@@ -8,7 +8,16 @@
     <title>Carpool Vote</title>
     <meta name="description" content="" property="description">
     <meta name="keywords" content="" property="keywords">
-    <meta name="og:image" content="" property="og:image">
+    
+    
+    <meta property="og:url"           content="http://carpoolvote.com" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="Carpool Vote - Vote America" />
+	<meta property="og:description"   content="Get a ride, or share a ride to vote, or register to vote. Support every American's right to vote!" />
+	<meta property="og:image"         content="http://carpoolvote/com/res/img/logo_fb.png?v=2" />
+	
+    
+    
     <link rel="icon" href="favicon.ico">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
     
@@ -60,19 +69,34 @@ body {
 
   </head>
   <body>
+  
+  
+  <!-- Load Facebook SDK for JavaScript -->
+	<div id="fb-root"></div>
+	<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
     
  
       <div class="container">
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <!--<li role="presentation" class="active"><a href="#">Home</a></li>-->
-              <li role="presentation" style="padding-top:10px" >
-                  
+
+<li role="presentation" style="padding-top:10px" >
                   <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-size="large" data-text="Need a ride to register to vote,or to vote on election day?CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
               </li>
-            <!--<li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>-->
+              <li role="presentation" style="padding-top:10px" >
+                  
+	        <div class="fb-share-button" data-href="http://carpoolvote.com?v=1" data-layout="button"></div>
+
+              </li>
+
           </ul>
         </nav>
         <h3 class="text-muted"></h3>
@@ -118,45 +142,6 @@ body {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-<script>
-
-$(document).ready( function(){
-
-  $('#btnNeedRide').click(function(){
-    $('#pnlIntro').slideUp('fast');
-    $('#pnlOfferRide').slideUp('fast');
-    $('#pnlNeedRide').slideDown('fast');
-  });
-
-  $('#btnRiderCancel').click( function(){
-      $('#pnlNeedRide').slideUp('fast');
-      $('#pnlOfferRide').slideUp('fast');
-    $('#pnlIntro').slideDown('fast');
-  });
-
-
-  $('#btnOfferRide').click(function () {
-      $('#pnlIntro').slideUp('fast');
-      $('#pnlNeedRide').slideUp('fast');
-      $('#pnlOfferRide').slideDown('fast');
-  });
-
-  $('#btnOfferCancel').click(function () {
-      $('#pnlOfferRide').slideUp('fast');
-      $('#pnlNeedRide').slideUp('fast');
-      $('#pnlIntro').slideDown('fast');
-  });
-    
-
-
-  $('.Timestamp').val(new Date());
-   $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
-
-
-
-});
 
 
 
