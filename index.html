@@ -41,14 +41,14 @@ html {
 }
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 100px;
+  margin-bottom: 40px;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 100px;
+  height: 40px;
   background-color: #f5f5f5;
 }
 
@@ -278,11 +278,13 @@ body{
           </div>
         
         <div class="form-group">
-            <label for="rideArea" class="col-sm-2 control-label">Area</label>
+            <label for="rideArea" class="col-sm-2 control-label">Neighborhood</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideArea" placeholder="Area" name="Area">
+              <input type="text" class="form-control" id="rideArea" placeholder="Neighborhood (pickup)" name="Area">
             </div>
           </div>
+
+         
 
           <div class="form-group">
             <label for="rideSeats" class="col-sm-2 control-label">Seats</label>
@@ -290,7 +292,12 @@ body{
               <input type="text" class="form-control" id="rideSeats" placeholder="How many seats do you need?" name="Seats">
             </div>
           </div>
-         
+          <div class="form-group">
+            <label for="offerNotes" class="col-sm-2 control-label">Notes</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="Text2" placeholder="Any other notes" name="Notes">
+            </div>
+          </div>
 
           <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-10">
@@ -372,21 +379,33 @@ body{
           
           <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-10">
-                <h5>When and where you can pick up</h5>
+                <h5>What you can offer</h5>
             </div>
           </div>
 
         <div class="form-group">
         
           <label for="offerDate" class="col-sm-2 control-label">Date</label>
-              <div class="col-sm-3">
-                <input  type="date" class="form-control" id="offerDate" name="Date">
-                </div>
+            <div class="col-sm-3">
+            <input  type="date" class="form-control" id="offerDate" name="Date">
+            </div>
 
-                <label for="offerTime" class="col-sm-2 control-label">Approx Time</label>
-              <div class="col-sm-4">
-                <input id="offerTime"  type="time" class="form-control" name="Time">
-                </div>
+            </div>
+
+          <div class="form-group">
+
+            <label for="offerTime" class="col-sm-2 control-label">Approx Time</label>
+            <div class="col-sm-10">
+            <input id="offerTime"  type="time" class="form-control" name="Time">
+            </div>
+              </div>
+
+          <div class="form-group">
+            <label for="offerTimeEnd" class="col-sm-2 control-label">Approx End Time</label>
+            <div class="col-sm-4">
+            <input id="offerTimeEnd"  type="time" class="form-control" name="TimeEnd">
+            </div>
+              <span class="col-sm-6">(end time only needed if you can help out with multiple trips)</span>
           </div>
 
          
@@ -457,9 +476,16 @@ body{
           </div>
         
         <div class="form-group">
-            <label for="offerArea" class="col-sm-2 control-label">Area</label>
+            <label for="offerArea" class="col-sm-2 control-label">Neighborhood</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerArea" placeholder="Area" name="Area">
+              <input type="text" class="form-control" id="offerArea" placeholder="Neighborhood (pickup)" name="Area">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="offerAreaDropOff" class="col-sm-2 control-label">Neighborhood</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="offerAreaDropOff" placeholder="Neighborhood (drop-off)" name="AreaDropOff">
             </div>
           </div>
 
@@ -469,6 +495,25 @@ body{
               <input type="text" class="form-control" id="offerSeats" placeholder="How many seats can you offer?" name="Seats">
             </div>
           </div>
+
+          <div class="form-group">
+            <label for="offerNotes" class="col-sm-2 control-label">Notes</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="offerNotes" placeholder="Any other notes" name="Notes">
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+              <label for="offerInsurance" class="col-sm-2 control-label">Insurance</label>
+              <div class="col-sm-10">
+                <div class="checkbox"><label><input type="checkbox" name="DriverHasInsurance" value="true" id="offerInsurance">
+                I confirm the driver has insurance</label>
+              </div>
+              </div>
+              </div>
+
          
 
           <div class="form-group">
@@ -564,7 +609,7 @@ Anybody who needs a lift</p>
 
           <div class="col-lg-6">
 
-              <div class="panel panel-info">
+    <div class="panel panel-info">
   <div class="panel-heading">
     <h4 class="panel-title">Why are we doing this?</h4>
   </div>
@@ -577,22 +622,21 @@ Anybody who needs a lift</p>
                 <p class="">Changes regarding timing and voting locations have hurt democracy in America. We believe that everyone should be able to exercise their democratic rights. 
           </p>
 
-              <p>Voter suppression affects everyone, but particularly lower-income People of Color. <a href="https://en.wikipedia.org/wiki/Voter_suppression_in_the_United_States" target="_blank">Find out more</a>
-                  </p>
+              <p>Voter suppression affects everyone, but particularly lower-income People of Color.</p>
 
 
 <p>
 It looks like the upcoming election will be a much closer fight than many had anticipated - and so is particularly important. 
     </p>       
       <p>
-    Even more so as:
+    Even more so as:  </p>
           <ul>
-<li>Polling stations face closure in lower-income People of Color neighbourhoods,</li>
-<li>        Would-be voters have to travel out of town to get a photo ID to register,</li>
-<li>     The periods available to register and vote become shorter, and</li>
-<li>     Registering for a postal vote is a bureaucratic nightmare.</li>
+                <li>Polling stations face closure in lower-income Communities of Color,</li>
+                <li>        Would-be voters have to travel out of town to get a photo ID to register,</li>
+                <li>     The periods available to register and vote become shorter, and</li>
+                <li>     Registering for a postal vote is a bureaucratic nightmare.</li>
               </ul>
-      </p>
+    
 
       <p>
 We're excited about getting people from all walks of life involved in the political process!
@@ -608,6 +652,35 @@ We're excited about getting people from all walks of life involved in the politi
         </div>
                   </div>
               </div>
+
+                <div class="col-lg-6">
+
+    <div class="panel panel-info">
+  <div class="panel-heading">
+    <h4 class="panel-title">Voting support</h4>
+  </div>
+  <div class="panel-body">
+
+      <p>
+      The Electoral Protection Coalition works around the clock to advance and defend your right to vote. 
+          </p>
+
+      <p>
+          Report voting problems, and get voting relating info for your state. 
+      </p>
+      <p>
+          <span class="glyphicon glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+          <a href="http://www.866ourvote.org/">866ourvote.org</a>
+      </p>
+      <p>
+          <span class="glyphicon glyphicon glyphicon-phone" aria-hidden="true"></span>
+          Call <a href="tel:866OURVOTE">866OURVOTE</a>
+      </p>
+      
+
+      </div>
+        </div>
+                    </div>
 
           <div class="col-lg-6">
 
@@ -720,7 +793,8 @@ We're excited about getting people from all walks of life involved in the politi
       <div class="container">
           <div class="row">
               <div class="col-sm-12">
-                        <a href="mailto:together@carpool.com" target="_blank" class="">Contact</a>
+                        <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                        <a href="mailto:together@carpoolvote.com" target="_blank" class="">Contact</a>
                   </div>
         
             </div>
