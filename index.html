@@ -278,9 +278,17 @@ body{
           </div>
         
         <div class="form-group">
-            <label for="rideArea" class="col-sm-2 control-label">Neighborhood</label>
+            <label for="rideArea" class="col-sm-2 control-label">From</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideArea" placeholder="Neighborhood (pickup)" name="Area">
+              <input type="text" class="form-control" id="rideArea" placeholder="Pick-up Neighborhood" name="Origin">
+            </div>
+          </div>
+
+          
+          <div class="form-group">
+            <label for="rideDestination" class="col-sm-2 control-label">Destination</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="rideDestination" placeholder="Destination" name="RiderDestination">
             </div>
           </div>
 
@@ -292,10 +300,21 @@ body{
               <input type="text" class="form-control" id="rideSeats" placeholder="How many seats do you need?" name="Seats">
             </div>
           </div>
+
+        <div class="form-group">
+              <label for="rideReturn" class="col-sm-2 control-label">Return Trip</label>
+              <div class="col-sm-10">
+                <div class="checkbox"><label><input type="checkbox" name="RiderReturn" value="true" id="rideReturn">
+                I need a two-way trip</label>
+              </div>
+              </div>
+        </div>
+
+
           <div class="form-group">
-            <label for="offerNotes" class="col-sm-2 control-label">Notes</label>
+            <label for="rideNotes" class="col-sm-2 control-label">Notes</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="Text2" placeholder="Any other notes" name="Notes">
+              <input type="text" class="form-control" id="rideNotes" placeholder="Any other notes" name="Notes">
             </div>
           </div>
 
@@ -478,14 +497,7 @@ body{
         <div class="form-group">
             <label for="offerArea" class="col-sm-2 control-label">Neighborhood</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerArea" placeholder="Neighborhood (pickup)" name="Area">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="offerAreaDropOff" class="col-sm-2 control-label">Neighborhood</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerAreaDropOff" placeholder="Neighborhood (drop-off)" name="AreaDropOff">
+              <input type="text" class="form-control" id="offerArea" placeholder="Pick-up Neighborhood" name="Origin">
             </div>
           </div>
 
@@ -512,7 +524,7 @@ body{
                 I confirm the driver has insurance</label>
               </div>
               </div>
-              </div>
+        </div>
 
          
 
@@ -622,7 +634,7 @@ Anybody who needs a lift</p>
                 <p class="">Changes regarding timing and voting locations have hurt democracy in America. We believe that everyone should be able to exercise their democratic rights. 
           </p>
 
-              <p>Voter suppression affects everyone, but particularly lower-income People of Color.</p>
+              <p>Voter suppression affects everyone, but particularly lower-income People of Color, people with disabilities, young people, and women.</p>
 
 
 <p>
@@ -670,7 +682,7 @@ We're excited about getting people from all walks of life involved in the politi
       </p>
       <p>
           <span class="glyphicon glyphicon glyphicon-hand-up" aria-hidden="true"></span>
-          <a href="http://www.866ourvote.org/">866ourvote.org</a>
+          Visit <a href="http://www.866ourvote.org/"> 866ourvote.org</a>
       </p>
       <p>
           <span class="glyphicon glyphicon glyphicon-phone" aria-hidden="true"></span>
