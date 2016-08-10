@@ -12,7 +12,7 @@
     <meta property="og:url"           content="http://carpoolvote.com" />
 	<meta property="og:type"          content="website" />
 	<meta property="og:title"         content="Carpool Vote - Vote America" />
-	<meta property="og:description"   content="Get a ride, or share a ride to vote, or register to vote. Support every American's right to vote!" />
+	<meta property="og:description"   content="Get a ride, or share a ride to vote. Support every American's right to vote!" />
 	<meta property="og:image"         content="http://carpoolvote/com/res/img/logo_fb.png?v=2" />
 
     <link rel="icon" href="favicon.ico">
@@ -96,7 +96,7 @@ body{
 
 </style>
 
-
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
   </head>
   <body>
     
@@ -117,7 +117,7 @@ body{
           <ul class="nav nav-pills pull-right">
             <!--<li role="presentation" class="active"><a href="#">Home</a></li>-->
               <li role="presentation" style="padding-top:10px" >
-                  <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-size="large" data-text="Need a ride to register to vote,or to vote on election day?CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                  <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-size="large" data-text="Need a ride to vote on election day?CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
               </li>
               <li role="presentation" style="padding-top:10px" >
                   
@@ -177,7 +177,7 @@ body{
 
     <div class="row">
       <div class="col-lg-offset-2 col-lg-10">
-        <h4>Need assistance getting to where you need to be in order to register to vote, or vote?</h4>
+        <h4>Need assistance getting to where you need to be in order to vote?</h4>
         <h4>Just fill in this form!
           We'll try and connect you with someone that can help.
         </h4>
@@ -186,7 +186,7 @@ body{
     <br/>
 
         
-      <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal">
+      <form action="https://api.cloudstitch.com/carpool/carpoolvote_test/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
           <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
           <input type="hidden" name="Timestamp" class="Timestamp" />
           <input type="hidden" name="Kind" value="Rider" />
@@ -201,12 +201,12 @@ body{
         
           <label for="riderDate" class="col-sm-2 control-label">Date</label>
               <div class="col-sm-3">
-                <input  type="date" class="form-control" id="riderDate" name="Date">
+                <input  type="date" class="form-control" id="riderDate" name="Date" required>
                 </div>
 
                 <label for="riderTime" class="col-sm-2 control-label">Approx Time</label>
               <div class="col-sm-4">
-                <input id="riderTime"  type="time" class="form-control" name="Time">
+                <input id="riderTime"  type="time" class="form-control" name="Time" required>
                 </div>
           </div>
 
@@ -214,7 +214,7 @@ body{
         <div class="form-group">
             <label for="rideState" class="col-sm-2 control-label">State</label>
             <div class="col-sm-2">
-              <select  class="form-control" id="rideState" placeholder="State" name="State">
+              <select  class="form-control" id="rideState" placeholder="State" name="State" required>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -273,14 +273,14 @@ body{
       <div class="form-group">
             <label for="rideCity" class="col-sm-2 control-label">City</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideCity" placeholder="City" name="City">
+              <input type="text" class="form-control" id="rideCity" placeholder="City" name="City" required>
             </div>
           </div>
         
         <div class="form-group">
             <label for="rideArea" class="col-sm-2 control-label">From</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideArea" placeholder="Pick-up Neighborhood" name="Origin">
+              <input type="text" class="form-control" id="rideArea" placeholder="Pick-up Neighborhood" name="Origin" required>
             </div>
           </div>
 
@@ -288,7 +288,7 @@ body{
           <div class="form-group">
             <label for="rideDestination" class="col-sm-2 control-label">Destination</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideDestination" placeholder="Destination" name="RiderDestination">
+              <input type="text" class="form-control" id="rideDestination" placeholder="Destination" name="RiderDestination" required>
             </div>
           </div>
 
@@ -297,7 +297,7 @@ body{
           <div class="form-group">
             <label for="rideSeats" class="col-sm-2 control-label">Seats</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideSeats" placeholder="How many seats do you need?" name="Seats">
+              <input type="text" class="form-control" id="rideSeats" placeholder="How many seats do you need?" name="Seats" required>
             </div>
           </div>
 
@@ -328,14 +328,14 @@ body{
         <div class="form-group">
             <label for="riderName" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="riderName" placeholder="Your name" name="Name">
+              <input type="text" class="form-control" id="riderName" placeholder="Your name" name="Name" required>
             </div>
           </div>
 
         <div class="form-group">
             <label for="riderEmail" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="riderEmail" placeholder="Email" name="Email">
+              <input type="email" class="form-control" id="riderEmail" placeholder="Email" name="Email" required>
             </div>
           </div>
         
@@ -381,7 +381,7 @@ body{
 
     <div class="row">
       <div class="col-lg-offset-2 col-lg-10">
-        <h4>Driving to register to vote, or actually voting, and have a spare seat?</h4>
+        <h4>Driving to vote, and have a spare seat?</h4>
         <h4>Fill in this form and help a fellow citizen exercise their democratic right.</h4>
           <h4>
           We'll try and connect you with someone that needs a ride in the same direction. 
@@ -391,7 +391,7 @@ body{
     <br/>
 
         
-      <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal">
+      <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal"  data-toggle="validator" role="form">
           <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
           <input type="hidden" name="Timestamp" class="Timestamp" />
           <input type="hidden" name="Kind" value="Driver" />
@@ -406,7 +406,7 @@ body{
         
           <label for="offerDate" class="col-sm-2 control-label">Date</label>
             <div class="col-sm-3">
-            <input  type="date" class="form-control" id="offerDate" name="Date">
+            <input  type="date" class="form-control" id="offerDate" name="Date" required>
             </div>
 
             </div>
@@ -415,7 +415,7 @@ body{
 
             <label for="offerTime" class="col-sm-2 control-label">Approx Time</label>
             <div class="col-sm-10">
-            <input id="offerTime"  type="time" class="form-control" name="Time">
+            <input id="offerTime"  type="time" class="form-control" name="Time" required>
             </div>
               </div>
 
@@ -431,7 +431,7 @@ body{
         <div class="form-group">
             <label for="offerState" class="col-sm-2 control-label">State</label>
             <div class="col-sm-2">
-              <select  class="form-control" id="offerState" placeholder="State" name="State">
+              <select  class="form-control" id="offerState" placeholder="State" name="State" required>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -490,21 +490,21 @@ body{
       <div class="form-group">
             <label for="offerCity" class="col-sm-2 control-label">City</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerCity" placeholder="City" name="City">
+              <input type="text" class="form-control" id="offerCity" placeholder="City" name="City" required>
             </div>
           </div>
         
         <div class="form-group">
             <label for="offerArea" class="col-sm-2 control-label">Neighborhood</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerArea" placeholder="Pick-up Neighborhood" name="Origin">
+              <input type="text" class="form-control" id="offerArea" placeholder="Pick-up Neighborhood" name="Origin" required>
             </div>
           </div>
 
           <div class="form-group">
             <label for="offerSeats" class="col-sm-2 control-label">Seats</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerSeats" placeholder="How many seats can you offer?" name="Seats">
+              <input type="text" class="form-control" id="offerSeats" placeholder="How many seats can you offer?" name="Seats" required>
             </div>
           </div>
 
@@ -538,14 +538,14 @@ body{
         <div class="form-group">
             <label for="offerrName" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerrName" placeholder="Your name" name="Name">
+              <input type="text" class="form-control" id="offerrName" placeholder="Your name" name="Name" required>
             </div>
           </div>
 
         <div class="form-group">
             <label for="offerEmail" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="offerEmail" placeholder="Email" name="Email">
+              <input type="email" class="form-control" id="offerEmail" placeholder="Email" name="Email" required>
             </div>
           </div>
         
@@ -708,7 +708,7 @@ We're excited about getting people from all walks of life involved in the politi
               <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below </p>
 
 
-              <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal">
+              <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal"  data-toggle="validator" role="form">
                   <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
           <input type="hidden" name="Timestamp" class="Timestamp" />
           <input type="hidden" name="Kind" value="Helper" />
@@ -716,16 +716,16 @@ We're excited about getting people from all walks of life involved in the politi
 
                             
         <div class="form-group">
-            <label for="riderName" class="col-sm-2 control-label">Name</label>
+            <label for="helpName" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="Text1" placeholder="Your name" name="Name">
+              <input type="text" class="form-control" id="helpName" placeholder="Your name" name="Name" required>
             </div>
           </div>
 
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+            <label for="helpEmail" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="Email1" placeholder="Email" name="Email">
+              <input type="email" class="form-control" id="helpEmail" placeholder="Email" name="Email" required>
             </div>
           </div>
                                 
@@ -734,11 +734,11 @@ We're excited about getting people from all walks of life involved in the politi
     <div class="col-sm-offset-2 col-sm-10">
 
               <div class="checkbox">
-  <label>
-    <input type="checkbox" name="Capability" value="build links">
-    I can help build links with organizations and communities
-  </label>
-</div>
+          <label>
+            <input type="checkbox" name="Capability" value="build links">
+            I can help build links with organizations and communities
+          </label>
+        </div>
 
 
       <div class="checkbox"><label><input type="checkbox" name="Capability" value="community organize">
