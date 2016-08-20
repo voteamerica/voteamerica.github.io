@@ -301,6 +301,16 @@ body{
             </div>
           </div>
 
+          <div class="form-group">
+            <label for="riderWheelchair" class="col-sm-2 control-label">Wheelchair</label>
+            <div class="col-sm-10">
+              <div class="checkbox"><label><input type="checkbox" name="RiderWheelchair" value="true" id="riderWheelchair">
+                 I use a wheelchair</label>
+            </div></div>
+          </div>
+
+
+
         <div class="form-group">
               <label for="rideReturn" class="col-sm-2 control-label">Return Trip</label>
               <div class="col-sm-10">
@@ -507,6 +517,14 @@ body{
               <input type="text" class="form-control" id="offerSeats" placeholder="How many seats can you offer?" name="Seats" required>
             </div>
           </div>
+          
+          <div class="form-group">
+            <label for="driverWheelchair" class="col-sm-2 control-label">Wheelchair</label>
+            <div class="col-sm-10">
+              <div class="checkbox"><label><input type="checkbox" name="DriverWheelchair" value="true" id="driverWheelchair">
+                 My car has space for a wheelchair</label>
+            </div></div>
+          </div>
 
           <div class="form-group">
             <label for="offerNotes" class="col-sm-2 control-label">Notes</label>
@@ -693,6 +711,27 @@ We're excited about getting people from all walks of life involved in the politi
       </div>
         </div>
                     </div>
+                    
+                    
+                    
+                              <div class="col-lg-6">
+
+    <div class="panel panel-info">
+  <div class="panel-heading">
+    <h4 class="panel-title">Newsletter</h4>
+  </div>
+  <div class="panel-body">
+
+We continue to make improvements to our platform to make it effective for as many voters as possible. To keep updated with the project, 
+                        <a href="http://eepurl.com/ccdDlv" target="_blank" class="">sign up for our newsletter.</a>             
+        </div>
+                  </div>
+              </div>
+
+
+                    
+                    
+                    
 
           <div class="col-lg-6">
 
@@ -804,10 +843,18 @@ We're excited about getting people from all walks of life involved in the politi
     <footer class="footer">
       <div class="container">
           <div class="row">
-              <div class="col-sm-12">
+              <div class="col-sm-3">
                         <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span>
                         <a href="mailto:together@carpoolvote.com" target="_blank" class="">Contact</a>
                   </div>
+              
+              
+              <div class="col-sm-9">
+                        <span class="glyphicon glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        Keep updated with the project!  <a href="http://eepurl.com/ccdDlv" target="_blank" class="">Sign up for our newsletter.</a>
+                  </div>
+                  
+                  
         
             </div>
       </div>
@@ -867,6 +914,8 @@ $(document).ready( function(){
 
 
 </script>
+
+
 
   </body>
 </html>
