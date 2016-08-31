@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,925 +10,801 @@
     <meta name="description" content="" property="description">
     <meta name="keywords" content="" property="keywords">
 
-    <meta property="og:url"           content="http://carpoolvote.com" />
-	<meta property="og:type"          content="website" />
-	<meta property="og:title"         content="Carpool Vote - Vote America" />
-	<meta property="og:description"   content="Get a ride, or share a ride to vote. Support every American's right to vote!" />
-	<meta property="og:image"         content="http://carpoolvote/com/res/img/logo_fb.png?v=2" />
+    <meta property="og:url" content="http://carpoolvote.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Carpool Vote - Vote America" />
+    <meta property="og:description" content="Get a ride, or share a ride to vote. Support every American's right to vote!" />
+    <meta property="og:image" content="http://carpoolvote/com/res/img/logo_fb.png?v=2" />
 
     <link rel="icon" href="favicon.ico">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
-        <link type="text/css" rel="stylesheet" href="res/styles.css">
+    <link type="text/css" rel="stylesheet" href="res/styles.css">
 
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
-
-
-  <style>
-
-    /* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 40px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 40px;
-  background-color: #f5f5f5;
-}
-
-    /* end Sticky footer styles */
-
-
-body{
-
-}
-
-
-    #pnlNeedRide{
-        display:none;
-    }
-
-    #pnlOfferRide{
-        display:none;
-    }
-
-
-    h5 {
-    text-transform: uppercase;
-    font-weight:bold;
-    color:#999;
-    }
-
-    .panel-title {
-        text-transform: uppercase;
-    }
-
-    .btn{
-        text-transform: uppercase;
-    }
-
-    #jumboMain {
-        background-image: url(res/back1.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-      #pnlIntro {
-          color:#fff;
-      }
-
-
-</style>
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 
     <script>
-      !function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(
-      arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
-      d.src='//d1l6p2sc9645hc.cloudfront.net/tracker.js';q.parentNode.
-      insertBefore(d,q)}(window,document,'script','_gs');
+        ! function(g, s, q, r, d) {
+            r = g[r] = g[r] || function() {
+                (r.q = r.q || []).push(
+                    arguments)
+            };
+            d = s.createElement(q);
+            q = s.getElementsByTagName(q)[0];
+            d.src = '//d1l6p2sc9645hc.cloudfront.net/tracker.js';
+            q.parentNode.
+            insertBefore(d, q)
+        }(window, document, 'script', '_gs');
 
-      _gs('GSN-777832-U');
+        _gs('GSN-777832-U');
     </script>
-  </head>
-  <body>
+</head>
 
-            	<!-- Load Facebook SDK for JavaScript -->
-	<div id="fb-root"></div>
-	<script>(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<body>
+
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 
 
-      <div class="container">
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <!--<li role="presentation" class="active"><a href="#">Home</a></li>-->
-              <li role="presentation" style="padding-top:10px" >
-                  <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-size="large" data-text="Need a ride to vote on election day?CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-              </li>
-              <li role="presentation" style="padding-top:10px" >
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <!--<li role="presentation" class="active"><a href="#">Home</a></li>-->
+                    <li role="presentation" style="padding-top:10px">
+                        <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-size="large" data-text="Need a ride to vote on election day?CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </li>
+                    <li role="presentation" style="padding-top:10px">
 
-	        <div class="fb-share-button" data-href="http://carpoolvote.com?v=1" data-layout="button"></div>
+                        <div class="fb-share-button" data-href="http://carpoolvote.com?v=1" data-layout="button"></div>
 
-              </li>
+                    </li>
 
-            <!--<li role="presentation"><a href="#">About</a></li>
+                    <!--<li role="presentation"><a href="#">About</a></li>
             <li role="presentation"><a href="#">Contact</a></li>-->
-          </ul>
-        </nav>
-          <img src="res/img/logo.png?v=2" alt="CARPOOL VOTE"/>
-        <!--<h3 class="text-muted">VOTE AMERICA</h3>-->
-      </div>
+                </ul>
+            </nav>
+            <img src="res/img/logo.png?v=2" alt="CARPOOL VOTE" />
+            <!--<h3 class="text-muted">VOTE AMERICA</h3>-->
+        </div>
 
-      <div class="jumbotron" id="jumboMain">
-        <div id="pnlIntro">
-        <h1 style="text-transform: uppercase;">Give every American the Vote they deserve</h1>
-        <p class="lead">Dozens of states have made it more difficult to get to polling stations.
-        </p>
-        <p>Minorities are particularly affected.</p>
+        <div class="jumbotron" id="jumboMain">
+            <div id="pnlIntro">
+                <h1 style="text-transform: uppercase;">Give every American the Vote they deserve</h1>
+                <p class="lead">Dozens of states have made it more difficult to get to polling stations.
+                </p>
+                <p>Minorities are particularly affected.</p>
+
+                <p>Carpool Vote is a platform that introduces volunteer drivers to people who need a ride to the polling station.</p>
+
+                <p>Can you help?</p>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+                            <button class="btn btn-lg btn-primary btn-block" href="#" role="button" id="btnNeedRide">
+            <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
+            I need a ride</button>
+                        </p>
+                    </div>
+                    <div class="col-lg-12">
+                        <p>
+                            <button class="btn btn-lg btn-success btn-block" href="#" role="button" id="btnOfferRide">
+                                <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                                I can offer a ride
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- intro -->
+
+            <div id="pnlNeedRide">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">I need a ride</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <h4>Need assistance getting to where you need to be in order to vote?</h4>
+                                <h4>Just fill in this form! We'll try and connect you with someone that can help.</h4>
+                            </div>
+                            <br/>
+                            <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                                <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
+                                <input type="hidden" name="Timestamp" class="Timestamp" />
+                                <input type="hidden" name="Kind" value="Rider" />
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-10">
+                                        <h5>When and where you need picking up</h5>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="riderDate" class="col-sm-2 control-label">Date</label>
+                                    <div class="col-sm-3">
+                                        <input type="date" class="form-control" id="riderDate" name="Date" required>
+                                    </div>
+
+                                    <label for="riderTime" class="col-sm-2 control-label">Approx Time</label>
+                                    <div class="col-sm-4">
+                                        <input id="riderTime" type="time" class="form-control" name="Time" required>
+                                    </div>
+                                </div>
 
 
-        <p>Carpool Vote is a platform that introduces volunteer drivers to people who need a ride to the polling station.</p>
+                                <div class="form-group">
+                                    <label for="rideState" class="col-sm-2 control-label">State</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="rideState" placeholder="State" name="State" required>
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="DC">DC</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
+              </select>
+                                    </div>
+                                </div>
 
-            <p>Can you help?</p>
+                                <div class="form-group">
+                                    <label for="rideCity" class="col-sm-2 control-label">City</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="rideCity" placeholder="City" name="City" required>
+                                    </div>
+                                </div>
 
+                                <div class="form-group">
+                                    <label for="rideArea" class="col-sm-2 control-label">From</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="rideArea" placeholder="Pick-up Neighborhood" name="Origin" required>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="rideDestination" class="col-sm-2 control-label">Destination</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="rideDestination" placeholder="Destination" name="RiderDestination" required>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label for="rideSeats" class="col-sm-2 control-label">Seats</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="rideSeats" placeholder="How many seats do you need?" name="Seats" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="riderWheelchair" class="col-sm-2 control-label">Wheelchair</label>
+                                    <div class="col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="RiderWheelchair" value="true" id="riderWheelchair">
+                                                I use a wheelchair
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label for="rideReturn" class="col-sm-2 control-label">Return Trip</label>
+                                    <div class="col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="RiderReturn" value="true" id="rideReturn">
+                                                I need a two-way trip
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="rideNotes" class="col-sm-2 control-label">Notes</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="rideNotes" placeholder="Any other notes" name="Notes">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-10">
+                                        <h5>Your details</h5>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="riderName" class="col-sm-2 control-label">Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="riderName" placeholder="Your name" name="Name" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="riderEmail" class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="riderEmail" placeholder="Email" name="Email" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ridePhone" class="col-sm-2 control-label">Phone</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="ridePhone" placeholder="Phone" name="Phone">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-4">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+
+                                    <div class="col-sm-offset-4 col-sm-2">
+                                        <a id="btnRiderCancel" class="btn btn-link">Back</a>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <div class="panel-footer">
+                        <span style="font-weight:bold">What happens next?</span> We'll record these details and contact you if someone can help
+                    </div>
+                </div>
+            </div>
+            <!-- pnlNeedRide -->
+
+            <div id="pnlOfferRide">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">I can offer a ride</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <h4>Driving to vote, and have a spare seat?</h4>
+                                <h4>Fill in this form and help a fellow citizen exercise their democratic right.</h4>
+                                <h4>We'll try and connect you with someone that needs a ride in the same direction.</h4>
+                            </div>
+                            <br/>
+
+                            <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                                <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
+                                <input type="hidden" name="Timestamp" class="Timestamp" />
+                                <input type="hidden" name="Kind" value="Driver" />
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-10">
+                                        <h5>What you can offer</h5>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="offerDate" class="col-sm-2 control-label">Date</label>
+                                    <div class="col-sm-3">
+                                        <input type="date" class="form-control" id="offerDate" name="Date" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerTime" class="col-sm-2 control-label">Approx Time</label>
+                                    <div class="col-sm-10">
+                                        <input id="offerTime" type="time" class="form-control" name="Time" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerTimeEnd" class="col-sm-2 control-label">Approx End Time</label>
+                                    <div class="col-sm-4">
+                                        <input id="offerTimeEnd" type="time" class="form-control" name="TimeEnd">
+                                    </div>
+                                    <span class="col-sm-6">(end time only needed if you can help out with multiple trips)</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerState" class="col-sm-2 control-label">State</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="offerState" placeholder="State" name="State" required>
+                                            <option value="AL">AL</option>
+                                            <option value="AK">AK</option>
+                                            <option value="AZ">AZ</option>
+                                            <option value="AR">AR</option>
+                                            <option value="CA">CA</option>
+                                            <option value="CO">CO</option>
+                                            <option value="CT">CT</option>
+                                            <option value="DE">DE</option>
+                                            <option value="DC">DC</option>
+                                            <option value="FL">FL</option>
+                                            <option value="GA">GA</option>
+                                            <option value="HI">HI</option>
+                                            <option value="ID">ID</option>
+                                            <option value="IL">IL</option>
+                                            <option value="IN">IN</option>
+                                            <option value="IA">IA</option>
+                                            <option value="KS">KS</option>
+                                            <option value="KY">KY</option>
+                                            <option value="LA">LA</option>
+                                            <option value="ME">ME</option>
+                                            <option value="MD">MD</option>
+                                            <option value="MA">MA</option>
+                                            <option value="MI">MI</option>
+                                            <option value="MN">MN</option>
+                                            <option value="MS">MS</option>
+                                            <option value="MO">MO</option>
+                                            <option value="MT">MT</option>
+                                            <option value="NE">NE</option>
+                                            <option value="NV">NV</option>
+                                            <option value="NH">NH</option>
+                                            <option value="NJ">NJ</option>
+                                            <option value="NM">NM</option>
+                                            <option value="NY">NY</option>
+                                            <option value="NC">NC</option>
+                                            <option value="ND">ND</option>
+                                            <option value="OH">OH</option>
+                                            <option value="OK">OK</option>
+                                            <option value="OR">OR</option>
+                                            <option value="PA">PA</option>
+                                            <option value="RI">RI</option>
+                                            <option value="SC">SC</option>
+                                            <option value="SD">SD</option>
+                                            <option value="TN">TN</option>
+                                            <option value="TX">TX</option>
+                                            <option value="UT">UT</option>
+                                            <option value="VT">VT</option>
+                                            <option value="VA">VA</option>
+                                            <option value="WA">WA</option>
+                                            <option value="WV">WV</option>
+                                            <option value="WI">WI</option>
+                                            <option value="WY">WY</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerCity" class="col-sm-2 control-label">City</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="offerCity" placeholder="City" name="City" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerArea" class="col-sm-2 control-label">Neighborhood</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="offerArea" placeholder="Pick-up Neighborhood" name="Origin" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerSeats" class="col-sm-2 control-label">Seats</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="offerSeats" placeholder="How many seats can you offer?" name="Seats" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="driverWheelchair" class="col-sm-2 control-label">Wheelchair</label>
+                                    <div class="col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="DriverWheelchair" value="true" id="driverWheelchair">
+                                                My car has space for a wheelchair
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerNotes" class="col-sm-2 control-label">Notes</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="offerNotes" placeholder="Any other notes" name="Notes">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerInsurance" class="col-sm-2 control-label">Insurance</label>
+                                    <div class="col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="DriverHasInsurance" value="true" id="offerInsurance">
+                                                I confirm the driver has insurance
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-10">
+                                        <h5>Your details</h5>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerrName" class="col-sm-2 control-label">Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="offerrName" placeholder="Your name" name="Name" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerEmail" class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="offerEmail" placeholder="Email" name="Email" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="offerPhone" class="col-sm-2 control-label">Phone</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="offerPhone" placeholder="Phone" name="Phone">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-4">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+
+                                    <div class="col-sm-offset-4 col-sm-2">
+                                        <a id="btnOfferCancel" class="btn btn-link">Back</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <span style="font-weight:bold">What happens next?</span> We'll contact you if there's a match
+                    </div>
+                </div>
+
+            </div>
+            <!-- pnlOfferRide -->
+
+        </div>
+        <!-- jumbo -->
 
         <div class="row">
-        <div class="col-lg-12">          <p>        <button class="btn btn-lg btn-primary btn-block" href="#" role="button" id="btnNeedRide">
-            <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
-            I need a ride</button>        </p>        </div>
-
-
-        <div class="col-lg-12">
-          <p>
-          <button class="btn btn-lg btn-success btn-block" href="#" role="button" id="btnOfferRide">
-
-               <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-
-              I can offer a ride</button>
-          </p>
-        </div>
-
-
-
-        </div>
-    </div> <!-- intro -->
-
-      <div id="pnlNeedRide">
-
-  <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">I need a ride</h3>
-  </div>
-  <div class="panel-body">
-
-    <div class="row">
-      <div class="col-lg-offset-2 col-lg-10">
-        <h4>Need assistance getting to where you need to be in order to vote?</h4>
-        <h4>Just fill in this form!
-          We'll try and connect you with someone that can help.
-        </h4>
-    </div>
-
-    <br/>
-
-
-      <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
-          <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
-          <input type="hidden" name="Timestamp" class="Timestamp" />
-          <input type="hidden" name="Kind" value="Rider" />
-
-          <div class="form-group">
-                <div class="col-sm-offset-1 col-sm-10">
-                <h5>When and where you need picking up</h5>
-            </div>
-          </div>
-
-        <div class="form-group">
-
-          <label for="riderDate" class="col-sm-2 control-label">Date</label>
-              <div class="col-sm-3">
-                <input  type="date" class="form-control" id="riderDate" name="Date" required>
-                </div>
-
-                <label for="riderTime" class="col-sm-2 control-label">Approx Time</label>
-              <div class="col-sm-4">
-                <input id="riderTime"  type="time" class="form-control" name="Time" required>
-                </div>
-          </div>
-
-
-        <div class="form-group">
-            <label for="rideState" class="col-sm-2 control-label">State</label>
-            <div class="col-sm-2">
-              <select  class="form-control" id="rideState" placeholder="State" name="State" required>
-                <option value="AL">AL</option>
-                <option value="AK">AK</option>
-                <option value="AZ">AZ</option>
-                <option value="AR">AR</option>
-                <option value="CA">CA</option>
-                <option value="CO">CO</option>
-                <option value="CT">CT</option>
-                <option value="DE">DE</option>
-                <option value="DC">DC</option>
-                <option value="FL">FL</option>
-                <option value="GA">GA</option>
-                <option value="HI">HI</option>
-                <option value="ID">ID</option>
-                <option value="IL">IL</option>
-                <option value="IN">IN</option>
-                <option value="IA">IA</option>
-                <option value="KS">KS</option>
-                <option value="KY">KY</option>
-                <option value="LA">LA</option>
-                <option value="ME">ME</option>
-                <option value="MD">MD</option>
-                <option value="MA">MA</option>
-                <option value="MI">MI</option>
-                <option value="MN">MN</option>
-                <option value="MS">MS</option>
-                <option value="MO">MO</option>
-                <option value="MT">MT</option>
-                <option value="NE">NE</option>
-                <option value="NV">NV</option>
-                <option value="NH">NH</option>
-                <option value="NJ">NJ</option>
-                <option value="NM">NM</option>
-                <option value="NY">NY</option>
-                <option value="NC">NC</option>
-                <option value="ND">ND</option>
-                <option value="OH">OH</option>
-                <option value="OK">OK</option>
-                <option value="OR">OR</option>
-                <option value="PA">PA</option>
-                <option value="RI">RI</option>
-                <option value="SC">SC</option>
-                <option value="SD">SD</option>
-                <option value="TN">TN</option>
-                <option value="TX">TX</option>
-                <option value="UT">UT</option>
-                <option value="VT">VT</option>
-                <option value="VA">VA</option>
-                <option value="WA">WA</option>
-                <option value="WV">WV</option>
-                <option value="WI">WI</option>
-                <option value="WY">WY</option>
-              </select>
-            </div>
-          </div>
-
-      <div class="form-group">
-            <label for="rideCity" class="col-sm-2 control-label">City</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideCity" placeholder="City" name="City" required>
-            </div>
-          </div>
-
-        <div class="form-group">
-            <label for="rideArea" class="col-sm-2 control-label">From</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideArea" placeholder="Pick-up Neighborhood" name="Origin" required>
-            </div>
-          </div>
-
-
-          <div class="form-group">
-            <label for="rideDestination" class="col-sm-2 control-label">Destination</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideDestination" placeholder="Destination" name="RiderDestination" required>
-            </div>
-          </div>
-
-
-
-          <div class="form-group">
-            <label for="rideSeats" class="col-sm-2 control-label">Seats</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideSeats" placeholder="How many seats do you need?" name="Seats" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="riderWheelchair" class="col-sm-2 control-label">Wheelchair</label>
-            <div class="col-sm-10">
-              <div class="checkbox"><label><input type="checkbox" name="RiderWheelchair" value="true" id="riderWheelchair">
-                 I use a wheelchair</label>
-            </div></div>
-          </div>
-
-
-
-        <div class="form-group">
-              <label for="rideReturn" class="col-sm-2 control-label">Return Trip</label>
-              <div class="col-sm-10">
-                <div class="checkbox"><label><input type="checkbox" name="RiderReturn" value="true" id="rideReturn">
-                I need a two-way trip</label>
-              </div>
-              </div>
-        </div>
-
-
-          <div class="form-group">
-            <label for="rideNotes" class="col-sm-2 control-label">Notes</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="rideNotes" placeholder="Any other notes" name="Notes">
-            </div>
-          </div>
-
-          <div class="form-group">
-                <div class="col-sm-offset-1 col-sm-10">
-                <h5>Your details</h5>
-            </div>
-          </div>
-
-
-        <div class="form-group">
-            <label for="riderName" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="riderName" placeholder="Your name" name="Name" required>
-            </div>
-          </div>
-
-        <div class="form-group">
-            <label for="riderEmail" class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="riderEmail" placeholder="Email" name="Email" required>
-            </div>
-          </div>
-
-        <div class="form-group">
-            <label for="ridePhone" class="col-sm-2 control-label">Phone</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="ridePhone" placeholder="Phone" name="Phone">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-4">
-              <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-
-            <div class="col-sm-offset-4 col-sm-2">
-              <a id="btnRiderCancel" class="btn btn-link">Back</a>
-            </div>
-          </div>
-
-
-        </form>
-        </div>
-
-  </div>
-
-              <div class="panel-footer">
-                <span style="font-weight:bold">What happens next?</span> We'll record these details and contact you if someone can help
-            </div>
-          </div>
-
-        </div> <!-- pnlNeedRide -->
-
-
-
-       <div id="pnlOfferRide">
-
-  <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">I can offer a ride</h3>
-  </div>
-  <div class="panel-body">
-
-    <div class="row">
-      <div class="col-lg-offset-2 col-lg-10">
-        <h4>Driving to vote, and have a spare seat?</h4>
-        <h4>Fill in this form and help a fellow citizen exercise their democratic right.</h4>
-          <h4>
-          We'll try and connect you with someone that needs a ride in the same direction.
-        </h4>
-    </div>
-
-    <br/>
-
-
-      <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal"  data-toggle="validator" role="form">
-          <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
-          <input type="hidden" name="Timestamp" class="Timestamp" />
-          <input type="hidden" name="Kind" value="Driver" />
-
-          <div class="form-group">
-                <div class="col-sm-offset-1 col-sm-10">
-                <h5>What you can offer</h5>
-            </div>
-          </div>
-
-        <div class="form-group">
-
-          <label for="offerDate" class="col-sm-2 control-label">Date</label>
-            <div class="col-sm-3">
-            <input  type="date" class="form-control" id="offerDate" name="Date" required>
-            </div>
-
-            </div>
-
-          <div class="form-group">
-
-            <label for="offerTime" class="col-sm-2 control-label">Approx Time</label>
-            <div class="col-sm-10">
-            <input id="offerTime"  type="time" class="form-control" name="Time" required>
-            </div>
-              </div>
-
-          <div class="form-group">
-            <label for="offerTimeEnd" class="col-sm-2 control-label">Approx End Time</label>
-            <div class="col-sm-4">
-            <input id="offerTimeEnd"  type="time" class="form-control" name="TimeEnd">
-            </div>
-              <span class="col-sm-6">(end time only needed if you can help out with multiple trips)</span>
-          </div>
-
-
-        <div class="form-group">
-            <label for="offerState" class="col-sm-2 control-label">State</label>
-            <div class="col-sm-2">
-              <select  class="form-control" id="offerState" placeholder="State" name="State" required>
-                <option value="AL">AL</option>
-                <option value="AK">AK</option>
-                <option value="AZ">AZ</option>
-                <option value="AR">AR</option>
-                <option value="CA">CA</option>
-                <option value="CO">CO</option>
-                <option value="CT">CT</option>
-                <option value="DE">DE</option>
-                <option value="DC">DC</option>
-                <option value="FL">FL</option>
-                <option value="GA">GA</option>
-                <option value="HI">HI</option>
-                <option value="ID">ID</option>
-                <option value="IL">IL</option>
-                <option value="IN">IN</option>
-                <option value="IA">IA</option>
-                <option value="KS">KS</option>
-                <option value="KY">KY</option>
-                <option value="LA">LA</option>
-                <option value="ME">ME</option>
-                <option value="MD">MD</option>
-                <option value="MA">MA</option>
-                <option value="MI">MI</option>
-                <option value="MN">MN</option>
-                <option value="MS">MS</option>
-                <option value="MO">MO</option>
-                <option value="MT">MT</option>
-                <option value="NE">NE</option>
-                <option value="NV">NV</option>
-                <option value="NH">NH</option>
-                <option value="NJ">NJ</option>
-                <option value="NM">NM</option>
-                <option value="NY">NY</option>
-                <option value="NC">NC</option>
-                <option value="ND">ND</option>
-                <option value="OH">OH</option>
-                <option value="OK">OK</option>
-                <option value="OR">OR</option>
-                <option value="PA">PA</option>
-                <option value="RI">RI</option>
-                <option value="SC">SC</option>
-                <option value="SD">SD</option>
-                <option value="TN">TN</option>
-                <option value="TX">TX</option>
-                <option value="UT">UT</option>
-                <option value="VT">VT</option>
-                <option value="VA">VA</option>
-                <option value="WA">WA</option>
-                <option value="WV">WV</option>
-                <option value="WI">WI</option>
-                <option value="WY">WY</option>
-              </select>
-            </div>
-          </div>
-
-      <div class="form-group">
-            <label for="offerCity" class="col-sm-2 control-label">City</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerCity" placeholder="City" name="City" required>
-            </div>
-          </div>
-
-        <div class="form-group">
-            <label for="offerArea" class="col-sm-2 control-label">Neighborhood</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerArea" placeholder="Pick-up Neighborhood" name="Origin" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="offerSeats" class="col-sm-2 control-label">Seats</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerSeats" placeholder="How many seats can you offer?" name="Seats" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="driverWheelchair" class="col-sm-2 control-label">Wheelchair</label>
-            <div class="col-sm-10">
-              <div class="checkbox"><label><input type="checkbox" name="DriverWheelchair" value="true" id="driverWheelchair">
-                 My car has space for a wheelchair</label>
-            </div></div>
-          </div>
-
-          <div class="form-group">
-            <label for="offerNotes" class="col-sm-2 control-label">Notes</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerNotes" placeholder="Any other notes" name="Notes">
-            </div>
-          </div>
-
-
-
-          <div class="form-group">
-              <label for="offerInsurance" class="col-sm-2 control-label">Insurance</label>
-              <div class="col-sm-10">
-                <div class="checkbox"><label><input type="checkbox" name="DriverHasInsurance" value="true" id="offerInsurance">
-                I confirm the driver has insurance</label>
-              </div>
-              </div>
-        </div>
-
-
-
-          <div class="form-group">
-                <div class="col-sm-offset-1 col-sm-10">
-                <h5>Your details</h5>
-            </div>
-          </div>
-
-
-        <div class="form-group">
-            <label for="offerrName" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerrName" placeholder="Your name" name="Name" required>
-            </div>
-          </div>
-
-        <div class="form-group">
-            <label for="offerEmail" class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="offerEmail" placeholder="Email" name="Email" required>
-            </div>
-          </div>
-
-        <div class="form-group">
-            <label for="offerPhone" class="col-sm-2 control-label">Phone</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="offerPhone" placeholder="Phone" name="Phone">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-4">
-              <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-
-            <div class="col-sm-offset-4 col-sm-2">
-              <a id="btnOfferCancel" class="btn btn-link">Back</a>
-            </div>
-          </div>
-
-
-        </form>
-        </div>
-
-  </div>
-
-              <div class="panel-footer">
-                <span style="font-weight:bold">What happens next?</span> We'll contact you if there's a match
-            </div>
-          </div>
-
-        </div> <!-- pnlOfferRide -->
-
-
-    </div> <!-- jumbo -->
-
-      <div class="row">
-        <div class="col-lg-6">
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                <h4 class="panel-title">What is this site?</h4>
-              </div>
-              <div class="panel-body">
-
-
-
-            <p>We aim to connect people willing to give rides to registration offices or polling stations</p>
-               <p> - with -</p>
-                   <p>
-Anybody who needs a ride</p>
-
-            </div>
-                </div>
-        </div>
-
-          <div class="col-lg-6">
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                <h4 class="panel-title">I Need voting info!</h4>
-              </div>
-              <div class="panel-body">
-                  <ul>
-                  <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica" target="_rtv">Register to vote!</a></li>
-                  <li><a href="https://www.rockthevote.com/get-informed/elections/am-i-registered-to-vote/" target="_rtv">Are you registered?</a></li>
-                  <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/" target="_rtv">Voter requirements</a></li>
-                  <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/" target="_rtv">Find where to vote</a></li>
-                  <li><a href="https://www.rockthevote.com/get-informed/elections/" target="_rtv">About elections</a></li>
-                  </ul>
-                        </div>
-                </div>
-              </div>
-
-
-          <div class="col-lg-6">
-
-    <div class="panel panel-info">
-  <div class="panel-heading">
-    <h4 class="panel-title">Why are we doing this?</h4>
-  </div>
-  <div class="panel-body">
-
-      <p>
-      We're excited about empowering people who may find it difficult to get to the polls.
-          </p>
-
-                <p class="">Changes regarding timing and voting locations have hurt democracy in America. We believe that everyone should be able to exercise their democratic rights.
-          </p>
-
-              <p>Voter suppression affects everyone, but particularly lower-income People of Color, people with disabilities, young people, and women.</p>
-
-
-<p>
-It looks like the upcoming election will be a much closer fight than many had anticipated - and so is particularly important.
-    </p>
-      <p>
-    Even more so as:  </p>
-          <ul>
-                <li>Polling stations face closure in lower-income Communities of Color,</li>
-                <li>        Would-be voters have to travel out of town to get a photo ID to register,</li>
-                <li>     The periods available to register and vote become shorter, and</li>
-                <li>     Requesting an absentee ballot or voting by mail can be difficult in many states.</li>
-              </ul>
-
-
-      <p>
-We're excited about getting people from all walks of life involved in the political process!
-          </p>
-
-
-      <p class="">
-          To help avoid any American losing their chance to vote, please do share this site with your friends and family.
-        </p>
-
-
-
-        </div>
-                  </div>
-              </div>
-
-                <div class="col-lg-6">
-
-    <div class="panel panel-info">
-  <div class="panel-heading">
-    <h4 class="panel-title">Voting support</h4>
-  </div>
-  <div class="panel-body">
-
-      <p>
-      The Electoral Protection Coalition works around the clock to advance and defend your right to vote.
-          </p>
-
-      <p>
-          Report voting problems, and get voting relating info for your state.
-      </p>
-      <p>
-          <span class="glyphicon glyphicon glyphicon-hand-up" aria-hidden="true"></span>
-          Visit <a href="http://www.866ourvote.org/"> 866ourvote.org</a>
-      </p>
-      <p>
-          <span class="glyphicon glyphicon glyphicon-phone" aria-hidden="true"></span>
-          Call <a href="tel:866OURVOTE">866OURVOTE</a>
-      </p>
-
-
-      </div>
-        </div>
+            <div class="col-lg-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">What is this site?</h4>
                     </div>
+                    <div class="panel-body">
+                        <p>We aim to connect people willing to give rides to registration offices or polling stations</p>
+                        <p> - with -</p>
+                        <p>Anybody who needs a ride</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">I Need voting info!</h4>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica" target="_rtv">Register to vote!</a></li>
+                            <li><a href="https://www.rockthevote.com/get-informed/elections/am-i-registered-to-vote/" target="_rtv">Are you registered?</a></li>
+                            <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/" target="_rtv">Voter requirements</a></li>
+                            <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/" target="_rtv">Find where to vote</a></li>
+                            <li><a href="https://www.rockthevote.com/get-informed/elections/" target="_rtv">About elections</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Why are we doing this?</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p>We're excited about empowering people who may find it difficult to get to the polls.</p>
+
+                        <p class="">Changes regarding timing and voting locations have hurt democracy in America. We believe that everyone should be able to exercise their democratic rights.
+                        </p>
+
+                        <p>Voter suppression affects everyone, but particularly lower-income People of Color, people with disabilities, young people, and women.</p>
+
+                        <p>It looks like the upcoming election will be a much closer fight than many had anticipated - and so is particularly important.
+                        </p>
+                        <p>Even more so as: </p>
+                        <ul>
+                            <li>Polling stations face closure in lower-income Communities of Color,</li>
+                            <li> Would-be voters have to travel out of town to get a photo ID to register,</li>
+                            <li> The periods available to register and vote become shorter, and</li>
+                            <li> Requesting an absentee ballot or voting by mail can be difficult in many states.</li>
+                        </ul>
 
 
+                        <p>We're excited about getting people from all walks of life involved in the political process!
+                        </p>
 
-                              <div class="col-lg-6">
 
-    <div class="panel panel-info">
-  <div class="panel-heading">
-    <h4 class="panel-title">Newsletter</h4>
-  </div>
-  <div class="panel-body">
+                        <p class="">To help avoid any American losing their chance to vote, please do share this site with your friends and family.
+                        </p>
 
-We continue to make improvements to our platform to make it effective for as many voters as possible. To keep updated with the project,
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Voting support</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p>The Electoral Protection Coalition works around the clock to advance and defend your right to vote.
+                        </p>
+
+                        <p>Report voting problems, and get voting relating info for your state.
+                        </p>
+                        <p><span class="glyphicon glyphicon glyphicon-hand-up" aria-hidden="true"></span> Visit <a href="http://www.866ourvote.org/"> 866ourvote.org</a>
+                        </p>
+                        <p><span class="glyphicon glyphicon glyphicon-phone" aria-hidden="true"></span> Call <a href="tel:866OURVOTE">866OURVOTE</a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Newsletter</h4>
+                    </div>
+                    <div class="panel-body">
+                        We continue to make improvements to our platform to make it effective for as many voters as possible. To keep updated with the project,
                         <a href="http://eepurl.com/ccdDlv" target="_blank" class="">sign up for our newsletter.</a>
-        </div>
-                  </div>
-              </div>
-
-
-
-
-
-
-          <div class="col-lg-6">
-
-              <div class="panel panel-info">
-  <div class="panel-heading">
-    <h4 class="panel-title">Can I help some other way?</h4>
-  </div>
-  <div class="panel-body">
-
-
-                <p>Absolutely!</p>
-
-              <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below </p>
-
-
-              <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal"  data-toggle="validator" role="form">
-                  <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
-          <input type="hidden" name="Timestamp" class="Timestamp" />
-          <input type="hidden" name="Kind" value="Helper" />
-
-
-
-        <div class="form-group">
-            <label for="helpName" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="helpName" placeholder="Your name" name="Name" required>
-            </div>
-          </div>
-
-        <div class="form-group">
-            <label for="helpEmail" class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="helpEmail" placeholder="Email" name="Email" required>
-            </div>
-          </div>
-
-
-                   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-
-              <div class="checkbox">
-          <label>
-            <input type="checkbox" name="Capability" value="build links">
-            I can help build links with organizations and communities
-          </label>
-        </div>
-
-
-      <div class="checkbox"><label><input type="checkbox" name="Capability" value="community organize">
-                I can organize my own community
-              </label></div>
-
-
-        <div class="checkbox"><label><input type="checkbox" name="Capability" value="collaboration">
-                Set up collaboration with my organization
-              </label></div>
-
-                <div class="checkbox"><label><input type="checkbox" name="Capability" value="awareness">
-                Help get the word out
-              </label></div>
-
-
-                <div class="checkbox"><label><input type="checkbox" name="Capability" value="research">
-                Do research
-              </label></div>
-
-
-        <div class="checkbox"><label><input type="checkbox" name="Capability" value="legal">
-                Offer legal expertise
-              </label></div>
-
-
-
-        <div class="checkbox"><label><input type="checkbox" name="Capability" value="tech">
-                Contribute my tech wizardry
-              </label></div>
-
-
-        <div class="checkbox"><label><input type="checkbox" name="Capability" value="raise money">
-                Help the project raise money
-              </label></div>
-
-
-
-        </div>
-                       </div>
-
-
-
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-4">
-              <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-              </div>
-
-                  </form>
-
-        </div>
-                  </div>
                     </div>
+                </div>
+            </div>
 
+            <div class="col-lg-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Can I help some other way?</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p>Absolutely!</p>
+
+                        <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below </p>
+
+                        <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                            <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
+                            <input type="hidden" name="Timestamp" class="Timestamp" />
+                            <input type="hidden" name="Kind" value="Helper" />
+
+                            <div class="form-group">
+                                <label for="helpName" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="helpName" placeholder="Your name" name="Name" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="helpEmail" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="helpEmail" placeholder="Email" name="Email" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="Capability" value="build links">
+                                            I can help build links with organizations and communities
+                                        </label>
+                                    </div>
+
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="Capability" value="community organize">
+                                                I can organize my own community
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="Capability" value="collaboration">
+                                            Set up collaboration with my organization
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="Capability" value="awareness">
+                                        Help get the word out
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="Capability" value="research">
+                                        Do research
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="Capability" value="legal">
+                                        Offer legal expertise
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="Capability" value="tech">
+                                        Contribute my tech wizardry
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="Capability" value="raise money">
+                                        Help the project raise money
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-4">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-     </div>
-           <!-- /container -->
-
-
+    <!-- /container -->
 
     <footer class="footer">
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-3">
-                        <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                        <a href="mailto:together@carpoolvote.com" target="_blank" class="">Contact</a>
-                  </div>
-
-
-              <div class="col-sm-9">
-                        <span class="glyphicon glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                        Keep updated with the project!  <a href="http://eepurl.com/ccdDlv" target="_blank" class="">Sign up for our newsletter.</a>
-                  </div>
-
-
-
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    <a href="mailto:together@carpoolvote.com" target="_blank" class="">Contact</a>
+                </div>
+                <div class="col-sm-9">
+                    <span class="glyphicon glyphicon glyphicon-info-sign" aria-hidden="true"></span> Keep updated with the project! <a href="http://eepurl.com/ccdDlv" target="_blank" class="">Sign up for our newsletter.</a>
+                </div>
             </div>
-      </div>
+        </div>
     </footer>
 
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-1858235-15', 'auto');
-      ga('send', 'pageview');
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-1858235-15', 'auto');
+        ga('send', 'pageview');
     </script>
-     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <script>
+        $(document).ready(function() {
 
-<script>
+            $('#btnNeedRide').click(function() {
+                $('#pnlIntro').slideUp('fast');
+                $('#pnlOfferRide').slideUp('fast');
+                $('#pnlNeedRide').slideDown('fast');
+            });
 
-$(document).ready( function(){
+            $('#btnRiderCancel').click(function() {
+                $('#pnlNeedRide').slideUp('fast');
+                $('#pnlOfferRide').slideUp('fast');
+                $('#pnlIntro').slideDown('fast');
+            });
 
-  $('#btnNeedRide').click(function(){
-    $('#pnlIntro').slideUp('fast');
-    $('#pnlOfferRide').slideUp('fast');
-    $('#pnlNeedRide').slideDown('fast');
-  });
+            $('#btnOfferRide').click(function() {
+                $('#pnlIntro').slideUp('fast');
+                $('#pnlNeedRide').slideUp('fast');
+                $('#pnlOfferRide').slideDown('fast');
+            });
 
-  $('#btnRiderCancel').click( function(){
-      $('#pnlNeedRide').slideUp('fast');
-      $('#pnlOfferRide').slideUp('fast');
-    $('#pnlIntro').slideDown('fast');
-  });
+            $('#btnOfferCancel').click(function() {
+                $('#pnlOfferRide').slideUp('fast');
+                $('#pnlNeedRide').slideUp('fast');
+                $('#pnlIntro').slideDown('fast');
+            });
 
+            $('.Timestamp').val(new Date());
+            $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
 
-  $('#btnOfferRide').click(function () {
-      $('#pnlIntro').slideUp('fast');
-      $('#pnlNeedRide').slideUp('fast');
-      $('#pnlOfferRide').slideDown('fast');
-  });
-
-  $('#btnOfferCancel').click(function () {
-      $('#pnlOfferRide').slideUp('fast');
-      $('#pnlNeedRide').slideUp('fast');
-      $('#pnlIntro').slideDown('fast');
-  });
-
-
-
-  $('.Timestamp').val(new Date());
-   $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
-
-
-
-});
-
-
-</script>
-
-
-
-  </body>
+        });
+    </script>
+</body>
 </html>
