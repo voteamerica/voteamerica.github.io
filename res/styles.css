@@ -21,7 +21,7 @@ body {
 
 .nav {
     width: 95%;
-    max-width: 2260px;
+    max-width: 1200px;
 
     margin: 0 auto 20px;
 }
@@ -200,15 +200,24 @@ body {
     display: none;
 }
 
+.about {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .bannerbox {
-    position: relative;
-    margin: 10px 10px 10px 20px;
+    max-width: 470px;
+    margin: 10px auto 10px;
     border-top: 10px solid white;
     border-bottom: 1px solid transparent;
     background-color: white;
 }
 
 .bannerbox__title {
+    position: relative;
     padding: 10px;
     text-transform: uppercase;
     font-weight: bold;
@@ -218,17 +227,17 @@ body {
     background-color: #297bbb;
 }
 
-.bannerbox:before {
+.bannerbox__title:before {
     content: '';
     position: absolute;
     top: 0px;
     left: -5px;
-    width: 5px;
+    width: 6px;
     height: 38px;
     background-color: #297bbb;
 }
 
-.bannerbox:after {
+.bannerbox__title:after {
     content: '';
     position: absolute;
     top: 38px;
@@ -265,7 +274,13 @@ body {
 }
 
 .footer__text {
-    margin-bottom: 1em;
+    max-width: 1200px;
+    margin: 0 auto 1em;
+}
+
+.newsletter {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .footer__link {
@@ -321,12 +336,22 @@ body {
     .ride__text {
         font-size: 16px;
     }
+
+    .about {
+        padding: 0 20px;
+    }
+
+    .bannerbox {
+        width: calc(50% - 30px);
+        max-width: 1000px; /* large number */
+    }
 }
 
 @media (min-width: 960px) {
     .supportbanner {
         margin-bottom: 24px;
     }
+
     .nav {
         display: flex;
         flex-wrap: nowrap;
@@ -382,5 +407,13 @@ body {
         max-width: 900px;
         text-align: center;
         text-shadow: none;
+    }
+
+    .about {
+        padding: 0;
+    }
+    .bannerbox {
+        width: calc(50% - 20px);
+        margin: 20px 0;
     }
 }
