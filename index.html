@@ -347,7 +347,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-4">
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-default" id="needRideSubmit">Submit</button>
                                     </div>
 
                                     <div class="col-sm-offset-4 col-sm-2">
@@ -590,7 +590,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-4">
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-default" id="offerRideSubmit">Submit</button>
                                     </div>
 
                                     <div class="col-sm-offset-4 col-sm-2">
@@ -870,10 +870,51 @@
                 $('#pnlIntro').slideDown('fast');
             });
 
+            $('#offerCity').change(changeOfferRideSubmit());
+            $('#offerArea').change(changeOfferRideSubmit());
+            $('#offerSeats').change(changeOfferRideSubmit());
+            $('#offerName').change(changeOfferRideSubmit());
+            $('#offerEmail').change(changeOfferRideSubmit());
+
+            $('#rideCity').change(changeNeedRideSubmit());
+            $('#rideArea').change(changeNeedRideSubmit());
+            $('#rideDestination').change(changeNeedRideSubmit());
+            $('#rideSeats').change(changeNeedRideSubmit());
+            $('#riderName').change(changeNeedRideSubmit());
+            $('#ridePhone').change(changeNeedRideSubmit());
+
             $('.Timestamp').val(new Date());
             $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
 
+            $("#offerRideSubmit").attr("disabled");
+            $("#needRideSubmit").attr("disabled");
+
         });
+
+        function changeNeedRideSubmit(){
+            if($('#offerCity').val().length() > 0 &&
+               $('#offerArea').val().length() > 0 &&
+               $('#offerSeats').val().length() > 0 &&
+               $('#offerName').val().length() > 0 &&
+               $('#offerEmail').val().length() > 0){
+                 $("#offerRideSubmit").removeAttr("disabled");
+            } else {
+                $("#offerRideSubmit").attr("disabled");
+            }
+        }
+
+        function changeOfferRideSubmit(){
+          if($('#rideCity').val().length() > 0 &&
+             $('#rideArea').val().length() > 0 &&
+             $('#rideDestination').val().length() > 0 &&
+             $('#rideSeats').val().length() > 0 &&
+             $('#riderName').val().length() > 0 &&
+             $('#ridePhone').val().length() > 0){
+               $("#needRideSubmit").removeAttr("disabled");
+          } else {
+              $("#needRideSubmit").attr("disabled");
+          }
+        }
     </script>
 </body>
 </html>
