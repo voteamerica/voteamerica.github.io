@@ -19,6 +19,7 @@
     <link rel="icon" href="favicon.ico">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 
+    <link rel="stylesheet" type="text/css" href="res/jquery.datetimepicker.min.css">
     <link type="text/css" rel="stylesheet" href="res/nouislider.min.css">
     <link type="text/css" rel="stylesheet" href="res/reset.css">
     <link type="text/css" rel="stylesheet" href="res/styles.css">
@@ -118,7 +119,7 @@
                                 <div class="form-group">
                                     <label for="riderDate" class="col-sm-2 control-label">Date</label>
                                     <div class="col-sm-3">
-                                        <input type="date" class="form-control" id="riderDate" name="Date" required>
+                                        <input type="text" class="form-control" id="riderDate" name="Date" required>
                                     </div>
 
                                     <label for="riderTime" class="col-sm-2 control-label">Approx Time</label>
@@ -584,6 +585,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="res/jquery.datetimepicker.full.min.js"></script>
     <script src="res/nouislider.min.js"></script>
     <script src="res/wNumb.min.js"></script>
     <script>
@@ -632,6 +634,11 @@
                         to: formatTime
                     }
                 }
+            });
+
+            $('#riderDate').datetimepicker( {
+                timepicker: false,
+                format: 'm-d-y'
             });
 
             function formatTime(minutes) {
