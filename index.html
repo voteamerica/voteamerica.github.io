@@ -19,6 +19,7 @@
     <link rel="icon" href="favicon.ico">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 
+    <link type="text/css" rel="stylesheet" href="res/nouislider.min.css">
     <link type="text/css" rel="stylesheet" href="res/reset.css">
     <link type="text/css" rel="stylesheet" href="res/styles.css">
 
@@ -110,7 +111,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-1 col-sm-10">
-                                    <h5>When and where you need picking up</h5>
+                                    <h5 title="Select all dates and times that would work for your ride. We'll let you know when there will be a driver available.">When could you travel?</h5>
                                 </div>
                             </div>
 
@@ -121,6 +122,13 @@
                                     </div>
 
                                     <label for="riderTime" class="col-sm-2 control-label">Approx Time</label>
+
+                                    <div id="slider_container">
+                                        <div id="slider" class="time_slider">
+
+                                        </div>
+                                    </div>
+
                                     <div class="col-sm-4">
                                         <input id="riderTime" type="time" class="form-control" name="Time" required>
                                     </div>
@@ -576,7 +584,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <script src="res/nouislider.min.js"></script>
+    <script src="res/wNumb.min.js"></script>
     <script>
         $(document).ready(function() {
 
@@ -606,6 +615,39 @@
 
             $('.Timestamp').val(new Date());
             $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
+
+            noUiSlider.create($('#slider')[0], {
+                start: [360, 1440],
+                connect: true,
+                step: 10,
+                range: {
+                    'min': [360],
+                    'max': [1320]
+                },
+                pips: {
+                    mode: 'values',
+                    density: 2,
+                    values: [480, 720, 960, 1200, ],
+                    format: {
+                        to: formatTime
+                    }
+                }
+            });
+
+            function formatTime(minutes) {
+                var am = false;
+                if (minutes < 720) {
+                    am = true;
+                }
+                var hour = Math.floor(minutes/60);
+                hour = am || minutes == 720 ? hour : hour - 12;
+                var out_minutes = minutes % 60;
+                out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
+                var ampmString = am ? 'am' : 'pm';
+
+                return hour + ':' + out_minutes + ampmString;
+
+            }
 
         });
     </script>
