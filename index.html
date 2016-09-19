@@ -130,7 +130,7 @@
                                         </div>
                                     </div>
 
-                                    <button type="button" id="rider-add-time">➕ Add Oct 1, 8:00am - 10:00pm to available times</button>
+                                    <button type="button" id="rider-add-time">➕ Add <span id="rider-button-date">Saturday, Oct 1</span>, <span id="rider-button-time">6:00am-10:00pm</span></button>
 
                                     <p>Available times (add as many dates and time ranges as you like):</p>
                                     <ul id="rider-available-times">
@@ -657,6 +657,16 @@
                 $('#rider-available-times').append(
                         '<li>' + $('#riderDate').val() + ', ' + startTime + '-' + endTime + ' (remove)</li>'
                 );
+            });
+
+            $('#slider')[0].noUiSlider.on('update', function() {
+                var startTime = formatTime($('#slider')[0].noUiSlider.get()[0]);
+                var endTime = formatTime($('#slider')[0].noUiSlider.get()[1]);
+                $('#rider-button-time').text(startTime + '-' + endTime);
+            });
+
+            $('#riderDate').change(function() {
+                $('#rider-button-date').text($('#riderDate').val());
             });
 
             function formatTime(minutes) {
