@@ -125,7 +125,7 @@
                                     <label for="riderTime" class="col-sm-2 control-label">Time range available</label>
 
                                     <div id="slider_container">
-                                        <div id="slider" class="time_slider">
+                                        <div id="rider-time-slider" class="time_slider">
 
                                         </div>
                                     </div>
@@ -621,8 +621,14 @@
             $('.Timestamp').val(new Date());
             $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
 
+            initializeCalAndTime();
+        });
+
+        function initializeCalAndTime() {
+            // Puts the datepicker and time range slider onto the page
+
             // Initialize time slider
-            noUiSlider.create($('#slider')[0], {
+            noUiSlider.create($('#rider-time-slider')[0], {
                 start: [360, 1440],
                 connect: true,
                 step: 10,
@@ -647,44 +653,46 @@
                 startDate: '2016/10/01',
                 inline: true
             });
+
             // Must manually set the initial value of the calendar input
             $('#riderDate').attr('value', 'Saturday, Oct 1');
 
             // Add selected date and time to list of available times on button click
             $('#rider-add-time').click(function() {
-                var startTime = formatTime($('#slider')[0].noUiSlider.get()[0]);
-                var endTime = formatTime($('#slider')[0].noUiSlider.get()[1]);
+                var startTime = formatTime($('#rider-time-slider')[0].noUiSlider.get()[0]);
+                var endTime = formatTime($('#rider-time-slider')[0].noUiSlider.get()[1]);
                 $('#rider-available-times').append(
                         '<li>' + $('#riderDate').val() + ', ' + startTime + '-' + endTime + ' (remove)</li>'
                 );
             });
 
-            $('#slider')[0].noUiSlider.on('update', function() {
-                var startTime = formatTime($('#slider')[0].noUiSlider.get()[0]);
-                var endTime = formatTime($('#slider')[0].noUiSlider.get()[1]);
+            $('#rider-time-slider')[0].noUiSlider.on('update', function() {
+                var startTime = formatTime($('#rider-time-slider')[0].noUiSlider.get()[0]);
+                var endTime = formatTime($('#rider-time-slider')[0].noUiSlider.get()[1]);
                 $('#rider-button-time').text(startTime + '-' + endTime);
             });
 
             $('#riderDate').change(function() {
                 $('#rider-button-date').text($('#riderDate').val());
             });
+        }
 
-            function formatTime(minutes) {
-                var am = false;
-                if (minutes < 720) {
-                    am = true;
-                }
-                var hour = Math.floor(minutes/60);
-                hour = am || minutes == 720 ? hour : hour - 12;
-                var out_minutes = minutes % 60;
-                out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
-                var ampmString = am ? 'am' : 'pm';
 
-                return hour + ':' + out_minutes + ampmString;
-
+        // The sliders work with the day in terms of minutes, this function translates the minutes
+        // into readable format i.e. 4:34pm
+        function formatTime(minutes) {
+            var am = false;
+            if (minutes < 720) {
+                am = true;
             }
+            var hour = Math.floor(minutes/60);
+            hour = minutes < 780 ? hour : hour - 12;
+            var out_minutes = minutes % 60;
+            out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
+            var ampmString = am ? 'am' : 'pm';
 
-        });
+            return hour + ':' + out_minutes + ampmString;
+        }
     </script>
 </body>
 </html>
