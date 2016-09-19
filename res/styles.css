@@ -424,3 +424,10 @@ body {
     margin-right: 30px;
     margin-top: 10px;
 }
+
+.noUi-pips-horizontal {
+    padding-bottom: 0;
+    padding-top: 47px;
+    position: relative;
+    top: -40px;
+}

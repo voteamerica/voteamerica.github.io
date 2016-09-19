@@ -117,12 +117,12 @@
                             </div>
 
                                 <div class="form-group">
-                                    <label for="riderDate" class="col-sm-2 control-label">Date</label>
+                                    <label for="riderDate" class="col-sm-2 control-label">Date available</label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control" id="riderDate" name="Date" required>
                                     </div>
 
-                                    <label for="riderTime" class="col-sm-2 control-label">Approx Time</label>
+                                    <label for="riderTime" class="col-sm-2 control-label">Time range available</label>
 
                                     <div id="slider_container">
                                         <div id="slider" class="time_slider">
@@ -130,9 +130,12 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-4">
-                                        <input id="riderTime" type="time" class="form-control" name="Time" required>
-                                    </div>
+                                    <button type="button" id="rider-add-time">➕ Add Oct 1, 8:00am - 10:00pm to available times</button>
+
+                                    <p>Available times (add as many dates and time ranges as you like):</p>
+                                    <ul id="rider-available-times">
+
+                                    </ul>
                                 </div>
 
                                 <div class="form-group">
@@ -618,6 +621,7 @@
             $('.Timestamp').val(new Date());
             $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
 
+            // Initialize time slider
             noUiSlider.create($('#slider')[0], {
                 start: [360, 1440],
                 connect: true,
@@ -636,9 +640,23 @@
                 }
             });
 
+            // Initialize datepicker
             $('#riderDate').datetimepicker( {
                 timepicker: false,
-                format: 'm-d-y'
+                format: 'l, M j',
+                startDate: '2016/10/01',
+                inline: true
+            });
+            // Must manually set the initial value of the calendar input
+            $('#riderDate').attr('value', 'Saturday, Oct 1');
+
+            // Add selected date and time to list of available times on button click
+            $('#rider-add-time').click(function() {
+                var startTime = formatTime($('#slider')[0].noUiSlider.get()[0]);
+                var endTime = formatTime($('#slider')[0].noUiSlider.get()[1]);
+                $('#rider-available-times').append(
+                        '<li>' + $('#riderDate').val() + ', ' + startTime + '-' + endTime + ' (remove)</li>'
+                );
             });
 
             function formatTime(minutes) {
