@@ -64,3 +64,16 @@ h5 {
 #pnlIntro {
     color: #fff;
 }
+
+/* dropdown: Am I register? */
+
+.state-details { padding-left: 20px; }
+
+.state-dropdown, .state-caption { 
+    display: inline-block; 
+}
+
+.state-caption { 
+    text-align: left; 
+    padding-right: 10px;
+}
