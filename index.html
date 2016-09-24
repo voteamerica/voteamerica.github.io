@@ -31,8 +31,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-
     <script>
         ! function(g, s, q, r, d) {
             r = g[r] = g[r] || function() {
@@ -635,11 +633,13 @@
                     <div class="panel-body">
                         <ul>
                             <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica" target="_rtv">Register to vote!</a></li>
-                            <li><a href="https://www.rockthevote.com/get-informed/elections/am-i-registered-to-vote/" target="_rtv">Are you registered?</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/" target="_rtv">Voter requirements</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/" target="_rtv">Find where to vote</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/" target="_rtv">About elections</a></li>
                         </ul>
+                        <div class="state-details" id="state-details">
+                            <p class="state-caption">Am I registered?</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -841,6 +841,8 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- dropdown for issue #37 - voting registrations per state -->
     <script src="dropdown.js"></script>
