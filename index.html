@@ -138,6 +138,10 @@
                                     <ul class="available-times-list" id="rider-available-times">
 
                                     </ul>
+
+                                    <div class="selected-dates">
+
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -343,6 +347,12 @@
                             <ul class="available-times-list" id="driver-available-times">
 
                             </ul>
+
+                            <div class="selected-dates">
+
+                            </div>
+
+
                         </div>
 
                         <div class="form-group">
@@ -668,11 +678,19 @@
                 var startTime = formatTime($(this).siblings('.time-range-slider')[0].noUiSlider.get()[0]);
                 var endTime = formatTime($(this).siblings('.time-range-slider')[0].noUiSlider.get()[1]);
                 var date = $(this).siblings('.datepicker').val();
+                var timeId = new Date().getTime();
                 $(this).siblings('.available-times-list').append(
-                        '<li>' + date + ', ' + startTime + '-' + endTime + ' (<span class="remove-time">remove</span>)</li>'
+                        '<li class="' + timeId +'">' + date + ', ' + startTime + '-' + endTime + ' (<span class="remove-time">remove</span>)</li>'
+                );
+                $(this).siblings('.selected-dates').append(
+                        '<input type="hidden" ' +
+                        'class="' + timeId + '" ' +
+                        'name="datetime[]" ' +
+                        'value="'+ date + ', ' + startTime + '-' + endTime + '">'
                 );
                 $('.remove-time').click(function() {
-                    $(this).closest('li').remove();
+                    var removeId = $(this).closest('li').attr('class');
+                    $('.' + removeId).remove();
                 });
             });
 
