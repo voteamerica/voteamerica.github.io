@@ -102,6 +102,16 @@
                         <h3 class="ride__title">Riders</h3>
                         <p class="ride__text">Need assistance getting to where you need to be in order to vote?</p>
                         <p class="ride__text">Just fill in this form! We'll try and connect you with someone that can help.</p>
+                        <p><span style="font-weight:bold">What happens next?</span> We'll record these details and contact you if someone can help</p>
+
+                        <div class="col-sm-6">
+                            <p>
+                                <button class="btn btn-lg btn-primary btn-block" href="#" role="button" id="btnNeedRide">
+                                <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
+                                I need a ride</button>
+                            </p>
+                        </div>
+
 
                         <form class="needride__form" action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
                             <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
@@ -286,7 +296,6 @@
 
                             </form>
 
-                        <span style="font-weight:bold">What happens next?</span> We'll record these details and contact you if someone can help
                     </div>
                 </li>
                 <li class="offerride" id="offerride">
@@ -295,6 +304,16 @@
                     <p class="ride__text">Driving to vote, and have a spare seat?</p>
                     <p class="ride__text">Fill in this form and help a fellow citizen exercise their democratic right.</p>
                     <p class="ride__text">We'll try and connect you with someone that needs a ride in the same direction.</p>
+                    <p><span style="font-weight:bold">What happens next?</span> We'll contact you if there's a match</p>
+
+                    <div class="col-sm-6">
+                        <p>
+                            <button class="btn btn-lg btn-success btn-block" href="#" role="button" id="btnOfferRide">
+                                <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                                I can offer a ride
+                            </button>
+                        </p>
+                    </div>
 
                     <form class="offerride__form" action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
                         <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
@@ -478,7 +497,7 @@
                             </div>
                         </div>
                     </form>
-                    <span style="font-weight:bold">What happens next?</span> We'll contact you if there's a match
+                    
                 </div>
                 </li>
             </ul>
