@@ -68,6 +68,7 @@ h5 {
 
 .rock-image {
     width: 10px;
+    padding-bottom: 10px;
 }
 
 .rock-vote-links {
@@ -91,16 +92,17 @@ a.election-protection-link {
 }
 /* dropdown: Am I register? */
 
-.state-details { padding-left: 20px; }
+.state-details {  }
 
 .state-dropdown, .state-caption { 
     display: inline-block; 
 }
 
+
 .state-caption { 
     text-align: left; 
     padding-right: 10px;
+
     font-size: 14px;
-    margin-left: -5px;
 }
 
