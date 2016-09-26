@@ -114,6 +114,13 @@ body {
 .button__offer {
     background-color: #5cb85c;
 }
+.button__ride {
+    background-color: #297BBB;
+}
+.btn {
+    text-transform: uppercase;
+}
+
 
 .lead {
     margin-bottom: 1em;

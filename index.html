@@ -19,6 +19,8 @@
     <link rel="icon" href="favicon.ico">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+
     <link type="text/css" rel="stylesheet" href="res/reset.css">
     <link type="text/css" rel="stylesheet" href="res/styles.css">
 
@@ -105,12 +107,8 @@
                         <p class="ride__text">Just fill in this form! We'll try and connect you with someone that can help.</p>
                         <p><span style="font-weight:bold">What happens next?</span> We'll record these details and contact you if someone can help</p>
 
-                        <div class="col-sm-6">
-                            <p>
-                                <button class="button button__offer" href="#" role="button" id="btnNeedRide">
-                                <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
-                                I need a ride</button>
-                            </p>
+                        <div class="">
+                            <button class="btn btn-lg btn-success btn-block" href="#" role="button" id="btnNeedRide">I need a ride</button>
                         </div>
 
 
@@ -300,20 +298,15 @@
                     </div>
                 </li>
                 <li class="offerride" id="offerride">
-                    <div class="ride__container">
+                <div class="ride__container">
                     <h3 class="ride__title">Drivers</h3>
                     <p class="ride__text">Driving to vote, and have a spare seat?</p>
                     <p class="ride__text">Fill in this form and help a fellow citizen exercise their democratic right.</p>
                     <p class="ride__text">We'll try and connect you with someone that needs a ride in the same direction.</p>
                     <p><span style="font-weight:bold">What happens next?</span> We'll contact you if there's a match</p>
 
-                    <div class="col-sm-4">
-                        <p>
-                            <button class="button button__centered" href="#" role="button" id="btnOfferRide">
-                                <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-                                I can offer a ride
-                            </button>
-                        </p>
+                    <div class="">
+                        <button class="btn btn-lg btn-success button__ride" href="#" role="button" id="btnOfferRide">I can offer a ride</button>
                     </div>
 
                     <form class="offerride__form" action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
