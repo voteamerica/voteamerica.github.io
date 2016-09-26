@@ -64,3 +64,9 @@ h5 {
 #pnlIntro {
     color: #fff;
 }
+
+/* rider form dropdown */
+
+.state-dropdown{
+    padding-top: 5px;
+}
