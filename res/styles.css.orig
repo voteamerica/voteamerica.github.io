@@ -64,6 +64,7 @@ h5 {
 #pnlIntro {
     color: #fff;
 }
+<<<<<<< fe855027fa11f94340601497d3ff529b2162120b
 /* how to register to vote */
 
 .rock-image {
@@ -96,6 +97,7 @@ a.election-protection-link {
 
 .state-dropdown, .state-caption { 
     display: inline-block; 
+}
 
 
 .state-caption { 
@@ -104,3 +106,9 @@ a.election-protection-link {
     font-size: 14px;}
 
 .state-intro { margin-bottom: 4px; }
+=======
+.state-dropdown{
+    font-size: 14px;
+    margin: 16px;
+}
+>>>>>>> fixing json data
