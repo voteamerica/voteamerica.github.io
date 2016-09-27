@@ -111,3 +111,10 @@ a.election-protection-link {
 
 .state-intro { margin-bottom: 4px; }
 
+.dropdown-form {
+    margin: 0;
+}
+
+.clearfix {
+    overflow: auto;
+}
