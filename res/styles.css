@@ -96,6 +96,11 @@ a.election-protection-link {
 
 .state-dropdown, .state-caption { 
     display: inline-block; 
+}
+
+.state-dropdown {
+    margin: 14px;
+}
 
 
 .state-caption { 
@@ -104,3 +109,4 @@ a.election-protection-link {
     font-size: 14px;}
 
 .state-intro { margin-bottom: 4px; }
+
