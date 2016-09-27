@@ -64,6 +64,7 @@ h5 {
 #pnlIntro {
     color: #fff;
 }
+
 /* how to register to vote */
 
 .rock-image {
@@ -98,6 +99,10 @@ a.election-protection-link {
     display: inline-block; 
 }
 
+.state-dropdown {
+    margin: 14px;
+}
+
 
 .state-caption { 
     text-align: left; 
@@ -105,3 +110,11 @@ a.election-protection-link {
     font-size: 14px;}
 
 .state-intro { margin-bottom: 4px; }
+
+.dropdown-form {
+    margin: 0;
+}
+
+.clearfix {
+    overflow: auto;
+}

@@ -15,7 +15,7 @@ var votingDropdown = (function() {
 			html: items.join("")
 		}).appendTo("#state-details");
 		$("#state-select").change(function() {
-			window.open(this.value);
+			window.open(this.value, '_blank');
 		});
 	});
 }());
