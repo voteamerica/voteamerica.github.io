@@ -64,3 +64,45 @@ h5 {
 #pnlIntro {
     color: #fff;
 }
+/* how to register to vote */
+
+.rock-image {
+    width: 10px;
+    padding-bottom: 10px;
+}
+
+.rock-vote-links {
+    margin-left: -10px;
+}
+
+.rock-vote-support {
+    color: #297bbb;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.election-protection {
+    padding-bottom: 8px;
+}
+
+a.election-protection-link {
+    height: 50px;
+    cursor: pointer;
+    font-weight: bold;
+}
+/* dropdown: Am I register? */
+
+.state-details {  }
+
+.state-dropdown, .state-caption { 
+    display: inline-block; 
+}
+
+
+.state-caption { 
+    text-align: left; 
+    padding-right: 10px;
+
+    font-size: 14px;
+}
+

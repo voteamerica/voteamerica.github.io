@@ -31,8 +31,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-
     <script>
         ! function(g, s, q, r, d) {
             r = g[r] = g[r] || function() {
@@ -630,16 +628,32 @@
             <div class="col-lg-6">
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h4 class="panel-title">I Need voting info!</h4>
+                        <h4 class="panel-title">How To Claim Your Vote!</h4>
                     </div>
                     <div class="panel-body">
-                        <ul>
+                        <div class="rock-image">
+                            <img src="res/img/rock.png" />
+                        </div>
+                        <p class="rock-vote-description">Rock the vote has several online tools that simplify and demystify voter registration and elections.  Follow the links below for more on how to claim your vote!
+                        <ul class="rock-vote-links">
                             <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica" target="_rtv">Register to vote!</a></li>
-                            <li><a href="https://www.rockthevote.com/get-informed/elections/am-i-registered-to-vote/" target="_rtv">Are you registered?</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/" target="_rtv">Voter requirements</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/" target="_rtv">Find where to vote</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/" target="_rtv">About elections</a></li>
                         </ul>
+                        
+                        <div id="state-details">
+                            <p class="state-caption">Am I registered?</p>
+                        </div>
+
+                        <p class="rock-vote-support">Need further support?</p>
+
+                        <img class="election-protection" src="res/img/election-protection.png" />
+
+                        <p>The <a class="election-protection-link" href="http://www.866ourvote.org/">Election Protection Coalition</a> works around the 
+                        clock to advance and defend your right to vote.  Report voting problems, and get voting-related
+                        information on your state, by calling 866-OURVOTE.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -841,7 +855,11 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- dropdown for issue #37 - voting registrations per state -->
+    <script src="dropdown.js"></script>
 
     <script>
         $(document).ready(function() {
