@@ -7,6 +7,7 @@ var votingDropdown = (function() {
 	$.getJSON("res/voting-details.json", function(data) {
 		var items = [];
 		$.each(data, function(key, val) {
+			console.log(key);
 			items.push("<option class='state-option' id='" + key + "' value='" + val["Polling location finder"] + "' >" + val["Voter registration check"] + "</option>");
 		});
 		$("<select />", {
