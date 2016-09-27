@@ -75,10 +75,12 @@ h5 {
     margin-left: -10px;
 }
 
-.rock-vote-support {
+.rock-vote-support, .state-caption {
     color: #297bbb;
-    padding-top: 10px;
     font-weight: bold;
+}
+.rock-vote-support {
+    padding-top: 10px;
 }
 
 .election-protection {
@@ -92,8 +94,6 @@ a.election-protection-link {
 }
 /* dropdown: Am I register? */
 
-.state-details {  }
-
 .state-dropdown, .state-caption { 
     display: inline-block; 
 }
@@ -102,7 +102,6 @@ a.election-protection-link {
 .state-caption { 
     text-align: left; 
     padding-right: 10px;
+    font-size: 14px;}
 
-    font-size: 14px;
-}
-
+.state-intro { margin-bottom: 4px; }
