@@ -2,9 +2,10 @@
 // Loads JSON data to dropdown template 
 
 var votingDropdown = (function() {
+	console.log('test');
 	// grab data from csv
 	// loop through and print statename in dropdown with hyperlink
-	$.getJSON("res/voting-details.json", function(data) {
+	$.getJSON("res/voting-locations.json", function(data) {
 		var items = [];
 		$.each(data, function(key, val) {
 			items.push("<option class='state-option' id='" + key + "' value='" + val["Polling location finder"] + "' >" + val["Voter registration check"] + "</option>");
