@@ -18,4 +18,20 @@ var votingDropdown = (function() {
 			window.open(this.value);
 		});
 	});
+// dbrusky1: I will refoctor this later
+	$.getJSON("res/location-details.json", function(data) {
+		var items = [];
+		$.each(data, function(key, val) {
+			items.push("<option class='state-option' id='" + key + "' value='" + val["Polling location finder"] + "' >" + val["Voter registration check"] + "</option>");
+		});
+		$("<select />", {
+			"class": "location-dropdown",
+			"id": "location-select",
+			html: items.join("")
+		}).appendTo("#location-details");
+		$("#location-select").change(function() {
+			window.open(this.value);
+		});
+	});
+
 }());
