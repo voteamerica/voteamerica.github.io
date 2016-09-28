@@ -92,7 +92,21 @@ a.election-protection-link {
     cursor: pointer;
     font-weight: bold;
 }
-/* dropdown: Am I register? */
+
+label.collection { 
+    font-weight: 400;
+    padding: 5px; 
+}
+
+.miles {
+    width: 50px;
+    padding: 4px;
+    border: none;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+
+}
+/* dropdown: Am I register?, Check Your Polling Location*/
 
 .state-dropdown, .state-caption { 
     display: inline-block; 
@@ -102,6 +116,10 @@ a.election-protection-link {
 .state-caption { 
     text-align: left; 
     padding-right: 10px;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 4px;}
 
+.location-dropdown {
+    margin: 14px;
+    font-size: 18px;
+}
