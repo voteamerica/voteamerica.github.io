@@ -102,6 +102,6 @@ a.election-protection-link {
 .state-caption { 
     text-align: left; 
     padding-right: 10px;
-    font-size: 14px;}
+    font-size: 14px;
+    margin-bottom: 4px;}
 
-.state-intro { margin-bottom: 4px; }
