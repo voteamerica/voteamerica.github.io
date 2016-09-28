@@ -223,19 +223,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="rideCity" class="col-sm-2 control-label">City</label>
+                                    <label for="rideArea" class="col-sm-2 control-label">Collection zip code</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="rideCity" placeholder="City" name="City" required>
+                                        <input type="number" class="form-control" pattern="(\d{5}?)" id="rideArea" placeholder="Where can you meet the driver" name="Origin" required>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="rideArea" class="col-sm-2 control-label">From</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="rideArea" placeholder="Pick-up Neighborhood" name="Origin" required>
-                                    </div>
-                                </div>
-
 
                                 <div class="form-group">
                                     <label for="rideLocations" class="col-sm-2 control-label">Check Your Polling Location</label>
@@ -244,6 +236,13 @@
                                     </div>
                                 </div>
 
+
+                                <div class="form-group">
+                                    <label for="rideDestination" class="col-sm-2 control-label">Destination address</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="rideDestination" placeholder="To where do you need a ride?" name="RiderDestination" required>
+                                    </div>
+                                </div>
 
 
                                 <div class="form-group">
@@ -474,18 +473,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="offerCity" class="col-sm-2 control-label">City</label>
+                                    <label for="offerArea" class="col-sm-2 control-label">Collection Zip Code</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="offerCity" placeholder="City" name="City" required>
+                                        <input type="number" class="form-control" id="offerArea" placeholder="Where can you collect the rider" name="Origin" pattern="(\d{5}?)" >
+                                        <label class="collection">
+                                            I am willing to collect within a 
+                                           <input type="number" id="miles" placeholder="000" name="quantity" pattern="(\d{3}?)" class="miles"  />
+                                            mile radius of this zip code.&nbsp;<span id="error"></span>
+                                        </label>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="offerArea" class="col-sm-2 control-label">Neighborhood</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="offerArea" placeholder="Pick-up Neighborhood" name="Origin" required>
-                                    </div>
-                                </div>
 
                                 <div class="form-group">
                                     <label for="offerSeats" class="col-sm-2 control-label">Seats</label>

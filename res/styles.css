@@ -92,6 +92,20 @@ a.election-protection-link {
     cursor: pointer;
     font-weight: bold;
 }
+
+label.collection { 
+    font-weight: 400;
+    padding: 5px; 
+}
+
+.miles {
+    width: 50px;
+    padding: 4px;
+    border: none;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+
+}
 /* dropdown: Am I register?, Check Your Polling Location*/
 
 .state-dropdown, .state-caption { 
