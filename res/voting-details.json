@@ -1,257 +1,308 @@
 [
   {
-    "Voter registration check": "Alabama",
-    "Polling location finder": "https://myinfo.alabamavotes.gov/VoterView/RegistrantSearch.do",
-    "Twitter": "https://myinfo.alabamavotes.gov/VoterView/PollingPlaceSearch.do"
+    "State": "Alabama",
+    "Voter registration check": "https://myinfo.alabamavotes.gov/VoterView/RegistrantSearch.do",
+    "Polling location finder": "https://myinfo.alabamavotes.gov/VoterView/PollingPlaceSearch.do",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Alaska",
+    "State": "Alaska",
+    "Voter registration check": "https://myvoterinformation.alaska.gov/",
     "Polling location finder": "https://myvoterinformation.alaska.gov/",
-    "Twitter": "https://myvoterinformation.alaska.gov/"
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Arizona",
-    "Polling location finder": "https://voter.azsos.gov/VoterView/RegistrantSearch.do",
-    "Twitter": "http://www.arizona.vote/home#1678087066"
+    "State": "Arizona",
+    "Voter registration check": "https://voter.azsos.gov/VoterView/RegistrantSearch.do",
+    "Polling location finder": "http://www.arizona.vote/home#1678087066",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Arkansas",
+    "State": "Arkansas",
+    "Voter registration check": "https://www.voterview.ar-nova.org/VoterView/RegistrantSearch.do",
     "Polling location finder": "https://www.voterview.ar-nova.org/VoterView/RegistrantSearch.do",
-    "Twitter": "https://www.voterview.ar-nova.org/VoterView/RegistrantSearch.do"
+    "Twitter": ""
   },
   {
-    "Voter registration check": "California",
-    "Polling location finder": "http://www.sos.ca.gov/elections/registration-status/",
-    "Twitter": "http://www.sos.ca.gov/elections/polling-place/"
+    "State": "California",
+    "Voter registration check": "http://www.sos.ca.gov/elections/registration-status/",
+    "Polling location finder": "http://www.sos.ca.gov/elections/polling-place/",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Colorado",
+    "State": "Colorado",
+    "Voter registration check": "https://www.sos.state.co.us/voter-classic/pages/pub/olvr/findVoterReg.xhtml",
     "Polling location finder": "https://www.sos.state.co.us/voter-classic/pages/pub/olvr/findVoterReg.xhtml",
-    "Twitter": "https://www.sos.state.co.us/voter-classic/pages/pub/olvr/findVoterReg.xhtml"
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Connecticut",
-    "Polling location finder": "http://www.dir.ct.gov/sots/LookUp.aspx",
-    "Twitter": "http://www.ct.gov/sots/cwp/view.asp?a=3172&q=512796"
+    "State": "Connecticut",
+    "Voter registration check": "http://www.dir.ct.gov/sots/LookUp.aspx",
+    "Polling location finder": "http://www.ct.gov/sots/cwp/view.asp?a=3172&q=512796",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Delaware",
-    "Polling location finder": "https://ivote.de.gov/voterlogin.aspx",
-    "Twitter": "https://ivote.de.gov/"
+    "State": "Delaware",
+    "Voter registration check": "https://ivote.de.gov/voterlogin.aspx",
+    "Polling location finder": "https://ivote.de.gov/",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "DC",
-    "Polling location finder": "https://www.dcboee.org/voter_info/reg_status/index.asp",
-    "Twitter": "https://www.vote4dc.com/SearchElection/SearchByAddress"
+    "State": "DC",
+    "Voter registration check": "https://www.dcboee.org/voter_info/reg_status/index.asp",
+    "Polling location finder": "https://www.vote4dc.com/SearchElection/SearchByAddress",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Florida",
-    "Polling location finder": "http://registration.elections.myflorida.com/CheckVoterStatus",
-    "Twitter": "https://registration.elections.myflorida.com/CheckVoterStatus"
+    "State": "Florida",
+    "Voter registration check": "http://registration.elections.myflorida.com/CheckVoterStatus",
+    "Polling location finder": "https://registration.elections.myflorida.com/CheckVoterStatus",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Georgia",
+    "State": "Georgia",
+    "Voter registration check": "https://www.mvp.sos.ga.gov/MVP/mvp.do",
     "Polling location finder": "https://www.mvp.sos.ga.gov/MVP/mvp.do",
-    "Twitter": "https://www.mvp.sos.ga.gov/MVP/mvp.do"
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Hawaii",
-    "Polling location finder": "https://olvr.hawaii.gov/",
-    "Twitter": "https://olvr.hawaii.gov/Default.aspx"
+    "State": "Hawaii",
+    "Voter registration check": "https://olvr.hawaii.gov/",
+    "Polling location finder": "https://olvr.hawaii.gov/Default.aspx",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Idaho",
-    "Polling location finder": "http://www.idahovotes.gov/YPP_NEW/AmIRegistered.aspx",
-    "Twitter": "http://www.idahovotes.gov/YourPollingPlace/WhereDoIVote.aspx"
+    "State": "Idaho",
+    "Voter registration check": "http://www.idahovotes.gov/YPP_NEW/AmIRegistered.aspx",
+    "Polling location finder": "http://www.idahovotes.gov/YourPollingPlace/WhereDoIVote.aspx",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Illinois",
+    "State": "Illinois",
+    "Voter registration check": "https://ova.elections.il.gov/RegistrationLookup.aspx",
     "Polling location finder": "https://ova.elections.il.gov/RegistrationLookup.aspx",
-    "Twitter": "https://ova.elections.il.gov/RegistrationLookup.aspx"
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Indiana",
-    "Polling location finder": "https://indianavoters.in.gov/PublicSite/(X(1)A(e7Gfh8n-778XUE295JqNHp18bSOHi-BiRS1xVaEhWmk6mLytNe9SNOka_y8Y7uCy9oksyV9ZRLMjJRw46EyYPJvgE9bQzhBHLbcui0lcWqMw5Dbd6rbwvYB9HXFKKT_0zEJSKhN50ZW9IKdPB1AHJ6Apht01))/Public/FT1/PublicLookupMain.aspx?AspxAutoDetectCookieSupport=1",
-    "Twitter": "https://indianavoters.in.gov/PublicSite/(X(1)A(XWzbr34ePhhGDFcwfVsbiSVjqePa_HVaGoxUQUV96N2VJ9P8MFFYmDstLmvvLs5qLEJniELwEACJqzfgOdWxKVWrGSxDulPtS1Ai-IsqNmx-1ALRnQ-RyvRXsTbddXnYXDhIxEiZYZT9Hc1_FJsgdtWFUzA1))/Public/FT1/PublicLookupMain.aspx?AspxAutoDetectCookieSupport=1"
+    "State": "Indiana",
+    "Voter registration check": "https://indianavoters.in.gov/PublicSite/(X(1)A(e7Gfh8n-778XUE295JqNHp18bSOHi-BiRS1xVaEhWmk6mLytNe9SNOka_y8Y7uCy9oksyV9ZRLMjJRw46EyYPJvgE9bQzhBHLbcui0lcWqMw5Dbd6rbwvYB9HXFKKT_0zEJSKhN50ZW9IKdPB1AHJ6Apht01))/Public/FT1/PublicLookupMain.aspx?AspxAutoDetectCookieSupport=1",
+    "Polling location finder": "https://indianavoters.in.gov/PublicSite/(X(1)A(XWzbr34ePhhGDFcwfVsbiSVjqePa_HVaGoxUQUV96N2VJ9P8MFFYmDstLmvvLs5qLEJniELwEACJqzfgOdWxKVWrGSxDulPtS1Ai-IsqNmx-1ALRnQ-RyvRXsTbddXnYXDhIxEiZYZT9Hc1_FJsgdtWFUzA1))/Public/FT1/PublicLookupMain.aspx?AspxAutoDetectCookieSupport=1",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Iowa",
-    "Polling location finder": "https://sos.iowa.gov/elections/VoterReg/RegToVote/search.aspx",
-    "Twitter": "https://sos.iowa.gov/elections/voterreg/pollingplace/search.aspx"
+    "State": "Iowa",
+    "Voter registration check": "https://sos.iowa.gov/elections/VoterReg/RegToVote/search.aspx",
+    "Polling location finder": "https://sos.iowa.gov/elections/voterreg/pollingplace/search.aspx",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Kansas",
-    "Polling location finder": "https://myvoteinfo.voteks.org/VoterView/RegistrantSearch.do",
-    "Twitter": "https://myvoteinfo.voteks.org/VoterView/PollingPlaceSearch.do"
+    "State": "Kansas",
+    "Voter registration check": "https://myvoteinfo.voteks.org/VoterView/RegistrantSearch.do",
+    "Polling location finder": "https://myvoteinfo.voteks.org/VoterView/PollingPlaceSearch.do",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Kentucky",
-    "Polling location finder": "https://vrsws.sos.ky.gov/VIC/",
-    "Twitter": "https://vrsws.sos.ky.gov/vic/"
+    "State": "Kentucky",
+    "Voter registration check": "https://vrsws.sos.ky.gov/VIC/",
+    "Polling location finder": "https://vrsws.sos.ky.gov/vic/",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Louisiana",
+    "State": "Louisiana",
+    "Voter registration check": "https://voterportal.sos.la.gov/Home/VoterLogin",
     "Polling location finder": "https://voterportal.sos.la.gov/Home/VoterLogin",
-    "Twitter": "https://voterportal.sos.la.gov/Home/VoterLogin"
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Maine",
+    "State": "Maine",
+    "Voter registration check": "http://www.maine.gov/portal/government/edemocracy/voter_lookup.php",
     "Polling location finder": "http://www.maine.gov/portal/government/edemocracy/voter_lookup.php",
-    "Twitter": "http://www.maine.gov/portal/government/edemocracy/voter_lookup.php"
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Maryland",
-    "Polling location finder": "https://voterservices.elections.state.md.us/VoterSearch",
-    "Twitter": "https://voterservices.elections.maryland.gov/PollingPlaceSearch"
+    "State": "Maryland",
+    "Voter registration check": "https://voterservices.elections.state.md.us/VoterSearch",
+    "Polling location finder": "https://voterservices.elections.maryland.gov/PollingPlaceSearch",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Massachusetts",
-    "Polling location finder": "http://www.sec.state.ma.us/ELE/eleclk/clkidx.htm",
-    "Twitter": "http://wheredoivotema.com/bal/MyElectionInfo.aspx"
+    "State": "Massachusetts",
+    "Voter registration check": "http://www.sec.state.ma.us/ELE/eleclk/clkidx.htm",
+    "Polling location finder": "http://wheredoivotema.com/bal/MyElectionInfo.aspx",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Michigan",
+    "State": "Michigan",
+    "Voter registration check": "https://webapps.sos.state.mi.us/MVIC/",
     "Polling location finder": "https://webapps.sos.state.mi.us/MVIC/",
-    "Twitter": "https://webapps.sos.state.mi.us/MVIC/"
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Minnesota",
-    "Polling location finder": "https://mnvotes.sos.state.mn.us/VoterStatus.aspx",
-    "Twitter": "http://pollfinder.sos.state.mn.us/"
+    "State": "Minnesota",
+    "Voter registration check": "https://mnvotes.sos.state.mn.us/VoterStatus.aspx",
+    "Polling location finder": "http://pollfinder.sos.state.mn.us/",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Mississippi",
-    "Polling location finder": "http://www.sos.state.ms.us/elections/VoterRegistrars.asp",
-    "Twitter": "http://www.sos.ms.gov/Elections-Voting/Pages/County-Election-Info.aspx"
+    "State": "Mississippi",
+    "Voter registration check": "http://www.sos.state.ms.us/elections/VoterRegistrars.asp",
+    "Polling location finder": "http://www.sos.ms.gov/Elections-Voting/Pages/County-Election-Info.aspx",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Missouri",
-    "Polling location finder": "https://s1.sos.mo.gov/elections/voterlookup/",
-    "Twitter": "http://s1.sos.mo.gov/elections/pollingplacelookup/"
+    "State": "Missouri",
+    "Voter registration check": "https://s1.sos.mo.gov/elections/voterlookup/",
+    "Polling location finder": "http://s1.sos.mo.gov/elections/pollingplacelookup/",
+    "Twitter": ""
   },
   {
-    "Voter registration check": "Montana",
+    "State": "Montana",
+    "Voter registration check": "https://app.mt.gov/cgi-bin/voterinfo/voterinfo.cgi",
     "Polling location finder": "https://app.mt.gov/cgi-bin/voterinfo/voterinfo.cgi",
-    "Twitter": "https://app.mt.gov/cgi-bin/voterinfo/voterinfo.cgi"
+    "Twitter": "https://twitter.com/sosmcculloch?lang=en-gb"
   },
   {
-    "Voter registration check": "Nebraska",
+    "State": "Nebraska",
+    "Voter registration check": "https://www.votercheck.necvr.ne.gov/VoterView/PollingPlaceSearch.do",
     "Polling location finder": "https://www.votercheck.necvr.ne.gov/VoterView/PollingPlaceSearch.do",
-    "Twitter": "https://www.votercheck.necvr.ne.gov/VoterView/PollingPlaceSearch.do"
+    "Twitter": "https://twitter.com/nesecjgale?lang=en-gb"
   },
   {
-    "Voter registration check": "Nevada",
+    "State": "Nevada",
+    "Voter registration check": "https://nvsos.gov/votersearch/",
     "Polling location finder": "https://nvsos.gov/votersearch/",
-    "Twitter": "https://nvsos.gov/votersearch/"
+    "Twitter": "https://twitter.com/NHgov"
   },
   {
-    "Voter registration check": "NewHampshire",
+    "State": "NewHampshire",
+    "Voter registration check": "http://app.sos.nh.gov/Public/PollingPlaceSearch.aspx",
     "Polling location finder": "http://app.sos.nh.gov/Public/PollingPlaceSearch.aspx",
-    "Twitter": "http://app.sos.nh.gov/Public/PollingPlaceSearch.aspx"
+    "Twitter": "https://twitter.com/nvsos"
   },
   {
-    "Voter registration check": "NewJersey",
-    "Polling location finder": "https://voter.njsvrs.com/PublicAccess/servlet/com.saber.publicaccess.control.PublicAccessNavigationServlet?USERPROCESS=PublicSearch",
-    "Twitter": "https://voter.njsvrs.com/PublicAccess/servlet/com.saber.publicaccess.control.PublicAccessNavigationServlet?USERPROCESS=PollingPlace"
+    "State": "NewJersey",
+    "Voter registration check": "https://voter.njsvrs.com/PublicAccess/servlet/com.saber.publicaccess.control.PublicAccessNavigationServlet?USERPROCESS=PublicSearch",
+    "Polling location finder": "https://voter.njsvrs.com/PublicAccess/servlet/com.saber.publicaccess.control.PublicAccessNavigationServlet?USERPROCESS=PollingPlace",
+    "Twitter": "https://twitter.com/govchristie?lang=en-gb"
   },
   {
-    "Voter registration check": "NewMexico",
+    "State": "NewMexico",
+    "Voter registration check": "",
     "Polling location finder": "",
     "Twitter": ""
   },
   {
-    "Voter registration check": "NewYork",
-    "Polling location finder": "https://voterlookup.elections.state.ny.us/",
-    "Twitter": "https://nyc.pollsitelocator.com/search"
+    "State": "NewYork",
+    "Voter registration check": "https://voterlookup.elections.state.ny.us/",
+    "Polling location finder": "https://nyc.pollsitelocator.com/search",
+    "Twitter": "https://twitter.com/boenyc?lang=en-gb"
   },
   {
-    "Voter registration check": "NorthCarolina",
-    "Polling location finder": "https://vt.ncsbe.gov/voter_search_public/",
-    "Twitter": "https://enr.ncsbe.gov/pollingplace_search/"
+    "State": "NorthCarolina",
+    "Voter registration check": "https://vt.ncsbe.gov/voter_search_public/",
+    "Polling location finder": "https://enr.ncsbe.gov/pollingplace_search/",
+    "Twitter": "https://twitter.com/ncsbe"
   },
   {
-    "Voter registration check": "NorthDakota",
-    "Polling location finder": "https://vip.sos.nd.gov/WhereToVoteID.aspx?tab=VoterLookup&ptlPKID=7&ptlhPKID=50",
-    "Twitter": "https://vip.sos.nd.gov/wheretovote.aspx"
+    "State": "NorthDakota",
+    "Voter registration check": "https://vip.sos.nd.gov/WhereToVoteID.aspx?tab=VoterLookup&ptlPKID=7&ptlhPKID=50",
+    "Polling location finder": "https://vip.sos.nd.gov/wheretovote.aspx",
+    "Twitter": "https://twitter.com/ndgov"
   },
   {
-    "Voter registration check": "Ohio",
-    "Polling location finder": "http://voterlookup.sos.state.oh.us/voterlookup.aspx",
-    "Twitter": "http://www.sos.state.oh.us/SOS/Upload/sites/ballotTracking/ballotTracking.aspx?page=20547"
+    "State": "Ohio",
+    "Voter registration check": "http://voterlookup.sos.state.oh.us/voterlookup.aspx",
+    "Polling location finder": "http://www.sos.state.oh.us/SOS/Upload/sites/ballotTracking/ballotTracking.aspx?page=20547",
+    "Twitter": "https://twitter.com/OhioSOSHusted?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
   },
   {
-    "Voter registration check": "Oklahoma",
+    "State": "Oklahoma",
+    "Voter registration check": "https://services.okelections.us/voterSearch.aspx",
     "Polling location finder": "https://services.okelections.us/voterSearch.aspx",
-    "Twitter": "https://services.okelections.us/voterSearch.aspx"
+    "Twitter": "https://twitter.com/okelections"
   },
   {
-    "Voter registration check": "Oregon",
-    "Polling location finder": "https://secure.sos.state.or.us/orestar/vr/showVoterSearch.do?lang=eng&source=SOS",
-    "Twitter": "http://sos.oregon.gov/voting/Pages/drop-box-locator.aspx"
+    "State": "Oregon",
+    "Voter registration check": "https://secure.sos.state.or.us/orestar/vr/showVoterSearch.do?lang=eng&source=SOS",
+    "Polling location finder": "http://sos.oregon.gov/voting/Pages/drop-box-locator.aspx",
+    "Twitter": "https://twitter.com/oregonsos?lang=en-gb"
   },
   {
-    "Voter registration check": "Pennsylvania",
-    "Polling location finder": "https://www.pavoterservices.state.pa.us/pages/voterregistrationstatus.aspx",
-    "Twitter": "https://www.pavoterservices.state.pa.us/pages/pollingplaceinfo.aspx"
+    "State": "Pennsylvania",
+    "Voter registration check": "https://www.pavoterservices.state.pa.us/pages/voterregistrationstatus.aspx",
+    "Polling location finder": "https://www.pavoterservices.state.pa.us/pages/pollingplaceinfo.aspx",
+    "Twitter": "https://twitter.com/pastatedept"
   },
   {
-    "Voter registration check": "RhodeIsland",
+    "State": "RhodeIsland",
+    "Voter registration check": "https://vote.sos.ri.gov/",
     "Polling location finder": "https://vote.sos.ri.gov/",
-    "Twitter": "https://vote.sos.ri.gov/"
+    "Twitter": "https://twitter.com/ri_boe"
   },
   {
-    "Voter registration check": "SouthCarolina",
+    "State": "SouthCarolina",
+    "Voter registration check": "https://info.scvotes.sc.gov/eng/voterinquiry/VoterInformationRequest.aspx?PageMode=VoterInfo",
     "Polling location finder": "https://info.scvotes.sc.gov/eng/voterinquiry/VoterInformationRequest.aspx?PageMode=VoterInfo",
-    "Twitter": "https://info.scvotes.sc.gov/eng/voterinquiry/VoterInformationRequest.aspx?PageMode=VoterInfo"
+    "Twitter": "https://twitter.com/scvotes"
   },
   {
-    "Voter registration check": "SouthDakota",
-    "Polling location finder": "https://sos.sd.gov/Elections/VIPLogin.aspx/",
-    "Twitter": "https://sos.sd.gov/elections/VIPLogin.aspx"
+    "State": "SouthDakota",
+    "Voter registration check": "https://sos.sd.gov/Elections/VIPLogin.aspx/",
+    "Polling location finder": "https://sos.sd.gov/elections/VIPLogin.aspx",
+    "Twitter": "https://twitter.com/shantelkrebs"
   },
   {
-    "Voter registration check": "Tennessee",
+    "State": "Tennessee",
+    "Voter registration check": "https://tnmap.tn.gov/voterlookup/",
     "Polling location finder": "https://tnmap.tn.gov/voterlookup/",
-    "Twitter": "https://tnmap.tn.gov/voterlookup/"
+    "Twitter": "https://twitter.com/SecTreHargett"
   },
   {
-    "Voter registration check": "Texas",
+    "State": "Texas",
+    "Voter registration check": "https://teamrv-mvp.sos.texas.gov/MVP/mvp.do",
     "Polling location finder": "https://teamrv-mvp.sos.texas.gov/MVP/mvp.do",
-    "Twitter": "https://teamrv-mvp.sos.texas.gov/MVP/mvp.do"
+    "Twitter": "https://twitter.com/TXsecofstate"
   },
   {
-    "Voter registration check": "Utah",
+    "State": "Utah",
+    "Voter registration check": "https://vote.utah.gov/vote/menu/index",
     "Polling location finder": "https://vote.utah.gov/vote/menu/index",
-    "Twitter": "https://vote.utah.gov/vote/menu/index"
+    "Twitter": "https://twitter.com/electionsutah"
   },
   {
-    "Voter registration check": "Vermont",
+    "State": "Vermont",
+    "Voter registration check": "https://mvp.sec.state.vt.us/",
     "Polling location finder": "https://mvp.sec.state.vt.us/",
-    "Twitter": "https://mvp.sec.state.vt.us/"
+    "Twitter": "https://twitter.com/vermontsos"
   },
   {
-    "Voter registration check": "Virginia",
-    "Polling location finder": "https://vote.elections.virginia.gov/VoterInformation",
-    "Twitter": "https://vote.elections.virginia.gov/VoterInformation/PollingPlaceLookup"
+    "State": "Virginia",
+    "Voter registration check": "https://vote.elections.virginia.gov/VoterInformation",
+    "Polling location finder": "https://vote.elections.virginia.gov/VoterInformation/PollingPlaceLookup",
+    "Twitter": "https://twitter.com/vaelect?lang=en-gb"
   },
   {
-    "Voter registration check": "Washington",
+    "State": "Washington",
+    "Voter registration check": "https://weiapplets.sos.wa.gov/MyVote/#/login",
     "Polling location finder": "https://weiapplets.sos.wa.gov/MyVote/#/login",
-    "Twitter": "https://weiapplets.sos.wa.gov/MyVote/#/login"
+    "Twitter": "https://twitter.com/dcboee?lang=en-gb"
   },
   {
-    "Voter registration check": "WestVirginia",
-    "Polling location finder": "https://services.sos.wv.gov/Elections/Voter/AmIRegisteredToVote",
-    "Twitter": "https://services.sos.wv.gov/Elections/Voter/FindMyPollingPlace"
+    "State": "WestVirginia",
+    "Voter registration check": "https://services.sos.wv.gov/Elections/Voter/AmIRegisteredToVote",
+    "Polling location finder": "https://services.sos.wv.gov/Elections/Voter/FindMyPollingPlace",
+    "Twitter": "https://twitter.com/NatalieTennant"
   },
   {
-    "Voter registration check": "Wisconsin",
-    "Polling location finder": "https://myvote.wi.gov/en-us/MyVoterInfo",
-    "Twitter": "https://myvote.wi.gov/en-us/FindMyPollingPlace"
+    "State": "Wisconsin",
+    "Voter registration check": "https://myvote.wi.gov/en-us/MyVoterInfo",
+    "Polling location finder": "https://myvote.wi.gov/en-us/FindMyPollingPlace",
+    "Twitter": "https://twitter.com/Wisconsin_GAB"
   },
   {
-    "Voter registration check": "Wyoming",
-    "Polling location finder": "http://soswy.state.wy.us/contactus.aspx",
-    "Twitter": "http://soswy.state.wy.us/Elections/PollPlace/Default.aspx"
+    "State": "Wyoming",
+    "Voter registration check": "http://soswy.state.wy.us/contactus.aspx",
+    "Polling location finder": "http://soswy.state.wy.us/Elections/PollPlace/Default.aspx",
+    "Twitter": "https://twitter.com/EdMurrayforWyo?lang=en"
   }
 ]

@@ -6,32 +6,39 @@ var votingDropdown = (function() {
 	// loop through and print statename in dropdown with hyperlink
 	$.getJSON("res/voting-details.json", function(data) {
 		var items = [];
+		
 		$.each(data, function(key, val) {
-			items.push("<option class='state-option' id='" + key + "' value='" + val["Polling location finder"] + "' >" + val["Voter registration check"] + "</option>");
+			items.push("<option class='state-option' id='" + key + "' value='" + val["Voter registration check"] + "' >" + val["State"] + "</option>");
 		});
+		
 		$("<select />", {
 			"class": "state-dropdown",
 			"id": "state-select",
 			html: items.join("")
 		}).appendTo("#state-details");
+
 		$("#state-select").change(function() {
 			window.open(this.value);
 		});
+
+		
 	});
-// dbrusky1: I will refoctor this later
-	$.getJSON("res/location-details.json", function(data) {
-		var items = [];
+
+	$.getJSON("res/voting-details.json", function(data) {
+		var itemsb = [];
 		$.each(data, function(key, val) {
-			items.push("<option class='state-option' id='" + key + "' value='" + val["Polling location finder"] + "' >" + val["Voter registration check"] + "</option>");
+			itemsb.push("<option class='state-option' id='" + key + "' value='" + val["Polling location finder"] + "' >" + val["State"] + "</option>");
 		});
+
 		$("<select />", {
 			"class": "location-dropdown",
 			"id": "location-select",
-			html: items.join("")
+			html: itemsb.join("")
 		}).appendTo("#location-details");
+
 		$("#location-select").change(function() {
 			window.open(this.value);
 		});
-	});
+    });
 
 }());
