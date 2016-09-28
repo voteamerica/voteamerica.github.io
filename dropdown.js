@@ -19,3 +19,4 @@ var votingDropdown = (function() {
 		});
 	});
 }());
+

@@ -64,6 +64,24 @@ h5 {
 #pnlIntro {
     color: #fff;
 }
+
+label.collection { 
+    font-weight: 400;
+    padding: 5px; 
+}
+
+.miles {
+    width: 50px;
+    padding: 4px;
+    border: none;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+
+}
+
+.error {
+    color: red;
+}
 /* how to register to vote */
 
 .rock-image {
