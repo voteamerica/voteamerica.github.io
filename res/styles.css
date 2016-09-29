@@ -108,31 +108,17 @@ label.collection {
 }
 /* dropdown: Am I register?, Check Your Polling Location*/
 
-.state-dropdown, .state-caption { 
-    display: inline-block; 
+.state-dropdown {
+    margin: 0;
+    padding: 0;
 }
-
 .state-intro {
     padding-top: 4px;
-}
-
-.show-state {
-    border: none;
-    background: none;
-    border: 2px solid lightgrey;
-    color: grey;
-    border-radius: 6px;
-    transition: all .5s ease-in-out;
-    margin: 10px 0 0 16px;
-}
-
-.show {
-    margin: 0;
 }
 .show-state:hover{
     background-color: #337ab7;
     color: #fff;
-    border: 2px solid #337ab7;
+    border: 1px solid #337ab7;
 }
 
 .state-caption { 
@@ -166,7 +152,18 @@ label.collection {
     background-color: #337ab7;
 }
 
-.overlay {
+.overlay-a {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    z-index: 1000;
+    display: none;
+}
+.overlay-b {
     width: 100%;
     height: 100%;
     color: #fff;
@@ -178,11 +175,11 @@ label.collection {
     display: none;
 }
 
-.content {
+.dropdown-content {
     color: lightgrey;
     background: #fff;
     position: relative;
-    height: auto;
+    height: 70%;
     width: 175px;
     border-radius: 3px;
     top: 10%;
@@ -190,15 +187,23 @@ label.collection {
     padding-top: 10px;
     border: 1px solid lightgrey;
     border-radius: 6px;
+    overflow: scroll;
 }
 
-.close {
-    font-size: 2em;
-    text-align: center;
-    border: 2px solid white;
-    border-radius: 25px;
-    padding: .5em;
-    display: inline-block;
-    color: #337ab7;
-    margin-left: 1.5em;
+.drop-b {
+    height: 15%;
+    top: 15%;
+}
+
+.show-b {
+    padding-top: 10px;
+}
+
+.check-poll {
+    float:left;
+}
+@media(max-width: 774px) {
+    .drop-b{
+            margin: auto 40% 15%;
+    }
 }

@@ -18,12 +18,12 @@ var votingDropdown = (function() {
 			html: items.join("")
 		}).appendTo("#state-details");
 
-		$("#showRegistration").click(function() {
-			$(".overlay").fadeIn(500);
+		$("#showState-a").click(function() {
+			$(".overlay-a").fadeIn(500);
 		});
 
-		$("#modalA").on("click", function() {
-			$(".overlay").fadeOut(500);
+		$("#modal-a").on("click", function() {
+			$(".overlay-a").fadeOut(500);
 
 		});
 
@@ -45,17 +45,13 @@ var votingDropdown = (function() {
 
 	});
 
-	$("#showStates").click(function() {
-		$(".overlay").fadeIn(500);
+	$("#showStates-b").click(function() {
+		$(".overlay-b").fadeIn(500);
 
 	});
 
-	$("a.close").click(function() {
-		$(".overlay").fadeOut(500);
-	});
-
-	$("#modal").on("click", function() {
-		$(".overlay").fadeOut(500);
+	$("#modal-b").on("click", function() {
+		$(".overlay-b").fadeOut(500);
 
 	});
 
