@@ -2,43 +2,61 @@
 // Loads JSON data to dropdown template 
 
 var votingDropdown = (function() {
+
 	// grab data from csv
 	// loop through and print statename in dropdown with hyperlink
 	$.getJSON("res/voting-details.json", function(data) {
 		var items = [];
-		
+
 		$.each(data, function(key, val) {
-			items.push("<option class='state-option' id='" + key + "' value='" + val["Voter registration check"] + "' >" + val["State"] + "</option>");
+			items.push("<li class='state-location'>" + "<a href='" + val["Voter registration check"] + "' target='_blank'  id='" + key + "' >" + val["State"] + "</a>" + "</li>");
 		});
-		
-		$("<select />", {
+
+		$("<ul />", {
 			"class": "state-dropdown",
 			"id": "state-select",
 			html: items.join("")
 		}).appendTo("#state-details");
 
-		$("#state-select").change(function() {
-			window.open(this.value);
+		$("#showRegistration").click(function() {
+			$(".overlay").fadeIn(500);
 		});
 
-		
+		$("#modalA").on("click", function() {
+			$(".overlay").fadeOut(500);
+
+		});
+
 	});
 
 	$.getJSON("res/voting-details.json", function(data) {
+
 		var itemsb = [];
+
 		$.each(data, function(key, val) {
-			itemsb.push("<option class='state-option' id='" + key + "' value='" + val["Polling location finder"] + "' >" + val["State"] + "</option>");
+			itemsb.push("<li class='state-location'>" + "<a href='" + val["Polling location finder"] + "' target='_blank'  id='" + key + "' >" + val["State"] + "</a>" + "</li>");
 		});
 
-		$("<select />", {
+		$("<ul />", {
 			"class": "location-dropdown",
-			"id": "location-select",
+			"id": "state-select",
 			html: itemsb.join("")
 		}).appendTo("#location-details");
 
-		$("#location-select").change(function() {
-			window.open(this.value);
-		});
-    });
+	});
+
+	$("#showStates").click(function() {
+		$(".overlay").fadeIn(500);
+
+	});
+
+	$("a.close").click(function() {
+		$(".overlay").fadeOut(500);
+	});
+
+	$("#modal").on("click", function() {
+		$(".overlay").fadeOut(500);
+
+	});
 
 }());

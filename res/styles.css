@@ -112,14 +112,93 @@ label.collection {
     display: inline-block; 
 }
 
+.state-intro {
+    padding-top: 4px;
+}
+
+.show-state {
+    border: none;
+    background: none;
+    border: 2px solid lightgrey;
+    color: grey;
+    border-radius: 6px;
+    transition: all .5s ease-in-out;
+    margin: 10px 0 0 16px;
+}
+
+.show {
+    margin: 0;
+}
+.show-state:hover{
+    background-color: #337ab7;
+    color: #fff;
+    border: 2px solid #337ab7;
+}
 
 .state-caption { 
     text-align: left; 
     padding-right: 10px;
     font-size: 16px;
-    margin-bottom: 4px;}
+    margin-bottom: 4px;
+}
 
 .location-dropdown {
-    margin: 14px;
-    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+.state-location a {
+    color: #999;
+    text-decoration: none;
+}
+
+.state-location a:hover {
+     color: white;
+}
+.state-location {
+    list-style: none;
+    transition: all .25s ease-in-out;
+    text-align: center;
+    cursor: pointer;
+}
+
+.state-location:hover {
+    background-color: #337ab7;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    z-index: 1000;
+    display: none;
+}
+
+.content {
+    color: lightgrey;
+    background: #fff;
+    position: relative;
+    height: auto;
+    width: 175px;
+    border-radius: 3px;
+    top: 10%;
+    margin: auto auto;
+    padding-top: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 6px;
+}
+
+.close {
+    font-size: 2em;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    padding: .5em;
+    display: inline-block;
+    color: #337ab7;
+    margin-left: 1.5em;
 }

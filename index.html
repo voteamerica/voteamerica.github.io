@@ -231,8 +231,13 @@
 
                                 <div class="form-group">
                                     <label for="rideLocations" class="col-sm-2 control-label">Check Your Polling Location</label>
-                                    <div id="location-details">
-                                        
+
+                                    <input type="button" class="show-state" id="showStates" value="Show States" />
+                                    <div id="modal" class="overlay">
+                                        <div class="content" id="location-details">
+                
+                                        </div>
+                                    
                                     </div>
                                 </div>
 
@@ -629,9 +634,19 @@
                         <h4 class="panel-title">How To Claim Your Vote!</h4>
                     </div>
                     <div class="panel-body">
-
+                        <!--
                         <div id="state-details">
                             <p class="state-caption">Am I registered?</p>
+                        </div>
+                        -->
+                        
+                        <input type="button" class="show-state show" id="showRegistration" value="Show States" />
+
+                        <div id="modalA" class="overlay">
+                            <div class="content" id="state-details">
+                
+                            </div>
+                                    
                         </div>
                         
                         <p class="state-intro">Select your state check if you're registered to vote on the November 8 presidential election</p>
