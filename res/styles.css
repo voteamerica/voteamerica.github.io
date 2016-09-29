@@ -108,18 +108,102 @@ label.collection {
 }
 /* dropdown: Am I register?, Check Your Polling Location*/
 
-.state-dropdown, .state-caption { 
-    display: inline-block; 
+.state-dropdown {
+    margin: 0;
+    padding: 0;
 }
-
+.state-intro {
+    padding-top: 4px;
+}
+.show-state:hover{
+    background-color: #337ab7;
+    color: #fff;
+    border: 1px solid #337ab7;
+}
 
 .state-caption { 
     text-align: left; 
     padding-right: 10px;
     font-size: 16px;
-    margin-bottom: 4px;}
+    margin-bottom: 4px;
+}
 
 .location-dropdown {
-    margin: 14px;
-    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+.state-location a {
+    color: #999;
+    text-decoration: none;
+}
+
+.state-location a:hover {
+     color: white;
+}
+.state-location {
+    list-style: none;
+    transition: all .25s ease-in-out;
+    text-align: center;
+    cursor: pointer;
+}
+
+.state-location:hover {
+    background-color: #337ab7;
+}
+
+.overlay-a {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    z-index: 1000;
+    display: none;
+}
+.overlay-b {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    z-index: 1000;
+    display: none;
+}
+
+.dropdown-content {
+    color: lightgrey;
+    background: #fff;
+    position: relative;
+    height: 70%;
+    width: 175px;
+    border-radius: 3px;
+    top: 10%;
+    margin: auto auto;
+    padding-top: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 6px;
+    overflow: scroll;
+}
+
+.drop-b {
+    height: 15%;
+    top: 15%;
+}
+
+.show-b {
+    padding-top: 10px;
+}
+
+.check-poll {
+    float:left;
+}
+@media(max-width: 774px) {
+    .drop-b{
+            margin: auto 40% 15%;
+    }
 }
