@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="res/nouislider.min.css">
+</head>
+<body>
+<div id="slider">
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="res/nouislider.min.js"></script>
+<script src="res/wNumb.min.js"></script>
+<script>
+    noUiSlider.create($('#slider')[0], {
+        start: [360, 1440],
+        connect: true,
+        step: 10,
+        range: {
+            'min': [360],
+            'max': [1320]
+        },
+        pips: {
+            mode: 'values',
+            density: 2,
+            values: [480, 720, 960, 1200, ],
+            format: {
+                to: formatTime
+            }
+        }
+    });
+
+    function formatTime(minutes) {
+        var am = false;
+        if (minutes < 720) {
+            am = true;
+        }
+        var hour = Math.floor(minutes/60);
+        hour = am || minutes == 720 ? hour : hour - 12;
+        var out_minutes = minutes % 60;
+        out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
+        var ampmString = am ? 'am' : 'pm';
+
+        return hour + ':' + out_minutes + ampmString;
+
+    }
+</script>
+</body>
+</html>
