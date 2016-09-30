@@ -64,6 +64,7 @@ h5 {
 #pnlIntro {
     color: #fff;
 }
+
 /* how to register to vote */
 
 .rock-image {
@@ -122,4 +123,60 @@ label.collection {
 .location-dropdown {
     margin: 14px;
     font-size: 18px;
+}
+
+.time-range-slider {
+    margin-bottom: 50px;
+    margin-left: 20px;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+.noUi-pips-horizontal {
+    padding-bottom: 0;
+    padding-top: 47px;
+    position: relative;
+    top: -40px;
+}
+
+.noUi-value-horizontal {
+    margin-top: 3px;
+}
+
+.remove-time:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#rider-add-time {
+    width: 75%;
+    margin-bottom: 15px;
+}
+
+h5 {
+    font-size: 1.2em;
+
+}
+
+#rider-available-times {
+    min-height: 30px;
+    list-style: initial;
+}
+
+#rider-available-times li {
+    margin-left: 20px;
+}
+
+.datepicker {
+    clear: both;
+    display: block;
+}
+
+.date-time-pickers label {
+    display: none;
+}
+
+.times-list-title {
+    clear: both;
+    display: block;
 }
