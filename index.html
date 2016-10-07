@@ -134,10 +134,8 @@
             <!-- intro -->
 
             <div id="pnlNeedRide">
-                <form name="needRide" action="https://api.carpoolvote.com/v1.0/rider" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                <form name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" class="form-horizontal" data-toggle="validator" role="form">
                     <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
-                    <input type="hidden" name="Timestamp" class="Timestamp" />
-                    <input type="hidden" name="Kind" value="Rider" />
                     <input type="hidden" name="hiddenJSONTimes" value="" />
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -181,14 +179,14 @@
                                         <div class="selected-dates">
                                         </div>
 
-                                        <input type="hidden" class="hiddenJSONTimes" id="riderJSONTimes" name="riderDateTimeRangesJSON" value="{}">
+                                        <input type="hidden" class="hiddenJSONTimes" id="riderJSONTimes" name="AvailableRideTimesJSON" value="{}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="rideState" class="col-sm-2 control-label">State</label>
                                     <div class="col-sm-2">
-                                        <select class="form-control" id="rideState" placeholder="State" name="State" required>
+                                        <select class="form-control" id="rideState" placeholder="State" name="RiderVotingState" required>
                                             <option value="AL">AL</option>
                                             <option value="AK">AK</option>
                                             <option value="AZ">AZ</option>
@@ -247,29 +245,15 @@
                                 <div class="form-group">
                                     <label for="rideArea" class="col-sm-2 control-label">Collection zip code</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" pattern="(\d{5}?)" id="rideArea" placeholder="Where can you meet the driver" name="Origin" required>
+                                        <input type="number" class="form-control" pattern="(\d{5}?)" id="rideArea" placeholder="Where can you meet the driver" name="RiderCollectionZIP" required>
                                     </div>
                                 </div>
 
-
-
-
-                                <div class="form-group">
-                                    <label for="rideDestinationAddress" class="col-sm-2 control-label">Destination address</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="rideDestinationAddress" placeholder="To where do you need a ride?" name="RiderDestinationAddress" required>
-                                    </div>
-                                </div>
-
-                                <!--
-                                        Would be cool if we could get the sanitized address from a google map or something,
-                                        with component parts (street address, city, state, zip)
-                                -->
 
                                 <div class="form-group">
                                     <label for="rideDestinationZIP" class="col-sm-2 control-label">Destination ZIP Code</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="rideDestinationZip" placeholder="To where do you need a ride?" name="RiderDestinationZIP" required>
+                                        <input type="text" class="form-control" id="rideDestinationZip" placeholder="To where do you need a ride?" name="RiderDropOffZIP" required>
                                     </div>
                                 </div>
 
@@ -287,19 +271,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="rideSeats" class="col-sm-2 control-label">Seats (non-wheelchair)</label>
+                                    <label for="rideSeats" class="col-sm-2 control-label">Party Size</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="rideSeats" placeholder="Ordinary seats: How many non-wheelchair seats do you need in the same car?" name="Seats" required>
+                                        <input type="text" class="form-control" id="rideSeats" placeholder="Ordinary seats: How many non-wheelchair seats do you need in the same car?" name="TotalPartySize" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="riderIsPowerChairUser" class="col-sm-2 control-label">Wheelchair</label>
                                     <div class="col-sm-10">
-                                        <!--
-                                            <input type="text" class="form-control" id="riderWheelchair" placeholder="Wheelchair-accessible ride: How many wheelchair users need to travel in the same car?" name="RiderWheelchair" required>
-                                        -->
-                                        <input type="checkbox" name="RiderUsesPowerChair" value="true" id="riderIsPowerChairUser"> I am a powerchair user who needs an adapted van with a lift
+                                        <input type="checkbox" name="NeedWheelchair" value="true" id="riderIsPowerChairUser"> I am a powerchair user who needs an adapted van with a lift
                                     </div>
                                 </div>
 
@@ -308,20 +289,13 @@
                                     <div class="col-sm-9">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="RiderReturn" value="true" id="rideReturn">
+                                                <input type="checkbox" name="TwoWayTripNeeded" value="true" id="rideReturn">
                                                 I need a two-way trip
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
-
-                                <div class="form-group">
-                                    <label for="rideNotes" class="col-sm-2 control-label">Notes</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="rideNotes" placeholder="I have the following accommodation requirements (ex: service animal, assistance folding equipment, assistance entering and exiting car)" name="Notes">
-                                    </div>
-                                </div>
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-1 col-sm-10">
@@ -347,26 +321,26 @@
                                 <div class="form-group">
                                     <label for="riderEmail" class="col-sm-2 control-label">Email</label>
                                     <div class="col-sm-9">
-                                        <input type="email" class="form-control" id="riderEmail" placeholder="Email" name="Email" required>
+                                        <input type="email" class="form-control" id="riderEmail" placeholder="Email" name="RiderEmail" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="ridePhone" class="col-sm-2 control-label">Phone</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="ridePhone" placeholder="Phone" name="Phone">
+                                        <input type="text" class="form-control" id="ridePhone" placeholder="Phone" name="RiderPhone" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="legalOne"></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="RiderLegalConsent" /></div>
                                     <div class="col-sm-9">
                                         <label for="legalOne">I understand that Carpool Vote will share my contact details with the driver if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)</label>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="legalTwo"></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="RiderWillNotTalkPolitics" /></div>
                                     <div class="col-sm-9">
                                         <label for="legalTwo">I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.</label>
                                     </div>
@@ -379,7 +353,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="inTouchRider" checked></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="PleaseStayInTouch" checked /></div>
                                     <div class="col-sm-9">
                                         <label for="inTouchRider">We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.</label>
                                     </div>
@@ -407,10 +381,8 @@
 
             <!-- http://40.117.45.210/driver/ -->
             <div id="pnlOfferRide">
-                <form name="offerRide" action="https://api.carpoolvote.com/v1.0/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                <form name="offerRide" action="https://api.carpoolvote.com/v1.1/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">
                     <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
-                    <input type="hidden" name="Timestamp" class="Timestamp" />
-                    <input type="hidden" name="Kind" value="Driver" />
                     <input type="hidden" name="hiddenJSONTimes" value="" />
 
                     <div class="panel panel-default">
@@ -455,77 +427,18 @@
 
                                         </div>
 
-                                        <input type="hidden" class="hiddenJSONTimes" id="driverJSONTimes" name="driverDateTimeRangesJSON" value="{}">
+                                        <input type="hidden" class="hiddenJSONTimes" id="driverJSONTimes" name="AvailableDriveTimesJSON" value="{}">
 
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="offerState" class="col-sm-2 control-label">State</label>
-                                    <div class="col-sm-2">
-                                        <select class="form-control" id="offerState" placeholder="State" name="State" required>
-                                            <option value="AL">AL</option>
-                                            <option value="AK">AK</option>
-                                            <option value="AZ">AZ</option>
-                                            <option value="AR">AR</option>
-                                            <option value="CA">CA</option>
-                                            <option value="CO">CO</option>
-                                            <option value="CT">CT</option>
-                                            <option value="DE">DE</option>
-                                            <option value="DC">DC</option>
-                                            <option value="FL">FL</option>
-                                            <option value="GA">GA</option>
-                                            <option value="HI">HI</option>
-                                            <option value="ID">ID</option>
-                                            <option value="IL">IL</option>
-                                            <option value="IN">IN</option>
-                                            <option value="IA">IA</option>
-                                            <option value="KS">KS</option>
-                                            <option value="KY">KY</option>
-                                            <option value="LA">LA</option>
-                                            <option value="ME">ME</option>
-                                            <option value="MD">MD</option>
-                                            <option value="MA">MA</option>
-                                            <option value="MI">MI</option>
-                                            <option value="MN">MN</option>
-                                            <option value="MS">MS</option>
-                                            <option value="MO">MO</option>
-                                            <option value="MT">MT</option>
-                                            <option value="NE">NE</option>
-                                            <option value="NV">NV</option>
-                                            <option value="NH">NH</option>
-                                            <option value="NJ">NJ</option>
-                                            <option value="NM">NM</option>
-                                            <option value="NY">NY</option>
-                                            <option value="NC">NC</option>
-                                            <option value="ND">ND</option>
-                                            <option value="OH">OH</option>
-                                            <option value="OK">OK</option>
-                                            <option value="OR">OR</option>
-                                            <option value="PA">PA</option>
-                                            <option value="RI">RI</option>
-                                            <option value="SC">SC</option>
-                                            <option value="SD">SD</option>
-                                            <option value="TN">TN</option>
-                                            <option value="TX">TX</option>
-                                            <option value="UT">UT</option>
-                                            <option value="VT">VT</option>
-                                            <option value="VA">VA</option>
-                                            <option value="WA">WA</option>
-                                            <option value="WV">WV</option>
-                                            <option value="WI">WI</option>
-                                            <option value="WY">WY</option>
-                                          </select>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="offerArea" class="col-sm-2 control-label">Collection Zip Code</label>
                                     <div class="col-sm-9">
-                                        <input type="text" pattern="\d{5}-?(\d{4})?" class="form-control" id="offerArea" placeholder="Where can you collect the rider" name="DriverZIP">
+                                        <input type="text" pattern="\d{5}-?(\d{4})?" class="form-control" id="offerArea" placeholder="Where can you collect the rider" name="DriverCollectionZIP">
                                         <label class="collection">
                                             I am willing to collect within a
-                                           <input type="number" id="offerMiles" placeholder="0" name="quantity" pattern="\d*" min="1" step="1" class="miles"  />
+                                           <input type="number" id="offerMiles" placeholder="0" name="DriverCollectionRadius" pattern="\d*" min="1" step="1" class="miles"  />
                                             mile radius of this zip code.&nbsp;<span id="error"></span>
                                         </label>
                                     </div>
@@ -534,7 +447,7 @@
                                 <div class="form-group">
                                     <label for="driverSeats" class="col-sm-2 control-label">Seats</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="driverSeats" placeholder="How many seats can you offer?" name="DriverSeats" required>
+                                        <input type="text" class="form-control" id="driverSeats" placeholder="How many seats can you offer?" name="SeatCount" required>
                                     </div>
                                 </div>
 
@@ -543,17 +456,10 @@
                                     <div class="col-sm-9">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="DriverWheelchair" value="true" id="driverWheelchair">
+                                                <input type="checkbox" name="DriverCanLoadRiderWithWheelchair" value="true" id="driverWheelchair">
                                                  I have an adapted van with space for a powerchair
                                             </label>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="offerNotes" class="col-sm-2 control-label">Notes</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="offerNotes" placeholder="Any other notes" name="Notes">
                                     </div>
                                 </div>
 
@@ -578,14 +484,14 @@
                                 <div class="form-group">
                                     <label for="driverLastName" class="col-sm-2 control-label">First Name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="driverLastName" placeholder="Your first name" name="DriverLastName" required>
+                                        <input type="text" class="form-control" id="driverLastName" placeholder="Your first name" name="DriverFirstName" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="driverFirstName" class="col-sm-2 control-label">Last Name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="driverFirstName" placeholder="Your last (family) name" name="DriverFirstName" required>
+                                        <input type="text" class="form-control" id="driverFirstName" placeholder="Your last (family) name" name="DriverLastName" required>
                                     </div>
                                 </div>
 
@@ -606,12 +512,12 @@
                                 <div class="form-group">
                                     <label for="veh_reg" class="col-sm-2 control-label">Vehicle Reg&nbsp;#</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="veh_reg" name="veh_reg">
+                                        <input type="text" class="form-control" id="veh_reg" name="VehicleRegistrationNumber">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="officialDriver" value="true" name="IsOfficialDriver"></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="officialDriver" value="true" name="DrivingOnBehalfOfOrganization"></div>
                                     <div class="col-sm-9">
                                         <label for="officialDriver">
                                         I am driving in an official capacity on behalf of a registered organization
@@ -622,19 +528,19 @@
                                 <div class="form-group" id="quesDriverOrgRegNumber">
                                     <label for="officialDriverOrgRegNumber" class="col-sm-2 control-label"> Organization registration number: </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="officialDriverOrgRegNumber" name="OrganizationRegNumber"> (required if the above box is checked)
+                                        <input type="text" class="form-control" id="officialDriverOrgRegNumber" name="DrivingOBOOrganizationName"> (required if the above box is checked)
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="legalThree"></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="legalThree" name="RidersCanSeeDriverDetails" /></div>
                                     <div class="col-sm-9">
                                         <label for="legalThree">I understand that Carpool Vote will share my contact details with the rider(s) if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)</label>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="legalFour"></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="legalFour" name="DriverWillNotTalkPolitics" /></div>
                                     <div class="col-sm-9">
                                         <label for="legalFour">I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.</label>
                                     </div>
@@ -647,7 +553,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="inTouchDriver" checked></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="PleaseStayInTouch" checked></div>
                                     <div class="col-sm-9">
                                         <label for="inTouchDriver">We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.</label>
                                     </div>
@@ -805,10 +711,8 @@
                         <!--
                             https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet
                         -->
-                        <form name="offerHelp" action="https://api.carpoolvote.com/v1.0/helper" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                        <form name="offerHelp" action="https://api.carpoolvote.com/v1.1/helper" method="post" class="form-horizontal" data-toggle="validator" role="form">
                             <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
-                            <input type="hidden" name="Timestamp" class="Timestamp" />
-                            <input type="hidden" name="Kind" value="Helper" />
 
                             <div class="form-group">
                                 <label for="helpName" class="col-sm-2 control-label">Name</label>
