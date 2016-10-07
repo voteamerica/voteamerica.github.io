@@ -22,7 +22,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="res/styles.css">
-
+    <link rel="stylesheet" type="text/css" href="res/jquery.datetimepicker.min.css">
+    <link type="text/css" rel="stylesheet" href="res/nouislider.min.css">
+    <link type="text/css" rel="stylesheet" href="res/styles.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -145,22 +147,44 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-1 col-sm-10">
-                                        <h5>When and where you need picking up</h5>
+                                        <h5>When and where do you need picking up?</h5>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="date-container col-sm-offset-1 col-sm-10">
+                                    <div class="date-time-pickers form-group">
+                                        <label for="rider-date" class="control-label">Date available</label>
 
-                                    <label for="riderDate" class="col-sm-2 control-label">Date</label>
-                                    <div class="col-sm-3">
-                                        <input type="date" class="form-control" id="riderDate" name="Date" required>
-                                    </div>
+                                        <input type="text" class="datepicker form-control col-md-4" id="rider-date" name="Date" required>
 
-                                    <label for="riderTime" class="col-sm-2 control-label">Approx Time</label>
-                                    <div class="col-sm-4">
-                                        <input id="riderTime" type="time" class="form-control" name="Time" required>
+                                        <label for="rider-time-slider" class="control-label">Time range available</label>
+
+
+                                        <div id="rider-time-slider" class="time-range-slider col-md-8">
+
+                                        </div>
+
+
+
+
+                                        <h5 class="times-list-title">Available times:</h5>
+                                        <button type="button" class="add-time-btn" id="rider-add-time">
+                                            ➕ Add <span class="button-date" id="rider-button-date">Saturday, Oct 1</span>,
+                                            <span class="button-time" id="rider-button-time">6:00am-10:00pm</span>
+                                        </button>
+                                        <p>(add as many dates and time ranges as you like)</p>
+                                        <ul class="available-times-list" id="rider-available-times">
+
+                                        </ul>
+
+                                        <div class="selected-dates">
+
+                                        </div>
+
+                                        <input type="hidden" class="hiddenJSONTimes" id="riderJSONTimes" name="riderDateTimeRangesJSON" value="{}">
                                     </div>
                                 </div>
+
 
 
                                 <div class="form-group">
@@ -240,7 +264,6 @@
                                         <div class="dropdown-content drop-b" id="location-details">
                                     </div>
                                     
-                                    </div>
                                 </div>
 
 
@@ -397,27 +420,37 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="date-container col-sm-offset-1 col-sm-10">
+                                    <div class="date-time-pickers form-group">
+                                        <label for="rider-date" class="col-sm-2 control-label">Date available</label>
 
-                                    <label for="offerDate" class="col-sm-2 control-label">Date</label>
-                                    <div class="col-sm-3">
-                                        <input type="date" class="form-control" id="offerDate" name="Date" required>
-                                    </div>
-                                </div>
+                                        <input type="text" class="datepicker form-control" id="driver-date" name="Date" required>
 
-                                <div class="form-group">
-                                    <label for="offerTime" class="col-sm-2 control-label">Approx Time</label>
-                                    <div class="col-sm-9">
-                                        <input id="offerTime" type="time" class="form-control" name="Time" required>
-                                    </div>
-                                </div>
+                                        <label for="rider-time-slider" class="col-sm-2 control-label">Time range available</label>
 
-                                <div class="form-group">
-                                    <label for="offerTimeEnd" class="col-sm-2 control-label">Approx End Time</label>
-                                    <div class="col-sm-4">
-                                        <input id="offerTimeEnd" type="time" class="form-control" name="TimeEnd">
+
+                                        <div id="driver-time-slider" class="time-range-slider">
+
+                                        </div>
+
+                                        <button type="button" class="add-time-btn" id="driver-add-time">
+                                            ➕ Add <span class="button-date" id="driver-button-date">Saturday, Oct 1</span>,
+                                            <span class="button-time" id="driver-button-time">6:00am-10:00pm</span>
+                                        </button>
+
+                                        <h5 class="times-list-title">Available times:</h5>
+                                        <p>(add as many dates and time ranges as you like)</p>
+                                        <ul class="available-times-list" id="driver-available-times">
+
+                                        </ul>
+
+                                        <div class="selected-dates">
+
+                                        </div>
+
+                                        <input type="hidden" class="hiddenJSONTimes" id="driverJSONTimes" name="driverDateTimeRangesJSON" value="{}">
+
                                     </div>
-                                    <span class="col-sm-6">(end time only needed if you can help out with multiple trips)</span>
                                 </div>
 
                                 <div class="form-group">
@@ -871,9 +904,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <!-- dropdown for issue #37 - voting registrations per state -->
     <script src="dropdown.js"></script>
-
+    <script type="text/javascript" src="res/jquery.datetimepicker.full.min.js"></script>
+    <script src="res/nouislider.min.js"></script>
+    <script src="res/wNumb.min.js"></script>
     <script>
         $(document).ready(function() {
 
@@ -901,50 +937,172 @@
                 $('#pnlIntro').slideDown('fast');
             });
 
-            $('#offerCity').change(changeOfferRideSubmit());
-            $('#offerArea').change(changeOfferRideSubmit());
-            $('#offerSeats').change(changeOfferRideSubmit());
-            $('#offerName').change(changeOfferRideSubmit());
-            $('#offerEmail').change(changeOfferRideSubmit());
+            initializeCalAndTime();
 
-            $('#rideCity').change(changeNeedRideSubmit());
-            $('#rideArea').change(changeNeedRideSubmit());
-            $('#rideDestination').change(changeNeedRideSubmit());
-            $('#rideSeats').change(changeNeedRideSubmit());
-            $('#riderName').change(changeNeedRideSubmit());
-            $('#ridePhone').change(changeNeedRideSubmit());
+            $('form').submit(function() {
+                // Sets the value of the hidden input for available times to a JSON string of
+                // Available times with month, day, startTime, and endTime properties
+                var dateTimeDiv = $(this).children('.date-container')
+                        .children('.date-time-pickers');
+                var availTimeElements = dateTimeDiv.children('.available-times-list').children();
+                var availTimesObjectArray = [];
 
-            $('.Timestamp').val(new Date());
-            $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
+                $.each(availTimeElements, function(index, element) {
+                    var outputDateTime = {};
+                    var splitText = $(element).text().split(', ');
+                    outputDateTime.month = splitText[1].split(' ')[0];
+                    outputDateTime.day = splitText[1].split(' ')[1];
+                    var times = splitText[2].split(' ')[0];
+                    outputDateTime.startTime = times.split('-')[0];
+                    outputDateTime.endTime = times.split('-')[1];
+                    availTimesObjectArray.push(outputDateTime);
 
-            $("#offerRideSubmit").attr("disabled");
-            $("#needRideSubmit").attr("disabled");
+                });
 
+                var hiddenTimeInput = dateTimeDiv.children('.hiddenJSONTimes');
+                hiddenTimeInput.val(JSON.stringify(availTimesObjectArray));
+
+            });
         });
 
+        $('#offerCity').change(changeOfferRideSubmit());
+        $('#offerArea').change(changeOfferRideSubmit());
+        $('#offerSeats').change(changeOfferRideSubmit());
+        $('#offerName').change(changeOfferRideSubmit());
+        $('#offerEmail').change(changeOfferRideSubmit());
+
+        $('#rideCity').change(changeNeedRideSubmit());
+        $('#rideArea').change(changeNeedRideSubmit());
+        $('#rideDestination').change(changeNeedRideSubmit());
+        $('#rideSeats').change(changeNeedRideSubmit());
+        $('#riderName').change(changeNeedRideSubmit());
+        $('#ridePhone').change(changeNeedRideSubmit());
+
+        $('.Timestamp').val(new Date());
+        $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
+
+        $("#offerRideSubmit").attr("disabled");
+        $("#needRideSubmit").attr("disabled");
+
+
         function changeNeedRideSubmit(){
-            if($('#offerCity').val().length() > 0 &&
-               $('#offerArea').val().length() > 0 &&
-               $('#offerSeats').val().length() > 0 &&
-               $('#offerName').val().length() > 0 &&
-               $('#offerEmail').val().length() > 0){
+            if (
+                   $('#offerCity').val().length() > 0 &&
+                   $('#offerArea').val().length() > 0 &&
+                   $('#offerSeats').val().length() > 0 &&
+                   $('#offerName').val().length() > 0 &&
+                   $('#offerEmail').val().length() > 0 &&
+                   // Checking if the list of appended available times has at least 1 item
+                   $('#rider-available-times').children().length
+            ) {
                  $("#offerRideSubmit").removeAttr("disabled");
             } else {
                 $("#offerRideSubmit").attr("disabled");
             }
         }
 
-        function changeOfferRideSubmit(){
-          if($('#rideCity').val().length() > 0 &&
-             $('#rideArea').val().length() > 0 &&
-             $('#rideDestination').val().length() > 0 &&
-             $('#rideSeats').val().length() > 0 &&
-             $('#riderName').val().length() > 0 &&
-             $('#ridePhone').val().length() > 0){
-               $("#needRideSubmit").removeAttr("disabled");
-          } else {
-              $("#needRideSubmit").attr("disabled");
-          }
+        function changeOfferRideSubmit() {
+            if ($('#rideCity').val().length() > 0 &&
+                    $('#rideArea').val().length() > 0 &&
+                    $('#rideDestination').val().length() > 0 &&
+                    $('#rideSeats').val().length() > 0 &&
+                    $('#riderName').val().length() > 0 &&
+                    $('#ridePhone').val().length() > 0) {
+                $("#needRideSubmit").removeAttr("disabled");
+            } else {
+                $("#needRideSubmit").attr("disabled");
+            }
+        }
+
+        function initializeCalAndTime() {
+            // Puts the datepicker and time range slider onto the page
+
+            // Initialize time sliders
+            $.each($('.time-range-slider'), function(index, slider) {
+                noUiSlider.create(slider, {
+                    start: [360, 1440],
+                    connect: true,
+                    step: 10,
+                    range: {
+                        'min': [360],
+                        'max': [1320]
+                    },
+                    pips: {
+                        mode: 'values',
+                        density: 2,
+                        values: [480, 720, 960, 1200, ],
+                        format: {
+                            to: formatTime
+                        }
+                    }
+                });
+            });
+
+
+            // Initialize datepickers
+            $('.datepicker').datetimepicker( {
+                timepicker: false,
+                format: 'l, M j',
+                startDate: '2016/10/01',
+                inline: true
+            });
+
+            // Must manually set the initial value of the calendar input
+            $('.datepicker').attr('value', 'Saturday, Oct 1');
+
+            // Add selected date and time to list of available times on button click
+            $('.add-time-btn').click(function() {
+                var startTime = formatTime($(this).siblings('.time-range-slider')[0].noUiSlider.get()[0]);
+                var endTime = formatTime($(this).siblings('.time-range-slider')[0].noUiSlider.get()[1]);
+                var date = $(this).siblings('.datepicker').val();
+                var timeId = new Date().getTime();
+                $(this).siblings('.available-times-list').append(
+                        '<li class="' + timeId +'">' + date + ', ' + startTime + '-' + endTime + ' (<span class="remove-time">remove</span>)</li>'
+                );
+                $(this).siblings('.selected-dates').append(
+                        '<input type="hidden" ' +
+                        'class="' + timeId + '" ' +
+                        'name="datetime[]" ' +
+                        'value="'+ date + ', ' + startTime + '-' + endTime + '">'
+                );
+                $('.remove-time').click(function() {
+                    var removeId = $(this).closest('li').attr('class');
+                    $('.' + removeId).remove();
+                    changeNeedRideSubmit();
+                    changeOfferRideSubmit();
+                });
+                changeNeedRideSubmit();
+                changeOfferRideSubmit();
+            });
+
+            $.each($('.time-range-slider'), function(index, slider) {
+                slider.noUiSlider.on('update', function() {
+                    var startTime = formatTime(slider.noUiSlider.get()[0]);
+                    var endTime = formatTime(slider.noUiSlider.get()[1]);
+                    $(slider).siblings('.add-time-btn').children('.button-time').text(startTime + '-' + endTime);
+                });
+            });
+
+            $('.datepicker').change(function() {
+                $(this).siblings('.add-time-btn').children('.button-date').text($(this).val());
+            });
+        }
+
+
+        // The sliders work with the day in terms of minutes, this function translates the minutes
+        // into readable format i.e. 4:34pm
+        function formatTime(minutes) {
+            var am = false;
+            if (minutes < 720) {
+                am = true;
+            }
+            var hour = Math.floor(minutes/60);
+            hour = minutes < 780 ? hour : hour - 12;
+            var out_minutes = minutes % 60;
+            out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
+            var ampmString = am ? 'am' : 'pm';
+
+            return hour + ':' + out_minutes + ampmString;
         }
     </script>
 </body>
