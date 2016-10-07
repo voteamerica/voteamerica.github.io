@@ -134,7 +134,7 @@
             <!-- intro -->
 
             <div id="pnlNeedRide">
-                <form name="needRide" action="https://api.carpoolvote.com/rider" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                <form name="needRide" action="https://api.carpoolvote.com/v1.0/rider" method="post" class="form-horizontal" data-toggle="validator" role="form">
                     <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
                     <input type="hidden" name="Timestamp" class="Timestamp" />
                     <input type="hidden" name="Kind" value="Rider" />
@@ -407,7 +407,7 @@
 
             <!-- http://40.117.45.210/driver/ -->
             <div id="pnlOfferRide">
-                <form name="offerRide" action="https://api.carpoolvote.com/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                <form name="offerRide" action="https://api.carpoolvote.com/v1.0/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">
                     <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
                     <input type="hidden" name="Timestamp" class="Timestamp" />
                     <input type="hidden" name="Kind" value="Driver" />
@@ -805,7 +805,7 @@
                         <!--
                             https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet
                         -->
-                        <form name="offerHelp" action="https://api.carpoolvote.com/helper" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                        <form name="offerHelp" action="https://api.carpoolvote.com/v1.0/helper" method="post" class="form-horizontal" data-toggle="validator" role="form">
                             <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
                             <input type="hidden" name="Timestamp" class="Timestamp" />
                             <input type="hidden" name="Kind" value="Helper" />
@@ -979,7 +979,7 @@
 
             // Submit Function for offerRide (Driver) form.
             $('form[name="offerRide"]').submit(function() {
-                document['offerRide'].action = "http://127.0.0.1:3000/driver";
+                document['offerRide'].action = "https://api.carpoolvote.com/v1.1/driver";
 
                 // CODE TO SUBMIT THE "OFFER A RIDE" FORM.
                 console.log("Submitting Form For Driver!");
@@ -1057,12 +1057,7 @@
 
             // Submit Function for needRide (Rider) form.
             $('form[name="needRide"]').submit(function() {
-
-                // change the action for the form.
-                // https://api.carpoolvote.com/rider
-                // to
-                // http://127.0.0.1:3000/rider
-                document['needRide'].action = "http://127.0.0.1:3000/rider";
+                document['needRide'].action = "https://api.carpoolvote.com/v1.1/rider";
 
                 // CODE TO SUBMIT THE "NEED A RIDE" FORM.
                 console.log("Submitting Form For Rider!");
@@ -1105,7 +1100,7 @@
             }); // end of submit for needRide
 
             $('form[name="offerHelp"]').submit(function() {
-                document['offerHelp'].action = "http://127.0.0.1:3000/helper";
+                document['offerHelp'].action = "https://api.carpoolvote.com/v1.1/helper";
 
                 console.log("Submitting Form For Helper!");
             }); // end of submit for offerHelp
