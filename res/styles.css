@@ -64,3 +64,71 @@ h5 {
 #pnlIntro {
     color: #fff;
 }
+/* how to register to vote */
+
+.rock-image {
+    width: 10px;
+    padding-bottom: 10px;
+}
+
+.rock-vote-links {
+    margin-left: -10px;
+}
+
+.rock-vote-support, .state-caption {
+    color: #297bbb;
+    font-weight: bold;
+}
+.rock-vote-support {
+    padding-top: 10px;
+}
+
+.election-protection {
+    padding-bottom: 8px;
+}
+
+a.election-protection-link {
+    height: 50px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+label.collection { 
+    font-weight: 400;
+    padding: 5px; 
+}
+
+.miles {
+    width: 50px;
+    padding: 4px;
+    border: none;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+
+}
+/* dropdown: Am I register?, Check Your Polling Location*/
+
+.state-dropdown, .state-caption { 
+    display: inline-block; 
+}
+
+
+.state-caption { 
+    text-align: left; 
+    padding-right: 10px;
+    font-size: 16px;
+    margin-bottom: 4px;}
+
+.location-dropdown {
+    margin: 14px;
+    font-size: 18px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

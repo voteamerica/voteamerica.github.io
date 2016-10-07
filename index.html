@@ -31,8 +31,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-
     <script>
         ! function(g, s, q, r, d) {
             r = g[r] = g[r] || function() {
@@ -82,7 +80,7 @@
                 <div class="col-sm-4">
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation" style="padding-top:10px">
-                            <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-size="large" data-text="Need a ride to vote on election day?CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
+                            <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-size="large" data-text="Support #DemocracyForAll this #Election2016. Sign up on @CarpoolVote.com: Linking volunteer drivers w voters needing a ride. #TogetherWeCan" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
                             <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                         </li>
 
@@ -135,8 +133,9 @@
 
                         <div class="row">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <h4>Need assistance getting to where you need to be in order to vote?</h4>
-                                <h4>Just fill in this form! We'll try and connect you with someone that can help.</h4>
+                                <h4>Need a ride to claim your vote?</h4>
+                                <h4>Some of our riders need to get to the polls - either on polling day or during early voting. Others need to travel to get a photo I.D.</h4>
+                                <h4>Just fill in this form! We'll try to connect you with a driver.</h4>
                             </div>
                             <br/>
                             <form action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
@@ -224,48 +223,45 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="rideCity" class="col-sm-2 control-label">City</label>
+                                    <label for="rideArea" class="col-sm-2 control-label">Collection zip code</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="rideCity" placeholder="City" name="City" required>
+                                        <input type="number" class="form-control" pattern="(\d{5}?)" id="rideArea" placeholder="Where can you meet the driver" name="Origin" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="rideArea" class="col-sm-2 control-label">From</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="rideArea" placeholder="Pick-up Neighborhood" name="Origin" required>
+                                    <label for="rideLocations" class="col-sm-2 control-label">Check Your Polling Location</label>
+                                    <div id="location-details">
+                                        
                                     </div>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label for="rideDestination" class="col-sm-2 control-label">Destination</label>
+                                    <label for="rideDestination" class="col-sm-2 control-label">Destination address</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="rideDestination" placeholder="Destination" name="RiderDestination" required>
+                                        <input type="text" class="form-control" id="rideDestination" placeholder="To where do you need a ride?" name="RiderDestination" required>
                                     </div>
                                 </div>
 
-
+                                <p>
+                                  Please let us know how how many people will need to travel together in the SAME CAR.
+                                  (To make it easier for us to match people, please complete an individual form if you do not need travel with anybody else
+                                </p>
 
                                 <div class="form-group">
-                                    <label for="rideSeats" class="col-sm-2 control-label">Seats</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="rideSeats" placeholder="How many seats do you need?" name="Seats" required>
+                                    <label for="rideSeats" class="col-sm-2 control-label">Seats (non-wheelchair)</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="rideSeats" placeholder="Ordinary seats: How many non-wheelchair seats do you need in the same car?" name="Seats" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="riderWheelchair" class="col-sm-2 control-label">Wheelchair</label>
-                                    <div class="col-sm-9">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="RiderWheelchair" value="true" id="riderWheelchair">
-                                                I use a wheelchair
-                                            </label>
-                                        </div>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="riderWheelchair" placeholder="Wheelchair-accessible ride: How many wheelchair users need to travel in the same car?" name="RiderWheelchair" required>
                                     </div>
                                 </div>
-
 
 
                                 <div class="form-group">
@@ -330,9 +326,23 @@
                                   </div>
                                 </div>
 
+                                 <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-10">
+                                        <h5>Yes, please stay in Touch!</h5>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="inTouchRider" checked></div>
+                                  <div class="col-sm-9">
+                                    <label for="inTouchRider">We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.</label>
+                                  </div>
+                                </div>
+
+
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-4">
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-default" id="needRideSubmit">Submit</button>
                                     </div>
 
                                     <div class="col-sm-offset-4 col-sm-2">
@@ -361,9 +371,9 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <h4>Driving to vote, and have a spare seat?</h4>
-                                <h4>Fill in this form and help a fellow citizen exercise their democratic right.</h4>
-                                <h4>We'll try and connect you with someone that needs a ride in the same direction.</h4>
+                                <h4>Sign up to give a fellow American a ride to claim their vote.</h4>
+                                <h4>Offer to drive someone to the polls or, if you live in a state where you need to show voter I.D., drive somebody to go and get one.</h4>
+                                <h4>Just fill in this form! We'll try to connect you with someone who needs a ride.</h4>
                             </div>
                             <br/>
 
@@ -461,18 +471,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="offerCity" class="col-sm-2 control-label">City</label>
+                                    <label for="offerArea" class="col-sm-2 control-label">Collection Zip Code</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="offerCity" placeholder="City" name="City" required>
+                                        <input type="number" class="form-control" id="offerArea" placeholder="Where can you collect the rider" name="Origin" pattern="(\d{5}?)" >
+                                        <label class="collection">
+                                            I am willing to collect within a 
+                                           <input type="number" id="miles" placeholder="000" name="quantity" pattern="(\d{3}?)" class="miles"  />
+                                            mile radius of this zip code.&nbsp;<span id="error"></span>
+                                        </label>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="offerArea" class="col-sm-2 control-label">Neighborhood</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="offerArea" placeholder="Pick-up Neighborhood" name="Origin" required>
-                                    </div>
-                                </div>
 
                                 <div class="form-group">
                                     <label for="offerSeats" class="col-sm-2 control-label">Seats</label>
@@ -561,14 +570,28 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-10">
+                                        <h5>Yes, please stay in Touch!</h5>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="inTouchDriver" checked></div>
+                                  <div class="col-sm-9">
+                                    <label for="inTouchDriver">We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.</label>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-4">
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-default" id="offerRideSubmit">Submit</button>
                                     </div>
 
                                     <div class="col-sm-offset-4 col-sm-2">
                                         <a id="btnOfferCancel" class="btn btn-link">Back</a>
                                     </div>
                                 </div>
+
                             </form>
                         </div>
                     </div>
@@ -601,16 +624,35 @@
             <div class="col-lg-6">
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h4 class="panel-title">I Need voting info!</h4>
+                        <h4 class="panel-title">How To Claim Your Vote!</h4>
                     </div>
                     <div class="panel-body">
-                        <ul>
+
+                        <div id="state-details">
+                            <p class="state-caption">Am I registered?</p>
+                        </div>
+                        
+                        <p class="state-intro">Select your state check if you're registered to vote on the November 8 presidential election</p>
+
+                        <div class="rock-image">
+                            <img src="res/img/rock.png" />
+                        </div>
+                        <p class="rock-vote-description">Rock the vote has several online tools that simplify and demystify voter registration and elections.  Follow the links below for more on how to claim your vote!
+                        <ul class="rock-vote-links">
                             <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica" target="_rtv">Register to vote!</a></li>
-                            <li><a href="https://www.rockthevote.com/get-informed/elections/am-i-registered-to-vote/" target="_rtv">Are you registered?</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/" target="_rtv">Voter requirements</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/" target="_rtv">Find where to vote</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/" target="_rtv">About elections</a></li>
                         </ul>
+
+                        <p class="rock-vote-support">Need further support?</p>
+
+                        <img class="election-protection" src="res/img/election-protection.png" />
+
+                        <p>The <a class="election-protection-link" href="http://www.866ourvote.org/">Election Protection Coalition</a> works around the 
+                        clock to advance and defend your right to vote.  Report voting problems, and get voting-related
+                        information on your state, by calling 866-OURVOTE.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -812,7 +854,11 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- dropdown for issue #37 - voting registrations per state -->
+    <script src="dropdown.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -841,10 +887,51 @@
                 $('#pnlIntro').slideDown('fast');
             });
 
+            $('#offerCity').change(changeOfferRideSubmit());
+            $('#offerArea').change(changeOfferRideSubmit());
+            $('#offerSeats').change(changeOfferRideSubmit());
+            $('#offerName').change(changeOfferRideSubmit());
+            $('#offerEmail').change(changeOfferRideSubmit());
+
+            $('#rideCity').change(changeNeedRideSubmit());
+            $('#rideArea').change(changeNeedRideSubmit());
+            $('#rideDestination').change(changeNeedRideSubmit());
+            $('#rideSeats').change(changeNeedRideSubmit());
+            $('#riderName').change(changeNeedRideSubmit());
+            $('#ridePhone').change(changeNeedRideSubmit());
+
             $('.Timestamp').val(new Date());
             $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
 
+            $("#offerRideSubmit").attr("disabled");
+            $("#needRideSubmit").attr("disabled");
+
         });
+
+        function changeNeedRideSubmit(){
+            if($('#offerCity').val().length() > 0 &&
+               $('#offerArea').val().length() > 0 &&
+               $('#offerSeats').val().length() > 0 &&
+               $('#offerName').val().length() > 0 &&
+               $('#offerEmail').val().length() > 0){
+                 $("#offerRideSubmit").removeAttr("disabled");
+            } else {
+                $("#offerRideSubmit").attr("disabled");
+            }
+        }
+
+        function changeOfferRideSubmit(){
+          if($('#rideCity').val().length() > 0 &&
+             $('#rideArea').val().length() > 0 &&
+             $('#rideDestination').val().length() > 0 &&
+             $('#rideSeats').val().length() > 0 &&
+             $('#riderName').val().length() > 0 &&
+             $('#ridePhone').val().length() > 0){
+               $("#needRideSubmit").removeAttr("disabled");
+          } else {
+              $("#needRideSubmit").attr("disabled");
+          }
+        }
     </script>
 </body>
 </html>
