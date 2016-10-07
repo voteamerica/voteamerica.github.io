@@ -22,27 +22,11 @@ body {
 .nav {
     width: 95%;
     max-width: 1200px;
-
+    text-align: center;
     margin: 0 auto 20px;
 }
 
-.social {
-    width: auto;
-    max-width: 400px;
-
-    display: inline-block;
-}
-
-.nav__twitter {
-    margin-right: 5px;
-}
-
-.nav__facebook {
-    margin-right: 5px;
-}
-
 .logo__link {
-    text-align: center;
     display: inline-block;
 }
 
@@ -51,6 +35,24 @@ body {
     margin: 0px auto 20px;
     max-width: 320px;
     display: block;
+}
+
+.social {
+    margin-top: 20px;
+}
+
+.social li {
+    display: inline-block;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+a.twitter-mention-button {
+    visibility: hidden;
+}
+
+iframe.twitter-mention-button {
+    margin-top: 2px;
 }
 
 .nav__links {
@@ -94,13 +96,12 @@ body {
     letter-spacing: 2px;
     text-shadow: 0px 0px 5px #000000;
 }
-.button__container {
-    display: flex;
-    justify-content: center;
+.button-container {
+    text-align: center;
     margin-bottom: 20px;
 }
 .button {
-    margin: 0 7px;
+    display: inline-block;
     padding: 12px 15px;
     border-radius: 5px;
     border: 0;
@@ -109,24 +110,26 @@ body {
     color: white;
     text-transform: uppercase;
     text-decoration: none;
+    cursor: pointer;
 }
 
-.button__offer {
+.button--alt {
     background-color: #5cb85c;
 }
+
 
 .lead {
     margin-bottom: 1em;
     line-height: 1.3em;
     font-size: 18px;
     color: white;
+    text-align: center;
     text-shadow: 0px 0px 5px #000000;
 }
 
 .ride_options {
-    margin-top: 100px;
     max-width: 470px;
-    margin: 100px auto 0;
+    margin: 0 auto 50px;
 }
 
 .needride,
@@ -144,7 +147,7 @@ body {
     font-size: 14px;
     line-height: 1.3em;
     margin-top: 75px;
-    padding: 15px;
+    padding: 35px;
 }
 
 .ride__container:before {
@@ -197,7 +200,86 @@ body {
 
 .offerride__form,
 .needride__form {
-    /*display: none;*/
+    display: none;
+}
+
+
+
+fieldset {
+    padding: 1em 1em;
+    margin: 1em 0;
+}
+
+legend {
+    padding: 0;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+label {
+    display: block;
+    margin: 1em 0;
+}
+
+label textarea,
+label select,
+label input[type="text"],
+label input[type="email"],
+label input[type="search"],
+label input[type="tel"],
+label input[type="url"],
+label input[type="password"],
+label input[type="color"],
+label input[type="file"],
+label input[type="color"],
+label input[type="number"],
+label input[type="range"],
+label input[type="date"],
+label input[type="month"],
+label input[type="week"],
+label input[type="time"],
+label input[type="datetime"],
+label input[type="datetime-local"] {
+  display: block;
+  width: 100%;
+}
+
+textarea,
+select,
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+input[type="color"],
+input[type="file"],
+input[type="color"],
+input[type="number"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"] {
+    margin: .2em 0;
+    padding: .25em .4em;
+    border: 1px solid #ddd;
+    max-width: 100%;
+}
+  
+input[type="search"] { 
+    box-sizing: border-box;
+}
+
+input[type="file"] { 
+    border-width: 0;
+    padding: 0;
+}
+
+input[type="image"] {
+    vertical-align: bottom;
 }
 
 .about {
@@ -326,7 +408,7 @@ body {
         flex-wrap: wrap;
         max-width: 100%;
         justify-content: space-around;
-        margin-top: 60px;
+        margin-bottom: 0;
     }
 
     .ride__title {
@@ -353,21 +435,10 @@ body {
     }
 
     .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
+        position: relative;
         width: 90%;
         max-width: 1200px;
         margin: 0 auto;
-    }
-
-    .social {
-        margin-right: auto;
-    }
-
-    .nav__links {
-        margin-left: auto;
     }
 
     .logo__img {
@@ -375,9 +446,23 @@ body {
         margin-bottom: 24px;
     }
 
-    .button__container {
-        display: none;
+    .social {
+        position: absolute;
+        left: 0;
+        top: 30%;
+        margin-top: 0;
     }
+
+    .social li {
+        margin-left: 0;
+    }
+
+    .nav__links {
+        position: absolute;
+        right: 0;
+        top: 30%;
+    }
+
 
     .content {
         border-top: 100px solid white;
@@ -405,7 +490,6 @@ body {
     .lead {
         margin: 0 auto 1em;
         max-width: 900px;
-        text-align: center;
         text-shadow: none;
     }
 
@@ -415,6 +499,13 @@ body {
     .bannerbox {
         width: calc(50% - 20px);
         margin: 20px 0;
+    }
+}
+
+@media (min-width: 1200px) {
+    .nav__link {
+        font-size: 18px;
+        margin-left: 10px;
     }
 }
 
