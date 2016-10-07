@@ -123,13 +123,13 @@ iframe.twitter-mention-button {
     line-height: 1.3em;
     font-size: 18px;
     color: white;
+    text-align: center;
     text-shadow: 0px 0px 5px #000000;
 }
 
 .ride_options {
-    margin-top: 100px;
     max-width: 470px;
-    margin: 100px auto 0;
+    margin: 0 auto 50px;
 }
 
 .needride,
@@ -147,7 +147,7 @@ iframe.twitter-mention-button {
     font-size: 14px;
     line-height: 1.3em;
     margin-top: 75px;
-    padding: 15px;
+    padding: 35px;
 }
 
 .ride__container:before {
@@ -408,7 +408,7 @@ input[type="image"] {
         flex-wrap: wrap;
         max-width: 100%;
         justify-content: space-around;
-        margin-top: 60px;
+        margin-bottom: 0;
     }
 
     .ride__title {
@@ -490,7 +490,6 @@ input[type="image"] {
     .lead {
         margin: 0 auto 1em;
         max-width: 900px;
-        text-align: center;
         text-shadow: none;
     }
 
@@ -506,7 +505,7 @@ input[type="image"] {
 @media (min-width: 1200px) {
     .nav__link {
         font-size: 18px;
-        margin: 0 10px;
+        margin-left: 10px;
     }
 }
 
