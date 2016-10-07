@@ -85,11 +85,6 @@
         </nav>
     </header>
 
-
-    <div class="button__container">
-        <a href="#needride" class="button button__need" role="button" id="btnNeedRide">I need a ride</a>
-        <a href="#offerride" class="button button__offer" role="button" id="btnOfferRide">I can offer a ride</a>
-    </div>
     <div class="content">
         <div class="main">
             <h1 class="title">Every American DESERVES a Vote</h1>
@@ -100,6 +95,10 @@
                         <h3 class="ride__title">Riders</h3>
                         <p class="ride__text">Need assistance getting to where you need to be in order to vote?</p>
                         <p class="ride__text">Just fill in this form! We'll try and connect you with someone that can help.</p>
+
+                        <p class="button-container">
+                            <a href="#needride" class="button" role="button" id="btnNeedRide">I need a ride</a>
+                        </p>
 
                         <form class="needride__form" action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
                             <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
@@ -308,6 +307,10 @@
                     <p class="ride__text">Driving to vote, and have a spare seat?</p>
                     <p class="ride__text">Fill in this form and help a fellow citizen exercise their democratic right.</p>
                     <p class="ride__text">We'll try and connect you with someone that needs a ride in the same direction.</p>
+
+                    <p class="button-container">
+                        <a href="#offerride" class="button button--alt" role="button" id="btnOfferRide">I can offer a ride</a>
+                    </p>
 
                     <form class="offerride__form" action="https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet" method="post" class="form-horizontal" data-toggle="validator" role="form">
                         <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />

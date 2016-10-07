@@ -94,9 +94,8 @@ body {
     letter-spacing: 2px;
     text-shadow: 0px 0px 5px #000000;
 }
-.button__container {
-    display: flex;
-    justify-content: center;
+.button-container {
+    text-align: center;
     margin-bottom: 20px;
 }
 .button {
@@ -111,7 +110,7 @@ body {
     text-decoration: none;
 }
 
-.button__offer {
+.button--alt {
     background-color: #5cb85c;
 }
 
@@ -373,10 +372,6 @@ body {
     .logo__img {
         max-width: 300px;
         margin-bottom: 24px;
-    }
-
-    .button__container {
-        display: none;
     }
 
     .content {
