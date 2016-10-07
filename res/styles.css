@@ -101,7 +101,7 @@ iframe.twitter-mention-button {
     margin-bottom: 20px;
 }
 .button {
-    margin: 0 7px;
+    display: inline-block;
     padding: 12px 15px;
     border-radius: 5px;
     border: 0;
@@ -110,11 +110,13 @@ iframe.twitter-mention-button {
     color: white;
     text-transform: uppercase;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .button--alt {
     background-color: #5cb85c;
 }
+
 
 .lead {
     margin-bottom: 1em;
@@ -198,7 +200,86 @@ iframe.twitter-mention-button {
 
 .offerride__form,
 .needride__form {
-    /*display: none;*/
+    display: none;
+}
+
+
+
+fieldset {
+    padding: 1em 1em;
+    margin: 1em 0;
+}
+
+legend {
+    padding: 0;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+label {
+    display: block;
+    margin: 1em 0;
+}
+
+label textarea,
+label select,
+label input[type="text"],
+label input[type="email"],
+label input[type="search"],
+label input[type="tel"],
+label input[type="url"],
+label input[type="password"],
+label input[type="color"],
+label input[type="file"],
+label input[type="color"],
+label input[type="number"],
+label input[type="range"],
+label input[type="date"],
+label input[type="month"],
+label input[type="week"],
+label input[type="time"],
+label input[type="datetime"],
+label input[type="datetime-local"] {
+  display: block;
+  width: 100%;
+}
+
+textarea,
+select,
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+input[type="color"],
+input[type="file"],
+input[type="color"],
+input[type="number"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"] {
+    margin: .2em 0;
+    padding: .25em .4em;
+    border: 1px solid #ddd;
+    max-width: 100%;
+}
+  
+input[type="search"] { 
+    box-sizing: border-box;
+}
+
+input[type="file"] { 
+    border-width: 0;
+    padding: 0;
+}
+
+input[type="image"] {
+    vertical-align: bottom;
 }
 
 .about {
