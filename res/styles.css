@@ -22,27 +22,11 @@ body {
 .nav {
     width: 95%;
     max-width: 1200px;
-
+    text-align: center;
     margin: 0 auto 20px;
 }
 
-.social {
-    width: auto;
-    max-width: 400px;
-
-    display: inline-block;
-}
-
-.nav__twitter {
-    margin-right: 5px;
-}
-
-.nav__facebook {
-    margin-right: 5px;
-}
-
 .logo__link {
-    text-align: center;
     display: inline-block;
 }
 
@@ -51,6 +35,24 @@ body {
     margin: 0px auto 20px;
     max-width: 320px;
     display: block;
+}
+
+.social {
+    margin-top: 20px;
+}
+
+.social li {
+    display: inline-block;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+a.twitter-mention-button {
+    visibility: hidden;
+}
+
+iframe.twitter-mention-button {
+    margin-top: 2px;
 }
 
 .nav__links {
@@ -352,27 +354,34 @@ body {
     }
 
     .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
+        position: relative;
         width: 90%;
         max-width: 1200px;
         margin: 0 auto;
-    }
-
-    .social {
-        margin-right: auto;
-    }
-
-    .nav__links {
-        margin-left: auto;
     }
 
     .logo__img {
         max-width: 300px;
         margin-bottom: 24px;
     }
+
+    .social {
+        position: absolute;
+        left: 0;
+        top: 30%;
+        margin-top: 0;
+    }
+
+    .social li {
+        margin-left: 0;
+    }
+
+    .nav__links {
+        position: absolute;
+        right: 0;
+        top: 30%;
+    }
+
 
     .content {
         border-top: 100px solid white;
@@ -410,6 +419,13 @@ body {
     .bannerbox {
         width: calc(50% - 20px);
         margin: 20px 0;
+    }
+}
+
+@media (min-width: 1200px) {
+    .nav__link {
+        font-size: 18px;
+        margin: 0 10px;
     }
 }
 
