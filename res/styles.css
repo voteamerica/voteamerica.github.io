@@ -68,8 +68,8 @@ h5 {
 /* how to register to vote */
 
 .rock-image {
-    width: 10px;
-    padding-bottom: 10px;
+    float: right;
+    margin: 0 0 10px 10px;
 }
 
 .rock-vote-links {
@@ -80,12 +80,10 @@ h5 {
     color: #297bbb;
     font-weight: bold;
 }
-.rock-vote-support {
-    padding-top: 10px;
-}
 
 .election-protection {
-    padding-bottom: 8px;
+    float: right;
+    margin: 0 0 10px 10px;
 }
 
 a.election-protection-link {
