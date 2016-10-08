@@ -249,6 +249,19 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="showStates-b" class="col-sm-2 control-label check-poll">Check Your Polling Location</label>
+
+                                    <div class="col-xs-6 col-sm-4">
+                                        <input type="button" class="btn btn-sm btn-primary show-b" id="showStates-b" value="Show States" />
+                                    </div>
+
+                                    <div id="modal-b" class="overlay-b" >
+                                        <div class="dropdown-content drop-b" id="location-details">
+                                    </div>
+                                    
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="rideDestinationZIP" class="col-sm-2 control-label">Destination ZIP Code</label>
@@ -610,8 +623,13 @@
                     </div>
                     <div class="panel-body">
 
-                        <div id="state-details">
-                            <p class="state-caption">Am I registered?</p>
+                        <p class="state-caption">Am I registered?</p>
+
+                        <input type="button" class="btn btn-sm btn-primary show-a" id="showState-a" value="Show States" />
+
+                        <div id="modal-a" class="overlay-a">
+                            <div class="dropdown-content drop-a" id="state-details">
+                            </div>
                         </div>
 
                         <p class="state-intro">Select your state check if you're registered to vote on the November 8 presidential election</p>
@@ -839,7 +857,7 @@
     <script type="text/javascript" src="res/wNumb.min.js"></script>
 
     <!-- dropdown for issue #37 - voting registrations per state -->
-    <script type="text/javascript" src="res/dropdown.js"></script>
+    <script type="text/javascript" src="dropdown.js"></script>
 
     <script>
         $(document).ready(function() {
