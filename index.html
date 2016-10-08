@@ -1131,19 +1131,19 @@
             // Determine whether we can allow the form to be submitted.
             if (
                 //$('#offerCity').val().length > 0 &&
-                $('#offerArea').val().length > 0 &&
-                $('#offerMiles').val().length > 0 &&
+                //$('#offerArea').val().length > 0 &&
+                //$('#offerMiles').val().length > 0 &&
                 // $('#offerState').val().length > 0 &&
                 $('#driverSeats').val().length > 0 &&
                 $('#driverFirstName').val().length > 0 &&
                 $('#driverLastName').val().length > 0 &&
-                $('#driverEmail').val().length > 0 &&
-                (
-                    $('#officialDriver').is(':checked') !== true ||
-                    $('#officialDriverOrgRegNumber').val().length > 0
-                ) &&
+                $('#driverEmail').val().length > 0 // &&
+                // (
+                //    $('#officialDriver').is(':checked') == true ||
+                //    $('#officialDriverOrgRegNumber').val().length > 0
+                //) &&
                 // Checking if the list of appended available times has at least 1 item
-                $('#driver-available-times').children().length
+                //$('#driver-available-times').children().length
             ) {
                 console.log("Enabling Submit Button for Driver")
                 $("#offerRideSubmit").prop("disabled", false);
