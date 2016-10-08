@@ -289,7 +289,7 @@
                                     <div class="col-sm-9">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="TwoWayTripNeeded" value="true" id="rideReturn">
+                                                <input type="checkbox" name="TwoWayTripNeeded" value="true" id="rideReturn" />
                                                 I need a two-way trip
                                             </label>
                                         </div>
@@ -333,14 +333,21 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="RiderLegalConsent" /></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="RiderIsVulnerable" name="RiderIsVulnerable" /></div>
+                                    <div class="col-sm-9">
+                                        <label for="RiderIsVulnerable">Pensioner or disability: Please check this box if you are retired from work or you consider yourself to have a disability</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="RiderLegalConsent" name="RiderLegalConsent" /></div>
                                     <div class="col-sm-9">
                                         <label for="legalOne">I understand that Carpool Vote will share my contact details with the driver if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)</label>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="RiderWillNotTalkPolitics" /></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="RiderWillNotTalkPolitics" name="RiderWillNotTalkPolitics" /></div>
                                     <div class="col-sm-9">
                                         <label for="legalTwo">I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.</label>
                                     </div>
@@ -353,7 +360,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="PleaseStayInTouch" checked /></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="PleaseStayInTouch" name="PleaseStayInTouch" checked /></div>
                                     <div class="col-sm-9">
                                         <label for="inTouchRider">We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.</label>
                                     </div>
@@ -553,7 +560,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="PleaseStayInTouch" checked></div>
+                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="PleaseStayInTouch" name="PleaseStayInTouch" checked></div>
                                     <div class="col-sm-9">
                                         <label for="inTouchDriver">We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.</label>
                                     </div>
@@ -608,7 +615,6 @@
                         </div>
 
                         <p class="state-intro">Select your state check if you're registered to vote on the November 8 presidential election</p>
-
                         <a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv"><img class="rock-image" src="res/img/rock.png" /></a>
 
                         <p class="rock-vote-description"><a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv">Rock the Vote</a> has several online tools that simplify and demystify voter registration and elections. Follow the links below for more on how to claim your vote!
@@ -618,6 +624,7 @@
                             <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/" target="_rtv">Find where to vote</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/" target="_rtv">About elections</a></li>
                         </ul>
+
                     </div>
                 </div>
             </div>
