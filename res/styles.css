@@ -608,9 +608,14 @@ label.collection {
     margin-top: 3px;
 }
 
-.remove-time:hover {
+.remove-time {
+    float: right;
+    color: steelblue;
     text-decoration: underline;
     cursor: pointer;
+}
+.remove-time:hover {
+    text-decoration: none;
 }
 
 #rider-add-time {
@@ -623,13 +628,17 @@ h2 {
     margin: 20px 0;
 }
 
-#rider-available-times {
+.available-times-list {
     min-height: 30px;
-    list-style: initial;
+    margin: 10px 0;
 }
 
-#rider-available-times li {
-    margin-left: 20px;
+.available-times-list li {
+    padding: 10px 20px;
+}
+
+.available-times-list li:nth-child(even) {
+    background-color: #f7f7f7;
 }
 
 .datepicker {
