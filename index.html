@@ -94,7 +94,7 @@
 
     <header class="header">
         <div class="supportbanner">Need voter support? Call 1-866-OURVOTE</div>
-        <nav class="nav">
+        <nav class="nav wrapper">
             <a href="/" class="logo__link">
                 <img class="logo__img" src="res/img/logo.jpg" alt="CARPOOL VOTE" />
             </a>
@@ -124,9 +124,10 @@
     </header>
 
     <div class="content">
-        <div class="main">
+        <div class="main wrapper">
             <h1 class="title">Every American DESERVES a Vote</h1>
-           <p class="lead">We connect volunteer drivers with anybody who needs a ride to claim their vote.</p>
+            <p class="lead">We connect volunteer drivers with anybody who needs a ride to claim their vote.</p>
+
             <ul class="ride_options">
                 <li class="needride" id="needride">
                     <div class="ride__container">
@@ -153,7 +154,7 @@
             </ul>
         </div>
 
-        <div class="forms">
+        <div class="forms wrapper">
             <div id="pnlNeedRide">
                 <form name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" class="form-horizontal" data-toggle="validator" role="form">
                     <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
@@ -611,173 +612,175 @@
 
 
 
-        <div class="about">
-            <div class="bannerbox" id="#story">
-                <h3 class="bannerbox__title">Our Story</h3>
-                <div class="bannerbox__content">
-                    <p>Carpool Vote connects volunteer drivers with anybody who needs a ride to claim their vote.</p>
+        <div class="about wrapper clearfix">
+            <div class="about__padding">
+                <div class="bannerbox" id="#story">
+                    <h3 class="bannerbox__title">Our Story</h3>
+                    <div class="bannerbox__content">
+                        <p>Carpool Vote connects volunteer drivers with anybody who needs a ride to claim their vote.</p>
 
-                    <p>Many of our riders need a driver after losing full protection of the Voting Rights Act in 2013, as state governments no longer need permission to change election rules. The 2016 US Presidential election will be the first since this change has happened.</p>
+                        <p>Many of our riders need a driver after losing full protection of the Voting Rights Act in 2013, as state governments no longer need permission to change election rules. The 2016 US Presidential election will be the first since this change has happened.</p>
 
-                    <p>Under the new rules, voters in several states face new barriers to getting to the polls. Some of the obstacles that Carpool Vote aims to reduce include:</p>
-                    <ul>
-                        <li>Polling stations face closure in lower-income communities of color,</li>
-                    	<li>Would-be voters have to travel out of town to get a photo ID to register,</li>
-                    	<li>The periods available to register and vote become shorter, and</li>
-                    	<li>Requesting an absentee ballot or voting by mail can be difficult in many states.</li>
-                    </ul>
-                    <p>These rules - along with others introduced since the change - affect everybody but especially people of color, people with disabilities, young people, elderly people, and women.</p>
-                </div>
-            </div>
-            <div class="bannerbox" id="#howtoclaim">
-                <h3 class="bannerbox__title">How to Claim Your Vote</h3>
-                <div class="bannerbox__content">
-                    <div id="state-details">
-                        <p class="state-caption">Am I registered?</p>
+                        <p>Under the new rules, voters in several states face new barriers to getting to the polls. Some of the obstacles that Carpool Vote aims to reduce include:</p>
+                        <ul>
+                            <li>Polling stations face closure in lower-income communities of color,</li>
+                        	<li>Would-be voters have to travel out of town to get a photo ID to register,</li>
+                        	<li>The periods available to register and vote become shorter, and</li>
+                        	<li>Requesting an absentee ballot or voting by mail can be difficult in many states.</li>
+                        </ul>
+                        <p>These rules - along with others introduced since the change - affect everybody but especially people of color, people with disabilities, young people, elderly people, and women.</p>
                     </div>
-
-                    <p class="state-intro">Select your state check if you're registered to vote on the November 8 presidential election</p>
-                    <a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv"><img class="rock-image" src="res/img/rock.png" /></a>
-
-                    <p class="rock-vote-description"><a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv">Rock the Vote</a> has several online tools that simplify and demystify voter registration and elections. Follow the links below for more on how to claim your vote!
-                    <ul class="rock-vote-links">
-                        <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica" target="_rtv">Register to vote!</a></li>
-                        <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/" target="_rtv">Voter requirements</a></li>
-                        <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/" target="_rtv">Find where to vote</a></li>
-                        <li><a href="https://www.rockthevote.com/get-informed/elections/" target="_rtv">About elections</a></li>
-                    </ul>
                 </div>
-            </div>
-            <div class="bannerbox" id="#why">
-                <h3 class="bannerbox__title">Why are we doing this?</h3>
-                <div class="bannerbox__content">
-                    <p>We're excited about empowering people who may find it difficult to get to the polls.</p>
-
-                    <p>Changes regarding timing and voting locations have hurt democracy in America. We believe that everyone should be able to exercise their democratic rights.
-                    </p>
-
-                    <p>Voter suppression affects everyone, but particularly lower-income People of Color, people with disabilities, young people, and women.</p>
-
-                    <p>It looks like the upcoming election will be a much closer fight than many had anticipated - and so is particularly important.
-                    </p>
-
-                    <p>Even more so as:</p>
-
-                    <ul>
-                        <li> Polling stations face closure in lower-income Communities of Color,</li>
-                        <li> Would-be voters have to travel out of town to get a photo ID to register,</li>
-                        <li> The periods available to register and vote become shorter, and</li>
-                        <li> Requesting an absentee ballot or voting by mail can be difficult in many states.</li>
-                    </ul>
-
-                    <p>We're excited about getting people from all walks of life involved in the political process!</p>
-
-                    <p>To help avoid any American losing their chance to vote, please do share this site with your friends and family.</p>
-                </div>
-            </div>
-            <div class="bannerbox" id="#righttovote">
-                <h3 class="bannerbox__title">Voting support</h3>
-                <div class="bannerbox__content">
-                    <a href="http://www.866ourvote.org/"><img class="election-protection" src="res/img/election-protection.png" /></a>
-
-                    <p>The <a href="http://www.866ourvote.org/">Election Protection Coalition</a> works around the clock to advance and defend your right to vote.</p>
-
-                    <p>Report voting problems, and get voting relating info for your state.</p>
-                    <p><span class="glyphicon glyphicon glyphicon-hand-up" aria-hidden="true"></span> Visit <a href="http://www.866ourvote.org/"> 866ourvote.org</a></p>
-                    <p><span class="glyphicon glyphicon glyphicon-phone" aria-hidden="true"></span> Call <a href="tel:866OURVOTE">866OURVOTE</a></p>
-                </div>
-            </div>
-            <div class="bannerbox" id="#newsletter">
-                <h3 class="bannerbox__title">Newsletter</h3>
-                <div class="bannerbox__content">
-                    <p>We continue to make improvements to our platform to make it effective for as many voters as possible. To keep updated with the project, <a href="http://eepurl.com/ccdDlv" target="_blank" class="">sign up for our newsletter</a>.</p>
-                </div>
-            </div>
-            <div class="bannerbox" id="#support">
-                <h3 class="bannerbox__title">Can I help some other way?</h3>
-                <div class="bannerbox__content">
-                    <p>Absolutely!</p>
-
-                    <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below </p>
-                    <!--
-                        https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet
-                    -->
-                    <form name="offerHelp" action="https://api.carpoolvote.com/v1.1/helper" method="post" class="form-horizontal" data-toggle="validator" role="form">
-                        <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
-
-                        <div class="form-group">
-                            <label for="helpName" class="col-sm-2 control-label">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="helpName" placeholder="Your name" name="Name" required>
-                            </div>
+                <div class="bannerbox" id="#howtoclaim">
+                    <h3 class="bannerbox__title">How to Claim Your Vote</h3>
+                    <div class="bannerbox__content">
+                        <div id="state-details">
+                            <p class="state-caption">Am I registered?</p>
                         </div>
 
-                        <div class="form-group">
-                            <label for="helpEmail" class="col-sm-2 control-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" id="helpEmail" placeholder="Email" name="Email" required>
-                            </div>
-                        </div>
+                        <p class="state-intro">Select your state check if you're registered to vote on the November 8 presidential election</p>
+                        <a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv"><img class="rock-image" src="res/img/rock.png" /></a>
 
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox" name="Capability" value="build links">
-                                    I can help build links with organizations and communities
-                                </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox" name="Capability" value="community organize">
-                                        I can organize my own community
-                                </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox" name="Capability" value="collaboration">
-                                    Set up collaboration with my organization
-                                </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox" name="Capability" value="awareness">
-                                Help get the word out
-                                </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox" name="Capability" value="research">
-                                Do research
-                                </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox" name="Capability" value="legal">
-                                Offer legal expertise
-                                </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox" name="Capability" value="tech">
-                                Contribute my tech wizardry
-                                </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox" name="Capability" value="raise money">
-                                Help the project raise money
-                                </label>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="rock-vote-description"><a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv">Rock the Vote</a> has several online tools that simplify and demystify voter registration and elections. Follow the links below for more on how to claim your vote!
+                        <ul class="rock-vote-links">
+                            <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica" target="_rtv">Register to vote!</a></li>
+                            <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/" target="_rtv">Voter requirements</a></li>
+                            <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/" target="_rtv">Find where to vote</a></li>
+                            <li><a href="https://www.rockthevote.com/get-informed/elections/" target="_rtv">About elections</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bannerbox" id="#why">
+                    <h3 class="bannerbox__title">Why are we doing this?</h3>
+                    <div class="bannerbox__content">
+                        <p>We're excited about empowering people who may find it difficult to get to the polls.</p>
 
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-4">
-                                <button type="submit" class="btn btn-success" id="offerHelpSubmit">Submit</button>
+                        <p>Changes regarding timing and voting locations have hurt democracy in America. We believe that everyone should be able to exercise their democratic rights.
+                        </p>
+
+                        <p>Voter suppression affects everyone, but particularly lower-income People of Color, people with disabilities, young people, and women.</p>
+
+                        <p>It looks like the upcoming election will be a much closer fight than many had anticipated - and so is particularly important.
+                        </p>
+
+                        <p>Even more so as:</p>
+
+                        <ul>
+                            <li> Polling stations face closure in lower-income Communities of Color,</li>
+                            <li> Would-be voters have to travel out of town to get a photo ID to register,</li>
+                            <li> The periods available to register and vote become shorter, and</li>
+                            <li> Requesting an absentee ballot or voting by mail can be difficult in many states.</li>
+                        </ul>
+
+                        <p>We're excited about getting people from all walks of life involved in the political process!</p>
+
+                        <p>To help avoid any American losing their chance to vote, please do share this site with your friends and family.</p>
+                    </div>
+                </div>
+                <div class="bannerbox" id="#righttovote">
+                    <h3 class="bannerbox__title">Voting support</h3>
+                    <div class="bannerbox__content">
+                        <a href="http://www.866ourvote.org/"><img class="election-protection" src="res/img/election-protection.png" /></a>
+
+                        <p>The <a href="http://www.866ourvote.org/">Election Protection Coalition</a> works around the clock to advance and defend your right to vote.</p>
+
+                        <p>Report voting problems, and get voting relating info for your state.</p>
+                        <p><span class="glyphicon glyphicon glyphicon-hand-up" aria-hidden="true"></span> Visit <a href="http://www.866ourvote.org/"> 866ourvote.org</a></p>
+                        <p><span class="glyphicon glyphicon glyphicon-phone" aria-hidden="true"></span> Call <a href="tel:866OURVOTE">866OURVOTE</a></p>
+                    </div>
+                </div>
+                <div class="bannerbox" id="#newsletter">
+                    <h3 class="bannerbox__title">Newsletter</h3>
+                    <div class="bannerbox__content">
+                        <p>We continue to make improvements to our platform to make it effective for as many voters as possible. To keep updated with the project, <a href="http://eepurl.com/ccdDlv" target="_blank" class="">sign up for our newsletter</a>.</p>
+                    </div>
+                </div>
+                <div class="bannerbox" id="#support">
+                    <h3 class="bannerbox__title">Can I help some other way?</h3>
+                    <div class="bannerbox__content">
+                        <p>Absolutely!</p>
+
+                        <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below </p>
+                        <!--
+                            https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet
+                        -->
+                        <form name="offerHelp" action="https://api.carpoolvote.com/v1.1/helper" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                            <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
+
+                            <div class="form-group">
+                                <label for="helpName" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="helpName" placeholder="Your name" name="Name" required>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+
+                            <div class="form-group">
+                                <label for="helpEmail" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="helpEmail" placeholder="Email" name="Email" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" name="Capability" value="build links">
+                                        I can help build links with organizations and communities
+                                    </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" name="Capability" value="community organize">
+                                            I can organize my own community
+                                    </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" name="Capability" value="collaboration">
+                                        Set up collaboration with my organization
+                                    </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" name="Capability" value="awareness">
+                                    Help get the word out
+                                    </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" name="Capability" value="research">
+                                    Do research
+                                    </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" name="Capability" value="legal">
+                                    Offer legal expertise
+                                    </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" name="Capability" value="tech">
+                                    Contribute my tech wizardry
+                                    </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" name="Capability" value="raise money">
+                                    Help the project raise money
+                                    </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-4">
+                                    <button type="submit" class="btn btn-success" id="offerHelpSubmit">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -785,14 +788,16 @@
     </div>
 
     <footer class="footer">
-        <p class="footer__text">
-            Contact us: <a class="footer__link" href="mailto:together@carpoolvote.com">together@carpoolvote.com</a>
-        </p>
-        <form class="newsletter">
-            <label class="newsletter__label" for="signup">Sign up for our newsletter</label>
-            <input class="newsletter__input" type="text" placeholder="email address">
-            <input class="newsletter__submit" value="Join" type="submit">
-        </form>
+        <div class="wrapper">
+            <p class="footer__text">
+                Contact us: <a class="footer__link" href="mailto:together@carpoolvote.com">together@carpoolvote.com</a>
+            </p>
+            <form class="newsletter">
+                <label class="newsletter__label" for="signup">Sign up for our newsletter</label>
+                <input class="newsletter__input" type="text" placeholder="email address">
+                <input class="newsletter__submit" value="Join" type="submit">
+            </form>
+        </div>
     </footer>
 
     <script>

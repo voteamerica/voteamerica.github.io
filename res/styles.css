@@ -19,9 +19,14 @@ body {
     background-color: #e64a4a;
 }
 
-.nav {
-    width: 95%;
+.wrapper {
+    width: 90%;
     max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav {
     text-align: center;
     margin: 0 auto 20px;
 }
@@ -213,16 +218,15 @@ iframe.twitter-mention-button {
 }
 
 .about {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
+}
+.about__padding {
+    margin: 0 -15px;
 }
 
 .bannerbox {
-    max-width: 470px;
-    margin: 10px auto 10px;
+    width: 100%;
+    float: left;
+    margin: 30px 15px;
     border-top: 10px solid white;
     border-bottom: 1px solid transparent;
     background-color: white;
@@ -265,8 +269,7 @@ iframe.twitter-mention-button {
     padding: 5px 20px 15px;
 }
 
-.bannerbox p,
-.bannerbox li {
+.bannerbox p {
     margin: 1em 0;
     line-height: 1.4em;
 }
@@ -276,6 +279,7 @@ iframe.twitter-mention-button {
 }
 
 .bannerbox li {
+    margin: 0.4em 0;
     display: list-item;
     list-style: disc;
     margin-bottom: 10px;
@@ -290,13 +294,7 @@ iframe.twitter-mention-button {
 }
 
 .footer__text {
-    max-width: 1200px;
     margin: 0 auto 1em;
-}
-
-.newsletter {
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .footer__link {
@@ -352,14 +350,9 @@ iframe.twitter-mention-button {
     .ride__text {
         font-size: 16px;
     }
-
-    .about {
-        padding: 0 20px;
-    }
-
     .bannerbox {
+        width: 40%;
         width: calc(50% - 30px);
-        max-width: 1000px; /* large number */
     }
 }
 
@@ -425,14 +418,6 @@ iframe.twitter-mention-button {
         margin: 0 auto 1em;
         max-width: 900px;
         text-shadow: none;
-    }
-
-    .about {
-        padding: 0;
-    }
-    .bannerbox {
-        width: calc(50% - 20px);
-        margin: 20px 0;
     }
 }
 
@@ -662,4 +647,12 @@ input[type="number"]::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    content: "";
+    clear: both;
+    height: 0;
 }
