@@ -496,9 +496,10 @@ label.collection {
 }
 /* dropdown: Am I register?, Check Your Polling Location*/
 
-.state-dropdown {
+.state-dropdown, .bannerbox .state-dropdown {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 .state-intro {
     padding-top: 4px;
@@ -540,38 +541,32 @@ label.collection {
     background-color: #337ab7;
 }
 
-.overlay-a {
-    width: 100%;
-    height: 100%;
-    color: #fff;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0 auto;
-    z-index: 1000;
-    display: none;
-}
+.overlay-a,
 .overlay-b {
     width: 100%;
     height: 100%;
     color: #fff;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     margin: 0 auto;
     z-index: 1000;
+    background: rgba(0,0,0,0.5);
+    transform: translate3d(0,0,0);
     display: none;
 }
 
 .dropdown-content {
     color: lightgrey;
     background: #fff;
-    position: relative;
+    position: absolute;
     height: 70%;
-    width: 175px;
+    min-height: 200px;
+    width: 200px;
     border-radius: 3px;
     top: 10%;
-    margin: auto auto;
+    left: 50%;
+    margin-left: -100px;
     padding-top: 10px;
     border: 1px solid lightgrey;
     border-radius: 6px;
