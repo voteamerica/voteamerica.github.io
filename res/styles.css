@@ -614,13 +614,13 @@ label.collection {
 }
 
 #rider-add-time {
-    width: 75%;
-    margin-bottom: 15px;
+    margin: 15px 0;
 }
 
-h5 {
-    font-size: 1.2em;
-
+h2 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 20px 0;
 }
 
 #rider-available-times {
