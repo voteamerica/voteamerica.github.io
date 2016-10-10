@@ -64,22 +64,53 @@ a {
 
 .button {
     display: inline-block;
-    padding: 12px 15px;
+    padding: 0.4em 1em 0.6em;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     border-radius: 5px;
-    border: 0;
-    font-size: 14px;
+    border: none;
     background-color: #297bbb;
-    text-transform: uppercase;
     cursor: pointer;
+    outline: none;
+    vertical-align: middle;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset, 0 -3px 0 rgba(0,0,0,0.1) inset;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    margin: 0 0.5em;
+    min-width: 4em;
+    font-weight: bold;
+    transition: all ease 0.1s;
 }
 
-.button, .button:hover {
-    color: white;
+.button:hover, .button:focus {
     text-decoration: none;
+    color: white;
+    background-color: #5091c3;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset, 0 -3px 0 rgba(0,0,0,0.2) inset;
+}
+
+.button:active {
+    transform: translateY(1px);
+}
+
+.button[disabled] {
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.button--large {
+    font-size: 1.2em;
+    min-width: 65%;
+    padding: 0.5em 2em 0.6em;
+    text-transform: uppercase;
 }
 
 .button--alt {
     background-color: #5cb85c;
+}
+
+.button--alt:hover, .button--alt:focus {
+    background-color: #78c778;
 }
 
 
