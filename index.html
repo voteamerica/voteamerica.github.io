@@ -1151,7 +1151,7 @@
                 var date = $(this).siblings('.datepicker').val();
                 var timeId = new Date().getTime();
                 $(this).siblings('.available-times-list').append(
-                    '<li class="' + timeId + '">' + date + ', ' + startTime + '-' + endTime + ' <span class="remove-time">remove</span></li>'
+                    '<li class="' + timeId + '">' + date + ', ' + startTime + '-' + endTime + ' <button class="remove-time" aria-label="Delete time">&times;</button></li>'
                 );
                 $(this).siblings('.selected-dates').append(
                     '<input type="hidden" ' +

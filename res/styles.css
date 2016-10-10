@@ -434,17 +434,6 @@ label.collection {
     margin-top: 3px;
 }
 
-.remove-time {
-    float: right;
-    color: steelblue;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.remove-time:hover {
-    text-decoration: none;
-}
-
 #rider-add-time {
     margin: 15px 0;
 }
@@ -453,16 +442,44 @@ label.collection {
 /* Available times list */
 
 .available-times-list {
-    min-height: 30px;
-    margin: 10px 0;
+    list-style: none;
+    padding: 0;
 }
 
 .available-times-list li {
     padding: 10px 20px;
+    border: 1px solid #eee;
+    border-top: none;
 }
 
-.available-times-list li:nth-child(even) {
+.available-times-list li:nth-child(odd) {
     background-color: #f7f7f7;
+}
+.available-times-list li:first-child {
+    border-top: 1px solid #eee;
+}
+
+.remove-time {
+    float: right;
+    background: none;
+    border: none;
+    color: crimson;
+    font-weight: bolder;
+    cursor: pointer;
+    font-size: 25px;
+    margin-top: -5px;
+    padding: 0 5px;
+    transition: all ease 0.1s;
+    opacity: 0.6;
+    outline: none;
+}
+
+.available-times-list li:hover .remove-time {
+    opacity: 1;
+}
+
+.remove-time:hover, .remove-time:focus {
+    transform: scale(1.3);
 }
 
 
