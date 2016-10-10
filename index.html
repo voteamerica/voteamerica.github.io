@@ -786,13 +786,14 @@
                 e.preventDefault();
             });
 
-            $('#btnNeedRide').click(function() {
+            $('#btnNeedRide').click(function(e) {
                 $('#pnlIntro').slideUp('fast');
                 $('#pnlOfferRide').slideUp('fast');
                 $('#pnlNeedRide').slideDown('fast');
+                e.preventDefault();
             });
 
-            $('#btnRiderCancel').click(function() {
+            $('#btnRiderCancel').click(function(e) {
                 $('#pnlNeedRide').slideUp('fast');
                 $('#pnlOfferRide').slideUp('fast');
                 $('#pnlIntro').slideDown('fast');
@@ -800,15 +801,17 @@
                 $("html, body").animate({
                     scrollTop: 0
                 }, "slow");
+                e.preventDefault();
             });
 
-            $('#btnOfferRide').click(function() {
+            $('#btnOfferRide').click(function(e) {
                 $('#pnlIntro').slideUp('fast');
                 $('#pnlNeedRide').slideUp('fast');
                 $('#pnlOfferRide').slideDown('fast');
+                e.preventDefault();
             });
 
-            $('#btnOfferCancel').click(function() {
+            $('#btnOfferCancel').click(function(e) {
                 $('#pnlOfferRide').slideUp('fast');
                 $('#pnlNeedRide').slideUp('fast');
                 $('#pnlIntro').slideDown('fast');
@@ -816,6 +819,7 @@
                 $("html, body").animate({
                     scrollTop: 0
                 }, "slow");
+                e.preventDefault();
             });
 
             initializeCalAndTime();
