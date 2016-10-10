@@ -1,3 +1,5 @@
+/* Base */
+
 html {
     position: relative;
     min-height: 100%;
@@ -8,17 +10,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-.supportbanner {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-bottom: 2px solid #cc3939;
-
-    font-size: 14px;
-    text-align: center;
-    color: white;
-    background-color: #e64a4a;
-}
-
 .wrapper {
     width: 90%;
     max-width: 1200px;
@@ -26,85 +17,27 @@ body {
     margin-right: auto;
 }
 
-.nav {
-    text-align: center;
-    margin: 0 auto 20px;
-}
-
-.logo__link {
-    display: inline-block;
-}
-
-.logo__img {
-    width: 90%;
-    margin: 0px auto 20px;
-    max-width: 320px;
-    display: block;
-}
-
-.social {
-    margin-top: 20px;
-}
-
-.social li {
-    display: inline-block;
-    margin: 0 5px;
-    vertical-align: middle;
-}
-
-a.twitter-mention-button {
-    visibility: hidden;
-}
-
-iframe.twitter-mention-button {
-    margin-top: 2px;
-}
-
-.nav__links {
-    text-align: center;
-}
-
-.nav__item {
-    display: inline;
-    border-right: solid 1px #297bbb;
-}
-
-.nav__support {
-    border-right: 0;
-}
-
-.nav__link {
-    padding: 0 10px;
-    font-size: 16px;
-    color: #e64a4a;
-    text-decoration: none;
-}
-
 .content {
+    border-top: 100px solid white;
     padding-bottom: 20px;
     background-color: #eee;
 }
 
-.main {
-    background: url('road.jpg') no-repeat top center;
-    padding: 15px;
-    background-size: cover;
+
+/* Typography */
+
+a {
+    color: #e64a4a;
 }
 
-.title {
-    margin-bottom: 20px;
-    font-size: 24px;
-    text-align: center;
-    text-transform: uppercase;
-    color: white;
-    line-height: 1.3em;
-    letter-spacing: 2px;
-    text-shadow: 0px 0px 5px #000000;
-}
+
+/* Buttons */
+
 .button-container {
     text-align: center;
     margin-bottom: 20px;
 }
+
 .button {
     display: inline-block;
     padding: 12px 15px;
@@ -126,39 +59,126 @@ iframe.twitter-mention-button {
 }
 
 
-.lead {
-    margin-bottom: 1em;
-    line-height: 1.3em;
-    font-size: 18px;
+/* Layout */
+
+.support-banner {
+    margin: 0 0 20px;
+    padding: 10px;
+    border-bottom: 2px solid #cc3939;
+    text-align: center;
+    color: white;
+    background-color: #e64a4a;
+}
+
+
+/* Header */
+
+.nav {
+    text-align: center;
+    margin: 0 auto 20px;
+}
+
+.logo {
+    display: inline-block;
+}
+
+.logo__img {
+    display: block;
+    width: 90%;
+    height: auto;
+    margin: 0px auto 20px;
+    max-width: 320px;
+}
+
+.social {
+    padding: 0;
+    margin: 20px 0 0;
+    list-style: none;
+}
+
+.social li {
+    display: inline-block;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+a.twitter-mention-button {
+    visibility: hidden;
+}
+
+iframe.twitter-mention-button {
+    margin-top: 2px;
+}
+
+.nav__links {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.nav__item {
+    display: inline;
+    border-right: solid 1px #297bbb;
+}
+
+.nav__support {
+    border-right: 0;
+}
+
+.nav__link {
+    padding: 0 10px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+
+/* Intro */
+
+.intro {
+    background: url('road.jpg') no-repeat top center;
+    padding: 15px;
+    background-size: cover;
+    margin-top: -100px;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+.intro__banner {
+    text-shadow: 0px 1px 4px rgba(0,0,0,0.4);
     color: white;
     text-align: center;
-    text-shadow: 0px 0px 5px #000000;
 }
 
-.ride_options {
-    max-width: 470px;
-    margin: 0 auto 50px;
+.intro__title {
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+    letter-spacing: 2px;
+    margin: 15px 0;
 }
 
-.needride,
-.offerride {
-    max-width: 470px;
-    margin: 20px 0;
-    padding: 10px 0;
-    flex-shrink: 0;
+.intro__lead {
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
-.ride__container {
+.ride {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ride__panel {
     position: relative;
-    background-color: white;
-    color: #333;
-    font-size: 14px;
-    line-height: 1.3em;
-    margin-top: 75px;
+    max-width: 470px;
+    flex-shrink: 0;
+    margin: 100px 0 20px;
     padding: 35px;
+    background-color: white;
 }
 
-.ride__container:before {
+.ride__panel:before {
     content: '';
     position: absolute;
     top: -75px;
@@ -175,7 +195,7 @@ iframe.twitter-mention-button {
     background-color: white;
 }
 
-.ride__container:after {
+.ride__panel:after {
     content: '';
     background: url(img/rider.jpg) center no-repeat;
     position: absolute;
@@ -187,39 +207,24 @@ iframe.twitter-mention-button {
     transform: translateX(50%);
 }
 
-.offerride .ride__container:after {
+.offerride:after {
     background-image: url(img/driver.jpg);
 }
 
 .ride__title {
-    margin-bottom: 1em;
+    margin-top: 0;
     font-size: 22px;
-    font-weight: bold;
     text-transform: uppercase;
     text-align: center;
     color: #e64a4a;
 }
 
-.ride__text {
-    font-size: 15px;
-    line-height: 1.4em;
-    margin-bottom: 1em;
+.ride__copy {
+    min-height: 100px;
 }
 
-#pnlNeedRide,
-#pnlOfferRide {
-    margin: 30px 0;
-    display: none;
-}
 
-.panel > .panel-heading {
-    background-color: #297bbb;
-}
-
-.panel-title {
-    text-transform: uppercase;
-    color: #fff; 
-}
+/* Main content section */
 
 .about {
     padding: 15px 0;
@@ -238,6 +243,7 @@ iframe.twitter-mention-button {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 18px;
+    margin: 0 0 1em;
     letter-spacing: 1px;
     color: white;
     background-color: #297bbb;
@@ -269,22 +275,8 @@ iframe.twitter-mention-button {
     padding: 5px 20px 15px;
 }
 
-.bannerbox p {
-    margin: 1em 0;
-    line-height: 1.4em;
-}
 
-.bannerbox ul {
-    padding-left: 20px;
-}
-
-.bannerbox li {
-    margin: 0.4em 0;
-    display: list-item;
-    list-style: disc;
-    margin-bottom: 10px;
-    line-height: 1.4em;
-}
+/* Footer */
 
 .footer {
     padding: 20px;
@@ -320,10 +312,12 @@ iframe.twitter-mention-button {
     background-color: #297bbb;
 }
 
+
+/* Media queries */
+
 @media (min-width: 620px) {
-    .supportbanner {
-        margin-bottom: 80px;
-        font-size: 18px;
+    .support-banner {
+        font-size: 1.3em;
     }
 
     .logo__img {
@@ -334,7 +328,7 @@ iframe.twitter-mention-button {
         color: #e64a4a;
     }
 
-    .ride_options {
+    .ride {
         display: flex;
         align-items: flex-start;
         flex-wrap: wrap;
@@ -362,6 +356,7 @@ iframe.twitter-mention-button {
     .about__padding {
         margin: 0 -15px;
     }
+
     .bannerbox {
         margin-left: 15px;
         margin-right: 15px;
@@ -369,10 +364,6 @@ iframe.twitter-mention-button {
 }
 
 @media (min-width: 960px) {
-    .supportbanner {
-        margin-bottom: 24px;
-    }
-
     .nav {
         position: relative;
         width: 90%;
@@ -401,36 +392,6 @@ iframe.twitter-mention-button {
         right: 0;
         top: 30%;
     }
-
-
-    .content {
-        border-top: 100px solid white;
-    }
-
-    .main {
-        width: 90%;
-        max-width: 1200px;
-        margin: -100px auto 0;
-        padding: 40px;
-        -webkit-border-radius: 6px;
-        -moz-border-radius: 6px;
-        border-radius: 6px;
-        background-size: cover;
-    }
-
-    .title {
-        font-size: 34px;
-        font-weight: bold;
-        text-transform: none;
-        letter-spacing: 0.5px;
-        text-shadow: none;
-    }
-
-    .lead {
-        margin: 0 auto 1em;
-        max-width: 900px;
-        text-shadow: none;
-    }
 }
 
 @media (min-width: 1200px) {
@@ -438,71 +399,40 @@ iframe.twitter-mention-button {
         font-size: 18px;
         margin-left: 10px;
     }
+
+    .intro__title {
+        font-size: 4em;
+    }
+
+    .intro__lead {
+        font-size: 1.7em;
+    }
 }
 
-.time-range-slider {
-    margin-bottom: 50px;
-    margin-left: 20px;
-    margin-right: 30px;
-    margin-top: 10px;
+
+/* Forms */
+
+#pnlNeedRide,
+#pnlOfferRide {
+    margin: 30px 0;
+    display: none;
 }
 
-.noUi-pips-horizontal {
-    padding-bottom: 0;
-    padding-top: 47px;
-    position: relative;
-    top: -40px;
+.panel > .panel-heading {
+    background-color: #297bbb;
 }
 
-/* how to register to vote */
-
-.rock-image {
-    float: right;
-    margin: 0 0 10px 10px;
+.panel-title {
+    text-transform: uppercase;
+    color: #fff; 
 }
 
-.rock-vote-links {
-    margin-left: -10px;
-}
+/* dropdown: Am I registered?, Check Your Polling Location*/
 
-.rock-vote-support, .state-caption {
-    color: #297bbb;
-    font-weight: bold;
-}
-
-.election-protection {
-    float: right;
-    margin: 0 0 10px 10px;
-}
-
-a.election-protection-link {
-    height: 50px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-label.collection { 
-    font-weight: 400;
-    padding: 5px; 
-}
-
-.miles {
-    width: 50px;
-    padding: 4px;
-    border: none;
-    border: 1px solid lightgrey;
-    border-radius: 4px;
-
-}
-/* dropdown: Am I register?, Check Your Polling Location*/
-
-.state-dropdown, .bannerbox .state-dropdown {
+.state-dropdown {
     margin: 0;
     padding: 0;
     list-style: none;
-}
-.state-intro {
-    padding-top: 4px;
 }
 .show-state:hover{
     background-color: #337ab7;
@@ -530,6 +460,7 @@ label.collection {
 .state-location a:hover {
      color: white;
 }
+
 .state-location {
     list-style: none;
     transition: all .25s ease-in-out;
@@ -590,11 +521,28 @@ label.collection {
             margin: auto 40% 15%;
     }
 }
+
+
+/* Time range slider */
+
 .time-range-slider {
     margin-bottom: 50px;
     margin-left: 20px;
     margin-right: 30px;
     margin-top: 10px;
+}
+
+label.collection { 
+    font-weight: 400;
+    padding: 5px; 
+}
+
+.miles {
+    width: 50px;
+    padding: 4px;
+    border: none;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
 }
 
 .noUi-pips-horizontal {
@@ -614,6 +562,7 @@ label.collection {
     text-decoration: underline;
     cursor: pointer;
 }
+
 .remove-time:hover {
     text-decoration: none;
 }
@@ -622,11 +571,8 @@ label.collection {
     margin: 15px 0;
 }
 
-h2 {
-    font-size: 2em;
-    font-weight: bold;
-    margin: 20px 0;
-}
+
+/* Available times list */
 
 .available-times-list {
     min-height: 30px;
@@ -640,6 +586,9 @@ h2 {
 .available-times-list li:nth-child(even) {
     background-color: #f7f7f7;
 }
+
+
+/* Datepicker */
 
 .datepicker {
     clear: both;
@@ -663,6 +612,21 @@ input[type="number"]::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+
+/* Utilities */
+
+.align-left {
+    float: left;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+.align-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
 }
 
 .clearfix:after {
