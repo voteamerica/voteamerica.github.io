@@ -237,13 +237,9 @@
                                     <label for="showStates-b" class="col-sm-2 control-label check-poll">Check Your Polling Location</label>
 
                                     <div class="col-xs-6 col-sm-4">
-                                        <input type="button" class="btn btn-sm btn-primary show-b" id="showStates-b" value="Show States" />
-                                    </div>
-
-                                    <div id="modal-b" class="overlay-b" >
-                                        <div class="dropdown-content drop-b" id="location-details">
-                                    </div>
-                                    
+                                        <ul id="location-details" class="state-dropdown">
+                                            <li>Loading&hellip;</li>
+                                        </ul>
                                     </div>
                                 </div>
 
@@ -600,13 +596,9 @@
                     <div class="bannerbox__content">
                         <h4>Am I registered?</h4>
                         <p>Select your state check if you're registered to vote on the November 8 presidential election</p>
-                        <input type="button" class="btn btn-sm btn-primary show-a" id="showState-a" value="Show States" />
-                        <div id="modal-a" class="overlay-a">
-                            <div class="dropdown-content drop-a" id="state-details">
-                            </div>
-                        </div>
-                        <br>
-                        <br>
+                        <ul id="state-select" class="state-dropdown drop-a">
+                            <li>Loading&hellip;</li>
+                        </ul>
 
                         <h4>Rock the Vote</h4>
                         <a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv"><img class="align-right" src="res/img/rock.png" /></a>

@@ -76,7 +76,6 @@ a {
     color: white;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset, 0 -3px 0 rgba(0,0,0,0.1) inset;
     text-shadow: 0 1px 1px rgba(0,0,0,0.2);
-    margin: 0 0.5em;
     min-width: 4em;
     font-weight: bold;
     transition: all ease 0.1s;
@@ -311,7 +310,43 @@ iframe.twitter-mention-button {
     margin: 0;
     padding: 0;
     list-style: none;
+    border: 2px solid #ccc;
+    max-width: 300px;
+    max-height: 120px;
+    overflow: auto;
+    box-shadow: 0 -1px 5px rgba(255,255,255,1) inset;
 }
+.state-dropdown::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
+}
+.state-dropdown::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.state-dropdown__item:nth-child(odd) {
+    background: #f7f7f7;
+}
+
+.state-dropdown__item a {
+    color: #333;
+    text-decoration: underline;
+    display: block;
+    padding: 3px 10px;
+    transition: all ease 0.1s;
+}
+.state-dropdown__item a:hover {
+    background-color: #e64a4a;
+    color: white;
+    text-decoration: none;
+}
+
+
+
+
+
+
 .show-state:hover{
     background-color: #337ab7;
     color: #fff;
@@ -328,26 +363,6 @@ iframe.twitter-mention-button {
 .location-dropdown {
     margin: 0;
     padding: 0;
-}
-
-.state-location a {
-    color: #999;
-    text-decoration: none;
-}
-
-.state-location a:hover {
-     color: white;
-}
-
-.state-location {
-    list-style: none;
-    transition: all .25s ease-in-out;
-    text-align: center;
-    cursor: pointer;
-}
-
-.state-location:hover {
-    background-color: #337ab7;
 }
 
 .overlay-a,
