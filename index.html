@@ -69,7 +69,7 @@
                 <img class="logo__img" src="res/img/logo.jpg" alt="CARPOOL VOTE" />
             </a>
 
-            <ul class="nav__links">
+            <ul id="nav-links" class="nav__links">
                 <li class="nav__item nav__story">
                     <a href="#story" class="nav__link">Our Story</a>
                 </li>
@@ -784,6 +784,14 @@
 
     <script>
         $(document).ready(function() {
+            $('#nav-links').on('click', 'a', function(e) {
+                var $anchor = $( $(this).attr('href') );
+                $('html, body').animate({
+                    scrollTop: $anchor.offset().top
+                }, 999);
+                e.preventDefault();
+            });
+
             $('#btnNeedRide').click(function() {
                 $('#pnlIntro').slideUp('fast');
                 $('#pnlOfferRide').slideUp('fast');
