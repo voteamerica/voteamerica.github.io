@@ -82,7 +82,7 @@ a {
 }
 
 
-/* Layout */
+/* Header */
 
 .support-banner {
     margin: 0 0 20px;
@@ -93,8 +93,17 @@ a {
     background-color: #e64a4a;
 }
 
+.support-banner a {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: bold;
+    padding: 0 0.2em;
+}
 
-/* Header */
+.support-banner a:hover {
+    background-color: rgba(0,0,0,0.15);
+    text-decoration: none;
+}
 
 .nav {
     text-align: center;
