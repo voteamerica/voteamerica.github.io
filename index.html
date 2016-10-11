@@ -132,18 +132,18 @@
                     <div class="bannerbox">
                         <h3 class="bannerbox__title">I need a ride</h3>
                         <div class="bannerbox__content">
-                            <fieldset>
+                            <fieldset class="date-time-pickers">
                                 <legend>When and where do you need picking up?</legend>
 
                                 <div class="form-column">
-                                    <div class="form-group date-container date-time-pickers">
+                                    <div class="form-group date-container">
                                         <label for="rider-date">Date available</label>
                                         <input type="text" class="riderdatepicker datepicker" id="rider-date" name="RiderDate" required>
                                     </div>
 
-                                    <div class="form-group date-time-pickers">
+                                    <div class="form-group">
                                         <label for="rider-time-slider">Time range available</label>
-                                        <div id="rider-time-slider"></div>
+                                        <div id="rider-time-slider" class="time-range-slider"></div>
                                     </div>
                                 </div>
 
@@ -975,10 +975,17 @@
             // Must manually set the initial value of the calendar input
             // Needs to be today's date.
             var currDate = new Date();
-            $('.datepicker').attr('value', currDate); // 'Tuesday, Oct 4'
+            $('.datepicker').attr('value', currDate) // 'Tuesday, Oct 4'
+                .on('change',function() {
+                    var $parent = $(this).parents('.date-time-pickers');
+                    $parent.find('.button-date').text($(this).val());
+                });
+
 
             // Initialize time sliders
-            $.each($('.time-range-slider'), function(index, slider) {
+            $('.time-range-slider').each(function(index, slider) {
+                var $parent = $(this).parents('.date-time-pickers');
+
                 noUiSlider.create(slider, {
                     start: [360, 1440],
                     connect: true,
@@ -996,18 +1003,27 @@
                         }
                     }
                 });
+
+                slider.noUiSlider.on('update', function() {
+                    var startTime = formatTime(slider.noUiSlider.get()[0]);
+                    var endTime = formatTime(slider.noUiSlider.get()[1]);
+                    $parent.find('.add-time-btn').children('.button-time').text(startTime + '-' + endTime);
+                });
             });
 
             // Add selected date and time to list of available times on button click
-            $('.add-time-btn').click(function() {
-                var startTime = formatTime($(this).siblings('.time-range-slider')[0].noUiSlider.get()[0]);
-                var endTime = formatTime($(this).siblings('.time-range-slider')[0].noUiSlider.get()[1]);
-                var date = $(this).siblings('.datepicker').val();
+            $('.add-time-btn').on('click',function(e) {
+                var $parent = $(this).parents('.date-time-pickers'),
+                    $slider = $parent.find('.time-range-slider'),
+                    sliderData = $slider[0].noUiSlider.get();
+                var startTime = formatTime(sliderData[0]);
+                var endTime = formatTime(sliderData[1]);
+                var date = $parent.find('.datepicker').val();
                 var timeId = new Date().getTime();
-                $(this).siblings('.available-times-list').append(
+                $parent.find('.available-times-list').append(
                     '<li class="' + timeId + '">' + date + ', ' + startTime + '-' + endTime + ' <button class="remove-time" aria-label="Delete time">&times;</button></li>'
                 );
-                $(this).siblings('.selected-dates').append(
+                $parent.find('.selected-dates').append(
                     '<input type="hidden" ' +
                     'class="' + timeId + '" ' +
                     'name="datetime[]" ' +
@@ -1021,18 +1037,7 @@
                 });
                 changeNeedRideSubmit();
                 changeOfferRideSubmit();
-            });
-
-            $.each($('.time-range-slider'), function(index, slider) {
-                slider.noUiSlider.on('update', function() {
-                    var startTime = formatTime(slider.noUiSlider.get()[0]);
-                    var endTime = formatTime(slider.noUiSlider.get()[1]);
-                    $(slider).siblings('.add-time-btn').children('.button-time').text(startTime + '-' + endTime);
-                });
-            });
-
-            $('.datepicker').change(function() {
-                $(this).siblings('.add-time-btn').children('.button-date').text($(this).val());
+                e.preventDefault();
             });
         }
 
