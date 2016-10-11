@@ -293,9 +293,14 @@ iframe.twitter-mention-button {
 
 /* Forms */
 
+.forms {
+    margin-top: -120px;
+    margin-bottom: 30px;
+    min-height: 120px;
+}
+
 #pnlNeedRide,
 #pnlOfferRide {
-    margin: 30px 0;
     display: none;
 }
 
@@ -514,15 +519,12 @@ label.collection {
 
 /* Main content section */
 
-.about {
-    padding: 15px 0;
-}
-
 .bannerbox {
     margin: 30px 0;
     border-top: 10px solid white;
     border-bottom: 1px solid transparent;
     background-color: white;
+    box-shadow: 0 0 1px rgba(0,0,0,0.2);
 }
 
 .bannerbox__title {
