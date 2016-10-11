@@ -1,5 +1,9 @@
 /* Base */
 
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -64,7 +68,7 @@ a {
 
 .button {
     display: inline-block;
-    padding: 0.4em 1em 0.6em;
+    padding: 0.4em 1em 0.5em;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     border-radius: 5px;
     border: none;
@@ -295,13 +299,68 @@ iframe.twitter-mention-button {
     display: none;
 }
 
-.panel > .panel-heading {
-    background-color: #297bbb;
+.forms .bannerbox__content {
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
-.panel-title {
-    text-transform: uppercase;
-    color: #fff; 
+fieldset {
+    border-color: #ddd;
+    padding: 25px 30px 10px;
+    margin: 10px 0 30px;
+}
+
+legend {
+    padding: 0 6px;
+    margin-left: -6px;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.form-column {
+    width: 50%;
+    padding-right: 2em;
+    float: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 3px;
+    line-height: 1.6;
+}
+
+.form-input {
+    border-radius: 3px;
+    background-color: white;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 8px 12px;
+    font-size: inherit;
+    font-family: inherit;
+    width: 100%;
+    max-width: 500px;
+}
+
+.checkbox label {
+    min-height: 10px;
+    padding-left: 25px;
+    margin-bottom: 0;
+    font-weight: 400;
+    cursor: pointer;
+}
+.checkbox input {
+    margin: 5px 0 0 -25px;
+    position: absolute;
+}
+.checkbox small {
+    display: block;
+    padding-left: 25px;
+    margin-top: 10px;
 }
 
 
@@ -354,10 +413,7 @@ iframe.twitter-mention-button {
 /* Time range slider */
 
 .time-range-slider {
-    margin-bottom: 50px;
-    margin-left: 20px;
-    margin-right: 30px;
-    margin-top: 10px;
+    margin: 10px 30px 50px 20px;
 }
 
 label.collection { 
@@ -435,29 +491,25 @@ label.collection {
 
 /* Datepicker */
 
-.datepicker {
-    clear: both;
-    display: block;
-}
+// .datepicker {
+//     clear: both;
+//     display: block;
+// }
 
-.date-time-pickers label {
-    display: none;
-}
+// .times-list-title {
+//     clear: both;
+//     display: block;
+// }
 
-.times-list-title {
-    clear: both;
-    display: block;
-}
+// input[type="number"]::-webkit-outer-spin-button,
+// input[type="number"]::-webkit-inner-spin-button {
+//   -webkit-appearance: none;
+//   margin: 0;
+// }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-}
+// input[type="number"] {
+//   -moz-appearance: textfield;
+// }
 
 
 /* Main content section */
@@ -593,7 +645,7 @@ input[type="number"] {
         margin: 0 -15px;
     }
 
-    .bannerbox {
+    #grid .bannerbox {
         margin-left: 15px;
         margin-right: 15px;
     }
