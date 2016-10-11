@@ -702,49 +702,38 @@
 
     <script>
         $(document).ready(function() {
-            $('#nav-links').on('click', 'a', function(e) {
-                var $anchor = $( $(this).attr('href') );
+
+            function scrollTo(offset) {
                 $('html, body').animate({
-                    scrollTop: $anchor.offset().top
+                    scrollTop: offset
                 }, 999);
+            }
+
+            $('#nav-links').on('click', 'a', function(e) {
+                var anchor = $(this).attr('href');
+                scrollTo($(anchor).offset().top);
                 e.preventDefault();
             });
 
-            $('#btnNeedRide').click(function(e) {
-                $('#pnlIntro').slideUp('fast');
-                $('#pnlOfferRide').slideUp('fast');
+            $('#btnNeedRide').on('click', function(e) {
+                $('#pnlIntro, #pnlOfferRide').slideUp('fast');
                 $('#pnlNeedRide').slideDown('fast');
                 e.preventDefault();
             });
 
-            $('#btnRiderCancel').click(function(e) {
-                $('#pnlNeedRide').slideUp('fast');
-                $('#pnlOfferRide').slideUp('fast');
-                $('#pnlIntro').slideDown('fast');
-                // Scroll to top of page.
-                $("html, body").animate({
-                    scrollTop: 0
-                }, "slow");
-                e.preventDefault();
-            });
-
-            $('#btnOfferRide').click(function(e) {
-                $('#pnlIntro').slideUp('fast');
-                $('#pnlNeedRide').slideUp('fast');
+            $('#btnOfferRide').on('click', function(e) {
+                $('#pnlIntro, #pnlNeedRide').slideUp('fast');
                 $('#pnlOfferRide').slideDown('fast');
                 e.preventDefault();
             });
 
-            $('#btnOfferCancel').click(function(e) {
-                $('#pnlOfferRide').slideUp('fast');
-                $('#pnlNeedRide').slideUp('fast');
+            $('#btnRiderCancel, #btnOfferCancel').on('click', function(e) {
+                $('#pnlNeedRide, #pnlOfferRide').slideUp('fast');
                 $('#pnlIntro').slideDown('fast');
-                // Scroll to top of page.
-                $("html, body").animate({
-                    scrollTop: 0
-                }, "slow");
+                scrollTo(0);
                 e.preventDefault();
             });
+
 
             initializeCalAndTime();
 
@@ -827,7 +816,7 @@
             });
 
             // Submit Function for needRide (Rider) form.
-            $('form[name="needRide"]').submit(function() {
+            $('form[name="needRide"]').on('submit', function() {
                 document['needRide'].action = "https://api.carpoolvote.com/v1.1/rider";
 
                 // CODE TO SUBMIT THE "NEED A RIDE" FORM.
@@ -839,8 +828,6 @@
                 var availTimeElements = dateTimeDiv.children('.available-times-list').children();
 
                 var availTimesObjectArray = [];
-
-                debugger;
 
                 $.each(availTimeElements, function(index, element) {
                     // TODO: Need to functionalize the version that exists on the driver side.
@@ -882,66 +869,9 @@
         $('#quesDriverOrgRegNumber').hide();
 
         // Handle Change in Different Form Attributes:
-        console.log("Setup change functions for driver.");
-        // Driver Details
-        $('#offerArea').change(function() {
-            changeOfferRideSubmit();
-        }); // Starting ZIP code for Driver Pickups.
+        $('#offerArea, #offerMiles, #driverSeats, #driverWheelchair, #driverFirstName, #driverLastName, #driverEmail, #driverPhone, #officialDriver').on('change', changeOfferRideSubmit);
 
-        $('#offerMiles').change(function() {
-            changeOfferRideSubmit();
-        }); // Radius for Driver
-
-        $('#driverSeats').change(function() {
-            changeOfferRideSubmit();
-        });
-
-        $('#driverWheelchair').change(function() {
-            changeOfferRideSubmit();
-        });
-
-        $('#driverFirstName').change(function() {
-            changeOfferRideSubmit();
-        });
-
-        $('#driverLastName').change(function() {
-            changeOfferRideSubmit();
-        });
-
-        $('#driverEmail').change(function() {
-            changeOfferRideSubmit();
-        });
-
-        $('#driverPhone').change(function() {
-            changeOfferRideSubmit();
-        });
-
-        $('#officialDriver').change(function() {
-            changeOfferRideSubmit();
-        });
-
-        //$('#IsOfficialDriver').change(changeOfferRideSubmit());
-        // $('#offerCity').change(changeOfferRideSubmit());
-
-        // Rider
-        console.log("Setup change functions for rider");
-        // $('#rideCity').change(changeNeedRideSubmit());
-        $('#rideArea').change(function() {
-            changeNeedRideSubmit();
-        });
-        $('#rideState').change(function() {
-            changeNeedRideSubmit();
-        });
-        // $('#rideDestination').change(changeNeedRideSubmit());
-        $('#rideSeats').change(function() {
-            changeNeedRideSubmit();
-        });
-        $('#riderName').change(function() {
-            changeNeedRideSubmit();
-        });
-        $('#ridePhone').change(function() {
-            changeNeedRideSubmit();
-        });
+        $('#rideArea, #rideState, #rideSeats, #riderName, #ridePhone').on('change', changeNeedRideSubmit);
 
         $('.Timestamp').val(new Date());
         $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
