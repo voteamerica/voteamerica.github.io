@@ -20,9 +20,9 @@
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link type="text/css" rel="stylesheet" href="res/jquery.datetimepicker.min.css">
     <link type="text/css" rel="stylesheet" href="res/nouislider.min.css">
-    <link type="text/css" rel="stylesheet" href="res/reset.css">
     <link type="text/css" rel="stylesheet" href="res/styles.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -63,13 +63,13 @@
     </script>
 
     <header class="header">
-        <div class="supportbanner">Need voter support? Call 1-866-OURVOTE</div>
+        <p class="support-banner">Need voter support? Call <a href="tel:18666878683">1-866-OURVOTE</a></p>
         <nav class="nav wrapper">
-            <a href="/" class="logo__link">
-                <img class="logo__img" src="res/img/logo.jpg" alt="CARPOOL VOTE" />
+            <a href="/" class="logo">
+                <img class="logo__img" src="res/img/logo.jpg" alt="Carpool Vote" width=709 height=187 />
             </a>
 
-            <ul class="nav__links">
+            <ul id="nav-links" class="nav__links">
                 <li class="nav__item nav__story">
                     <a href="#story" class="nav__link">Our Story</a>
                 </li>
@@ -83,7 +83,7 @@
             
             <ul class="social">
                 <li role="presentation">
-                    <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Need a ride to vote on election day?CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
+                    <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Need a ride to vote on election day? CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
                     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </li>
                 <li role="presentation">
@@ -94,33 +94,33 @@
     </header>
 
     <div class="content">
-        <div id="pnlIntro" class="main wrapper">
-            <h1 class="title">Every American DESERVES a Vote</h1>
-            <p class="lead">We connect volunteer drivers with anybody who needs a ride to claim their vote.</p>
+        <div id="pnlIntro" class="intro wrapper">
+            <div class="intro__banner">
+                <h1 class="intro__title">Every American DESERVES a Vote</h1>
+                <p class="intro__lead">We connect volunteer drivers with anybody who needs a ride to claim their vote.</p>
+            </div>
 
-            <ul class="ride_options">
-                <li class="needride" id="needride">
-                    <div class="ride__container">
-                        <h3 class="ride__title">Riders</h3>
-                        <p class="ride__text">Need assistance getting to where you need to be in order to vote?</p>
-                        <p class="ride__text">Just fill in this form! We'll try and connect you with someone that can help.</p>
-
-                        <p class="button-container">
-                            <a href="#needride" class="button" role="button" id="btnNeedRide">I need a ride</a>
-                        </p>
+            <ul class="ride">
+                <li class="ride__panel needride" id="needride">
+                    <h3 class="ride__title">Riders</h3>
+                    <div class="ride__copy">
+                        <p>Need assistance getting to where you need to be in order to vote?</p>
+                        <p>Just fill in this form! We'll try and connect you with someone that can help.</p>
                     </div>
-                </li>
-                <li class="offerride" id="offerride">
-                    <div class="ride__container">
-                    <h3 class="ride__title">Drivers</h3>
-                    <p class="ride__text">Driving to vote, and have a spare seat?</p>
-                    <p class="ride__text">Fill in this form and help a fellow citizen exercise their democratic right.</p>
-                    <p class="ride__text">We'll try and connect you with someone that needs a ride in the same direction.</p>
-
-                    <p class="button-container">
-                        <a href="#offerride" class="button button--alt" role="button" id="btnOfferRide">I can offer a ride</a>
+                    <p class="align-center">
+                        <a href="#needride" class="button button--large" role="button" id="btnNeedRide">I need a ride</a>
                     </p>
-                </div>
+                </li>
+                <li class="ride__panel offerride" id="offerride">
+                    <h3 class="ride__title">Drivers</h3>
+                    <div class="ride__copy">
+                        <p>Driving to vote, and have a spare seat? Want to help a fellow citizen exercise their democratic right?</p>
+                        <p>Fill in this form and we'll try and connect you with someone that needs a ride in the same direction.</p>
+                    </div>
+                    <p class="align-center">
+                        <a href="#offerride" class="button button--large button--alt" role="button" id="btnOfferRide">I can offer a ride</a>
+                    </p>
+                </li>
             </ul>
         </div>
 
@@ -153,7 +153,7 @@
 
                                         <h5 class="times-list-title">Available times:</h5>
                                         <button type="button" class="add-time-btn button" id="rider-add-time">
-                                            ➕ Add <span class="button-date" id="rider-button-date"></span>,
+                                            &plus; Add <span class="button-date" id="rider-button-date"></span>,
                                             <span class="button-time" id="rider-button-time">6:00am-10:00pm</span>
                                         </button>
                                         <p>(add as many dates and time ranges as you like)</p>
@@ -237,13 +237,9 @@
                                     <label for="showStates-b" class="col-sm-2 control-label check-poll">Check Your Polling Location</label>
 
                                     <div class="col-xs-6 col-sm-4">
-                                        <input type="button" class="btn btn-sm btn-primary show-b" id="showStates-b" value="Show States" />
-                                    </div>
-
-                                    <div id="modal-b" class="overlay-b" >
-                                        <div class="dropdown-content drop-b" id="location-details">
-                                    </div>
-                                    
+                                        <ul id="location-details" class="state-dropdown">
+                                            <li>Loading&hellip;</li>
+                                        </ul>
                                     </div>
                                 </div>
 
@@ -411,7 +407,7 @@
                                         </div>
 
                                         <button type="button" class="add-time-btn button" id="driver-add-time">
-                                            ➕ Add <span class="button-date" id="driver-button-date"></span>,
+                                            &plus; Add <span class="button-date" id="driver-button-date"></span>,
                                             <span class="button-time" id="driver-button-time">6:00am-10:00pm</span>
                                         </button>
 
@@ -580,13 +576,11 @@
 
         <div class="about wrapper clearfix">
             <div id="grid" class="about__padding" data-columns>
-                <div class="bannerbox" id="#story">
+                <div class="bannerbox" id="story">
                     <h3 class="bannerbox__title">Our Story</h3>
                     <div class="bannerbox__content">
                         <p>Carpool Vote connects volunteer drivers with anybody who needs a ride to claim their vote.</p>
-
                         <p>Many of our riders need a driver after losing full protection of the Voting Rights Act in 2013, as state governments no longer need permission to change election rules. The 2016 US Presidential election will be the first since this change has happened.</p>
-
                         <p>Under the new rules, voters in several states face new barriers to getting to the polls. Some of the obstacles that Carpool Vote aims to reduce include:</p>
                         <ul>
                             <li>Polling stations face closure in lower-income communities of color,</li>
@@ -597,23 +591,19 @@
                         <p>These rules - along with others introduced since the change - affect everybody but especially people of color, people with disabilities, young people, elderly people, and women.</p>
                     </div>
                 </div>
-                <div class="bannerbox" id="#howtoclaim">
+                <div class="bannerbox" id="howtoclaim">
                     <h3 class="bannerbox__title">How to Claim Your Vote</h3>
                     <div class="bannerbox__content">
-                        <p class="state-caption">Am I registered?</p>
+                        <h4>Am I registered?</h4>
+                        <p>Select your state check if you're registered to vote on the November 8 presidential election</p>
+                        <ul id="state-select" class="state-dropdown drop-a">
+                            <li>Loading&hellip;</li>
+                        </ul>
 
-                        <input type="button" class="btn btn-sm btn-primary show-a" id="showState-a" value="Show States" />
-
-                        <div id="modal-a" class="overlay-a">
-                            <div class="dropdown-content drop-a" id="state-details">
-                            </div>
-                        </div>
-
-                        <p class="state-intro">Select your state check if you're registered to vote on the November 8 presidential election</p>
-                        <a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv"><img class="rock-image" src="res/img/rock.png" /></a>
-
-                        <p class="rock-vote-description"><a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv">Rock the Vote</a> has several online tools that simplify and demystify voter registration and elections. Follow the links below for more on how to claim your vote!
-                        <ul class="rock-vote-links">
+                        <h4>Rock the Vote</h4>
+                        <a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv"><img class="align-right" src="res/img/rock.png" /></a>
+                        <p><a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv">Rock the Vote</a> has several online tools that simplify and demystify voter registration and elections. Follow the links below for more on how to claim your vote!
+                        <ul>
                             <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica" target="_rtv">Register to vote!</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/" target="_rtv">Voter requirements</a></li>
                             <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/" target="_rtv">Find where to vote</a></li>
@@ -621,29 +611,20 @@
                         </ul>
                     </div>
                 </div>
-                <div class="bannerbox" id="#righttovote">
+                <div class="bannerbox" id="righttovote">
                     <h3 class="bannerbox__title">Voting support</h3>
                     <div class="bannerbox__content">
-                        <a href="http://www.866ourvote.org/"><img class="election-protection" src="res/img/election-protection.png" /></a>
-
+                        <a href="http://www.866ourvote.org/"><img class="align-right" src="res/img/election-protection.png" /></a>
                         <p>The <a href="http://www.866ourvote.org/">Election Protection Coalition</a> works around the clock to advance and defend your right to vote.</p>
-
                         <p>Report voting problems, and get voting relating info for your state.</p>
                         <p><span class="glyphicon glyphicon glyphicon-hand-up" aria-hidden="true"></span> Visit <a href="http://www.866ourvote.org/"> 866ourvote.org</a></p>
                         <p><span class="glyphicon glyphicon glyphicon-phone" aria-hidden="true"></span> Call <a href="tel:866OURVOTE">866OURVOTE</a></p>
                     </div>
                 </div>
-                <div class="bannerbox" id="#newsletter">
-                    <h3 class="bannerbox__title">Newsletter</h3>
-                    <div class="bannerbox__content">
-                        <p>We continue to make improvements to our platform to make it effective for as many voters as possible. To keep updated with the project, <a href="http://eepurl.com/ccdDlv" target="_blank" class="">sign up for our newsletter</a>.</p>
-                    </div>
-                </div>
-                <div class="bannerbox" id="#support">
+                <div class="bannerbox" id="support">
                     <h3 class="bannerbox__title">Can I help some other way?</h3>
                     <div class="bannerbox__content">
                         <p>Absolutely!</p>
-
                         <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below </p>
                         <!--
                             https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet
@@ -726,9 +707,14 @@
                         </form>
                     </div>
                 </div>
+                <div class="bannerbox" id="newsletter">
+                    <h3 class="bannerbox__title">Newsletter</h3>
+                    <div class="bannerbox__content">
+                        <p>We continue to make improvements to our platform to make it effective for as many voters as possible. To keep updated with the project, <a href="http://eepurl.com/ccdDlv" target="_blank" class="">sign up for our newsletter</a>.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- /row -->
     </div>
 
     <footer class="footer">
@@ -784,13 +770,22 @@
 
     <script>
         $(document).ready(function() {
-            $('#btnNeedRide').click(function() {
+            $('#nav-links').on('click', 'a', function(e) {
+                var $anchor = $( $(this).attr('href') );
+                $('html, body').animate({
+                    scrollTop: $anchor.offset().top
+                }, 999);
+                e.preventDefault();
+            });
+
+            $('#btnNeedRide').click(function(e) {
                 $('#pnlIntro').slideUp('fast');
                 $('#pnlOfferRide').slideUp('fast');
                 $('#pnlNeedRide').slideDown('fast');
+                e.preventDefault();
             });
 
-            $('#btnRiderCancel').click(function() {
+            $('#btnRiderCancel').click(function(e) {
                 $('#pnlNeedRide').slideUp('fast');
                 $('#pnlOfferRide').slideUp('fast');
                 $('#pnlIntro').slideDown('fast');
@@ -798,15 +793,17 @@
                 $("html, body").animate({
                     scrollTop: 0
                 }, "slow");
+                e.preventDefault();
             });
 
-            $('#btnOfferRide').click(function() {
+            $('#btnOfferRide').click(function(e) {
                 $('#pnlIntro').slideUp('fast');
                 $('#pnlNeedRide').slideUp('fast');
                 $('#pnlOfferRide').slideDown('fast');
+                e.preventDefault();
             });
 
-            $('#btnOfferCancel').click(function() {
+            $('#btnOfferCancel').click(function(e) {
                 $('#pnlOfferRide').slideUp('fast');
                 $('#pnlNeedRide').slideUp('fast');
                 $('#pnlIntro').slideDown('fast');
@@ -814,6 +811,7 @@
                 $("html, body").animate({
                     scrollTop: 0
                 }, "slow");
+                e.preventDefault();
             });
 
             initializeCalAndTime();
@@ -1145,7 +1143,7 @@
                 var date = $(this).siblings('.datepicker').val();
                 var timeId = new Date().getTime();
                 $(this).siblings('.available-times-list').append(
-                    '<li class="' + timeId + '">' + date + ', ' + startTime + '-' + endTime + ' <span class="remove-time">remove</span></li>'
+                    '<li class="' + timeId + '">' + date + ', ' + startTime + '-' + endTime + ' <button class="remove-time" aria-label="Delete time">&times;</button></li>'
                 );
                 $(this).siblings('.selected-dates').append(
                     '<input type="hidden" ' +
