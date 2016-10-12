@@ -21,6 +21,12 @@ var helpers = [{
 	}
 }];
 
+function bust(){
+	var timeOffset = 1000 * 60 * 15,
+		bust = Math.round(new Date().getTime() / timeOffset) * timeOffset;
+	return '?' + bust;
+};
+
 function radius(count){
 	var r = 0, zoom = view.getZoom() - 8, mult = zoom > 0 ? zoom : 1;
 	if (count == 0) {
@@ -62,7 +68,7 @@ map = new ol.Map({
 
 riderSrc = new nyc.ol.source.Decorating(
 	{loader: new nyc.ol.source.CsvPointFeatureLoader({
-		url: RIDERS_URL,
+		url: RIDERS_URL + bust(),
 		projection: 'EPSG:4326',
 		xCol: LONGITUDE_COL,
 		yCol: LATITUDE_COL
@@ -80,7 +86,7 @@ riderLyr = new ol.layer.Vector({
 
 driverSrc = new nyc.ol.source.Decorating(
 	{loader: new nyc.ol.source.CsvPointFeatureLoader({
-		url: DRIVERS_URL,
+		url: DRIVERS_URL + bust(),
 		projection: 'EPSG:4326',
 		xCol: LONGITUDE_COL,
 		yCol: LATITUDE_COL
