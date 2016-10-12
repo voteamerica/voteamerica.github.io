@@ -356,6 +356,7 @@ label {
 }
 
 .checkbox label {
+    display: inline-block;
     min-height: 10px;
     padding-left: 25px;
     margin-bottom: 0;
@@ -371,6 +372,29 @@ label {
 .checkbox small {
     padding-left: 25px;
     margin-top: 10px;
+}
+
+.has-error label,
+.has-error .help-block {
+    color: #a94442;
+}
+
+.has-error .form-input {
+    border-color: #a94442;
+    background-color: #fff7f7;
+}
+
+.help-block {
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.help-block ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 
@@ -464,20 +488,19 @@ label.collection {
 .available-times-list {
     list-style: none;
     padding: 0;
+    min-height: 300px;
+    border: 2px solid #ddd;
+    margin-top: 5px;
 }
 
 .available-times-list li {
     padding: 10px 60px 10px 20px;
-    border: 1px solid #eee;
-    border-top: none;
+    border-bottom: 1px solid #ddd;
     position: relative;
 }
 
 .available-times-list li:nth-child(odd) {
     background-color: #f7f7f7;
-}
-.available-times-list li:first-child {
-    border-top: 1px solid #eee;
 }
 
 .remove-time {

@@ -167,7 +167,8 @@
                                 <div class="form-column">
                                     <div class="form-group">
                                         <label for="rideState">State</label>
-                                        <select class="form-input" id="rideState" placeholder="State" name="RiderVotingState" required>
+                                        <select class="form-input" id="rideState" placeholder="State" name="RiderVotingState" required data-error="What state do you live in?">
+                                            <option value="">Select a state</option>
                                             <option value="AL">AL</option>
                                             <option value="AK">AK</option>
                                             <option value="AZ">AZ</option>
@@ -220,14 +221,17 @@
                                             <option value="WI">WI</option>
                                             <option value="WY">WY</option>
                                         </select>
+                                        <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="rideArea">Collection ZIP code</label>
-                                        <input type="number" class="form-input" pattern="(\d{5}?)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
+                                        <input type="text" class="form-input" pattern="(\d{5}?)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required data-error="Please enter the ZIP code where you would prefer to be picked up.">
+                                        <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="rideDestinationZIP">Destination ZIP Code</label>
-                                        <input type="text" class="form-input" id="rideDestinationZip" placeholder="Where you need a ride to" name="RiderDropOffZIP" required>
+                                        <input type="text" class="form-input" id="rideDestinationZip" placeholder="Where you need a ride to" name="RiderDropOffZIP" data-error="Please enter the ZIP code of your local voting station." required>
+                                        <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
 
@@ -248,6 +252,7 @@
                                 <div class="form-group">
                                     <label for="rideSeats">Party Size</label>
                                     <input type="number" class="form-input" id="rideSeats" placeholder="Number of non-wheelchair seats required" name="TotalPartySize" min=0 required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group checkbox">
                                     <label for="riderIsPowerChairUser">
@@ -266,18 +271,22 @@
                                 <div class="form-group">
                                     <label for="riderFirstName">First Name</label>
                                     <input type="text" class="form-input" id="riderFirstName" placeholder="Your first name" name="RiderFirstName" required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="riderLastName">Last Name</label>
                                     <input type="text" class="form-input" id="riderLastName" placeholder="Your last name" name="RiderLastName" required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="riderEmail">Email</label>
                                     <input type="email" class="form-input" id="riderEmail" placeholder="Email" name="RiderEmail" required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="ridePhone">Phone</label>
                                     <input type="tel" class="form-input" id="ridePhone" placeholder="Phone" name="RiderPhone" />
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </fieldset>
 
