@@ -1,0 +1,48 @@
+html, body, #map, #layers {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+#map, #layers {
+	position: fixed;
+	right: 0;
+	bottom: 0;	
+}
+#map {
+	top: 0;
+	left: 0;
+}
+#layers {
+	left: 4px;
+	height: 52px;
+}
+#info {
+	display: none;
+	width: 110px;
+}
+#ctl-z-srch {
+	max-width: 260px
+}
+#layers .ui-checkbox {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+}
+.ui-btn.ui-checkbox-off.ui-checkbox-off:after, .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
+	background-color: #000;
+}
+#layers label div {
+	float: right;
+	width: 15px;
+	height: 15px;
+	border-radius: 15px;
+	margin: 1px 0 0 5px;
+}
+#layers label[for="riders"] div {
+	background-color: rgba(255, 0, 0, 0.5);
+	border: 2px solid rgb(255, 0, 0);
+}
+#layers label[for="drivers"] div {
+	background-color: rgba(0, 0, 255, 0.5);
+	border: 2px solid rgb(0, 0, 255);
+}
