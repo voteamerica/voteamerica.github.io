@@ -32,7 +32,6 @@ function radius(count){
 	if (count == 0) {
 		return r;
 	}
-	console.info(view.getZoom() + "..." + zoom + "..." + mult);
 	for (var i = 0; i < GRADUATED_POINT_COUNTS.length; i++){
 		r = r + POINT_RADIUS_INCREMENT;
 		if (count <= GRADUATED_POINT_COUNTS[i]){
