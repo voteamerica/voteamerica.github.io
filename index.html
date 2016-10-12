@@ -124,7 +124,7 @@
             </ul>
         </div>
 
-        <div class="forms wrapper">
+        <div id="forms" class="forms wrapper">
             <div id="pnlNeedRide">
                 <form name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" data-toggle="validator" role="form">
                     <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
@@ -134,13 +134,13 @@
                         <div class="bannerbox__content">
                             <fieldset class="date-time-pickers">
                                 <legend>When and where do you need picking up?</legend>
+                                <a class="close-form button--cancel" href="#pnlIntro">&times;</a>
 
                                 <div class="form-column">
                                     <div class="form-group date-container">
                                         <label for="rider-date">Date available</label>
                                         <input type="text" class="riderdatepicker datepicker" id="rider-date" name="RiderDate" required>
                                     </div>
-
                                     <div class="form-group">
                                         <label for="rider-time-slider">Time range available</label>
                                         <div id="rider-time-slider" class="time-range-slider"></div>
@@ -229,7 +229,7 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="rideDestinationZIP">Destination ZIP Code</label>
+                                        <label for="rideDestinationZIP">Destination ZIP code</label>
                                         <input type="text" class="form-input" id="rideDestinationZip" placeholder="Where you need a ride to" name="RiderDropOffZIP" data-error="Please enter the ZIP code of your local voting station." required>
                                         <div class="help-block with-errors"></div>
                                     </div>
@@ -237,7 +237,7 @@
 
                                 <div class="form-column">
                                     <div class="form-group">
-                                        <label>Check Your Polling Location</label>
+                                        <label>Check your polling location</label>
                                         <ul id="location-details" class="state-dropdown">
                                             <li>Loading&hellip;</li>
                                         </ul>
@@ -250,7 +250,7 @@
                                 <p>Please let us know how how many people will need to travel together in the <b>same car</b>.</p>
                                 <p>(To make it easier for us to match people, please complete an individual form if you do not need travel with anybody else.)</p>
                                 <div class="form-group">
-                                    <label for="rideSeats">Party Size</label>
+                                    <label for="rideSeats">Party size</label>
                                     <input type="number" class="form-input" id="rideSeats" placeholder="Number of non-wheelchair seats required" name="TotalPartySize" min=0 required>
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -268,23 +268,24 @@
 
                             <fieldset>
                                 <legend>Your details</legend>
+
                                 <div class="form-group">
-                                    <label for="riderFirstName">First Name</label>
+                                    <label for="riderFirstName">First name</label>
                                     <input type="text" class="form-input" id="riderFirstName" placeholder="Your first name" name="RiderFirstName" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="riderLastName">Last Name</label>
+                                    <label for="riderLastName">Last name</label>
                                     <input type="text" class="form-input" id="riderLastName" placeholder="Your last name" name="RiderLastName" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="riderEmail">Email</label>
+                                    <label for="riderEmail">Email address</label>
                                     <input type="email" class="form-input" id="riderEmail" placeholder="Email" name="RiderEmail" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ridePhone">Phone</label>
+                                    <label for="ridePhone">Phone number</label>
                                     <input type="tel" class="form-input" id="ridePhone" placeholder="Phone" name="RiderPhone" />
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -306,14 +307,14 @@
                                 </label>
                             </div>
                             <div class="form-group checkbox">
-                                <label for="PleaseStayInTouch">
-                                    <input type="checkbox" id="PleaseStayInTouch" name="PleaseStayInTouch" checked /> We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.
+                                <label for="inTouchRider">
+                                    <input type="checkbox" id="inTouchRider" name="PleaseStayInTouch" checked /> We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.
                                 </label>
-                                <small>Yes, please stay in Touch!</small>
+                                <small>Yes, please stay in touch!</small>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="button" id="needRideSubmit">Submit</button>
-                                <a id="btnRiderCancel" class="align-right" href="#pnlIntro">Back</a>
+                                <a class="align-right close-form" href="#pnlIntro">Back</a>
                             </div>
                             <p class="panel-footer"><b>What happens next?</b> We'll record these details and contact you if someone can help.</p>
                         </div>
@@ -331,183 +332,122 @@
                     <div class="bannerbox">
                         <h3 class="bannerbox__title">I can offer a ride</h3>
                         <div class="bannerbox__content">
-                            <div class="row">
+                            <a class="close-form button--cancel" href="#pnlIntro">&times;</a>
 
-                                <div class="form-group">
-                                    <div class="col-sm-offset-1 col-sm-10">
-                                        <h2>What you can offer</h2>
+                            <fieldset class="date-time-pickers">
+                                <legend>When and where can you pick someone up?</legend>
+
+                                <div class="form-column">
+                                    <div class="form-group date-container">
+                                        <label for="driver-date">Date available</label>
+                                        <input type="text" class="driverdatepicker datepicker" id="driver-date" name="DriverDate" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="driver-time-slider">Time range available</label>
+                                        <div id="driver-time-slider" class="time-range-slider"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="add-time-btn button" id="driver-add-time">&plus; Add <span class="button-date" id="driver-button-date"></span>, <span class="button-time" id="driver-button-time">6:00am-10:00pm</span></button>
+                                        <small>(Add as many dates and time ranges as you like)</small>
                                     </div>
                                 </div>
 
-                                <div class="date-container col-sm-offset-1 col-sm-10">
-                                    <div class="date-time-pickers form-group">
-                                        <label for="driver-date" class="col-sm-2 control-label">Date available</label>
-                                        <input type="text" class="driverdatepicker datepicker form-control" id="driver-date" name="DriverDate" required>
-                                        <label for="driver-time-slider" class="col-sm-2 control-label">Time range available</label>
-                                        <div id="driver-time-slider" class="time-range-slider">
-                                        </div>
-
-                                        <button type="button" class="add-time-btn button" id="driver-add-time">
-                                            &plus; Add <span class="button-date" id="driver-button-date"></span>,
-                                            <span class="button-time" id="driver-button-time">6:00am-10:00pm</span>
-                                        </button>
-
-                                        <h5 class="times-list-title">Available times:</h5>
-                                        <p>(add as many dates and time ranges as you like)</p>
+                                <div class="form-column">
+                                    <div class="form-group">
+                                        <label>Available times</label>
                                         <ul class="available-times-list" id="driver-available-times">
-
                                         </ul>
-
-                                        <div class="selected-dates">
-
-                                        </div>
-
                                         <input type="hidden" class="hiddenJSONTimes" id="driverJSONTimes" name="AvailableDriveTimesJSON" value="{}">
-
                                     </div>
                                 </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Location and vehicle</legend>
 
                                 <div class="form-group">
-                                    <label for="offerArea" class="col-sm-2 control-label">Collection Zip Code</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" pattern="\d{5}-?(\d{4})?" class="form-control" id="offerArea" placeholder="Where can you collect the rider" name="DriverCollectionZIP">
-                                        <label class="collection">
-                                            I am willing to collect within a
-                                           <input type="number" id="offerMiles" placeholder="0" name="DriverCollectionRadius" pattern="\d*" min="1" step="1" class="miles"  />
-                                            mile radius of this zip code.&nbsp;<span id="error"></span>
-                                        </label>
-                                    </div>
+                                    <label for="rideArea">Collection ZIP code</label>
+                                    <input type="text" class="form-input" pattern="\d{5}-?(\d{4})?" id="offerArea" placeholder="Where you can collect the rider" name="DriverCollectionZIP" required data-error="Please enter the ZIP code where you would prefer to pick someone up.">
+                                    <div class="help-block with-errors"></div>
+                                    <p>I am willing to collect within a <input type="number" id="offerMiles" placeholder="0" name="DriverCollectionRadius" pattern="\d*" min="1" step="1" class="form-input form-input--inline" /> mile radius of this zip code.<p>
                                 </div>
+                                <div class="form-group">
+                                    <label for="driverSeats">Seats</label>
+                                    <input type="number" min="0" class="form-input" id="driverSeats" placeholder="How many seats can you offer?" name="SeatCount" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="form-group checkbox">
+                                    <label for="driverWheelchair">
+                                        <input type="checkbox" name="DriverCanLoadRiderWithWheelchair" id="driverWheelchair"/> I have an adapted van with space for a powerchair
+                                    </label>
+                                </div>
+                                <div class="form-group checkbox">
+                                    <label for="offerInsurance">
+                                        <input type="checkbox" name="DriverHasInsurance" id="offerInsurance"/> I confirm the driver has insurance
+                                    </label>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Your details</legend>
 
                                 <div class="form-group">
-                                    <label for="driverSeats" class="col-sm-2 control-label">Seats</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="driverSeats" placeholder="How many seats can you offer?" name="SeatCount" required>
-                                    </div>
+                                    <label for="driverFirstName">First name</label>
+                                    <input type="text" class="form-input" id="driverFirstName" placeholder="Your first name" name="DriverFirstName" required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="driverWheelchair" class="col-sm-2 control-label">Wheelchair</label>
-                                    <div class="col-sm-9">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="DriverCanLoadRiderWithWheelchair" id="driverWheelchair"/>
-                                                 I have an adapted van with space for a powerchair
-                                            </label>
-                                        </div>
-                                    </div>
+                                    <label for="driverLastName">Last name</label>
+                                    <input type="text" class="form-input" id="driverLastName" placeholder="Your last name" name="DriverLastName" required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="offerInsurance" class="col-sm-2 control-label">Insurance</label>
-                                    <div class="col-sm-9">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="DriverHasInsurance" id="offerInsurance"/>
-                                                I confirm the driver has insurance
-                                            </label>
-                                        </div>
-                                    </div>
+                                    <label for="driverEmail">Email address</label>
+                                    <input type="email" class="form-input" id="driverEmail" placeholder="Email address" name="DriverEmail" required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
-
                                 <div class="form-group">
-                                    <div class="col-sm-offset-1 col-sm-10">
-                                        <h5>Your details</h5>
-                                    </div>
+                                    <label for="driverPhone">Phone number</label>
+                                    <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" />
+                                    <div class="help-block with-errors"></div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="driverLastName" class="col-sm-2 control-label">First Name</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="driverLastName" placeholder="Your first name" name="DriverFirstName" required>
-                                    </div>
+                                    <label for="veh_reg">Vehicle registration number</label>
+                                    <input type="text" class="form-input" id="veh_reg" name="VehicleRegistrationNumber">
                                 </div>
+                            </fieldset>
 
-                                <div class="form-group">
-                                    <label for="driverFirstName" class="col-sm-2 control-label">Last Name</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="driverFirstName" placeholder="Your last (family) name" name="DriverLastName" required>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="driverEmail" class="col-sm-2 control-label">Email</label>
-                                    <div class="col-sm-9">
-                                        <input type="email" class="form-control" id="driverEmail" placeholder="Email Address" name="DriverEmail" required>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="driverPhone" class="col-sm-2 control-label">Phone</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="driverPhone" placeholder="Phone Number" name="DriverPhone">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="veh_reg" class="col-sm-2 control-label">Vehicle Reg&nbsp;#</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="veh_reg" name="VehicleRegistrationNumber">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="officialDriver" name="DrivingOnBehalfOfOrganization" /></div>
-                                    <div class="col-sm-9">
-                                        <label for="officialDriver">
-                                        I am driving in an official capacity on behalf of a registered organization
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group" id="quesDriverOrgRegNumber" style="display:none">
-                                    <label for="officialDriverOrgRegNumber" class="col-sm-2 control-label"> Organization registration number: </label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="officialDriverOrgRegNumber" name="DrivingOBOOrganizationName"> (required if the above box is checked)
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="legalThree" name="RidersCanSeeDriverDetails" /></div>
-                                    <div class="col-sm-9">
-                                        <label for="legalThree">I understand that Carpool Vote will share my contact details with the rider(s) if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="legalFour" name="DriverWillNotTalkPolitics" /></div>
-                                    <div class="col-sm-9">
-                                        <label for="legalFour">I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-offset-1 col-sm-10">
-                                        <h5>Yes, please stay in Touch!</h5>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-2 control-label checkbox"><input type="checkbox" id="PleaseStayInTouch" name="PleaseStayInTouch" checked></div>
-                                    <div class="col-sm-9">
-                                        <label for="inTouchDriver">We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-4">
-                                        <button type="submit" class="btn btn-default" id="offerRideSubmit">Submit</button>
-                                    </div>
-
-                                    <div class="col-sm-offset-4 col-sm-2">
-                                        <a id="btnOfferCancel" class="btn btn-link">Back</a>
-                                    </div>
-                                </div>
+                            <div class="form-group checkbox">
+                                <label for="officialDriver">
+                                    <input type="checkbox" id="officialDriver" name="DrivingOnBehalfOfOrganization" /> I am driving in an official capacity on behalf of a registered organization
+                                </label>
                             </div>
-                        </div>
-
-                        <div class="panel-footer">
-                            <span style="font-weight:bold">What happens next?</span> We'll contact you if there's a match
+                            <div class="form-group" id="quesDriverOrgRegNumber" style="display:none">
+                                <label for="officialDriverOrgRegNumber">Organization registration number</label>
+                                <input type="text" class="form-input" id="officialDriverOrgRegNumber" name="DrivingOBOOrganizationName" data-error="The registration number is required if the above box is checked.">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group checkbox">
+                                <label for="legalThree">
+                                    <input type="checkbox" id="legalThree" name="RidersCanSeeDriverDetails" /> I understand that Carpool Vote will share my contact details with the rider(s) if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
+                                </label>
+                            </div>
+                            <div class="form-group checkbox">
+                                <label for="legalFour">
+                                    <input type="checkbox" id="legalFour" name="DriverWillNotTalkPolitics" /> I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.
+                                </label>
+                            </div>
+                            <div class="form-group checkbox">
+                                <label for="inTouchDriver">
+                                    <input type="checkbox" id="inTouchDriver" name="PleaseStayInTouch" checked /> We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.
+                                </label>
+                                <small>Yes, please stay in touch!</small>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="button" id="offerRideSubmit">Submit</button>
+                                <a class="align-right close-form" href="#pnlIntro">Back</a>
+                            </div>
+                            <p class="panel-footer"><b>What happens next?</b> We'll record these details and contact you if there's a match.</p>
                         </div>
                     </div>
                 </form>
@@ -734,7 +674,7 @@
                 e.preventDefault();
             });
 
-            $('#btnRiderCancel, #btnOfferCancel').on('click', function(e) {
+            $('#forms').on('click', '.close-form', function(e) {
                 $('#pnlNeedRide, #pnlOfferRide').slideUp('fast');
                 $('#pnlIntro').slideDown('fast');
                 scrollTo(0);
@@ -925,7 +865,7 @@
 
                 var hiddenInput = '<input type="hidden" class="' + timeId + '" name="datetime[]" value="' + date + ' ' + startTime + '/' + date + ' ' + endTime + '">';
 
-                $timesList.append('<li class="' + timeId + '">' + niceDate + ', ' + startTime + '—' + endTime + hiddenInput + ' <button class="remove-time" aria-label="Delete time">&times;</button></li>');
+                $timesList.append('<li class="' + timeId + '">' + niceDate + ', ' + startTime + '—' + endTime + hiddenInput + ' <button class="remove-time button--cancel" aria-label="Delete time">&times;</button></li>');
                 e.preventDefault();
             });
         }

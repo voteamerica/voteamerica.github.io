@@ -116,6 +116,22 @@ a {
     background-color: #78c778;
 }
 
+.button--cancel {
+    background: none;
+    border: none;
+    color: crimson;
+    font-weight: bolder;
+    cursor: pointer;
+    padding: 0 5px;
+    font-size: 40px;
+    transition: all ease 0.1s;
+    outline: none;
+    text-decoration: none;
+}
+
+.button--cancel:hover, .button--cancel:focus {
+    transform: scale(1.3);
+}
 
 /* Header */
 
@@ -305,14 +321,22 @@ iframe.twitter-mention-button {
 }
 
 .forms .bannerbox__content {
+    padding-top: 5px;
     padding-left: 30px;
     padding-right: 30px;
+    position: relative;
+}
+
+.button--cancel.close-form {
+    position: absolute;
+    top: -12px;
+    right: 13px;
 }
 
 fieldset {
     border-color: #ddd;
     padding: 25px 30px 10px;
-    margin: 10px 0 30px;
+    margin: 30px 0;
 }
 
 legend {
@@ -349,6 +373,14 @@ label {
     font-family: inherit;
     width: 100%;
     max-width: 500px;
+}
+
+.form-input--inline {
+    width: 80px;
+    display: inline-block;
+    margin: 0 0.5em;
+    text-align: center;
+    padding: 8px;
 }
 
 .form-group small {
@@ -478,8 +510,8 @@ label.collection {
     margin-top: 3px;
 }
 
-#rider-add-time {
-    margin: 15px 0;
+.add-time-btn {
+    margin: 10px 0;
 }
 
 
@@ -507,25 +539,13 @@ label.collection {
     position: absolute;
     right: 20px;
     top: 50%;
-    background: none;
-    border: none;
-    color: crimson;
-    font-weight: bolder;
-    cursor: pointer;
+    opacity: 0.6;
     font-size: 25px;
     margin-top: -14px;
-    padding: 0 5px;
-    transition: all ease 0.1s;
-    opacity: 0.6;
-    outline: none;
 }
 
 .available-times-list li:hover .remove-time {
     opacity: 1;
-}
-
-.remove-time:hover, .remove-time:focus {
-    transform: scale(1.3);
 }
 
 
@@ -597,7 +617,7 @@ label.collection {
 }
 
 .bannerbox__content {
-    padding: 5px 20px 15px;
+    padding: 0 20px 15px;
 }
 
 
