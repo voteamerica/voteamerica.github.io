@@ -145,17 +145,17 @@
                                         <label for="rider-time-slider">Time range available</label>
                                         <div id="rider-time-slider" class="time-range-slider"></div>
                                     </div>
+                                    <div class="form-group">
+                                        <button class="add-time-btn button" id="rider-add-time">&plus; Add <span class="button-date" id="rider-button-date"></span>, <span class="button-time" id="rider-button-time">6:00am-10:00pm</span></button>
+                                        <small>(Add as many dates and time ranges as you like)</small>
+                                    </div>
                                 </div>
 
                                 <div class="form-column">
-                                    <div class="form-group date-time-pickers">
-                                        <label>Available times:</label>
-                                        <button class="add-time-btn button" id="rider-add-time">&plus; Add <span class="button-date" id="rider-button-date"></span>, <span class="button-time" id="rider-button-time">6:00am-10:00pm</span></button>
-                                        <p>(add as many dates and time ranges as you like)</p>
+                                    <div class="form-group">
+                                        <label>Available times</label>
                                         <ul class="available-times-list" id="rider-available-times">
                                         </ul>
-                                        <div class="selected-dates">
-                                        </div>
                                         <input type="hidden" class="hiddenJSONTimes" id="riderJSONTimes" name="AvailableRideTimesJSON" value="{}">
                                     </div>
                                 </div>
@@ -451,7 +451,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" id="quesDriverOrgRegNumber">
+                                <div class="form-group" id="quesDriverOrgRegNumber" style="display:none">
                                     <label for="officialDriverOrgRegNumber" class="col-sm-2 control-label"> Organization registration number: </label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="officialDriverOrgRegNumber" name="DrivingOBOOrganizationName"> (required if the above box is checked)
@@ -695,8 +695,6 @@
 
     <script type="text/javascript" src="res/nouislider.min.js"></script>
 
-    <script type="text/javascript" src="res/wNumb.min.js"></script>
-
     <!-- dropdown for issue #37 - voting registrations per state -->
     <script type="text/javascript" src="dropdown.js"></script>
 
@@ -734,19 +732,13 @@
                 e.preventDefault();
             });
 
-
-            initializeCalAndTime();
+            $('.available-times-list').on('click', '.remove-time', function() {
+                $(this).parent().remove();
+            });
 
             // Submit Function for offerRide (Driver) form.
-            $('form[name="offerRide"]').submit(function() {
+            $('form[name="offerRide"]').on('submit', function() {
                 document['offerRide'].action = "https://api.carpoolvote.com/v1.1/driver";
-
-                // CODE TO SUBMIT THE "OFFER A RIDE" FORM.
-                console.log("Submitting Form For Driver!");
-
-                // var dateTimeDiv = $(this).children('.date-container')
-                //    .children('.date-time-pickers');
-                // var availTimeElements = dateTimeDiv.children('.available-times-list').children();
 
                 var availTimeElements = $('.available-times-list#driver-available-times').children()
 
@@ -762,8 +754,6 @@
                         isoDate.setFullYear(2016); // HACK!!!!  Specific to 2016 Elections!
 
                         var times = splitText[2].split(' ')[0];
-                        //outputDateTime.startTime = times.split('-')[0];
-                        //outputDateTime.endTime = times.split('-')[1];
                         var startTime = times.split('-')[0];
                         var endTime = times.split('-')[1];
                         // Handle am/pm putting the time in the afternoon, if needed.
@@ -779,8 +769,6 @@
                             endHour = endHour + 12;
                         }
                         var endMinute = parseInt(endTime.split(':')[1].replace(/am/gi, '').replace(/pm/gi, ''));
-
-                        // .replace(/am/gi, '').replace(/pm/gi, '')
 
                         var startDateTime = new Date(isoDate); // Both Start and End are on same date.
                         var endDateTime = new Date(isoDate); // Both Start and End are on same date.
@@ -799,7 +787,7 @@
                         console.log("Date Time pair:" + JSON.stringify(outputDateTime));
 
                     } catch (err) {
-                        console.log("Error Caught!" + err);
+                        console.error(err);
                     }
                     availTimesObjectArray.push(outputDateTime);
                 });
@@ -819,9 +807,6 @@
             $('form[name="needRide"]').on('submit', function() {
                 document['needRide'].action = "https://api.carpoolvote.com/v1.1/rider";
 
-                // CODE TO SUBMIT THE "NEED A RIDE" FORM.
-                console.log("Submitting Form For Rider!");
-
                 var dateTimeDiv = $(this).children('.date-container')
                     .children('.date-time-pickers');
 
@@ -833,15 +818,6 @@
                     // TODO: Need to functionalize the version that exists on the driver side.
                     // This needs to do essentially the same work.
                     var outputDateTime = {};
-                    console.log('Index:' + index + ' El:' + element);
-
-                    //  var outputDateTime = {};
-                    //  var splitText = $(element).text().split(', ');
-                    //  outputDateTime.month = splitText[1].split(' ')[0];
-                    //  outputDateTime.day = splitText[1].split(' ')[1];
-                    //  var times = splitText[2].split(' ')[0];
-                    //  outputDateTime.startTime = times.split('-')[0];
-                    //  outputDateTime.endTime = times.split('-')[1];
 
                     outputDateTime.startDttm = $(element);
                     outputDateTime.endDttm = $(element);
@@ -857,111 +833,29 @@
 
             }); // end of submit for needRide
 
-            $('form[name="offerHelp"]').submit(function() {
+            $('form[name="offerHelp"]').on('submit', function() {
                 document['offerHelp'].action = "https://api.carpoolvote.com/v1.1/helper";
-
-                console.log("Submitting Form For Helper!");
-            }); // end of submit for offerHelp
+            });
 
         });
 
-        // Hide question if not needed.
-        $('#quesDriverOrgRegNumber').hide();
-
-        // Handle Change in Different Form Attributes:
-        $('#offerArea, #offerMiles, #driverSeats, #driverWheelchair, #driverFirstName, #driverLastName, #driverEmail, #driverPhone, #officialDriver').on('change', changeOfferRideSubmit);
-
-        $('#rideArea, #rideState, #rideSeats, #riderName, #ridePhone').on('change', changeNeedRideSubmit);
-
-        $('.Timestamp').val(new Date());
         $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
 
-        //var today = new Date().toISOString().slice(0, 10);
-        var now = new Date();
-        var currentDateString = $.format.date(now, "ddd, MMM d");
-        $('#driver-button-date').text(currentDateString);
-        $('#rider-button-date').text(currentDateString);
+        var currentDateString = $.format.date(new Date(), "ddd, MMM d");
+        $('#driver-button-date, #rider-button-date').text(currentDateString);
 
-        $("#offerRideSubmit").prop("disabled", true);
-        $("#offerHelpSubmit").prop("disabled", true);
-        $("#needRideSubmit").prop("disabled", true);
 
-        function changeNeedRideSubmit() {
-            console.log("Rider Form Status Changed! - In changeNeedRideSubmit");
+        // Toggle Official Driver input when checkbox is ticked:
+        $('#officialDriver').on('change', function() {
+            var isOfficialDriver = $(this).is(':checked');
+            $('#quesDriverOrgRegNumber').toggle(isOfficialDriver)
+                .find('#officialDriverOrgRegNumber').prop('required', isOfficialDriver);
+        });
 
-            $("#needRideSubmit").prop("disabled", true); // Mark it Disabled by Default.
-
-            if (
-                // $('#rideCity').val().length > 0 &&
-                $('#rideArea').val().length > 0 &&
-                $('#rideState').val().length > 0 &&
-                // $('#rideDestination').val().length > 0 &&
-                $('#rideSeats').val().length > 0 &&
-                $('#riderIsPowerChairUser').val().length > 0 &&
-                $('#riderFirstName').val().length > 0 &&
-                $('#riderLastName').val().length > 0 &&
-                (
-                    $('#ridePhone').val().length > 0 ||
-                    $('#rideEmail').val().length > 0
-                ) &&
-                // At least one available date/time range has been selected.
-                $('#rider-available-times').children().length
-            ) {
-                $("#needRideSubmit").prop("disabled", false);
-            } else {
-                $("#needRideSubmit").prop("disabled", true);
-            }
-        }
-
-        function changeOfferRideSubmit() {
-            console.log("Driver Form Status Changed! - In changeOfferRideSubmit");
-            $("#offerRideSubmit").prop("disabled", true); // Start off disabled.
-
-            // Show the question if the "Official Driver" box is checked.
-            if ($('#officialDriver').is(':checked')) {
-                // Show div containing   officialDriverOrgRegNumber
-                $('#quesDriverOrgRegNumber').show();
-                // And mark the question as required.
-                $('#officialDriverOrgRegNumber').prop("required", true);
-            } else {
-                $('#quesDriverOrgRegNumber').hide();
-                // And mark the question as NOT required.
-                $('#officialDriverOrgRegNumber').prop("required", false);
-            }
-
-            // Determine whether we can allow the form to be submitted.
-            if (
-                //$('#offerCity').val().length > 0 &&
-                //$('#offerArea').val().length > 0 &&
-                //$('#offerMiles').val().length > 0 &&
-                // $('#offerState').val().length > 0 &&
-                $('#driverSeats').val().length > 0 &&
-                $('#driverFirstName').val().length > 0 &&
-                $('#driverLastName').val().length > 0 &&
-                $('#driverEmail').val().length > 0 // &&
-                // (
-                //    $('#officialDriver').is(':checked') == true ||
-                //    $('#officialDriverOrgRegNumber').val().length > 0
-                //) &&
-                // Checking if the list of appended available times has at least 1 item
-                //$('#driver-available-times').children().length
-            ) {
-                console.log("Enabling Submit Button for Driver")
-                $("#offerRideSubmit").prop("disabled", false);
-            } else {
-                console.log("Disabling Submit Button for Driver")
-                $("#offerRideSubmit").prop("disabled", true);
-            }
-
-            return true;
-        } // end of changeOfferRideSubmit
-
-        function initializeCalAndTime() {
-            // Puts the datepicker and time range slider onto the page
-
+        function initDatePicker($datetime, $datepicker) {
             // Initialize datepickers
             // Max Date = Voting Day 2016!'
-            $('.datepicker').datetimepicker({
+            $datepicker.datetimepicker({
                 timepicker: false,
                 format: 'l, M j',
                 startDate: '2016/10/05',
@@ -975,71 +869,70 @@
             // Must manually set the initial value of the calendar input
             // Needs to be today's date.
             var currDate = new Date();
-            $('.datepicker').attr('value', currDate) // 'Tuesday, Oct 4'
-                .on('change',function() {
-                    var $parent = $(this).parents('.date-time-pickers');
-                    $parent.find('.button-date').text($(this).val());
-                });
+            $datepicker.attr('value', currDate);
 
+            $datepicker.on('change', function() {
+                $datetime.find('.button-date').text($(this).val());
+            });
+        }
 
-            // Initialize time sliders
-            $('.time-range-slider').each(function(index, slider) {
-                var $parent = $(this).parents('.date-time-pickers');
-
-                noUiSlider.create(slider, {
-                    start: [360, 1440],
-                    connect: true,
-                    step: 10,
-                    range: {
-                        'min': [360],
-                        'max': [1320]
-                    },
-                    pips: {
-                        mode: 'values',
-                        density: 2,
-                        values: [480, 720, 960, 1200, ],
-                        format: {
-                            to: formatTime
-                        }
+        function initTimeSlider($datetime, slider) {
+            noUiSlider.create(slider, {
+                start: [360, 1440],
+                connect: true,
+                step: 10,
+                range: {
+                    'min': [360],
+                    'max': [1320]
+                },
+                pips: {
+                    mode: 'values',
+                    density: 2,
+                    values: [480, 720, 960, 1200, ],
+                    format: {
+                        to: formatTime
                     }
-                });
-
-                slider.noUiSlider.on('update', function() {
-                    var startTime = formatTime(slider.noUiSlider.get()[0]);
-                    var endTime = formatTime(slider.noUiSlider.get()[1]);
-                    $parent.find('.add-time-btn').children('.button-time').text(startTime + '-' + endTime);
-                });
+                }
             });
 
-            // Add selected date and time to list of available times on button click
-            $('.add-time-btn').on('click',function(e) {
-                var $parent = $(this).parents('.date-time-pickers'),
-                    $slider = $parent.find('.time-range-slider'),
-                    sliderData = $slider[0].noUiSlider.get();
+            slider.noUiSlider.on('update', function() {
+                var sliderData = slider.noUiSlider.get();
                 var startTime = formatTime(sliderData[0]);
                 var endTime = formatTime(sliderData[1]);
-                var date = $parent.find('.datepicker').val();
-                var timeId = new Date().getTime();
-                $parent.find('.available-times-list').append(
-                    '<li class="' + timeId + '">' + date + ', ' + startTime + '-' + endTime + ' <button class="remove-time" aria-label="Delete time">&times;</button></li>'
-                );
-                $parent.find('.selected-dates').append(
-                    '<input type="hidden" ' +
-                    'class="' + timeId + '" ' +
-                    'name="datetime[]" ' +
-                    'value="' + date + ' ' + startTime + '/' + date + ' ' + endTime + '">'
-                );
-                $('.remove-time').click(function() {
-                    var removeId = $(this).closest('li').attr('class');
-                    $('.' + removeId).remove();
-                    changeNeedRideSubmit();
-                    changeOfferRideSubmit();
-                });
-                changeNeedRideSubmit();
-                changeOfferRideSubmit();
+                $datetime.find('.add-time-btn')
+                    .children('.button-time')
+                    .text(startTime + '-' + endTime);
+            });
+        }
+
+        function addTimeBtnListener($datetime, $slider, $timesList, $datepicker) {
+            $datetime.on('click', '.add-time-btn', function(e) {
+                var sliderData = $slider[0].noUiSlider.get(),
+                    startTime = formatTime(sliderData[0]),
+                    endTime = formatTime(sliderData[1]),
+                    date = $datepicker.val(),
+                    niceDate = $.format.date(date, "ddd D MMMM"),
+                    timeId = new Date().getTime();
+
+                var hiddenInput = '<input type="hidden" class="' + timeId + '" name="datetime[]" value="' + date + ' ' + startTime + '/' + date + ' ' + endTime + '">';
+
+                $timesList.append('<li class="' + timeId + '">' + niceDate + ', ' + startTime + '—' + endTime + hiddenInput + ' <button class="remove-time" aria-label="Delete time">&times;</button></li>');
                 e.preventDefault();
             });
         }
+
+        $('.date-time-pickers').each(function() {
+            // Add selected date and time to list of available times on button click
+            var $slider = $(this).find('.time-range-slider'),
+                $timesList = $(this).find('.available-times-list'),
+                $datepicker = $(this).find('.datepicker');
+
+            initDatePicker($(this), $datepicker);
+
+            initTimeSlider($(this), $slider.get(0));
+            
+            addTimeBtnListener($(this), $slider, $timesList, $datepicker);
+        });
 
         // The sliders work with the day in terms of minutes, this function translates the minutes
         // into readable format i.e. 4:34pm

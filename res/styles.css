@@ -351,6 +351,10 @@ label {
     max-width: 500px;
 }
 
+.form-group small {
+    display: block;
+}
+
 .checkbox label {
     min-height: 10px;
     padding-left: 25px;
@@ -358,12 +362,13 @@ label {
     font-weight: 400;
     cursor: pointer;
 }
+
 .checkbox input {
     margin: 5px 0 0 -25px;
     position: absolute;
 }
+
 .checkbox small {
-    display: block;
     padding-left: 25px;
     margin-top: 10px;
 }
@@ -434,6 +439,10 @@ label.collection {
     border-radius: 4px;
 }
 
+.noUi-connect {
+    background-color: #297bbb;
+}
+
 .noUi-pips-horizontal {
     padding-bottom: 0;
     padding-top: 47px;
@@ -458,9 +467,10 @@ label.collection {
 }
 
 .available-times-list li {
-    padding: 10px 20px;
+    padding: 10px 60px 10px 20px;
     border: 1px solid #eee;
     border-top: none;
+    position: relative;
 }
 
 .available-times-list li:nth-child(odd) {
@@ -471,14 +481,16 @@ label.collection {
 }
 
 .remove-time {
-    float: right;
+    position: absolute;
+    right: 20px;
+    top: 50%;
     background: none;
     border: none;
     color: crimson;
     font-weight: bolder;
     cursor: pointer;
     font-size: 25px;
-    margin-top: -5px;
+    margin-top: -14px;
     padding: 0 5px;
     transition: all ease 0.1s;
     opacity: 0.6;
