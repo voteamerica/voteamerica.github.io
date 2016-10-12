@@ -64,7 +64,6 @@ map = new ol.Map({
 	view: view
 });
 
-
 riderSrc = new nyc.ol.source.Decorating(
 	{loader: new nyc.ol.source.CsvPointFeatureLoader({
 		url: RIDERS_URL + bust(),
