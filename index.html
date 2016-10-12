@@ -770,6 +770,8 @@
 
     <script>
         $(document).ready(function() {
+            var formSubmitPath = "https://api.carpoolvote.com/v1.1/";
+
             $('#nav-links').on('click', 'a', function(e) {
                 var $anchor = $( $(this).attr('href') );
                 $('html, body').animate({
@@ -818,7 +820,7 @@
 
             // Submit Function for offerRide (Driver) form.
             $('form[name="offerRide"]').submit(function() {
-                document['offerRide'].action = "https://api.carpoolvote.com/v1.1/driver";
+                document['offerRide'].action = formSubmitPath + "driver";
 
                 // CODE TO SUBMIT THE "OFFER A RIDE" FORM.
                 console.log("Submitting Form For Driver!");
@@ -896,7 +898,7 @@
 
             // Submit Function for needRide (Rider) form.
             $('form[name="needRide"]').submit(function() {
-                document['needRide'].action = "https://api.carpoolvote.com/v1.1/rider";
+                document['needRide'].action = formSubmitPath + "rider";
 
                 // CODE TO SUBMIT THE "NEED A RIDE" FORM.
                 console.log("Submitting Form For Rider!");
@@ -939,7 +941,7 @@
             }); // end of submit for needRide
 
             $('form[name="offerHelp"]').submit(function() {
-                document['offerHelp'].action = "https://api.carpoolvote.com/v1.1/helper";
+                document['offerHelp'].action = formSubmitPath + "helper";
 
                 console.log("Submitting Form For Helper!");
             }); // end of submit for offerHelp
