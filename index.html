@@ -663,7 +663,7 @@
 
             // Submit Function for offerRide (Driver) form.
             $('form[name="offerRide"]').on('submit', function() {
-                document['offerRide'].action = "https://api.carpoolvote.com/v1.1/driver";
+                // document['offerRide'].action = "https://api.carpoolvote.com/v1.1/driver";
                 document['offerRide'].action = formSubmitPath + "driver";
 
                 var availTimeElements = $('.available-times-list#driver-available-times').children()
@@ -731,7 +731,7 @@
 
             // Submit Function for needRide (Rider) form.
             $('form[name="needRide"]').on('submit', function() {
-                document['needRide'].action = "https://api.carpoolvote.com/v1.1/rider";
+                // document['needRide'].action = "https://api.carpoolvote.com/v1.1/rider";
                 document['needRide'].action = formSubmitPath + "rider";
 
                 var dateTimeDiv = $(this).children('.date-container')
@@ -761,7 +761,7 @@
             }); // end of submit for needRide
 
             $('form[name="offerHelp"]').on('submit', function() {
-                document['offerHelp'].action = "https://api.carpoolvote.com/v1.1/helper";
+                // document['offerHelp'].action = "https://api.carpoolvote.com/v1.1/helper";
                 document['offerHelp'].action = formSubmitPath + "helper";
             });
         });
