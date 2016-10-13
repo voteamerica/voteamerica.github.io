@@ -1,5 +1,9 @@
 /* Base */
 
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -59,12 +63,20 @@ a {
     color: #e64a4a;
 }
 
+ul, ol {
+    padding-left: 1.6em;
+}
+
+li {
+    margin: 0.4em 0;
+}
 
 /* Buttons */
 
 .button {
     display: inline-block;
-    padding: 0.4em 1em 0.6em;
+    font-size: 1em;
+    padding: 0.4em 1em 0.5em;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     border-radius: 5px;
     border: none;
@@ -99,9 +111,7 @@ a {
 
 .button--large {
     font-size: 1.2em;
-    min-width: 65%;
-    padding: 0.5em 2em 0.6em;
-    text-transform: uppercase;
+    padding: 0.5em 1.5em 0.6em;
 }
 
 .button--alt {
@@ -112,6 +122,22 @@ a {
     background-color: #78c778;
 }
 
+.button--cancel {
+    background: none;
+    border: none;
+    color: crimson;
+    font-weight: bolder;
+    cursor: pointer;
+    padding: 0 5px;
+    font-size: 40px;
+    transition: all ease 0.1s;
+    outline: none;
+    text-decoration: none;
+}
+
+.button--cancel:hover, .button--cancel:focus {
+    transform: scale(1.3);
+}
 
 /* Header */
 
@@ -286,22 +312,136 @@ iframe.twitter-mention-button {
     min-height: 100px;
 }
 
+.ride__panel .button {
+    min-width: 65%;
+    text-transform: uppercase;
+}
+
 
 /* Forms */
 
+.forms {
+    margin-top: -120px;
+    margin-bottom: 30px;
+    min-height: 120px;
+}
+
 #pnlNeedRide,
 #pnlOfferRide {
-    margin: 30px 0;
     display: none;
 }
 
-.panel > .panel-heading {
-    background-color: #297bbb;
+.forms .bannerbox__content {
+    padding-top: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    position: relative;
 }
 
-.panel-title {
-    text-transform: uppercase;
-    color: #fff; 
+.button--cancel.close-form {
+    position: absolute;
+    top: -12px;
+    right: 13px;
+}
+
+fieldset {
+    border-color: #ddd;
+    padding: 25px 30px 10px;
+    margin: 30px 0;
+}
+
+legend {
+    padding: 0 6px;
+    margin-left: -6px;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.form-column {
+    width: 50%;
+    padding-right: 2em;
+    float: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 3px;
+    line-height: 1.6;
+}
+
+.form-input {
+    border-radius: 3px;
+    background-color: white;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 8px 12px;
+    font-size: inherit;
+    font-family: inherit;
+    width: 100%;
+    max-width: 500px;
+}
+
+.form-input--inline {
+    width: 80px;
+    display: inline-block;
+    margin: 0 0.5em;
+    text-align: center;
+    padding: 8px;
+}
+
+.form-group small {
+    display: block;
+}
+
+.checkbox label {
+    display: inline-block;
+    min-height: 10px;
+    padding-left: 25px;
+    margin-bottom: 0;
+    font-weight: 400;
+    cursor: pointer;
+}
+.checkbox--multi label {
+    display: block;
+    margin: 5px 0;
+}
+
+.checkbox input {
+    margin: 5px 0 0 -25px;
+    position: absolute;
+}
+
+.checkbox small {
+    padding-left: 25px;
+    margin-top: 10px;
+}
+
+.has-error label,
+.has-error .help-block {
+    color: #a94442;
+}
+
+.has-error .form-input {
+    border-color: #a94442;
+    background-color: #fff7f7;
+}
+
+.help-block {
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.help-block ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 
@@ -332,6 +472,9 @@ iframe.twitter-mention-button {
     min-height: 25px;
 }
 
+.state-dropdown__item {
+    margin: 0;
+}
 .state-dropdown__item:nth-child(odd) {
     background: #f7f7f7;
 }
@@ -354,23 +497,11 @@ iframe.twitter-mention-button {
 /* Time range slider */
 
 .time-range-slider {
-    margin-bottom: 50px;
-    margin-left: 20px;
-    margin-right: 30px;
-    margin-top: 10px;
+    margin: 10px 16px 50px 16px;
 }
 
-label.collection { 
-    font-weight: 400;
-    padding: 5px; 
-}
-
-.miles {
-    width: 50px;
-    padding: 4px;
-    border: none;
-    border: 1px solid lightgrey;
-    border-radius: 4px;
+.noUi-connect {
+    background-color: #297bbb;
 }
 
 .noUi-pips-horizontal {
@@ -381,11 +512,12 @@ label.collection {
 }
 
 .noUi-value-horizontal {
-    margin-top: 3px;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-#rider-add-time {
-    margin: 15px 0;
+.add-time-btn {
+    margin: 10px 0;
 }
 
 
@@ -394,83 +526,44 @@ label.collection {
 .available-times-list {
     list-style: none;
     padding: 0;
+    min-height: 300px;
+    border: 2px solid #ddd;
+    margin-top: 5px;
 }
 
 .available-times-list li {
-    padding: 10px 20px;
-    border: 1px solid #eee;
-    border-top: none;
+    margin: 0;
+    padding: 10px 60px 10px 20px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
 }
 
 .available-times-list li:nth-child(odd) {
     background-color: #f7f7f7;
 }
-.available-times-list li:first-child {
-    border-top: 1px solid #eee;
-}
 
 .remove-time {
-    float: right;
-    background: none;
-    border: none;
-    color: crimson;
-    font-weight: bolder;
-    cursor: pointer;
-    font-size: 25px;
-    margin-top: -5px;
-    padding: 0 5px;
-    transition: all ease 0.1s;
+    position: absolute;
+    right: 20px;
+    top: 50%;
     opacity: 0.6;
-    outline: none;
+    font-size: 25px;
+    margin-top: -14px;
 }
 
 .available-times-list li:hover .remove-time {
     opacity: 1;
 }
 
-.remove-time:hover, .remove-time:focus {
-    transform: scale(1.3);
-}
-
-
-/* Datepicker */
-
-.datepicker {
-    clear: both;
-    display: block;
-}
-
-.date-time-pickers label {
-    display: none;
-}
-
-.times-list-title {
-    clear: both;
-    display: block;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
 
 /* Main content section */
-
-.about {
-    padding: 15px 0;
-}
 
 .bannerbox {
     margin: 30px 0;
     border-top: 10px solid white;
     border-bottom: 1px solid transparent;
     background-color: white;
+    box-shadow: 0 0 1px rgba(0,0,0,0.2);
 }
 
 .bannerbox__title {
@@ -508,7 +601,7 @@ input[type="number"] {
 }
 
 .bannerbox__content {
-    padding: 5px 20px 15px;
+    padding: 0 20px 15px;
 }
 
 
@@ -593,7 +686,7 @@ input[type="number"] {
         margin: 0 -15px;
     }
 
-    .bannerbox {
+    #grid .bannerbox {
         margin-left: 15px;
         margin-right: 15px;
     }
