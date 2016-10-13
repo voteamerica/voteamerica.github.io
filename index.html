@@ -850,9 +850,8 @@
                 var endDateTime = niceDateYear + ' ' + endTime;                    
 
                 var ndt = $.format.date(date, "dd MMMM yyyy");
-
                 var sdt = moment(ndt);
-                // sdt = moment(startDateTime).toISOString();
+                var edt = moment(ndt);
 
                 var st = formatTime2(sliderData[0]);
 
@@ -863,8 +862,19 @@
                     sdt = sdt.add(12, 'h');                    
                 }
 
-                var isoT = moment().toISOString();
-                isoT = sdt.toISOString();
+                var isoStart = sdt.toISOString();
+
+                var et = formatTime2(sliderData[1]);
+
+                edt = edt.add(et.mins, 'm');
+                edt = edt.add(et.hour, 'h');
+
+                if (et.am === false) {
+                    edt = edt.add(12, 'h');                    
+                }
+
+                var isoEnd = edt.toISOString();
+
 
 // 2016-10-01T08:00:00-0500/2016-10-01T10:00:00-0500
 
@@ -873,8 +883,8 @@
                             timeId + 
                             '" name="datetime[]" value="' + date + ' ' + 
                             startTime + '/' + date + ' ' + endTime + '" ' +
-                            'data-start="' + startDateTime + '" ' +
-                            'data-end="' + endDateTime + '" ' +
+                            'data-start="' + isoStart + '" ' +
+                            'data-end="' + isoEnd + '" ' +
                             '>';
 
                 $timesList.append('<li class="' + timeId + '">' + niceDate + ', ' + startTime + '—' + endTime + hiddenInput + ' <button class="remove-time button--cancel" aria-label="Delete time">&times;</button></li>');
