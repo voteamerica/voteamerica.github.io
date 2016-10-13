@@ -84,12 +84,16 @@
             </ul>
             
             <ul class="social">
-                <li role="presentation">
+                <li role="presentation" class="social__twitter">
                     <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Need a ride to vote on election day? CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
                     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="social__facebook">
                     <div class="fb-share-button" data-href="http://carpoolvote.com?v=1" data-layout="button"></div>
+                </li>
+                <li role="presentation" class="social__youtube">
+                    <script src="https://apis.google.com/js/platform.js"></script>
+                    <div class="g-ytsubscribe" data-channelid="UCY1aS3TMDGxVbckA7Va0QFA" data-layout="default" data-count="hidden"></div>
                 </li>
             </ul>
         </nav>
@@ -169,64 +173,6 @@
 
                                 <div class="form-column">
                                     <div class="form-group">
-                                        <label for="rideState">State</label>
-                                        <select class="form-input" id="rideState" placeholder="State" name="RiderVotingState" required data-error="What state do you live in?">
-                                            <option value="">Select a state</option>
-                                            <option value="AL">AL</option>
-                                            <option value="AK">AK</option>
-                                            <option value="AZ">AZ</option>
-                                            <option value="AR">AR</option>
-                                            <option value="CA">CA</option>
-                                            <option value="CO">CO</option>
-                                            <option value="CT">CT</option>
-                                            <option value="DE">DE</option>
-                                            <option value="DC">DC</option>
-                                            <option value="FL">FL</option>
-                                            <option value="GA">GA</option>
-                                            <option value="HI">HI</option>
-                                            <option value="ID">ID</option>
-                                            <option value="IL">IL</option>
-                                            <option value="IN">IN</option>
-                                            <option value="IA">IA</option>
-                                            <option value="KS">KS</option>
-                                            <option value="KY">KY</option>
-                                            <option value="LA">LA</option>
-                                            <option value="ME">ME</option>
-                                            <option value="MD">MD</option>
-                                            <option value="MA">MA</option>
-                                            <option value="MI">MI</option>
-                                            <option value="MN">MN</option>
-                                            <option value="MS">MS</option>
-                                            <option value="MO">MO</option>
-                                            <option value="MT">MT</option>
-                                            <option value="NE">NE</option>
-                                            <option value="NV">NV</option>
-                                            <option value="NH">NH</option>
-                                            <option value="NJ">NJ</option>
-                                            <option value="NM">NM</option>
-                                            <option value="NY">NY</option>
-                                            <option value="NC">NC</option>
-                                            <option value="ND">ND</option>
-                                            <option value="OH">OH</option>
-                                            <option value="OK">OK</option>
-                                            <option value="OR">OR</option>
-                                            <option value="PA">PA</option>
-                                            <option value="RI">RI</option>
-                                            <option value="SC">SC</option>
-                                            <option value="SD">SD</option>
-                                            <option value="TN">TN</option>
-                                            <option value="TX">TX</option>
-                                            <option value="UT">UT</option>
-                                            <option value="VT">VT</option>
-                                            <option value="VA">VA</option>
-                                            <option value="WA">WA</option>
-                                            <option value="WV">WV</option>
-                                            <option value="WI">WI</option>
-                                            <option value="WY">WY</option>
-                                        </select>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="rideArea">Collection ZIP code</label>
                                         <input type="text" class="form-input" pattern="(\d{5}?)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required data-error="Please enter the ZIP code where you would prefer to be picked up.">
                                         <div class="help-block with-errors"></div>
@@ -267,6 +213,10 @@
                                         <input type="checkbox" name="TwoWayTripNeeded" id="rideReturn" /> I need a two-way trip.
                                     </label>
                                 </div>
+                                <div class="form-group">
+                                    <label for="riderNotes">Notes</label>
+                                    <textarea class="form-input" id="riderNotes" placeholder="Accommodation requirements e.g. service animal, assistance folding equipment, assistance entering/exiting the vehicle, etc." name="riderNotes" rows="4"></textarea>
+                                </div>
                             </fieldset>
 
                             <fieldset>
@@ -289,7 +239,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="ridePhone">Phone number</label>
-                                    <input type="tel" class="form-input" id="ridePhone" placeholder="Phone" name="RiderPhone" />
+                                    <input type="tel" class="form-input" id="ridePhone" placeholder="Phone" name="RiderPhone" required />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </fieldset>
@@ -302,6 +252,11 @@
                             <div class="form-group checkbox">
                                 <label for="RiderLegalConsent">
                                     <input type="checkbox" id="RiderLegalConsent" name="RiderLegalConsent" /> I understand that Carpool Vote will share my contact details with the driver if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
+                                </label>
+                            </div>
+                            <div class="form-group checkbox">
+                                <label for="RiderWillBeSafe">
+                                    <input type="checkbox" id="RiderWillBeSafe" name="RiderWillBeSafe" /> I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.
                                 </label>
                             </div>
                             <div class="form-group checkbox">
@@ -389,6 +344,10 @@
                                         <input type="checkbox" name="DriverHasInsurance" id="offerInsurance"/> I confirm the driver has insurance
                                     </label>
                                 </div>
+                                <div class="form-group">
+                                    <label for="driverLicence">Driver's license number</label>
+                                    <input type="text" class="form-input" id="driverLicence" name="DriverLicenceNumber">
+                                </div>
                             </fieldset>
 
                             <fieldset>
@@ -414,10 +373,6 @@
                                     <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" />
                                     <div class="help-block with-errors"></div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="veh_reg">Vehicle registration number</label>
-                                    <input type="text" class="form-input" id="veh_reg" name="VehicleRegistrationNumber">
-                                </div>
                             </fieldset>
 
                             <div class="form-group checkbox">
@@ -425,9 +380,9 @@
                                     <input type="checkbox" id="officialDriver" name="DrivingOnBehalfOfOrganization" /> I am driving in an official capacity on behalf of a registered organization
                                 </label>
                             </div>
-                            <div class="form-group" id="quesDriverOrgRegNumber" style="display:none">
-                                <label for="officialDriverOrgRegNumber">Organization registration number</label>
-                                <input type="text" class="form-input" id="officialDriverOrgRegNumber" name="DrivingOBOOrganizationName" data-error="The registration number is required if the above box is checked.">
+                            <div class="form-group" id="quesDriverOrgName" style="display:none">
+                                <label for="officialDriverOrgName">Organization name</label>
+                                <input type="text" class="form-input" id="officialDriverOrgName" name="DrivingOBOOrganizationName" data-error="The organisation name is required if the above box is checked.">
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
@@ -437,7 +392,12 @@
                             </div>
                             <div class="form-group checkbox">
                                 <label for="legalFour">
-                                    <input type="checkbox" id="legalFour" name="DriverWillNotTalkPolitics" /> I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.
+                                    <input type="checkbox" id="legalFour" name="DriverWillTakeCare" /> I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up for a ride and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.
+                                </label>
+                            </div>
+                            <div class="form-group checkbox">
+                                <label for="legalFive">
+                                    <input type="checkbox" id="legalFive" name="DriverWillNotTalkPolitics" /> I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.
                                 </label>
                             </div>
                             <div class="form-group checkbox">
@@ -563,10 +523,12 @@
                         </form>
                     </div>
                 </div>
-                <div class="bannerbox" id="newsletter">
-                    <h3 class="bannerbox__title">Newsletter</h3>
+                <div class="bannerbox" id="countdown">
+                    <h3 class="bannerbox__title">2016 Election Countdown Clock</h3>
                     <div class="bannerbox__content">
-                        <p>We continue to make improvements to our platform to make it effective for as many voters as possible. To keep updated with the project, <a href="http://eepurl.com/ccdDlv" target="_blank" class="">sign up for our newsletter</a>.</p>
+                        <iframe src="http://www.270towin.com/2016-countdown-clock/widget300x200.php" width="300" height="200" border="0" frameBorder="0">
+                            Browser not supported. Visit <a href="http://www.270towin.com/">www.270towin.com</a>
+                        </iframe>
                     </div>
                 </div>
             </div>
@@ -793,8 +755,8 @@
         // Toggle Official Driver input when checkbox is ticked:
         $('#officialDriver').on('change', function() {
             var isOfficialDriver = $(this).is(':checked');
-            $('#quesDriverOrgRegNumber').toggle(isOfficialDriver)
-                .find('#officialDriverOrgRegNumber').prop('required', isOfficialDriver);
+            $('#quesDriverOrgName').toggle(isOfficialDriver)
+                .find('#officialDriverOrgName').prop('required', isOfficialDriver);
         });
 
         function initDatePicker($datetime, $datepicker) {
