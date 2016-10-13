@@ -63,6 +63,13 @@ a {
     color: #e64a4a;
 }
 
+ul, ol {
+    padding-left: 1.6em;
+}
+
+li {
+    margin: 0.4em 0;
+}
 
 /* Buttons */
 
@@ -461,6 +468,9 @@ label {
     min-height: 25px;
 }
 
+.state-dropdown__item {
+    margin: 0;
+}
 .state-dropdown__item:nth-child(odd) {
     background: #f7f7f7;
 }
@@ -530,6 +540,7 @@ label.collection {
 }
 
 .available-times-list li {
+    margin: 0;
     padding: 10px 60px 10px 20px;
     border-bottom: 1px solid #ddd;
     position: relative;
