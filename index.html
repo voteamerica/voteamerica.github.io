@@ -25,6 +25,8 @@
     <link type="text/css" rel="stylesheet" href="res/nouislider.min.css">
     <link type="text/css" rel="stylesheet" href="res/styles.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -126,7 +128,8 @@
 
         <div id="forms" class="forms wrapper">
             <div id="pnlNeedRide">
-                <form name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" data-toggle="validator" role="form">
+                <!--<form name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" data-toggle="validator" role="form">-->
+                <form name="needRide" action="localhost:8000/rider" method="post" data-toggle="validator" role="form">
                     <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
                     <input type="hidden" name="hiddenJSONTimes" value="" />
                     <div class="bannerbox">
@@ -325,7 +328,7 @@
 
             <!-- http://40.117.45.210/driver/ -->
             <div id="pnlOfferRide">
-                <form name="offerRide" action="localhost:8000/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                <form name="offerRide" action="http://localhost:8000/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">
                     <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
                     <input type="hidden" name="hiddenJSONTimes" value="" />
 
@@ -622,7 +625,7 @@
     <script>
         $(document).ready(function() {
             // var formSubmitPath = "https://api.carpoolvote.com/v1.1/";
-            var formSubmitPath = "locahost:8000/";
+            var formSubmitPath = "http://localhost:8000/";
 
             function scrollTo(offset, speed) {
                 $('html, body').animate({
@@ -834,14 +837,45 @@
 
         function addTimeBtnListener($datetime, $slider, $timesList, $datepicker) {
             $datetime.on('click', '.add-time-btn', function(e) {
-                var sliderData = $slider[0].noUiSlider.get(),
-                    startTime = formatTime(sliderData[0]),
-                    endTime = formatTime(sliderData[1]),
-                    date = $datepicker.val(),
-                    niceDate = $.format.date(date, "ddd D MMMM"),
-                    timeId = new Date().getTime();
+                var sliderData = $slider[0].noUiSlider.get();
+                var startTime = formatTime(sliderData[0]);
+                var endTime = formatTime(sliderData[1]);
 
-                var hiddenInput = '<input type="hidden" class="' + timeId + '" name="datetime[]" value="' + date + ' ' + startTime + '/' + date + ' ' + endTime + '">';
+                var date = $datepicker.val();
+                var niceDate = $.format.date(date, "ddd D MMMM");
+                var timeId = new Date().getTime();
+
+                var niceDateYear = $.format.date(date, "ddd D MMMM yyyy");
+                var startDateTime = niceDateYear + ' ' + startTime;                    
+                var endDateTime = niceDateYear + ' ' + endTime;                    
+
+                var ndt = $.format.date(date, "dd MMMM yyyy");
+
+                var sdt = moment(ndt);
+                // sdt = moment(startDateTime).toISOString();
+
+                var st = formatTime2(sliderData[0]);
+
+                sdt = sdt.add(st.mins, 'm');
+                sdt = sdt.add(st.hour, 'h');
+
+                if (st.am === false) {
+                    sdt = sdt.add(12, 'h');                    
+                }
+
+                var isoT = moment().toISOString();
+                isoT = sdt.toISOString();
+
+// 2016-10-01T08:00:00-0500/2016-10-01T10:00:00-0500
+
+                var hiddenInput = 
+                    '<input type="hidden" class="' + 
+                            timeId + 
+                            '" name="datetime[]" value="' + date + ' ' + 
+                            startTime + '/' + date + ' ' + endTime + '" ' +
+                            'data-start="' + startDateTime + '" ' +
+                            'data-end="' + endDateTime + '" ' +
+                            '>';
 
                 $timesList.append('<li class="' + timeId + '">' + niceDate + ', ' + startTime + '—' + endTime + hiddenInput + ' <button class="remove-time button--cancel" aria-label="Delete time">&times;</button></li>');
                 e.preventDefault();
@@ -876,6 +910,30 @@
 
             return hour + ':' + out_minutes + ampmString;
         }
+
+        function formatTime2(minutes) {
+            var am = false;
+            if (minutes < 720) {
+                am = true;
+            }
+            var hour = Math.floor(minutes / 60);
+            hour = minutes < 780 ? hour : hour - 12;
+            var out_minutes = minutes % 60;
+            out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
+            var ampmString = am ? 'am' : 'pm';
+
+            var hour24 = 0;
+            if (am) {
+
+            }
+
+            return {
+                hour: hour,
+                mins: out_minutes,
+                am: am
+            }
+        }
+
     </script>
 </body>
 
