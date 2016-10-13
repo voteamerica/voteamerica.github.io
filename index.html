@@ -673,57 +673,72 @@
 
                 var availTimesObjectArray = [];
 
+                var isoString = "";
+
+                var inputElem;
+                var startT, endT;
+
                 $.each(availTimeElements, function(index, element) {
-                    var outputDateTime = {};
-                    try {
-                        var splitText = $(element).text().split(', ');
-                        //outputDateTime.month = splitText[1].split(' ')[0];
-                        //outputDateTime.day = splitText[1].split(' ')[1];
-                        var isoDate = new Date(splitText[1]);
-                        isoDate.setFullYear(2016); // HACK!!!!  Specific to 2016 Elections!
+                    inputElem = $(element).find("input");
 
-                        var times = splitText[2].split(' ')[0];
-                        var startTime = times.split('-')[0];
-                        var endTime = times.split('-')[1];
-                        // Handle am/pm putting the time in the afternoon, if needed.
-                        var startHour = parseInt(startTime.split(':')[0]);
-                        if (startTime.indexOf('pm', 0) !== -1) {
-                            startHour = startHour + 12;
-                        }
-                        var startMinute = parseInt(startTime.split(':')[1].replace(/am/gi, '').replace(/pm/gi, ''));
+                    startT = inputElem.attr('data-start');
+                    endT = inputElem.attr('data-end');
 
-                        // Handle am/pm putting the time in the afternoon, if needed.
-                        var endHour = parseInt(endTime.split(':')[0]);
-                        if (endTime.indexOf('pm', 0) !== -1) {
-                            endHour = endHour + 12;
-                        }
-                        var endMinute = parseInt(endTime.split(':')[1].replace(/am/gi, '').replace(/pm/gi, ''));
+                    availTimesObjectArray.push(startT + '/' + endT);
 
-                        var startDateTime = new Date(isoDate); // Both Start and End are on same date.
-                        var endDateTime = new Date(isoDate); // Both Start and End are on same date.
+                    // var outputDateTime = {};
+                    // try {
+                    //     var splitText = $(element).text().split(', ');
+                    //     //outputDateTime.month = splitText[1].split(' ')[0];
+                    //     //outputDateTime.day = splitText[1].split(' ')[1];
+                    //     var isoDate = new Date(splitText[1]);
+                    //     isoDate.setFullYear(2016); // HACK!!!!  Specific to 2016 Elections!
 
-                        startDateTime.setHours(startHour);
-                        startDateTime.setMinutes(startMinute);
-                        endDateTime.setHours(endHour);
-                        endDateTime.setMinutes(endMinute);
+                    //     var times = splitText[2].split(' ')[0];
+                    //     var startTime = times.split('-')[0];
+                    //     var endTime = times.split('-')[1];
+                    //     // Handle am/pm putting the time in the afternoon, if needed.
+                    //     var startHour = parseInt(startTime.split(':')[0]);
+                    //     if (startTime.indexOf('pm', 0) !== -1) {
+                    //         startHour = startHour + 12;
+                    //     }
+                    //     var startMinute = parseInt(startTime.split(':')[1].replace(/am/gi, '').replace(/pm/gi, ''));
 
-                        var startDateTimeISO = startDateTime.toISOString();
-                        var endDateTimeISO = endDateTime.toISOString();
+                    //     // Handle am/pm putting the time in the afternoon, if needed.
+                    //     var endHour = parseInt(endTime.split(':')[0]);
+                    //     if (endTime.indexOf('pm', 0) !== -1) {
+                    //         endHour = endHour + 12;
+                    //     }
+                    //     var endMinute = parseInt(endTime.split(':')[1].replace(/am/gi, '').replace(/pm/gi, ''));
 
-                        outputDateTime.startDttm = startDateTimeISO;
-                        outputDateTime.endDttm = endDateTimeISO;
+                    //     var startDateTime = new Date(isoDate); // Both Start and End are on same date.
+                    //     var endDateTime = new Date(isoDate); // Both Start and End are on same date.
 
-                        console.log("Date Time pair:" + JSON.stringify(outputDateTime));
+                    //     startDateTime.setHours(startHour);
+                    //     startDateTime.setMinutes(startMinute);
+                    //     endDateTime.setHours(endHour);
+                    //     endDateTime.setMinutes(endMinute);
 
-                    } catch (err) {
-                        console.error(err);
-                    }
-                    availTimesObjectArray.push(outputDateTime);
+                    //     var startDateTimeISO = startDateTime.toISOString();
+                    //     var endDateTimeISO = endDateTime.toISOString();
+
+                    //     outputDateTime.startDttm = startDateTimeISO;
+                    //     outputDateTime.endDttm = endDateTimeISO;
+
+                    //     console.log("Date Time pair:" + JSON.stringify(outputDateTime));
+
+                    // } catch (err) {
+                    //     console.error(err);
+                    // }
+                    // availTimesObjectArray.push(outputDateTime);
                 });
+
+                isoString = availTimesObjectArray.join("|");
 
                 // var hiddenTimeInput = dateTimeDiv.children('.hiddenJSONTimes');
                 var hiddenTimeInput = $('.hiddenJSONTimes#driverJSONTimes');
-                hiddenTimeInput.val(JSON.stringify(availTimesObjectArray));
+                // hiddenTimeInput.val(JSON.stringify(availTimesObjectArray));
+                hiddenTimeInput.val(isoString);
 
                 //var driverDateTimesJson = JSON.stringify(availTimesObjectArray);
                 //$('#driverDateTimeRangesJSON').attr('value', driverDateTimesJson);
