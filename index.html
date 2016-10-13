@@ -424,9 +424,9 @@
                                     <input type="checkbox" id="officialDriver" name="DrivingOnBehalfOfOrganization" /> I am driving in an official capacity on behalf of a registered organization
                                 </label>
                             </div>
-                            <div class="form-group" id="quesDriverOrgRegNumber" style="display:none">
-                                <label for="officialDriverOrgRegNumber">Organization registration number</label>
-                                <input type="text" class="form-input" id="officialDriverOrgRegNumber" name="DrivingOBOOrganizationName" data-error="The registration number is required if the above box is checked.">
+                            <div class="form-group" id="quesDriverOrgName" style="display:none">
+                                <label for="officialDriverOrgName">Organization name</label>
+                                <input type="text" class="form-input" id="officialDriverOrgName" name="DrivingOBOOrganizationName" data-error="The organisation name is required if the above box is checked.">
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
@@ -792,8 +792,8 @@
         // Toggle Official Driver input when checkbox is ticked:
         $('#officialDriver').on('change', function() {
             var isOfficialDriver = $(this).is(':checked');
-            $('#quesDriverOrgRegNumber').toggle(isOfficialDriver)
-                .find('#officialDriverOrgRegNumber').prop('required', isOfficialDriver);
+            $('#quesDriverOrgName').toggle(isOfficialDriver)
+                .find('#officialDriverOrgName').prop('required', isOfficialDriver);
         });
 
         function initDatePicker($datetime, $datepicker) {
