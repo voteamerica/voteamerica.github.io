@@ -510,80 +510,50 @@
                         <!--
                             https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet
                         -->
-                        <form name="offerHelp" action="https://api.carpoolvote.com/v1.1/helper" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                        <form name="offerHelp" action="https://api.carpoolvote.com/v1.1/helper" method="post" data-toggle="validator" role="form">
                             <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
 
                             <div class="form-group">
-                                <label for="helpName" class="col-sm-2 control-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="helpName" placeholder="Your name" name="Name" required>
-                                </div>
+                                <label for="helpName">Name</label>
+                                <input type="text" class="form-input" id="helpName" placeholder="Your name" name="Name" required>
+                                <div class="help-block with-errors"></div>
                             </div>
 
                             <div class="form-group">
-                                <label for="helpEmail" class="col-sm-2 control-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="helpEmail" placeholder="Email" name="Email" required>
-                                </div>
+                                <label for="helpEmail">Email</label>
+                                <input type="email" class="form-input" id="helpEmail" placeholder="Email" name="Email" required>
+                                <div class="help-block with-errors"></div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                        <input type="checkbox" name="Capability" value="build links"/>
-                                        I can help build links with organizations and communities
-                                    </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                        <input type="checkbox" name="Capability" value="community organize"/>
-                                            I can organize my own community
-                                    </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                        <input type="checkbox" name="Capability" value="collaboration"/>
-                                        Set up collaboration with my organization
-                                    </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                        <input type="checkbox" name="Capability" value="awareness"/>
-                                    Help get the word out
-                                    </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                        <input type="checkbox" name="Capability" value="research"/>
-                                    Do research
-                                    </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                        <input type="checkbox" name="Capability" value="legal"/>
-                                    Offer legal expertise
-                                    </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                        <input type="checkbox" name="Capability" value="tech"/>
-                                    Contribute my tech wizardry
-                                    </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                        <input type="checkbox" name="Capability" value="raise money"/>
-                                    Help the project raise money
-                                    </label>
-                                    </div>
-                                </div>
+                            <div class="form-group checkbox checkbox--multi">
+                                <p><b>I can:</b></p>
+                                <label>
+                                    <input type="checkbox" name="Capability" value="build links"/> Help build links with organizations and communities
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="Capability" value="community organize"/> Organize my own community
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="Capability" value="collaboration"/> Set up collaboration with my organization
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="Capability" value="awareness"/> Help get the word out
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="Capability" value="research"/> Do research
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="Capability" value="legal"/> Offer legal expertise
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="Capability" value="tech"/> Contribute my tech wizardry
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="Capability" value="raise money"/> Help the project raise money
+                                </label>
                             </div>
-
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-4">
-                                    <button type="submit" class="btn btn-success" id="offerHelpSubmit">Submit</button>
-                                </div>
+                                <button type="submit" class="button" id="offerHelpSubmit">Submit</button>
                             </div>
                         </form>
                     </div>

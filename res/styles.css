@@ -395,6 +395,10 @@ label {
     font-weight: 400;
     cursor: pointer;
 }
+.checkbox--multi label {
+    display: block;
+    margin: 5px 0;
+}
 
 .checkbox input {
     margin: 5px 0 0 -25px;
