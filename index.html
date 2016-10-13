@@ -227,12 +227,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="rideArea">Collection ZIP code</label>
-                                        <input type="text" class="form-input" pattern="(\d{5}?)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required data-error="Please enter the ZIP code where you would prefer to be picked up.">
+                                        <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="rideDestinationZIP">Destination ZIP code</label>
-                                        <input type="text" class="form-input" id="rideDestinationZip" placeholder="Where you need a ride to" name="RiderDropOffZIP" data-error="Please enter the ZIP code of your local voting station." required>
+                                        <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideDestinationZip" placeholder="Where you need a ride to" name="RiderDropOffZIP" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -369,7 +369,7 @@
 
                                 <div class="form-group">
                                     <label for="rideArea">Collection ZIP code</label>
-                                    <input type="text" class="form-input" pattern="\d{5}-?(\d{4})?" id="offerArea" placeholder="Where you can collect the rider" name="DriverCollectionZIP" required data-error="Please enter the ZIP code where you would prefer to pick someone up.">
+                                    <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where you can collect the rider" name="DriverCollectionZIP" required>
                                     <div class="help-block with-errors"></div>
                                     <p>I am willing to collect within a <input type="number" id="offerMiles" placeholder="0" name="DriverCollectionRadius" pattern="\d*" min="1" step="1" class="form-input form-input--inline" /> mile radius of this zip code.<p>
                                 </div>
