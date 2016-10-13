@@ -75,6 +75,7 @@ li {
 
 .button {
     display: inline-block;
+    font-size: 1em;
     padding: 0.4em 1em 0.5em;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     border-radius: 5px;
@@ -110,9 +111,7 @@ li {
 
 .button--large {
     font-size: 1.2em;
-    min-width: 65%;
-    padding: 0.5em 2em 0.6em;
-    text-transform: uppercase;
+    padding: 0.5em 1.5em 0.6em;
 }
 
 .button--alt {
@@ -313,6 +312,11 @@ iframe.twitter-mention-button {
     min-height: 100px;
 }
 
+.ride__panel .button {
+    min-width: 65%;
+    text-transform: uppercase;
+}
+
 
 /* Forms */
 
@@ -493,20 +497,7 @@ label {
 /* Time range slider */
 
 .time-range-slider {
-    margin: 10px 30px 50px 20px;
-}
-
-label.collection { 
-    font-weight: 400;
-    padding: 5px; 
-}
-
-.miles {
-    width: 50px;
-    padding: 4px;
-    border: none;
-    border: 1px solid lightgrey;
-    border-radius: 4px;
+    margin: 10px 16px 50px 16px;
 }
 
 .noUi-connect {
@@ -521,7 +512,8 @@ label.collection {
 }
 
 .noUi-value-horizontal {
-    margin-top: 3px;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
 .add-time-btn {
@@ -562,29 +554,6 @@ label.collection {
 .available-times-list li:hover .remove-time {
     opacity: 1;
 }
-
-
-/* Datepicker */
-
-// .datepicker {
-//     clear: both;
-//     display: block;
-// }
-
-// .times-list-title {
-//     clear: both;
-//     display: block;
-// }
-
-// input[type="number"]::-webkit-outer-spin-button,
-// input[type="number"]::-webkit-inner-spin-button {
-//   -webkit-appearance: none;
-//   margin: 0;
-// }
-
-// input[type="number"] {
-//   -moz-appearance: textfield;
-// }
 
 
 /* Main content section */
