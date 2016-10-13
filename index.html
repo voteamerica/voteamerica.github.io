@@ -622,27 +622,29 @@
     <script>
         $(document).ready(function() {
 
-            function scrollTo(offset) {
+            function scrollTo(offset, speed) {
                 $('html, body').animate({
                     scrollTop: offset
-                }, 999);
+                }, speed || 500);
             }
 
             $('#nav-links').on('click', 'a', function(e) {
                 var anchor = $(this).attr('href');
-                scrollTo($(anchor).offset().top);
+                scrollTo($(anchor).offset().top, 999);
                 e.preventDefault();
             });
 
             $('#btnNeedRide').on('click', function(e) {
                 $('#pnlIntro, #pnlOfferRide').slideUp('fast');
                 $('#pnlNeedRide').slideDown('fast');
+                scrollTo(0);
                 e.preventDefault();
             });
 
             $('#btnOfferRide').on('click', function(e) {
                 $('#pnlIntro, #pnlNeedRide').slideUp('fast');
                 $('#pnlOfferRide').slideDown('fast');
+                scrollTo(0);
                 e.preventDefault();
             });
 
