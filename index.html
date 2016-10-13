@@ -133,6 +133,7 @@
         <div id="forms" class="forms wrapper">
             <div id="pnlNeedRide">
                 <form name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" data-toggle="validator" role="form">
+                <!--<form name="needRide" action="localhost:8000/rider" method="post" data-toggle="validator" role="form">-->
                     <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
                     <input type="hidden" name="hiddenJSONTimes" value="" />
                     <div class="bannerbox">
@@ -283,6 +284,7 @@
             <!-- http://40.117.45.210/driver/ -->
             <div id="pnlOfferRide">
                 <form name="offerRide" action="https://api.carpoolvote.com/v1.1/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                <!--<form name="offerRide" action="http://localhost:8000/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">-->
                     <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
                     <input type="hidden" name="hiddenJSONTimes" value="" />
 
@@ -647,51 +649,6 @@
 
                     availTimesObjectArray.push(startT + '/' + endT);
 
-                    // var outputDateTime = {};
-                    // try {
-                    //     var splitText = $(element).text().split(', ');
-                    //     //outputDateTime.month = splitText[1].split(' ')[0];
-                    //     //outputDateTime.day = splitText[1].split(' ')[1];
-                    //     var isoDate = new Date(splitText[1]);
-                    //     isoDate.setFullYear(2016); // HACK!!!!  Specific to 2016 Elections!
-
-                    //     var times = splitText[2].split(' ')[0];
-                    //     var startTime = times.split('-')[0];
-                    //     var endTime = times.split('-')[1];
-                    //     // Handle am/pm putting the time in the afternoon, if needed.
-                    //     var startHour = parseInt(startTime.split(':')[0]);
-                    //     if (startTime.indexOf('pm', 0) !== -1) {
-                    //         startHour = startHour + 12;
-                    //     }
-                    //     var startMinute = parseInt(startTime.split(':')[1].replace(/am/gi, '').replace(/pm/gi, ''));
-
-                    //     // Handle am/pm putting the time in the afternoon, if needed.
-                    //     var endHour = parseInt(endTime.split(':')[0]);
-                    //     if (endTime.indexOf('pm', 0) !== -1) {
-                    //         endHour = endHour + 12;
-                    //     }
-                    //     var endMinute = parseInt(endTime.split(':')[1].replace(/am/gi, '').replace(/pm/gi, ''));
-
-                    //     var startDateTime = new Date(isoDate); // Both Start and End are on same date.
-                    //     var endDateTime = new Date(isoDate); // Both Start and End are on same date.
-
-                    //     startDateTime.setHours(startHour);
-                    //     startDateTime.setMinutes(startMinute);
-                    //     endDateTime.setHours(endHour);
-                    //     endDateTime.setMinutes(endMinute);
-
-                    //     var startDateTimeISO = startDateTime.toISOString();
-                    //     var endDateTimeISO = endDateTime.toISOString();
-
-                    //     outputDateTime.startDttm = startDateTimeISO;
-                    //     outputDateTime.endDttm = endDateTimeISO;
-
-                    //     console.log("Date Time pair:" + JSON.stringify(outputDateTime));
-
-                    // } catch (err) {
-                    //     console.error(err);
-                    // }
-                    // availTimesObjectArray.push(outputDateTime);
                 });
 
                 isoString = availTimesObjectArray.join("|");
@@ -713,30 +670,44 @@
                 document['needRide'].action = "https://api.carpoolvote.com/v1.1/rider";
                 // document['needRide'].action = formSubmitPath + "rider";
 
-                var dateTimeDiv = $(this).children('.date-container')
-                    .children('.date-time-pickers');
+                // NOTE: code below is a version of that used for driver times
+                //       css selectors used below appear to work correctly
+                //       may be useful to review this later
+                // 
+                //var dateTimeDiv = $(this).children('.date-container').children('.date-time-pickers');
+                // var availTimeElements = dateTimeDiv.children('.available-times-list').children();
 
-                var availTimeElements = dateTimeDiv.children('.available-times-list').children();
+                var availTimeElements = $('.available-times-list#rider-available-times').children();
 
                 var availTimesObjectArray = [];
 
+                                var isoString = "";
+
+                var inputElem;
+                var startT, endT;
+
                 $.each(availTimeElements, function(index, element) {
-                    // TODO: Need to functionalize the version that exists on the driver side.
-                    // This needs to do essentially the same work.
-                    var outputDateTime = {};
+                    inputElem = $(element).find("input");
 
-                    outputDateTime.startDttm = $(element);
-                    outputDateTime.endDttm = $(element);
+                    startT = inputElem.attr('data-start');
+                    endT = inputElem.attr('data-end');
 
-                    availTimesObjectArray.push(outputDateTime);
+                    availTimesObjectArray.push(startT + '/' + endT);
+
                 });
+
+                isoString = availTimesObjectArray.join("|");
+
+                // NOTE: see comments above about changes
 
                 // Sets the value of the hidden input for available times to a JSON string of
                 // Available times with month, day, startTime, and endTime properties
-                var hiddenTimeInput = dateTimeDiv.children('.hiddenJSONTimes');
-                hiddenTimeInput.val(JSON.stringify(availTimesObjectArray));
-                $('#riderDateTimeRangesJSON').attr('value', hiddenTimeInput);
+                // var hiddenTimeInput = dateTimeDiv.children('.hiddenJSONTimes');
+                // hiddenTimeInput.val(JSON.stringify(availTimesObjectArray));
+                var hiddenTimeInput = $('.hiddenJSONTimes#riderJSONTimes');
+                hiddenTimeInput.val(isoString);
 
+                $('#riderDateTimeRangesJSON').attr('value', hiddenTimeInput);
             }); // end of submit for needRide
 
             $('form[name="offerHelp"]').on('submit', function() {
@@ -821,11 +792,14 @@
                 var niceDate = $.format.date(date, "ddd D MMMM");
                 var timeId = new Date().getTime();
 
-                var niceDateYear = $.format.date(date, "ddd D MMMM yyyy");
+                // not comfortable with this, but can't see why don't get this from datepicker
+                var datePlusYear = date + " 2016";
+
+                var niceDateYear = $.format.date(datePlusYear, "ddd D MMMM yyyy");
                 var startDateTime = niceDateYear + ' ' + startTime;                    
                 var endDateTime = niceDateYear + ' ' + endTime;                    
 
-                var ndt = $.format.date(date, "dd MMMM yyyy");
+                var ndt = $.format.date(datePlusYear, "dd MMMM yyyy");
                 var sdt = moment(ndt);
                 var edt = moment(ndt);
 
