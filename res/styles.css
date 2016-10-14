@@ -189,15 +189,21 @@ li {
     display: inline-block;
     margin: 0 5px;
     vertical-align: middle;
+    position: relative;
+}
+
+.social__facebook {
+    top: -2px;
+}
+
+.social__youtube {
+    transform: scale(0.85) translate(-7px, -0.5px); /* 1337 hax */
 }
 
 a.twitter-mention-button {
-    visibility: hidden;
+    visibility: hidden; /* Don't show link til it's loaded */
 }
 
-iframe.twitter-mention-button {
-    margin-top: 2px;
-}
 
 .nav__links {
     padding: 0;
@@ -718,6 +724,7 @@ label {
 
     .social li {
         margin-left: 0;
+        margin-right: 12px;
     }
 
     .nav__links {
