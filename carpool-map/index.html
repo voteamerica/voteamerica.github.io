@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+ 	<title>carpool-vote</title>
+
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.16.0/ol.css">
+	<link rel="stylesheet" href="https://maps.nyc.gov/nyc-lib/v0.2.0/css/nyc-ol-lib.css">
+	<link rel="stylesheet" href="css/map.css">
+
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.16.0/ol-debug.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+	<script src="https://maps.nyc.gov/nyc-lib/v0.2.0/js/nyc-ol-lib.js"></script>
+</head>
+<body>
+	<div id="map"></div>
+	<div id="info"></div>
+	<script src="js/geocoder.js"></script>
+	<script src="js/map.js"></script>
+	<div id="layers">
+		<label for="riders">Riders<div></div></label>
+		<input id="riders" type="checkbox" checked>
+		<label for="drivers">Drivers<div></div></label>
+		<input id="drivers" type="checkbox" checked>
+	</div>
+</body>
+</html>
