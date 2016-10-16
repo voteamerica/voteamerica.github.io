@@ -494,6 +494,21 @@ label {
 }
 
 
+/* Datepicker (SMH at this CSS) */
+
+.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_default,
+.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current,
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box > div > div.xdsoft_current {
+    background-color: #297bbb;
+}
+.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_today {
+    color: #297bbb;
+    font-weight: bold;
+}
+.xdsoft_datetimepicker .xdsoft_calendar td:hover, .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box>div>div:hover {
+    background-color: #e64a4a !important;
+}
+
 /* Time range slider */
 
 .time-range-slider {
