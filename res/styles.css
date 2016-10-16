@@ -541,7 +541,7 @@ label {
 .available-times-list {
     list-style: none;
     padding: 0;
-    min-height: 300px;
+    min-height: 90px;
     border: 2px solid #ddd;
     margin-top: 5px;
 }
@@ -742,6 +742,10 @@ label {
         width: 50%;
         padding-right: 2em;
         float: left;
+    }
+
+    .available-times-list {
+        min-height: 245px;
     }
 }
 
