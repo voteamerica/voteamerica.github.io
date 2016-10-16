@@ -626,10 +626,13 @@
                 });
 
             $forms.on('submit', 'form', function() {
+                var isoString = '';
+                var datetimes = $(this).find('.add-time-btn').data('datetimes'); 
 
-                var isoString = $(this).find('.add-time-btn')
-                    .data('datetimes')
-                    .join('|');
+                if (datetimes !== undefined)
+                {
+                    isoString = datetimes.join('|');
+                }
 
                 $(this).find('.hiddenJSONTimes').val(isoString);
             });
