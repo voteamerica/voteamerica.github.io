@@ -19,13 +19,10 @@
     <link rel="icon" href="favicon.ico">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 
-    <!-- <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"> -->
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link type="text/css" rel="stylesheet" href="res/jquery.datetimepicker.min.css">
     <link type="text/css" rel="stylesheet" href="res/nouislider.min.css">
     <link type="text/css" rel="stylesheet" href="res/styles.css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -133,9 +130,7 @@
         <div id="forms" class="forms wrapper">
             <div id="pnlNeedRide">
                 <form name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" data-toggle="validator" role="form">
-                <!--<form name="needRide" action="localhost:8000/rider" method="post" data-toggle="validator" role="form">-->
                     <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
-                    <input type="hidden" name="hiddenJSONTimes" value="" />
                     <div class="bannerbox">
                         <h3 class="bannerbox__title">I need a ride</h3>
                         <div class="bannerbox__content">
@@ -174,12 +169,12 @@
                                 <div class="form-column">
                                     <div class="form-group">
                                         <label for="rideArea">Collection ZIP code</label>
-                                        <input type="text" class="form-input" pattern="(\d{5}?)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required data-error="Please enter the ZIP code where you would prefer to be picked up.">
+                                        <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="rideDestinationZIP">Destination ZIP code</label>
-                                        <input type="text" class="form-input" id="rideDestinationZip" placeholder="Where you need a ride to" name="RiderDropOffZIP" data-error="Please enter the ZIP code of your local voting station." required>
+                                        <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" name="RiderDropOffZIP" placeholder="Where you need a ride to" name="RiderDropOffZIP" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -251,18 +246,21 @@
                             </div>
                             <div class="form-group checkbox">
                                 <label for="RiderLegalConsent">
-                                    <input type="checkbox" id="RiderLegalConsent" name="RiderLegalConsent" /> I understand that Carpool Vote will share my contact details with the driver if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
+                                    <input type="checkbox" id="RiderLegalConsent" name="RiderLegalConsent" required /> I understand that Carpool Vote will share my contact details with the driver if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
                                 </label>
+                                <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
                                 <label for="RiderWillBeSafe">
-                                    <input type="checkbox" id="RiderWillBeSafe" name="RiderWillBeSafe" /> I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.
+                                    <input type="checkbox" id="RiderWillBeSafe" name="RiderWillBeSafe" required /> I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.
                                 </label>
+								<div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
                                 <label for="RiderWillNotTalkPolitics">
-                                    <input type="checkbox" id="RiderWillNotTalkPolitics" name="RiderWillNotTalkPolitics" /> I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.
+                                    <input type="checkbox" id="RiderWillNotTalkPolitics" name="RiderWillNotTalkPolitics" required /> I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.
                                 </label>
+                                <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
                                 <label for="inTouchRider">
@@ -284,10 +282,7 @@
             <!-- http://40.117.45.210/driver/ -->
             <div id="pnlOfferRide">
                 <form name="offerRide" action="https://api.carpoolvote.com/v1.1/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">
-                <!--<form name="offerRide" action="http://localhost:8000/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">-->
                     <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
-                    <input type="hidden" name="hiddenJSONTimes" value="" />
-
                     <div class="bannerbox">
                         <h3 class="bannerbox__title">I can offer a ride</h3>
                         <div class="bannerbox__content">
@@ -326,7 +321,7 @@
 
                                 <div class="form-group">
                                     <label for="rideArea">Collection ZIP code</label>
-                                    <input type="text" class="form-input" pattern="\d{5}-?(\d{4})?" id="offerArea" placeholder="Where you can collect the rider" name="DriverCollectionZIP" required data-error="Please enter the ZIP code where you would prefer to pick someone up.">
+                                    <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where you can collect the rider" name="DriverCollectionZIP" required>
                                     <div class="help-block with-errors"></div>
                                     <p>I am willing to collect within a <input type="number" id="offerMiles" placeholder="0" name="DriverCollectionRadius" pattern="\d*" min="1" step="1" class="form-input form-input--inline" /> mile radius of this zip code.<p>
                                 </div>
@@ -388,18 +383,21 @@
                             </div>
                             <div class="form-group checkbox">
                                 <label for="legalThree">
-                                    <input type="checkbox" id="legalThree" name="RidersCanSeeDriverDetails" /> I understand that Carpool Vote will share my contact details with the rider(s) if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
+                                    <input type="checkbox" id="legalThree" name="RidersCanSeeDriverDetails" required /> I understand that Carpool Vote will share my contact details with the rider(s) if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
                                 </label>
+                                <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
                                 <label for="legalFour">
-                                    <input type="checkbox" id="legalFour" name="DriverWillTakeCare" /> I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up for a ride and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.
+                                    <input type="checkbox" id="legalFour" name="DriverWillTakeCare" required /> I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up for a ride and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.
                                 </label>
+                                <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
                                 <label for="legalFive">
-                                    <input type="checkbox" id="legalFive" name="DriverWillNotTalkPolitics" /> I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.
+                                    <input type="checkbox" id="legalFive" name="DriverWillNotTalkPolitics" required /> I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.
                                 </label>
+								<div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
                                 <label for="inTouchDriver">
@@ -574,7 +572,7 @@
 
     <script type="text/javascript" src="res/jquery-dateFormat.min.js"></script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -587,8 +585,7 @@
 
     <script>
         $(document).ready(function() {
-            var formSubmitPath = "https://api.carpoolvote.com/v1.1/";
-            // var formSubmitPath = "http://localhost:8000/";
+            var $forms = $('#forms');
 
             function scrollTo(offset, speed) {
                 $('html, body').animate({
@@ -616,103 +613,25 @@
                 e.preventDefault();
             });
 
-            $('#forms').on('click', '.close-form', function(e) {
+            $forms.on('click', '.close-form', function(e) {
                 $('#pnlNeedRide, #pnlOfferRide').slideUp('fast');
                 $('#pnlIntro').slideDown('fast');
                 scrollTo(0);
                 e.preventDefault();
             });
 
-            $('.available-times-list').on('click', '.remove-time', function() {
-                $(this).parent().remove();
-            });
-
-            // Submit Function for offerRide (Driver) form.
-            $('form[name="offerRide"]').on('submit', function() {
-                document['offerRide'].action = "https://api.carpoolvote.com/v1.1/driver";
-                // document['offerRide'].action = formSubmitPath + "driver";
-
-                var availTimeElements = $('.available-times-list#driver-available-times').children()
-
-                var availTimesObjectArray = [];
-
-                var isoString = "";
-
-                var inputElem;
-                var startT, endT;
-
-                $.each(availTimeElements, function(index, element) {
-                    inputElem = $(element).find("input");
-
-                    startT = inputElem.attr('data-start');
-                    endT = inputElem.attr('data-end');
-
-                    availTimesObjectArray.push(startT + '/' + endT);
-
+            $forms.find('.available-times-list')
+                .on('click', '.remove-time', function() {
+                    $(this).parent().remove();
                 });
 
-                isoString = availTimesObjectArray.join("|");
+            $forms.on('submit', 'form', function() {
 
-                // var hiddenTimeInput = dateTimeDiv.children('.hiddenJSONTimes');
-                var hiddenTimeInput = $('.hiddenJSONTimes#driverJSONTimes');
-                // hiddenTimeInput.val(JSON.stringify(availTimesObjectArray));
-                hiddenTimeInput.val(isoString);
+                var isoString = $(this).find('.add-time-btn')
+                    .data('datetimes')
+                    .join('|');
 
-                //var driverDateTimesJson = JSON.stringify(availTimesObjectArray);
-                //$('#driverDateTimeRangesJSON').attr('value', driverDateTimesJson);
-
-                return true;
-
-            });
-
-            // Submit Function for needRide (Rider) form.
-            $('form[name="needRide"]').on('submit', function() {
-                document['needRide'].action = "https://api.carpoolvote.com/v1.1/rider";
-                // document['needRide'].action = formSubmitPath + "rider";
-
-                // NOTE: code below is a version of that used for driver times
-                //       css selectors used below appear to work correctly
-                //       may be useful to review this later
-                // 
-                //var dateTimeDiv = $(this).children('.date-container').children('.date-time-pickers');
-                // var availTimeElements = dateTimeDiv.children('.available-times-list').children();
-
-                var availTimeElements = $('.available-times-list#rider-available-times').children();
-
-                var availTimesObjectArray = [];
-
-                                var isoString = "";
-
-                var inputElem;
-                var startT, endT;
-
-                $.each(availTimeElements, function(index, element) {
-                    inputElem = $(element).find("input");
-
-                    startT = inputElem.attr('data-start');
-                    endT = inputElem.attr('data-end');
-
-                    availTimesObjectArray.push(startT + '/' + endT);
-
-                });
-
-                isoString = availTimesObjectArray.join("|");
-
-                // NOTE: see comments above about changes
-
-                // Sets the value of the hidden input for available times to a JSON string of
-                // Available times with month, day, startTime, and endTime properties
-                // var hiddenTimeInput = dateTimeDiv.children('.hiddenJSONTimes');
-                // hiddenTimeInput.val(JSON.stringify(availTimesObjectArray));
-                var hiddenTimeInput = $('.hiddenJSONTimes#riderJSONTimes');
-                hiddenTimeInput.val(isoString);
-
-                $('#riderDateTimeRangesJSON').attr('value', hiddenTimeInput);
-            }); // end of submit for needRide
-
-            $('form[name="offerHelp"]').on('submit', function() {
-                document['offerHelp'].action = "https://api.carpoolvote.com/v1.1/helper";
-                // document['offerHelp'].action = formSubmitPath + "helper";
+                $(this).find('.hiddenJSONTimes').val(isoString);
             });
         });
 
@@ -790,7 +709,6 @@
 
                 var date = $datepicker.val();
                 var niceDate = $.format.date(date, "ddd D MMMM");
-                var timeId = new Date().getTime();
 
                 // not comfortable with this, but can't see why don't get this from datepicker
                 var datePlusYear = date + " 2016";
@@ -825,19 +743,14 @@
 
                 var isoEnd = edt.toISOString();
 
+                var data = $(this).data('datetimes') || [];
+                data.push( [isoStart, isoEnd].join('/') );
+                $(this).data('datetimes', data);
 
-// 2016-10-01T08:00:00-0500/2016-10-01T10:00:00-0500
+                var cancelButton = ' <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>';
 
-                var hiddenInput = 
-                    '<input type="hidden" class="' + 
-                            timeId + 
-                            '" name="datetime[]" value="' + date + ' ' + 
-                            startTime + '/' + date + ' ' + endTime + '" ' +
-                            'data-start="' + isoStart + '" ' +
-                            'data-end="' + isoEnd + '" ' +
-                            '>';
+                $timesList.append('<li>' + niceDate + ', ' + startTime + '—' + endTime + cancelButton + '</li>');
 
-                $timesList.append('<li class="' + timeId + '">' + niceDate + ', ' + startTime + '—' + endTime + hiddenInput + ' <button class="remove-time button--cancel" aria-label="Delete time">&times;</button></li>');
                 e.preventDefault();
             });
         }
@@ -882,16 +795,11 @@
             out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
             var ampmString = am ? 'am' : 'pm';
 
-            var hour24 = 0;
-            if (am) {
-
-            }
-
             return {
                 hour: hour,
                 mins: out_minutes,
                 am: am
-            }
+            };
         }
 
     </script>
