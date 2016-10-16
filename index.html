@@ -724,27 +724,11 @@
                 var sdt = moment(ndt);
                 var edt = moment(ndt);
 
-                var st = formatTime2(sliderData[0]);
+                var sliderStartTime = formatTime2(sliderData[0]);
+                var sliderEndTime   = formatTime2(sliderData[1]);
 
-                sdt = sdt.add(st.mins, 'm');
-                sdt = sdt.add(st.hour, 'h');
-
-                if (st.am === false) {
-                    sdt = sdt.add(12, 'h');                    
-                }
-
-                var isoStart = sdt.toISOString();
-
-                var et = formatTime2(sliderData[1]);
-
-                edt = edt.add(et.mins, 'm');
-                edt = edt.add(et.hour, 'h');
-
-                if (et.am === false) {
-                    edt = edt.add(12, 'h');                    
-                }
-
-                var isoEnd = edt.toISOString();
+                var isoStart        = getISOString(sdt, sliderStartTime);
+                var isoEnd          = getISOString(edt, sliderEndTime);
 
                 var data = $(this).data('datetimes') || [];
                 data.push( [isoStart, isoEnd].join('/') );
@@ -770,6 +754,21 @@
             
             addTimeBtnListener($(this), $slider, $timesList, $datepicker);
         });
+
+        function getISOString(date, timeAdjustment) {
+            var isoString = '';
+
+            date = date.add(timeAdjustment.mins, 'm');
+            date = date.add(timeAdjustment.hour, 'h');
+
+            if (timeAdjustment.am === false && timeAdjustment.hour !== 12) {
+                date = date.add(12, 'h');
+            }
+
+            isoString = date.toISOString();
+
+            return isoString;
+        }
 
         // The sliders work with the day in terms of minutes, this function translates the minutes
         // into readable format i.e. 4:34pm
