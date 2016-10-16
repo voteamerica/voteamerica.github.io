@@ -363,12 +363,6 @@ legend {
     font-size: 1.4em;
 }
 
-.form-column {
-    width: 50%;
-    padding-right: 2em;
-    float: left;
-}
-
 .form-group {
     margin-bottom: 20px;
 }
@@ -727,6 +721,12 @@ label {
         position: absolute;
         right: 0;
         top: 30%;
+    }
+
+    .form-column {
+        width: 50%;
+        padding-right: 2em;
+        float: left;
     }
 }
 
