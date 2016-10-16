@@ -363,12 +363,6 @@ legend {
     font-size: 1.4em;
 }
 
-.form-column {
-    width: 50%;
-    padding-right: 2em;
-    float: left;
-}
-
 .form-group {
     margin-bottom: 20px;
 }
@@ -500,6 +494,21 @@ label {
 }
 
 
+/* Datepicker (SMH at this CSS) */
+
+.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_default,
+.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current,
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box > div > div.xdsoft_current {
+    background-color: #297bbb;
+}
+.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_today {
+    color: #297bbb;
+    font-weight: bold;
+}
+.xdsoft_datetimepicker .xdsoft_calendar td:hover, .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box>div>div:hover {
+    background-color: #e64a4a !important;
+}
+
 /* Time range slider */
 
 .time-range-slider {
@@ -507,7 +516,7 @@ label {
 }
 
 .noUi-connect {
-    background-color: #297bbb;
+    background-color: #7d8f9c;
 }
 
 .noUi-pips-horizontal {
@@ -532,7 +541,7 @@ label {
 .available-times-list {
     list-style: none;
     padding: 0;
-    min-height: 300px;
+    min-height: 90px;
     border: 2px solid #ddd;
     margin-top: 5px;
 }
@@ -727,6 +736,16 @@ label {
         position: absolute;
         right: 0;
         top: 30%;
+    }
+
+    .form-column {
+        width: 50%;
+        padding-right: 2em;
+        float: left;
+    }
+
+    .available-times-list {
+        min-height: 245px;
     }
 }
 
