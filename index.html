@@ -778,7 +778,7 @@
 
         function format24HrTime(minutes) {
             var time = formatTime(minutes);
-            if (!time.am) {
+            if (!time.am && time.hour !== 12) {
                 time.hour += 12;
             }
             return toTwoDigits(time.hour) + ':' + time.mins;
