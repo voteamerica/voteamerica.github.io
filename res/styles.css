@@ -231,9 +231,9 @@ a.twitter-mention-button {
 /* Intro */
 
 .intro {
-    background: url('road.jpg') no-repeat top center;
-    padding: 15px;
+    background: #275880 url('road.jpg') no-repeat top center;
     background-size: cover;
+    padding: 15px;
     margin-top: -100px;
     padding: 20px;
     border-radius: 6px;
