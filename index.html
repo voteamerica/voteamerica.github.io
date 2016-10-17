@@ -731,7 +731,7 @@
                 var timeRange = $slider[0].noUiSlider.get();
 
                 var iso = timeRange.map(function(mins) {
-                    var timestamp = $.format.date(date, 'yyyy-MM-dd ') + format24HrTime(mins);
+                    var timestamp = $.format.date(date, 'yyyy-MM-ddT') + format24HrTime(mins) + ':00';
                     return new Date(timestamp).toISOString();
                 });
 
@@ -766,7 +766,7 @@
 
             return {
                 hour: minutes < 780 ? hour : hour - 12,
-                mins: (out_minutes < 10 ? '0' : '') + out_minutes,
+                mins: toTwoDigits(out_minutes),
                 am: minutes < 720
             };
         }
@@ -781,7 +781,7 @@
             if (!time.am) {
                 time.hour += 12;
             }
-            return time.hour + ':' + time.mins;
+            return toTwoDigits(time.hour) + ':' + time.mins;
         }
 
         function formatTimeRange(range) {
@@ -790,6 +790,10 @@
 
         function formatNiceDate(date) {
             return $.format.date(date, 'ddd D MMMM');
+        }
+
+        function toTwoDigits(n) {
+            return (n < 10 ? '0' : '') + n;
         }
 
     </script>
