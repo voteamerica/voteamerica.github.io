@@ -247,6 +247,18 @@
                                 <input type="tel" class="form-input" id="ridePhone" placeholder="Phone" name="RiderPhone" required />
                                 <div class="help-block with-errors"></div>
                             </div>
+                            <div class="form-group checkbox checkbox--multi">
+                                <p>Preferred method of contact</p>
+                                <label>
+                                    <input type="checkbox" name="RiderPreferredContact" value="email" /> Email
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="RiderPreferredContact" value="phone" /> Phone
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="RiderPreferredContact" value="sMS" /> SMS
+                                </label>
+                            </div>
                         </fieldset>
 
                         <div class="form-group checkbox">
@@ -481,7 +493,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox checkbox--multi">
-                                <p><b>I can:</b></p>
+                                <p>I can</p>
                                 <label>
                                     <input type="checkbox" name="Capability" value="build links"/> Help build links with organizations and communities
                                 </label>
