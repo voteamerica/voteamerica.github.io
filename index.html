@@ -608,7 +608,7 @@
                 scrollTo(0);
             }
 
-            window.onpopstate = function() {
+            function toggleFormsOnHashChange() {
                 if (document.location.hash.length) {
                     showForm(document.location.hash);
                 } else {
@@ -652,13 +652,15 @@
                 var isoString = '';
                 var datetimes = $(this).find('.add-time-btn').data('datetimes'); 
 
-                if (datetimes !== undefined)
-                {
+                if (datetimes !== undefined) {
                     isoString = datetimes.join('|');
                 }
 
                 $(this).find('.hiddenJSONTimes').val(isoString);
             });
+            
+            toggleFormsOnHashChange();
+            window.onpopstate = toggleFormsOnHashChange;
         });
 
         $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
