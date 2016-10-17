@@ -623,11 +623,12 @@
             });
 
             $intro.on('click', '.show-form', function(e) {
-                showForm( $(this).attr('href') );
+                var href = $(this).attr('href');
+                showForm(href);
                 if (supportsHistoryApi) {
-                    history.pushState({page: target}, target, target);
+                    history.pushState({page: href}, href, href);
                 } else {
-                    window.location.hash = target;
+                    window.location.hash = href;
                 }
                 e.preventDefault();
             });
