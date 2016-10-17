@@ -332,8 +332,7 @@ a.twitter-mention-button {
     min-height: 120px;
 }
 
-#pnlNeedRide,
-#pnlOfferRide {
+.forms > div {
     display: none;
 }
 

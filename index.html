@@ -97,7 +97,7 @@
     </header>
 
     <div class="content">
-        <div id="pnlIntro" class="intro wrapper">
+        <div id="intro" class="intro wrapper">
             <div class="intro__banner">
                 <h1 class="intro__title">Every American DESERVES a Vote</h1>
                 <p class="intro__lead">We connect volunteer drivers with anybody who needs a ride to claim their vote.</p>
@@ -111,7 +111,7 @@
                         <p>Just fill in this form! We'll try and connect you with someone that can help.</p>
                     </div>
                     <p class="align-center">
-                        <a href="#pnlNeedRide" class="show-form button button--large" role="button">I need a ride</a>
+                        <a href="#need-ride" class="show-form button button--large" role="button">I need a ride</a>
                     </p>
                 </li>
                 <li class="ride__panel offerride" id="offerride">
@@ -121,14 +121,14 @@
                         <p>Fill in this form and we'll try and connect you with someone that needs a ride in the same direction.</p>
                     </div>
                     <p class="align-center">
-                        <a href="#pnlOfferRide" class="show-form button button--large button--alt" role="button">I can offer a ride</a>
+                        <a href="#offer-ride" class="show-form button button--large button--alt" role="button">I can offer a ride</a>
                     </p>
                 </li>
             </ul>
         </div>
 
         <div id="forms" class="forms wrapper">
-            <div id="pnlNeedRide">
+            <div id="need-ride">
                 <form name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" data-toggle="validator" role="form">
                     <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
                     <div class="bannerbox">
@@ -136,7 +136,7 @@
                         <div class="bannerbox__content">
                             <fieldset class="date-time-pickers">
                                 <legend>When and where do you need picking up?</legend>
-                                <a class="close-form button--cancel" href="#pnlIntro">&times;</a>
+                                <a class="close-form button--cancel" href="#intro">&times;</a>
 
                                 <div class="form-column">
                                     <div class="form-group date-container">
@@ -270,7 +270,7 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="button button--large" id="needRideSubmit">Submit</button>
-                                <a class="align-right close-form" href="#pnlIntro">Back</a>
+                                <a class="align-right close-form" href="#intro">Back</a>
                             </div>
                             <p class="panel-footer"><b>What happens next?</b> We'll record these details and contact you if someone can help.</p>
                         </div>
@@ -278,13 +278,13 @@
                 </form>
             </div>
 
-            <div id="pnlOfferRide">
+            <div id="offer-ride">
                 <form name="offerRide" action="https://api.carpoolvote.com/v1.1/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">
                     <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
                     <div class="bannerbox">
                         <h3 class="bannerbox__title">I can offer a ride</h3>
                         <div class="bannerbox__content">
-                            <a class="close-form button--cancel" href="#pnlIntro">&times;</a>
+                            <a class="close-form button--cancel" href="#intro">&times;</a>
 
                             <fieldset class="date-time-pickers">
                                 <legend>When and where can you pick someone up?</legend>
@@ -405,7 +405,7 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="button button--large" id="offerRideSubmit">Submit</button>
-                                <a class="align-right close-form" href="#pnlIntro">Back</a>
+                                <a class="align-right close-form" href="#intro">Back</a>
                             </div>
                             <p class="panel-footer"><b>What happens next?</b> We'll record these details and contact you if there's a match.</p>
                         </div>
@@ -584,7 +584,8 @@
     <script>
         $(document).ready(function() {
             var $forms = $('#forms'),
-                $intro = $('#pnlIntro');
+                $intro = $('#intro'),
+                supportsHistoryApi =  !!(window.history && history.pushState);
 
             function scrollTo(offset, speed) {
                 $('html, body').animate({
@@ -604,6 +605,14 @@
                 scrollTo(0);
             }
 
+            window.onpopstate = function() {
+                if (document.location.hash.length) {
+                    showForm(document.location.hash);
+                } else {
+                    hideForms();
+                }
+            };
+
             $('#nav-links').on('click', 'a', function(e) {
                 var anchor = $(this).attr('href');
                 scrollTo($(anchor).offset().top, 999);
@@ -612,11 +621,21 @@
 
             $intro.on('click', '.show-form', function(e) {
                 showForm( $(this).attr('href') );
+                if (supportsHistoryApi) {
+                    history.pushState({page: target}, target, target);
+                } else {
+                    window.location.hash = target;
+                }
                 e.preventDefault();
             });
 
             $forms.on('click', '.close-form', function(e) {
                 hideForms();
+                if (supportsHistoryApi) {
+                    history.pushState({page: 'home'}, 'Home', '/');
+                } else {
+                    window.location.hash = '';
+                }
                 e.preventDefault();
             });
 
