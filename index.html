@@ -647,7 +647,7 @@
             $forms.on('click', '.close-form', function(e) {
                 hideForms();
                 if (supportsHistoryApi) {
-                    history.pushState({page: 'home'}, 'Home', '/');
+                    history.pushState({page: 'home'}, 'Home', '/' + window.location.search);
                 } else {
                     window.location.hash = '';
                 }
