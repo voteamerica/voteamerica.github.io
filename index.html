@@ -65,8 +65,19 @@
         <p class="support-banner">Need voter support? Call <a href="tel:18666878683">1-866-OURVOTE</a></p>
         <nav class="nav wrapper">
             <a href="/" class="logo">
-                <img class="logo__img" src="res/img/logo.jpg" alt="Carpool Vote" width=709 height=187 />
+                <img id="logo" class="logo__img" src="res/img/logo.jpg" alt="Carpool Vote" width=709 height=187 />
             </a>
+            <script>
+                (function(){
+                    if (window.location.search === '?souls2thepolls') {
+                        var logo = document.getElementById('logo');
+                        logo.setAttribute('src', 'res/img/logo-souls2thepolls.png');
+                        logo.setAttribute('width', 661);
+                        logo.setAttribute('height', 300);
+                        logo.parentNode.setAttribute('href', '/?souls2thepolls');
+                    }
+                })();
+            </script>
 
             <ul id="nav-links" class="nav__links">
                 <li class="nav__item nav__story">
