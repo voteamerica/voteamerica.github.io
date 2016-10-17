@@ -111,7 +111,7 @@
                         <p>Just fill in this form! We'll try and connect you with someone that can help.</p>
                     </div>
                     <p class="align-center">
-                        <a href="#needride" class="button button--large" role="button" id="btnNeedRide">I need a ride</a>
+                        <a href="#pnlNeedRide" class="show-form button button--large" role="button">I need a ride</a>
                     </p>
                 </li>
                 <li class="ride__panel offerride" id="offerride">
@@ -121,7 +121,7 @@
                         <p>Fill in this form and we'll try and connect you with someone that needs a ride in the same direction.</p>
                     </div>
                     <p class="align-center">
-                        <a href="#offerride" class="button button--large button--alt" role="button" id="btnOfferRide">I can offer a ride</a>
+                        <a href="#pnlOfferRide" class="show-form button button--large button--alt" role="button">I can offer a ride</a>
                     </p>
                 </li>
             </ul>
@@ -277,9 +277,7 @@
                     </div>
                 </form>
             </div>
-            <!-- pnlNeedRide -->
 
-            <!-- http://40.117.45.210/driver/ -->
             <div id="pnlOfferRide">
                 <form name="offerRide" action="https://api.carpoolvote.com/v1.1/driver" method="post" class="form-horizontal" data-toggle="validator" role="form">
                     <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
@@ -414,7 +412,6 @@
                     </div>
                 </form>
             </div>
-            <!-- /pnlOfferRide -->
         </div>
 
         <div class="about wrapper clearfix">
@@ -586,12 +583,25 @@
 
     <script>
         $(document).ready(function() {
-            var $forms = $('#forms');
+            var $forms = $('#forms'),
+                $intro = $('#pnlIntro');
 
             function scrollTo(offset, speed) {
                 $('html, body').animate({
                     scrollTop: offset
                 }, speed || 500);
+            }
+
+            function showForm(target){
+                $(target).slideDown(200).siblings().slideUp(200);
+                $intro.slideUp(200);
+                scrollTo(0);
+            }
+
+            function hideForms(){
+                $forms.children().slideUp(200);
+                $intro.slideDown(200);
+                scrollTo(0);
             }
 
             $('#nav-links').on('click', 'a', function(e) {
@@ -600,24 +610,13 @@
                 e.preventDefault();
             });
 
-            $('#btnNeedRide').on('click', function(e) {
-                $('#pnlIntro, #pnlOfferRide').slideUp('fast');
-                $('#pnlNeedRide').slideDown('fast');
-                scrollTo(0);
-                e.preventDefault();
-            });
-
-            $('#btnOfferRide').on('click', function(e) {
-                $('#pnlIntro, #pnlNeedRide').slideUp('fast');
-                $('#pnlOfferRide').slideDown('fast');
-                scrollTo(0);
+            $intro.on('click', '.show-form', function(e) {
+                showForm( $(this).attr('href') );
                 e.preventDefault();
             });
 
             $forms.on('click', '.close-form', function(e) {
-                $('#pnlNeedRide, #pnlOfferRide').slideUp('fast');
-                $('#pnlIntro').slideDown('fast');
-                scrollTo(0);
+                hideForms();
                 e.preventDefault();
             });
 
