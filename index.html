@@ -110,12 +110,9 @@
     <div class="content">
         <div id="intro" class="intro wrapper">
             <script>
-                (function(){
-                    if (window.location.search === '?souls2thepolls') {
-                        var intro = document.getElementById('intro');
-                        intro.style.background = "#275880 url('forest.jpeg') no-repeat top center";
-                    }
-                })();
+                if (window.location.search === '?souls2thepolls') {
+                    document.getElementById('intro').style.backgroundImage = 'url("res/forest.jpeg")';
+                }
             </script>
             <div class="intro__banner">
                 <h1 class="intro__title">Every American DESERVES a Vote</h1>
