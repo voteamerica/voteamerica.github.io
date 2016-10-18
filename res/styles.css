@@ -748,8 +748,12 @@ label {
         float: left;
     }
 
+    .time-range-slider {
+        max-width: 700px;
+    }
+    
     .available-times-list {
-        min-height: 245px;
+        max-width: 500px;
     }
 }
 
