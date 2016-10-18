@@ -173,7 +173,8 @@
                                 <label>Available times</label>
                                 <ul class="available-times-list" id="rider-available-times">
                                 </ul>
-                                <input type="hidden" class="hiddenJSONTimes" id="riderJSONTimes" name="AvailableRideTimesJSON" value="{}">
+                                <input type="text" class="hiddenJSONTimes" aria-hidden="true" name="AvailableRideTimesJSON" required data-error="Please enter at least one available time">
+                                <div class="help-block with-errors"></div>
                             </div>
                         </fieldset>
 
@@ -317,7 +318,8 @@
                                 <label>Available times</label>
                                 <ul class="available-times-list" id="driver-available-times">
                                 </ul>
-                                <input type="hidden" class="hiddenJSONTimes" id="driverJSONTimes" name="AvailableDriveTimesJSON" value="{}">
+                                <input type="text" class="hiddenJSONTimes" aria-hidden="true" name="AvailableDriveTimesJSON" required data-error="Please enter at least one available time">
+                                <div class="help-block with-errors"></div>
                             </div>
                         </fieldset>
 
@@ -655,18 +657,13 @@
 
             $forms.find('.available-times-list')
                 .on('click', '.remove-time', function() {
+                    var $timesList = $(this).parents('.available-times-list');
                     $(this).parent().remove();
+                    updateHiddenJSONTimes($timesList);
                 });
 
             $forms.on('submit', 'form', function() {
-                var isoString = '';
-                var datetimes = $(this).find('.add-time-btn').data('datetimes'); 
-
-                if (datetimes !== undefined) {
-                    isoString = datetimes.join('|');
-                }
-
-                $(this).find('.hiddenJSONTimes').val(isoString);
+                updateHiddenJSONTimes( $(this).find('.available-times-list') );
             });
             
             toggleFormsOnHashChange();
@@ -765,16 +762,29 @@
                 var isoStart        = getISOString(sdt, sliderStartTime);
                 var isoEnd          = getISOString(edt, sliderEndTime);
 
-                var data = $(this).data('datetimes') || [];
-                data.push( [isoStart, isoEnd].join('/') );
-                $(this).data('datetimes', data);
 
                 var cancelButton = ' <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>';
 
-                $timesList.append('<li>' + niceDate + ', ' + startTime + '—' + endTime + cancelButton + '</li>');
+                var $listItem = $('<li/>')
+                    .data('datetime', [isoStart, isoEnd].join('/'))
+                    .html(niceDate + ', ' + startTime + '—' + endTime + cancelButton);
+
+                $timesList.append($listItem);
+
+                updateHiddenJSONTimes($timesList);
 
                 e.preventDefault();
             });
+        }
+
+        function updateHiddenJSONTimes($timesList) {
+            var timeData = $timesList.find('li').get().map(function(li) {
+                return $(li).data('datetime');
+            }).join('|');
+
+            $timesList.siblings('.hiddenJSONTimes')
+                .val(timeData)
+                .trigger('change');
         }
 
         $('.date-time-pickers').each(function() {

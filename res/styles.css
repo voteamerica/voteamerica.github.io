@@ -574,6 +574,10 @@ label {
     opacity: 1;
 }
 
+.hiddenJSONTimes {
+    display: none;
+}
+
 
 /* Main content section */
 
