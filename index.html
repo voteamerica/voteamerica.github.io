@@ -589,8 +589,6 @@
 
     <script type="text/javascript" src="res/jquery-dateFormat.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="res/jquery.datetimepicker.full.min.js"></script>
@@ -677,13 +675,11 @@
             
             toggleFormsOnHashChange();
             window.onpopstate = toggleFormsOnHashChange;
+
+            $forms.find('.button-date').text(formatNiceDate(new Date()));
+
+            $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
         });
-
-        $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
-
-        var currentDateString = $.format.date(new Date(), "ddd, MMM d");
-        $('#driver-button-date, #rider-button-date').text(currentDateString);
-
 
         // Toggle Official Driver input when checkbox is ticked:
         $('#officialDriver').on('change', function() {
@@ -697,7 +693,7 @@
             // Max Date = Voting Day 2016!'
             $datepicker.datetimepicker({
                 timepicker: false,
-                format: 'l, M j',
+                format: 'c',
                 startDate: '2016/10/05',
                 minDate: '2016/10/05',
                 maxDate: '2016/11/08',
@@ -712,7 +708,7 @@
             $datepicker.attr('value', currDate);
 
             $datepicker.on('change', function() {
-                $datetime.find('.button-date').text($(this).val());
+                $datetime.find('.button-date').text(formatNiceDate( $(this).val() ));
             });
         }
 
@@ -730,54 +726,36 @@
                     density: 2,
                     values: [480, 720, 960, 1200, ],
                     format: {
-                        to: formatTime
+                        to: format12HrTime
                     }
                 }
             });
 
             slider.noUiSlider.on('update', function() {
-                var sliderData = slider.noUiSlider.get();
-                var startTime = formatTime(sliderData[0]);
-                var endTime = formatTime(sliderData[1]);
+                var timeRange = formatTimeRange( slider.noUiSlider.get() );
                 $datetime.find('.add-time-btn')
                     .children('.button-time')
-                    .text(startTime + '-' + endTime);
+                    .text(timeRange);
             });
         }
 
         function addTimeBtnListener($datetime, $slider, $timesList, $datepicker) {
+            var cancelButton = ' <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>';
+
             $datetime.on('click', '.add-time-btn', function(e) {
-                var sliderData = $slider[0].noUiSlider.get();
-                var startTime = formatTime(sliderData[0]);
-                var endTime = formatTime(sliderData[1]);
-
                 var date = $datepicker.val();
-                var niceDate = $.format.date(date, "ddd D MMMM");
+                var timeRange = $slider[0].noUiSlider.get();
 
-                // not comfortable with this, but can't see why don't get this from datepicker
-                var datePlusYear = date + " 2016";
-
-                var niceDateYear = $.format.date(datePlusYear, "ddd D MMMM yyyy");
-                var startDateTime = niceDateYear + ' ' + startTime;                    
-                var endDateTime = niceDateYear + ' ' + endTime;                    
-
-                var ndt = $.format.date(datePlusYear, "dd MMMM yyyy");
-                var sdt = moment(ndt);
-                var edt = moment(ndt);
-
-                var sliderStartTime = formatTime2(sliderData[0]);
-                var sliderEndTime   = formatTime2(sliderData[1]);
-
-                var isoStart        = getISOString(sdt, sliderStartTime);
-                var isoEnd          = getISOString(edt, sliderEndTime);
+                var iso = timeRange.map(function(mins) {
+                    var timestamp = $.format.date(date, 'yyyy-MM-ddT') + format24HrTime(mins) + ':00';
+                    return new Date(timestamp).toISOString();
+                });
 
                 var data = $(this).data('datetimes') || [];
-                data.push( [isoStart, isoEnd].join('/') );
+                data.push( iso.join('/') );
                 $(this).data('datetimes', data);
 
-                var cancelButton = ' <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>';
-
-                $timesList.append('<li>' + niceDate + ', ' + startTime + '—' + endTime + cancelButton + '</li>');
+                $timesList.append('<li>' + formatNiceDate(date) + ', ' + formatTimeRange(timeRange) + cancelButton + '</li>');
 
                 e.preventDefault();
             });
@@ -796,53 +774,42 @@
             addTimeBtnListener($(this), $slider, $timesList, $datepicker);
         });
 
-        function getISOString(date, timeAdjustment) {
-            var isoString = '';
-
-            date = date.add(timeAdjustment.mins, 'm');
-            date = date.add(timeAdjustment.hour, 'h');
-
-            if (timeAdjustment.am === false && timeAdjustment.hour !== 12) {
-                date = date.add(12, 'h');
-            }
-
-            isoString = date.toISOString();
-
-            return isoString;
-        }
-
-        // The sliders work with the day in terms of minutes, this function translates the minutes
-        // into readable format i.e. 4:34pm
+        // The sliders work with the day in terms of minutes, so these functions
+        // translate the minutes into a readable format
         function formatTime(minutes) {
-            var am = false;
-            if (minutes < 720) {
-                am = true;
-            }
             var hour = Math.floor(minutes / 60);
-            hour = minutes < 780 ? hour : hour - 12;
             var out_minutes = minutes % 60;
-            out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
-            var ampmString = am ? 'am' : 'pm';
-
-            return hour + ':' + out_minutes + ampmString;
-        }
-
-        function formatTime2(minutes) {
-            var am = false;
-            if (minutes < 720) {
-                am = true;
-            }
-            var hour = Math.floor(minutes / 60);
-            hour = minutes < 780 ? hour : hour - 12;
-            var out_minutes = minutes % 60;
-            out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
-            var ampmString = am ? 'am' : 'pm';
 
             return {
-                hour: hour,
-                mins: out_minutes,
-                am: am
+                hour: minutes < 780 ? hour : hour - 12,
+                mins: toTwoDigits(out_minutes),
+                am: minutes < 720
             };
+        }
+
+        function format12HrTime(minutes) {
+            var time = formatTime(minutes);
+            return time.hour + ':' + time.mins + (time.am ? 'am' : 'pm');
+        }
+
+        function format24HrTime(minutes) {
+            var time = formatTime(minutes);
+            if (!time.am && time.hour !== 12) {
+                time.hour += 12;
+            }
+            return toTwoDigits(time.hour) + ':' + time.mins;
+        }
+
+        function formatTimeRange(range) {
+            return range.map(format12HrTime).join('—');
+        }
+
+        function formatNiceDate(date) {
+            return $.format.date(date, 'ddd D MMMM');
+        }
+
+        function toTwoDigits(n) {
+            return (n < 10 ? '0' : '') + n;
         }
 
     </script>
