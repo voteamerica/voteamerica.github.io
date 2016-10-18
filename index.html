@@ -109,6 +109,14 @@
 
     <div class="content">
         <div id="intro" class="intro wrapper">
+            <script>
+                (function(){
+                    if (window.location.search === '?souls2thepolls') {
+                        var intro = document.getElementById('intro');
+                        intro.style.background = "#275880 url('forest.jpeg') no-repeat top center";
+                    }
+                })();
+            </script>
             <div class="intro__banner">
                 <h1 class="intro__title">Every American DESERVES a Vote</h1>
                 <p class="intro__lead">We connect volunteer drivers with anybody who needs a ride to claim their vote.</p>
