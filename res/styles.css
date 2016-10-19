@@ -574,6 +574,10 @@ label {
     opacity: 1;
 }
 
+.hiddenJSONTimes {
+    display: none;
+}
+
 
 /* Main content section */
 
@@ -748,8 +752,12 @@ label {
         float: left;
     }
 
+    .time-range-slider {
+        max-width: 700px;
+    }
+    
     .available-times-list {
-        min-height: 245px;
+        max-width: 500px;
     }
 }
 

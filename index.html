@@ -149,32 +149,29 @@
                 <div class="bannerbox">
                     <h3 class="bannerbox__title">I need a ride</h3>
                     <div class="bannerbox__content">
+                        <a class="close-form button--cancel" href="#intro">&times;</a>
+                        
                         <fieldset class="date-time-pickers">
                             <legend>When and where do you need picking up?</legend>
-                            <a class="close-form button--cancel" href="#intro">&times;</a>
 
-                            <div class="form-column">
-                                <div class="form-group date-container">
-                                    <label for="rider-date">Date available</label>
-                                    <input type="text" class="riderdatepicker datepicker" id="rider-date" name="RiderDate" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="rider-time-slider">Time range available</label>
-                                    <div id="rider-time-slider" class="time-range-slider"></div>
-                                </div>
+                            <div class="form-group date-container">
+                                <label for="rider-date">Date available</label>
+                                <input type="text" class="riderdatepicker datepicker" id="rider-date" name="RiderDate" required>
                             </div>
-
-                            <div class="form-column">
-                                <div class="form-group">
-                                    <button class="add-time-btn button" id="rider-add-time">&plus; Add <span class="button-date" id="rider-button-date"></span>, <span class="button-time" id="rider-button-time">6:00am-10:00pm</span></button>
-                                    <small>(Add as many dates and time ranges as you like)</small>
-                                </div>
-                                <div class="form-group">
-                                    <label>Available times</label>
-                                    <ul class="available-times-list" id="rider-available-times">
-                                    </ul>
-                                    <input type="hidden" class="hiddenJSONTimes" id="riderJSONTimes" name="AvailableRideTimesJSON" value="{}">
-                                </div>
+                            <div class="form-group">
+                                <label for="rider-time-slider">Time range available</label>
+                                <div id="rider-time-slider" class="time-range-slider"></div>
+                            </div>
+                            <div class="form-group">
+                                <button class="add-time-btn button" id="rider-add-time">&plus; Add <span class="button-date" id="rider-button-date"></span>, <span class="button-time" id="rider-button-time">6:00am-10:00pm</span></button>
+                                <small>(Add as many dates and time ranges as you like)</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Available times</label>
+                                <ul class="available-times-list" id="rider-available-times">
+                                </ul>
+                                <input type="text" class="hiddenJSONTimes" aria-hidden="true" name="AvailableRideTimesJSON" required data-error="Please enter at least one available time">
+                                <div class="help-block with-errors"></div>
                             </div>
                         </fieldset>
 
@@ -302,28 +299,24 @@
                         <fieldset class="date-time-pickers">
                             <legend>When and where can you pick someone up?</legend>
 
-                            <div class="form-column">
-                                <div class="form-group date-container">
-                                    <label for="driver-date">Date available</label>
-                                    <input type="text" class="driverdatepicker datepicker" id="driver-date" name="DriverDate" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="driver-time-slider">Time range available</label>
-                                    <div id="driver-time-slider" class="time-range-slider"></div>
-                                </div>
+                            <div class="form-group date-container">
+                                <label for="driver-date">Date available</label>
+                                <input type="text" class="driverdatepicker datepicker" id="driver-date" name="DriverDate" required>
                             </div>
-
-                            <div class="form-column">
-                                <div class="form-group">
-                                    <button class="add-time-btn button" id="driver-add-time">&plus; Add <span class="button-date" id="driver-button-date"></span>, <span class="button-time" id="driver-button-time">6:00am-10:00pm</span></button>
-                                    <small>(Add as many dates and time ranges as you like)</small>
-                                </div>
-                                <div class="form-group">
-                                    <label>Available times</label>
-                                    <ul class="available-times-list" id="driver-available-times">
-                                    </ul>
-                                    <input type="hidden" class="hiddenJSONTimes" id="driverJSONTimes" name="AvailableDriveTimesJSON" value="{}">
-                                </div>
+                            <div class="form-group">
+                                <label for="driver-time-slider">Time range available</label>
+                                <div id="driver-time-slider" class="time-range-slider"></div>
+                            </div>
+                            <div class="form-group">
+                                <button class="add-time-btn button" id="driver-add-time">&plus; Add <span class="button-date" id="driver-button-date"></span>, <span class="button-time" id="driver-button-time">6:00am-10:00pm</span></button>
+                                <small>(Add as many dates and time ranges as you like)</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Available times</label>
+                                <ul class="available-times-list" id="driver-available-times">
+                                </ul>
+                                <input type="text" class="hiddenJSONTimes" aria-hidden="true" name="AvailableDriveTimesJSON" required data-error="Please enter at least one available time">
+                                <div class="help-block with-errors"></div>
                             </div>
                         </fieldset>
 
@@ -661,18 +654,13 @@
 
             $forms.find('.available-times-list')
                 .on('click', '.remove-time', function() {
+                    var $timesList = $(this).parents('.available-times-list');
                     $(this).parent().remove();
+                    updateHiddenJSONTimes($timesList);
                 });
 
             $forms.on('submit', 'form', function() {
-                var isoString = '';
-                var datetimes = $(this).find('.add-time-btn').data('datetimes'); 
-
-                if (datetimes !== undefined) {
-                    isoString = datetimes.join('|');
-                }
-
-                $(this).find('.hiddenJSONTimes').val(isoString);
+                updateHiddenJSONTimes( $(this).find('.available-times-list') );
             });
             
             toggleFormsOnHashChange();
@@ -771,16 +759,29 @@
                 var isoStart        = getISOString(sdt, sliderStartTime);
                 var isoEnd          = getISOString(edt, sliderEndTime);
 
-                var data = $(this).data('datetimes') || [];
-                data.push( [isoStart, isoEnd].join('/') );
-                $(this).data('datetimes', data);
 
                 var cancelButton = ' <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>';
 
-                $timesList.append('<li>' + niceDate + ', ' + startTime + '—' + endTime + cancelButton + '</li>');
+                var $listItem = $('<li/>')
+                    .data('datetime', [isoStart, isoEnd].join('/'))
+                    .html(niceDate + ', ' + startTime + '—' + endTime + cancelButton);
+
+                $timesList.append($listItem);
+
+                updateHiddenJSONTimes($timesList);
 
                 e.preventDefault();
             });
+        }
+
+        function updateHiddenJSONTimes($timesList) {
+            var timeData = $timesList.find('li').get().map(function(li) {
+                return $(li).data('datetime');
+            }).join('|');
+
+            $timesList.siblings('.hiddenJSONTimes')
+                .val(timeData)
+                .trigger('change');
         }
 
         $('.date-time-pickers').each(function() {
