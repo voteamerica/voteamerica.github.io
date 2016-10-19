@@ -84,10 +84,10 @@
                     <a href="/story" class="nav__link story" id="story-link">Our Story</a>
                 </li>
                 <li class="nav__item nav__how">
-                    <a href="#howtoclaim" class="nav__link">How it works</a>
+                    <a href="#howtoclaim" class="nav__link scroll">How it works</a>
                 </li>
                 <li class="nav__item nav__support">
-                    <a href="#support" class="nav__link">Support</a>
+                    <a href="#support" class="nav__link scroll">Support</a>
                 </li>
             </ul>
 
@@ -638,7 +638,7 @@
                 }
             };
 
-            $('#nav-links').on('click', 'a', function(e) {
+            $('#nav-links').on('click', '.scroll', function(e) {
                 var anchor = $(this).attr('href');
                 scrollTo($(anchor).offset().top, 999);
                 e.preventDefault();
