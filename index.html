@@ -156,14 +156,16 @@
                         <a class="close-form button--cancel" href="#intro">&times;</a>
 
                         <fieldset class="date-time-pickers">
-                            <legend>When and where do you need picking up?</legend>
+                            <legend>Your trip</legend>
 
                             <div class="form-group date-container">
-                                <label for="rider-date">Date available</label>
+                                <label for="rider-date">Date(s) available</label>
+                                <p>On what date(s) would you be a available for the ride? Please pick all the dates that could work for you: This will make it easier for us to match you with a driver.</p>
                                 <input type="text" class="riderdatepicker datepicker" id="rider-date" name="RiderDate" required>
                             </div>
                             <div class="form-group">
                                 <label for="rider-time-slider">Time range available</label>
+                                <p>Which times slots on this date would you be available for a ride? You can pick multiple time slots, on different dates or the same date.</p>
                                 <div id="rider-time-slider" class="time-range-slider"></div>
                             </div>
                             <div class="form-group">
@@ -184,20 +186,20 @@
 
                             <div class="form-column">
                                 <div class="form-group">
-                                    <label for="rideArea">Collection ZIP code</label>
+                                    <label for="rideArea">Pick up ZIP code</label>
                                     <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="rideDestinationZIP">Destination ZIP code</label>
-                                    <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" name="RiderDropOffZIP" placeholder="Where you need a ride to" name="RiderDropOffZIP" required>
+                                    <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" name="RiderDropOffZIP" placeholder="To where do you need a ride?" name="RiderDropOffZIP" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
 
                             <div class="form-column">
                                 <div class="form-group">
-                                    <label>Check your polling location</label>
+                                    <label>Find your polling place</label>
                                     <ul id="location-details" class="state-dropdown">
                                         <li>Loading&hellip;</li>
                                     </ul>
@@ -269,7 +271,7 @@
 
                         <div class="form-group checkbox">
                             <label for="RiderIsVulnerable">
-                                <input type="checkbox" id="RiderIsVulnerable" name="RiderIsVulnerable" /> Pensioner or disability: Please check this box if you are retired from work or you consider yourself to have a disability.
+                                <input type="checkbox" id="RiderIsVulnerable" name="RiderIsVulnerable" /> Senior or disability: Please check this box if you are retired from work or you consider yourself to have a disability.
                             </label>
                         </div>
                         <div class="form-group checkbox">
