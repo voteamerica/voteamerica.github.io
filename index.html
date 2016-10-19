@@ -311,14 +311,16 @@
                         <a class="close-form button--cancel" href="#intro">&times;</a>
 
                         <fieldset class="date-time-pickers">
-                            <legend>When and where can you pick someone up?</legend>
+                            <legend>What can you offer?</legend>
 
                             <div class="form-group date-container">
-                                <label for="driver-date">Date available</label>
+                                <label for="driver-date">Dates available</label>
+                                <p>On what date(s) would you be a available to give rides?" We'll propose matches for all of the dates that you pick.</p>
                                 <input type="text" class="driverdatepicker datepicker" id="driver-date" name="DriverDate" required>
                             </div>
                             <div class="form-group">
                                 <label for="driver-time-slider">Time range available</label>
+                                <p>Which times slots on this date would you be available to give rides? You can pick multiple time slots, on different dates or the same date.</p>
                                 <div id="driver-time-slider" class="time-range-slider"></div>
                             </div>
                             <div class="form-group">
@@ -338,8 +340,8 @@
                             <legend>Location and vehicle</legend>
 
                             <div class="form-group">
-                                <label for="rideArea">Collection ZIP code</label>
-                                <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where you can collect the rider" name="DriverCollectionZIP" required>
+                                <label for="rideArea">Pick up zip code</label>
+                                <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where can you pick up the rider?" name="DriverCollectionZIP" required>
                                 <div class="help-block with-errors"></div>
                                 <p>I am willing to collect within a <input type="number" id="offerMiles" placeholder="0" name="DriverCollectionRadius" pattern="\d*" min="1" step="1" class="form-input form-input--inline" /> mile radius of this zip code.<p>
                             </div>
@@ -391,7 +393,8 @@
 
                         <div class="form-group checkbox">
                             <label for="officialDriver">
-                                <input type="checkbox" id="officialDriver" name="DrivingOnBehalfOfOrganization" /> I am driving in an official capacity on behalf of a registered organization
+                              <input type="checkbox" class="hidden" name="V" value="B" style="display:none;">
+                                <input type="checkbox" id="officialDriver" name="DrivingOnBehalfOfOrganization" style="display:none;" class="hidden" /> <!--I am driving in an official capacity on behalf of a registered organization -->
                             </label>
                         </div>
                         <div class="form-group" id="quesDriverOrgName" style="display:none">
