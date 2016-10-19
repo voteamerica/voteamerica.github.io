@@ -241,13 +241,25 @@
                             </div>
                             <div class="form-group">
                                 <label for="riderEmail">Email address</label>
-                                <input type="email" class="form-input" id="riderEmail" placeholder="Email" name="RiderEmail" required>
+                                <input type="email" class="form-input" id="riderEmail" placeholder="Email" name="RiderEmail">
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label for="ridePhone">Phone number</label>
-                                <input type="tel" class="form-input" id="ridePhone" placeholder="Phone" name="RiderPhone" required />
+                                <label for="riderPhone">Phone number</label>
+                                <input type="tel" class="form-input" id="riderPhone" placeholder="Phone" name="RiderPhone" required />
                                 <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group checkbox checkbox--multi">
+                                <p>Preferred method of contact</p>
+                                <label>
+                                    <input type="checkbox" name="RiderPreferredContact" id="toggleRiderEmail" value="Email" /> Email
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="RiderPreferredContact" value="Phone" /> Phone
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="RiderPreferredContact" value="SMS" /> SMS
+                                </label>
                             </div>
                         </fieldset>
 
@@ -479,7 +491,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox checkbox--multi">
-                                <p><b>I can:</b></p>
+                                <p>I can</p>
                                 <label>
                                     <input type="checkbox" name="Capability" value="build links"/> Help build links with organizations and communities
                                 </label>
@@ -658,6 +670,11 @@
                     $(this).parent().remove();
                     updateHiddenJSONTimes($timesList);
                 });
+
+            $forms.on('change', '#toggleRiderEmail', function(){
+                $forms.find('#riderEmail')
+                    .prop('required', $(this).is(':checked'));
+            });
 
             $forms.on('submit', 'form', function() {
                 updateHiddenJSONTimes( $(this).find('.available-times-list') );
