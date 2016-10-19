@@ -81,7 +81,7 @@
 
             <ul id="nav-links" class="nav__links">
                 <li class="nav__item nav__story">
-                    <a href="#story" class="nav__link">Our Story</a>
+                    <a href="/story" class="nav__link story" id="story-link">Our Story</a>
                 </li>
                 <li class="nav__item nav__how">
                     <a href="#howtoclaim" class="nav__link">How it works</a>
@@ -90,7 +90,7 @@
                     <a href="#support" class="nav__link">Support</a>
                 </li>
             </ul>
-            
+
             <ul class="social">
                 <li role="presentation" class="social__twitter">
                     <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Need a ride to vote on election day? CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
@@ -150,7 +150,7 @@
                     <h3 class="bannerbox__title">I need a ride</h3>
                     <div class="bannerbox__content">
                         <a class="close-form button--cancel" href="#intro">&times;</a>
-                        
+
                         <fieldset class="date-time-pickers">
                             <legend>When and where do you need picking up?</legend>
 
@@ -424,16 +424,11 @@
                 <div class="bannerbox" id="story">
                     <h3 class="bannerbox__title">Our Story</h3>
                     <div class="bannerbox__content">
-                        <p>Carpool Vote connects volunteer drivers with anybody who needs a ride to claim their vote.</p>
-                        <p>Many of our riders need a driver after losing full protection of the Voting Rights Act in 2013, as state governments no longer need permission to change election rules. The 2016 US Presidential election will be the first since this change has happened.</p>
-                        <p>Under the new rules, voters in several states face new barriers to getting to the polls. Some of the obstacles that Carpool Vote aims to reduce include:</p>
-                        <ul>
-                            <li>Polling stations face closure in lower-income communities of color,</li>
-                            <li>Would-be voters have to travel out of town to get a photo ID to register,</li>
-                            <li>The periods available to register and vote become shorter, and</li>
-                            <li>Requesting an absentee ballot or voting by mail can be difficult in many states.</li>
-                        </ul>
-                        <p>These rules - along with others introduced since the change - affect everybody but especially people of color, people with disabilities, young people, elderly people, and women.</p>
+                        <p>In many states, new voting rules have made it more difficult for people to get to polling stations. These rules particularly affect People of Color, People with Disabilities, Young People, Elderly People, and Women.Carpool Vote is a tool to fight back against an unfair political system in the 2016 election.</p>
+
+                        <p>We connect volunteer drivers with anybody who needs a ride - to the polls or voter I.D. office.</p>
+
+                        <p> <a href="/story" class="story" id="story-button"> Read more </a> </p>
                     </div>
                 </div>
                 <div class="bannerbox" id="howtoclaim">
@@ -523,7 +518,7 @@
                         </ul>
                     </div>
                 </div>
-                <div>                   
+                <div>
                 </div>
                 <div class="bannerbox" id="countdown">
                     <h3 class="bannerbox__title">2016 Election Countdown Clock</h3>
@@ -595,6 +590,12 @@
 
     <script>
         $(document).ready(function() {
+            if (window.location.search === '?souls2thepolls') {
+                $('a[href^="/"]').each(function() {
+                    $(this).attr('href', $(this).attr('href') + '?souls2thepolls');
+                });
+            }
+
             var $forms = $('#forms'),
                 $intro = $('#intro'),
                 supportsHistoryApi =  !!(window.history && history.pushState);
@@ -662,7 +663,7 @@
             $forms.on('submit', 'form', function() {
                 updateHiddenJSONTimes( $(this).find('.available-times-list') );
             });
-            
+
             toggleFormsOnHashChange();
             window.onpopstate = toggleFormsOnHashChange;
         });
@@ -746,8 +747,8 @@
                 var datePlusYear = date + " 2016";
 
                 var niceDateYear = $.format.date(datePlusYear, "ddd D MMMM yyyy");
-                var startDateTime = niceDateYear + ' ' + startTime;                    
-                var endDateTime = niceDateYear + ' ' + endTime;                    
+                var startDateTime = niceDateYear + ' ' + startTime;
+                var endDateTime = niceDateYear + ' ' + endTime;
 
                 var ndt = $.format.date(datePlusYear, "dd MMMM yyyy");
                 var sdt = moment(ndt);
@@ -793,7 +794,7 @@
             initDatePicker($(this), $datepicker);
 
             initTimeSlider($(this), $slider.get(0));
-            
+
             addTimeBtnListener($(this), $slider, $timesList, $datepicker);
         });
 
