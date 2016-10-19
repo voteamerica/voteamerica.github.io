@@ -30,6 +30,14 @@ body {
     margin-right: auto;
 }
 
+.single-column {
+    max-width: 850px;
+}
+
+.offset-top {
+    margin-top: -120px;
+}
+
 .align-left {
     float: left;
     margin-right: 1em;
@@ -331,7 +339,6 @@ a.twitter-mention-button {
 /* Forms */
 
 .forms {
-    margin-top: -120px;
     margin-bottom: 30px;
     min-height: 120px;
 }
