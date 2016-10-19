@@ -592,7 +592,11 @@ label {
 }
 
 .hiddenJSONTimes {
-    display: none;
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    margin-top: -130px;
+    visibility: hidden;
 }
 
 
