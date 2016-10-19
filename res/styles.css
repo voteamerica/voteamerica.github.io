@@ -239,6 +239,10 @@ a.twitter-mention-button {
     border-radius: 6px;
 }
 
+.intro.s2tp {
+    background-image: url('forest.jpeg');
+}
+
 .intro__banner {
     text-shadow: 0px 1px 4px rgba(0,0,0,0.4);
     color: white;
