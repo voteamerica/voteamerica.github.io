@@ -30,6 +30,14 @@ body {
     margin-right: auto;
 }
 
+.single-column {
+    max-width: 850px;
+}
+
+.offset-top {
+    margin-top: -120px;
+}
+
 .align-left {
     float: left;
     margin-right: 1em;
@@ -239,6 +247,10 @@ a.twitter-mention-button {
     border-radius: 6px;
 }
 
+.intro.s2tp {
+    background-image: url('forest.jpeg');
+}
+
 .intro__banner {
     text-shadow: 0px 1px 4px rgba(0,0,0,0.4);
     color: white;
@@ -327,7 +339,6 @@ a.twitter-mention-button {
 /* Forms */
 
 .forms {
-    margin-top: -120px;
     margin-bottom: 30px;
     min-height: 120px;
 }
@@ -581,7 +592,11 @@ label {
 }
 
 .hiddenJSONTimes {
-    display: none;
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    margin-top: -130px;
+    visibility: hidden;
 }
 
 
