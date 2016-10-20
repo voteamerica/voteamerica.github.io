@@ -242,7 +242,7 @@
                             <div class="form-group checkbox checkbox--multi">
                                 <p>Preferred method of contact</p>
                                 <label>
-                                    <input type="checkbox" name="RiderPreferredContact" id="toggleRiderEmail" value="Email" /> Email
+                                    <input type="checkbox" name="RiderPreferredContact" class="toggleRequiredEmail" data-emailID="#riderEmail" value="Email" /> Email
                                 </label>
                                 <label>
                                     <input type="checkbox" name="RiderPreferredContact" value="Phone" /> Phone
@@ -370,13 +370,25 @@
                             </div>
                             <div class="form-group">
                                 <label for="driverEmail">Email address</label>
-                                <input type="email" class="form-input" id="driverEmail" placeholder="Email address" name="DriverEmail" required>
+                                <input type="email" class="form-input" id="driverEmail" placeholder="Email address" name="DriverEmail">
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
                                 <label for="driverPhone">Phone number</label>
                                 <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" />
                                 <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group checkbox checkbox--multi">
+                                <p>Preferred method of contact</p>
+                                <label>
+                                    <input type="checkbox" name="DriverPreferredContact" class="toggleRequiredEmail" data-emailID="#driverEmail" value="Email" /> Email
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="DriverPreferredContact" value="Phone" /> Phone
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="DriverPreferredContact" value="SMS" /> SMS
+                                </label>
                             </div>
                         </fieldset>
 
@@ -673,9 +685,9 @@
                     updateHiddenJSONTimes($timesList);
                 });
 
-            $forms.on('change', '#toggleRiderEmail', function(){
-                $forms.find('#riderEmail')
-                    .prop('required', $(this).is(':checked'));
+            $forms.on('change', '.toggleRequiredEmail', function(){
+                var id = $(this).attr('data-emailID');
+                $forms.find(id).prop('required', $(this).is(':checked')).trigger('change');
             });
 
             $forms.on('submit', 'form', function() {
