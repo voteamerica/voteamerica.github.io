@@ -239,7 +239,7 @@ a.twitter-mention-button {
 /* Intro */
 
 .intro {
-    background: #275880 url('road.jpg') no-repeat top center;
+    background: #275880 url('../images/road.jpg') no-repeat top center;
     background-size: cover;
     padding: 15px;
     margin-top: -100px;
@@ -248,7 +248,7 @@ a.twitter-mention-button {
 }
 
 .intro.s2tp {
-    background-image: url('forest.jpeg');
+    background-image: url('../images/forest.jpeg');
 }
 
 .intro__banner {
@@ -304,7 +304,7 @@ a.twitter-mention-button {
 
 .ride__panel:after {
     content: '';
-    background: url(img/rider.jpg) center no-repeat;
+    background: url('../images/rider.jpg') center no-repeat;
     position: absolute;
     top: -58px;
     right: 50%;
@@ -315,7 +315,7 @@ a.twitter-mention-button {
 }
 
 .offerride:after {
-    background-image: url(img/driver.jpg);
+    background-image: url('../images/driver.jpg');
 }
 
 .ride__title {
