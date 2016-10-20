@@ -105,7 +105,7 @@
 
             <ul class="ride">
                 <li class="ride__panel needride" id="needride">
-                    <h3 class="ride__title">Riders</h3>
+                    <h2 class="ride__title">Riders</h2>
                     <div class="ride__copy">
                       <p>Need a ride to the polls or voter I.D. office?</p>
                       <p> Fill in the form to let us know when and where you
@@ -117,7 +117,7 @@
                     </p>
                 </li>
                 <li class="ride__panel offerride" id="offerride">
-                    <h3 class="ride__title">Drivers</h3>
+                    <h2 class="ride__title">Drivers</h2>
                     <div class="ride__copy">
                       <p>Do you have a spare seat to help get somebody to the
                       polls or voter I.D. office?</p>
@@ -135,7 +135,7 @@
             <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" class="ride-form" data-toggle="validator" role="form" aria-hidden="true">
                 <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
                 <div class="bannerbox">
-                    <h3 class="bannerbox__title">I need a ride</h3>
+                    <h2 class="bannerbox__title">I need a ride</h2>
                     <div class="bannerbox__content">
                         <a class="close-form button--cancel" href="#intro">&times;</a>
 
@@ -242,7 +242,7 @@
                             <div class="form-group checkbox checkbox--multi">
                                 <p>Preferred method of contact</p>
                                 <label>
-                                    <input type="checkbox" name="RiderPreferredContact" id="toggleRiderEmail" value="Email" /> Email
+                                    <input type="checkbox" name="RiderPreferredContact" class="toggleRequiredEmail" data-emailID="#riderEmail" value="Email" /> Email
                                 </label>
                                 <label>
                                     <input type="checkbox" name="RiderPreferredContact" value="Phone" /> Phone
@@ -294,7 +294,7 @@
             <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/v1.1/driver" method="post" class="ride-form" data-toggle="validator" role="form" aria-hidden="true">
                 <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
                 <div class="bannerbox">
-                    <h3 class="bannerbox__title">I can offer a ride</h3>
+                    <h2 class="bannerbox__title">I can offer a ride</h2>
                     <div class="bannerbox__content">
                         <a class="close-form button--cancel" href="#intro">&times;</a>
 
@@ -372,13 +372,25 @@
                             </div>
                             <div class="form-group">
                                 <label for="driverEmail">Email address</label>
-                                <input type="email" class="form-input" id="driverEmail" placeholder="Email address" name="DriverEmail" required>
+                                <input type="email" class="form-input" id="driverEmail" placeholder="Email address" name="DriverEmail">
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
                                 <label for="driverPhone">Phone number</label>
                                 <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" />
                                 <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group checkbox checkbox--multi">
+                                <p>Preferred method of contact</p>
+                                <label>
+                                    <input type="checkbox" name="DriverPreferredContact" class="toggleRequiredEmail" data-emailID="#driverEmail" value="Email" /> Email
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="DriverPreferredContact" value="Phone" /> Phone
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="DriverPreferredContact" value="SMS" /> SMS
+                                </label>
                             </div>
                         </fieldset>
 
@@ -419,9 +431,9 @@
         <div class="about wrapper clearfix">
             <div id="grid" class="about__padding" data-columns>
                 <div class="bannerbox" id="story">
-                    <h3 class="bannerbox__title">Our Story</h3>
+                    <h2 class="bannerbox__title">Our Story</h2>
                     <div class="bannerbox__content">
-                        <p>In many states, new voting rules have made it more difficult for people to get to polling stations. These rules particularly affect People of Color, People with Disabilities, Young People, Elderly People, and Women. Carpool Vote is a tool to fight back against an unfair political system in the 2016 election.</p>
+                        <p>In many states, new voting rules have made it more difficult for people to get to polling stations. These rules particularly affect people of color, people with disabilities, young people, elderly people, and women. Carpool Vote is a tool to fight back against an unfair political system in the 2016 election.</p>
 
                         <p>We connect volunteer drivers with anybody who needs a ride - to the polls or voter I.D. office.</p>
 
@@ -429,16 +441,16 @@
                     </div>
                 </div>
                 <div class="bannerbox" id="howtoclaim">
-                    <h3 class="bannerbox__title">How to Claim Your Vote</h3>
+                    <h2 class="bannerbox__title">How to Claim Your Vote</h2>
                     <div class="bannerbox__content">
-                        <h4>Am I registered?</h4>
+                        <h3>Am I registered?</h3>
                         <p>Select your state check if you're registered to vote on the November 8 presidential election</p>
                         <ul id="state-select" class="state-dropdown drop-a">
                             <li>Loading&hellip;</li>
                         </ul>
 
-                        <h4>Rock the Vote</h4>
-                        <a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv"><img class="align-right" src="res/img/rock.png" /></a>
+                        <h3>Rock the Vote</h3>
+                        <a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv"><img class="align-right" src="res/img/rock.png" alt="Rock the Vote logo" width=78 height=75 /></a>
                         <p><a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv">Rock the Vote</a> has several online tools that simplify and demystify voter registration and elections. Follow the links below for more on how to claim your vote!
                         <ul>
                             <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica" target="_rtv">Register to vote!</a></li>
@@ -449,10 +461,10 @@
                     </div>
                 </div>
                 <div class="bannerbox" id="support">
-                    <h3 class="bannerbox__title">Can I help some other way?</h3>
+                    <h2 class="bannerbox__title">Can I help some other way?</h2>
                     <div class="bannerbox__content">
                         <p>Absolutely!</p>
-                        <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below </p>
+                        <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below</p>
                         <!--
                             https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet
                         -->
@@ -504,9 +516,9 @@
                     </div>
                 </div>
                 <div class="bannerbox" id="righttovote">
-                    <h3 class="bannerbox__title">Voting support</h3>
+                    <h2 class="bannerbox__title">Voting support</h2>
                     <div class="bannerbox__content">
-                        <a href="http://www.866ourvote.org/"><img class="align-right" src="res/img/election-protection.png" /></a>
+                        <a href="http://www.866ourvote.org/"><img class="align-right" src="res/img/election-protection.png" alt="Election Protection logo" width=161 height=47 /></a>
                         <p>The <a href="http://www.866ourvote.org/">Election Protection Coalition</a> works around the clock to advance and defend your right to vote.</p>
                         <p>Report voting problems, and get voting related info for your state.</p>
                         <ul>
@@ -518,9 +530,9 @@
                 <div>
                 </div>
                 <div class="bannerbox" id="countdown">
-                    <h3 class="bannerbox__title">2016 Election Countdown Clock</h3>
+                    <h2 class="bannerbox__title">2016 Election Countdown Clock</h2>
                     <div class="bannerbox__content">
-                        <iframe src="http://www.270towin.com/2016-countdown-clock/widget300x200.php" width="300" height="200" border="0" frameBorder="0">
+                        <iframe src="http://www.270towin.com/2016-countdown-clock/widget300x200.php" width="300" height="200" border="0" frameBorder="0" style="max-width:100%">
                             Browser not supported. Visit <a href="http://www.270towin.com/">www.270towin.com</a>
                         </iframe>
                     </div>
@@ -531,13 +543,12 @@
 
     <footer class="footer">
         <div class="wrapper">
-            <p class="footer__text">
-                Contact us: <a class="footer__link" href="mailto:together@carpoolvote.com">together@carpoolvote.com</a>
-            </p>
-            <form class="newsletter">
-                <label class="newsletter__label" for="signup">Sign up for our newsletter</label>
-                <input class="newsletter__input" type="text" placeholder="email address">
-                <input class="newsletter__submit" value="Join" type="submit">
+            <p><strong>Contact us:</strong> <a href="mailto:together@carpoolvote.com">together@carpoolvote.com</a></p>
+            <form class="newsletter form-group" data-toggle="validator" role="form">
+                <label class="newsletter__label" for="newsletter-email">Sign up for our newsletter</label>
+                <input class="form-input input newsletter__input" id="newsletter-email" type="email" placeholder="email address" required />
+                <button class="button newsletter__submit">Join</button>
+                <div class="help-block with-errors"></div>
             </form>
         </div>
     </footer>
@@ -597,9 +608,6 @@
     <script type="text/javascript" src="res/jquery.datetimepicker.full.min.js"></script>
 
     <script type="text/javascript" src="res/nouislider.min.js"></script>
-
-    <!-- dropdown for issue #37 - voting registrations per state -->
-    <script type="text/javascript" src="dropdown.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -669,9 +677,9 @@
                     updateHiddenJSONTimes($timesList);
                 });
 
-            $forms.on('change', '#toggleRiderEmail', function(){
-                $forms.find('#riderEmail')
-                    .prop('required', $(this).is(':checked'));
+            $forms.on('change', '.toggleRequiredEmail', function(){
+                var id = $(this).attr('data-emailID');
+                $forms.find(id).prop('required', $(this).is(':checked')).trigger('change');
             });
 
             $forms.on('submit', 'form', function() {
