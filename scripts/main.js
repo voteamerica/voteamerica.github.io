@@ -259,7 +259,7 @@ function listItem(type) {
     }
 }
 
-$.getJSON('res/voting-details.json', function(data) {
+$.getJSON('scripts/voting-details.json', function(data) {
     $("#state-select").html( $.map(data, listItem('RegCheck')).join('') );
     $("#location-details").html( $.map(data, listItem('LocationFinder')).join('') );
 });
