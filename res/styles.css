@@ -349,8 +349,6 @@ a.twitter-mention-button {
 
 .forms .bannerbox__content {
     padding-top: 5px;
-    padding-left: 30px;
-    padding-right: 30px;
     position: relative;
 }
 
@@ -361,8 +359,8 @@ a.twitter-mention-button {
 }
 
 fieldset {
-    border-color: #ddd;
-    padding: 25px 30px 10px;
+    border: none;
+    padding: 20px 0 0;
     margin: 30px 0;
 }
 
@@ -703,6 +701,16 @@ label {
 
     .ride__text {
         font-size: 16px;
+    }
+
+    .forms .bannerbox__content {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    fieldset {
+        border: 1px solid #ddd;
+        padding: 25px 30px 10px;
     }
 
 
