@@ -299,14 +299,16 @@
                         <a class="close-form button--cancel" href="#intro">&times;</a>
 
                         <fieldset class="date-time-pickers">
-                            <legend>When and where can you pick someone up?</legend>
+                            <legend>What can you offer?</legend>
 
                             <div class="form-group date-container">
-                                <label for="driver-date">Date available</label>
+                                <label for="driver-date">Dates available</label>
+                                <p>On what date(s) would you be a available to give rides? We'll propose matches for all of the dates that you pick.</p>
                                 <input type="text" class="driverdatepicker datepicker" id="driver-date" name="DriverDate" required>
                             </div>
                             <div class="form-group">
                                 <label for="driver-time-slider">Time range available</label>
+                                <p>Which times slots on this date would you be available to give rides? You can pick multiple time slots, on different dates or the same date.</p>
                                 <div id="driver-time-slider" class="time-range-slider"></div>
                             </div>
                             <div class="form-group">
@@ -326,8 +328,8 @@
                             <legend>Location and vehicle</legend>
 
                             <div class="form-group">
-                                <label for="rideArea">Collection ZIP code</label>
-                                <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where you can collect the rider" name="DriverCollectionZIP" required>
+                                <label for="rideArea">Pick up ZIP code</label>
+                                <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where can you pick up the rider?" name="DriverCollectionZIP" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
@@ -380,16 +382,6 @@
                             </div>
                         </fieldset>
 
-                        <div class="form-group checkbox">
-                            <label for="officialDriver">
-                                <input type="checkbox" id="officialDriver" name="DrivingOnBehalfOfOrganization" /> I am driving in an official capacity on behalf of a registered organization
-                            </label>
-                        </div>
-                        <div class="form-group" id="quesDriverOrgName" style="display:none">
-                            <label for="officialDriverOrgName">Organization name</label>
-                            <input type="text" class="form-input" id="officialDriverOrgName" name="DrivingOBOOrganizationName" data-error="The organisation name is required if the above box is checked.">
-                            <div class="help-block with-errors"></div>
-                        </div>
                         <div class="form-group checkbox">
                             <label for="legalThree">
                                 <input type="checkbox" id="legalThree" name="RidersCanSeeDriverDetails" required /> I understand that Carpool Vote will share my contact details with the rider(s) if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
@@ -697,11 +689,6 @@
 
 
         // Toggle Official Driver input when checkbox is ticked:
-        $('#officialDriver').on('change', function() {
-            var isOfficialDriver = $(this).is(':checked');
-            $('#quesDriverOrgName').toggle(isOfficialDriver)
-                .find('#officialDriverOrgName').prop('required', isOfficialDriver);
-        });
 
         function initDatePicker($datetime, $datepicker) {
             // Initialize datepickers
