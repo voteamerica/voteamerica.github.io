@@ -652,37 +652,24 @@ label {
 /* Footer */
 
 .footer {
-    padding: 20px;
-    border-top: 10px solid #e64a4a;
+    padding: 50px 20px;
     color: #333;
-    background-color: #ccc; /* replace with real grey */
-}
-
-.footer__text {
-    margin: 0 auto 1em;
-}
-
-.footer__link {
-    color: #e64a4a;
-}
-
-.newsletter__label {
-    display: block;
+    background-color: #c8c8c8;
+    border-top: 4px solid #c93334;
+    box-shadow: inset 0 8px 0 #e5494a;
 }
 
 .newsletter__input {
-    margin: 10px 0;
-    padding: 5px;
-    min-width: 200px
+    display: inline-block;
+    padding: 0.4em 1em 0.5em;
+    margin-right: 8px;
+    vertical-align: middle;
+    max-width: 300px;
 }
 
+.newsletter__input,
 .newsletter__submit {
-    margin-left: 5px;
-    padding: 4px 10px 6px;
-    border: 0;
-    font-size: 14px;
-    color: white;
-    background-color: #297bbb;
+    margin-bottom: 10px;
 }
 
 

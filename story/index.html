@@ -129,13 +129,12 @@
 
     <footer class="footer">
         <div class="wrapper">
-            <p class="footer__text">
-                Contact us: <a class="footer__link" href="mailto:together@carpoolvote.com">together@carpoolvote.com</a>
-            </p>
-            <form class="newsletter">
-                <label class="newsletter__label" for="signup">Sign up for our newsletter</label>
-                <input class="newsletter__input" type="text" placeholder="email address">
-                <input class="newsletter__submit" value="Join" type="submit">
+            <p><strong>Contact us:</strong> <a href="mailto:together@carpoolvote.com">together@carpoolvote.com</a></p>
+            <form class="newsletter form-group" data-toggle="validator" role="form">
+                <label class="newsletter__label" for="newsletter-email">Sign up for our newsletter</label>
+                <input class="form-input input newsletter__input" id="newsletter-email" type="email" placeholder="email address" required />
+                <button class="button newsletter__submit">Join</button>
+                <div class="help-block with-errors"></div>
             </form>
         </div>
     </footer>
