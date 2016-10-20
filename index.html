@@ -392,17 +392,6 @@
                         </fieldset>
 
                         <div class="form-group checkbox">
-                            <label for="officialDriver">
-                              <input type="checkbox" class="hidden" name="V" value="B" style="display:none;">
-                                <input type="checkbox" id="officialDriver" name="DrivingOnBehalfOfOrganization" style="display:none;" class="hidden" /> <!--I am driving in an official capacity on behalf of a registered organization -->
-                            </label>
-                        </div>
-                        <div class="form-group" id="quesDriverOrgName" style="display:none">
-                            <label for="officialDriverOrgName">Organization name</label>
-                            <input type="text" class="form-input" id="officialDriverOrgName" name="DrivingOBOOrganizationName" data-error="The organisation name is required if the above box is checked.">
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group checkbox">
                             <label for="legalThree">
                                 <input type="checkbox" id="legalThree" name="RidersCanSeeDriverDetails" required /> I understand that Carpool Vote will share my contact details with the rider(s) if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
                             </label>
@@ -696,11 +685,6 @@
 
 
         // Toggle Official Driver input when checkbox is ticked:
-        $('#officialDriver').on('change', function() {
-            var isOfficialDriver = $(this).is(':checked');
-            $('#quesDriverOrgName').toggle(isOfficialDriver)
-                .find('#officialDriverOrgName').prop('required', isOfficialDriver);
-        });
 
         function initDatePicker($datetime, $datepicker) {
             // Initialize datepickers
