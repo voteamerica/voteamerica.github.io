@@ -3,6 +3,11 @@ $(function(){
         $intro = $('#intro'),
         rowTemplate = $('#available-time-row').html(),
         supportsHistoryApi =  !!(window.history && history.pushState);
+    var datetimeClasses = [
+        '.input--date',
+        '.input--time-start',
+        '.input--time-end'
+    ];
 
     toggleFormsOnHashChange();
     window.onpopstate = toggleFormsOnHashChange;
@@ -72,11 +77,19 @@ $(function(){
 
     $forms.find('.available-times').each(function() {
         var $self = $(this),
-            type = $self.attr('data-type');
+            type = $self.attr('data-type'),
+            rowID = 0;
 
-        function addRow(i, hideDeleteButton) {
-            var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{i}}/g, i));
-            $row.find('.form-input--date').attr('min', yyyymmdd());
+        function addRow(id, hideDeleteButton) {
+            var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, id));
+            $row.find('.input--date').attr('min', yyyymmdd());
+            if (id !== 0) {
+                var $prevRow = $self.find('li').last();
+                datetimeClasses.forEach(function(c){
+                    var prevVal = $prevRow.find(c).val();
+                    $row.find(c).val(prevVal);
+                });
+            }
             if (hideDeleteButton) {
                 $row.find('.remove-time').hide();
             }
@@ -87,13 +100,12 @@ $(function(){
             $self.find('.remove-time').toggle(rowCount > 1);
         }
 
-        addRow(0, true);
+        addRow(rowID, true);
 
         $self.siblings('.add-time-btn').on('click', function(e) {
-            var $rows = $self.find('li'),
-                rowCount = $rows.length;
-            addRow(rowCount);
-            toggleRemoveTimeBtn(rowCount + 1);
+            var $rows = $self.find('li');
+            addRow(rowID++);
+            toggleRemoveTimeBtn($rows.length);
             updateHiddenJSONTimes($self);
             $self.parents('form').validator('update');
             e.preventDefault();
@@ -110,11 +122,11 @@ $(function(){
 
     function getDateTimeValues($timesList) {
         return $timesList.find('li').get().map(function(li) {
-            return formatTime(
-                $(li).find('.form-input--date').val(),
-                $(li).find('.form-input--time-start').val(),
-                $(li).find('.form-input--time-end').val()
-            );
+            var inputValues = datetimeClasses.map(function(c) {
+                return $(li).find(c).val();
+            });
+
+            return formatTime.apply(this, inputValues);
         });
     }
 
@@ -126,7 +138,7 @@ $(function(){
     function formatTime(date, startTime, endTime) {
         var toIsoTime = function (date, time) {
             if (!date || !time) {
-                console.error('Invalid datetime: ', date, time);
+                console.error('Invalid date/time: ', date, time);
                 return '';
             }
             return new Date(date + ' ' + time).toISOString();

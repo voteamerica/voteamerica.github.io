@@ -568,18 +568,18 @@
     <script type="text/template" id="available-time-row">
         <li class="available-times__row">
             <div class="form-group">
-                <label for="{{type}}Date{{i}}">Date</label>
-                <input class="form-input form-input--date" type="date" name="{{type}}Date" id="{{type}}Date{{i}}" min="2016-10-20" max="2016-11-08" required />
+                <label for="{{type}}Date{{id}}">Date</label>
+                <input class="form-input input--date" type="date" name="{{type}}Date" id="{{type}}Date{{id}}" min="2016-10-20" max="2016-11-08" required />
                 <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">
-                <label for="{{type}}TimeStart{{i}}">Start time</label>
-                <input class="form-input form-input--time-start" type="time" name="{{type}}TimeStart" id="{{type}}TimeStart{{i}}" min="06:00" max="22:00" value="06:00" required />
+                <label for="{{type}}TimeStart{{id}}">Start time</label>
+                <input class="form-input input--time-start" type="time" name="{{type}}TimeStart" id="{{type}}TimeStart{{id}}" min="06:00" max="22:00" value="06:00" required />
                 <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">
-                <label for="{{type}}TimeEnd{{i}}">End time</label>
-                <input class="form-input form-input--time-end" type="time" name="{{type}}TimeEnd" id="{{type}}TimeEnd{{i}}" min="06:00" max="22:00" value="22:00" required />
+                <label for="{{type}}TimeEnd{{id}}">End time</label>
+                <input class="form-input input--time-end" type="time" name="{{type}}TimeEnd" id="{{type}}TimeEnd{{id}}" min="06:00" max="22:00" value="22:00" required />
                 <div class="help-block with-errors"></div>
             </div>
             <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>
