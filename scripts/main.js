@@ -147,7 +147,7 @@ $(function(){
             $row.find('.input--date').attr('min', yyyymmdd());
 
             if (!hideDeleteButton && Modernizr.inputtypes.date) {
-                var $prevRow = $self.find('li').last();
+                var $prevRow = $self.find('.available-times__row').last();
                 datetimeClasses.forEach(function(c){
                     var prevVal = $prevRow.find(c).val();
                     $row.find(c).val(prevVal).trigger('update');
@@ -196,7 +196,7 @@ $(function(){
     });
 
     function getDateTimeValues($timesList) {
-        return $timesList.find('li').get().map(function(li) {
+        return $timesList.find('.available-times__row').get().map(function(li) {
             var inputValues = datetimeClasses.map(function(c) {
                 return $(li).find(c).val();
             });
