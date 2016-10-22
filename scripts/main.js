@@ -166,9 +166,17 @@ $(function(){
                     $times.inputTime();
                 }
             }
+
+            $self.parents('form').validator('update');
         }
 
-        function toggleRemoveTimeBtn(rowCount) {
+        function removeRow($row){
+            $row.remove();
+            $self.parents('form').validator('update');
+        }
+
+        function toggleRemoveTimeBtn() {
+            var rowCount = $self.find('.available-times__row').length;
             $self.find('.remove-time').toggle(rowCount > 1);
         }
 
@@ -176,15 +184,13 @@ $(function(){
 
         $self.siblings('.add-time-btn').on('click', function(e) {
             addRow();
-            toggleRemoveTimeBtn($self.find('li').length);
-            $self.parents('form').validator('update');
+            toggleRemoveTimeBtn();
             e.preventDefault();
         });
 
         $self.on('click', '.remove-time', function(e) {
-            $(this).parent().remove();
-            toggleRemoveTimeBtn($self.find('li').length);
-            $self.parents('form').validator('update');
+            removeRow( $(this).parent() );
+            toggleRemoveTimeBtn();
             e.preventDefault();
         });
     });
