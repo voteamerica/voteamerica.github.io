@@ -32,6 +32,7 @@
     <script src="carpool-map/js/l.control.geosearch.js"></script>
     <script src="carpool-map/js/l.geosearch.provider.openstreetmap.js"></script>
     <link rel="stylesheet" href="res/src/css/l.geosearch.css"/>
+    <link rel="stylesheet" href="carpool-map/css/l.geosearch.css"/>
     <!-- csv parser Omnivore by Mapbox-->
     <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
 
@@ -441,6 +442,14 @@
 
         <div class="about wrapper clearfix">
             <div id="grid" class="about__padding" data-columns>
+
+                <div class="bannerbox" id="mapbannerbox">
+                    <h2 class="bannerbox__title">Map of Participants</h2>
+                    <!-- Add a div to hold the map, referenced in carpool-map/js/map.js-->
+                    <!-- Map CSS is inherited from Leaflet, but need to set a minimum height -->
+                    <div class="bannerbox__content" id="map" style="height: 400px">
+                    </div>
+                </div>
                 <div class="bannerbox" id="story">
                     <h2 class="bannerbox__title">Our Story</h2>
                     <div class="bannerbox__content">
@@ -613,5 +622,7 @@
     <script src="scripts/jquery.datetimepicker.full.min.js"></script>
     <script src="scripts/nouislider.min.js"></script>
     <script src="scripts/main.js"></script>
+    <!-- load the map-->
+    <script src="carpool-map/js/map.js"></script>
 </body>
 </html>
