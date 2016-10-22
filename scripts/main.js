@@ -207,22 +207,14 @@ $(function(){
 
     function updateHiddenJSONTimes($timesList) {
         var timeData = getDateTimeValues($timesList);
+        console.log(timeData);
         $timesList.siblings('.hiddenJSONTimes').val(timeData.join('|'));
     }
 
     function formatTime(date, startTime, endTime) {
-        var toIsoTime = function (date, time) {
-            if (!date || !time) {
-                console.error('Invalid date/time: ', date, time);
-                return '';
-            }
-            return new Date(date + ' ' + time).toISOString();
-        };
-
-        return [
-            toIsoTime(date, startTime),
-            toIsoTime(date, endTime)
-        ].join('/');
+        return [startTime, endTime].map(function(time){
+            return (date || '') + 'T' + (time || '');
+        }).join('/');
     }
     
     function yyyymmdd(date) {
