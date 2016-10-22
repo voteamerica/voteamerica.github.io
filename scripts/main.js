@@ -163,14 +163,13 @@ $(function(){
     }
 
     // Load JSON data to dropdown template 
-    function listItem(type) {
-        return function (val, key) {
-            return '<li class="state-dropdown__item">' + '<a href="' + val[type] + '" target="_blank"  id="' + key + '" >' + val['State'] + '</a>' + '</li>';
-        };
-    }
-
     $.getJSON('scripts/voting-details.json', function(data) {
-        $("#state-select").html( $.map(data, listItem('RegCheck')).join('') );
-        $("#location-details").html( $.map(data, listItem('LocationFinder')).join('') );
+        function getListItems(type) {
+            return $.map(data, function (val, key) {
+                return '<li class="state-dropdown__item">' + '<a href="' + val[type] + '" target="_blank"  id="' + key + '" >' + val['State'] + '</a>' + '</li>';
+            }).join('');
+        }
+        $("#state-select").html( getListItems('RegCheck') );
+        $("#location-details").html( getListItems('LocationFinder') );
     });
 });
