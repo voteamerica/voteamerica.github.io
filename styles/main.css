@@ -710,6 +710,10 @@ label {
         margin-top: -21px;
     }
 
+    .time-spin-btn {
+        min-height: 18.5px; // time-input polyfill bugfix
+    }
+
 
     /* Salvattore.js */
     #grid[data-columns]::before {

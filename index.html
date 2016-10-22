@@ -587,25 +587,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
     <script src="scripts/main.js"></script>
-
-    <!-- Date/time input polyfills -->
-    <script>
-        // Rather than download all of Modernizr, just fake the bits we need:
-        function checkInputSupport(type) {
-            var input = document.createElement('input');
-            input.setAttribute('type',type);
-            var invalidValue = 'invalid-value';
-            input.setAttribute('value', invalidValue); 
-            return (input.type === type) && (input.value !== invalidValue);
-        }
-        window.Modernizr = {
-            inputtypes: {
-                date: checkInputSupport('date'),
-                time: checkInputSupport('time')
-            }
-        };
-    </script>
-    <link type="text/css" rel="stylesheet" href="styles/time-polyfill.css">
-    <script src="scripts/time-polyfill.min.js"></script>
 </body>
 </html>

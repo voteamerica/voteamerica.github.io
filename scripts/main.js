@@ -3,6 +3,7 @@ $(function(){
         $intro = $('#intro'),
         rowTemplate = $('#available-time-row').html(),
         supportsHistoryApi =  !!(window.history && history.pushState);
+
     var datetimeClasses = [
         '.input--date',
         '.input--time-start',
@@ -10,7 +11,39 @@ $(function(){
     ];
 
     toggleFormsOnHashChange();
+
     window.onpopstate = toggleFormsOnHashChange;
+
+
+    // Rather than download all of Modernizr, just fake the bits we need:
+    function checkInputSupport(type) {
+        var input = document.createElement('input');
+        input.setAttribute('type',type);
+        var invalidValue = 'invalid-value';
+        input.setAttribute('value', invalidValue); 
+        return (input.type === type) && (input.value !== invalidValue);
+    }
+
+    window.Modernizr = {
+        inputtypes: {
+            date: checkInputSupport('date'),
+            time: checkInputSupport('time')
+        }
+    };
+
+    if (!Modernizr.inputtypes.time) {
+        $('<link>').appendTo('head').attr({
+            type: 'text/css', 
+            rel: 'stylesheet',
+            href: 'styles/time-polyfill.css'
+        });
+        $.getScript('scripts/time-polyfill.min.js');
+    }
+
+    if (!Modernizr.inputtypes.date) {
+        $.getScript('scripts/nodep-date-input-polyfill.dist.js');
+    }
+
 
     function scrollTo(offset, speed) {
         $('html, body').animate({
@@ -80,33 +113,42 @@ $(function(){
             type = $self.attr('data-type'),
             rowID = 0;
 
-        function addRow(id, hideDeleteButton) {
-            var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, id));
+        function addRow(hideDeleteButton) {
+            var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, rowID++));
+            
             $row.find('.input--date').attr('min', yyyymmdd());
-            if (id !== 0) {
+
+            if (!hideDeleteButton && Modernizr.inputtypes.date) {
                 var $prevRow = $self.find('li').last();
                 datetimeClasses.forEach(function(c){
                     var prevVal = $prevRow.find(c).val();
-                    $row.find(c).val(prevVal);
+                    $row.find(c).val(prevVal).trigger('update');
                 });
             }
+
             if (hideDeleteButton) {
                 $row.find('.remove-time').hide();
             }
+
             $self.append($row);
+
+            if (!Modernizr.inputtypes.time) {
+                var $times = $row.find('input[type="time"]').attr('step', 600);
+                if ($times.inputTime) {
+                    $times.inputTime();
+                }
+            }
         }
 
         function toggleRemoveTimeBtn(rowCount) {
             $self.find('.remove-time').toggle(rowCount > 1);
         }
 
-        addRow(rowID, true);
+        addRow(true);
 
         $self.siblings('.add-time-btn').on('click', function(e) {
-            var $rows = $self.find('li');
-            addRow(rowID++);
-            toggleRemoveTimeBtn($rows.length);
-            updateHiddenJSONTimes($self);
+            addRow();
+            toggleRemoveTimeBtn($self.find('li').length);
             $self.parents('form').validator('update');
             e.preventDefault();
         });
@@ -114,7 +156,6 @@ $(function(){
         $self.on('click', '.remove-time', function(e) {
             $(this).parent().remove();
             toggleRemoveTimeBtn($self.find('li').length);
-            updateHiddenJSONTimes($self);
             $self.parents('form').validator('update');
             e.preventDefault();
         });
