@@ -41,7 +41,11 @@ $(function(){
     }
 
     if (!Modernizr.inputtypes.date) {
-        $.getScript('scripts/nodep-date-input-polyfill.dist.js');
+        $.getScript('scripts/nodep-date-input-polyfill.dist.js', function(){
+            $('body').on('click', 'date-input-polyfill', function(){
+                $('input[type="date"]').trigger('change');
+            });
+        });
     }
 
 
@@ -115,7 +119,7 @@ $(function(){
 
         function addRow(hideDeleteButton) {
             var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, rowID++));
-            
+
             $row.find('.input--date').attr('min', yyyymmdd());
 
             if (!hideDeleteButton && Modernizr.inputtypes.date) {
@@ -133,7 +137,7 @@ $(function(){
             $self.append($row);
 
             if (!Modernizr.inputtypes.time) {
-                var $times = $row.find('input[type="time"]').attr('step', 600);
+                var $times = $row.find('input[type="time"]').attr('step', 3600);
                 if ($times.inputTime) {
                     $times.inputTime();
                 }
