@@ -28,3 +28,7 @@ Relies on Mailchimp (for user email subscriptions) and Google Analytics (for sta
 - Submit your own email in the subscription form to make sure that it works;
 - Go to your Google Analytics dashboard to make sure that your page view was taken into account;
 - Enjoy your free landing page! :-)
+
+# Contributing
+
+- If you're interested in contributing to this project, please read more [here](CONTRIBUTING.md) and read over our Code of Conduct [here](code-of-conduct.md)
