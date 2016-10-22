@@ -128,7 +128,7 @@
         </div>
 
         <div id="forms" class="forms wrapper offset-top">
-            <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" class="ride-form" role="form" aria-hidden="true">
+            <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/live/rider" method="post" class="ride-form" role="form" aria-hidden="true">
                 <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks.html" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I need a ride</h2>
@@ -273,7 +273,7 @@
                 </div>
             </form>
 
-            <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/v1.1/driver" method="post" class="ride-form" role="form" aria-hidden="true">
+            <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/live/driver" method="post" class="ride-form" role="form" aria-hidden="true">
                 <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks.html" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I can offer a ride</h2>
@@ -433,10 +433,7 @@
                     <div class="bannerbox__content">
                         <p>Absolutely!</p>
                         <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below</p>
-                        <!--
-                            https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet
-                        -->
-                        <form name="offerHelp" action="https://api.carpoolvote.com/v1.1/helper" method="post" data-toggle="validator" role="form">
+                        <form name="offerHelp" action="https://api.carpoolvote.com/live/helper" method="post" data-toggle="validator" role="form">
                             <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
 
                             <div class="form-group">
