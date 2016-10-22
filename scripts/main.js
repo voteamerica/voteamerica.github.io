@@ -207,7 +207,6 @@ $(function(){
 
     function updateHiddenJSONTimes($timesList) {
         var timeData = getDateTimeValues($timesList);
-        console.log(timeData);
         $timesList.siblings('.hiddenJSONTimes').val(timeData.join('|'));
     }
 
