@@ -1,12 +1,10 @@
 <!-- create the map, set the zoom, add it to the 'map' div element -->
     var map = L.map('map')
         .setView([36, -93], 3);
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibGFuZ2Rvbm1zIiwiYSI6ImNpZmQxdzE1dzRyd2RzbWx4bnp2Ym5maDcifQ.mrTKjuh7OcKwTDWc95OlZQ', {
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            id: 'mapbox.streets'
+            minZoom: 3,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         }).addTo(map);
         
 <!-- create the geocoder -->
