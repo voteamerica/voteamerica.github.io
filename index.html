@@ -128,7 +128,7 @@
         </div>
 
         <div id="forms" class="forms wrapper offset-top">
-            <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" class="ride-form" data-toggle="validator" role="form" aria-hidden="true">
+            <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" class="ride-form" role="form" aria-hidden="true">
                 <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks.html" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I need a ride</h2>
@@ -273,7 +273,7 @@
                 </div>
             </form>
 
-            <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/v1.1/driver" method="post" class="ride-form" data-toggle="validator" role="form" aria-hidden="true">
+            <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/v1.1/driver" method="post" class="ride-form" role="form" aria-hidden="true">
                 <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks.html" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I can offer a ride</h2>
@@ -572,12 +572,12 @@
             </div>
             <div class="form-group">
                 <label for="{{type}}TimeStart{{id}}">Start time</label>
-                <input class="form-input input--time-start" type="time" name="{{type}}TimeStart" id="{{type}}TimeStart{{id}}" min="06:00" max="22:00" value="06:00" required />
+                <input class="form-input input--time-start" type="time" name="{{type}}TimeStart" id="{{type}}TimeStart{{id}}" min="06:00" max="22:00" value="06:00" required data-start="#{{type}}TimeEnd{{id}}" />
                 <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">
                 <label for="{{type}}TimeEnd{{id}}">End time</label>
-                <input class="form-input input--time-end" type="time" name="{{type}}TimeEnd" id="{{type}}TimeEnd{{id}}" min="06:00" max="22:00" value="22:00" required />
+                <input class="form-input input--time-end" type="time" name="{{type}}TimeEnd" id="{{type}}TimeEnd{{id}}" min="06:00" max="22:00" value="22:00" required data-end="#{{type}}TimeStart{{id}}" />
                 <div class="help-block with-errors"></div>
             </div>
             <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>

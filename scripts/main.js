@@ -48,6 +48,30 @@ $(function(){
         });
     }
 
+    // Initialise form validator
+    $forms.find('form').validator({
+        custom: {
+            start: function($el) {
+                var endTime = $($el.data('start')).val();
+                if ($el.val() >= endTime) {
+                    return 'Start time must be before the end time';
+                }
+            },
+            end: function($el) {
+                var startTime = $($el.data('end')).val();
+                if ($el.val() <= startTime) {
+                    return 'End time must be after the start time';
+                }
+            }
+        }
+    });
+
+    // Update sibling start/end time validation on change
+    $forms.on('change', 'input[type="time"]', function(){
+        var sibling = $(this).data('start') || $(this).data('end');
+        $(sibling).trigger('input'); // Use a different event to prevent recursive trigger
+    });
+
 
     function scrollTo(offset, speed) {
         $('html, body').animate({
