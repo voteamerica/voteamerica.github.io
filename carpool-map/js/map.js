@@ -21,9 +21,9 @@
     var csvrider = "/carpool-map/data/unmatched-rider.csv";
     var csvdriver = "/carpool-map/data/unmatched-driver.csv";
 
-<!-- create a geojson layer from the csv file -->
-    var omniParseRider = omnivore.csv(csvrider);
-    var omniParseDriver = omnivore.csv(csvdriver);
+<!-- create a geojson layer from the csv file, .addTo(map) turns these layers on by default-->
+    var omniParseRider = omnivore.csv(csvrider).addTo(map);
+    var omniParseDriver = omnivore.csv(csvdriver).addTo(map);
     
 <!-- load these layers into a group for the layer control -->
     var overlayGroup = L.layerGroup([omniParseRider, omniParseDriver]);
@@ -33,6 +33,7 @@
         "Riders": omniParseRider,
         "Drivers": omniParseDriver,
     };
-
+    
 <!-- load the label, then the layer from the layer group -->
-    L.control.layers(overlaylabels).addTo(map);
+<!-- loads the map controller, using the .addTo(map) method when creating the layer initially determines if on/off at start-->
+    L.control.layers(null, overlaylabels).addTo(map);
