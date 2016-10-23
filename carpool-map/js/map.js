@@ -40,15 +40,15 @@
     })
     .addTo(map);
     
-<!-- load these layers into a group for the layer control -->
+// load these layers into a group for the layer control
     var overlayGroup = L.layerGroup([omniParseRider, omniParseDriver]);
     
-<!-- create "label": key for layers -->    
+//create "label": key for layers   
     var overlaylabels = {
         "Riders": omniParseRider,
         "Drivers": omniParseDriver,
     };
     
-<!-- load the label, then the layer from the layer group -->
-<!-- loads the map controller, using the .addTo(map) method when creating the layer initially determines if on/off at start-->
+//load the label, then the layer from the layer group
+//loads the map controller, using the .addTo(map) method when creating the layer initially determines if on/off at start
     L.control.layers(null, overlaylabels).addTo(map);
