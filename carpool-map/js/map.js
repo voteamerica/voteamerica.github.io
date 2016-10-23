@@ -11,7 +11,7 @@
     new L.Control.GeoSearch({
         provider: new L.GeoSearch.Provider.OpenStreetMap(),
         position: 'topleft',
-        showMarker: true,
+        showMarker: false,
         retainZoomLevel: false,
     }).addTo(map);
 
