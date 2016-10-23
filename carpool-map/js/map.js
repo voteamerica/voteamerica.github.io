@@ -16,39 +16,24 @@
     }).addTo(map);
 
 //data location
-    var csvrider = "/carpool-map/data/unmatched-rider.csv";
-    var csvdriver = "/carpool-map/data/unmatched-driver.csv";
+    var jsonRider = [{"count":"1","zip":"20111","state":"VA","latitude":" 38.769697","longitude":" -77.44915","city":"Manassas","full_state":"Virginia","latitude_numeric":38.7697,"longitude_numeric":-77.4492,"latlong":{"x":38.7696952819824,"y":-77.4491500854492}}];
+    var jsonDriver = [{"count":"1","zip":"20111","state":"VA","latitude":" 38.769697","longitude":" -77.44915","city":"Manassas","full_state":"Virginia","latitude_numeric":38.7697,"longitude_numeric":-77.4492,"latlong":{"x":38.7696952819824,"y":-77.4491500854492}}];
 
-
-//create a geojson layer from the csv file, .addTo(map) turns these layers on by default
-//credits to Mapbox for Omnivore methods
-    var omniParseRider = omnivore.csv(csvrider)
-    .on('ready', function() {
-        // when this is fired, the layer
-        // is done being initialized
-    })
-    .on('error', function() {
-        // fired if the layer can't be loaded over AJAX
-        // or can't be parsed
-    })
-    .addTo(map);
+// create geoJSON by parsing JSON with geojson.js library
+    var jsonRiderParse = GeoJSON.parse(jsonRider, {Point: ["latitude_numeric", "longitude_numeric"]});
+    var jsonDriverParse = GeoJSON.parse(jsonDriver, {Point: ["latitude_numeric", "longitude_numeric"]});
     
-    var omniParseDriver = omnivore.csv(csvdriver)
-    .on('ready', function() {
-    })
-    .on('error', function() {
-    })
-    .addTo(map);
+    var jsonRiderLayer = L.geoJSON(jsonRiderParse).addTo(map);
+    var jsonDriverLayer = L.geoJSON(jsonDriverParse).addTo(map);
     
 // load these layers into a group for the layer control
-    var overlayGroup = L.layerGroup([omniParseRider, omniParseDriver]);
+    var overlayGroup = L.layerGroup([jsonRiderLayer, jsonDriverLayer]);
     
 //create "label": key for layers   
     var overlaylabels = {
-        "Riders": omniParseRider,
-        "Drivers": omniParseDriver,
+        "Riders": jsonRiderLayer,
+        "Drivers": jsonDriverLayer,
     };
-    
 //load the label, then the layer from the layer group
 //loads the map controller, using the .addTo(map) method when creating the layer initially determines if on/off at start
     L.control.layers(null, overlaylabels).addTo(map);
