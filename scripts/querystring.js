@@ -21,9 +21,9 @@ var QueryString = {
       match = regex.exec(query),
       pair = value ? name + '=' + encodeURIComponent(value) : name;
 
-    if (!query.length) {
+    if (!query.length || query.indexOf('?') < 0) {
       // If there are no existing queries then create new one:
-      return '?' + pair;
+      return (query || '') + '?' + pair;
     } else if (match) {
       // If there is an existing query for this name then update the value:
       return query.replace(regex, match[0].charAt(0) + pair);
