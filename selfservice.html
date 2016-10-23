@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Self Service test page</title>
+  <style>
+    .hiddenButton {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btnCancelRideRequest" onclick="cancelRideRequest()">Cancel Ride Request</button>
+  <button id="btn6" onclick="cancelRiderMatchTest()">Cancel Rider Match Request</button>
+  <button id="btnCancelDriveOffer" onclick="cancelDriveOffer()">Cancel Drive Offer Request</button>
+  <button id="btn8" onclick="cancelDriverMatchTest()">Cancel Driver Match Request</button>
+  <button id="btnAcceptDriverMatch" onclick="acceptDriverMatch()">Accept Driver Match Request</button>
+  
+  <br>
+  <br>
+  Enter Phone or Last Name
+  <input id=inputPhoneNumber>  
+  
+  <script src="selfservice.js"></script>
+</body>
+</html>
