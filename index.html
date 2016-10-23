@@ -20,8 +20,6 @@
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/jquery.datetimepicker.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/nouislider.min.css">
     <link type="text/css" rel="stylesheet" href="styles/main.css">
 
     <!-- Leaflet map, js plugins, and css & sources -->
@@ -40,6 +38,7 @@
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -146,37 +145,23 @@
         </div>
 
         <div id="forms" class="forms wrapper offset-top">
-            <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/v1.1/rider" method="post" class="ride-form" data-toggle="validator" role="form" aria-hidden="true">
-                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
+            <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/live/rider" method="post" class="ride-form" role="form" aria-hidden="true">
+                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks.html" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I need a ride</h2>
                     <div class="bannerbox__content">
-                        <a class="close-form button--cancel" href="#intro">&times;</a>
+                        <a class="close-form button--cancel" href="#intro" aria-label="Close form" role="button" aria-controls="need-ride">&times;</a>
 
                         <fieldset class="date-time-pickers">
                             <legend>Your trip</legend>
 
-                            <div class="form-group date-container">
-                                <label for="rider-date">Date(s) available</label>
-                                <p>On what date(s) would you be a available for the ride? Please pick all the dates that could work for you: This will make it easier for us to match you with a driver.</p>
-                                <input type="text" class="riderdatepicker datepicker" id="rider-date" name="RiderDate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="rider-time-slider">Time range available</label>
-                                <p>Which times slots on this date would you be available for a ride? You can pick multiple time slots, on different dates or the same date.</p>
-                                <div id="rider-time-slider" class="time-range-slider"></div>
-                            </div>
-                            <div class="form-group">
-                                <button class="add-time-btn button" id="rider-add-time">&plus; Add <span class="button-date" id="rider-button-date"></span>, <span class="button-time" id="rider-button-time">6:00am-10:00pm</span></button>
-                                <small>(Add as many dates and time ranges as you like)</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Available times</label>
-                                <ul class="available-times-list" id="rider-available-times">
-                                </ul>
-                                <input type="text" class="hiddenJSONTimes" aria-hidden="true" name="AvailableRideTimesJSON" required data-error="Please enter at least one available time">
-                                <div class="help-block with-errors"></div>
-                            </div>
+                            <h3>Dates available</h3>
+                            <p>On what dates and times would you be a available for the ride? Please pick all the time slots that could work for you: This will make it easier for us to match you with a driver. You can pick multiple time slots, on different dates or on the same date.</p>
+                            <ul id="RiderAvailableTimes" class="available-times" data-type="Rider">
+                            </ul>
+                            <button class="add-time-btn button" aria-controls="RiderAvailableTimes">&plus; Add another date / time</button>
+                            <small>(Add as many dates and time ranges as you like)</small>
+                            <input type="hidden" class="hiddenJSONTimes" name="AvailableRideTimesJSON" />
                         </fieldset>
 
                         <fieldset>
@@ -305,37 +290,23 @@
                 </div>
             </form>
 
-            <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/v1.1/driver" method="post" class="ride-form" data-toggle="validator" role="form" aria-hidden="true">
-                <input type="hidden" class="redirect" name="_redirect" value="http://carpoolvote.com" />
+            <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/live/driver" method="post" class="ride-form" role="form" aria-hidden="true">
+                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks.html" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I can offer a ride</h2>
                     <div class="bannerbox__content">
-                        <a class="close-form button--cancel" href="#intro">&times;</a>
+                        <a class="close-form button--cancel" href="#intro" aria-label="Close form" role="button" aria-controls="offer-ride">&times;</a>
 
                         <fieldset class="date-time-pickers">
                             <legend>What can you offer?</legend>
 
-                            <div class="form-group date-container">
-                                <label for="driver-date">Dates available</label>
-                                <p>On what date(s) would you be a available to give rides? We'll propose matches for all of the dates that you pick.</p>
-                                <input type="text" class="driverdatepicker datepicker" id="driver-date" name="DriverDate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="driver-time-slider">Time range available</label>
-                                <p>Which times slots on this date would you be available to give rides? You can pick multiple time slots, on different dates or the same date.</p>
-                                <div id="driver-time-slider" class="time-range-slider"></div>
-                            </div>
-                            <div class="form-group">
-                                <button class="add-time-btn button" id="driver-add-time">&plus; Add <span class="button-date" id="driver-button-date"></span>, <span class="button-time" id="driver-button-time">6:00am-10:00pm</span></button>
-                                <small>(Add as many dates and time ranges as you like)</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Available times</label>
-                                <ul class="available-times-list" id="driver-available-times">
-                                </ul>
-                                <input type="text" class="hiddenJSONTimes" aria-hidden="true" name="AvailableDriveTimesJSON" required data-error="Please enter at least one available time">
-                                <div class="help-block with-errors"></div>
-                            </div>
+                            <h3>Dates available</h3>
+                            <p>On what dates and times would you be a available to give rides? Please pick all the time slots that could work for you: This will make it easier for us to match you with someone who needs a ride. You can pick multiple time slots, on different dates or on the same date.</p>
+                            <ul id="DriverAvailableTimes" class="available-times" data-type="Driver">
+                            </ul>
+                            <button class="add-time-btn button" aria-controls="DriverAvailableTimes">&plus; Add another date / time</button>
+                            <small>(Add as many dates and time ranges as you like)</small>
+                            <input type="hidden" class="hiddenJSONTimes" name="AvailableDriveTimesJSON" />
                         </fieldset>
 
                         <fieldset>
@@ -487,10 +458,7 @@
                     <div class="bannerbox__content">
                         <p>Absolutely!</p>
                         <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below</p>
-                        <!--
-                            https://api.cloudstitch.com/carpool/carpoolvote/datasources/sheet
-                        -->
-                        <form name="offerHelp" action="https://api.carpoolvote.com/v1.1/helper" method="post" data-toggle="validator" role="form">
+                        <form name="offerHelp" action="https://api.carpoolvote.com/live/helper" method="post" data-toggle="validator" role="form">
                             <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
 
                             <div class="form-group">
@@ -617,12 +585,29 @@
         }
     </script>
 
+    <script type="text/template" id="available-time-row">
+        <li class="available-times__row">
+            <div class="form-group">
+                <label for="{{type}}Date{{id}}">Date</label>
+                <input class="form-input input--date" type="date" name="{{type}}Date" id="{{type}}Date{{id}}" min="2016-10-20" max="2016-11-08" required />
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label for="{{type}}TimeStart{{id}}">Start time</label>
+                <input class="form-input input--time-start" type="time" name="{{type}}TimeStart" id="{{type}}TimeStart{{id}}" min="06:00" max="22:00" value="06:00" required data-start="#{{type}}TimeEnd{{id}}" />
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label for="{{type}}TimeEnd{{id}}">End time</label>
+                <input class="form-input input--time-end" type="time" name="{{type}}TimeEnd" id="{{type}}TimeEnd{{id}}" min="06:00" max="22:00" value="22:00" required data-end="#{{type}}TimeStart{{id}}" />
+                <div class="help-block with-errors"></div>
+            </div>
+            <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>
+        </li>
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-    <script src="scripts/jquery-dateFormat.min.js"></script>
-    <script src="scripts/jquery.datetimepicker.full.min.js"></script>
-    <script src="scripts/nouislider.min.js"></script>
     <script src="scripts/main.js"></script>
     <!-- load the map-->
     <script src="carpool-map/js/map.js"></script>
