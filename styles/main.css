@@ -389,8 +389,9 @@ label {
 
 .form-input {
     border-radius: 3px;
-    background-color: white;
-    border: 1px solid #ccc;
+    background: white;
+    border: 1px solid #aaa;
+    box-shadow: none;
     color: #333;
     padding: 8px 12px;
     font-size: inherit;
@@ -560,6 +561,10 @@ label {
 
 .add-time-btn {
     margin: 15px 10px 15px 0;
+}
+
+.date-time-pickers small {
+    display: inline-block;
 }
 
 
