@@ -38,3 +38,28 @@ var QueryString = {
     return query.replace(this.regex(name), '');
   }
 };
+
+(function(){
+    if (QueryString.get('souls2thepolls')) {
+
+        $('#intro').addClass('s2tp');
+
+        $('#logo').attr({
+            src: '/images/logo-souls2thepolls.png',
+            width: 661,
+            height: 300
+        });
+
+        $('a[href^="/"]').each(function() {
+            $(this).attr('href', QueryString.set('souls2thepolls', false, $(this).attr('href')));
+        });
+    }
+    
+    var uuid = QueryString.get('uuid');
+    if (uuid) {
+        $('.uuid').text(uuid);
+        $('.self-service-url').each(function() {
+            $(this).attr('href', QueryString.set('uuid', uuid, $(this).attr('href')));
+        });
+    }
+})();
