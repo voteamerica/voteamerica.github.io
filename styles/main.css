@@ -512,89 +512,49 @@ label {
 }
 
 
-/* Datepicker (SMH at this CSS) */
-
-.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_today {
-    color: #297bbb;
-    font-weight: bold;
-}
-.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_default,
-.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current,
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box > div > div.xdsoft_current {
-    background-color: #297bbb;
-    color: white;
-}
-.xdsoft_datetimepicker .xdsoft_calendar td:hover, .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box>div>div:hover {
-    background-color: #e64a4a !important;
-}
-
-/* Time range slider */
-
-.time-range-slider {
-    margin: 10px 16px 50px 16px;
-}
-
-.noUi-connect {
-    background-color: #7d8f9c;
-}
-
-.noUi-pips-horizontal {
-    padding-bottom: 0;
-    padding-top: 47px;
-    position: relative;
-    top: -40px;
-}
-
-.noUi-value-horizontal {
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.add-time-btn {
-    margin: 10px 0;
-}
-
 
 /* Available times list */
 
-.available-times-list {
+.available-times {
     list-style: none;
     padding: 0;
-    min-height: 90px;
-    border: 2px solid #ddd;
-    margin-top: 5px;
-}
-
-.available-times-list li {
     margin: 0;
-    padding: 10px 60px 10px 20px;
-    border-bottom: 1px solid #ddd;
-    position: relative;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.available-times-list li:nth-child(odd) {
-    background-color: #f7f7f7;
+.available-times__row {
+    padding: 20px 20px 10px;
+    position: relative;
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.available-times .form-group {
+    margin-bottom: 10px;
+}
+
+.available-times__row:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+.available-times__row:nth-child(odd) {
+    background-color: #f3f3f3;
 }
 
 .remove-time {
     position: absolute;
-    right: 20px;
-    top: 50%;
+    right: 8px;
+    top: 6px;
     opacity: 0.6;
     font-size: 25px;
-    margin-top: -14px;
 }
 
-.available-times-list li:hover .remove-time {
+.available-times__row:hover .remove-time {
     opacity: 1;
 }
 
-.hiddenJSONTimes {
-    position: absolute;
-    pointer-events: none;
-    opacity: 0;
-    margin-top: -130px;
-    visibility: hidden;
+.add-time-btn {
+    margin: 15px 10px 15px 0;
 }
 
 
@@ -714,6 +674,47 @@ label {
     }
 
 
+    .available-times__row {
+        padding: 15px 60px 5px 30px;
+    }
+
+    .available-times label,
+    .available-times .form-input {
+        display: inline-block;
+        width: auto;
+    }
+
+    .available-times label {
+        margin-right: 0.5em;
+    }
+
+    .available-times .help-block {
+        margin: 0;
+    }
+
+    .available-times .form-group {
+        display: inline-block;
+        vertical-align: top;
+        padding-right: 40px;
+        min-width: 220px;
+    }
+
+    .available-times .help-block {
+        max-width: 200px;
+    }
+
+    .remove-time {
+        font-size: 35px;
+        right: 30px;
+        top: 50%;
+        margin-top: -21px;
+    }
+
+    .time-spin-btn {
+        min-height: 18.5px; // time-input polyfill bugfix
+    }
+
+
     /* Salvattore.js */
     #grid[data-columns]::before {
         content: '2 .column.size-1of3';
@@ -770,10 +771,6 @@ label {
 
     .time-range-slider {
         max-width: 700px;
-    }
-    
-    .available-times-list {
-        max-width: 500px;
     }
 }
 

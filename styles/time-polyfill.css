@@ -1,0 +1,63 @@
+/* !HTML5 Time polyfill | Jonathan Stipe | https://github.com/jonstipe/time-polyfill */
+div.time-spin-btn-container {
+  display: inline-block;
+  position: relative;
+  vertical-align: bottom;
+  margin: 0;
+  padding: 0; }
+
+div.time-spin-btn {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #CCCCCC;
+  width: 1.2em; }
+
+div.time-spin-btn-up {
+  border-bottom-width: 1px;
+  -moz-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0px 0px; }
+
+div.time-spin-btn-up:before,
+div.time-spin-btn-down:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  left: 50%;
+  margin: -0.15em 0 0 -0.3em;
+  padding: 0; }
+
+div.time-spin-btn-up:before {
+  border-width: 0 0.3em 0.3em 0.3em;
+  border-color: transparent transparent black transparent;
+  top: 25%; }
+
+div.time-spin-btn-down {
+  border-top-width: 1px;
+  -moz-border-radius: 0px 0px 3px 3px;
+  -webkit-border-radius: 0px 0px 3px 3px;
+  border-radius: 0px 0px 3px 3px; }
+
+div.time-spin-btn-down:before {
+  border-width: 0.3em 0.3em 0 0.3em;
+  border-color: black transparent transparent transparent;
+  top: 75%; }
+
+div.time-spin-btn:hover {
+  cursor: pointer; }
+
+div.time-spin-btn:active {
+  background-color: #999999; }
+
+div.time-spin-btn-up:active:before {
+  border-color: transparent transparent white transparent;
+  top: 26%;
+  left: 51%; }
+
+div.time-spin-btn-down:active:before {
+  border-color: white transparent transparent transparent;
+  top: 76%;
+  left: 51%; }

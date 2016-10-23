@@ -1,7 +1,77 @@
 $(function(){
     var $forms = $('#forms'),
         $intro = $('#intro'),
+        rowTemplate = $('#available-time-row').html(),
         supportsHistoryApi =  !!(window.history && history.pushState);
+
+    var datetimeClasses = [
+        '.input--date',
+        '.input--time-start',
+        '.input--time-end'
+    ];
+
+    toggleFormsOnHashChange();
+
+    window.onpopstate = toggleFormsOnHashChange;
+
+
+    // Rather than download all of Modernizr, just fake the bits we need:
+    function checkInputSupport(type) {
+        var input = document.createElement('input');
+        input.setAttribute('type',type);
+        var invalidValue = 'invalid-value';
+        input.setAttribute('value', invalidValue); 
+        return (input.type === type) && (input.value !== invalidValue);
+    }
+
+    window.Modernizr = {
+        inputtypes: {
+            date: checkInputSupport('date'),
+            time: checkInputSupport('time')
+        }
+    };
+
+    if (!Modernizr.inputtypes.time) {
+        $('<link>').appendTo('head').attr({
+            type: 'text/css', 
+            rel: 'stylesheet',
+            href: 'styles/time-polyfill.css'
+        });
+        $.getScript('scripts/time-polyfill.min.js');
+    }
+
+    if (!Modernizr.inputtypes.date) {
+        $.getScript('scripts/nodep-date-input-polyfill.dist.js', function(){
+            $('body').on('click', 'date-input-polyfill', function(){
+                $('input[type="date"]').trigger('change');
+            });
+        });
+    }
+
+    // Initialise form validator
+    $forms.find('form').validator({
+        custom: {
+            start: function($el) {
+                var endTime = $($el.data('start')).val();
+                if ($el.val() >= endTime) {
+                    return 'Start time must be before the end time';
+                }
+            },
+            end: function($el) {
+                var startTime = $($el.data('end')).val();
+                if ($el.val() <= startTime) {
+                    return 'End time must be after the start time';
+                }
+            }
+        }
+    });
+
+    // Update sibling start/end time validation on change
+    $forms.on('change', 'input[type="time"]', function(){
+        var sibling = $(this).data('start') || $(this).data('end');
+        $(sibling).trigger('input'); // Use a different event to prevent recursive trigger
+    });
+
 
     function scrollTo(offset, speed) {
         $('html, body').animate({
@@ -57,206 +127,115 @@ $(function(){
         e.preventDefault();
     });
 
-    $forms.find('.available-times-list')
-        .on('click', '.remove-time', function() {
-            var $timesList = $(this).parents('.available-times-list');
-            $(this).parent().remove();
-            updateHiddenJSONTimes($timesList);
-        });
-
     $forms.on('change', '.toggleRequiredEmail', function(){
         var id = $(this).attr('data-emailID');
         $forms.find(id).prop('required', $(this).is(':checked')).trigger('change');
     });
 
     $forms.on('submit', 'form', function() {
-        updateHiddenJSONTimes( $(this).find('.available-times-list') );
+        updateHiddenJSONTimes( $(this).find('.available-times') );
     });
 
-    toggleFormsOnHashChange();
-    window.onpopstate = toggleFormsOnHashChange;
+    $forms.find('.available-times').each(function() {
+        var $self = $(this),
+            type = $self.attr('data-type'),
+            rowID = 0;
 
-    $('.redirect').val(window.location.origin + window.location.pathname + 'thanks.html');
+        function addRow(hideDeleteButton) {
+            var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, rowID++));
 
-    var currentDateString = $.format.date(new Date(), "ddd, MMM d");
-    $('#driver-button-date, #rider-button-date').text(currentDateString);
-    
+            $row.find('.input--date').attr('min', yyyymmdd());
 
-    function initDatePicker($datetime, $datepicker) {
-        // Initialize datepickers
-        // Max Date = Voting Day 2016!'
-        $datepicker.datetimepicker({
-            timepicker: false,
-            format: 'l, M j',
-            startDate: '2016/10/05',
-            minDate: '2016/10/05',
-            maxDate: '2016/11/08',
-            yearStart: 2016,
-            yearEnd: 2016,
-            inline: true
-        });
+            if (!hideDeleteButton && Modernizr.inputtypes.date) {
+                var $prevRow = $self.find('.available-times__row').last();
+                datetimeClasses.forEach(function(c){
+                    var prevVal = $prevRow.find(c).val();
+                    $row.find(c).val(prevVal).trigger('update');
+                });
+            }
 
-        // Must manually set the initial value of the calendar input
-        // Needs to be today's date.
-        var currDate = new Date();
-        $datepicker.attr('value', currDate);
+            if (hideDeleteButton) {
+                $row.find('.remove-time').hide();
+            }
 
-        $datepicker.on('change', function() {
-            $datetime.find('.button-date').text($(this).val());
-        });
-    }
+            $self.append($row);
 
-    function initTimeSlider($datetime, slider) {
-        noUiSlider.create(slider, {
-            start: [360, 1440],
-            connect: true,
-            step: 10,
-            range: {
-                'min': [360],
-                'max': [1320]
-            },
-            pips: {
-                mode: 'values',
-                density: 2,
-                values: [480, 720, 960, 1200, ],
-                format: {
-                    to: formatTime
+            if (!Modernizr.inputtypes.time) {
+                var $times = $row.find('input[type="time"]').attr('step', 3600);
+                if ($times.inputTime) {
+                    $times.inputTime();
                 }
             }
-        });
 
-        slider.noUiSlider.on('update', function() {
-            var sliderData = slider.noUiSlider.get();
-            var startTime = formatTime(sliderData[0]);
-            var endTime = formatTime(sliderData[1]);
-            $datetime.find('.add-time-btn')
-                .children('.button-time')
-                .text(startTime + '-' + endTime);
-        });
-    }
+            $self.parents('form').validator('update');
+        }
 
-    function addTimeBtnListener($datetime, $slider, $timesList, $datepicker) {
-        $datetime.on('click', '.add-time-btn', function(e) {
-            var sliderData = $slider[0].noUiSlider.get();
-            var startTime = formatTime(sliderData[0]);
-            var endTime = formatTime(sliderData[1]);
+        function removeRow($row){
+            $row.remove();
+            $self.parents('form').validator('update');
+        }
 
-            var date = $datepicker.val();
-            var niceDate = $.format.date(date, "ddd D MMMM");
+        function toggleRemoveTimeBtn() {
+            var rowCount = $self.find('.available-times__row').length;
+            $self.find('.remove-time').toggle(rowCount > 1);
+        }
 
-            // not comfortable with this, but can't see why don't get this from datepicker
-            var datePlusYear = date + " 2016";
+        addRow(true);
 
-            var niceDateYear = $.format.date(datePlusYear, "ddd D MMMM yyyy");
-            var startDateTime = niceDateYear + ' ' + startTime;
-            var endDateTime = niceDateYear + ' ' + endTime;
-
-            var ndt = $.format.date(datePlusYear, "dd MMMM yyyy");
-            var sdt = moment(ndt);
-            var edt = moment(ndt);
-
-            var sliderStartTime = formatTime2(sliderData[0]);
-            var sliderEndTime   = formatTime2(sliderData[1]);
-
-            var isoStart        = getISOString(sdt, sliderStartTime);
-            var isoEnd          = getISOString(edt, sliderEndTime);
-
-
-            var cancelButton = ' <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>';
-
-            var $listItem = $('<li/>')
-                .data('datetime', [isoStart, isoEnd].join('/'))
-                .html(niceDate + ', ' + startTime + '—' + endTime + cancelButton);
-
-            $timesList.append($listItem);
-
-            updateHiddenJSONTimes($timesList);
-
+        $self.siblings('.add-time-btn').on('click', function(e) {
+            addRow();
+            toggleRemoveTimeBtn();
             e.preventDefault();
+        });
+
+        $self.on('click', '.remove-time', function(e) {
+            removeRow( $(this).parent() );
+            toggleRemoveTimeBtn();
+            e.preventDefault();
+        });
+    });
+
+    function getDateTimeValues($timesList) {
+        return $timesList.find('.available-times__row').get().map(function(li) {
+            var inputValues = datetimeClasses.map(function(c) {
+                return $(li).find(c).val();
+            });
+
+            return formatTime.apply(this, inputValues);
         });
     }
 
     function updateHiddenJSONTimes($timesList) {
-        var timeData = $timesList.find('li').get().map(function(li) {
-            return $(li).data('datetime');
-        }).join('|');
-
-        $timesList.siblings('.hiddenJSONTimes')
-            .val(timeData)
-            .trigger('change');
+        var timeData = getDateTimeValues($timesList);
+        $timesList.siblings('.hiddenJSONTimes').val(timeData.join('|'));
     }
 
-    $('.date-time-pickers').each(function() {
-        // Add selected date and time to list of available times on button click
-        var $slider = $(this).find('.time-range-slider'),
-            $timesList = $(this).find('.available-times-list'),
-            $datepicker = $(this).find('.datepicker');
-
-        initDatePicker($(this), $datepicker);
-
-        initTimeSlider($(this), $slider.get(0));
-
-        addTimeBtnListener($(this), $slider, $timesList, $datepicker);
-    });
-
-    function getISOString(date, timeAdjustment) {
-        var isoString = '';
-
-        date = date.add(timeAdjustment.mins, 'm');
-        date = date.add(timeAdjustment.hour, 'h');
-
-        if (timeAdjustment.am === false && timeAdjustment.hour !== 12) {
-            date = date.add(12, 'h');
-        }
-
-        isoString = date.toISOString();
-
-        return isoString;
+    function formatTime(date, startTime, endTime) {
+        return [startTime, endTime].map(function(time){
+            return (date || '') + 'T' + (time || '');
+        }).join('/');
     }
+    
+    function yyyymmdd(date) {
+        date = date || new Date();
+        var mm = date.getMonth() + 1;
+        var dd = date.getDate();
 
-    // The sliders work with the day in terms of minutes, this function translates the minutes
-    // into readable format i.e. 4:34pm
-    function formatTime(minutes) {
-        var am = false;
-        if (minutes < 720) {
-            am = true;
-        }
-        var hour = Math.floor(minutes / 60);
-        hour = minutes < 780 ? hour : hour - 12;
-        var out_minutes = minutes % 60;
-        out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
-        var ampmString = am ? 'am' : 'pm';
-
-        return hour + ':' + out_minutes + ampmString;
-    }
-
-    function formatTime2(minutes) {
-        var am = false;
-        if (minutes < 720) {
-            am = true;
-        }
-        var hour = Math.floor(minutes / 60);
-        hour = minutes < 780 ? hour : hour - 12;
-        var out_minutes = minutes % 60;
-        out_minutes = out_minutes < 10 ? '0' + out_minutes : out_minutes.toString();
-        var ampmString = am ? 'am' : 'pm';
-
-        return {
-            hour: hour,
-            mins: out_minutes,
-            am: am
-        };
+        return [
+            date.getFullYear(),
+            mm<10 ? '0'+mm : mm,
+            dd<10 ? '0'+dd : dd
+        ].join('-');
     }
 
     // Load JSON data to dropdown template 
-    function listItem(type) {
-        return function (val, key) {
-            return '<li class="state-dropdown__item">' + '<a href="' + val[type] + '" target="_blank"  id="' + key + '" >' + val['State'] + '</a>' + '</li>';
-        };
-    }
-
     $.getJSON('scripts/voting-details.json', function(data) {
-        $("#state-select").html( $.map(data, listItem('RegCheck')).join('') );
-        $("#location-details").html( $.map(data, listItem('LocationFinder')).join('') );
+        function getListItems(type) {
+            return $.map(data, function (val, key) {
+                return '<li class="state-dropdown__item">' + '<a href="' + val[type] + '" target="_blank"  id="' + key + '" >' + val['State'] + '</a>' + '</li>';
+            }).join('');
+        }
+        $("#state-select").html( getListItems('RegCheck') );
+        $("#location-details").html( getListItems('LocationFinder') );
     });
 });
