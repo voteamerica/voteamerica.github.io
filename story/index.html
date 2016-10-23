@@ -72,20 +72,6 @@
                 </li>
             </ul>
 
-            <script>
-                (function(){
-                    if (window.location.search === '?souls2thepolls') {
-                        var logo = document.getElementById('logo');
-                        logo.setAttribute('src', '../images/logo-souls2thepolls.png');
-                        logo.setAttribute('width', 661);
-                        logo.setAttribute('height', 300);
-                        logo.parentNode.setAttribute('href', '/?souls2thepolls');
-                        var homelink = document.getElementById('home-link');
-                        homelink.setAttribute('href', '/?souls2thepolls')
-                    }
-                })();
-            </script>
-
             <ul class="social">
                 <li role="presentation" class="social__twitter">
                     <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Need a ride to vote on election day? CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
@@ -153,6 +139,25 @@
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
         ga('create', 'UA-1858235-15', 'auto');
         ga('send', 'pageview');
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="scripts/querystring.js"></script>
+    <script>
+        if (QueryString.get('souls2thepolls')) {
+
+            $('#intro').addClass('s2tp');
+
+            $('#logo').attr({
+                src: '../images/logo-souls2thepolls.png',
+                width: 661,
+                height: 300
+            });
+
+            $('a[href^="/"]').each(function() {
+                $(this).attr('href', QueryString.set('souls2thepolls', false, $(this).attr('href')));
+            });
+        }
     </script>
 </body>
 </html>

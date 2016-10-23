@@ -19,7 +19,7 @@ var QueryString = {
     query = query || window.location.search;
     var regex = this.regex(name),
       match = regex.exec(query),
-      pair = name + '=' + encodeURIComponent(value);
+      pair = value ? name + '=' + encodeURIComponent(value) : name;
 
     if (!query.length) {
       // If there are no existing queries then create new one:

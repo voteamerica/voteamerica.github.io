@@ -157,5 +157,23 @@
         ga('create', 'UA-1858235-15', 'auto');
         ga('send', 'pageview');
     </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="scripts/querystring.js"></script>
+
+    <script>
+        if (QueryString.get('souls2thepolls')) {
+
+            $('#logo').attr({
+                src: '../images/logo-souls2thepolls.png',
+                width: 661,
+                height: 300
+            });
+
+            $('a[href^="/"]').each(function() {
+                $(this).attr('href', QueryString.set('souls2thepolls', false, $(this).attr('href')));
+            });
+        }
+    </script>
 </body>
 </html>
