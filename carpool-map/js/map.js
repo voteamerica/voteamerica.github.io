@@ -1,4 +1,4 @@
-<!-- create the map, set the zoom, add it to the 'map' div element -->
+//create the map, set the zoom, add it to the 'map' div element
     var map = L.map('map')
         .setView([36, -93], 3);
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -7,7 +7,7 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         }).addTo(map);
         
-<!-- create the geocoder -->
+//create the geocoder
     new L.Control.GeoSearch({
         provider: new L.GeoSearch.Provider.OpenStreetMap(),
         position: 'topleft',
@@ -15,13 +15,10 @@
         retainZoomLevel: false,
     }).addTo(map);
 
-<!-- data location-->
+//data location
     var csvrider = "/carpool-map/data/unmatched-rider.csv";
     var csvdriver = "/carpool-map/data/unmatched-driver.csv";
 
-<!-- create a geojson layer from the csv file, .addTo(map) turns these layers on by default-->
-    var omniParseRider = omnivore.csv(csvrider).addTo(map);
-    var omniParseDriver = omnivore.csv(csvdriver).addTo(map);
 
 //create a geojson layer from the csv file, .addTo(map) turns these layers on by default
 //credits to Mapbox for Omnivore methods
