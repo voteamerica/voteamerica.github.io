@@ -542,9 +542,10 @@
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="scripts/querystring.js"></script>
 
     <script>
-        if (window.location.search === '?souls2thepolls') {
+        if (QueryString.get('souls2thepolls')) {
 
             $('#intro').addClass('s2tp');
 
