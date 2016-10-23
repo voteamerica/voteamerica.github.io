@@ -1,4 +1,4 @@
-// var remoteUrl = "http://localhost:8000";
+// var remoteUrl = "http://localhost:8000";                                                                 
 var remoteUrl = "https://api.carpoolvote.com/live";
 
 // call page with querystring
@@ -72,22 +72,20 @@ function cancelRideRequest() {
   request.send();
 }
 
-function cancelRiderMatchTest() {
-  var formData  = new FormData();
+function cancelRiderMatch() {
+  var checkField = getCheckValue();
+
   var url = 
     remoteUrl + '/cancel-rider-match?' + 
-    'UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897' +
-    '&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897' +
-    '&Score=123' +
-    '&RiderPhone=123';
+    'UUID_driver=' + UUID_driver +
+    '&UUID_rider=' + UUID_rider + 
+    '&Score=' + Score +
+    '&RiderPhone=' + checkField;
+
   var request = new XMLHttpRequest();
 
-  // formData.append("UUID", "1e6e274d-ad33-4127-9f02-f35b48a07897");
-  // formData.append("RiderPhone", '1');
-
-  // request.open("POST", url);
   request.open("GET", url);
-  request.send(formData);
+  request.send();
 }
 
 function cancelDriveOffer() {
@@ -105,22 +103,20 @@ function cancelDriveOffer() {
   request.send();
 }
 
-function cancelDriverMatchTest() {
-  var formData  = new FormData();
+function cancelDriverMatch() {
+  var checkField = getCheckValue();
+
   var url = 
     remoteUrl + '/cancel-driver-match?' + 
-    'UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897' +
-    '&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897' +
-    '&Score=123' +
-    '&DriverPhone=123';
+    'UUID_driver=' + UUID_driver +
+    '&UUID_rider=' + UUID_rider + 
+    '&Score=' + Score +
+    '&DriverPhone=' + checkField;
+
   var request = new XMLHttpRequest();
 
-  // formData.append("UUID", "1e6e274d-ad33-4127-9f02-f35b48a07897");
-  // formData.append("DriverPhone", '1');
-
-  // request.open("POST", url);
   request.open("GET", url);
-  request.send(formData);
+  request.send();
 }
 
 function acceptDriverMatch() {
