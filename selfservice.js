@@ -1,9 +1,5 @@
-var remoteUrl = "http://localhost:8000";
-
-var testZipCode = 60001;
-var testAreaCode = 246;
-var testDriverAreaCode = 346;
-var needWheelchair = true;
+// var remoteUrl = "http://localhost:8000";
+var remoteUrl = "https://api.carpoolvote.com/live";
 
 // call page with querystring
 // self.html?UUID_driver=9dba44a5-8188-4ced-925f-11c80fa9e130&DriverPhone=07958110786
@@ -27,6 +23,8 @@ function getParameterByName(name, url) {
 var UUID_driver = getParameterByName('UUID_driver'); 
 var UUID_rider = getParameterByName('UUID_rider'); 
 var Score = getParameterByName('Score'); 
+
+// these will be put input into the text field rather than passed as querystring params
 // var DriverPhone = getParameterByName('DriverPhone'); 
 // var RiderPhone = getParameterByName('RiderPhone'); 
 // var LastName = getParameterByName('LastName'); 
