@@ -12,6 +12,7 @@ html {
 body {
     font-family: "Lato", sans-serif;
     -webkit-font-smoothing: antialiased;
+    color: #333;
 }
 
 .content {
@@ -195,9 +196,13 @@ li {
 
 .social li {
     display: inline-block;
-    margin: 0 5px;
+    margin: 0 15px 0 0;
     vertical-align: middle;
     position: relative;
+}
+
+.header .social li {
+    margin: 0 5px;
 }
 
 .social__facebook {
@@ -745,14 +750,14 @@ label {
         margin-bottom: 24px;
     }
 
-    .social {
+    .header .social {
         position: absolute;
         left: 0;
         top: 30%;
         margin-top: 0;
     }
 
-    .social li {
+    .header .social li {
         margin-left: 0;
         margin-right: 12px;
     }
