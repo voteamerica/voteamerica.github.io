@@ -22,6 +22,26 @@
 <!-- create a geojson layer from the csv file, .addTo(map) turns these layers on by default-->
     var omniParseRider = omnivore.csv(csvrider).addTo(map);
     var omniParseDriver = omnivore.csv(csvdriver).addTo(map);
+
+//create a geojson layer from the csv file, .addTo(map) turns these layers on by default
+//credits to Mapbox for Omnivore methods
+    var omniParseRider = omnivore.csv(csvrider)
+    .on('ready', function() {
+        // when this is fired, the layer
+        // is done being initialized
+    })
+    .on('error', function() {
+        // fired if the layer can't be loaded over AJAX
+        // or can't be parsed
+    })
+    .addTo(map);
+    
+    var omniParseDriver = omnivore.csv(csvdriver)
+    .on('ready', function() {
+    })
+    .on('error', function() {
+    })
+    .addTo(map);
     
 <!-- load these layers into a group for the layer control -->
     var overlayGroup = L.layerGroup([omniParseRider, omniParseDriver]);
