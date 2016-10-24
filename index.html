@@ -146,7 +146,7 @@
 
         <div id="forms" class="forms wrapper offset-top">
             <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/live/rider" method="post" class="ride-form" role="form" aria-hidden="true">
-                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks.html" />
+                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-driver/" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I need a ride</h2>
                     <div class="bannerbox__content">
@@ -292,7 +292,7 @@
             </form>
 
             <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/live/driver" method="post" class="ride-form" role="form" aria-hidden="true">
-                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks.html" />
+                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-rider/" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I can offer a ride</h2>
                     <div class="bannerbox__content">
@@ -567,24 +567,7 @@
         ga('send', 'pageview');
     </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-    <script>
-        if (window.location.search === '?souls2thepolls') {
-
-            $('#intro').addClass('s2tp');
-
-            $('#logo').attr({
-                src: 'images/logo-souls2thepolls.png',
-                width: 661,
-                height: 300
-            });
-
-            $('a[href^="/"]').each(function() {
-                $(this).attr('href', $(this).attr('href') + '?souls2thepolls');
-            });
-        }
-    </script>
+    <script src="scripts/querystring.js"></script>
 
     <script type="text/template" id="available-time-row">
         <li class="available-times__row">
@@ -607,6 +590,7 @@
         </li>
     </script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
     <script src="scripts/main.js"></script>
