@@ -38,19 +38,19 @@ function getCheckValue() {
 if (UUID_driver === null) {
   var buttonCancelDriveOffer = document.getElementById("btnCancelDriveOffer");
 
-  buttonCancelDriveOffer.className += "hiddenButton";
+  buttonCancelDriveOffer.classList.add("hiddenButton");
 }
 
 if (UUID_rider === null) {
   var buttonCancelRideRequest = document.getElementById("btnCancelRideRequest");
 
-  buttonCancelRideRequest.className += "hiddenButton";
+  buttonCancelRideRequest.classList.add("hiddenButton");
 }
 
 if (Score === null) {
   var buttonAcceptDriverMatch = document.getElementById("btnAcceptDriverMatch");
 
-  buttonAcceptDriverMatch.className += "hiddenButton";
+  buttonAcceptDriverMatch.classList.add("hiddenButton");
 }
 
 
@@ -58,7 +58,7 @@ function cancelRideRequest() {
   // var checkField = (RiderPhone || LastName || "");
   var checkField = getCheckValue();
 
-  buttonCancelDriveOffer.className += "hiddenButton";
+  buttonCancelDriveOffer.classList.add("hiddenButton");
 
   var url = 
     remoteUrl + 

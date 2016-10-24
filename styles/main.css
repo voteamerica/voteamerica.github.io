@@ -111,6 +111,7 @@ li {
 
 .button:active {
     transform: translateY(1px);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset, 0 3px 0 rgba(0,0,0,0.2) inset;
 }
 
 .button[disabled] {
@@ -129,6 +130,14 @@ li {
 
 .button--alt:hover, .button--alt:focus {
     background-color: #78c778;
+}
+
+.button--danger {
+    background-color: #e64a4a;
+}
+
+.button--danger:hover, .button--danger:focus {
+    background-color: #f86464;
 }
 
 .button--cancel {
