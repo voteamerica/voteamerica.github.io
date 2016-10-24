@@ -12,6 +12,7 @@ html {
 body {
     font-family: "Lato", sans-serif;
     -webkit-font-smoothing: antialiased;
+    color: #333;
 }
 
 .content {
@@ -110,6 +111,7 @@ li {
 
 .button:active {
     transform: translateY(1px);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset, 0 3px 0 rgba(0,0,0,0.2) inset;
 }
 
 .button[disabled] {
@@ -128,6 +130,14 @@ li {
 
 .button--alt:hover, .button--alt:focus {
     background-color: #78c778;
+}
+
+.button--danger {
+    background-color: #e64a4a;
+}
+
+.button--danger:hover, .button--danger:focus {
+    background-color: #f86464;
 }
 
 .button--cancel {
@@ -195,9 +205,13 @@ li {
 
 .social li {
     display: inline-block;
-    margin: 0 5px;
+    margin: 0 15px 0 0;
     vertical-align: middle;
     position: relative;
+}
+
+.header .social li {
+    margin: 0 5px;
 }
 
 .social__facebook {
@@ -384,8 +398,9 @@ label {
 
 .form-input {
     border-radius: 3px;
-    background-color: white;
-    border: 1px solid #ccc;
+    background: white;
+    border: 1px solid #aaa;
+    box-shadow: none;
     color: #333;
     padding: 8px 12px;
     font-size: inherit;
@@ -555,6 +570,10 @@ label {
 
 .add-time-btn {
     margin: 15px 10px 15px 0;
+}
+
+.date-time-pickers small {
+    display: inline-block;
 }
 
 
@@ -745,14 +764,14 @@ label {
         margin-bottom: 24px;
     }
 
-    .social {
+    .header .social {
         position: absolute;
         left: 0;
         top: 30%;
         margin-top: 0;
     }
 
-    .social li {
+    .header .social li {
         margin-left: 0;
         margin-right: 12px;
     }
