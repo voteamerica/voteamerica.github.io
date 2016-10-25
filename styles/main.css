@@ -475,6 +475,7 @@ label {
     overflow: auto;
 }
 
+
 .state-dropdown::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 8px;
@@ -509,6 +510,10 @@ label {
     background-color: #e64a4a;
     color: white;
     text-decoration: none;
+}
+
+.state-dropdown-small{
+	max-height:92px;
 }
 
 
