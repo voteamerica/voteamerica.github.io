@@ -419,6 +419,13 @@ label {
     line-height: 1.6;
 }
 
+.optional {
+    font-size: 12px;
+    color: #999;
+    margin-left: 15px;
+    font-style: normal;
+}
+
 .form-input {
     border-radius: 3px;
     background: white;
