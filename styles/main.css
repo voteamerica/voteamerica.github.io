@@ -439,6 +439,14 @@ label {
     max-width: 500px;
 }
 
+.form-input--medium {
+    max-width: 300px;
+}
+
+.form-input--small {
+    max-width: 150px;
+}
+
 .form-input--inline {
     width: 80px;
     display: inline-block;
