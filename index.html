@@ -152,12 +152,12 @@
                             <div class="form-column">
                                 <div class="form-group">
                                     <label for="rideArea">Pick up ZIP code</label>
-                                    <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
+                                    <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="rideDestinationZIP">Destination ZIP code</label>
-                                    <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" name="RiderDropOffZIP" placeholder="To where do you need a ride?" name="RiderDropOffZIP" required>
+                                    <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" name="RiderDropOffZIP" placeholder="To where do you need a ride?" name="RiderDropOffZIP" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -178,8 +178,8 @@
                             <p>Please let us know how many people will need to travel together in the <b>same car</b>.</p>
                             <p>(To make it easier for us to match people, please complete an individual form if you do not need travel with anybody else.)</p>
                             <div class="form-group">
-                                <label for="rideSeats">Party size</label>
-                                <input type="number" class="form-input" id="rideSeats" placeholder="Number of non-wheelchair seats required" name="TotalPartySize" min=0 required>
+                                <label for="rideSeats">Number of non-wheelchair seats required</label>
+                                <input type="number" class="form-input form-input--small" id="rideSeats" name="TotalPartySize" min=0 required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
@@ -193,7 +193,7 @@
                                 </label>
                             </div>
                             <div class="form-group">
-                                <label for="RiderAccommodationNotes">Notes</label>
+                                <label for="RiderAccommodationNotes">Notes <i class="optional">Optional</i></label>
                                 <textarea class="form-input" id="RiderAccommodationNotes" placeholder="Accommodation requirements e.g. service animal, assistance folding equipment, assistance entering/exiting the vehicle, etc." name="RiderAccommodationNotes" rows="4"></textarea>
                             </div>
                         </fieldset>
@@ -212,7 +212,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label for="riderEmail">Email address</label>
+                                <label for="riderEmail">Email address <i class="optional">Optional</i></label>
                                 <input type="email" class="form-input" id="riderEmail" placeholder="Email" name="RiderEmail">
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -298,16 +298,16 @@
 
                             <div class="form-group">
                                 <label for="rideArea">Pick up ZIP code</label>
-                                <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where can you pick up the rider?" name="DriverCollectionZIP" required>
+                                <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where can you pick up the rider?" name="DriverCollectionZIP" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <p>I am willing to collect within a <input type="number" id="offerMiles" placeholder="0" name="DriverCollectionRadius" pattern="\d*" min="0" step="1" class="form-input form-input--inline" required /> mile radius of this zip code.<p>
+                                <p>I am willing to collect within a <input type="number" id="offerMiles" name="DriverCollectionRadius" pattern="\d*" min="0" step="1" class="form-input form-input--inline" required /> mile radius of this zip code.<p>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label for="driverSeats">Seats</label>
-                                <input type="number" min="0" class="form-input" id="driverSeats" placeholder="How many seats can you offer?" name="SeatCount" required>
+                                <label for="driverSeats">Number of seats in vehicle</label>
+                                <input type="number" min="0" class="form-input form-input--small" id="driverSeats" name="SeatCount" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
@@ -317,12 +317,14 @@
                             </div>
                             <div class="form-group checkbox">
                                 <label for="offerInsurance">
-                                    <input type="checkbox" name="DriverHasInsurance" id="offerInsurance"/> I confirm the driver has insurance
+                                    <input type="checkbox" name="DriverHasInsurance" id="offerInsurance" required/> I confirm the driver has insurance
                                 </label>
+                                <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
                                 <label for="driverLicence">Driver's license number</label>
-                                <input type="text" class="form-input" id="driverLicence" name="DriverLicenceNumber">
+                                <input type="text" class="form-input form-input--medium" id="driverLicence" name="DriverLicenceNumber" required>
+                                <div class="help-block with-errors"></div>
                             </div>
                         </fieldset>
 
@@ -340,13 +342,13 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label for="driverEmail">Email address</label>
+                                <label for="driverEmail">Email address <i class="optional">Optional</i></label>
                                 <input type="email" class="form-input" id="driverEmail" placeholder="Email address" name="DriverEmail">
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
                                 <label for="driverPhone">Phone number</label>
-                                <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" />
+                                <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" required />
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox checkbox--multi">

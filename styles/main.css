@@ -419,6 +419,13 @@ label {
     line-height: 1.6;
 }
 
+.optional {
+    font-size: 12px;
+    color: #999;
+    margin-left: 15px;
+    font-style: normal;
+}
+
 .form-input {
     border-radius: 3px;
     background: white;
@@ -430,6 +437,14 @@ label {
     font-family: inherit;
     width: 100%;
     max-width: 500px;
+}
+
+.form-input--medium {
+    max-width: 300px;
+}
+
+.form-input--small {
+    max-width: 150px;
 }
 
 .form-input--inline {

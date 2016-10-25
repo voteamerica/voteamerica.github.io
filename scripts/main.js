@@ -128,8 +128,10 @@ $(function(){
     });
 
     $forms.on('change', '.toggleRequiredEmail', function(){
-        var id = $(this).attr('data-emailID');
-        $forms.find(id).prop('required', $(this).is(':checked')).trigger('change');
+        var id = $(this).attr('data-emailID'),
+            isRequired = $(this).is(':checked');
+        $forms.find(id).prop('required', isRequired).trigger('change')
+            .siblings('label').find('.optional').toggle(!isRequired);
     });
 
     $forms.on('submit', 'form', function() {
