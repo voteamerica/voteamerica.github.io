@@ -1,3 +1,19 @@
+<?php 
+session_start();
+$errors = '';
+
+if(isset($_POST['submit']))
+{
+	if(empty($_SESSION['6_letters_code'] ) ||
+	  strcmp($_SESSION['6_letters_code'], $_POST['6_letters_code']) != 0)
+	{
+		$errors .= "\n The captcha code does not match!";
+	}
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en-us">
 
@@ -264,6 +280,13 @@
                             </label>
                             <small>Yes, please stay in touch!</small>
                         </div>
+						<div class="form-group">
+							<img src="captcha_code_file.php?rand=<?php echo rand(); ?>" id='captchaimg' ><br>
+                            <label for="CaptchaCode">Enter the Captcha Code</label>
+                            <input type="text" class="form-input" placeholder="Captcha Code" id="6_letters_code" name="6_letters_code" required>
+							<small>Can't read the image? click <a href='javascript: refreshCaptcha();'>here</a> to refresh</small>
+                            <div class="help-block with-errors"></div>
+                        </div>
                         <div class="form-group">
                             <button type="submit" class="button button--large" id="needRideSubmit">Submit</button>
                             <a class="align-right close-form" href="#intro">Back</a>
@@ -385,6 +408,13 @@
                                 <input type="checkbox" id="inTouchDriver" name="PleaseStayInTouch" checked /> We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.
                             </label>
                             <small>Yes, please stay in touch!</small>
+                        </div>
+						<div class="form-group">
+							<img src="captcha_code_file.php?rand=<?php echo rand(); ?>" id='captchaimg' ><br>
+                            <label for="CaptchaCode">Enter the Captcha Code</label>
+                            <input type="text" class="form-input" placeholder="Captcha Code" id="6_letters_code" name="6_letters_code" required>
+							<small>Can't read the image? click <a href='javascript: refreshCaptcha();'>here</a> to refresh</small>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="button button--large" id="offerRideSubmit">Submit</button>
@@ -540,6 +570,14 @@
         ga('create', 'UA-1858235-15', 'auto');
         ga('send', 'pageview');
     </script>
+	
+	<script language='JavaScript' type='text/javascript'>
+		function refreshCaptcha()
+		{
+			var img = document.images['captchaimg'];
+			img.src = img.src.substring(0,img.src.lastIndexOf("?"))+"?rand="+Math.random()*1000;
+		}
+</script>
 
     <script src="scripts/querystring.js"></script>
 
