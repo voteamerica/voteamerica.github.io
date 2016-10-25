@@ -12,6 +12,7 @@ html {
 body {
     font-family: "Lato", sans-serif;
     -webkit-font-smoothing: antialiased;
+    color: #333;
 }
 
 .content {
@@ -110,6 +111,7 @@ li {
 
 .button:active {
     transform: translateY(1px);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset, 0 3px 0 rgba(0,0,0,0.2) inset;
 }
 
 .button[disabled] {
@@ -128,6 +130,14 @@ li {
 
 .button--alt:hover, .button--alt:focus {
     background-color: #78c778;
+}
+
+.button--danger {
+    background-color: #e64a4a;
+}
+
+.button--danger:hover, .button--danger:focus {
+    background-color: #f86464;
 }
 
 .button--cancel {
@@ -195,17 +205,44 @@ li {
 
 .social li {
     display: inline-block;
-    margin: 0 5px;
+    margin: 0 15px 0 0;
     vertical-align: middle;
     position: relative;
 }
 
-.social__facebook {
-    top: -2px;
+.header .social li {
+    margin: 0 5px;
 }
 
-.social__youtube {
-    transform: scale(0.85) translate(-7px, -0.5px); /* 1337 hax */
+.social__twitter {
+    top: 2px;
+}
+
+.social__youtube a {
+    display: inline-block;
+    background-color: #e62117;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px 6px 3px;
+    font-family: Helvetica, Arial, sans-serif;
+    vertical-align: top;
+}
+.social__youtube a:before {
+    content: '';
+    background: url('../images/youtubeIcon.png') no-repeat center;
+    background-size: contain;
+    width: 16px;
+    height: 12px;
+    display: inline-block;
+    margin: -1px 4px 0 0;
+    vertical-align: top;
+    transform: scale(0.9);
+}
+.social__youtube a:hover {
+    background-color: #cc181e;
 }
 
 a.twitter-mention-button {
@@ -384,8 +421,9 @@ label {
 
 .form-input {
     border-radius: 3px;
-    background-color: white;
-    border: 1px solid #ccc;
+    background: white;
+    border: 1px solid #aaa;
+    box-shadow: none;
     color: #333;
     padding: 8px 12px;
     font-size: inherit;
@@ -560,6 +598,10 @@ label {
 
 .add-time-btn {
     margin: 15px 10px 15px 0;
+}
+
+.date-time-pickers small {
+    display: inline-block;
 }
 
 
@@ -750,14 +792,14 @@ label {
         margin-bottom: 24px;
     }
 
-    .social {
+    .header .social {
         position: absolute;
         left: 0;
         top: 30%;
         margin-top: 0;
     }
 
-    .social li {
+    .header .social li {
         margin-left: 0;
         margin-right: 12px;
     }

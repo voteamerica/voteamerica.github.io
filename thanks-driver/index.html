@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Our Story | Carpool Vote</title>
+    <title>Thank you! | Carpool Vote</title>
     <meta name="description" content="" property="description">
     <meta name="keywords" content="" property="keywords">
 
@@ -72,6 +72,20 @@
                 </li>
             </ul>
 
+            <script>
+                (function(){
+                    if (window.location.search === '?souls2thepolls') {
+                        var logo = document.getElementById('logo');
+                        logo.setAttribute('src', '../images/logo-souls2thepolls.png');
+                        logo.setAttribute('width', 661);
+                        logo.setAttribute('height', 300);
+                        logo.parentNode.setAttribute('href', '/?souls2thepolls');
+                        var homelink = document.getElementById('home-link');
+                        homelink.setAttribute('href', '/?souls2thepolls')
+                    }
+                })();
+            </script>
+
             <ul class="social">
                 <li role="presentation" class="social__twitter">
                     <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Need a ride to vote on election day? CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
@@ -90,23 +104,27 @@
     <main class="content">
         <div class="wrapper single-column offset-top">
             <div class="bannerbox">
-                <h1 class="bannerbox__title">Our Story</h1>
                 <div class="bannerbox__content">
-                    <p>Carpool Vote connects volunteer drivers with anybody who needs a ride to claim their vote.</p>
-                    <p>Many of our riders need a driver after losing full protection of the Voting Rights Act in 2013, as state governments no longer need permission to change election rules. The 2016 US Presidential election will be the first since this change has happened.</p>
-                    <p>Under the new rules, voters in several states face new barriers to getting to the polls. Some of the obstacles that Carpool Vote aims to reduce include:</p>
-                    <ul>
-                        <li>Polling stations face closure in lower-income communities of color.</li>
-                        <li>Would-be voters have to travel out of town to get a photo ID to register.</li>
-                        <li>The periods available to register and vote become shorter.</li>
-                        <li>Requesting an absentee ballot or voting by mail can be difficult in many states.</li>
+                    <h1>Thank you</h1>
+                    <p>for offering a fellow American a ride to claim their vote! Together, our driving volunteers could help shape the outcome of this election.</p>
+                    <p>We’ve sent you a message confirming that we’ve received your offer.</p>
+                    <p>Your driver offer reference number is: <b class="uuid">ID not loaded, please try again</b>.</p>
+                    <p>Please <strong>keep this reference</strong> in case you need to manage your ride request.</p>
+                    <p>To view or manage your matches, visit our <b><a class="self-service-url" href="/self-service/">self-service portal</a></b>.</p>
+
+                    <h2>What happens next?</h2>
+                    <p>Our system will match you with a passenger(s), based on the information you’ve provided. We’ll send you a notification of every ride request that matches your criteria. You can then accept as many ride requests as work for you.</p>
+                    <p>Once you have accepted a ride request, we’ll send you a message with the rider’s contact details. It’s then up the you and the rider to arrange when and where you'd like to meet, and any other details of your trip.</p>
+
+                    <p>Let your friends know!</p>
+                    <ul class="social">
+                        <li role="presentation" class="social__twitter">
+                            <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="I’ve signed up for a ride to #ClaimMyVote on @CarpoolVote. #Election2016 will be close. #CountEveryVote" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
+                        </li>
+                        <li role="presentation" class="social__facebook">
+                            <div class="fb-share-button" data-href="http://carpoolvote.com?v=1" data-layout="button"></div>
+                        </li>
                     </ul>
-                    <p>These rules - along with others introduced since the change - affect everybody but especially people of color, people with disabilities, young people, elderly people, and women.</p>
-                    <p><a href="https://medium.com/@RightToVote">Find out more about voter suppression</a></p>
-                    <p>These rules in swing states could sway 84 Electoral College votes and control of the Senate. It looks like the upcoming Presidential Election will be a close fight, so our mission is to help make sure that no vote goes uncounted.</p>
-                    <p>While we’re at it, we love that we can help people of all ages get excited about the political process, and introduce people from all walks of life who may not have had the chance to meet otherwise.</p>
-                    <p>We hope that you love this, too!</p>
-                    <p><a href="https://medium.com/@carpoolvote">Carpool Vote news stories</a></p>
                 </div>
             </div>
         </div>

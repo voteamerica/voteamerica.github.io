@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Our Story | Carpool Vote</title>
+    <title>Manage your matches | Carpool Vote</title>
     <meta name="description" content="" property="description">
     <meta name="keywords" content="" property="keywords">
 
@@ -90,23 +90,24 @@
     <main class="content">
         <div class="wrapper single-column offset-top">
             <div class="bannerbox">
-                <h1 class="bannerbox__title">Our Story</h1>
+                <h1 class="bannerbox__title">Manage your matches</h1>
                 <div class="bannerbox__content">
-                    <p>Carpool Vote connects volunteer drivers with anybody who needs a ride to claim their vote.</p>
-                    <p>Many of our riders need a driver after losing full protection of the Voting Rights Act in 2013, as state governments no longer need permission to change election rules. The 2016 US Presidential election will be the first since this change has happened.</p>
-                    <p>Under the new rules, voters in several states face new barriers to getting to the polls. Some of the obstacles that Carpool Vote aims to reduce include:</p>
-                    <ul>
-                        <li>Polling stations face closure in lower-income communities of color.</li>
-                        <li>Would-be voters have to travel out of town to get a photo ID to register.</li>
-                        <li>The periods available to register and vote become shorter.</li>
-                        <li>Requesting an absentee ballot or voting by mail can be difficult in many states.</li>
-                    </ul>
-                    <p>These rules - along with others introduced since the change - affect everybody but especially people of color, people with disabilities, young people, elderly people, and women.</p>
-                    <p><a href="https://medium.com/@RightToVote">Find out more about voter suppression</a></p>
-                    <p>These rules in swing states could sway 84 Electoral College votes and control of the Senate. It looks like the upcoming Presidential Election will be a close fight, so our mission is to help make sure that no vote goes uncounted.</p>
-                    <p>While we’re at it, we love that we can help people of all ages get excited about the political process, and introduce people from all walks of life who may not have had the chance to meet otherwise.</p>
-                    <p>We hope that you love this, too!</p>
-                    <p><a href="https://medium.com/@carpoolvote">Carpool Vote news stories</a></p>
+                    <style>
+                        .hiddenButton {
+                            display: none;
+                        }
+                    </style>
+                    <div class="form-group">
+                        <label for="inputPhoneNumber">Enter your phone number or last name</label>
+                        <input type="text" id="inputPhoneNumber" class="form-input" />
+                    </div>
+                    <div class="form-group">
+                        <button class="button button--danger" id="btnCancelRideRequest" onclick="cancelRideRequest()">Cancel Ride Request</button>
+                        <button class="button button--danger" id="btnCancelRiderMatch" onclick="cancelRiderMatch()">Cancel Rider Match Request</button>
+                        <button class="button button--danger" id="btnCancelDriveOffer" onclick="cancelDriveOffer()">Cancel Drive Offer Request</button>
+                        <button class="button button--danger" id="btnCancelDriverMatch" onclick="cancelDriverMatch()">Cancel Driver Match Request</button>
+                        <button class="button" id="btnAcceptDriverMatch" onclick="acceptDriverMatch()">Accept Driver Match Request</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,5 +142,6 @@
     </script>
 
     <script src="../scripts/querystring.js"></script>
+    <script src="../scripts/selfservice.js"></script>
 </body>
 </html>

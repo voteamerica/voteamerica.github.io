@@ -85,8 +85,7 @@
                     <div class="fb-share-button" data-href="http://carpoolvote.com?v=1" data-layout="button"></div>
                 </li>
                 <li role="presentation" class="social__youtube">
-                    <script src="https://apis.google.com/js/platform.js"></script>
-                    <div class="g-ytsubscribe" data-channelid="UCY1aS3TMDGxVbckA7Va0QFA" data-layout="default" data-count="hidden"></div>
+                    <a href="https://www.youtube.com/channel/UCY1aS3TMDGxVbckA7Va0QFA?sub_confirmation=1" target="_blank">YouTube</a>
                 </li>
             </ul>
         </nav>
@@ -129,7 +128,7 @@
 
         <div id="forms" class="forms wrapper offset-top">
             <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/live/rider" method="post" class="ride-form" role="form" aria-hidden="true">
-                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks.html" />
+                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-driver/" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I need a ride</h2>
                     <div class="bannerbox__content">
@@ -176,7 +175,7 @@
 
                         <fieldset>
                             <legend>Vehicle requirements</legend>
-                            <p>Please let us know how how many people will need to travel together in the <b>same car</b>.</p>
+                            <p>Please let us know how many people will need to travel together in the <b>same car</b>.</p>
                             <p>(To make it easier for us to match people, please complete an individual form if you do not need travel with anybody else.)</p>
                             <div class="form-group">
                                 <label for="rideSeats">Party size</label>
@@ -276,7 +275,7 @@
             </form>
 
             <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/live/driver" method="post" class="ride-form" role="form" aria-hidden="true">
-                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks.html" />
+                <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-rider/" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I can offer a ride</h2>
                     <div class="bannerbox__content">
@@ -543,24 +542,7 @@
         ga('send', 'pageview');
     </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-    <script>
-        if (window.location.search === '?souls2thepolls') {
-
-            $('#intro').addClass('s2tp');
-
-            $('#logo').attr({
-                src: 'images/logo-souls2thepolls.png',
-                width: 661,
-                height: 300
-            });
-
-            $('a[href^="/"]').each(function() {
-                $(this).attr('href', $(this).attr('href') + '?souls2thepolls');
-            });
-        }
-    </script>
+    <script src="scripts/querystring.js"></script>
 
     <script type="text/template" id="available-time-row">
         <li class="available-times__row">
@@ -583,6 +565,7 @@
         </li>
     </script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
     <script src="scripts/main.js"></script>
