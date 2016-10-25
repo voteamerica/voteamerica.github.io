@@ -6,7 +6,7 @@ We are racing to get this site up and running for the 2016 US Presidential elect
 
 ## Slack
 
-We have a [Slack team](https://carpool-vote.slack.com/)! Please [email us](slack@carpoolvote.com) if you would like to join.
+We have a [Slack team](https://carpool-vote.slack.com/)! Please [email us](mailto:slack@carpoolvote.com) if you would like to join.
 
 ## Technical
 
