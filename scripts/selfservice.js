@@ -1,5 +1,5 @@
-var remoteUrl = "http://localhost:8000";                                                                 
-// var remoteUrl = "https://api.carpoolvote.com/live";
+// var remoteUrl = "http://localhost:8000";                                                                 
+var remoteUrl = "https://api.carpoolvote.com/live";
 
 // call page with querystring
 // self.html?UUID_driver=9dba44a5-8188-4ced-925f-11c80fa9e130&DriverPhone=07958110786
@@ -46,7 +46,7 @@ function hideButton (buttonId) {
 if (UUID_driver === null) {
   hideButton("btnCancelDriveOffer");
   hideButton("btnCancelDriverMatch");
-  // hideButton("btnPauseDriverMatch");
+  hideButton("btnPauseDriverMatch");
 }
 
 if (UUID_rider === null) {
@@ -68,30 +68,49 @@ function updateFnInfo (info) {
   infoText.innerHTML=info;
 }
 
-
 function executeDbFunction (url) {
   var checkField = getCheckValue();
 
+  updateFnInfo("");
+
+  if (checkField === "") {
+
+    updateFnInfo("Please enter a phone number or last name");
+
+    return;
+  }
+
   url += checkField;
+
 
   var request = new XMLHttpRequest();
 
   request.responseType = 'text';
 
   request.onload = function () {
-      if (request.readyState === xhr.DONE) {
+      if (request.readyState === request.DONE) {
           if (request.status === 200) {
+            var dbInfo = {};
+            var info = "";
 
-            updateFnInfo(request.response + request.responseText);
-              // console.log(xhr.response);
-              // console.log(xhr.responseText);
+            try {
+              dbInfo = JSON.parse(request.response);
+
+              var keys = Object.keys(dbInfo);
+
+              if (keys) {
+                info = dbInfo[keys[0]].toString();
+                updateFnInfo(info);
+              }
+            }
+            catch (err) {
+              updateFnInfo("");
+            }
           }
       }
   };
 
   request.open("GET", url);
-// xhr.open('GET', '/server', true);
-
   request.send();
 }
 
