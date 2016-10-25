@@ -128,8 +128,10 @@ $(function(){
     });
 
     $forms.on('change', '.toggleRequiredEmail', function(){
-        var id = $(this).attr('data-emailID');
-        $forms.find(id).prop('required', $(this).is(':checked')).trigger('change');
+        var id = $(this).attr('data-emailID'),
+            isRequired = $(this).is(':checked');
+        $forms.find(id).prop('required', isRequired).trigger('change')
+            .siblings('label').find('.optional').toggle(!isRequired);
     });
 
     $forms.on('submit', 'form', function() {
@@ -212,8 +214,25 @@ $(function(){
 
     function formatTime(date, startTime, endTime) {
         return [startTime, endTime].map(function(time){
-            return (date || '') + 'T' + (time || '');
+            return [(date || ''), to24Hour(time)].join('T');
         }).join('/');
+    }
+
+    function to24Hour(time) {
+        if (!time) {
+            return '';
+        }
+        var period = time.match(/[AP]M/);
+        if (!period) {
+            return time; // is 24 hour time already
+        }
+        var divisions = time.split(':'),
+            hours = divisions[0],
+            minutes = divisions[1];
+        if (period.toString() === 'PM' && +hours !== 12) {
+            hours = +hours + 12;
+        }
+        return [hours,minutes].join(':');
     }
     
     function yyyymmdd(date) {

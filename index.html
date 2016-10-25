@@ -13,7 +13,7 @@
     <meta property="og:url" content="http://carpoolvote.com" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Carpool Vote - Vote America" />
-    <meta property="og:description" content="Get a ride, or share a ride to vote, or register to vote. Support every American's right to vote!" />
+    <meta property="og:description" content="Get a ride or share a ride in the 2016 US presidential election. Every American DESERVES a vote!"/>
     <meta property="og:image" content="http://carpoolvote.com/images/logo.png" />
 
     <link rel="icon" href="favicon.ico">
@@ -95,15 +95,14 @@
 
             <ul class="social">
                 <li role="presentation" class="social__twitter">
-                    <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Need a ride to vote on election day? CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
+                    <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Support #Democracy4All this #Election2016. Sign up on @CarpoolVote: Linking drivers with voters needing a ride" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
                     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </li>
                 <li role="presentation" class="social__facebook">
                     <div class="fb-share-button" data-href="http://carpoolvote.com?v=1" data-layout="button"></div>
                 </li>
                 <li role="presentation" class="social__youtube">
-                    <script src="https://apis.google.com/js/platform.js"></script>
-                    <div class="g-ytsubscribe" data-channelid="UCY1aS3TMDGxVbckA7Va0QFA" data-layout="default" data-count="hidden"></div>
+                    <a href="https://www.youtube.com/channel/UCY1aS3TMDGxVbckA7Va0QFA?sub_confirmation=1" target="_blank">YouTube</a>
                 </li>
             </ul>
         </nav>
@@ -170,12 +169,12 @@
                             <div class="form-column">
                                 <div class="form-group">
                                     <label for="rideArea">Pick up ZIP code</label>
-                                    <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
+                                    <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="rideDestinationZIP">Destination ZIP code</label>
-                                    <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" name="RiderDropOffZIP" placeholder="To where do you need a ride?" name="RiderDropOffZIP" required>
+                                    <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" name="RiderDropOffZIP" placeholder="To where do you need a ride?" name="RiderDropOffZIP" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -183,7 +182,8 @@
                             <div class="form-column">
                                 <div class="form-group">
                                     <label>Find your polling place</label>
-                                    <ul id="location-details" class="state-dropdown">
+									<div class="help-block">(Link will open your state’s polling place checker in a new tab.)</div>
+                                    <ul id="location-details" class="state-dropdown state-dropdown-small">
                                         <li>Loading&hellip;</li>
                                     </ul>
                                 </div>
@@ -192,11 +192,11 @@
 
                         <fieldset>
                             <legend>Vehicle requirements</legend>
-                            <p>Please let us know how how many people will need to travel together in the <b>same car</b>.</p>
+                            <p>Please let us know how many people will need to travel together in the <b>same car</b>.</p>
                             <p>(To make it easier for us to match people, please complete an individual form if you do not need travel with anybody else.)</p>
                             <div class="form-group">
-                                <label for="rideSeats">Party size</label>
-                                <input type="number" class="form-input" id="rideSeats" placeholder="Number of non-wheelchair seats required" name="TotalPartySize" min=0 required>
+                                <label for="rideSeats">Number of non-wheelchair seats required</label>
+                                <input type="number" class="form-input form-input--small" id="rideSeats" name="TotalPartySize" min=0 required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
@@ -210,7 +210,7 @@
                                 </label>
                             </div>
                             <div class="form-group">
-                                <label for="RiderAccommodationNotes">Notes</label>
+                                <label for="RiderAccommodationNotes">Notes <i class="optional">Optional</i></label>
                                 <textarea class="form-input" id="RiderAccommodationNotes" placeholder="Accommodation requirements e.g. service animal, assistance folding equipment, assistance entering/exiting the vehicle, etc." name="RiderAccommodationNotes" rows="4"></textarea>
                             </div>
                         </fieldset>
@@ -229,7 +229,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label for="riderEmail">Email address</label>
+                                <label for="riderEmail">Email address <i class="optional">Optional</i></label>
                                 <input type="email" class="form-input" id="riderEmail" placeholder="Email" name="RiderEmail">
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -315,16 +315,16 @@
 
                             <div class="form-group">
                                 <label for="rideArea">Pick up ZIP code</label>
-                                <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where can you pick up the rider?" name="DriverCollectionZIP" required>
+                                <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where can you pick up the rider?" name="DriverCollectionZIP" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <p>I am willing to collect within a <input type="number" id="offerMiles" placeholder="0" name="DriverCollectionRadius" pattern="\d*" min="0" step="1" class="form-input form-input--inline" required /> mile radius of this zip code.<p>
+                                <p>I am willing to collect within a <input type="number" id="offerMiles" name="DriverCollectionRadius" pattern="\d*" min="0" step="1" class="form-input form-input--inline" required /> mile radius of this zip code.<p>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label for="driverSeats">Seats</label>
-                                <input type="number" min="0" class="form-input" id="driverSeats" placeholder="How many seats can you offer?" name="SeatCount" required>
+                                <label for="driverSeats">Number of seats in vehicle</label>
+                                <input type="number" min="0" class="form-input form-input--small" id="driverSeats" name="SeatCount" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
@@ -334,12 +334,14 @@
                             </div>
                             <div class="form-group checkbox">
                                 <label for="offerInsurance">
-                                    <input type="checkbox" name="DriverHasInsurance" id="offerInsurance"/> I confirm the driver has insurance
+                                    <input type="checkbox" name="DriverHasInsurance" id="offerInsurance" required/> I confirm the driver has insurance
                                 </label>
+                                <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
                                 <label for="driverLicence">Driver's license number</label>
-                                <input type="text" class="form-input" id="driverLicence" name="DriverLicenceNumber">
+                                <input type="text" class="form-input form-input--medium" id="driverLicence" name="DriverLicenceNumber" required>
+                                <div class="help-block with-errors"></div>
                             </div>
                         </fieldset>
 
@@ -357,13 +359,13 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label for="driverEmail">Email address</label>
+                                <label for="driverEmail">Email address <i class="optional">Optional</i></label>
                                 <input type="email" class="form-input" id="driverEmail" placeholder="Email address" name="DriverEmail">
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
                                 <label for="driverPhone">Phone number</label>
-                                <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" />
+                                <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" required />
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox checkbox--multi">
@@ -438,7 +440,7 @@
                     <h2 class="bannerbox__title">How to Claim Your Vote</h2>
                     <div class="bannerbox__content">
                         <h3>Am I registered?</h3>
-                        <p>Select your state check if you're registered to vote on the November 8 presidential election</p>
+                        <p>Select your state check if you're registered to vote on the November 8 presidential election. (Link will open your state’s polling place checker in a new tab.)</p>
                         <ul id="state-select" class="state-dropdown drop-a">
                             <li>Loading&hellip;</li>
                         </ul>

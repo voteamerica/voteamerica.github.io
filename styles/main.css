@@ -214,12 +214,35 @@ li {
     margin: 0 5px;
 }
 
-.social__facebook {
-    top: -2px;
+.social__twitter {
+    top: 2px;
 }
 
-.social__youtube {
-    transform: scale(0.85) translate(-7px, -0.5px); /* 1337 hax */
+.social__youtube a {
+    display: inline-block;
+    background-color: #e62117;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px 6px 3px;
+    font-family: Helvetica, Arial, sans-serif;
+    vertical-align: top;
+}
+.social__youtube a:before {
+    content: '';
+    background: url('../images/youtubeIcon.png') no-repeat center;
+    background-size: contain;
+    width: 16px;
+    height: 12px;
+    display: inline-block;
+    margin: -1px 4px 0 0;
+    vertical-align: top;
+    transform: scale(0.9);
+}
+.social__youtube a:hover {
+    background-color: #cc181e;
 }
 
 a.twitter-mention-button {
@@ -396,6 +419,13 @@ label {
     line-height: 1.6;
 }
 
+.optional {
+    font-size: 12px;
+    color: #999;
+    margin-left: 15px;
+    font-style: normal;
+}
+
 .form-input {
     border-radius: 3px;
     background: white;
@@ -407,6 +437,14 @@ label {
     font-family: inherit;
     width: 100%;
     max-width: 500px;
+}
+
+.form-input--medium {
+    max-width: 300px;
+}
+
+.form-input--small {
+    max-width: 150px;
 }
 
 .form-input--inline {
@@ -490,6 +528,7 @@ label {
     overflow: auto;
 }
 
+
 .state-dropdown::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 8px;
@@ -524,6 +563,10 @@ label {
     background-color: #e64a4a;
     color: white;
     text-decoration: none;
+}
+
+.state-dropdown-small{
+	max-height:92px;
 }
 
 

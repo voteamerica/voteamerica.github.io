@@ -21,116 +21,156 @@ function getParameterByName(name, url) {
 }
 
 var UUID_driver = getParameterByName('UUID_driver'); 
-var UUID_rider = getParameterByName('UUID_rider'); 
-var Score = getParameterByName('Score'); 
+var UUID_rider  = getParameterByName('UUID_rider'); 
+var Score       = getParameterByName('Score'); 
 
 // these will be put input into the text field rather than passed as querystring params
 // var DriverPhone = getParameterByName('DriverPhone'); 
 // var RiderPhone = getParameterByName('RiderPhone'); 
 // var LastName = getParameterByName('LastName'); 
 
-function getCheckValue() {
+function getCheckValue () {
   var phoneNumField = document.getElementById("inputPhoneNumber");
 
   return phoneNumField.value;
 }
+
+function hideButton (buttonId) {
+  var buttonToHide = document.getElementById(buttonId);
+
+  if (buttonToHide) {
+    buttonToHide.classList.add("hiddenButton");
+  }
+}
  
 if (UUID_driver === null) {
-  var buttonCancelDriveOffer = document.getElementById("btnCancelDriveOffer");
-
-  buttonCancelDriveOffer.classList.add("hiddenButton");
+  hideButton("btnCancelDriveOffer");
+  hideButton("btnCancelDriverMatch");
+  hideButton("btnPauseDriverMatch");
 }
 
 if (UUID_rider === null) {
-  var buttonCancelRideRequest = document.getElementById("btnCancelRideRequest");
-
-  buttonCancelRideRequest.classList.add("hiddenButton");
+  hideButton("btnCancelRideRequest");
+  hideButton("btnCancelRiderMatch");
 }
 
-if (Score === null) {
-  var buttonAcceptDriverMatch = document.getElementById("btnAcceptDriverMatch");
-
-  buttonAcceptDriverMatch.classList.add("hiddenButton");
+if (UUID_driver === null || Score === null) {
+  hideButton("btnAcceptDriverMatch");
 }
 
+if (UUID_driver === null && UUID_rider === null) {
+  updateFnInfo("Please access this page via the email or sms link. If there is an issue, please contact support@carpoolvote.com");
+}
 
-function cancelRideRequest() {
-  // var checkField = (RiderPhone || LastName || "");
+function updateFnInfo (info) {
+  var infoText = document.getElementById("execFnInfo");
+
+  infoText.innerHTML=info;
+}
+
+function executeDbFunction (url) {
   var checkField = getCheckValue();
 
-  buttonCancelDriveOffer.classList.add("hiddenButton");
+  updateFnInfo("");
 
-  var url = 
-    remoteUrl + 
-    '/cancel-ride-request?' + 
-    'UUID=' + UUID_rider + 
-    '&RiderPhone=' + checkField;
+  if (checkField === "") {
+
+    updateFnInfo("Please enter a phone number or last name");
+
+    return;
+  }
+
+  url += checkField;
+
 
   var request = new XMLHttpRequest();
+
+  request.responseType = 'text';
+
+  request.onload = function () {
+      if (request.readyState === request.DONE) {
+          if (request.status === 200) {
+            var dbInfo = {};
+            var info = "";
+
+            try {
+              dbInfo = JSON.parse(request.response);
+
+              var keys = Object.keys(dbInfo);
+
+              if (keys) {
+                info = dbInfo[keys[0]].toString();
+                updateFnInfo(info);
+              }
+            }
+            catch (err) {
+              updateFnInfo("");
+            }
+          }
+      }
+  };
 
   request.open("GET", url);
   request.send();
 }
 
-function cancelRiderMatch() {
-  var checkField = getCheckValue();
+function cancelRideRequest() {
+  var url = 
+    remoteUrl + 
+    '/cancel-ride-request?' + 
+    'UUID=' + UUID_rider + 
+    '&RiderPhone=';
 
+  executeDbFunction(url);
+}
+
+function cancelRiderMatch() {
   var url = 
     remoteUrl + '/cancel-rider-match?' + 
     'UUID_driver=' + UUID_driver +
     '&UUID_rider=' + UUID_rider + 
     '&Score=' + Score +
-    '&RiderPhone=' + checkField;
+    '&RiderPhone=';
 
-  var request = new XMLHttpRequest();
-
-  request.open("GET", url);
-  request.send();
+  executeDbFunction(url);
 }
 
 function cancelDriveOffer() {
-  var checkField = getCheckValue();
-  // var checkField = (DriverPhone || LastName || "");
-
   var url = 
     remoteUrl + '/cancel-drive-offer?' + 
     'UUID=' + UUID_driver +
-    '&DriverPhone=' + checkField;
+    '&DriverPhone=';
 
-  var request = new XMLHttpRequest();
-
-  request.open("GET", url);
-  request.send();
+  executeDbFunction(url);
 }
 
 function cancelDriverMatch() {
-  var checkField = getCheckValue();
-
   var url = 
     remoteUrl + '/cancel-driver-match?' + 
     'UUID_driver=' + UUID_driver +
     '&UUID_rider=' + UUID_rider + 
     '&Score=' + Score +
-    '&DriverPhone=' + checkField;
+    '&DriverPhone=';
 
-  var request = new XMLHttpRequest();
-
-  request.open("GET", url);
-  request.send();
+    executeDbFunction(url);
 }
 
 function acceptDriverMatch() {
-  var checkField = getCheckValue();
-
   var url = 
     remoteUrl + '/accept-driver-match?' + 
     'UUID_driver=' + UUID_driver +
     '&UUID_rider=' + UUID_rider + 
     '&Score=' + Score +
-    '&DriverPhone=' + checkField;
+    '&DriverPhone=';
 
-  var request = new XMLHttpRequest();
+  executeDbFunction(url);
+}
 
-  request.open("GET", url);
-  request.send();
+function pauseDriverMatch() {
+  var url = 
+    remoteUrl + '/pause-driver-match?' + 
+    'UUID=' + UUID_driver +
+    '&DriverPhone=';
+
+  executeDbFunction(url);
 }
