@@ -38,16 +38,21 @@
     var jsonRiderParse = GeoJSON.parse(jsonRider, {Point: ["latitude_numeric", "longitude_numeric"]});
     var jsonDriverParse = GeoJSON.parse(jsonDriver, {Point: ["latitude_numeric", "longitude_numeric"]});
     
-//lot the geoJSON feaures with markesr so we can use custom icons
+//plot the geoJSON feaures with markesr so we can use custom icons
+//example here https://maptimeboston.github.io/leaflet-intro/
     var jsonRiderLayer = L.geoJSON(jsonRiderParse, {
         pointToLayer: function (feature, latlng) {
-            return L.marker(latlng, {icon: riderIcon});
+            var marker = L.marker(latlng, {icon: riderIcon});
+            marker.bindPopup('<b>Unmatched Riders: ' + feature.properties.count + '</b><br/>' + feature.properties.city + ', ' + feature.properties.state + '<br/>zip: ' + feature.properties.zip);
+            return marker
         }
     }).addTo(map);
     
     var jsonDriverLayer = L.geoJSON(jsonDriverParse, {
         pointToLayer: function (feature, latlng) {
-            return L.marker(latlng, {icon: driverIcon});
+            var marker = L.marker(latlng, {icon: driverIcon});
+            marker.bindPopup('<b>Available Drivers: </b>' + feature.properties.count + '</b><br/>' + feature.properties.city + ', ' + feature.properties.state + '<br/>zip: ' + feature.properties.zip);
+            return marker
         }
     }).addTo(map);
     
