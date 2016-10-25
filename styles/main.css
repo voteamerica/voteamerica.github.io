@@ -565,8 +565,8 @@ label {
     text-decoration: none;
 }
 
-.state-dropdown-small{
-	max-height:92px;
+.state-dropdown-large{
+	max-height:175px;
 }
 
 

@@ -155,6 +155,11 @@
 
                             <div class="form-column">
                                 <div class="form-group">
+                                    <label for="riderPickUpAddress">Pick up address</label>
+                                    <input type="text" class="form-input form-input--medium" id="riderCollectionAddress" placeholder="Your pick up address" name="RiderCollectionAddress" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="form-group">
                                     <label for="rideArea">Pick up ZIP code</label>
                                     <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
                                     <div class="help-block with-errors"></div>
@@ -169,8 +174,8 @@
                             <div class="form-column">
                                 <div class="form-group">
                                     <label>Find your polling place</label>
-									<div class="help-block">(Link will open your state’s polling place checker in a new tab.)</div>
-                                    <ul id="location-details" class="state-dropdown state-dropdown-small">
+                                    <div class="help-block">(Link will open your state’s polling place checker in a new tab.)</div>
+                                    <ul id="location-details" class="state-dropdown state-dropdown-large">
                                         <li>Loading&hellip;</li>
                                     </ul>
                                 </div>
