@@ -212,8 +212,25 @@ $(function(){
 
     function formatTime(date, startTime, endTime) {
         return [startTime, endTime].map(function(time){
-            return (date || '') + 'T' + (time || '');
+            return [(date || ''), to24Hour(time)].join('T');
         }).join('/');
+    }
+
+    function to24Hour(time) {
+        if (!time) {
+            return '';
+        }
+        var period = time.match(/[AP]M/);
+        if (!period) {
+            return time; // is 24 hour time already
+        }
+        var divisions = time.split(':'),
+            hours = divisions[0],
+            minutes = divisions[1];
+        if (period.toString() === 'PM' && +hours !== 12) {
+            hours = +hours + 12;
+        }
+        return [hours,minutes].join(':');
     }
     
     function yyyymmdd(date) {
