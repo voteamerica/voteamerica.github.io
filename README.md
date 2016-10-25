@@ -31,4 +31,4 @@ Relies on Mailchimp (for user email subscriptions) and Google Analytics (for sta
 
 # Contributing
 
-- If you're interested in contributing to this project, please read more [here](CONTRIBUTING.md) and read over our Code of Conduct [here](code-of-conduct.md)
+- If you're interested in contributing to this project, please read our guidelines for [how to contribute](docs/contributing.md) and also please be aware of our [code of conduct](docs/code-of-conduct.md).
