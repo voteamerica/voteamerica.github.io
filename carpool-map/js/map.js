@@ -1,10 +1,25 @@
 //get the data from API, using jQuery, assigns rider / driver variables to calls
 
 $(document).ready(function () { 
+    $.when(
+    
+    //wait until successful calls of both sources
+    $.getJSON('https://api.carpoolvote.com/live/unmatched-riders', function (riderSource) { 
+        jsonRider = riderSource;
+    }),
+    
     $.getJSON('https://api.carpoolvote.com/live/unmatched-drivers', function (driverSource) { 
-    var jsonDriver = driverSource;
-//
-//        $(".json").text(data.ip); //selects the CSS class, json, and sets it to the 'ip' property of the 'data' object called earlier.
+        jsonDriver = driverSource;
+    })
+    
+    
+    ).then(function(){
+        
+        //do stuff
+
+    
+//    $.getJSON('https://api.carpoolvote.com/live/unmatched-drivers', function (driverSource) { 
+//    var jsonDriver = driverSource;
 
 //create the map, set the zoom, add it to the 'map' div element
     var map = L.map('map')
@@ -39,7 +54,7 @@ $(document).ready(function () {
     });
 
 //data location
-    var jsonRider = [{"count":"1","zip":"20111","state":"VA","latitude":" 38.769697","longitude":" -77.44915","city":"Manassas","full_state":"Virginia","latitude_numeric":38.7697,"longitude_numeric":-77.4492,"latlong":{"x":38.7696952819824,"y":-77.4491500854492}}];
+//    var jsonRider = [{"count":"1","zip":"20111","state":"VA","latitude":" 38.769697","longitude":" -77.44915","city":"Manassas","full_state":"Virginia","latitude_numeric":38.7697,"longitude_numeric":-77.4492,"latlong":{"x":38.7696952819824,"y":-77.4491500854492}}];
 //    var jsonDriver = [{"count":"1","zip":"20111","state":"VA","latitude":" 38.769697","longitude":" -77.44915","city":"Manassas","full_state":"Virginia","latitude_numeric":38.7697,"longitude_numeric":-77.4492,"latlong":{"x":38.7696952819824,"y":-77.4491500854492}}];
 
 // create geoJSON layer by parsing JSON with geojson.js library
@@ -75,5 +90,8 @@ $(document).ready(function () {
 //load the label, then the layer from the layer group
 //loads the map controller, using the .addTo(map) method when creating the layer initially determines if on/off at start
     L.control.layers(null, overlaylabels).addTo(map);
-    });
-});
+    
+
+    }); // end of then function
+    
+}); //end ready function 
