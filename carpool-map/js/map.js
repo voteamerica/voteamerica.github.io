@@ -1,26 +1,16 @@
 //get the data from API, using jQuery, assigns rider / driver variables to calls
-
+//make leaflet map, load custom icons, pop-ups, and add to a layer group
 $(document).ready(function () { 
     $.when(
-    
     //wait until successful calls of both sources
     $.getJSON('https://api.carpoolvote.com/live/unmatched-riders', function (riderSource) { 
         jsonRider = riderSource;
     }),
-    
     $.getJSON('https://api.carpoolvote.com/live/unmatched-drivers', function (driverSource) { 
         jsonDriver = driverSource;
     })
-    
-    
     ).then(function(){
         
-        //do stuff
-
-    
-//    $.getJSON('https://api.carpoolvote.com/live/unmatched-drivers', function (driverSource) { 
-//    var jsonDriver = driverSource;
-
 //create the map, set the zoom, add it to the 'map' div element
     var map = L.map('map')
         .setView([36, -93], 3);
@@ -53,13 +43,9 @@ $(document).ready(function () {
         popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
     });
 
-//data location
-//    var jsonRider = [{"count":"1","zip":"20111","state":"VA","latitude":" 38.769697","longitude":" -77.44915","city":"Manassas","full_state":"Virginia","latitude_numeric":38.7697,"longitude_numeric":-77.4492,"latlong":{"x":38.7696952819824,"y":-77.4491500854492}}];
-//    var jsonDriver = [{"count":"1","zip":"20111","state":"VA","latitude":" 38.769697","longitude":" -77.44915","city":"Manassas","full_state":"Virginia","latitude_numeric":38.7697,"longitude_numeric":-77.4492,"latlong":{"x":38.7696952819824,"y":-77.4491500854492}}];
-
-// create geoJSON layer by parsing JSON with geojson.js library
-    var jsonRiderParse = GeoJSON.parse(jsonRider, {Point: ["latitude_numeric", "longitude_numeric"]});
-    var jsonDriverParse = GeoJSON.parse(jsonDriver, {Point: ["latitude_numeric", "longitude_numeric"]});
+//create geoJSON layer by parsing JSON with geojson.js library
+    var jsonRiderParse = GeoJSON.parse(jsonRider, {Point: ['latitude_numeric', 'longitude_numeric']});
+    var jsonDriverParse = GeoJSON.parse(jsonDriver, {Point: ['latitude_numeric', 'longitude_numeric']});
     
 //plot the geoJSON feaures with markesr so we can use custom icons
 //example here https://maptimeboston.github.io/leaflet-intro/
@@ -79,19 +65,16 @@ $(document).ready(function () {
         }
     }).addTo(map);
     
-// load these layers into a group for the layer control
+//load these layers into a group for the layer control
     var overlayGroup = L.layerGroup([jsonRiderLayer, jsonDriverLayer]);
     
 //create "label": key for layers   
     var overlaylabels = {
-        "Riders": jsonRiderLayer,
-        "Drivers": jsonDriverLayer,
+        'Riders': jsonRiderLayer,
+        'Drivers': jsonDriverLayer,
     };
 //load the label, then the layer from the layer group
 //loads the map controller, using the .addTo(map) method when creating the layer initially determines if on/off at start
-    L.control.layers(null, overlaylabels).addTo(map);
-    
 
     }); // end of then function
-    
 }); //end ready function 
