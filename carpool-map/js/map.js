@@ -75,6 +75,6 @@ $(document).ready(function () {
     };
 //load the label, then the layer from the layer group
 //loads the map controller, using the .addTo(map) method when creating the layer initially determines if on/off at start
-
+    L.control.layers(null, overlaylabels).addTo(map);
     }); // end of then function
 }); //end ready function 
