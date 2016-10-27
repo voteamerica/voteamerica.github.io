@@ -36,6 +36,7 @@ the imperative (e.g. 'Update rider email input field').
 ## Reviewing and testing PRs
 
 - Once you have submitted a new PR, it will need to be reviewed and ideally tested before it's merged into master.
+- Please indicate in your PR description whether your PR is ready to merge, or whether you're still working on it.
 - Even if you have write permission to this repository, please try to avoid merging your own PRs, especially for large features.
 - Ideally, every PR should have a senior project member sign off on it before being merged.
 - If you have an urgent PR, please announce it in the #frontend Slack channel and one of us will try to prioritise reviewing and deploying it.
