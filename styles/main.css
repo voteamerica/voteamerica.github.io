@@ -829,6 +829,10 @@ label {
     .time-range-slider {
         max-width: 700px;
     }
+	
+    .state-dropdown--large{
+        max-height:323px;
+    }
 }
 
 @media (min-width: 1200px) {
