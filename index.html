@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="rideDestinationZIP">Destination ZIP code</label>
-                                    <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" name="RiderDropOffZIP" placeholder="To where do you need a ride?" name="RiderDropOffZIP" required>
+                                    <input type="text" class="form-input" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" name="RiderDropOffZIP" placeholder="To where do you need a ride?" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -243,7 +243,7 @@
                         </div>
                         <div class="form-group checkbox">
                             <label for="RiderLegalConsent">
-                                <input type="checkbox" id="RiderLegalConsent" name="RiderLegalConsent" required /> I understand that Carpool Vote will share my contact details with the driver if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
+                                <input type="checkbox" id="RiderLegalConsent" name="RiderLegalConsent" required /> I understand that Carpool Vote will share my contact details with the driver if there's a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
                             </label>
                             <div class="help-block with-errors"></div>
                         </div>
@@ -260,8 +260,20 @@
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group checkbox">
+                            <label for="AgreeTnC">
+                                <input type="checkbox" id="AgreeTnC" name="AgreeTnC" />I agree to the Terms and Conditions
+                                <p>I understand that Carpool Vote will share my contact details with the driver if there's a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)</p>
+
+<p>I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.</p>
+
+<p>I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.</p>
+<p><a href="/terms-conditions.html" class="nav__link story" id="story-link">Terms &amp; Conditions</a></p>
+                            </label>
+                        </div>
+
+                        <div class="form-group checkbox">
                             <label for="inTouchRider">
-                                <input type="checkbox" id="inTouchRider" name="PleaseStayInTouch" checked /> We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.
+                                <input type="checkbox" id="inTouchRider" name="PleaseStayInTouch" checked /> We'd like to keep you updated from time to time about how the project is progressing. Please untick this box if you'd prefer us not to do this.
                             </label>
                             <small>Yes, please stay in touch!</small>
                         </div>
@@ -365,7 +377,7 @@
 
                         <div class="form-group checkbox">
                             <label for="legalThree">
-                                <input type="checkbox" id="legalThree" name="RidersCanSeeDriverDetails" required /> I understand that Carpool Vote will share my contact details with the rider(s) if there’s a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
+                                <input type="checkbox" id="legalThree" name="RidersCanSeeDriverDetails" required /> I understand that Carpool Vote will share my contact details with the rider(s) if there's a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)
                             </label>
                             <div class="help-block with-errors"></div>
                         </div>
@@ -381,9 +393,20 @@
                             </label>
                             <div class="help-block with-errors"></div>
                         </div>
+						<div class="form-group checkbox">
+                            <label for="AgreeTnC">
+                                <input type="checkbox" id="AgreeTnC" name="AgreeTnC" />I agree to the Terms and Conditions
+                                <p>I understand that Carpool Vote will share my contact details with the driver if there's a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)</p>
+
+<p>I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.</p>
+
+<p>I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.</p>
+<p><a href="/terms-conditions.html" class="nav__link story" id="story-link">Terms &amp; Conditions</a></p>
+                            </label>
+                        </div>                        
                         <div class="form-group checkbox">
                             <label for="inTouchDriver">
-                                <input type="checkbox" id="inTouchDriver" name="PleaseStayInTouch" checked /> We’d like to keep you updated from time to time about how the project is progressing. Please untick this box if you’d prefer us not to do this.
+                                <input type="checkbox" id="inTouchDriver" name="PleaseStayInTouch" checked /> We'd like to keep you updated from time to time about how the project is progressing. Please untick this box if you'd prefer us not to do this.
                             </label>
                             <small>Yes, please stay in touch!</small>
                         </div>
@@ -509,7 +532,7 @@
 
     <footer class="footer">
         <div class="wrapper">
-            <p><strong>Contact us:</strong><div style="float:right;"><a href="/terms-conditions.html" class="nav__link story" id="story-link">Terms &amp; Conditions</a></div> <a href="mailto:together@carpoolvote.com">together@carpoolvote.com</a></p>
+            <p><strong>Contact us:</strong><div style="float:right;"><a href="/terms-conditions.html" class="nav__link story" id="story-link">Terms &amp; Conditions</a></div> <a href="mailto:together@carpoolvote.com">together@carpoolvote.com</a><p></p>
             <form class="newsletter form-group" data-toggle="validator" role="form">
                 <label class="newsletter__label" for="newsletter-email">Sign up for our newsletter</label>
                 <input class="form-input input newsletter__input" id="newsletter-email" type="email" placeholder="email address" required />
