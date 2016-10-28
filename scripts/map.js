@@ -30,14 +30,12 @@ $(document).ready(function () {
 
 //custom icons
     var riderIcon = new L.icon({
-        iconUrl: '/carpool-map/img/rider_red.png',
         iconSize:     [30, 30], // size of the icon
         iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
         popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
     });
     
     var driverIcon = new L.icon({
-        iconUrl: '/carpool-map/img/maki-car-15-blue.png',
         iconSize:     [30, 30], // size of the icon
         iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
         popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
