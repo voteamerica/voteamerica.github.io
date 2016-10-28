@@ -565,11 +565,6 @@ label {
     text-decoration: none;
 }
 
-.state-dropdown-small{
-	max-height:92px;
-}
-
-
 
 /* Available times list */
 
@@ -833,6 +828,10 @@ label {
 
     .time-range-slider {
         max-width: 700px;
+    }
+	
+    .state-dropdown--large{
+        max-height:323px;
     }
 }
 
