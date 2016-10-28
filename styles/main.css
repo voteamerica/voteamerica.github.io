@@ -831,7 +831,7 @@ label {
     }
 	
     .state-dropdown--large{
-        max-height:323px;
+        max-height: 260px;
     }
 }
 
