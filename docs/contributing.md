@@ -8,7 +8,7 @@ so that we can have a chance of keeping on top of things.
 ## Getting Started
 
 - Join our [Slack team](https://carpool-vote.slack.com/)! It's the best way to keep up to date with the project.
-Please [email us](slack@carpoolvote.com) if you would like to join.
+Please [email us](mailto:slack@carpoolvote.com) if you would like to join.
 - If you're new to GitHub and open-source, please familiarise yourself 
 with the [official guidelines](https://guides.github.com/activities/contributing-to-open-source/).
 - Check our GitHub issues to see what needs doing.
