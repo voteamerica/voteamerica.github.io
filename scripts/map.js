@@ -3,13 +3,12 @@
 $(document).ready(function () { 
     $.when(
     //wait until successful calls of both sources
-    $.getJSON('https://api.carpoolvote.com/live/unmatched-riders', function (riderSource) { 
-        jsonRider = riderSource;
-    }),
-    $.getJSON('https://api.carpoolvote.com/live/unmatched-drivers', function (driverSource) { 
-        jsonDriver = driverSource;
-    })
-    ).then(function(){
+    $.getJSON('https://api.carpoolvote.com/live/unmatched-riders'),
+    $.getJSON('https://api.carpoolvote.com/live/unmatched-drivers')
+    
+    ).done(function(riderSource, driverSource){
+        var jsonRider = riderSource[0],
+            jsonDriver = driverSource[0];
         
 //create the map, set the zoom, add it to the 'map' div element
     var map = L.map('map')
@@ -47,7 +46,7 @@ $(document).ready(function () {
     var jsonRiderParse = GeoJSON.parse(jsonRider, {Point: ['latitude_numeric', 'longitude_numeric']});
     var jsonDriverParse = GeoJSON.parse(jsonDriver, {Point: ['latitude_numeric', 'longitude_numeric']});
     
-//plot the geoJSON feaures with markesr so we can use custom icons
+//plot the geoJSON feaures with markers so we can use custom icons
 //example here https://maptimeboston.github.io/leaflet-intro/
     var jsonRiderLayer = L.geoJSON(jsonRiderParse, {
         pointToLayer: function (feature, latlng) {
