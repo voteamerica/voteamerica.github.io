@@ -22,6 +22,10 @@
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link type="text/css" rel="stylesheet" href="styles/main.css">
 
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -401,6 +405,16 @@
 
         <div class="about wrapper clearfix">
             <div id="grid" class="about__padding" data-columns>
+
+                <div class="bannerbox" id="mapbannerbox">
+                    <h2 class="bannerbox__title">Map of Participants</h2>
+                    <!-- Add a div to hold the map, referenced in carpool-map/js/map.js-->
+                    <!-- Map CSS is inherited from Leaflet, but need to set a minimum height -->
+                    <div class="bannerbox__content">
+                        <p>This map shows voters who still need a ride and available volunteer drivers.</p>
+                        <div id="map" style="height: 400px"></div>
+                    </div>
+                </div>
                 <div class="bannerbox" id="story">
                     <h2 class="bannerbox__title">Our Story</h2>
                     <div class="bannerbox__content">
@@ -495,8 +509,6 @@
                         </ul>
                     </div>
                 </div>
-                <div>
-                </div>
                 <div class="bannerbox" id="countdown">
                     <h2 class="bannerbox__title">2016 Election Countdown Clock</h2>
                     <div class="bannerbox__content">
@@ -571,5 +583,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
     <script src="scripts/main.js"></script>
+
+    <!-- Leaflet map, js plugins, and css & sources -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js"></script>
+    <!-- Search tool for map -->
+    <script src="scripts/l.control.geosearch.js"></script>
+    <script src="scripts/l.geosearch.provider.openstreetmap.js"></script>
+    <link rel="stylesheet" href="styles/l.geosearch.css"/>
+    <!-- JSON parser to GeoJSON by Casey Thomas -->
+    <script src="scripts/geojson.min.js"></script>  
+    <!-- load the map-->
+    <script src="scripts/map.js"></script>
 </body>
 </html>
