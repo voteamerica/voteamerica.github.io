@@ -1,131 +1,6 @@
 // TinyQueryString - A really tiny URL query string utility
-// author : Richard Westenra
-// license : MIT
-// richardwestenra.com/tiny-query-string
-
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(['tinyQuery'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    module.exports = factory();
-  } else {
-    root.tinyQuery = factory();
-  }
-}(this, function () {
-  'use strict';
-
-  var getRegex = function(name) {
-    return new RegExp('[\?&](' + name + ')=?([^&#]*)', 'i');
-  };
-
-  var setDefault = function(text) {
-    return typeof text === 'undefined' ? (
-      typeof window === 'undefined' ? '' : window.location.search
-    ) : text;
-  };
-
-  return {
-    get: function() {
-      if (typeof arguments[0] === 'object') {
-        return this.getMany.apply(this, arguments);
-      } else if (arguments[1] === false) {
-        return this.getAll.apply(this, arguments);
-      } else {
-        return this.getOne.apply(this, arguments);
-      }
-    },
-
-    getOne: function(name, text) {
-      var match = setDefault(text).match( getRegex(name) );
-      if (!match) {
-        return false;
-      } else if (match[2]) {
-        return decodeURIComponent(match[2]);
-      } else {
-        return true;
-      }
-    },
-
-    getMany: function(arr, text) {
-      return arr.map(function(d) {
-        return this.getOne(d, setDefault(text));
-      }.bind(this));
-    },
-
-    getAll: function(text) {
-      text = setDefault(text).match(/\?(.+)/);
-      if (!text) {
-        return [];
-      }
-      return text[1].split('&').map(function(d) {
-        var s = d.split('=');
-        return s.length < 2 ? d : { name: s[0], value: s[1] };
-      });
-    },
-
-    set: function() {
-      return  (typeof arguments[0] === 'object') ? 
-        this.setMany.apply(this, arguments) :
-        this.setOne.apply(this, arguments);
-    },
-
-    setOne: function(name, value, text) {
-      text = setDefault(text);
-      var regex = getRegex(name),
-        match = regex.exec(text),
-        pair = value ? name + '=' + encodeURIComponent(value) : name;
-
-      if (!text.length || text.indexOf('?') < 0) {
-        return (text || '') + '?' + pair;
-      } else if (match) {
-        return text.replace(regex, match[0].charAt(0) + pair);
-      } else {
-        return text + '&' + pair;
-      }
-    },
-
-    setMany: function(arr, text) {
-      return arr.reduce(function(txt, d) {
-        return typeof d === 'object' ? 
-          this.setOne(d.name, d.value, txt) :
-          this.setOne(d, false, txt);
-      }.bind(this), setDefault(text));
-    },
-
-    remove: function() {
-      if (typeof arguments[0] === 'object') {
-        return this.removeMany.apply(this, arguments);
-      } else if (arguments[1] === false) {
-        return this.removeAll.apply(this, arguments);
-      } else {
-        return this.removeOne.apply(this, arguments);
-      }
-    },
-
-    removeOne: function(name, text) {
-      text = setDefault(text).match(/([^\?]*)(\?*.*)/);
-      if (!text) {
-        return false;
-      } else if (!text[2].length) {
-        return text[1];
-      } else {
-        return this.setMany(this.getAll(text[2]).filter(function(d){
-          return d !== name && d.name !== name;
-        }), text[1]);
-      }
-    },
-
-    removeMany: function(arr, text) {
-      return arr.reduce(function(txt, d) {
-        return this.removeOne(d, txt);
-      }.bind(this), setDefault(text));
-    },
-
-    removeAll: function(text) {
-      return setDefault(text).split('?')[0];
-    }
-  };
-}));
+// github.com/richardwestenra/tiny-query-string
+!function(t,e){"function"==typeof define&&define.amd?define(["tinyQuery"],e):"object"==typeof module&&module.exports?module.exports=e():t.tinyQuery=e()}(this,function(){"use strict";var t=function(t){return RegExp("[?&]("+t+")=?([^&#]*)","i")},e=function(t){return"string"!=typeof t?"undefined"!=typeof window?window.location.search:"":t};return{get:function(t,e){return"object"==typeof t?this.getMany.apply(this,arguments):t&&e!==!1?this.getOne.apply(this,arguments):this.getAll.apply(this,arguments)},getOne:function(n,r){var i=e(r).match(t(n));return i?i[2]?decodeURIComponent(i[2]):!0:!1},getMany:function(t,n){return t.reduce(function(t,r){return t[r]=this.getOne(r,e(n)),t}.bind(this),{})},getAll:function(t){if(t=e(t).match(/\?(.+)/)){var n=t[1].split("&").map(function(t){return t.split("=")[0]});return this.getMany.call(this,n,t[0])}return{}},set:function(t){return"object"==typeof t?this.setMany.apply(this,arguments):this.setOne.apply(this,arguments)},setOne:function(n,r,i){i=e(i);var u=t(n),o=u.exec(i);return!r||"string"!=typeof r&&"number"!=typeof r||(n=n+"="+encodeURIComponent(r)),!i.length||i.indexOf("?")<0?(i||"")+"?"+n:o?i.replace(u,o[0].charAt(0)+n):i+"&"+n},setMany:function(t,n){return Array.isArray(t)?t.reduce(function(t,e){return this.setOne(e,!1,t)}.bind(this),e(n)):Object.keys(t).reduce(function(e,n){return this.setOne(n,t[n],e)}.bind(this),e(n))},remove:function(t,e){return"object"==typeof t?this.removeMany.apply(this,arguments):t&&e!==!1?this.removeOne.apply(this,arguments):this.removeAll.apply(this,arguments)},removeOne:function(t,n){if(n=e(n).match(/([^\?]*)(\?*.*)/)){if(n[2].length){var r=Object.keys(this.getAll(n[2])).filter(function(e){return e!==t});return this.setMany(r,n[1])}return n[1]}return!1},removeMany:function(t,n){return t.reduce(function(t,e){return this.removeOne(e,t)}.bind(this),e(n))},removeAll:function(t){return e(t).split("?")[0]}}});
 
 
 // Update Query String properties on each page
@@ -143,7 +18,9 @@
       }
     }
 
-    if (tinyQuery.get('souls2thepolls')) {
+    var qs = tinyQuery.getAll();
+
+    if (qs.souls2thepolls) {
         var intro = gid('intro');
         if (intro) {
           intro.classList.add('s2tp');
@@ -164,18 +41,13 @@
         });
     }
 
-    var uuid = tinyQuery.get('uuid');
-    if (uuid) {
+    if (qs.uuid) {
         forEach(qsa('.uuid'), function() {
-            this.textContent = uuid;
+            this.textContent = qs.uuid;
         });
-        var type = tinyQuery.get('type');
+
         forEach(qsa('.self-service-url'), function() {
-            var newHref = tinyQuery.set('uuid', uuid, this.href);
-            if (type) {
-                newHref = tinyQuery.set('type', type, newHref);
-            }
-            this.href = newHref;
+            this.href = tinyQuery.set(qs, this.href);
         });
     }
 })();

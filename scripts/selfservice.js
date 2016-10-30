@@ -1,176 +1,143 @@
-// var remoteUrl = "http://localhost:8000";                                                                 
 var remoteUrl = "https://api.carpoolvote.com/live";
 
-// call page with querystring
-// self.html?UUID_driver=9dba44a5-8188-4ced-925f-11c80fa9e130&DriverPhone=07958110786
+// Create a data object containing all URL query string data:
+var data = tinyQuery.getAll();
 
-// will support fairly old browsers?
-// 
-// http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+// Cache jQuery selectors:
+var $login = $('#login'),
+  $manage = $('#manage'),
+  $info = $manage.find('#info');
 
-function getParameterByName(name, url) {
-    if (!url) {
-      url = window.location.href;
-    }
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+
+if (data.uuid) {
+  $login.find('#enter-uuid').remove();
+}
+if (data.type) {
+  $login.find('#enter-type').remove();
 }
 
-var UUID_driver = getParameterByName('UUID_driver'); 
-var UUID_rider  = getParameterByName('UUID_rider'); 
-var Score       = getParameterByName('Score'); 
 
-// these will be put input into the text field rather than passed as querystring params
-// var DriverPhone = getParameterByName('DriverPhone'); 
-// var RiderPhone = getParameterByName('RiderPhone'); 
-// var LastName = getParameterByName('LastName'); 
-
-function getCheckValue () {
-  var phoneNumField = document.getElementById("inputPhoneNumber");
-
-  return phoneNumField.value;
-}
-
-function hideButton (buttonId) {
-  var buttonToHide = document.getElementById(buttonId);
-
-  if (buttonToHide) {
-    buttonToHide.classList.add("hiddenButton");
-  }
-}
- 
-if (UUID_driver === null) {
-  hideButton("btnCancelDriveOffer");
-  hideButton("btnCancelDriverMatch");
-  hideButton("btnPauseDriverMatch");
-}
-
-if (UUID_rider === null) {
-  hideButton("btnCancelRideRequest");
-  hideButton("btnCancelRiderMatch");
-}
-
-if (UUID_driver === null || Score === null) {
-  hideButton("btnAcceptDriverMatch");
-}
-
-if (UUID_driver === null && UUID_rider === null) {
-  updateFnInfo("Please access this page via the email or sms link. If there is an issue, please contact support@carpoolvote.com");
-}
-
-function updateFnInfo (info) {
-  var infoText = document.getElementById("execFnInfo");
-
-  infoText.innerHTML=info;
-}
-
-function executeDbFunction (url) {
-  var checkField = getCheckValue();
-
-  updateFnInfo("");
-
-  if (checkField === "") {
-
-    updateFnInfo("Please enter a phone number or last name");
-
+$login.validator().on('submit', function(e) {
+  if (e.isDefaultPrevented()) {
     return;
   }
+  data.uuid = data.uuid || $(this).find('#inputUUID').val();
+  data.type = data.type || $(this).find('#enter-type').find('input:checked').val();
+  data.phone = $(this).find('#inputPhoneNumber').val();
 
-  url += checkField;
+  $(this).slideUp(300).attr('aria-hidden','true');
+  $manage.slideDown(300).attr('aria-hidden','false');
+  updateUI();
+  e.preventDefault();
+});
 
 
-  var request = new XMLHttpRequest();
+function updateUI(uuid, type, phone) {
+  $manage.find('#btnCancelDriveOffer').toggle(data.type === 'driver');
+  $manage.find('#btnCancelDriverMatch').toggle(data.type === 'driver' && data.score);
+  $manage.find('#btnPauseDriverMatch').toggle(data.type === 'driver' && data.score);
 
-  request.responseType = 'text';
+  $manage.find('#btnCancelRideRequest').toggle(data.type === 'rider');
+  $manage.find('#btnCancelRiderMatch').toggle(data.type === 'rider' && data.score);
 
-  request.onload = function () {
-      if (request.readyState === request.DONE) {
-          if (request.status === 200) {
-            var dbInfo = {};
-            var info = "";
-
-            try {
-              dbInfo = JSON.parse(request.response);
-
-              var keys = Object.keys(dbInfo);
-
-              if (keys) {
-                info = dbInfo[keys[0]].toString();
-                updateFnInfo(info);
-              }
-            }
-            catch (err) {
-              updateFnInfo("");
-            }
-          }
-      }
-  };
-
-  request.open("GET", url);
-  request.send();
+  $manage.find('#btnAcceptDriverMatch').toggle(data.type === 'driver' && data.score);
 }
 
-function cancelRideRequest() {
-  var url = 
-    remoteUrl + 
-    '/cancel-ride-request?' + 
-    'UUID=' + UUID_rider + 
-    '&RiderPhone=';
 
-  executeDbFunction(url);
+$manage
+  .on('click', '#btnCancelRideRequest', cancelRideRequest)
+  .on('click', '#btnCancelRiderMatch', cancelRiderMatch)
+  .on('click', '#btnCancelDriveOffer', cancelDriveOffer)
+  .on('click', '#btnCancelDriverMatch', cancelDriverMatch)
+  .on('click', '#btnPauseDriverMatch', pauseDriverMatch)
+  .on('click', '#btnAcceptDriverMatch', acceptDriverMatch)
+  .on('click', '#logout', logout);
+
+
+function cancelRideRequest() {
+  sendAjaxRequest(
+    {
+      uuid: data.uuid,
+      RiderPhone: data.phone
+    },
+    '/cancel-ride-request'
+  );
 }
 
 function cancelRiderMatch() {
-  var url = 
-    remoteUrl + '/cancel-rider-match?' + 
-    'UUID_driver=' + UUID_driver +
-    '&UUID_rider=' + UUID_rider + 
-    '&Score=' + Score +
-    '&RiderPhone=';
-
-  executeDbFunction(url);
+  sendAjaxRequest(
+    {
+      UUID_driver: data.UUID_driver,
+      UUID_rider: data.uuid,
+      Score: data.score,
+      RiderPhone: data.phone
+    },
+    '/cancel-rider-match'
+  );
 }
 
 function cancelDriveOffer() {
-  var url = 
-    remoteUrl + '/cancel-drive-offer?' + 
-    'UUID=' + UUID_driver +
-    '&DriverPhone=';
-
-  executeDbFunction(url);
+  sendAjaxRequest(
+    {
+      uuid: data.uuid,
+      DriverPhone: data.phone
+    },
+    '/cancel-drive-offer'
+  );
 }
 
 function cancelDriverMatch() {
-  var url = 
-    remoteUrl + '/cancel-driver-match?' + 
-    'UUID_driver=' + UUID_driver +
-    '&UUID_rider=' + UUID_rider + 
-    '&Score=' + Score +
-    '&DriverPhone=';
-
-    executeDbFunction(url);
+  sendAjaxRequest(
+    {
+      UUID_driver: data.UUID_driver,
+      UUID_rider: data.uuid,
+      Score: data.score,
+      RiderPhone: data.phone
+    },
+    '/cancel-driver-match'
+  );
 }
 
 function acceptDriverMatch() {
-  var url = 
-    remoteUrl + '/accept-driver-match?' + 
-    'UUID_driver=' + UUID_driver +
-    '&UUID_rider=' + UUID_rider + 
-    '&Score=' + Score +
-    '&DriverPhone=';
-
-  executeDbFunction(url);
+  sendAjaxRequest(
+    {
+      UUID_driver: data.uuid,
+      UUID_rider: data.UUID_rider,
+      Score: data.score,
+      DriverPhone: data.phone
+    },
+    '/accept-driver-match'
+  );
 }
 
 function pauseDriverMatch() {
-  var url = 
-    remoteUrl + '/pause-driver-match?' + 
-    'UUID=' + UUID_driver +
-    '&DriverPhone=';
+  sendAjaxRequest(
+    {
+      uuid: data.uuid,
+      DriverPhone: data.phone
+    },
+    '/pause-driver-match'
+  );
+}
 
-  executeDbFunction(url);
+function logout() {
+  window.location.search = tinyQuery.remove(['type','uuid']);
+}
+
+
+function sendAjaxRequest(ajaxData, ajaxPath) {
+  var url = tinyQuery.set(ajaxData, remoteUrl + ajaxPath);
+
+  $info.html('⏳ Loading&hellip;');
+
+  $.getJSON(url, function(dbInfo) {
+    var keys = Object.keys(dbInfo);
+    if (keys) {
+      info = dbInfo[keys[0]].toString();
+      $info.text('ℹ️ ' + info);
+    }
+  })
+  .fail(function(err) {
+    $info.text('⚠️ ' + err.statusText);
+  });
 }
