@@ -692,6 +692,14 @@ label {
     margin-bottom: 10px;
 }
 
+.self-service {
+    min-height: 300px;
+}
+
+#info {
+    font-weight: bold;
+}
+
 
 /* Media queries */
 
