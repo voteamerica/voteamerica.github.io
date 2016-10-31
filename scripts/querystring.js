@@ -66,6 +66,11 @@ var QueryString = {
         forEach(qsa('a[href^="/"]'), function() {
           this.href = QueryString.set('souls2thepolls', false, this.href);
         });
+
+        forEach(qsa('.twitter-mention-button'), function() {
+          var url = this.getAttribute('data-url');
+          this.setAttribute('data-url', QueryString.set('souls2thepolls', false, url));
+        });
     }
 
     var uuid = QueryString.get('uuid');
