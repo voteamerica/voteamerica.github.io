@@ -34,6 +34,11 @@
         forEach(qsa('a[href^="/"]'), function() {
           this.href = tinyQuery.set('souls2thepolls', false, this.href);
         });
+
+        forEach(qsa('.twitter-mention-button'), function() {
+          var url = this.getAttribute('data-url');
+          this.setAttribute('data-url', QueryString.set('souls2thepolls', false, url));
+        });
     }
 
     if (qs.uuid) {

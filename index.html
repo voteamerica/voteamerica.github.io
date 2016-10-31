@@ -66,7 +66,7 @@
 
             <ul id="nav-links" class="nav__links">
                 <li class="nav__item nav__story">
-                    <a href="/story" class="nav__link story" id="story-link">Our Story</a>
+                    <a href="/story" class="nav__link story" id="story-link">Our story</a>
                 </li>
                 <li class="nav__item nav__how">
                     <a href="#howtoclaim" class="nav__link scroll">How it works</a>
@@ -78,7 +78,7 @@
 
             <ul class="social">
                 <li role="presentation" class="social__twitter">
-                    <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Support #Democracy4All this #Election2016. Sign up on @CarpoolVote: Linking drivers with voters needing a ride" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
+                    <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Support #Democracy4All this #Election2016. Sign up on @CarpoolVote: Linking drivers with voters needing a ride" data-url="http://carpoolvote.com" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
                     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </li>
                 <li role="presentation" class="social__facebook">
@@ -151,8 +151,18 @@
 
                             <div class="form-column">
                                 <div class="form-group">
+                                    <label for="riderPickUpAddress">Pick up address</label>
+                                    <input type="text" class="form-input" id="riderCollectionAddress" placeholder="Your pick up address" name="RiderCollectionAddress" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="form-group">
                                     <label for="rideArea">Pick up ZIP code</label>
                                     <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="riderDestinationAddress">Destination address</label>
+                                    <input type="text" class="form-input" id="riderDestinationAddress" placeholder="Your destination address" name="RiderDestinationAddress" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
@@ -165,8 +175,8 @@
                             <div class="form-column">
                                 <div class="form-group">
                                     <label>Find your polling place</label>
-									<div class="help-block">(Link will open your state’s polling place checker in a new tab.)</div>
-                                    <ul id="location-details" class="state-dropdown state-dropdown-small">
+                                    <div class="help-block">(Link will open your state’s polling place checker in a new tab.)</div>
+                                    <ul id="location-details" class="state-dropdown state-dropdown--large">
                                         <li>Loading&hellip;</li>
                                     </ul>
                                 </div>
@@ -217,7 +227,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label for="riderPhone">Phone number</label>
+                                <label for="riderPhone">Phone number (cell preferred)</label>
                                 <input type="tel" class="form-input" id="riderPhone" placeholder="Phone" name="RiderPhone" required />
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -238,7 +248,7 @@
 
                         <div class="form-group checkbox">
                             <label for="RiderIsVulnerable">
-                                <input type="checkbox" id="RiderIsVulnerable" name="RiderIsVulnerable" /> Senior or disability: Please check this box if you are retired from work or you consider yourself to have a disability.
+                                <input type="checkbox" id="RiderIsVulnerable" name="RiderIsVulnerable" /> Senior or disability: Please check this box if you are retired from work or you consider yourself to have a disability, and would like us to try to match you with a driver affiliated with one of our partners.
                             </label>
                         </div>
                         <div class="form-group checkbox">
@@ -302,12 +312,12 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <p>I am willing to collect within a <input type="number" id="offerMiles" name="DriverCollectionRadius" pattern="\d*" min="0" step="1" class="form-input form-input--inline" required /> mile radius of this zip code.<p>
+                                <p>I am willing to collect within a <input type="number" id="offerMiles" name="DriverCollectionRadius" pattern="\d*" min="0" step="1" class="form-input form-input--inline" placeholder="e.g. 10" required /> mile radius of this zip code.<p>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label for="driverSeats">Number of seats in vehicle</label>
-                                <input type="number" min="0" class="form-input form-input--small" id="driverSeats" name="SeatCount" required>
+                                <label for="driverSeats">Seats available in vehicle</label>
+                                <input type="number" min="0" class="form-input form-input--small" id="driverSeats" name="SeatCount" placeholder="e.g. 2" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox">
@@ -347,7 +357,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label for="driverPhone">Phone number</label>
+                                <label for="driverPhone">Phone number (cell preferred)</label>
                                 <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" required />
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -401,6 +411,16 @@
 
         <div class="about wrapper clearfix">
             <div id="grid" class="about__padding" data-columns>
+
+                <div class="bannerbox" id="mapbannerbox">
+                    <h2 class="bannerbox__title">Map of Participants</h2>
+                    <!-- Add a div to hold the map, referenced in carpool-map/js/map.js-->
+                    <!-- Map CSS is inherited from Leaflet, but need to set a minimum height -->
+                    <div class="bannerbox__content">
+                        <p>This map shows voters who still need a ride and available volunteer drivers.</p>
+                        <div id="map" style="height: 400px"></div>
+                    </div>
+                </div>
                 <div class="bannerbox" id="story">
                     <h2 class="bannerbox__title">Our Story</h2>
                     <div class="bannerbox__content">
@@ -495,8 +515,6 @@
                         </ul>
                     </div>
                 </div>
-                <div>
-                </div>
                 <div class="bannerbox" id="countdown">
                     <h2 class="bannerbox__title">2016 Election Countdown Clock</h2>
                     <div class="bannerbox__content">
@@ -511,7 +529,13 @@
 
     <footer class="footer">
         <div class="wrapper">
-            <p><strong>Contact us:</strong><div style="float:right;"><a href="/terms-conditions.html" class="nav__link story" id="story-link">Terms &amp; Conditions</a></div> <a href="mailto:together@carpoolvote.com">together@carpoolvote.com</a></p>
+            <ul class="footer__links footer__links--left">
+                <li><strong>Contact us:</strong> <a href="mailto:together@carpoolvote.com">together@carpoolvote.com</a></li>
+            </ul>
+            <ul class="footer__links footer__links--right">
+                <li><a href="/self-service/">Self-service portal</a></li>
+                <li><a href="/terms-conditions/">Terms &amp; conditions</a></li>
+            </ul>
             <form class="newsletter form-group" data-toggle="validator" role="form">
                 <label class="newsletter__label" for="newsletter-email">Sign up for our newsletter</label>
                 <input class="form-input input newsletter__input" id="newsletter-email" type="email" placeholder="email address" required />
@@ -571,5 +595,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
     <script src="scripts/main.js"></script>
+
+    <!-- Leaflet map, js plugins, and css & sources -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js"></script>
+    <!-- Search tool for map -->
+    <script src="scripts/l.control.geosearch.js"></script>
+    <script src="scripts/l.geosearch.provider.openstreetmap.js"></script>
+    <link rel="stylesheet" href="styles/l.geosearch.css"/>
+    <!-- JSON parser to GeoJSON by Casey Thomas -->
+    <script src="scripts/geojson.min.js"></script>  
+    <!-- load the map-->
+    <script src="scripts/map.js"></script>
 </body>
 </html>
