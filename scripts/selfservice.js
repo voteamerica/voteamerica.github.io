@@ -3,6 +3,15 @@ var remoteUrl = "https://api.carpoolvote.com/live";
 // Create a data object containing all URL query string data:
 var data = tinyQuery.getAll();
 
+if (data.uuid_driver) {
+  data.uuid = data.uuid || data.uuid_driver;
+  data.type = data.type || 'driver';
+}
+if (data.uuid_rider) {
+  data.uuid = data.uuid || data.uuid_rider;
+  data.type = data.type || 'rider';
+}
+
 // Cache jQuery selectors:
 var $login = $('#login'),
   $manage = $('#manage'),
@@ -67,7 +76,7 @@ function cancelRideRequest() {
 function cancelRiderMatch() {
   sendAjaxRequest(
     {
-      UUID_driver: data.UUID_driver,
+      UUID_driver: data.uuid_driver,
       UUID_rider: data.uuid,
       Score: data.score,
       RiderPhone: data.phone
@@ -89,7 +98,7 @@ function cancelDriveOffer() {
 function cancelDriverMatch() {
   sendAjaxRequest(
     {
-      UUID_driver: data.UUID_driver,
+      UUID_driver: data.uuid_driver,
       UUID_rider: data.uuid,
       Score: data.score,
       RiderPhone: data.phone
@@ -102,7 +111,7 @@ function acceptDriverMatch() {
   sendAjaxRequest(
     {
       UUID_driver: data.uuid,
-      UUID_rider: data.UUID_rider,
+      UUID_rider: data.uuid_rider,
       Score: data.score,
       DriverPhone: data.phone
     },
@@ -121,7 +130,7 @@ function pauseDriverMatch() {
 }
 
 function logout() {
-  window.location.search = tinyQuery.remove(['type','uuid']);
+  window.location.search = tinyQuery.remove(['type','uuid','uuid_driver','uuid_rider']);
 }
 
 
