@@ -27,18 +27,21 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	
-	 <!--<script>
-		function get_action(form) {
-
-		var v = grecaptcha.getResponse();
-		if(v.length == 0)
-		{
-			document.getElementById('captcha').innerHTML="You left the Captcha Code empty";
-			return false;
+	 <script type="text/javascript" language="javascript">
+		function validateform(){
+			var captcha_response = grecaptcha.getResponse();
+			if(captcha_response.length == 0)
+			{
+    			// Captcha is not Passed
+    				return false;
+			}
+			else
+			{
+   				// Captcha is Passed
+    				return true;
+			}
 		}
-		return true;
-	}
-	</script> -->
+	</script>
 
     <script>
         ! function(g, s, q, r, d) {
@@ -141,7 +144,7 @@
         </div>
 
         <div id="forms" class="forms wrapper offset-top">
-            <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/live/rider" method="post" class="ride-form" role="form" aria-hidden="true">
+            <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/live/rider" method="post" class="ride-form" role="form" aria-hidden="true" onsubmit="return validateform();">
                 <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-driver/" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I need a ride</h2>
@@ -278,9 +281,9 @@
                             </label>
                             <small>Yes, please stay in touch!</small>
                         </div>
-						<div class="form-group">
-							<script src='https://www.google.com/recaptcha/api.js'></script>
-							<div class="g-recaptcha" data-sitekey="YOUR_KEY_1"></div> <!--Generate your site owner key (http://www.google.com/recaptcha/intro/) and add here-->
+			<div class="form-group">
+			    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+			    <div class="g-recaptcha" data-sitekey="your_sitekey"></div>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
@@ -292,7 +295,7 @@
                 </div>
             </form>
 
-            <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/live/driver" method="post" class="ride-form" role="form" aria-hidden="true">
+            <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/live/driver" method="post" class="ride-form" role="form" aria-hidden="true" onsubmit="return validateform();">
                 <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-rider/" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I can offer a ride</h2>
@@ -405,9 +408,9 @@
                             </label>
                             <small>Yes, please stay in touch!</small>
                         </div>
-						<div class="form-group">
-							<script src='https://www.google.com/recaptcha/api.js'></script>
-							<div class="g-recaptcha" data-sitekey="YOUR_KEY_1"></div> <!--Generate your site owner key (http://www.google.com/recaptcha/intro/) and add here-->
+			    <div class="form-group">
+			    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+			    <div class="g-recaptcha" data-sitekey="your_sitekey"></div>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
