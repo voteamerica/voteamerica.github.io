@@ -43,13 +43,13 @@ $login.validator().on('submit', function(e) {
 
 function updateUI(uuid, type, phone) {
   $manage.find('#btnCancelDriveOffer').toggle(data.type === 'driver');
-  $manage.find('#btnCancelDriverMatch').toggle(data.type === 'driver' && data.score);
-  $manage.find('#btnPauseDriverMatch').toggle(data.type === 'driver' && data.score);
+  $manage.find('#btnCancelDriverMatch').toggle(data.type === 'driver' && data.score !== 'undefined');
+  $manage.find('#btnPauseDriverMatch').toggle(data.type === 'driver' && data.score !== 'undefined');
 
   $manage.find('#btnCancelRideRequest').toggle(data.type === 'rider');
-  $manage.find('#btnCancelRiderMatch').toggle(data.type === 'rider' && data.score);
+  $manage.find('#btnCancelRiderMatch').toggle(data.type === 'rider' && data.score !== 'undefined');
 
-  $manage.find('#btnAcceptDriverMatch').toggle(data.type === 'driver' && data.score);
+  $manage.find('#btnAcceptDriverMatch').toggle(data.type === 'driver' && data.score !== 'undefined');
 }
 
 
