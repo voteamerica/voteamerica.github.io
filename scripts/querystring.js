@@ -37,7 +37,7 @@
 
         forEach(qsa('.twitter-mention-button'), function() {
           var url = this.getAttribute('data-url');
-          this.setAttribute('data-url', QueryString.set('souls2thepolls', false, url));
+          this.setAttribute('data-url', tinyQuery.set('souls2thepolls', false, url));
         });
     }
 
