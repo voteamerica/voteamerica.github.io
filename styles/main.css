@@ -124,6 +124,11 @@ li {
     padding: 0.5em 1.5em 0.6em;
 }
 
+.button--small {
+    font-size: 0.9em;
+    padding: 0.3em 0.8em 0.4em;
+}
+
 .button--alt {
     background-color: #5cb85c;
 }
@@ -696,9 +701,15 @@ label {
     min-height: 300px;
 }
 
+.self-service .button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
 #info {
     font-weight: bold;
 }
+
 
 
 /* Media queries */
