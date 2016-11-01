@@ -64,6 +64,9 @@ $manage
 
 
 function cancelRideRequest() {
+  if (!window.confirm('This will cancel your ride request. Are you sure you want to proceed?')) {
+    return;
+  }
   sendAjaxRequest(
     {
       uuid: data.uuid,
@@ -74,6 +77,9 @@ function cancelRideRequest() {
 }
 
 function cancelRiderMatch() {
+  if (!window.confirm('This will cancel your ride match. Are you sure you want to proceed?')) {
+    return;
+  }
   sendAjaxRequest(
     {
       UUID_driver: data.uuid_driver,
@@ -86,6 +92,9 @@ function cancelRiderMatch() {
 }
 
 function cancelDriveOffer() {
+  if (!window.confirm('This will cancel your ride offer. Are you sure you want to proceed?')) {
+    return;
+  }
   sendAjaxRequest(
     {
       uuid: data.uuid,
@@ -96,6 +105,9 @@ function cancelDriveOffer() {
 }
 
 function cancelDriverMatch() {
+  if (!window.confirm('This will cancel your ride match. Are you sure you want to proceed?')) {
+    return;
+  }
   sendAjaxRequest(
     {
       UUID_driver: data.uuid_driver,
