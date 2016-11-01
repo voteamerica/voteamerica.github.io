@@ -48,21 +48,25 @@ $(document).ready(function () {
     
 //plot the geoJSON feaures with markers so we can use custom icons
 //example here https://maptimeboston.github.io/leaflet-intro/
+    var markers = L.markerClusterGroup();
+
     var jsonRiderLayer = L.geoJSON(jsonRiderParse, {
         pointToLayer: function (feature, latlng) {
             var marker = L.marker(latlng, {icon: riderIcon});
             marker.bindPopup('<b>Unmatched Riders: ' + feature.properties.count + '</b><br/>' + feature.properties.city + ', ' + feature.properties.state + '<br/>zip: ' + feature.properties.zip);
-            return marker
+            markers.addLayer(marker);
         }
-    }).addTo(map);
+    });
     
     var jsonDriverLayer = L.geoJSON(jsonDriverParse, {
         pointToLayer: function (feature, latlng) {
             var marker = L.marker(latlng, {icon: driverIcon});
             marker.bindPopup('<b>Available Drivers: </b>' + feature.properties.count + '</b><br/>' + feature.properties.city + ', ' + feature.properties.state + '<br/>zip: ' + feature.properties.zip);
-            return marker
+            markers.addLayer(marker);
         }
-    }).addTo(map);
+    });
+    
+    map.addLayer(markers);
     
 //load these layers into a group for the layer control
     var overlayGroup = L.layerGroup([jsonRiderLayer, jsonDriverLayer]);
