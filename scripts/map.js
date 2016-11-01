@@ -67,17 +67,6 @@ $(document).ready(function () {
     });
     
     map.addLayer(markers);
-    
-//load these layers into a group for the layer control
-    var overlayGroup = L.layerGroup([jsonRiderLayer, jsonDriverLayer]);
-    
-//create "label": key for layers   
-    var overlaylabels = {
-        'Riders': jsonRiderLayer,
-        'Drivers': jsonDriverLayer,
-    };
-//load the label, then the layer from the layer group
-//loads the map controller, using the .addTo(map) method when creating the layer initially determines if on/off at start
-    L.control.layers(null, overlaylabels).addTo(map);
+
     }); // end of then function
 }); //end ready function 
