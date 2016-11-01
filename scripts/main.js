@@ -40,14 +40,6 @@ $(function(){
         $.getScript('scripts/time-polyfill.min.js');
     }
 
-    if (!Modernizr.inputtypes.date) {
-        $.getScript('scripts/nodep-date-input-polyfill.dist.js', function(){
-            $('body').on('click', 'date-input-polyfill', function(){
-                $('input[type="date"]').trigger('change');
-            });
-        });
-    }
-
     // Initialise form validator
     $forms.find('form').validator({
         custom: {
@@ -146,9 +138,18 @@ $(function(){
         function addRow(hideDeleteButton) {
             var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, rowID++));
 
-            $row.find('.input--date').attr('min', yyyymmdd());
+            var userLanguage = navigator.language || navigator.userLanguage; 
+            $.datepicker.setDefaults($.datepicker.regional[userLanguage]);
+            $row.find('.input--date').datepicker({
+                altField: "#alt-"+$row.find('.input--date').attr('id'), 
+                altFormat: "yy-mm-dd", 
+                yearRange: '2016:2016',
+                minDate: 0, 
+                maxDate: new Date(2016,11 -1,08)})
+            .on('keypress', function(e){ e.preventDefault(); })
+            .on('paste', function(e){ e.preventDefault(); });
 
-            if (!hideDeleteButton && Modernizr.inputtypes.date) {
+            if (!hideDeleteButton) {
                 var $prevRow = $self.find('.available-times__row').last();
                 datetimeClasses.forEach(function(c){
                     var prevVal = $prevRow.find(c).val();
@@ -198,8 +199,13 @@ $(function(){
     });
 
     function getDateTimeValues($timesList) {
+        var formattedDatetimeClasses = [
+        '.input-formatted-date',
+        '.input--time-start',
+        '.input--time-end'
+        ];
         return $timesList.find('.available-times__row').get().map(function(li) {
-            var inputValues = datetimeClasses.map(function(c) {
+            var inputValues = formattedDatetimeClasses.map(function(c) {
                 return $(li).find(c).val();
             });
 
@@ -233,18 +239,6 @@ $(function(){
             hours = +hours + 12;
         }
         return [hours,minutes].join(':');
-    }
-    
-    function yyyymmdd(date) {
-        date = date || new Date();
-        var mm = date.getMonth() + 1;
-        var dd = date.getDate();
-
-        return [
-            date.getFullYear(),
-            mm<10 ? '0'+mm : mm,
-            dd<10 ? '0'+dd : dd
-        ].join('-');
     }
 
     // Load JSON data to dropdown template 
