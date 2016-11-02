@@ -137,25 +137,9 @@ $(function(){
 
         function addRow(hideDeleteButton) {
             var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, rowID++));
-
-            var userLanguage = navigator.language || navigator.userLanguage; 
-            $.datepicker.setDefaults($.datepicker.regional[userLanguage]);
-            $row.find('.input--date').datepicker({
-                altField: "#alt-"+$row.find('.input--date').attr('id'), 
-                altFormat: "yy-mm-dd", 
-                yearRange: '2016:2016',
-                minDate: 0, 
-                maxDate: new Date(2016,11 -1,08)})
-            .on('keypress', function(e){ e.preventDefault(); })
-            .on('paste', function(e){ e.preventDefault(); });
-
-            if (!hideDeleteButton) {
-                var $prevRow = $self.find('.available-times__row').last();
-                datetimeClasses.forEach(function(c){
-                    var prevVal = $prevRow.find(c).val();
-                    $row.find(c).val(prevVal).trigger('update');
-                });
-            }
+            var inputDate = $row.find('.input--date'),
+                inputFormattedDate = $row.find('.input-formatted-date');
+            getCalendarBasedOnInputSupport($row);
 
             if (hideDeleteButton) {
                 $row.find('.remove-time').hide();
@@ -172,6 +156,32 @@ $(function(){
 
             $self.parents('form').validator('update');
         }
+
+        function getCalendarBasedOnInputSupport($row){
+            var inputDate = $row.find('.input--date'),
+            inputFormattedDate = $row.find('.input-formatted-date');
+
+            if (!checkInputSupport('date')){
+               var userLanguage = navigator.language || navigator.userLanguage; 
+               $.datepicker.setDefaults($.datepicker.regional[userLanguage]);
+               inputDate.removeAttr('name');
+               inputFormattedDate.attr('name', type+'Date');
+               inputDate.datepicker({
+	            altField: "#alt-"+$row.find('.input--date').attr('id'), 
+	            altFormat: "yy-mm-dd", 
+	            yearRange: '2016:2016',
+	            minDate: 0, 
+	            maxDate: new Date(2016,11 -1,08)})
+            .on('keypress', function(e){ e.preventDefault(); })
+		    .on('paste', function(e){ e.preventDefault(); });
+		   }
+           else {
+            inputDate.attr('name', type+'Date');
+            inputFormattedDate.removeAttr('name');
+            inputDate.attr('min', yyyymmdd());
+            inputDate.attr('max', yyyymmdd(new Date(2016,11 -1,08)));
+            }
+	    }
 
         function removeRow($row){
             $row.remove();
@@ -199,11 +209,11 @@ $(function(){
     });
 
     function getDateTimeValues($timesList) {
-        var formattedDatetimeClasses = [
+        var formattedDatetimeClasses = (!checkInputSupport('date')) ? [
         '.input-formatted-date',
         '.input--time-start',
         '.input--time-end'
-        ];
+        ]:datetimeClasses;
         return $timesList.find('.available-times__row').get().map(function(li) {
             var inputValues = formattedDatetimeClasses.map(function(c) {
                 return $(li).find(c).val();
@@ -239,6 +249,18 @@ $(function(){
             hours = +hours + 12;
         }
         return [hours,minutes].join(':');
+    }
+
+    function yyyymmdd(date) {
+        date = date || new Date();
+        var mm = date.getMonth() + 1;
+        var dd = date.getDate();
+
+        return [
+            date.getFullYear(),
+            mm<10 ? '0'+mm : mm,
+            dd<10 ? '0'+dd : dd
+        ].join('-');
     }
 
     // Load JSON data to dropdown template 
