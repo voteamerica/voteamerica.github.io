@@ -48,32 +48,25 @@ $(document).ready(function () {
     
 //plot the geoJSON feaures with markers so we can use custom icons
 //example here https://maptimeboston.github.io/leaflet-intro/
+    var markers = L.markerClusterGroup();
+
     var jsonRiderLayer = L.geoJSON(jsonRiderParse, {
         pointToLayer: function (feature, latlng) {
             var marker = L.marker(latlng, {icon: riderIcon});
             marker.bindPopup('<b>Unmatched Riders: ' + feature.properties.count + '</b><br/>' + feature.properties.city + ', ' + feature.properties.state + '<br/>zip: ' + feature.properties.zip);
-            return marker
+            markers.addLayer(marker);
         }
-    }).addTo(map);
+    });
     
     var jsonDriverLayer = L.geoJSON(jsonDriverParse, {
         pointToLayer: function (feature, latlng) {
             var marker = L.marker(latlng, {icon: driverIcon});
             marker.bindPopup('<b>Available Drivers: </b>' + feature.properties.count + '</b><br/>' + feature.properties.city + ', ' + feature.properties.state + '<br/>zip: ' + feature.properties.zip);
-            return marker
+            markers.addLayer(marker);
         }
-    }).addTo(map);
+    });
     
-//load these layers into a group for the layer control
-    var overlayGroup = L.layerGroup([jsonRiderLayer, jsonDriverLayer]);
-    
-//create "label": key for layers   
-    var overlaylabels = {
-        'Riders': jsonRiderLayer,
-        'Drivers': jsonDriverLayer,
-    };
-//load the label, then the layer from the layer group
-//loads the map controller, using the .addTo(map) method when creating the layer initially determines if on/off at start
-    L.control.layers(null, overlaylabels).addTo(map);
+    map.addLayer(markers);
+
     }); // end of then function
 }); //end ready function 
