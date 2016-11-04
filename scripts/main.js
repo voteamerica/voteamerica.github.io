@@ -255,7 +255,7 @@ $(function(){
         }
         return [hours,minutes].join(':');
     }
-    
+
     function yyyymmdd(date) {
         date = date || new Date();
         var mm = date.getMonth() + 1;
