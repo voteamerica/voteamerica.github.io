@@ -204,11 +204,120 @@ function driverExists () {
           $(this).slideUp(300).attr('aria-hidden','true');
           $manage.slideDown(300).attr('aria-hidden','false');
           updateUI();
+
+          driverInfo();
+          driverProposedMatches();
+          driverConfirmedMatches();
+
         }
       }
     }
   };
 }
 
+function driverInfo () {
+//http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
+
+  var url = 
+    remoteUrl + '/driver-info?' + 
+    'UUID=' + data.uuid +
+    '&DriverPhone=' + data.phone;
+
+  var request = new XMLHttpRequest();
+
+  request.open("GET", url);
+  request.send();
+
+  request.onreadystatechange = function () {
+    if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      console.log(request.responseText);
+
+      var resp = JSON.parse(request.responseText);
+
+      var keys = Object.keys(resp);
+      if (keys) {
+        // info = resp[keys[0]].toString();
+        // $info.text(info);
+        // $infoLogin.text(info);
+
+        if (keys[0] == "driver_info" ) {
+          
+          var driverInfo = resp[keys[0]];
+          var i = 0;
+
+          // $(this).slideUp(300).attr('aria-hidden','true');
+          // $manage.slideDown(300).attr('aria-hidden','false');
+          // updateUI();
+
+$("#driverInfo ul").append('<li>' + driverInfo.DriverFirstName + '</li>');
+$("#driverInfo ul").append('<li>' + driverInfo.DriverLastName + '</li>');
+          
+        }
+      }
+    }
+  };
+}
+
+function driverProposedMatches () {
+//http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
+
+  var url = 
+    remoteUrl + '/driver-proposed-matches?' + 
+    'UUID=' + data.uuid +
+    '&DriverPhone=' + data.phone;
+
+  var request = new XMLHttpRequest();
+
+  request.open("GET", url);
+  request.send();
+
+  request.onreadystatechange = function () {
+    if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      console.log(request.responseText);
+
+      var resp = JSON.parse(request.responseText);
+
+      resp.forEach(val => {
+
+          $("#driverProposedMatches ul").append('<li> UUID_driver - ' + val.driver_proposed_matches.uuid_driver + '</li>');
+  $("#driverProposedMatches ul").append('<li>  UUID_rider - ' + val.driver_proposed_matches.uuid_rider + '</li>');
+  $("#driverProposedMatches ul").append('<li> Score - ' + val.driver_proposed_matches.score + '</li>');
+
+      });
+
+    }
+  };
+}
+
+function driverConfirmedMatches () {
+//http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
+
+  var url = 
+    remoteUrl + '/driver-confirmed-matches?' + 
+    'UUID=' + data.uuid +
+    '&DriverPhone=' + data.phone;
+
+  var request = new XMLHttpRequest();
+
+  request.open("GET", url);
+  request.send();
+
+  request.onreadystatechange = function () {
+    if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      console.log(request.responseText);
+
+      var resp = JSON.parse(request.responseText);
+
+      resp.forEach(val => {
+
+          $("#driverConfirmedMatches ul").append('<li> UUID_driver - ' + val.driver_confirmed_matches.uuid_driver + '</li>');
+  $("#driverConfirmedMatches ul").append('<li>  UUID_rider - ' + val.driver_confirmed_matches.uuid_rider + '</li>');
+  $("#driverConfirmedMatches ul").append('<li> Score - ' + val.driver_confirmed_matches.score + '</li>');
+
+      });
+
+    }
+  };
+}
 
 
