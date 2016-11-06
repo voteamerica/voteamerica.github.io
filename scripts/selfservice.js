@@ -1,4 +1,7 @@
-var remoteUrl = "https://api.carpoolvote.com/live";
+// var remoteUrl = "https://api.carpoolvote.com/live";
+var remoteUrl = "http://localhost:8000";
+
+var driverLoggedIn = false;
 
 // Create a data object containing all URL query string data:
 var data = tinyQuery.getAll();
@@ -15,7 +18,10 @@ if (data.uuid_rider) {
 // Cache jQuery selectors:
 var $login = $('#login'),
   $manage = $('#manage'),
-  $info = $manage.find('#info');
+  $manageLogin = $('#manageLogin'),
+  $info = $manage.find('#info'),
+  $infoLogin = $manageLogin.find('#info')
+  ;
 
 
 if (data.uuid) {
@@ -34,9 +40,13 @@ $login.validator().on('submit', function(e) {
   data.type = data.type || $(this).find('#enter-type').find('input:checked').val();
   data.phone = $(this).find('#inputPhoneNumber').val();
 
-  $(this).slideUp(300).attr('aria-hidden','true');
-  $manage.slideDown(300).attr('aria-hidden','false');
-  updateUI();
+  driverExists ();
+
+  // done in driver exists
+  //
+  // $(this).slideUp(300).attr('aria-hidden','true');
+  // $manage.slideDown(300).attr('aria-hidden','false');
+  // updateUI();
   e.preventDefault();
 });
 
@@ -162,3 +172,43 @@ function sendAjaxRequest(ajaxData, ajaxPath) {
     $info.text('⚠️ ' + err.statusText);
   });
 }
+
+function driverExists () {
+//http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
+
+  var url = 
+    remoteUrl + '/driver-exists?' + 
+    'UUID=' + data.uuid +
+    '&DriverPhone=' + data.phone;
+
+  var request = new XMLHttpRequest();
+
+  request.open("GET", url);
+  request.send();
+
+  request.onreadystatechange = function () {
+    if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      console.log(request.responseText);
+
+      var resp = JSON.parse(request.responseText);
+
+      var keys = Object.keys(resp);
+      if (keys) {
+        info = resp[keys[0]].toString();
+        // $info.text(info);
+        $infoLogin.text(info);
+
+        if (keys[0] == "driver_exists" && info === "") {
+          driverLoggedIn = true;
+
+          $(this).slideUp(300).attr('aria-hidden','true');
+          $manage.slideDown(300).attr('aria-hidden','false');
+          updateUI();
+        }
+      }
+    }
+  };
+}
+
+
+
