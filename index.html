@@ -82,7 +82,7 @@
                     <a href="#support" class="nav__link">Support</a>
                 </li>
             </ul>
-            
+
             <ul class="social">
                 <li role="presentation" class="social__twitter">
                     <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Need a ride to vote on election day? CarpoolVote.com can help! #election" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
@@ -215,7 +215,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="RiderAccommodationNotes">Notes</label>
-                                    <textarea class="form-input" id="RiderAccommodationNotes" placeholder="Accommodation requirements e.g. service animal, assistance folding equipment, assistance entering/exiting the vehicle, etc." name="RiderAccommodationNotes" rows="4"></textarea>
+                                    <textarea class="form-input" id="RiderAccommodationNotes"
+                                    placeholder="Accommodation requirements e.g. service animal, assistance folding equipment, assistance entering/exiting the vehicle, child car seat or booster (please include age), must also collect non-voting assistant or companion, or anything else the driver should know." name="RiderAccommodationNotes" rows="4"></textarea>
                                 </div>
                             </fieldset>
 
@@ -673,7 +674,7 @@
                 // NOTE: code below is a version of that used for driver times
                 //       css selectors used below appear to work correctly
                 //       may be useful to review this later
-                // 
+                //
                 //var dateTimeDiv = $(this).children('.date-container').children('.date-time-pickers');
                 // var availTimeElements = dateTimeDiv.children('.available-times-list').children();
 
@@ -796,8 +797,8 @@
                 var datePlusYear = date + " 2016";
 
                 var niceDateYear = $.format.date(datePlusYear, "ddd D MMMM yyyy");
-                var startDateTime = niceDateYear + ' ' + startTime;                    
-                var endDateTime = niceDateYear + ' ' + endTime;                    
+                var startDateTime = niceDateYear + ' ' + startTime;
+                var endDateTime = niceDateYear + ' ' + endTime;
 
                 var ndt = $.format.date(datePlusYear, "dd MMMM yyyy");
                 var sdt = moment(ndt);
@@ -809,7 +810,7 @@
                 sdt = sdt.add(st.hour, 'h');
 
                 if (st.am === false) {
-                    sdt = sdt.add(12, 'h');                    
+                    sdt = sdt.add(12, 'h');
                 }
 
                 var isoStart = sdt.toISOString();
@@ -820,7 +821,7 @@
                 edt = edt.add(et.hour, 'h');
 
                 if (et.am === false) {
-                    edt = edt.add(12, 'h');                    
+                    edt = edt.add(12, 'h');
                 }
 
                 var isoEnd = edt.toISOString();
@@ -828,10 +829,10 @@
 
 // 2016-10-01T08:00:00-0500/2016-10-01T10:00:00-0500
 
-                var hiddenInput = 
-                    '<input type="hidden" class="' + 
-                            timeId + 
-                            '" name="datetime[]" value="' + date + ' ' + 
+                var hiddenInput =
+                    '<input type="hidden" class="' +
+                            timeId +
+                            '" name="datetime[]" value="' + date + ' ' +
                             startTime + '/' + date + ' ' + endTime + '" ' +
                             'data-start="' + isoStart + '" ' +
                             'data-end="' + isoEnd + '" ' +
@@ -851,7 +852,7 @@
             initDatePicker($(this), $datepicker);
 
             initTimeSlider($(this), $slider.get(0));
-            
+
             addTimeBtnListener($(this), $slider, $timesList, $datepicker);
         });
 
