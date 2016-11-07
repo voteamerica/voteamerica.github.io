@@ -1,5 +1,5 @@
-var remoteUrl = "https://api.carpoolvote.com/live";
-// var remoteUrl = "http://localhost:8000";
+// var remoteUrl = "https://api.carpoolvote.com/live";
+var remoteUrl = "http://localhost:8000";
 
 var driverLoggedIn = false;
 var riderLoggedIn = false;
@@ -251,7 +251,12 @@ function driverInfo () {
 
 $("#driverInfo ul").append('<li>' + driverInfo.DriverFirstName + '</li>');
 $("#driverInfo ul").append('<li>' + driverInfo.DriverLastName + '</li>');
-          
+$("#driverInfo ul").append('<li>' + driverInfo.UUID + '</li>');
+$("#driverInfo ul").append('<li>' + driverInfo.DriverCollectionZIP + '</li>');
+$("#driverInfo ul").append('<li>' + driverInfo.DriverEmail + '</li>');
+$("#driverInfo ul").append('<li>' + driverInfo.DriverPhone + '</li>');
+$("#driverInfo ul").append('<li>' + driverInfo.DriverLicenseNumber + '</li>');
+
         }
       }
     }
@@ -389,6 +394,11 @@ function riderInfo () {
 
 $("#riderInfo ul").append('<li>' + riderInfo.RiderFirstName + '</li>');
 $("#riderInfo ul").append('<li>' + riderInfo.RiderLastName + '</li>');
+$("#riderInfo ul").append('<li>' + riderInfo.UUID + '</li>');
+$("#riderInfo ul").append('<li>' + riderInfo.RiderCollectionZIP + '</li>');
+$("#riderInfo ul").append('<li>' + riderInfo.RiderEmail + '</li>');
+$("#riderInfo ul").append('<li>' + riderInfo.RiderPhone + '</li>');
+
           
         }
       }
