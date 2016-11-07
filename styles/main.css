@@ -395,8 +395,9 @@ a.twitter-mention-button {
 }
 
 .bannerbox__logo {
-    height: 50px;
-    width: 15%;
+    max-height: 50px;
+    width: auto;
+    margin-right: 5px;
 }
 
 .button--cancel.close-form {
