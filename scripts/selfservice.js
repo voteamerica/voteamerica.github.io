@@ -85,7 +85,7 @@ function cancelRideRequest() {
   }
   sendAjaxRequest(
     {
-      uuid: data.uuid,
+      UUID: data.uuid,
       RiderPhone: data.phone
     },
     '/cancel-ride-request'
@@ -113,7 +113,7 @@ function cancelDriveOffer() {
   }
   sendAjaxRequest(
     {
-      uuid: data.uuid,
+      UUID: data.uuid,
       DriverPhone: data.phone
     },
     '/cancel-drive-offer'
@@ -150,7 +150,7 @@ function acceptDriverMatch() {
 function pauseDriverMatch() {
   sendAjaxRequest(
     {
-      uuid: data.uuid,
+      UUID: data.uuid,
       DriverPhone: data.phone
     },
     '/pause-driver-match'
