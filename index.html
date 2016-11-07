@@ -432,10 +432,16 @@
                     </div>
                 </div>
                 <div class="bannerbox" id="support">
-                    <h2 class="bannerbox__title">Can I help some other way?</h2>
+                    <h2 class="bannerbox__title">How else can I support the movement?</h2>
                     <div class="bannerbox__content">
-                        <p>Absolutely!</p>
-                        <p>Please use the social media links to share this site, but also let us know if you can help out with any of this below</p>
+                        <p>Firstly, tell your family, friends, colleagues, and strangers! And share us on social media! The more people who know about us, the better our chances of making this project work for as many voters as possible!</p>
+                        <div class="bannerbox__social">
+                            <a href="https://twitter.com/carpoolvote" target="_blank"><img src="images/twitter_logo.png" class="bannerbox__logo"></img></a>
+                            <a href="https://www.facebook.com/CarpoolVote/?fref=ts" target="_blank"><img src="images/facebook_logo.png" class="bannerbox__logo"></img></a>
+                            <a href="https://www.youtube.com/channel/UCY1aS3TMDGxVbckA7Va0QFA" target="_blank"><img src="images/youtube_logo.jpg" class="bannerbox__logo"></img></a>
+                        </div>
+                        <p>Please also sign up to join the campaign! We’re supported entirely by a network of volunteers who believe passionately that democracy is for everybody.</p>
+                        <p>We have a variety of roles for people with any amount of time to give. This could involve joining our volunteer pool who take on small tasks that help the project take big leaps forward. We also have several strategic roles for those who want to remain actively involved until Election Day.</p>
                         <form name="offerHelp" action="https://api.carpoolvote.com/live/helper" method="post" data-toggle="validator" role="form">
                             <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
 
@@ -451,19 +457,19 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group checkbox checkbox--multi">
-                                <p>I can</p>
+                                <p>How can you help?</p>
                                 <label>
-                                    <input type="checkbox" name="Capability" value="build links"/> Help build links with organizations and communities
+                                    <input type="checkbox" name="Capability" value="build links"/> Do community outreach / Organize my own community
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="Capability" value="community organize"/> Organize my own community
+                                    <input type="checkbox" name="Capability" value="community organize"/> Help with media /social media outreach
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="Capability" value="collaboration"/> Set up collaboration with my organization
+                                    <input type="checkbox" name="Capability" value="collaboration"/> Help build links with organizations / Set up collaboration with my organization
                                 </label>
-                                <label>
-                                    <input type="checkbox" name="Capability" value="awareness"/> Help get the word out
-                                </label>
+                                <!--<label>
+                                    <input type="checkbox" name="Capability" value="awareness"/> Do research
+                                </label>-->
                                 <label>
                                     <input type="checkbox" name="Capability" value="research"/> Do research
                                 </label>
@@ -474,9 +480,22 @@
                                     <input type="checkbox" name="Capability" value="tech"/> Contribute my tech wizardry
                                 </label>
                                 <label>
+                                    <input type="checkbox" name="Capability" value="recruit"/> Help recruit and organize volunteers
+                                </label>
+                                <label>
                                     <input type="checkbox" name="Capability" value="raise money"/> Help the project raise money
                                 </label>
+                                <label>
+                                    <input type="checkbox" name="Capability" value="other"/> Other (please specify)
+                                    <br/>
+                                    <input type="text" class="form-input" id="helpOther" placeholder="Other" name="other">
+                                    <div class="help-block with-errors"></div>
+                                </label>
                             </div>
+                            <br/>
+                            <p>We also need funding to keep building the movement. Our volunteers are working around the clock but some things cannot be done with time and love alone. Could you spare some money to contribute to the campaign?</p>
+                            <p><a href="https://www.generosity.com/fundraising/CarpoolVote-com-linking-volunteer-drivers-voters" target="_blank">Support our IndieGogo campaign</a></p>
+                            <p>Or get in touch at: <a href="mailto:donations@CarpoolVote.com">donations@CarpoolVote.com</a></p>
                             <div class="form-group">
                                 <button type="submit" class="button button--large" id="offerHelpSubmit">Offer help</button>
                             </div>

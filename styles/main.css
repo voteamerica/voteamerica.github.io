@@ -394,6 +394,11 @@ a.twitter-mention-button {
     position: relative;
 }
 
+.bannerbox__logo {
+    height: 50px;
+    width: 15%;
+}
+
 .button--cancel.close-form {
     position: absolute;
     top: -12px;
