@@ -273,7 +273,7 @@ function acceptDriverMatch(UUID_driver, UUID_rider, Score, DriverPhone) {
   var request = new XMLHttpRequest();
 
   request.open("GET", acceptUrl);
-  // request.send();
+  request.send();
 
   request.onreadystatechange = function () {
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
@@ -287,7 +287,7 @@ function acceptDriverMatch(UUID_driver, UUID_rider, Score, DriverPhone) {
         // $info.text(info);
         $infoLogin.text(info);
 
-        if (keys[0] == "driver_accept_match" && info === "") {
+        if (keys[0] == "driver_confirm_match" && info === "") {
           // driverLoggedIn = true;
 
           // $(this).slideUp(300).attr('aria-hidden','true');
@@ -386,6 +386,13 @@ function driverConfirmedMatches () {
           $("#driverConfirmedMatches ul").append('<li> UUID_driver - ' + val.driver_confirmed_matches.uuid_driver + '</li>');
   $("#driverConfirmedMatches ul").append('<li>  UUID_rider - ' + val.driver_confirmed_matches.uuid_rider + '</li>');
   $("#driverConfirmedMatches ul").append('<li> Score - ' + val.driver_confirmed_matches.score + '</li>');
+$("#driverConfirmedMatches ul").append('<li>  rider name - ' + val.driver_confirmed_matches.RiderFirstName + ' ' + val.driver_confirmed_matches.RiderLastName + '</li>');
+$("#driverConfirmedMatches ul").append('<li>  rider phone - ' + val.driver_confirmed_matches.RiderPhone + '</li>');
+$("#driverConfirmedMatches ul").append('<li>  rider email - ' + val.driver_confirmed_matches.RiderEmail + '</li>');
+$("#driverConfirmedMatches ul").append('<li>  rider collection - ' + val.driver_confirmed_matches.RiderCollectionZIP + ' ' + val.driver_confirmed_matches.RiderCollectionAddress + '</li>');
+$("#driverConfirmedMatches ul").append('<li>  rider drop off - ' + val.driver_confirmed_matches.RiderDropOffZIP + ' ' + val.driver_confirmed_matches.RiderDestinationAddress + '</li>');
+$("#driverConfirmedMatches ul").append('<li>  rider contact method, notes - ' + val.driver_confirmed_matches.RiderPreferredContact + ' ' + val.driver_confirmed_matches.RiderAccommodationNotes + '</li>');
+  $("#driverConfirmedMatches ul").append('<li> </li>');
 
       });
 
