@@ -273,7 +273,7 @@ a.twitter-mention-button {
 
 .nav__link {
     padding: 0 10px;
-    font-size: 16px;
+    font-size: 14px;
     text-decoration: none;
 }
 
@@ -721,6 +721,12 @@ label {
 
 
 /* Media queries */
+
+@media (min-width: 400px) {
+    .nav__link {
+        font-size: 16px;
+    }
+}
 
 @media (min-width: 620px) {
     .footer__links--left {
