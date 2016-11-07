@@ -1,5 +1,5 @@
-// var remoteUrl = "https://api.carpoolvote.com/live";
-var remoteUrl = "http://localhost:8000";
+var remoteUrl = "https://api.carpoolvote.com/live";
+// var remoteUrl = "http://localhost:8000";
 
 var driverLoggedIn = false;
 var riderLoggedIn = false;
@@ -352,7 +352,7 @@ $("#driverProposedMatches ul").append('<li>  rider drop off - ' + val.driver_pro
 $("#driverProposedMatches ul").append('<li>  rider contact method, notes - ' + val.driver_proposed_matches.RiderPreferredContact + ' ' + val.driver_proposed_matches.RiderAccommodationNotes + '</li>');
   // $("#driverProposedMatches ul").append('<li> Accept - <a href="' + acceptUrl + '">Accept</a></li>');
   $("#driverProposedMatches ul").append('<li>' + buttonInList + '</li>');
-  $("#driverProposedMatches ul").append('<li> </li>');
+  $("#driverProposedMatches ul").append('<li> (after clicking Accept, refresh browser page) </li>');
 
 // https://api.carpoolvote.com/v2.0/accept-driver-match?UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897&Score=123&DriverPhone=123
 
@@ -504,6 +504,9 @@ function riderConfirmedMatch () {
         $("#riderConfirmedMatch ul").append('<li> UUID_driver - ' + resp.rider_confirmed_match.uuid_driver + '</li>');
         $("#riderConfirmedMatch ul").append('<li>  UUID_rider - ' + resp.rider_confirmed_match.uuid_rider + '</li>');
         $("#riderConfirmedMatch ul").append('<li> Score - ' + resp.rider_confirmed_match.score + '</li>');
+        $("#riderConfirmedMatch ul").append('<li>  driver name - ' + resp.rider_confirmed_match.DriverFirstName + ' ' + resp.rider_confirmed_match.DriverLastName + '</li>');
+        $("#riderConfirmedMatch ul").append('<li>  driver phone - ' + resp.rider_confirmed_match.DriverPhone + '</li>');
+        $("#riderConfirmedMatch ul").append('<li>  driver email - ' + resp.rider_confirmed_match.DriverEmail + '</li>');
       }
     }
   };
