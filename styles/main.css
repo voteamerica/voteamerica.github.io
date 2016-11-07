@@ -166,7 +166,7 @@ li {
 
 .support-banner {
     margin: 0 0 20px;
-    padding: 10px;
+    padding: 10px 20px;
     border-bottom: 2px solid #cc3939;
     text-align: center;
     color: white;
@@ -275,6 +275,11 @@ a.twitter-mention-button {
     padding: 0 10px;
     font-size: 14px;
     text-decoration: none;
+}
+
+#google_translate_element {
+    text-align: center;
+    margin: 1em 0;
 }
 
 
@@ -745,10 +750,6 @@ label {
         float: right;
     }
 
-    .support-banner {
-        font-size: 1.3em;
-    }
-
     .logo__img {
         max-width: 560px;
     }
@@ -844,6 +845,17 @@ label {
 }
 
 @media (min-width: 960px) {
+    .support-banner {
+        text-align: left;
+    }
+
+    #google_translate_element {
+        margin: 0;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+
     .nav {
         position: relative;
         width: 90%;
@@ -890,6 +902,15 @@ label {
 }
 
 @media (min-width: 1200px) {
+    .support-banner {
+        font-size: 1.2em;
+    }
+
+    #google_translate_element {
+        top: 10px;
+        right: 10px;
+    }
+
     .nav__link {
         font-size: 18px;
         margin-left: 10px;
@@ -901,5 +922,11 @@ label {
 
     .intro__lead {
         font-size: 1.7em;
+    }
+}
+
+@media (min-width: 1400px) {
+    .support-banner {
+        text-align: center;
     }
 }
