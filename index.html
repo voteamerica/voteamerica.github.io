@@ -185,12 +185,12 @@
 
                         <fieldset>
                             <legend>Vehicle requirements</legend>
-                            <p>Please let us know how many people will need to travel together in the <b>same car</b>.</p>
-                            <p>(To make it easier for us to match people, please complete an individual form if you do not need travel with anybody else.)</p>
                             <div class="form-group">
-                                <label for="rideSeats">Number of non-wheelchair seats required</label>
-                                <input type="number" class="form-input form-input--small" id="rideSeats" name="TotalPartySize" min=0 required>
+                                <label for="rideSeats">Number of seats required</label>
+                                <input type="number" class="form-input form-input--small" id="rideSeats" name="TotalPartySize" min=1 required>
                                 <div class="help-block with-errors"></div>
+                                <small>Please let us know how many people will need to travel together in the same car.</small>
+                                <small>To make it easier for us to match people, please complete an individual form if you do not need travel with anybody else.</small>
                             </div>
                             <div class="form-group checkbox">
                                 <label for="riderIsPowerChairUser">
