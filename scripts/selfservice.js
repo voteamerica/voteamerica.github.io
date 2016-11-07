@@ -273,7 +273,7 @@ function acceptDriverMatch(UUID_driver, UUID_rider, Score, DriverPhone) {
   var request = new XMLHttpRequest();
 
   request.open("GET", acceptUrl);
-  request.send();
+  // request.send();
 
   request.onreadystatechange = function () {
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
@@ -328,11 +328,13 @@ function driverProposedMatches () {
 //                             '&UUID_rider=' + val.driver_proposed_matches.uuid_rider + 
 //                             '&Score=' + val.driver_proposed_matches.score + 
 //                             '&DriverPhone=' + data.phone;
-var btnFn = "acceptDriverMatch(" + 
-  val.driver_proposed_matches.uuid_driver + ', ' + 
-  val.driver_proposed_matches.uuid_rider  + ', ' +
-  val.driver_proposed_matches.score       + ', ' +
-  data.phone + ")";
+var btnFn = "acceptDriverMatch('" + 
+  val.driver_proposed_matches.uuid_driver + "', '" + 
+  val.driver_proposed_matches.uuid_rider  + "', " +
+  val.driver_proposed_matches.score       + ", '" +
+  data.phone + "')";
+
+
 
 var buttonInList = 
   '<button class="button" onclick="' + 
@@ -342,6 +344,12 @@ var buttonInList =
           $("#driverProposedMatches ul").append('<li> UUID_driver - ' + val.driver_proposed_matches.uuid_driver + '</li>');
   $("#driverProposedMatches ul").append('<li>  UUID_rider - ' + val.driver_proposed_matches.uuid_rider + '</li>');
   $("#driverProposedMatches ul").append('<li> Score - ' + val.driver_proposed_matches.score + '</li>');
+$("#driverProposedMatches ul").append('<li>  rider name - ' + val.driver_proposed_matches.RiderFirstName + ' ' + val.driver_proposed_matches.RiderLastName + '</li>');
+$("#driverProposedMatches ul").append('<li>  rider phone - ' + val.driver_proposed_matches.RiderPhone + '</li>');
+$("#driverProposedMatches ul").append('<li>  rider email - ' + val.driver_proposed_matches.RiderEmail + '</li>');
+$("#driverProposedMatches ul").append('<li>  rider collection - ' + val.driver_proposed_matches.RiderCollectionZIP + ' ' + val.driver_proposed_matches.RiderCollectionAddress + '</li>');
+$("#driverProposedMatches ul").append('<li>  rider drop off - ' + val.driver_proposed_matches.RiderDropOffZIP + ' ' + val.driver_proposed_matches.RiderDestinationAddress + '</li>');
+$("#driverProposedMatches ul").append('<li>  rider contact method, notes - ' + val.driver_proposed_matches.RiderPreferredContact + ' ' + val.driver_proposed_matches.RiderAccommodationNotes + '</li>');
   // $("#driverProposedMatches ul").append('<li> Accept - <a href="' + acceptUrl + '">Accept</a></li>');
   $("#driverProposedMatches ul").append('<li>' + buttonInList + '</li>');
   $("#driverProposedMatches ul").append('<li> </li>');
