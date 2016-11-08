@@ -1,5 +1,5 @@
-// var remoteUrl = "https://api.carpoolvote.com/live";
-var remoteUrl = "http://localhost:8000";
+var remoteUrl = "https://api.carpoolvote.com/live";
+// var remoteUrl = "http://localhost:8000";
 
 var driverLoggedIn = false;
 var riderLoggedIn = false;
@@ -449,7 +449,7 @@ function driverProposedMatches () {
         $(listSelector).append('<li>  rider contact method, notes - ' + val.driver_proposed_matches.RiderPreferredContact + ' ' + val.driver_proposed_matches.RiderAccommodationNotes + '</li>');
         // $(listSelector).append('<li> Accept - <a href="' + acceptUrl + '">Accept</a></li>');
         $(listSelector).append('<li>' + acceptButtonInList + '</li>');
-        $(listSelector).append('<li> (after clicking Accept, refresh browser page) </li>');
+        // $(listSelector).append('<li> (after clicking Accept, refresh browser page) </li>');
         $(listSelector).append('<li> </li>');
 
         // https://api.carpoolvote.com/v2.0/accept-driver-match?UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897&Score=123&DriverPhone=123
@@ -492,7 +492,7 @@ function driverConfirmedMatches () {
         $(listSelector).append('<li>  rider drop off - ' + val.driver_confirmed_matches.RiderDropOffZIP + ' ' + val.driver_confirmed_matches.RiderDestinationAddress + '</li>');
         $(listSelector).append('<li>  rider contact method, notes - ' + val.driver_confirmed_matches.RiderPreferredContact + ' ' + val.driver_confirmed_matches.RiderAccommodationNotes + '</li>');
         $(listSelector).append('<li>' + cancelButtonInList + '</li>');
-        $(listSelector).append('<li> (after clicking Cancel, refresh browser page) </li>');
+        // $(listSelector).append('<li> (after clicking Cancel, refresh browser page) </li>');
         $(listSelector).append('<li> </li>');
 
         // https://api.carpoolvote.com/v2.0/cancel-driver-match?UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897&Score=123&DriverPhone=123
@@ -613,7 +613,7 @@ function riderConfirmedMatch () {
         $(listSelector).append('<li>  driver phone - ' + resp.rider_confirmed_match.DriverPhone + '</li>');
         $(listSelector).append('<li>  driver email - ' + resp.rider_confirmed_match.DriverEmail + '</li>');
         $(listSelector).append('<li>' + cancelButtonInList + '</li>');
-        $(listSelector).append('<li> (after clicking Cancel, refresh browser page) </li>');
+        // $(listSelector).append('<li> (after clicking Cancel, refresh browser page) </li>');
         $(listSelector).append('<li> </li>');
       }
     }
