@@ -265,10 +265,10 @@ $("#driverInfo ul").append('<li>' + driverInfo.DriverLicenseNumber + '</li>');
 
 function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhone) {
 
-  var acceptUrl = remoteUrl + '/accept-driver-match?UUID_driver=' + UUID_driver +
-                            '&UUID_rider=' + UUID_rider + 
-                            '&Score=' + Score + 
-                            '&DriverPhone=' + DriverPhone;
+  var acceptUrl = remoteUrl + '/accept-driver-match?UUID_driver='   + UUID_driver +
+                                                    '&UUID_rider='  + UUID_rider + 
+                                                    '&Score='       + Score + 
+                                                    '&DriverPhone=' + DriverPhone;
 
   var request = new XMLHttpRequest();
 
@@ -284,24 +284,16 @@ function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
       var keys = Object.keys(resp);
       if (keys) {
         info = resp[keys[0]].toString();
-        // $info.text(info);
-        $infoLogin.text(info);
+        $info.text(info);
+        // $infoLogin.text(info);
 
         if (keys[0] == "driver_confirm_match" && info === "") {
-          // driverLoggedIn = true;
-
-          // $(this).slideUp(300).attr('aria-hidden','true');
-          // $manage.slideDown(300).attr('aria-hidden','false');
-          // updateUI();
-
-          // driverInfo();
           driverProposedMatches();
           driverConfirmedMatches();
         }
       }
     }
   };
-
 }
 
 function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhone) {
@@ -310,10 +302,10 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
     return;
   }
 
-  var cancelUrl = remoteUrl + '/cancel-driver-match?UUID_driver=' + UUID_driver +
-                              '&UUID_rider=' + UUID_rider + 
-                              '&Score=' + Score + 
-                              '&DriverPhone=' + DriverPhone;
+  var cancelUrl = remoteUrl + '/cancel-driver-match?UUID_driver='   + UUID_driver +
+                                                    '&UUID_rider='  + UUID_rider + 
+                                                    '&Score='       + Score + 
+                                                    '&DriverPhone=' + DriverPhone;
 
   var request = new XMLHttpRequest();
 
@@ -329,8 +321,8 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
       var keys = Object.keys(resp);
       if (keys) {
         info = resp[keys[0]].toString();
-        // $info.text(info);
-        $infoLogin.text(info);
+        $info.text(info);
+        // $infoLogin.text(info);
 
         if (keys[0] == "driver_cancel_confirmed_match" && info === "") {
           driverProposedMatches();
@@ -341,23 +333,57 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
   };
 }
 
+function cancelRiderMatchFromButton (UUID_driver, UUID_rider, Score, RiderPhone) {
 
+  if (!window.confirm('This will cancel your match. Are you sure you want to proceed?')) {
+    return;
+  }
 
-function createDriverListButton (dbFunctionName) {
+  var cancelUrl = remoteUrl + '/cancel-rider-match?UUID_driver='   + UUID_driver +
+                                                    '&UUID_rider='  + UUID_rider + 
+                                                    '&Score='       + Score + 
+                                                    '&RiderPhone='  + RiderPhone;
+
+  var request = new XMLHttpRequest();
+
+  request.open("GET", cancelUrl);
+  request.send();
+
+  request.onreadystatechange = function () {
+    if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      console.log(request.responseText);
+
+      var resp = JSON.parse(request.responseText);
+
+      var keys = Object.keys(resp);
+      if (keys) {
+        info = resp[keys[0]].toString();
+        $info.text(info);
+        // $infoLogin.text(info);
+
+        if (keys[0] == "rider_cancel_confirmed_match" && info === "") {
+          driverProposedMatches();
+          driverConfirmedMatches();
+        }
+      }
+    }
+  };
+}
+
+function createListButton (dbFunctionName, buttonCaption, 
+                                  uuid_driver, uuid_rider, score, phone) {
   var btnFn = dbFunctionName + "('" + 
-  val.driver_proposed_matches.uuid_driver + "', '" + 
-  val.driver_proposed_matches.uuid_rider  + "', " +
-  val.driver_proposed_matches.score       + ", '" +
-  data.phone + "')";
+                                  uuid_driver + "', '" + 
+                                  uuid_rider  + "', " +
+                                  score       + ", '" +
+                                  phone + "')";
 
   return  '<button class="button" onclick="' + 
           btnFn + 
-          '">Accept</button>';
+          '">' + buttonCaption + '</button>';
 }
 
 function driverProposedMatches () {
-//http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
-
   var url = 
     remoteUrl + '/driver-proposed-matches?' + 
     'UUID=' + data.uuid +
@@ -380,7 +406,10 @@ function driverProposedMatches () {
 //                             '&Score=' + val.driver_proposed_matches.score + 
 //                             '&DriverPhone=' + data.phone;
 
-        var acceptButtonInList =  createDriverListButton("acceptDriverMatchFromButton");
+        var acceptButtonInList =  
+          createListButton("acceptDriverMatchFromButton", "Accept",
+            val.driver_proposed_matches.uuid_driver, val.driver_proposed_matches.uuid_rider, 
+            val.driver_proposed_matches.score, data.phone);
                   
         $("#driverProposedMatches ul").append('<li> UUID_driver - ' + val.driver_proposed_matches.uuid_driver + '</li>');
         $("#driverProposedMatches ul").append('<li>  UUID_rider - ' + val.driver_proposed_matches.uuid_rider + '</li>');
@@ -403,8 +432,6 @@ function driverProposedMatches () {
 }
 
 function driverConfirmedMatches () {
-//http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
-
   var url = 
     remoteUrl + '/driver-confirmed-matches?' + 
     'UUID=' + data.uuid +
@@ -422,7 +449,10 @@ function driverConfirmedMatches () {
       var resp = JSON.parse(request.responseText);
 
       resp.forEach(val => {
-        var cancelButtonInList =  createDriverListButton("cancelDriverMatchFromButton");
+
+        var cancelButtonInList =  createListButton("cancelDriverMatchFromButton", "Cancel",
+            val.driver_confirmed_matches.uuid_driver, val.driver_confirmed_matches.uuid_rider, 
+            val.driver_confirmed_matches.score, data.phone);
 
         $("#driverConfirmedMatches ul").append('<li> UUID_driver - ' + val.driver_confirmed_matches.uuid_driver + '</li>');
         $("#driverConfirmedMatches ul").append('<li>  UUID_rider - ' + val.driver_confirmed_matches.uuid_rider + '</li>');
@@ -484,8 +514,6 @@ function riderExists () {
 }
 
 function riderInfo () {
-//http://localhost:8000/rider-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&RiderPhone=Test
-
   var url = 
     remoteUrl + '/rider-info?' + 
     'UUID=' + data.uuid +
@@ -510,14 +538,12 @@ function riderInfo () {
           var riderInfo = resp[keys[0]];
           var i = 0;
 
-$("#riderInfo ul").append('<li>' + riderInfo.RiderFirstName + '</li>');
-$("#riderInfo ul").append('<li>' + riderInfo.RiderLastName + '</li>');
-$("#riderInfo ul").append('<li>' + riderInfo.UUID + '</li>');
-$("#riderInfo ul").append('<li>' + riderInfo.RiderCollectionZIP + '</li>');
-$("#riderInfo ul").append('<li>' + riderInfo.RiderEmail + '</li>');
-$("#riderInfo ul").append('<li>' + riderInfo.RiderPhone + '</li>');
-
-          
+          $("#riderInfo ul").append('<li>' + riderInfo.RiderFirstName + '</li>');
+          $("#riderInfo ul").append('<li>' + riderInfo.RiderLastName + '</li>');
+          $("#riderInfo ul").append('<li>' + riderInfo.UUID + '</li>');
+          $("#riderInfo ul").append('<li>' + riderInfo.RiderCollectionZIP + '</li>');
+          $("#riderInfo ul").append('<li>' + riderInfo.RiderEmail + '</li>');
+          $("#riderInfo ul").append('<li>' + riderInfo.RiderPhone + '</li>');
         }
       }
     }
@@ -543,6 +569,10 @@ function riderConfirmedMatch () {
 
       var resp = JSON.parse(request.responseText);
 
+      var cancelButtonInList =  createListButton("cancelRiderMatchFromButton", "Cancel",
+            resp.rider_confirmed_match.uuid_driver, resp.rider_confirmed_match.uuid_rider, 
+            resp.rider_confirmed_match.score, data.phone);
+
       if (resp.rider_confirmed_match.uuid_driver !== null) {
         $("#riderConfirmedMatch ul").append('<li> UUID_driver - ' + resp.rider_confirmed_match.uuid_driver + '</li>');
         $("#riderConfirmedMatch ul").append('<li>  UUID_rider - ' + resp.rider_confirmed_match.uuid_rider + '</li>');
@@ -550,6 +580,9 @@ function riderConfirmedMatch () {
         $("#riderConfirmedMatch ul").append('<li>  driver name - ' + resp.rider_confirmed_match.DriverFirstName + ' ' + resp.rider_confirmed_match.DriverLastName + '</li>');
         $("#riderConfirmedMatch ul").append('<li>  driver phone - ' + resp.rider_confirmed_match.DriverPhone + '</li>');
         $("#riderConfirmedMatch ul").append('<li>  driver email - ' + resp.rider_confirmed_match.DriverEmail + '</li>');
+        $("#riderConfirmedMatch ul").append('<li>' + cancelButtonInList + '</li>');
+        $("#riderConfirmedMatch ul").append('<li> (after clicking Cancel, refresh browser page) </li>');
+        $("#riderConfirmedMatch ul").append('<li> </li>');
       }
     }
   };
