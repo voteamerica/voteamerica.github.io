@@ -189,6 +189,17 @@ function sendAjaxRequest(ajaxData, ajaxPath) {
   });
 }
 
+function clearDriverInfo () {
+  $('#driverInfo li').remove();
+  $('#driverProposedMatches li').remove();
+  $('#driverConfirmedMatches li').remove();
+}
+
+function clearRiderInfo () {
+  $('#riderInfo li').remove();
+  $('#riderConfirmedMatch li').remove();
+}
+
 function driverExists () {
 //http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
 
@@ -221,10 +232,11 @@ function driverExists () {
           $manage.slideDown(300).attr('aria-hidden','false');
           updateUI();
 
+          clearDriverInfo ();
+
           driverInfo();
           driverProposedMatches();
           driverConfirmedMatches();
-
         }
       }
     }
@@ -296,6 +308,8 @@ function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
         // $infoLogin.text(info);
 
         if (keys[0] == "driver_confirm_match" && info === "") {
+          clearDriverInfo ();
+
           driverProposedMatches();
           driverConfirmedMatches();
         }
@@ -333,6 +347,8 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
         // $infoLogin.text(info);
 
         if (keys[0] == "driver_cancel_confirmed_match" && info === "") {
+          clearDriverInfo ();
+
           driverProposedMatches();
           driverConfirmedMatches();
         }
@@ -370,8 +386,10 @@ function cancelRiderMatchFromButton (UUID_driver, UUID_rider, Score, RiderPhone)
         // $infoLogin.text(info);
 
         if (keys[0] == "rider_cancel_confirmed_match" && info === "") {
-          driverProposedMatches();
-          driverConfirmedMatches();
+          clearRiderInfo();
+
+          riderInfo();
+          riderConfirmedMatch();
         }
       }
     }
@@ -514,6 +532,8 @@ function riderExists () {
           $(this).slideUp(300).attr('aria-hidden','true');
           $manage.slideDown(300).attr('aria-hidden','false');
           updateUI();
+
+          clearRiderInfo ();
 
           riderInfo();
           riderConfirmedMatch();
