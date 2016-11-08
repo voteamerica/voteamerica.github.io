@@ -471,6 +471,10 @@ label {
     padding: 8px;
 }
 
+#helpOther {
+    margin-top: 5px;
+}
+
 .form-group small {
     display: block;
 }
@@ -494,7 +498,7 @@ label {
     margin: 5px 0;
 }
 
-.checkbox input {
+.checkbox input[type=checkbox] {
     margin: 5px 0 0 -25px;
     position: absolute;
 }
