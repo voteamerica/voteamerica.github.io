@@ -71,6 +71,10 @@ body {
 a {
     color: #e64a4a;
 }
+a:hover, a:focus {
+    color: #c72929;
+    text-decoration: none;
+}
 
 ul, ol {
     padding-left: 1.6em;
@@ -275,6 +279,10 @@ a.twitter-mention-button {
     padding: 0 10px;
     font-size: 14px;
     text-decoration: none;
+}
+
+.nav__link:hover, .nav__link:focus {
+    text-decoration: underline;
 }
 
 #google_translate_element {

@@ -22,6 +22,13 @@
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link type="text/css" rel="stylesheet" href="styles/main.css">
 
+    <noscript>
+        <style>
+            .forms { margin-top: 0; }
+            .ride-form { display: block; }
+        </style>
+    </noscript>
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -129,7 +136,7 @@
         </div>
 
         <div id="forms" class="forms wrapper offset-top">
-            <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/live/rider" method="post" class="ride-form" role="form" aria-hidden="true">
+            <form id="need-ride" name="needRide" action="https://api.carpoolvote.com/live/rider" method="post" class="ride-form" aria-hidden="true">
                 <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-rider" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I need a ride</h2>
@@ -153,7 +160,7 @@
 
                             <div class="form-column">
                                 <div class="form-group">
-                                    <label for="riderPickUpAddress">Pick up address</label>
+                                    <label for="riderCollectionAddress">Pick up address</label>
                                     <input type="text" class="form-input" id="riderCollectionAddress" placeholder="Your pick up address" name="RiderCollectionAddress" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -169,7 +176,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="rideDestinationZIP">Destination ZIP code</label>
-                                    <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" name="RiderDropOffZIP" placeholder="To where do you need a ride?" required>
+                                    <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideDestinationZIP" name="RiderDropOffZIP" placeholder="To where do you need a ride?" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -272,7 +279,7 @@
                 </div>
             </form>
 
-            <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/live/driver" method="post" class="ride-form" role="form" aria-hidden="true">
+            <form id="offer-ride" name="offerRide" action="https://api.carpoolvote.com/live/driver" method="post" class="ride-form" aria-hidden="true">
                 <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-driver" />
                 <div class="bannerbox">
                     <h2 class="bannerbox__title">I can offer a ride</h2>
@@ -300,7 +307,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <p>I am willing to collect within a <input type="number" id="offerMiles" name="DriverCollectionRadius" pattern="\d*" min="0" step="1" class="form-input form-input--inline" placeholder="e.g. 10" required /> mile radius of this zip code.<p>
+                                <p>I am willing to collect within a <input type="number" id="offerMiles" name="DriverCollectionRadius" min="0" step="1" class="form-input form-input--inline" placeholder="e.g. 10" required /> mile radius of this zip code.<p>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
@@ -418,20 +425,20 @@
                         </ul>
 
                         <h3>Rock the Vote</h3>
-                        <a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv"><img class="align-right" src="images/rock.png" alt="Rock the Vote logo" width=78 height=75 /></a>
-                        <p><a href="https://www.rockthevote.com/?source=voteamerica" target="_rtv">Rock the Vote</a> has several online tools that simplify and demystify voter registration and elections. Follow the links below for more on how to claim your vote!
+                        <a href="https://www.rockthevote.com/?source=voteamerica"><img class="align-right" src="images/rock.png" alt="Rock the Vote logo" width=78 height=75 /></a>
+                        <p><a href="https://www.rockthevote.com/?source=voteamerica">Rock the Vote</a> has several online tools that simplify and demystify voter registration and elections. Follow the links below for more on how to claim your vote!
                         <ul>
-                            <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica" target="_rtv">Register to vote!</a></li>
-                            <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/" target="_rtv">Voter requirements</a></li>
-                            <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/" target="_rtv">Find where to vote</a></li>
-                            <li><a href="https://www.rockthevote.com/get-informed/elections/" target="_rtv">About elections</a></li>
+                            <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica">Register to vote!</a></li>
+                            <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/">Voter requirements</a></li>
+                            <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/">Find where to vote</a></li>
+                            <li><a href="https://www.rockthevote.com/get-informed/elections/">About elections</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="bannerbox" id="countdown">
                     <h2 class="bannerbox__title">2016 Election Countdown Clock</h2>
                     <div class="bannerbox__content">
-                        <iframe src="http://www.270towin.com/2016-countdown-clock/widget300x200.php" width="300" height="200" border="0" frameBorder="0" style="max-width:100%">
+                        <iframe src="http://www.270towin.com/2016-countdown-clock/widget300x200.php" width="300" height="200" style="border:none; max-width:100%">
                             Browser not supported. Visit <a href="http://www.270towin.com/">www.270towin.com</a>
                         </iframe>
                     </div>
@@ -454,13 +461,13 @@
                     <div class="bannerbox__content">
                         <p>Firstly, tell your family, friends, colleagues, and strangers! And share us on social media! The more people who know about us, the better our chances of making this project work for as many voters as possible!</p>
                         <div class="bannerbox__social">
-                            <a href="https://twitter.com/carpoolvote" target="_blank"><img src="images/twitter_logo.png" alt="Twitter Logo" width="100" height="100" class="bannerbox__logo"></img></a>
-                            <a href="https://www.facebook.com/CarpoolVote/?fref=ts" target="_blank"><img src="images/facebook_logo.png" alt="Facebook Logo" width="100" height="100" class="bannerbox__logo"></img></a>
-                            <a href="https://www.youtube.com/channel/UCY1aS3TMDGxVbckA7Va0QFA" target="_blank"><img src="images/youtube_logo.jpg" alt="Youtube Logo" width="140" height="100" class="bannerbox__logo"></img></a>
+                            <a href="https://twitter.com/carpoolvote" target="_blank"><img src="images/twitter_logo.png" alt="Twitter Logo" width="100" height="100" class="bannerbox__logo" /></a>
+                            <a href="https://www.facebook.com/CarpoolVote/?fref=ts" target="_blank"><img src="images/facebook_logo.png" alt="Facebook Logo" width="100" height="100" class="bannerbox__logo" /></a>
+                            <a href="https://www.youtube.com/channel/UCY1aS3TMDGxVbckA7Va0QFA" target="_blank"><img src="images/youtube_logo.jpg" alt="Youtube Logo" width="140" height="100" class="bannerbox__logo" /></a>
                         </div>
                         <p>Please also sign up to join the campaign! We’re supported entirely by a network of volunteers who believe passionately that democracy is for everybody.</p>
-                        <p>We have a variety of roles for people with any amount of time to give. This could involve joining our volunteer pool who take on small tasks that help the project take big leaps forward. We also have several strategic roles for those who want to remain actively involved until Election Day.</p>
-                        <form name="offerHelp" action="https://api.carpoolvote.com/live/helper" method="post" data-toggle="validator" role="form">
+                        <p>We have a variety of roles for people with any amount of time to give. This could involve joining our volunteer pool who take on small tasks that help the project take big leaps forward. If you're a web developer, then consider contributing to our website on <a href="https://github.com/voteamerica/" target="_blank">GitHub</a>. We also have several strategic roles for those who want to remain actively involved until Election Day.</p>
+                        <form name="offerHelp" action="https://api.carpoolvote.com/live/helper" method="post" data-toggle="validator">
                             <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
 
                             <div class="form-group">
@@ -485,9 +492,6 @@
                                 <label>
                                     <input type="checkbox" name="Capability" value="collaboration"/> Help build links with organizations / Set up collaboration with my organization
                                 </label>
-                                <!--<label>
-                                    <input type="checkbox" name="Capability" value="awareness"/> Do research
-                                </label>-->
                                 <label>
                                     <input type="checkbox" name="Capability" value="research"/> Do research
                                 </label>
@@ -505,10 +509,8 @@
                                 </label>
                                 <label>
                                     <input type="checkbox" name="Capability" value="other"/> Other (please specify)
-                                    <br/>
-                                    <input type="text" class="form-input" id="helpOther" placeholder="Other" name="other">
-                                    <div class="help-block with-errors"></div>
                                 </label>
+                                <input type="text" class="form-input" id="helpOther" placeholder="Other" name="other">
                             </div>
                             <p>We also need funding to keep building the movement. Our volunteers are working around the clock but some things cannot be done with time and love alone. Could you spare some money to contribute to the campaign?</p>
                             <p><a href="https://www.generosity.com/fundraising/CarpoolVote-com-linking-volunteer-drivers-voters" target="_blank">Support our IndieGogo campaign</a></p>
@@ -533,7 +535,7 @@
                 <li><a href="/self-service/">Self-service portal</a></li>
                 <li><a href="/terms-conditions/">Terms &amp; conditions</a></li>
             </ul>
-            <form class="newsletter form-group" data-toggle="validator" role="form">
+            <form class="newsletter form-group" data-toggle="validator">
                 <label class="newsletter__label" for="newsletter-email">Sign up for our newsletter</label>
                 <input class="form-input input newsletter__input" id="newsletter-email" type="email" placeholder="email address" required />
                 <button class="button newsletter__submit">Join</button>
@@ -541,13 +543,6 @@
             </form>
         </div>
     </footer>
-
-    <noscript>
-        <style>
-            .forms { margin-top: 0; }
-            .ride-form { display: block; }
-        </style>
-    </noscript>
 
     <script>
         (function(i, s, o, g, r, a, m) {
