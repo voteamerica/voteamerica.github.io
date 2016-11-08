@@ -45,9 +45,16 @@ $login.validator().on('submit', function(e) {
   data.phone = $(this).find('#inputPhoneNumber').val();
 
   if (data.type === "driver") {
+    $manage.find('#riderInfo').toggle(false);
+    $manage.find('#riderConfirmedMatch').toggle(false);
+
     driverExists();
   }
   else {
+    $manage.find('#driverInfo').toggle(false);
+    $manage.find('#driverProposedMatches').toggle(false);
+    $manage.find('#driverConfirmedMatches').toggle(false);
+
     riderExists();
   }
 
