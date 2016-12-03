@@ -856,6 +856,14 @@ label {
     }
 }
 
+/* Self service page */
+li.list_button{
+    list-style-type: none;
+}
+#manage ul{
+    margin-bottom: 30px;
+}
+
 @media (min-width: 960px) {
     .support-banner {
         text-align: left;
