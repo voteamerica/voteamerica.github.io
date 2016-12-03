@@ -71,7 +71,7 @@ function updateUI(uuid, type, phone) {
   $manage.find('#btnCancelDriveOffer').toggle(data.type === 'driver');
   $manage.find('#btnPauseDriverMatch').toggle(data.type === 'driver');
   $manage.find('#btnCancelDriverMatch').toggle(data.type === 'rider' && data.uuid_driver !== undefined && data.score !== 'undefined');
-  
+
   $manage.find('#btnCancelRideRequest').toggle(data.type === 'rider');
   $manage.find('#btnCancelRiderMatch').toggle(data.type === 'rider' && data.uuid_driver !== undefined && data.score !== 'undefined');
 
@@ -203,8 +203,8 @@ function clearRiderInfo () {
 function driverExists () {
 //http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
 
-  var url = 
-    remoteUrl + '/driver-exists?' + 
+  var url =
+    remoteUrl + '/driver-exists?' +
     'UUID=' + data.uuid +
     '&DriverPhone=' + data.phone;
 
@@ -246,8 +246,8 @@ function driverExists () {
 function driverInfo () {
 //http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
 
-  var url = 
-    remoteUrl + '/driver-info?' + 
+  var url =
+    remoteUrl + '/driver-info?' +
     'UUID=' + data.uuid +
     '&DriverPhone=' + data.phone;
 
@@ -266,7 +266,7 @@ function driverInfo () {
       if (keys) {
 
         if (keys[0] == "driver_info" ) {
-          
+
           var driverInfo = resp[keys[0]];
           var listSelector = "#driverInfo ul";
 
@@ -286,8 +286,8 @@ function driverInfo () {
 function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhone) {
 
   var acceptUrl = remoteUrl + '/accept-driver-match?UUID_driver='   + UUID_driver +
-                                                    '&UUID_rider='  + UUID_rider + 
-                                                    '&Score='       + Score + 
+                                                    '&UUID_rider='  + UUID_rider +
+                                                    '&Score='       + Score +
                                                     '&DriverPhone=' + DriverPhone;
 
   var request = new XMLHttpRequest();
@@ -325,8 +325,8 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
   }
 
   var cancelUrl = remoteUrl + '/cancel-driver-match?UUID_driver='   + UUID_driver +
-                                                    '&UUID_rider='  + UUID_rider + 
-                                                    '&Score='       + Score + 
+                                                    '&UUID_rider='  + UUID_rider +
+                                                    '&Score='       + Score +
                                                     '&DriverPhone=' + DriverPhone;
 
   var request = new XMLHttpRequest();
@@ -364,8 +364,8 @@ function cancelRiderMatchFromButton (UUID_driver, UUID_rider, Score, RiderPhone)
   }
 
   var cancelUrl = remoteUrl + '/cancel-rider-match?UUID_driver='   + UUID_driver +
-                                                    '&UUID_rider='  + UUID_rider + 
-                                                    '&Score='       + Score + 
+                                                    '&UUID_rider='  + UUID_rider +
+                                                    '&Score='       + Score +
                                                     '&RiderPhone='  + RiderPhone;
 
   var request = new XMLHttpRequest();
@@ -396,22 +396,22 @@ function cancelRiderMatchFromButton (UUID_driver, UUID_rider, Score, RiderPhone)
   };
 }
 
-function createListButton (dbFunctionName, buttonCaption, buttonClass, 
+function createListButton (dbFunctionName, buttonCaption, buttonClass,
                                   uuid_driver, uuid_rider, score, phone) {
-  var btnFn = dbFunctionName + "('" + 
-                                  uuid_driver + "', '" + 
+  var btnFn = dbFunctionName + "('" +
+                                  uuid_driver + "', '" +
                                   uuid_rider  + "', " +
                                   score       + ", '" +
                                   phone + "')";
 
-  return  '<button ' + buttonClass + ' onclick="' + 
-          btnFn + 
+  return  '<button ' + buttonClass + ' onclick="' +
+          btnFn +
           '">' + buttonCaption + '</button>';
 }
 
 function driverProposedMatches () {
-  var url = 
-    remoteUrl + '/driver-proposed-matches?' + 
+  var url =
+    remoteUrl + '/driver-proposed-matches?' +
     'UUID=' + data.uuid +
     '&DriverPhone=' + data.phone;
 
@@ -428,17 +428,18 @@ function driverProposedMatches () {
 
       resp.forEach(val => {
 // var acceptUrl = remoteUrl + '/accept-driver-match?UUID_driver=' + val.driver_proposed_matches.uuid_driver +
-//                             '&UUID_rider=' + val.driver_proposed_matches.uuid_rider + 
-//                             '&Score=' + val.driver_proposed_matches.score + 
+//                             '&UUID_rider=' + val.driver_proposed_matches.uuid_rider +
+//                             '&Score=' + val.driver_proposed_matches.score +
 //                             '&DriverPhone=' + data.phone;
 
-        var acceptButtonInList =  
+        var acceptButtonInList =
           createListButton("acceptDriverMatchFromButton", "Accept", ' class="button" ',
-            val.driver_proposed_matches.uuid_driver, val.driver_proposed_matches.uuid_rider, 
+            val.driver_proposed_matches.uuid_driver, val.driver_proposed_matches.uuid_rider,
             val.driver_proposed_matches.score, data.phone);
         var listSelector = "#driverProposedMatches ul";
 
-        $(listSelector).append('<li> UUID_driver - ' + val.driver_proposed_matches.uuid_driver + '</li>');
+
+        $(listSelector).append('<li> UUID_driver - ' + driverMatches.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + val.driver_proposed_matches.uuid_rider + '</li>');
         $(listSelector).append('<li> Score - ' + val.driver_proposed_matches.score + '</li>');
         $(listSelector).append('<li>  rider name - ' + val.driver_proposed_matches.RiderFirstName + ' ' + val.driver_proposed_matches.RiderLastName + '</li>');
@@ -459,8 +460,8 @@ function driverProposedMatches () {
 }
 
 function driverConfirmedMatches () {
-  var url = 
-    remoteUrl + '/driver-confirmed-matches?' + 
+  var url =
+    remoteUrl + '/driver-confirmed-matches?' +
     'UUID=' + data.uuid +
     '&DriverPhone=' + data.phone;
 
@@ -478,9 +479,11 @@ function driverConfirmedMatches () {
       resp.forEach(val => {
 
         var cancelButtonInList =  createListButton("cancelDriverMatchFromButton", "Cancel", ' class="button button--danger" ',
-            val.driver_confirmed_matches.uuid_driver, val.driver_confirmed_matches.uuid_rider, 
+            val.driver_confirmed_matches.uuid_driver, val.driver_confirmed_matches.uuid_rider,
             val.driver_confirmed_matches.score, data.phone);
         var listSelector = "#driverConfirmedMatches ul";
+
+        var tmpList = '';
 
         $(listSelector).append('<li> UUID_driver - ' + val.driver_confirmed_matches.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + val.driver_confirmed_matches.uuid_rider + '</li>');
@@ -504,8 +507,8 @@ function driverConfirmedMatches () {
 function riderExists () {
 //http://localhost:8000/rider-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&RiderPhone=Test
 
-  var url = 
-    remoteUrl + '/rider-exists?' + 
+  var url =
+    remoteUrl + '/rider-exists?' +
     'UUID=' + data.uuid +
     '&RiderPhone=' + data.phone;
 
@@ -544,8 +547,8 @@ function riderExists () {
 }
 
 function riderInfo () {
-  var url = 
-    remoteUrl + '/rider-info?' + 
+  var url =
+    remoteUrl + '/rider-info?' +
     'UUID=' + data.uuid +
     '&RiderPhone=' + data.phone;
 
@@ -564,16 +567,21 @@ function riderInfo () {
       if (keys) {
 
         if (keys[0] == "rider_info" ) {
-          
+
           var riderInfo = resp[keys[0]];
-          var listSelector = "#riderInfo ul";
-        
-          $(listSelector).append('<li>' + riderInfo.RiderFirstName + '</li>');
-          $(listSelector).append('<li>' + riderInfo.RiderLastName + '</li>');
-          $(listSelector).append('<li>' + riderInfo.UUID + '</li>');
-          $(listSelector).append('<li>' + riderInfo.RiderCollectionZIP + '</li>');
-          $(listSelector).append('<li>' + riderInfo.RiderEmail + '</li>');
-          $(listSelector).append('<li>' + riderInfo.RiderPhone + '</li>');
+
+          var riderInfoList = [RiderFirstName, RiderLastName, UUID, RiderCollectionZIP, RiderEmail, RiderEmail];
+          
+          var tempList = '';
+
+          //why are we appending RiderEmail twice?
+
+          for(let i = 0; i < riderInfoList.length; i++) {
+            li = '<li>' + riderInfo. + riderInfoList[i] + '</li>';
+            tempList += li;
+          }
+
+          $("#riderInfo ul").append(tempList);
         }
       }
     }
@@ -583,8 +591,8 @@ function riderInfo () {
 function riderConfirmedMatch () {
 //http://localhost:8000/rider-confirmed-match?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
 
-  var url = 
-    remoteUrl + '/rider-confirmed-match?' + 
+  var url =
+    remoteUrl + '/rider-confirmed-match?' +
     'UUID=' + data.uuid +
     '&RiderPhone=' + data.phone;
 
@@ -600,7 +608,7 @@ function riderConfirmedMatch () {
       var resp = JSON.parse(request.responseText);
 
       var cancelButtonInList =  createListButton("cancelRiderMatchFromButton", "Cancel", ' class="button button--danger" ',
-            resp.rider_confirmed_match.uuid_driver, resp.rider_confirmed_match.uuid_rider, 
+            resp.rider_confirmed_match.uuid_driver, resp.rider_confirmed_match.uuid_rider,
             resp.rider_confirmed_match.score, data.phone);
 
       if (resp.rider_confirmed_match.uuid_driver !== null) {
@@ -619,4 +627,3 @@ function riderConfirmedMatch () {
     }
   };
 }
-
