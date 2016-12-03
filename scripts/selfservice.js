@@ -569,12 +569,10 @@ function riderInfo () {
         if (keys[0] == "rider_info" ) {
 
           var riderInfo = resp[keys[0]];
+          // var listSelector = "#riderInfo ul";
 
-          var riderInfoList = [RiderFirstName, RiderLastName, UUID, RiderCollectionZIP, RiderEmail, RiderEmail];
-          
+          var riderInfoList = [RiderFirstName, RiderLastName, UUID, RiderCollectionZIP, RiderEmail, RiderPhone];
           var tempList = '';
-
-          //why are we appending RiderEmail twice?
 
           for(let i = 0; i < riderInfoList.length; i++) {
             li = '<li>' + riderInfo. + riderInfoList[i] + '</li>';
@@ -582,6 +580,7 @@ function riderInfo () {
           }
 
           $("#riderInfo ul").append(tempList);
+          
         }
       }
     }
