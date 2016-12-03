@@ -569,7 +569,6 @@ function riderInfo () {
         if (keys[0] == "rider_info" ) {
 
           var riderInfo = resp[keys[0]];
-          // var listSelector = "#riderInfo ul";
 
           var riderInfoList = [RiderFirstName, RiderLastName, UUID, RiderCollectionZIP, RiderEmail, RiderPhone];
           var tempList = '';
@@ -580,7 +579,7 @@ function riderInfo () {
           }
 
           $("#riderInfo ul").append(tempList);
-          
+
         }
       }
     }
