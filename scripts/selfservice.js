@@ -570,16 +570,15 @@ function riderInfo () {
 
           var riderInfo = resp[keys[0]];
 
-          var riderInfoList = [RiderFirstName, RiderLastName, UUID, RiderCollectionZIP, RiderEmail, RiderPhone];
+          var riderInfoList = [riderInfo.RiderFirstName, riderInfo.RiderLastName, riderInfo.UUID, riderInfo.RiderCollectionZIP, riderInfo.RiderEmail, riderInfo.RiderPhone];
           var tempList = '';
 
           for(let i = 0; i < riderInfoList.length; i++) {
-            li = '<li>' + riderInfo. + riderInfoList[i] + '</li>';
+            li = '<li>' + riderInfoList[i] + '</li>';
             tempList += li;
           }
 
           $("#riderInfo ul").append(tempList);
-
         }
       }
     }
