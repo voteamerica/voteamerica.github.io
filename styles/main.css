@@ -7,6 +7,7 @@
 html {
     position: relative;
     min-height: 100%;
+    /*text-align: justify;*/
 }
 
 body {
@@ -690,6 +691,9 @@ label {
 .bannerbox__content {
     padding: 0 20px 15px;
 }
+.bannerbox__content h3,h4{
+    text-align: center;
+}
 
 
 /* Footer */
@@ -907,7 +911,7 @@ label {
     .time-range-slider {
         max-width: 700px;
     }
-	
+
     .state-dropdown--large{
         max-height: 260px;
     }
