@@ -439,7 +439,7 @@ function driverProposedMatches () {
         var listSelector = "#driverProposedMatches ul";
 
 
-        $(listSelector).append('<li> UUID_driver - ' + driverMatches.uuid_driver + '</li>');
+        $(listSelector).append('<li> UUID_driver - ' + val.driver_proposed_matches.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + val.driver_proposed_matches.uuid_rider + '</li>');
         $(listSelector).append('<li> Score - ' + val.driver_proposed_matches.score + '</li>');
         $(listSelector).append('<li>  rider name - ' + val.driver_proposed_matches.RiderFirstName + ' ' + val.driver_proposed_matches.RiderLastName + '</li>');
