@@ -442,12 +442,12 @@ function driverProposedMatches () {
         $(listSelector).append('<li> UUID_driver - ' + val.driver_proposed_matches.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + val.driver_proposed_matches.uuid_rider + '</li>');
         $(listSelector).append('<li> Score - ' + val.driver_proposed_matches.score + '</li>');
-        $(listSelector).append('<li>  rider name - ' + val.driver_proposed_matches.RiderFirstName + ' ' + val.driver_proposed_matches.RiderLastName + '</li>');
-        $(listSelector).append('<li>  rider phone - ' + val.driver_proposed_matches.RiderPhone + '</li>');
-        $(listSelector).append('<li>  rider email - ' + val.driver_proposed_matches.RiderEmail + '</li>');
-        $(listSelector).append('<li>  rider collection - ' + val.driver_proposed_matches.RiderCollectionZIP + ' ' + val.driver_proposed_matches.RiderCollectionAddress + '</li>');
-        $(listSelector).append('<li>  rider drop off - ' + val.driver_proposed_matches.RiderDropOffZIP + ' ' + val.driver_proposed_matches.RiderDestinationAddress + '</li>');
-        $(listSelector).append('<li>  rider contact method, notes - ' + val.driver_proposed_matches.RiderPreferredContact + ' ' + val.driver_proposed_matches.RiderAccommodationNotes + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider name - ' + val.driver_proposed_matches.RiderFirstName + ' ' + val.driver_proposed_matches.RiderLastName + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider phone - ' + val.driver_proposed_matches.RiderPhone + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider email - ' + val.driver_proposed_matches.RiderEmail + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider collection - ' + val.driver_proposed_matches.RiderCollectionZIP + ' ' + val.driver_proposed_matches.RiderCollectionAddress + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider drop off - ' + val.driver_proposed_matches.RiderDropOffZIP + ' ' + val.driver_proposed_matches.RiderDestinationAddress + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider contact method, notes - ' + val.driver_proposed_matches.RiderPreferredContact + ' ' + val.driver_proposed_matches.RiderAccommodationNotes + '</li>');
         // $(listSelector).append('<li> Accept - <a href="' + acceptUrl + '">Accept</a></li>');
         $(listSelector).append('<li class="list_button">' + acceptButtonInList + '</li>');
         // $(listSelector).append('<li> (after clicking Accept, refresh browser page) </li>');
@@ -488,12 +488,12 @@ function driverConfirmedMatches () {
         $(listSelector).append('<li> UUID_driver - ' + val.driver_confirmed_matches.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + val.driver_confirmed_matches.uuid_rider + '</li>');
         $(listSelector).append('<li> Score - ' + val.driver_confirmed_matches.score + '</li>');
-        $(listSelector).append('<li>  rider name - ' + val.driver_confirmed_matches.RiderFirstName + ' ' + val.driver_confirmed_matches.RiderLastName + '</li>');
-        $(listSelector).append('<li>  rider phone - ' + val.driver_confirmed_matches.RiderPhone + '</li>');
-        $(listSelector).append('<li>  rider email - ' + val.driver_confirmed_matches.RiderEmail + '</li>');
-        $(listSelector).append('<li>  rider collection - ' + val.driver_confirmed_matches.RiderCollectionZIP + ' ' + val.driver_confirmed_matches.RiderCollectionAddress + '</li>');
-        $(listSelector).append('<li>  rider drop off - ' + val.driver_confirmed_matches.RiderDropOffZIP + ' ' + val.driver_confirmed_matches.RiderDestinationAddress + '</li>');
-        $(listSelector).append('<li>  rider contact method, notes - ' + val.driver_confirmed_matches.RiderPreferredContact + ' ' + val.driver_confirmed_matches.RiderAccommodationNotes + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider name - ' + val.driver_confirmed_matches.RiderFirstName + ' ' + val.driver_confirmed_matches.RiderLastName + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider phone - ' + val.driver_confirmed_matches.RiderPhone + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider email - ' + val.driver_confirmed_matches.RiderEmail + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider collection - ' + val.driver_confirmed_matches.RiderCollectionZIP + ' ' + val.driver_confirmed_matches.RiderCollectionAddress + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider drop off - ' + val.driver_confirmed_matches.RiderDropOffZIP + ' ' + val.driver_confirmed_matches.RiderDestinationAddress + '</li>');
+        $(listSelector).append('<li class="match-info-item">  rider contact method, notes - ' + val.driver_confirmed_matches.RiderPreferredContact + ' ' + val.driver_confirmed_matches.RiderAccommodationNotes + '</li>');
         $(listSelector).append('<li class="list_button">' + cancelButtonInList + '</li>');
         // $(listSelector).append('<li> (after clicking Cancel, refresh browser page) </li>');
 

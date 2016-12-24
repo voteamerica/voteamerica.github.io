@@ -866,6 +866,15 @@ li.list_button{
     margin-bottom: 30px;
 }
 
+li.match-info-item {
+    list-style-type: none;
+    margin-bottom: 7px;
+}
+
+h3.self-service-heading {
+    text-align: left;
+    margin-bottom: -2px;
+}
 
 @media (min-width: 960px) {
     .support-banner {
