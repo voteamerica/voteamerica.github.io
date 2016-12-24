@@ -494,7 +494,7 @@ function driverConfirmedMatches () {
         $(listSelector).append('<li>  rider collection - ' + val.driver_confirmed_matches.RiderCollectionZIP + ' ' + val.driver_confirmed_matches.RiderCollectionAddress + '</li>');
         $(listSelector).append('<li>  rider drop off - ' + val.driver_confirmed_matches.RiderDropOffZIP + ' ' + val.driver_confirmed_matches.RiderDestinationAddress + '</li>');
         $(listSelector).append('<li>  rider contact method, notes - ' + val.driver_confirmed_matches.RiderPreferredContact + ' ' + val.driver_confirmed_matches.RiderAccommodationNotes + '</li>');
-        $(listSelector).append('<li class="list_button>' + cancelButtonInList + '</li>');
+        $(listSelector).append('<li class="list_button">' + cancelButtonInList + '</li>');
         // $(listSelector).append('<li> (after clicking Cancel, refresh browser page) </li>');
 
         // https://api.carpoolvote.com/v2.0/cancel-driver-match?UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897&Score=123&DriverPhone=123
