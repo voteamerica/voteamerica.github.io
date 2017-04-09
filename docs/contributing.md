@@ -39,4 +39,4 @@ the imperative (e.g. 'Update rider email input field').
 - Please indicate in your PR description whether your PR is ready to merge, or whether you're still working on it.
 - Even if you have write permission to this repository, please try to avoid merging your own PRs, especially for large features.
 - Ideally, every PR should have a senior project member sign off on it before being merged.
-- If you have an urgent PR, please announce it in the #frontend Slack channel and one of us will try to prioritise reviewing and deploying it.
+- If you have an urgent PR, please announce it in the #frontend or #backend Slack channel and one of us will try to prioritise reviewing and deploying it.
