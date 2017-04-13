@@ -6,4 +6,5 @@ highlighter: pygments
 
 permalink: :title/
 relative_permalinks: false
-baseurl: "/"
+
+api: "https://api.carpoolvote.com/live/"

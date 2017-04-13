@@ -1,0 +1,99 @@
+    <footer class="footer">
+        <div class="wrapper">
+            <ul class="footer__links footer__links--left">
+                <li><strong>Contact us:</strong> <a href="mailto:together@carpoolvote.com">together@carpoolvote.com</a></li>
+                <li><a href="/faq/">Frequently-Asked Questions</a></li>
+            </ul>
+            <ul class="footer__links footer__links--right">
+                <li><a href="/self-service/">Self-service portal</a></li>
+                <li><a href="/terms-conditions/">Terms &amp; conditions</a></li>
+            </ul>
+            <form class="newsletter form-group" data-toggle="validator">
+                <label class="newsletter__label" for="newsletter-email">Sign up for our newsletter</label>
+                <input class="form-input input newsletter__input" id="newsletter-email" type="email" placeholder="email address" required />
+                <button class="button newsletter__submit">Join</button>
+                <div class="help-block with-errors"></div>
+            </form>
+        </div>
+    </footer>
+
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-1858235-15', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="{{ baseurl }}scripts/querystring.js"></script>
+
+    {% if page.home %}
+        <script type="text/template" id="available-time-row">
+            <li class="available-times__row">
+                <div class="form-group">
+                    <label for="{{type}}Date{{id}}">Date</label>
+                    <input class="form-input input--date" type="date" name="{{type}}Date" id="{{type}}Date{{id}}" min="2016-10-20" max="2016-11-08" required />
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="{{type}}TimeStart{{id}}">Start time</label>
+                    <input class="form-input input--time-start" type="time" name="{{type}}TimeStart" id="{{type}}TimeStart{{id}}" min="06:00" max="22:00" value="06:00" required data-start="#{{type}}TimeEnd{{id}}" />
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="{{type}}TimeEnd{{id}}">End time</label>
+                    <input class="form-input input--time-end" type="time" name="{{type}}TimeEnd" id="{{type}}TimeEnd{{id}}" min="06:00" max="22:00" value="22:00" required data-end="#{{type}}TimeStart{{id}}" />
+                    <div class="help-block with-errors"></div>
+                </div>
+                <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>
+            </li>
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+        <script src="{{ baseurl }}scripts/main.js"></script>
+        
+    {% elsif page.selfservice %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+        <script src="{{ baseurl }}scripts/selfservice.js"></script>
+    {% endif %}
+
+    <script>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT
+        }, 'google_translate_element');
+    }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    {% if page.map %}
+        <!-- Leaflet map, js plugins, and css & sources -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+        <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.css">
+        <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.Default.css">
+        <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+        <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.0/dist/leaflet.markercluster-src.js"></script>
+        <!-- Search tool for map -->
+        <script src="{{ baseurl }}scripts/l.control.geosearch.js"></script>
+        <script src="{{ baseurl }}scripts/l.geosearch.provider.openstreetmap.js"></script>
+        <link rel="stylesheet" href="{{ baseurl }}styles/l.geosearch.css"/>
+        <!-- JSON parser to GeoJSON by Casey Thomas -->
+        <script src="{{ baseurl }}scripts/geojson.min.js"></script>
+        <!-- load the map-->
+        <script src="{{ baseurl }}scripts/map.js"></script>
+    {% endif %}
+</body>
+</html>
