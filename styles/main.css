@@ -472,6 +472,10 @@ label {
     max-width: 150px;
 }
 
+.form-input--tiny {
+    max-width: 70px;
+}
+
 .form-input--inline {
     width: 80px;
     display: inline-block;
@@ -745,7 +749,10 @@ label {
     font-weight: bold;
 }
 
-
+.text-inline{
+	display: inline-block;
+	margin-left:5px;
+}
 
 /* Media queries */
 

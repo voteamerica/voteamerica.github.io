@@ -40,14 +40,6 @@ $(function(){
         $.getScript('scripts/time-polyfill.min.js');
     }
 
-    if (!Modernizr.inputtypes.date) {
-        $.getScript('scripts/nodep-date-input-polyfill.dist.js', function(){
-            $('body').on('click', 'date-input-polyfill', function(){
-                $('input[type="date"]').trigger('change');
-            });
-        });
-    }
-
     // Initialise form validator
     $forms.find('form').validator({
         custom: {
@@ -71,7 +63,6 @@ $(function(){
         var sibling = $(this).data('start') || $(this).data('end');
         $(sibling).trigger('input'); // Use a different event to prevent recursive trigger
     });
-
 
     function scrollTo(offset, speed) {
         $('html, body').animate({
@@ -145,8 +136,16 @@ $(function(){
 
         function addRow(hideDeleteButton) {
             var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, rowID++));
-
-            $row.find('.input--date').attr('min', yyyymmdd());
+            if(!Modernizr.inputtypes.date)
+            {
+               initBackupDateInput($row)
+            }
+            else{
+                $row.find('.text-date-block').hide();
+                $row.find('.input--date').attr('required',true);
+                $row.find('.input-day').removeAttr('required');
+                $row.find('.input--date').attr('min', yyyymmdd());
+            }
 
             if (!hideDeleteButton && Modernizr.inputtypes.date) {
                 var $prevRow = $self.find('.available-times__row').last();
@@ -170,6 +169,23 @@ $(function(){
             }
 
             $self.parents('form').validator('update');
+        }
+
+        function initBackupDateInput($row){
+            var textInputDay = $row.find('.input-day');
+            var calendarInputDate = $row.find('.input--date');
+            $row.find('.calendar-date-block').hide();
+            textInputDay.attr('min',new Date().getDate());
+            textInputDay.attr('required',true);
+            calendarInputDate.removeAttr('name');
+            calendarInputDate.removeAttr('required');
+
+            textInputDay.bind('keyup mouseup click', function () {
+                var formattedDate = $row.find('.input-formatted--date');
+                formattedDate.attr('name',type+'Date');
+                var formattedInputDay = textInputDay.val().length>1 ? textInputDay.val() : '0'+ textInputDay.val();
+                formattedDate.val('2016-11-'+formattedInputDay);
+            });
         }
 
         function removeRow($row){
@@ -198,8 +214,13 @@ $(function(){
     });
 
     function getDateTimeValues($timesList) {
+        var formattedDatetimeClasses = (!Modernizr.inputtypes.date) ? [
+        '.input-formatted--date',
+        '.input--time-start',
+        '.input--time-end'
+        ]:datetimeClasses;
         return $timesList.find('.available-times__row').get().map(function(li) {
-            var inputValues = datetimeClasses.map(function(c) {
+            var inputValues = formattedDatetimeClasses.map(function(c) {
                 return $(li).find(c).val();
             });
 
@@ -234,7 +255,7 @@ $(function(){
         }
         return [hours,minutes].join(':');
     }
-    
+
     function yyyymmdd(date) {
         date = date || new Date();
         var mm = date.getMonth() + 1;

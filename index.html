@@ -564,9 +564,15 @@
 
     <script type="text/template" id="available-time-row">
         <li class="available-times__row">
-            <div class="form-group">
+            <div class="form-group calendar-date-block">
                 <label for="{{type}}Date{{id}}">Date</label>
                 <input class="form-input input--date" type="date" name="{{type}}Date" id="{{type}}Date{{id}}" min="2016-10-20" max="2016-11-08" required />
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group text-date-block">
+                <label for="{{type}}Date{{id}}">Date</label>
+                <input class="input-day form-input form-input--tiny" type="number" id="{{type}}Day{{id}}" max="8"  maxlength="1"/> <span class="text-inline">November 2016</span>
+                <input type="hidden" id="formatted_{{type}}Date{{id}}" class="input-formatted--date" />
                 <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">
