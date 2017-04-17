@@ -7,6 +7,7 @@
 html {
     position: relative;
     min-height: 100%;
+    /*text-align: justify;*/
 }
 
 body {
@@ -70,6 +71,10 @@ body {
 
 a {
     color: #e64a4a;
+}
+a:hover, a:focus {
+    color: #c72929;
+    text-decoration: none;
 }
 
 ul, ol {
@@ -166,7 +171,7 @@ li {
 
 .support-banner {
     margin: 0 0 20px;
-    padding: 10px;
+    padding: 10px 20px;
     border-bottom: 2px solid #cc3939;
     text-align: center;
     color: white;
@@ -273,8 +278,17 @@ a.twitter-mention-button {
 
 .nav__link {
     padding: 0 10px;
-    font-size: 16px;
+    font-size: 14px;
     text-decoration: none;
+}
+
+.nav__link:hover, .nav__link:focus {
+    text-decoration: underline;
+}
+
+#google_translate_element {
+    text-align: center;
+    margin: 1em 0;
 }
 
 
@@ -394,6 +408,12 @@ a.twitter-mention-button {
     position: relative;
 }
 
+.bannerbox__logo {
+    max-height: 50px;
+    width: auto;
+    margin-right: 5px;
+}
+
 .button--cancel.close-form {
     position: absolute;
     top: -12px;
@@ -464,6 +484,10 @@ label {
     padding: 8px;
 }
 
+#helpOther {
+    margin-top: 5px;
+}
+
 .form-group small {
     display: block;
 }
@@ -487,7 +511,7 @@ label {
     margin: 5px 0;
 }
 
-.checkbox input {
+.checkbox input[type=checkbox] {
     margin: 5px 0 0 -25px;
     position: absolute;
 }
@@ -671,6 +695,9 @@ label {
 .bannerbox__content {
     padding: 0 20px 15px;
 }
+.bannerbox__content h3,h4{
+    text-align: center;
+}
 
 
 /* Footer */
@@ -729,6 +756,12 @@ label {
 
 /* Media queries */
 
+@media (min-width: 400px) {
+    .nav__link {
+        font-size: 16px;
+    }
+}
+
 @media (min-width: 620px) {
     .footer__links--left {
         text-align: left;
@@ -738,10 +771,6 @@ label {
     .footer__links--right {
         text-align: right;
         float: right;
-    }
-
-    .support-banner {
-        font-size: 1.3em;
     }
 
     .logo__img {
@@ -838,7 +867,34 @@ label {
     }
 }
 
+/* Self service page */
+li.list_button{
+    list-style-type: none;
+    margin-bottom: 30px;
+}
+
+li.match-info-item {
+    list-style-type: none;
+    margin-bottom: 7px;
+}
+
+h3.self-service-heading {
+    text-align: left;
+    margin-bottom: -2px;
+}
+
 @media (min-width: 960px) {
+    .support-banner {
+        text-align: left;
+    }
+
+    #google_translate_element {
+        margin: 0;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+
     .nav {
         position: relative;
         width: 90%;
@@ -878,13 +934,22 @@ label {
     .time-range-slider {
         max-width: 700px;
     }
-	
+
     .state-dropdown--large{
         max-height: 260px;
     }
 }
 
 @media (min-width: 1200px) {
+    .support-banner {
+        font-size: 1.2em;
+    }
+
+    #google_translate_element {
+        top: 10px;
+        right: 10px;
+    }
+
     .nav__link {
         font-size: 18px;
         margin-left: 10px;
@@ -896,5 +961,11 @@ label {
 
     .intro__lead {
         font-size: 1.7em;
+    }
+}
+
+@media (min-width: 1400px) {
+    .support-banner {
+        text-align: center;
     }
 }

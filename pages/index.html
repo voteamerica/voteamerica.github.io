@@ -1,0 +1,439 @@
+---
+layout: default
+home: true
+map: true
+navigation: full
+permalink: /
+---
+
+<noscript>
+    <style>
+        .forms { margin-top: 0; }
+        .ride-form { display: block; }
+    </style>
+</noscript>
+
+<div class="content">
+    <div id="intro" class="intro wrapper">
+        <div class="intro__banner">
+            <h1 class="intro__title">Every American DESERVES a Vote</h1>
+            <p class="intro__lead">We connect volunteer drivers with anybody who needs a ride to claim their vote.</p>
+        </div>
+
+        <ul class="ride">
+            <li class="ride__panel needride" id="needride">
+                <h2 class="ride__title">Riders</h2>
+                <div class="ride__copy align-center">
+                  <p>Need a ride to the polls or voter I.D. office?</p>
+                  <p> Fill in the form to let us know when and where you
+                  need a ride. We'll do our best to match you with a
+                  driver!</p>
+                </div>
+                <p class="align-center">
+                    <a href="#need-ride" aria-controls="need-ride" class="show-form button button--large" role="button">I need a ride</a>
+                </p>
+            </li>
+            <li class="ride__panel offerride" id="offerride">
+                <h2 class="ride__title">Drivers</h2>
+                <div class="ride__copy align-center">
+                  <p>Do you have a spare seat to help get somebody to the
+                  polls or voter I.D. office?</p>
+                  <p>Fill in the form to let us know when and where you'll
+                  be driving, and we'll match you with a rider!</p>
+                </div>
+                <p class="align-center">
+                    <a href="#offer-ride" aria-controls="offer-ride" class="show-form button button--large button--alt" role="button">I can offer a ride</a>
+                </p>
+            </li>
+        </ul>
+    </div>
+
+    <div id="forms" class="forms wrapper offset-top">
+        <form id="need-ride" name="needRide" action="{{ site.api }}rider" method="post" class="ride-form" aria-hidden="true">
+            <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-rider/?type=rider" />
+            <div class="bannerbox">
+                <h2 class="bannerbox__title">I need a ride</h2>
+                <div class="bannerbox__content">
+                    <a class="close-form button--cancel" href="#intro" aria-label="Close form" role="button" aria-controls="need-ride">&times;</a>
+
+                    <fieldset class="date-time-pickers">
+                        <legend>Your trip</legend>
+
+                        <h3>Dates available</h3>
+                        <p>On what dates and times would you be a available for the ride? Please pick all the time slots that could work for you: This will make it easier for us to match you with a driver. You can pick multiple time slots, on different dates or on the same date.</p>
+                        <ul id="RiderAvailableTimes" class="available-times" data-type="Rider">
+                        </ul>
+                        <button class="add-time-btn button" aria-controls="RiderAvailableTimes">&plus; Add another date / time</button>
+                        <small>(Add as many dates and time ranges as you like)</small>
+                        <input type="hidden" class="hiddenJSONTimes" name="AvailableRideTimesJSON" />
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Your location details</legend>
+
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="riderCollectionAddress">Pick up address</label>
+                                <input type="text" class="form-input" id="riderCollectionAddress" placeholder="Your pick up address" name="RiderCollectionAddress" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="rideArea">Pick up ZIP code</label>
+                                <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="riderDestinationAddress">Destination address</label>
+                                <input type="text" class="form-input" id="riderDestinationAddress" placeholder="Your destination address" name="RiderDestinationAddress" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="rideDestinationZIP">Destination ZIP code</label>
+                                <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="rideDestinationZIP" name="RiderDropOffZIP" placeholder="To where do you need a ride?" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label>Find your polling place</label>
+                                <div class="help-block">(Link will open your state’s polling place checker in a new tab.)</div>
+                                <ul id="location-details" class="state-dropdown state-dropdown--large">
+                                    <li>Loading&hellip;</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Vehicle requirements</legend>
+                        <div class="form-group">
+                            <label for="rideSeats">Number of seats required</label>
+                            <input type="number" class="form-input form-input--small" id="rideSeats" name="TotalPartySize" min=1 required>
+                            <div class="help-block with-errors"></div>
+                            <small>Please let us know how many people will need to travel together in the same car.</small>
+                            <small>To make it easier for us to match people, please complete an individual form if you do not need travel with anybody else.</small>
+                        </div>
+                        <div class="form-group checkbox">
+                            <label for="riderIsPowerChairUser">
+                                <input type="checkbox" name="NeedWheelchair" id="riderIsPowerChairUser"/> I am a powerchair user who needs an adapted van with a lift.
+                            </label>
+                        </div>
+                        <div class="form-group checkbox">
+                            <label for="rideReturn">
+                                <input type="checkbox" name="TwoWayTripNeeded" id="rideReturn" /> I need a two-way trip.
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="RiderAccommodationNotes">Notes <i class="optional">Optional</i></label>
+                            <textarea class="form-input" id="RiderAccommodationNotes"
+                            placeholder="Accommodation requirements e.g. service animal, assistance folding equipment, assistance entering/exiting the vehicle, child car seat or booster (please include age), must also collect non-voting assistant or companion, or anything else the driver should know." name="RiderAccommodationNotes" rows="4"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Your details</legend>
+
+                        <div class="form-group">
+                            <label for="riderFirstName">First name</label>
+                            <input type="text" class="form-input" id="riderFirstName" placeholder="Your first name" name="RiderFirstName" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="riderLastName">Last name</label>
+                            <input type="text" class="form-input" id="riderLastName" placeholder="Your last name" name="RiderLastName" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="riderEmail">Email address <i class="optional">Optional</i></label>
+                            <input type="email" class="form-input" id="riderEmail" placeholder="Email" name="RiderEmail">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="riderPhone">Phone number (cell preferred)</label>
+                            <input type="tel" class="form-input" id="riderPhone" placeholder="Phone" name="RiderPhone" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group checkbox checkbox--multi">
+                            <p>Preferred method of contact</p>
+                            <div>How would you like to driver to get in touch with you?</div>
+                            <label>
+                                <input type="checkbox" name="RiderPreferredContact" class="toggleRequiredEmail" data-emailID="#riderEmail" value="Email" /> Email
+                            </label>
+                            <label>
+                                <input type="checkbox" name="RiderPreferredContact" value="Phone" /> Phone
+                            </label>
+                            <label>
+                                <input type="checkbox" name="RiderPreferredContact" value="SMS" /> SMS
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group checkbox">
+                        <label for="RiderAgreeTnC">
+                            <input type="checkbox" id="RiderAgreeTnC" name="RiderAgreeTnC" required /> I agree to the <a href="/terms-conditions/" target="_blank">Terms &amp; Conditions</a>.
+                        </label>
+                        <small>I understand that Carpool Vote LLC will share my contact details with the driver if there's a match. (Carpool Vote LLC will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)</small>
+                        <small>I understand that Carpool Vote LLC provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote LLC is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote LLC cannot be responsible if anything goes wrong.</small>
+                        <small>I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.</small>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <label for="inTouchRider">
+                            <input type="checkbox" id="inTouchRider" name="PleaseStayInTouch" checked /> We'd like to keep you updated from time to time about how the project is progressing. Please untick this box if you'd prefer us not to do this.
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="button button--large" id="needRideSubmit">Sign up</button>
+                        <a class="align-right close-form" href="#intro">Back</a>
+                    </div>
+                    <p class="panel-footer"><b>What happens next?</b> We'll record these details and contact you if someone can help.</p>
+                </div>
+            </div>
+        </form>
+
+        <form id="offer-ride" name="offerRide" action="{{ site.api }}driver" method="post" class="ride-form" aria-hidden="true">
+            <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-driver/?type=driver" />
+            <div class="bannerbox">
+                <h2 class="bannerbox__title">I can offer a ride</h2>
+                <div class="bannerbox__content">
+                    <a class="close-form button--cancel" href="#intro" aria-label="Close form" role="button" aria-controls="offer-ride">&times;</a>
+
+                    <fieldset class="date-time-pickers">
+                        <legend>What can you offer?</legend>
+
+                        <h3>Dates available</h3>
+                        <p>On what dates and times would you be a available to give rides? Please pick all the time slots that could work for you: This will make it easier for us to match you with someone who needs a ride. You can pick multiple time slots, on different dates or on the same date.</p>
+                        <ul id="DriverAvailableTimes" class="available-times" data-type="Driver">
+                        </ul>
+                        <button class="add-time-btn button" aria-controls="DriverAvailableTimes">&plus; Add another date / time</button>
+                        <small>(Add as many dates and time ranges as you like)</small>
+                        <input type="hidden" class="hiddenJSONTimes" name="AvailableDriveTimesJSON" />
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Location and vehicle</legend>
+
+                        <div class="form-group">
+                            <label for="rideArea">Pick up ZIP code</label>
+                            <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where can you pick up the rider?" name="DriverCollectionZIP" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <p>I am willing to collect within a <input type="number" id="offerMiles" name="DriverCollectionRadius" min="0" step="1" class="form-input form-input--inline" placeholder="e.g. 10" required /> mile radius of this zip code.<p>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="driverSeats">Seats available in vehicle</label>
+                            <input type="number" min="0" class="form-input form-input--small" id="driverSeats" name="SeatCount" placeholder="e.g. 2" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group checkbox">
+                            <label for="driverWheelchair">
+                                <input type="checkbox" name="DriverCanLoadRiderWithWheelchair" id="driverWheelchair"/> I have an adapted van with space for a powerchair
+                            </label>
+                        </div>
+                        <div class="form-group checkbox">
+                            <label for="offerInsurance">
+                                <input type="checkbox" name="DriverHasInsurance" id="offerInsurance" required/> I confirm the driver has insurance
+                            </label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="driverLicence">Driver's license number</label>
+                            <input type="text" class="form-input form-input--medium" id="driverLicence" name="DriverLicenceNumber" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Your details</legend>
+
+                        <div class="form-group">
+                            <label for="driverFirstName">First name</label>
+                            <input type="text" class="form-input" id="driverFirstName" placeholder="Your first name" name="DriverFirstName" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="driverLastName">Last name</label>
+                            <input type="text" class="form-input" id="driverLastName" placeholder="Your last name" name="DriverLastName" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="driverEmail">Email address</label>
+                            <input type="email" class="form-input" id="driverEmail" placeholder="Email address" name="DriverEmail" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="driverPhone">Phone number (cell preferred)</label>
+                            <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group checkbox checkbox--multi">
+                            <p>Preferred method of contact</p>
+                            <label>
+                                <input type="checkbox" name="DriverPreferredContact" value="Email" /> Email
+                            </label>
+                            <label>
+                                <input type="checkbox" name="DriverPreferredContact" value="Phone" /> Phone
+                            </label>
+                            <label>
+                                <input type="checkbox" name="DriverPreferredContact" value="SMS" /> SMS
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group checkbox">
+                        <label for="DriverAgreeTnC">
+                            <input type="checkbox" id="DriverAgreeTnC" name="DriverAgreeTnC" required /> I agree to the <a href="/terms-conditions/" target="_blank">Terms &amp; Conditions</a>
+                        </label>
+                        <small>I understand that Carpool Vote LCC will share my contact details with the driver if there's a match. (Carpool Vote LLC will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day.)</small>
+                        <small>I understand that Carpool Vote LLC provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote LLC is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote LLC cannot be responsible if anything goes wrong.</small>
+                        <small>I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.</small>
+                    </div>
+                    <div class="form-group checkbox">
+                        <label for="inTouchDriver">
+                            <input type="checkbox" id="inTouchDriver" name="PleaseStayInTouch" checked /> We'd like to keep you updated from time to time about how the project is progressing. Please untick this box if you'd prefer us not to do this.
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="button button--large" id="offerRideSubmit">Sign up</button>
+                        <a class="align-right close-form" href="#intro">Back</a>
+                    </div>
+                    <p class="panel-footer"><b>What happens next?</b> We'll record these details and contact you if there's a match.</p>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="about wrapper clearfix">
+        <div id="grid" class="about__padding" data-columns>
+
+            <div class="bannerbox" id="mapbannerbox">
+                <h2 class="bannerbox__title">Map of Participants</h2>
+                <!-- Add a div to hold the map, referenced in carpool-map/js/map.js-->
+                <!-- Map CSS is inherited from Leaflet, but need to set a minimum height -->
+                <div class="bannerbox__content">
+                    <p>This map shows voters who still need a ride and available volunteer drivers.</p>
+                    <div id="map" style="height: 400px"></div>
+                </div>
+            </div>
+            <div class="bannerbox" id="story">
+                <h2 class="bannerbox__title">Our Story</h2>
+                <div class="bannerbox__content">
+                    <p>In many states, new voting rules have made it more difficult for people to get to polling stations. These rules particularly affect people of color, people with disabilities, young people, elderly people, and women. Carpool Vote is a tool to fight back against an unfair political system in the 2016 election.</p>
+
+                    <p>We connect volunteer drivers with anybody who needs a ride - to the polls or voter I.D. office.</p>
+
+                    <p> <a href="/story" class="story" id="story-button"> Read more </a> </p>
+                </div>
+            </div>
+            <div class="bannerbox" id="howtoclaim">
+                <h2 class="bannerbox__title">How to Claim Your Vote</h2>
+                <div class="bannerbox__content">
+                    <h3>Am I registered?</h3>
+                    <p>Select your state to check if you're registered to vote on the November 8 presidential election. (Link will open your state’s polling place checker in a new tab.)</p>
+                    <ul id="state-select" class="state-dropdown drop-a">
+                        <li>Loading&hellip;</li>
+                    </ul>
+
+                    <h3>Rock the Vote</h3>
+                    <a href="https://www.rockthevote.com/?source=voteamerica"><img class="align-right" src="images/rock.png" alt="Rock the Vote logo" width=78 height=75 /></a>
+                    <p><a href="https://www.rockthevote.com/?source=voteamerica">Rock the Vote</a> has several online tools that simplify and demystify voter registration and elections. Follow the links below for more on how to claim your vote!
+                    <ul>
+                        <li><a href="https://www.rockthevote.com/register-to-vote/?source=voteamerica">Register to vote!</a></li>
+                        <li><a href="https://www.rockthevote.com/get-informed/elections/voter-id-requirements/state/">Voter requirements</a></li>
+                        <li><a href="https://www.rockthevote.com/get-informed/elections/find-your-polling-place/">Find where to vote</a></li>
+                        <li><a href="https://www.rockthevote.com/get-informed/elections/">About elections</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bannerbox" id="countdown">
+                <h2 class="bannerbox__title">2016 Election Countdown Clock</h2>
+                <div class="bannerbox__content">
+                    <iframe src="http://www.270towin.com/2016-countdown-clock/widget300x200.php" width="300" height="200" style="border:none; max-width:100%">
+                        Browser not supported. Visit <a href="http://www.270towin.com/">www.270towin.com</a>
+                    </iframe>
+                </div>
+            </div>
+            <div class="bannerbox" id="righttovote">
+                <h2 class="bannerbox__title">Voting support</h2>
+                <div class="bannerbox__content">
+                    <a href="http://www.866ourvote.org/"><img class="align-right" src="images/election-protection.png" alt="Election Protection logo" width=161 height=47 /></a>
+                    <p>The <a href="http://www.866ourvote.org/">Election Protection Coalition</a> works around the clock to advance and defend your right to vote.</p>
+                    <p>Report voting problems, and get voting related info for your state.</p>
+                    <ul>
+                        <li>Visit <a href="http://www.866ourvote.org/">866ourvote.org</a></li>
+                        <li>Call <a href="tel:8666878683">866-OUR-VOTE</a></li>
+                    </ul>
+                    <p>You can also call the <a href="http://www.votingrightsalliance.net/">Voting Rights Alliance</a> command center on <a href="tel:2025365400">202-536-5400</a></p>
+                </div>
+            </div>
+            <div class="bannerbox" id="support">
+                <h2 class="bannerbox__title">How else can I support the movement?</h2>
+                <div class="bannerbox__content">
+                    <p>Firstly, tell your family, friends, colleagues, and strangers! And share us on social media! The more people who know about us, the better our chances of making this project work for as many voters as possible!</p>
+                    <div class="bannerbox__social">
+                        <a href="https://twitter.com/carpoolvote" target="_blank"><img src="images/twitter_logo.png" alt="Twitter Logo" width="100" height="100" class="bannerbox__logo" /></a>
+                        <a href="https://www.facebook.com/CarpoolVote/?fref=ts" target="_blank"><img src="images/facebook_logo.png" alt="Facebook Logo" width="100" height="100" class="bannerbox__logo" /></a>
+                        <a href="https://www.youtube.com/channel/UCY1aS3TMDGxVbckA7Va0QFA" target="_blank"><img src="images/youtube_logo.jpg" alt="Youtube Logo" width="140" height="100" class="bannerbox__logo" /></a>
+                    </div>
+                    <p>Please also sign up to join the campaign! We’re supported entirely by a network of volunteers who believe passionately that democracy is for everybody.</p>
+                    <p>We have a variety of roles for people with any amount of time to give. This could involve joining our volunteer pool who take on small tasks that help the project take big leaps forward. If you're a web developer, then consider contributing to our website on <a href="https://github.com/voteamerica/" target="_blank">GitHub</a>. We also have several strategic roles for those who want to remain actively involved until Election Day.</p>
+                    <form name="offerHelp" action="{{ site.api }}helper" method="post" data-toggle="validator">
+                        <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
+
+                        <div class="form-group">
+                            <label for="helpName">Name</label>
+                            <input type="text" class="form-input" id="helpName" placeholder="Your name" name="Name" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="helpEmail">Email</label>
+                            <input type="email" class="form-input" id="helpEmail" placeholder="Email" name="Email" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group checkbox checkbox--multi">
+                            <p>How can you help?</p>
+                            <label>
+                                <input type="checkbox" name="Capability" value="community organize"/> Do community outreach / Organize my own community
+                            </label>
+                            <label>
+                                <input type="checkbox" name="Capability" value="social media"/> Help with media /social media outreach
+                            </label>
+                            <label>
+                                <input type="checkbox" name="Capability" value="collaboration"/> Help build links with organizations / Set up collaboration with my organization
+                            </label>
+                            <label>
+                                <input type="checkbox" name="Capability" value="research"/> Do research
+                            </label>
+                            <label>
+                                <input type="checkbox" name="Capability" value="legal"/> Offer legal expertise
+                            </label>
+                            <label>
+                                <input type="checkbox" name="Capability" value="tech"/> Contribute my tech wizardry
+                            </label>
+                            <label>
+                                <input type="checkbox" name="Capability" value="recruit"/> Help recruit and organize volunteers
+                            </label>
+                            <label>
+                                <input type="checkbox" name="Capability" value="raise money"/> Help the project raise money
+                            </label>
+                            <label>
+                                <input type="checkbox" name="Capability" value="other"/> Other (please specify)
+                            </label>
+                            <input type="text" class="form-input" id="helpOther" placeholder="Other" name="other">
+                        </div>
+                        <p>We also need funding to keep building the movement. Our volunteers are working around the clock but some things cannot be done with time and love alone. Could you spare some money to contribute to the campaign?</p>
+                        <p><a href="https://www.generosity.com/fundraising/CarpoolVote-com-linking-volunteer-drivers-voters" target="_blank">Support our IndieGogo campaign</a></p>
+                        <p>Or get in touch at: <a href="mailto:donations@carpoolvote.com">donations@carpoolvote.com</a></p>
+                        <div class="form-group">
+                            <button type="submit" class="button button--large" id="offerHelpSubmit">Offer help</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
