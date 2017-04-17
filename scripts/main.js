@@ -136,18 +136,19 @@ $(function(){
 
         function addRow(hideDeleteButton) {
             var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, rowID++));
-            if(!Modernizr.inputtypes.date)
-            {
+            if (!Modernizr.inputtypes.date) {
                initBackupDateInput($row)
-            }
-            else{
+            } else {
                 $row.find('.text-date-block').hide();
                 $row.find('.input--date').attr('required',true);
                 $row.find('.input-day').removeAttr('required');
+                // Set a minimum value for the date input to today's date
                 $row.find('.input--date').attr('min', yyyymmdd());
             }
 
             if (!hideDeleteButton && Modernizr.inputtypes.date) {
+                // Make the new row's value equal to the previous row,
+                // if one already exists, to save users time
                 var $prevRow = $self.find('.available-times__row').last();
                 datetimeClasses.forEach(function(c){
                     var prevVal = $prevRow.find(c).val();
@@ -156,6 +157,7 @@ $(function(){
             }
 
             if (hideDeleteButton) {
+                // Remove the 'X' icon if there's only one row
                 $row.find('.remove-time').hide();
             }
 
