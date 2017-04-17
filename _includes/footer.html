@@ -42,6 +42,7 @@
     <script src="{{ baseurl }}scripts/querystring.js"></script>
 
     {% if page.home %}
+        {% raw %}
         <script type="text/template" id="available-time-row">
             <li class="available-times__row">
                 <div class="form-group">
@@ -62,6 +63,7 @@
                 <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>
             </li>
         </script>
+        {% endraw %}
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
