@@ -10,7 +10,7 @@ We have a [Slack team](https://carpool-vote.slack.com/)! Please [email us](mailt
 
 ## Technical
 
-This site is a completely static site, based on [landing-page-boilerplate](https://github.com/adrienjoly/landing-page-boilerplate) by @adrienjoly. It is hosted on Github Pages from this respository. There is no server-side scripting available on this site, but we have an API set up at https://github.com/voteamerica/backend. The current live version of the API can be accessed via https://api.carpoolvote.com/live/, while a test version is at https://api.carpoolvote.com/test/.
+This site runs on [Jekyll](https://jekyllrb.com/), and is hosted on [Github Pages](https://jekyllrb.com/docs/github-pages/) from this respository. We have an API set up at https://github.com/voteamerica/backend. The current live version of the API can be accessed via https://api.carpoolvote.com/live/, while a test version is at https://api.carpoolvote.com/test/.
 
 ## Contributing
 
