@@ -143,15 +143,23 @@ $(function(){
                 $row.find('.input--date').attr('min', yyyymmdd());
             } else {
                 $row.find('.calendar-date-block').remove();
-                $row.find('.input--day')
-                    .attr('min', new Date().getDate())
-                    .on('change', '.input--day', function() {
-                        var day = $(this).val();
-                        var formattedInputDay = day.length > 1 ? day : '0' + day;
-                        $(this).find('.input-formatted--date')
-                            .attr('name', type + 'Date')
-                            .val('2016-11-' + formattedInputDay);
-                    });
+                var today = new Date();
+                var date = {
+                    day: to2digits(today.getDate()),
+                    month: to2digits(today.getMonth() + 1),
+                    year: today.getFullYear()
+                };
+                function updateDate(field, value) {
+                    if (field !== 'year') {
+                        value = to2digits(value);
+                    }
+                    date[field] = value;
+                    $row.find('.input-formatted--date')
+                        .val([date.year, date.month, date.day].join('-'));
+                }
+                $row.on('change', '.input--date', function() {
+                    updateDate($(this).data('field'), $(this).val());
+                });
             }
 
             if (!hideDeleteButton && Modernizr.inputtypes.date) {
@@ -247,6 +255,10 @@ $(function(){
             hours = +hours + 12;
         }
         return [hours,minutes].join(':');
+    }
+
+    function to2digits(n){
+        return ('0' + n).slice(-2);
     }
 
     function yyyymmdd(date) {

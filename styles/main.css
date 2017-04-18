@@ -473,7 +473,8 @@ label {
 }
 
 .form-input--tiny {
-    max-width: 70px;
+    max-width: 80px;
+    margin-right: 2px;
 }
 
 .form-input--inline {
@@ -482,6 +483,11 @@ label {
     margin: 0 0.5em;
     text-align: center;
     padding: 8px;
+}
+
+.input--time-start,
+.input--time-end {
+    width: 90%;
 }
 
 #helpOther {
