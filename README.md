@@ -14,4 +14,4 @@ This site runs on [Jekyll](https://jekyllrb.com/), and is hosted on [Github Page
 
 ## Contributing
 
-If you're interested in contributing to this project, read our guidelines for [how to contribute](docs/contributing.md) and also please be aware of our [code of conduct](docs/code-of-conduct.md).
+If you're interested in contributing to this project, read our guidelines for [how to contribute](docs/contributing.md) first, and also please be aware of our [code of conduct](docs/code-of-conduct.md).
