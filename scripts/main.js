@@ -136,14 +136,22 @@ $(function(){
 
         function addRow(hideDeleteButton) {
             var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, rowID++));
-            if (!Modernizr.inputtypes.date) {
-               initBackupDateInput($row)
-            } else {
-                $row.find('.text-date-block').hide();
-                $row.find('.input--date').attr('required',true);
-                $row.find('.input-day').removeAttr('required');
+
+            if (Modernizr.inputtypes.date) {
+                $row.find('.text-date-block').remove();
                 // Set a minimum value for the date input to today's date
                 $row.find('.input--date').attr('min', yyyymmdd());
+            } else {
+                $row.find('.calendar-date-block').remove();
+                $row.find('.input--day')
+                    .attr('min', new Date().getDate())
+                    .on('change', '.input--day', function() {
+                        var day = $(this).val();
+                        var formattedInputDay = day.length > 1 ? day : '0' + day;
+                        $(this).find('.input-formatted--date')
+                            .attr('name', type + 'Date')
+                            .val('2016-11-' + formattedInputDay);
+                    });
             }
 
             if (!hideDeleteButton && Modernizr.inputtypes.date) {
@@ -173,24 +181,7 @@ $(function(){
             $self.parents('form').validator('update');
         }
 
-        function initBackupDateInput($row){
-            var textInputDay = $row.find('.input-day');
-            var calendarInputDate = $row.find('.input--date');
-            $row.find('.calendar-date-block').hide();
-            textInputDay.attr('min',new Date().getDate());
-            textInputDay.attr('required',true);
-            calendarInputDate.removeAttr('name');
-            calendarInputDate.removeAttr('required');
-
-            textInputDay.bind('keyup mouseup click', function () {
-                var formattedDate = $row.find('.input-formatted--date');
-                formattedDate.attr('name',type+'Date');
-                var formattedInputDay = textInputDay.val().length>1 ? textInputDay.val() : '0'+ textInputDay.val();
-                formattedDate.val('2016-11-'+formattedInputDay);
-            });
-        }
-
-        function removeRow($row){
+        function removeRow($row) {
             $row.remove();
             $self.parents('form').validator('update');
         }
