@@ -7,4 +7,4 @@ highlighter: rouge
 permalink: :title/
 relative_permalinks: false
 
-api: "https://api.carpoolvote.com/live/"
+api: "https://api.carpoolvote.com/live"

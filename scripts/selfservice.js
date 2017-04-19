@@ -1,5 +1,6 @@
-var remoteUrl = "https://api.carpoolvote.com/live";
-// var remoteUrl = "http://localhost:8000";
+if (!remoteUrl) {
+  var remoteUrl = "https://api.carpoolvote.com/live";
+}
 
 var driverLoggedIn = false;
 var riderLoggedIn = false;
