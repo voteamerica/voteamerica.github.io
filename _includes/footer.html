@@ -3,15 +3,15 @@
             <ul class="footer__links footer__links--left">
                 <li><strong>Contact us:</strong> <a href="mailto:together@carpoolvote.com">together@carpoolvote.com</a></li>
                 {% if page.url != '/faq' %}
-                    <li><a href="/faq/">Frequently-Asked Questions</a></li>
+                    <li><a href="{{ baseurl }}faq/">Frequently-Asked Questions</a></li>
                 {% endif %}
             </ul>
             <ul class="footer__links footer__links--right">
                 {% if page.url != '/self-service' %}
-                    <li><a href="/self-service/">Self-service portal</a></li>
+                    <li><a href="{{ baseurl }}self-service/">Self-service portal</a></li>
                 {% endif %}
                 {% if page.url != '/terms-conditions' %}
-                    <li><a href="/terms-conditions/">Terms &amp; conditions</a></li>
+                    <li><a href="{{ baseurl }}terms-conditions/">Terms &amp; conditions</a></li>
                 {% endif %}
             </ul>
             <form class="newsletter form-group" data-toggle="validator">
@@ -81,6 +81,7 @@
     {% elsif page.selfservice %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+        <script> var remoteUrl = '{{ site.api }}'; </script>
         <script src="{{ baseurl }}scripts/selfservice.js"></script>
     {% endif %}
 
@@ -109,6 +110,7 @@
         <!-- JSON parser to GeoJSON by Casey Thomas -->
         <script src="{{ baseurl }}scripts/geojson.min.js"></script>
         <!-- load the map-->
+        <script> var remoteUrl = '{{ site.api }}'; </script>
         <script src="{{ baseurl }}scripts/map.js"></script>
     {% endif %}
 </body>

@@ -3,8 +3,8 @@
 $(document).ready(function () { 
     $.when(
     //wait until successful calls of both sources
-    $.getJSON('https://api.carpoolvote.com/live/unmatched-riders'),
-    $.getJSON('https://api.carpoolvote.com/live/unmatched-drivers')
+    $.getJSON(remoteUrl + '/unmatched-riders'),
+    $.getJSON(remoteUrl + '/unmatched-drivers')
     
     ).done(function(riderSource, driverSource){
         var jsonRider = riderSource[0],

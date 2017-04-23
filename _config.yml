@@ -2,9 +2,9 @@ name: "Carpool Vote - Vote America"
 description: "Get a ride or share a ride in the 2016 US presidential election. Every American DESERVES a vote!"
 
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 
 permalink: :title/
 relative_permalinks: false
 
-api: "https://api.carpoolvote.com/live/"
+api: "https://api.carpoolvote.com/live"

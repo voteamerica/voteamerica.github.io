@@ -1,14 +1,18 @@
 # How to contribute
 
-Third-party patches are essential for keeping Vote America great. 
-We want to keep it as easy as possible to contribute changes. 
-There are a few guidelines that we need contributors to follow 
-so that we can have a chance of keeping on top of things.
+Welcome! Community contributions are essential for keeping CarpoolVote running. We want to keep it as easy as possible to contribute changes. There are a few guidelines that we need contributors to follow so that we can have a chance of keeping on top of things.
+
+## Philosophy
+
+We want to keep this codebase as simple as we can, in order to encourage contributions from junior developers, and to help onboard new people quickly. That means avoiding technologies that junior developers might find overwhelming. For a long time our site was just static HTML, but as the website grew it became difficult to maintain without templating, so we've moved to Jekyll for static site generation. For client-side scripting we want to avoid newer, shinier, more advanced tools like React/Angular in favour of more beginner-friendly libraries like jQuery.
+
+It's also very important that the site is accessible to disabled users. All HTML should be semantic and standards-compliant, and should use [WAI-ARIA](https://www.w3.org/WAI/intro/aria) and follow a11y best-practices wherever possible. We also prefer native HTML elements (e.g. `<button>` and `<input type="date"/>`) instead of bespoke UI controls wherever possible.
+
+Our website should work on as many devices as possible. This means that it should be responsive and mobile-friendly design, as well as fast, lightweight, and performant. Assets should be kept as small as possible, and animations should be slick and unobtrusive. We try to support all browsers with >1% market share in the US - including IE11.
 
 ## Getting started
 
-- Join our [Slack team](https://carpool-vote.slack.com/)! It's the best way to keep up to date with the project.
-Please [email us](mailto:slack@carpoolvote.com) if you would like to join.
+- Join our [Slack team](https://carpool-vote.slack.com/)! It's the best way to keep up to date with the project. Please [email us](mailto:slack@carpoolvote.com) if you would like to join.
 - If you're new to GitHub and open-source, please familiarise yourself 
 with the [official guidelines](https://guides.github.com/activities/contributing-to-open-source/).
 - Check our GitHub issues to see what needs doing.
