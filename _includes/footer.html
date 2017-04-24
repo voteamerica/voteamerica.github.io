@@ -81,7 +81,7 @@
     {% elsif page.selfservice %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-        <script> var remoteUrl = '{{ site.api }}'; </script>
+        <script> var remoteUrl = '{{ api }}'; </script>
         <script src="{{ baseurl }}scripts/selfservice.js"></script>
     {% endif %}
 
@@ -110,7 +110,7 @@
         <!-- JSON parser to GeoJSON by Casey Thomas -->
         <script src="{{ baseurl }}scripts/geojson.min.js"></script>
         <!-- load the map-->
-        <script> var remoteUrl = '{{ site.api }}'; </script>
+        <script> var remoteUrl = '{{ api }}'; </script>
         <script src="{{ baseurl }}scripts/map.js"></script>
     {% endif %}
 </body>

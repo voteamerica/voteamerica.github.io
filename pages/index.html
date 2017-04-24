@@ -49,7 +49,7 @@ permalink: /
     </div>
 
     <div id="forms" class="forms wrapper offset-top">
-        <form id="need-ride" name="needRide" action="{{ site.api }}/rider" method="post" class="ride-form" aria-hidden="true">
+        <form id="need-ride" name="needRide" action="{{ api }}/rider" method="post" class="ride-form" aria-hidden="true">
             <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-rider/?type=rider" />
             <div class="bannerbox">
                 <h2 class="bannerbox__title">I need a ride</h2>
@@ -192,7 +192,7 @@ permalink: /
             </div>
         </form>
 
-        <form id="offer-ride" name="offerRide" action="{{ site.api }}/driver" method="post" class="ride-form" aria-hidden="true">
+        <form id="offer-ride" name="offerRide" action="{{ api }}/driver" method="post" class="ride-form" aria-hidden="true">
             <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-driver/?type=driver" />
             <div class="bannerbox">
                 <h2 class="bannerbox__title">I can offer a ride</h2>
@@ -380,7 +380,7 @@ permalink: /
                     </div>
                     <p>Please also sign up to join the campaign! We’re supported entirely by a network of volunteers who believe passionately that democracy is for everybody.</p>
                     <p>We have a variety of roles for people with any amount of time to give. This could involve joining our volunteer pool who take on small tasks that help the project take big leaps forward. If you're a web developer, then consider contributing to our website on <a href="https://github.com/voteamerica/" target="_blank">GitHub</a>. We also have several strategic roles for those who want to remain actively involved until Election Day.</p>
-                    <form name="offerHelp" action="{{ site.api }}/helper" method="post" data-toggle="validator">
+                    <form name="offerHelp" action="{{ api }}/helper" method="post" data-toggle="validator">
                         <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com" />
 
                         <div class="form-group">
