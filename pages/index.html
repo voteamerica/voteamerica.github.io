@@ -50,7 +50,7 @@ permalink: /
 
     <div id="forms" class="forms wrapper offset-top">
         <form id="need-ride" name="needRide" action="{{ api }}/rider" method="post" class="ride-form" aria-hidden="true">
-            <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-rider" />
+            <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-rider/?type=rider" />
             <div class="bannerbox">
                 <h2 class="bannerbox__title">I need a ride</h2>
                 <div class="bannerbox__content">
@@ -193,7 +193,7 @@ permalink: /
         </form>
 
         <form id="offer-ride" name="offerRide" action="{{ api }}/driver" method="post" class="ride-form" aria-hidden="true">
-            <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-driver" />
+            <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-driver/?type=driver" />
             <div class="bannerbox">
                 <h2 class="bannerbox__title">I can offer a ride</h2>
                 <div class="bannerbox__content">

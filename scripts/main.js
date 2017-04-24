@@ -40,14 +40,6 @@ $(function(){
         $.getScript('scripts/time-polyfill.min.js');
     }
 
-    if (!Modernizr.inputtypes.date) {
-        $.getScript('scripts/nodep-date-input-polyfill.dist.js', function(){
-            $('body').on('click', 'date-input-polyfill', function(){
-                $('input[type="date"]').trigger('change');
-            });
-        });
-    }
-
     // Initialise form validator
     $forms.find('form').validator({
         custom: {
@@ -71,7 +63,6 @@ $(function(){
         var sibling = $(this).data('start') || $(this).data('end');
         $(sibling).trigger('input'); // Use a different event to prevent recursive trigger
     });
-
 
     function scrollTo(offset, speed) {
         $('html, body').animate({
@@ -146,9 +137,34 @@ $(function(){
         function addRow(hideDeleteButton) {
             var $row = $(rowTemplate.replace(/{{type}}/g, type).replace(/{{id}}/g, rowID++));
 
-            $row.find('.input--date').attr('min', yyyymmdd());
+            if (Modernizr.inputtypes.date) {
+                $row.find('.text-date-block').remove();
+                // Set a minimum value for the date input to today's date
+                $row.find('.input--date').attr('min', yyyymmdd());
+            } else {
+                $row.find('.calendar-date-block').remove();
+                var today = new Date();
+                var date = {
+                    day: to2digits(today.getDate()),
+                    month: to2digits(today.getMonth() + 1),
+                    year: today.getFullYear()
+                };
+                function updateDate(field, value) {
+                    if (field !== 'year') {
+                        value = to2digits(value);
+                    }
+                    date[field] = value;
+                    $row.find('.input-formatted--date')
+                        .val([date.year, date.month, date.day].join('-'));
+                }
+                $row.on('change', '.input--date', function() {
+                    updateDate($(this).data('field'), $(this).val());
+                });
+            }
 
             if (!hideDeleteButton && Modernizr.inputtypes.date) {
+                // Make the new row's value equal to the previous row,
+                // if one already exists, to save users time
                 var $prevRow = $self.find('.available-times__row').last();
                 datetimeClasses.forEach(function(c){
                     var prevVal = $prevRow.find(c).val();
@@ -157,6 +173,7 @@ $(function(){
             }
 
             if (hideDeleteButton) {
+                // Remove the 'X' icon if there's only one row
                 $row.find('.remove-time').hide();
             }
 
@@ -172,7 +189,7 @@ $(function(){
             $self.parents('form').validator('update');
         }
 
-        function removeRow($row){
+        function removeRow($row) {
             $row.remove();
             $self.parents('form').validator('update');
         }
@@ -198,8 +215,13 @@ $(function(){
     });
 
     function getDateTimeValues($timesList) {
+        var formattedDatetimeClasses = (!Modernizr.inputtypes.date) ? [
+        '.input-formatted--date',
+        '.input--time-start',
+        '.input--time-end'
+        ]:datetimeClasses;
         return $timesList.find('.available-times__row').get().map(function(li) {
-            var inputValues = datetimeClasses.map(function(c) {
+            var inputValues = formattedDatetimeClasses.map(function(c) {
                 return $(li).find(c).val();
             });
 
@@ -234,7 +256,11 @@ $(function(){
         }
         return [hours,minutes].join(':');
     }
-    
+
+    function to2digits(n){
+        return ('0' + n).slice(-2);
+    }
+
     function yyyymmdd(date) {
         date = date || new Date();
         var mm = date.getMonth() + 1;

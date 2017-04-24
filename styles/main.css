@@ -472,12 +472,22 @@ label {
     max-width: 150px;
 }
 
+.form-input--tiny {
+    max-width: 80px;
+    margin-right: 2px;
+}
+
 .form-input--inline {
     width: 80px;
     display: inline-block;
     margin: 0 0.5em;
     text-align: center;
     padding: 8px;
+}
+
+.input--time-start,
+.input--time-end {
+    width: 90%;
 }
 
 #helpOther {
@@ -745,7 +755,10 @@ label {
     font-weight: bold;
 }
 
-
+.text-inline{
+	display: inline-block;
+	margin-left:5px;
+}
 
 /* Media queries */
 
