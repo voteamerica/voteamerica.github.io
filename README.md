@@ -12,6 +12,10 @@ We have a [Slack team](https://carpool-vote.slack.com/)! Please [email us](mailt
 
 This site runs on [Jekyll](https://jekyllrb.com/), and is hosted on [Github Pages](https://jekyllrb.com/docs/github-pages/) from this respository. We have an API set up at https://github.com/voteamerica/backend. The current live version of the API can be accessed via https://api.carpoolvote.com/live/, while a test version is at https://api.carpoolvote.com/test/.
 
+### URLs
+
+The main site is available at http://carpoolvote.com/, but there is a mirror at http://souls2thepolls.org, which redirects to http://carpoolvote.com/?souls2thepolls. This mirror has a [different logo](http://carpoolvote.com/images/logo-souls2thepolls.png) and other small changes, which are handled in [querystring.js](https://github.com/voteamerica/voteamerica.github.io/blob/master/scripts/querystring.js) so that we don't need to maintain two separate websites.
+
 ## Contributing
 
 If you're interested in contributing to this project, read our guidelines for [how to contribute](docs/contributing.md) first, and also please be aware of our [code of conduct](docs/code-of-conduct.md).

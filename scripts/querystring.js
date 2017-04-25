@@ -1,11 +1,14 @@
-// TinyQueryString - A really tiny URL query string utility
-// github.com/richardwestenra/tiny-query-string
-!function(t,e){"function"==typeof define&&define.amd?define(["tinyQuery"],e):"object"==typeof module&&module.exports?module.exports=e():t.tinyQuery=e()}(this,function(){"use strict";var t=function(t){return RegExp("[?&]("+t+")=?([^&#]*)","i")},e=function(t){return"string"!=typeof t?"undefined"!=typeof window?window.location.search:"":t};return{get:function(t,e){return"object"==typeof t?this.getMany.apply(this,arguments):t&&e!==!1?this.getOne.apply(this,arguments):this.getAll.apply(this,arguments)},getOne:function(n,r){var i=e(r).match(t(n));return i?i[2]?decodeURIComponent(i[2]):!0:!1},getMany:function(t,n){return t.reduce(function(t,r){return t[r]=this.getOne(r,e(n)),t}.bind(this),{})},getAll:function(t){if(t=e(t).match(/\?(.+)/)){var n=t[1].split("&").map(function(t){return t.split("=")[0].toLowerCase()});return this.getMany.call(this,n,t[0])}return{}},set:function(t){return"object"==typeof t?this.setMany.apply(this,arguments):this.setOne.apply(this,arguments)},setOne:function(n,r,i){i=e(i);var u=t(n),o=u.exec(i);return!r||"string"!=typeof r&&"number"!=typeof r||(n=n+"="+encodeURIComponent(r)),!i.length||i.indexOf("?")<0?(i||"")+"?"+n:o?i.replace(u,o[0].charAt(0)+n):i+"&"+n},setMany:function(t,n){return Array.isArray(t)?t.reduce(function(t,e){return this.setOne(e,!1,t)}.bind(this),e(n)):Object.keys(t).reduce(function(e,n){return this.setOne(n,t[n],e)}.bind(this),e(n))},remove:function(t,e){return"object"==typeof t?this.removeMany.apply(this,arguments):t&&e!==!1?this.removeOne.apply(this,arguments):this.removeAll.apply(this,arguments)},removeOne:function(t,n){if(n=e(n).match(/([^\?]*)(\?*.*)/)){if(n[2].length){var r=Object.keys(this.getAll(n[2])).filter(function(e){return e!==t});return this.setMany(r,n[1])}return n[1]}return!1},removeMany:function(t,n){return t.reduce(function(t,e){return this.removeOne(e,t)}.bind(this),e(n))},removeAll:function(t){return e(t).split("?")[0]}}});
+/**
+ * Tiny Query String - v0.1.2
+ * https://github.com/richardwestenra/tiny-query-string
+ */
+(function(e,t){if(typeof define==="function"&&define.amd){define(["tinyQuery"],t)}else if(typeof module==="object"&&module.exports){module.exports=t()}else{e.tinyQuery=t()}})(this,function(){"use strict";var e=function(e){return new RegExp("[?&]("+e+")=?([^&#]*)","i")};var t=function(e){return typeof e!=="string"?typeof window!=="undefined"?window.location.search:"":e};return{get:function(e,t){if(typeof e==="object"){return this.getMany.apply(this,arguments)}else if(!e||t===false){return this.getAll.apply(this,arguments)}else{return this.getOne.apply(this,arguments)}},getOne:function(n,r){var i=t(r).match(e(n));if(!i){return false}else if(i[2]){return decodeURIComponent(i[2])}else{return true}},getMany:function(e,n){return e.reduce(function(e,r){e[r]=this.getOne(r,t(n));return e}.bind(this),{})},getAll:function(e){e=t(e).match(/\?(.+)/);if(!e){return{}}else{var n=e[1].split("&").map(function(e){return e.split("=")[0].toLowerCase()});return this.getMany.call(this,n,e[0])}},set:function(e){return typeof e==="object"?this.setMany.apply(this,arguments):this.setOne.apply(this,arguments)},setOne:function(n,r,i){i=t(i);var s=e(n),u=s.exec(i);if(r&&(typeof r==="string"||typeof r==="number")){n=n+"="+encodeURIComponent(r)}if(!i.length||i.indexOf("?")<0){return(i||"")+"?"+n}else if(u){return i.replace(s,u[0].charAt(0)+n)}else{return i+"&"+n}},setMany:function(e,n){if(Array.isArray(e)){return e.reduce(function(e,t){return this.setOne(t,false,e)}.bind(this),t(n))}return Object.keys(e).reduce(function(t,n){return this.setOne(n,e[n],t)}.bind(this),t(n))},remove:function(e,t){if(typeof e==="object"){return this.removeMany.apply(this,arguments)}else if(!e||t===false){return this.removeAll.apply(this,arguments)}else{return this.removeOne.apply(this,arguments)}},removeOne:function(e,n){n=t(n).match(/([^\?]*)(\?*.*)/);if(!n){return false}else if(!n[2].length){return n[1]}else{var r=Object.keys(this.getAll(n[2])).filter(function(t){return t!==e});return this.setMany(r,n[1])}},removeMany:function(e,n){return e.reduce(function(e,t){return this.removeOne(t,e)}.bind(this),t(n))},removeAll:function(e){return t(e).split("?")[0]}}});
 
 
 // Update Query String properties on each page
 
 (function(){
+    // Helper functions (so we don't need to include jQuery on every page)
     function gid(id) {
       return document.getElementById(id);
     }
@@ -20,6 +23,8 @@
 
     var qs = tinyQuery.getAll();
 
+    // Change site design for souls2thepolls mirror.
+    // (See https://github.com/voteamerica/voteamerica.github.io/blob/master/README.md#urls)
     if (qs.souls2thepolls) {
         var intro = gid('intro');
         if (intro) {
@@ -41,6 +46,7 @@
         });
     }
 
+    // Update selfservice page UUID values
     if (qs.uuid) {
         forEach(qsa('.uuid'), function() {
             this.textContent = qs.uuid;
