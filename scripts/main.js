@@ -17,6 +17,7 @@ $(function(){
         addNavLinkEvents();
         initFormValidator();
         initFormLogic();
+        loadStateData();
     }
 
     /**
@@ -299,7 +300,7 @@ $(function(){
                     // Remove no-date-input fallback
                     $row.find('.text-date-block').remove();
                     // Set a minimum value for the date input to today's date
-                    $row.find('.input--date').attr('min', yyyymmdd());
+                    $row.find('.input--date').attr('min', dateToYYYYMMDD( new Date() ));
                 } else {
                     // Remove date-input and use the fallback
                     $row.find('.calendar-date-block').remove();
@@ -312,7 +313,7 @@ $(function(){
              * If this is not the first row created, then make the new row's
              * value equal to the previous row, to save users having to
              * duplicate values when filling out the form
-             * @param {object} $row The jQuery element for the new row
+             * @param {object} $row - The jQuery element for the new row
              */
             setInitialRowValue: function($row) {
                 // Select the previous row
@@ -361,6 +362,30 @@ $(function(){
         };
     }
 
+    /**
+     * When the form is submitted, we need to send the date and time values
+     * in a useful format for the API. This function gets this data and adds it
+     * to a hidden input so that it can be sent with the rest of the form data.
+     * @param  {object} $availableTimes - The jQuery container node
+     */
+    function updateHiddenJSONTimes($availableTimes) {
+        var timeData = getDateTimeValues($availableTimes);
+        $availableTimes
+            .siblings('.hiddenJSONTimes')
+            .val(timeData);
+    }
+
+    /**
+     * When submitting a form, retrieve the date, start time and end time
+     * of all the available-time rows in the form.
+     * Note: Date-times are in ISO 8601 format, e.g. 2017-01-01T06:00.
+     * Start times and end-times in a single availability slot are
+     * separated with the '/' character, while each availability slot is
+     * separated with the '|' character.
+     * e.g: 2017-01-01T06:00/2017-01-01T22:00|2017-01-01T06:00/2017-01-01T22:00
+     * @param  {object} $availableTimes - The jQuery container node
+     * @return {string} A formatted, stringified list of date-time values
+     */
     function getDateTimeValues($availableTimes) {
         var datetimeClasses = [
             '.input--date',
@@ -372,18 +397,26 @@ $(function(){
             .get()
             .map(function(row) {
                 var $row = $(row);
+
                 if (!Modernizr.inputtypes.date) {
                     $row.find('.input--date')
                         .val( getDateFallbackValues($row) );
                 }
+
                 var inputValues = datetimeClasses.map(function(c) {
                     return $row.find(c).val();
                 });
 
-                return formatTime.apply(this, inputValues);
-            });
+                return formatAvailabilityPeriod.apply(this, inputValues);
+            }).join('|');
     }
 
+    /**
+     * If the date input is not supported, we're using text/number inputs instead,
+     * so retrieve the values from the 3 fallback inputs, and format them
+     * @param  {object} $row - The jQuery element for the row
+     * @return {string} A formatted date string
+     */
     function getDateFallbackValues($row) {
         var dateFallbackClasses = [
             '.input--year',
@@ -393,20 +426,39 @@ $(function(){
         var dateValues = dateFallbackClasses.map(function(dateClass) {
             return $row.find(dateClass).val();
         });
-        return yyyymmdd( new Date(dateValues) );
+        return dateToYYYYMMDD( new Date(dateValues) );
     }
 
-    function updateHiddenJSONTimes($availableTimes) {
-        var timeData = getDateTimeValues($availableTimes);
-        $availableTimes.siblings('.hiddenJSONTimes').val(timeData.join('|'));
-    }
-
-    function formatTime(date, startTime, endTime) {
+    /**
+     * Convert a single Availability Time row into a joined datetime string.
+     * @param  {string} date - A date in YYYY-MM-DD format
+     * @param  {string} startTime - A time in either 12 or 24-hour format
+     * @param  {string} endTime - A time in either 12 or 24-hour format
+     * @return {string} The datetime for a single row
+     */
+    function formatAvailabilityPeriod(date, startTime, endTime) {
         return [startTime, endTime].map(function(time){
-            return [(date || ''), to24Hour(time)].join('T');
+            return toISO8601((date || ''), time);
         }).join('/');
     }
 
+    /**
+     * Convert a date and time to ISO 8601 format
+     * (See https://www.w3.org/TR/NOTE-datetime)
+     * Uses complete date plus hours and minutes but no time-zone
+     * @param  {string} date - In YYYY-MM-DD format
+     * @param  {string} time - In either 12 or 24-hour format
+     * @return {string} A date in YYYY-MM-DDThh-mm format
+     */
+    function toISO8601(date, time) {
+        return [date, to24Hour(time)].join('T');
+    }
+
+    /**
+     * Convert a 12-hour time to 24-hour time
+     * @param  {string} time - A time in either 12 or 24-hour format
+     * @return {string} A time in 24-hour format
+     */
     function to24Hour(time) {
         if (!time) {
             return '';
@@ -424,12 +476,12 @@ $(function(){
         return [hours,minutes].join(':');
     }
 
-    function to2digits(n) {
-        return ('0' + n).slice(-2);
-    }
-
-    function yyyymmdd(date) {
-        date = date || new Date();
+    /**
+     * Convert a date object to 'YYYY-MM-DD' format
+     * @param  {object} date - A date object.
+     * @return {string} An ISO-compliant YYYY-MM-DD date string
+     */
+    function dateToYYYYMMDD(date) {
         var mm = date.getMonth() + 1;
         var dd = date.getDate();
 
@@ -440,19 +492,22 @@ $(function(){
         ].join('-');
     }
 
-    // Load JSON data to dropdown template 
-    $.getJSON('scripts/voting-details.json', function(data) {
-        function getListItems(type) {
-            return $.map(data, function (val, key) {
-                return '<li class="state-dropdown__item">' + '<a href="' + val[type] + '" target="_blank"  id="' + key + '" >' + val['State'] + '</a>' + '</li>';
-            }).join('');
-        }
-        $("#state-select").html( getListItems('RegCheck') );
-        $("#location-details").html( getListItems('LocationFinder') );
-    });
+    /**
+     * Load JSON data asynchronously and populate state dropdowns
+     */
+    function loadStateData() {
+        $.getJSON('scripts/voting-details.json', function(data) {
+            function getListItems(type) {
+                return $.map(data, function (val, key) {
+                    return '<li class="state-dropdown__item">' + '<a href="' + val[type] + '" target="_blank"  id="' + key + '" >' + val['State'] + '</a>' + '</li>';
+                }).join('');
+            }
+            $("#state-select").html( getListItems('RegCheck') );
+            $("#location-details").html( getListItems('LocationFinder') );
+        });
+    }
 
 
     // Start it up!
-
     initialise();
 });
