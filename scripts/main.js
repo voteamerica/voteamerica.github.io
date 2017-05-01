@@ -1,12 +1,4 @@
 $(function(){
-
-    // Declare script-wide variables and constants
-
-    var datetimeClasses = [
-        '.input--date',
-        '.input--time-start',
-        '.input--time-end'
-    ];
     
     // Cache jQuery selectors to improve performance
 
@@ -368,12 +360,23 @@ $(function(){
              * @param {object} $row The jQuery element for the new row
              */
             setInitialRowValue: function($row) {
+                // Select the previous row
                 var $prevRow = this.$container
                     .find('.available-times__row')
                     .last();
-                datetimeClasses.forEach(function(c){
-                    var prevVal = $prevRow.find(c).val();
-                    $row.find(c).val(prevVal).trigger('update');
+
+                $row.find('input').each(function(){
+                    // Get the class selector for the current input
+                    var inputClass = '.' + $(this).attr('class')
+                        .split(' ')
+                        .join('.');
+                    // Find the equivalent input in the previous row and get its value
+                    var prevVal = $prevRow.find(inputClass)
+                        .val();
+                    // Set the current input's value to that of the previous one 
+                    // and trigger an update
+                    $(this).val(prevVal)
+                        .trigger('update');
                 });
             },
 
@@ -404,6 +407,11 @@ $(function(){
     }
 
     function getDateTimeValues($availableTimes) {
+        var datetimeClasses = [
+            '.input--date',
+            '.input--time-start',
+            '.input--time-end'
+        ];
         if (!Modernizr.inputtypes.date) {
             datetimeClasses[0] = '.input-formatted--date';
         }
