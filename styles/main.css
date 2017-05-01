@@ -473,6 +473,7 @@ label {
 }
 
 .form-input--tiny {
+    min-width: 70px;
     max-width: 80px;
     margin-right: 2px;
 }

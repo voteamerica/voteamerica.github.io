@@ -255,10 +255,6 @@ $(function(){
             addRow: function() {
                 var $row = this.getNewRowElement();
 
-                if (!Modernizr.inputtypes.date) {
-                    this.updateDateFallback($row);
-                }
-
                 if (this.rowID > 0 && Modernizr.inputtypes.date) {
                     this.setInitialRowValue($row);
                 }
@@ -310,47 +306,6 @@ $(function(){
                 }
 
                 return $row;
-            },
-
-            /**
-             * If the date input is not supported then we use 3 text inputs instead,
-             * with a hidden field to store their combined values.
-             * @param {object} $row The jQuery element for the new row
-             */
-            updateDateFallback: function($row) {
-                /**
-                 * [updateDate description]
-                 * @param  {string} field - key e.g. day, month, year
-                 * @param  {number} value - The numberic value
-                 * @return {string} A date in yyyy-mm-dd format
-                 */
-                function updateDate(field, value) {
-                    var today = new Date();
-                    var date = {
-                        day: to2digits(today.getDate()),
-                        month: to2digits(today.getMonth() + 1),
-                        year: today.getFullYear()
-                    };
-
-                    if (field !== 'year') {
-                        value = to2digits(value);
-                    }
-                    date[field] = value;
-
-                    return [
-                        date.year,
-                        date.month,
-                        date.day
-                    ].join('-');
-                }
-
-                $row.on('change', '.input--date', function() {
-                    var newDate = updateDate(
-                        $(this).data('field'),
-                        $(this).val()
-                    );
-                    $row.find('.input-formatted--date').val(newDate);
-                });
             },
 
             /**
@@ -412,19 +367,33 @@ $(function(){
             '.input--time-start',
             '.input--time-end'
         ];
-        if (!Modernizr.inputtypes.date) {
-            datetimeClasses[0] = '.input-formatted--date';
-        }
 
         return $availableTimes.find('.available-times__row')
             .get()
-            .map(function(li) {
+            .map(function(row) {
+                var $row = $(row);
+                if (!Modernizr.inputtypes.date) {
+                    $row.find('.input--date')
+                        .val( getDateFallbackValues($row) );
+                }
                 var inputValues = datetimeClasses.map(function(c) {
-                    return $(li).find(c).val();
+                    return $row.find(c).val();
                 });
 
                 return formatTime.apply(this, inputValues);
             });
+    }
+
+    function getDateFallbackValues($row) {
+        var dateFallbackClasses = [
+            '.input--year',
+            '.input--month',
+            '.input--day'
+        ];
+        var dateValues = dateFallbackClasses.map(function(dateClass) {
+            return $row.find(dateClass).val();
+        });
+        return yyyymmdd( new Date(dateValues) );
     }
 
     function updateHiddenJSONTimes($availableTimes) {
