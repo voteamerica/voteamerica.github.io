@@ -242,7 +242,7 @@ $(function(){
      * Class constructor for the .available-times form sections
      * Allows users to create and delete rows
      * @param  {object} $container - Container element jQuery node
-     * @retuen {object} A new AvailableTimes class instance
+     * @return {object} A new AvailableTimes class instance
      */
     function AvailableTimes($container) {
         return {
