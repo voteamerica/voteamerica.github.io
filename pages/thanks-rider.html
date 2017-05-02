@@ -8,17 +8,28 @@ title: Thank you!
     <div class="wrapper single-column offset-top">
         <div class="bannerbox">
             <div class="bannerbox__content">
-                <h1>Congratulations</h1>
-                <p>on taking this step to claim your vote! We’ve sent you a message confirming that we’ve received your request.</p>
-                <p>Your ride request reference number is: <b class="uuid">ID not loaded, please try again</b>.</p>
-                <p>Please <strong>keep this reference</strong> in case you need to manage your ride request.</p>
-                <p>To view or manage your ride request, visit our <b><a class="self-service-url" href="../self-service/?type=rider">self-service portal</a></b>.</p>
+                <h1 id="thanks-header">Congratulations</h1>
+                <span id="sorryHeading" hidden style="display:none">We are sorry</span>
+                
+                <p id="introPara">on taking this step to claim your vote! We’ve sent you a message confirming that we’ve received your request.</p>
+                <span id="sorryPara" hidden style="display:none">It has not been possible to process your request. Please see the information below for more details. We want to help you, so please contact our phone support if you cannot resolve this issue yourself.</span>
 
-                <h2>What happens next?</h2>
-                <p>Our system will match you with potential drivers, based on the information you’ve provided. We'll let you know as soon as a driver has accepted your request.</p>
-                <p>The driver will then get in touch with you through the preferred method of contact you specified on the form. It's then up the you and the driver to arrange when and where you'd like to meet, and any other details of your trip.</p>
+                <div id="responseDetails" hidden style="display:none">
+                    <p>Response code: <b id="responseCode" class="uuid"></b></p>                    
+                    <p>Response info: <b id="responseText" class="uuid"></b></p>                    
+                </div>
+                
+                <div id="requestSuccessInfo">
+                    <p>Your ride request reference number is: <b class="uuid">ID not loaded, please try again</b>.</p>
+                    <p>Please <strong>keep this reference</strong> in case you need to manage your ride request.</p>
+                    <p>To view or manage your ride request, visit our <b><a class="self-service-url" href="../self-service/?type=rider">self-service portal</a></b>.</p>
 
-                <p>Let your friends know!</p>
+                    <h2>What happens next?</h2>
+                    <p>Our system will match you with potential drivers, based on the information you’ve provided. We'll let you know as soon as a driver has accepted your request.</p>
+                    <p>The driver will then get in touch with you through the preferred method of contact you specified on the form. It's then up the you and the driver to arrange when and where you'd like to meet, and any other details of your trip.</p>
+                    <p>Let your friends know!</p>
+                </div>
+
                 <ul class="social">
                     <li role="presentation" class="social__twitter">
                         <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="I’ve signed up for a ride to #ClaimMyVote on @CarpoolVote. #Election2016 will be close. #CountEveryVote" data-related="" data-url="http://carpoolvote.com" data-show-count="false">Tweet to help others find out about this!</a>
@@ -30,4 +41,5 @@ title: Thank you!
             </div>
         </div>
     </div>
+    <script src="/scripts/thanks.js"></script>
 </main>
