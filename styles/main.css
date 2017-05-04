@@ -527,6 +527,23 @@ label {
     margin-top: 10px;
 }
 
+.radio label {
+    display: inline-block;
+    min-height: 10px;
+    margin-bottom: 0;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.radio > p {
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+
+.radio input[type=radio] {
+    margin: 5px 10px 0 10px;
+}
+
 .has-error label,
 .has-error .help-block {
     color: #a94442;
