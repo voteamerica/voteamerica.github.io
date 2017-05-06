@@ -7,6 +7,7 @@ permalink: /
 ---
 
 {% include api.html %}
+{% include cp_site.html %}
 
 <noscript>
     <style>
@@ -52,7 +53,7 @@ permalink: /
 
     <div id="forms" class="forms wrapper offset-top">
         <form id="need-ride" name="needRide" action="{{ api }}/rider" method="post" class="ride-form" aria-hidden="true">
-            <input type="hidden" name="_redirect" class="redirect" value="http://carpoolvote.com/thanks-rider/?type=rider" />
+            <input type="hidden" name="_redirect" class="redirect" value="{{ cp_site }}/thanks-rider/?type=rider" />
             <div class="bannerbox">
                 <h2 class="bannerbox__title">I need a ride</h2>
                 <div class="bannerbox__content">
