@@ -1,4 +1,7 @@
 {% comment %}
-	Change the carpool site url to the test value on the test repo
+	Change the carpool site url to the value defined in the relevant config file
 {% endcomment %}
 {% assign cp_site = site.cp_site %}
+{% if site.github.owner_name == 'richardwestenra' %}
+	{% assign cp_site = 'http://richardwestenra.com/voteamerica.github.io' %}
+{% endif %}
