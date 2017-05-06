@@ -1,8 +1,8 @@
-if (!remoteUrl) {
-  var remoteUrl = "https://api.carpoolvote.com/live";
-}
 
-const handleBackendResponse = () => {
+// var data = tinyQuery.getAll();
+
+
+// const handleBackendResponse = () => {
   var data = tinyQuery.getAll();
 
   var heading             = document.getElementById("thanks-header");
@@ -28,6 +28,6 @@ const handleBackendResponse = () => {
     responseCode.innerHTML = data.code;
     responseText.innerHTML = data.info;
   }
-} 
+// } 
 
-window.onload = handleBackendResponse; 
+// window.onload = handleBackendResponse; 
