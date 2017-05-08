@@ -4,7 +4,7 @@ Welcome! Community contributions are essential for keeping CarpoolVote running. 
 
 ## Philosophy
 
-We want to keep this codebase as simple as we can, in order to encourage contributions from junior developers, and to help onboard new people quickly. That means avoiding technologies that junior developers might find overwhelming. For a long time our site was just static HTML, but as the website grew it became difficult to maintain without templating, so we've moved to Jekyll for static site generation. For client-side scripting we want to avoid newer, shinier, more advanced tools like React/Angular in favour of more beginner-friendly libraries like jQuery.
+We want to keep this codebase as simple as we can, in order to encourage contributions from junior developers, and to help onboard new people quickly. That means avoiding technologies that junior developers might find overwhelming. For a long time our site was just static HTML, but as the website grew it became difficult to maintain without templating, so we've moved to Jekyll for static site generation. For client-side scripting we want to avoid newer, shinier, more advanced technologies like ES6+ and React, in favour of ES5 and more beginner-friendly libraries like jQuery.
 
 It's also very important that the site is accessible to disabled users. All HTML should be semantic and standards-compliant, and should use [WAI-ARIA](https://www.w3.org/WAI/intro/aria) and follow a11y best-practices wherever possible. We also prefer native HTML elements (e.g. `<button>` and `<input type="date"/>`) instead of bespoke UI controls wherever possible.
 
