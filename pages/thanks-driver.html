@@ -2,24 +2,37 @@
 layout: default
 permalink: thanks-driver/
 title: Thank you!
+thanks: true
 ---
 
 <main class="content">
     <div class="wrapper single-column offset-top">
         <div class="bannerbox">
             <div class="bannerbox__content">
-                <h1>Thank you</h1>
-                <p>for offering a fellow American a ride to claim their vote! Together, our driving volunteers could help shape the outcome of this election.</p>
-                <p>We've sent you a message confirming that we've received your offer.</p>
-                <p>Your driver offer reference number is: <b class="uuid">ID not loaded, please try again</b>.</p>
-                <p>Please <strong>keep this reference</strong> in case you need to manage your ride request.</p>
-                <p>To view or manage your matches, visit our <b><a class="self-service-url" href="../self-service/?type=driver">self-service portal</a></b>.</p>
+                <h1 id="thanks-header">Thank you</h1>
+                <span id="sorryHeading" hidden style="display:none">We are sorry</span>
 
-                <h2>What happens next?</h2>
-                <p>Our system will match you with a passenger(s), based on the information you've provided. We'll send you a notification of every ride request that matches your criteria. You can then accept as many ride requests as work for you.</p>
-                <p>Once you have accepted a ride request, we'll send you a message with the rider's contact details. It's then up the you and the rider to arrange when and where you'd like to meet, and any other details of your trip.</p>
+                <p id="introPara">for offering a fellow American a ride to claim their vote! Together, our driving volunteers could help shape the outcome of this election.</p>
+                <span id="sorryPara" hidden style="display:none">It has not been possible to process your request. Please see the information below for more details. We want to help you to volunteer, so please contact our phone support if you cannot resolve this issue yourself.</span>
 
-                <p>Let your friends know!</p>
+                <div id="responseDetails" hidden style="display:none">
+                    <p>Response code: <b id="responseCode" class="uuid"></b></p>                    
+                    <p>Response info: <b id="responseText" class="uuid"></b></p>                    
+                </div>
+                
+                <div id="requestSuccessInfo">
+                    <p>We've sent you a message confirming that we've received your offer.</p>
+                    <p>Your driver offer reference number is: <b class="uuid">ID not loaded, please try again</b>.</p>
+                    <p>Please <strong>keep this reference</strong> in case you need to manage your ride request.</p>
+                    <p>To view or manage your matches, visit our <b><a class="self-service-url" href="../self-service/?type=driver">self-service portal</a></b>.</p>
+
+                    <h2>What happens next?</h2>
+                    <p>Our system will match you with a passenger(s), based on the information you've provided. We'll send you a notification of every ride request that matches your criteria. You can then accept as many ride requests as work for you.</p>
+                    <p>Once you have accepted a ride request, we'll send you a message with the rider's contact details. It's then up the you and the rider to arrange when and where you'd like to meet, and any other details of your trip.</p>
+
+                    <p>Let your friends know!</p>
+                </div>
+
                 <ul class="social">
                     <li role="presentation" class="social__twitter">
                         <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="I've signed up to offer a ride to a fellow American on @CarpoolVote. #Election2016 will be close. #CountEveryVote" data-related="" data-url="http://carpoolvote.com" data-show-count="false">Tweet to help others find out about this!</a>
