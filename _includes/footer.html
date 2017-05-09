@@ -44,42 +44,10 @@
     <script src="{{ baseurl }}scripts/querystring.js"></script>
 
     {% if page.home %}
-        {% raw %}
-        <script type="text/template" id="available-time-row">
-            <li class="available-times__row">
-                <div class="form-group calendar-date-block">
-                    <label for="{{type}}Date{{id}}">Date</label>
-                    <input class="form-input input--date" type="date" name="{{type}}Date" id="{{type}}Date{{id}}" required />
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group text-date-block">
-                    <label for="{{type}}Date{{id}}">Date</label>
-                    <input class="form-input form-input--tiny input--date" data-field="month" type="number" id="{{type}}Month{{id}}" placeholder="MM" min="1" max="12" required/>
-                    <input class="form-input form-input--tiny input--date" data-field="day" type="number" id="{{type}}Day{{id}}" placeholder="DD" min="1" max="31" required/>
-                    <input class="form-input form-input--tiny input--date" data-field="year" type="number" id="{{type}}Year{{id}}" placeholder="YYYY" min="2017" required/>
-                    <input type="hidden" id="formatted_{{type}}Date{{id}}" class="input-formatted--date" name="{{type}}Date" />
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                    <label for="{{type}}TimeStart{{id}}">Start time</label>
-                    <input class="form-input input--time-start" type="time" name="{{type}}TimeStart" id="{{type}}TimeStart{{id}}" min="06:00" max="22:00" value="06:00" required data-start="#{{type}}TimeEnd{{id}}" />
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                    <label for="{{type}}TimeEnd{{id}}">End time</label>
-                    <input class="form-input input--time-end" type="time" name="{{type}}TimeEnd" id="{{type}}TimeEnd{{id}}" min="06:00" max="22:00" value="22:00" required data-end="#{{type}}TimeStart{{id}}" />
-                    <div class="help-block with-errors"></div>
-                </div>
-                <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>
-            </li>
-        </script>
-        {% endraw %}
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-        <script src="{{ baseurl }}scripts/main.js"></script>
-        
+        <script src="{{ baseurl }}scripts/home.js"></script> 
     {% elsif page.selfservice %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>

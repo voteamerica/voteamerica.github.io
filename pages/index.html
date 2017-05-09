@@ -392,3 +392,41 @@ permalink: /
         </div>
     </div>
 </div>
+
+{% comment %}
+    Mustache-style HTML template which is used in the AvailableTimes class in main.js to create rows in the first section of the two forms.
+
+    Note that while this uses mustache-style template tags, we're actually not including Mustache/Handlebars, but instead we're just using String.prototype.replace() to populate them, because it works well enough and saves a few kilobytes.
+
+    The raw/endraw Liquid tags are used to escape this section so that Jekyll doesn't confuse the Mustache-style tags with Liquid template tags and try to process them.
+{% endcomment %}
+{% raw %}
+    <script type="text/template" id="available-time-row">
+        <li class="available-times__row">
+            <div class="form-group calendar-date-block">
+                <label for="{{type}}Date{{id}}">Date</label>
+                <input class="form-input input--date" type="date" name="{{type}}Date" id="{{type}}Date{{id}}" required />
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group text-date-block">
+                <label for="{{type}}Date{{id}}">Date</label>
+                <input class="form-input form-input--tiny input--month" data-field="month" type="number" id="{{type}}Month{{id}}" placeholder="MM" min="1" max="12" required/>
+                <input class="form-input form-input--tiny input--day" data-field="day" type="number" id="{{type}}Day{{id}}" placeholder="DD" min="1" max="31" required/>
+                <input class="form-input form-input--tiny input--year" data-field="year" type="number" id="{{type}}Year{{id}}" placeholder="YYYY" min="2017" required/>
+                <input type="hidden" id="{{type}}Date{{id}}" class="input--date" name="{{type}}Date" />
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label for="{{type}}TimeStart{{id}}">Start time</label>
+                <input class="form-input input--time-start" type="time" name="{{type}}TimeStart" id="{{type}}TimeStart{{id}}" min="06:00" max="22:00" value="06:00" required data-start="#{{type}}TimeEnd{{id}}" />
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label for="{{type}}TimeEnd{{id}}">End time</label>
+                <input class="form-input input--time-end" type="time" name="{{type}}TimeEnd" id="{{type}}TimeEnd{{id}}" min="06:00" max="22:00" value="22:00" required data-end="#{{type}}TimeStart{{id}}" />
+                <div class="help-block with-errors"></div>
+            </div>
+            <button class="remove-time button--cancel" aria-label="Delete time">&times;</button>
+        </li>
+    </script>
+{% endraw %}
