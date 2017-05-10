@@ -669,6 +669,10 @@ label {
     box-shadow: 0 0 1px rgba(0,0,0,0.2);
 }
 
+.bannerbox--span-full {
+  margin: 30px 0 0;
+}
+
 .bannerbox__title {
     position: relative;
     padding: 10px;

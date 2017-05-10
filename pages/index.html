@@ -309,18 +309,17 @@ permalink: /
     </div>
 
     <div class="about wrapper clearfix">
-        <div id="grid" class="about__padding" data-columns>
-
-            <div class="bannerbox" id="mapbannerbox">
-                <h2 class="bannerbox__title">Map of Participants</h2>
-                <!-- Add a div to hold the map, referenced in carpool-map/js/map.js-->
-                <!-- Map CSS is inherited from Leaflet, but need to set a minimum height -->
-                <div class="bannerbox__content">
-                    <p>This map shows voters who still need a ride and available volunteer drivers.</p>
-                    <div id="map" style="height: 400px"></div>
-                </div>
+        <div class="bannerbox bannerbox--span-full" id="mapbannerbox">
+            <h2 class="bannerbox__title">Map of Participants</h2>
+            <!-- Add a div to hold the map, referenced in carpool-map/js/map.js-->
+            <!-- Map CSS is inherited from Leaflet, but need to set a minimum height -->
+            <div class="bannerbox__content">
+                <p>This map shows voters who still need a ride and available volunteer drivers.</p>
+                <div id="map" style="height: 400px; width: 100%;"></div>
             </div>
-            <div class="bannerbox" id="story">
+        </div>
+        <div id="grid" class="about__padding" data-columns>
+          <div class="bannerbox" id="story">
                 <h2 class="bannerbox__title">Our Story</h2>
                 <div class="bannerbox__content">
                     <p>In many states, new voting rules have made it more difficult for people to get to polling stations. These rules particularly affect people of color, people with disabilities, young people, elderly people, and women. Carpool Vote is a tool to fight back against an unfair political system in the 2016 election.</p>
