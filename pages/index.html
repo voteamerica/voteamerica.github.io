@@ -60,10 +60,9 @@ permalink: /
                     <a class="close-form button--cancel" href="#intro" aria-label="Close form" role="button" aria-controls="need-ride">&times;</a>
 
                     <fieldset class="date-time-pickers">
-                        <legend>Your trip</legend>
+                        <legend>Dates and Times Available</legend>
 
-                        <h3>Dates available</h3>
-                        <p>On what dates and times would you be a available for the ride? Please pick all the time slots that could work for you: This will make it easier for us to match you with a driver. You can pick multiple time slots, on different dates or on the same date.</p>
+                        <p>On what dates and times would you be available for the ride? Please pick all the time slots that could work for you: This will make it easier for us to match you with a driver. You can pick multiple time slots, on different dates or on the same date.</p>
                         <ul id="RiderAvailableTimes" class="available-times" data-type="Rider">
                         </ul>
                         <button class="add-time-btn button" aria-controls="RiderAvailableTimes">&plus; Add another date / time</button>
@@ -190,7 +189,7 @@ permalink: /
                         <button type="submit" class="button button--large" id="needRideSubmit">Sign up</button>
                         <a class="align-right close-form" href="#intro">Back</a>
                     </div>
-                    <p class="panel-footer"><b>What happens next?</b> We'll record these details and contact you if someone can help.</p>
+                    <p class="panel-footer"><b>What happens next?</b> Our system will use these details to try to find you a driver. If there is a match, the driver will get in touch to arrange the ride.</p>
                 </div>
             </div>
         </form>
@@ -205,7 +204,7 @@ permalink: /
                     <fieldset class="date-time-pickers">
                         <legend>What can you offer?</legend>
 
-                        <h3>Dates available</h3>
+                        <h3>Dates and times available</h3>
                         <p>On what dates and times would you be a available to give rides? Please pick all the time slots that could work for you: This will make it easier for us to match you with someone who needs a ride. You can pick multiple time slots, on different dates or on the same date.</p>
                         <ul id="DriverAvailableTimes" class="available-times" data-type="Driver">
                         </ul>
@@ -218,7 +217,7 @@ permalink: /
                         <legend>Location and vehicle</legend>
 
                         <div class="form-group">
-                            <label for="rideArea">Pick up ZIP code</label>
+                            <label for="rideArea">Driving ZIP code</label>
                             <input type="text" class="form-input form-input--medium" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" id="offerArea" placeholder="Where can you pick up the rider?" name="DriverCollectionZIP" required>
                             <div class="help-block with-errors"></div>
                         </div>
@@ -303,7 +302,7 @@ permalink: /
                         <button type="submit" class="button button--large" id="offerRideSubmit">Sign up</button>
                         <a class="align-right close-form" href="#intro">Back</a>
                     </div>
-                    <p class="panel-footer"><b>What happens next?</b> We'll record these details and contact you if there's a match.</p>
+                    <p class="panel-footer"><b>What happens next?</b>Our system will use these details to try to find riders. If there is a potential match, we'll send you a notification. If you accept the match, we'll let the rider know that you'll be in touch to arrange the ride.</p>
                 </div>
             </div>
         </form>
