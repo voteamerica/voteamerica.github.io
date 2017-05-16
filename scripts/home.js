@@ -198,6 +198,19 @@ $(function(){
             // to prevent a recursive trigger loop
             $(sibling).trigger('input');
         });
+
+	// Require the user to have opened the Terms and Conditions link by
+	// removing the default `disable` attribute of the input element
+	// when the link has been clicked
+
+	// Apply this logic to both the rider signup and driver signup
+	$('#RiderAgreeTnCLink').click(function() {
+	    $('#RiderAgreeTnC').removeAttr('disabled');
+	});
+
+	$('#DriverAgreeTnCLink').click(function() {
+	    $('#DriverAgreeTnC').removeAttr('disabled');
+	});
     }
 
     /**
