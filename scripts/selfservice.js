@@ -516,11 +516,8 @@ function driverProposedMatches () {
         $(listSelector).append('<li class="match-info-item">  rider collection - ' + val.driver_proposed_matches.RiderCollectionZIP + ' ' + val.driver_proposed_matches.RiderCollectionAddress + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider drop off - ' + val.driver_proposed_matches.RiderDropOffZIP + ' ' + val.driver_proposed_matches.RiderDestinationAddress + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider contact method, notes - ' + val.driver_proposed_matches.RiderPreferredContact + ' ' + val.driver_proposed_matches.RiderAccommodationNotes + '</li>');
-        // $(listSelector).append('<li> Accept - <a href="' + acceptUrl + '">Accept</a></li>');
         $(listSelector).append('<li class="list_button">' + acceptButtonInList + '</li>');
-        // $(listSelector).append('<li> (after clicking Accept, refresh browser page) </li>');
-        
-
+       
         // https://api.carpoolvote.com/v2.0/accept-driver-match?UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897&Score=123&DriverPhone=123
       });
     }
@@ -679,12 +676,10 @@ function riderConfirmedMatch () {
 
         $(listSelector).append('<li> UUID_driver - ' + resp.rider_confirmed_match.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + resp.rider_confirmed_match.uuid_rider + '</li>');
-        $(listSelector).append('<li>  driver name - ' + resp.rider_confirmed_match.DriverFirstName + ' ' + resp.rider_confirmed_match.DriverLastName + '</li>');
-        $(listSelector).append('<li>  driver phone - ' + resp.rider_confirmed_match.DriverPhone + '</li>');
-        $(listSelector).append('<li>  driver email - ' + resp.rider_confirmed_match.DriverEmail + '</li>');
-        $(listSelector).append('<li>' + cancelButtonInList + '</li>');
-        // $(listSelector).append('<li> (after clicking Cancel, refresh browser page) </li>');
-        $(listSelector).append('<li> </li>');
+        $(listSelector).append('<li class="match-info-item">  driver name - ' + resp.rider_confirmed_match.DriverFirstName + ' ' + resp.rider_confirmed_match.DriverLastName + '</li>');
+        $(listSelector).append('<li class="match-info-item">  driver phone - ' + resp.rider_confirmed_match.DriverPhone + '</li>');
+        $(listSelector).append('<li class="match-info-item">  driver email - ' + resp.rider_confirmed_match.DriverEmail + '</li>');
+        $(listSelector).append('<li class="list_button">' + cancelButtonInList + '</li>');
       }
     }
   };
