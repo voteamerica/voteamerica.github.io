@@ -331,7 +331,7 @@ function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
   request.onreadystatechange = function () {
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
       var dbInfo;
-      var dbDescription = ""
+      var dbDescription = "";
 
       console.log(request.responseText);
 
@@ -381,6 +381,9 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
 
   request.onreadystatechange = function () {
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      var dbInfo;
+      var dbDescription = ""
+
       console.log(request.responseText);
 
       var resp = JSON.parse(request.responseText);
@@ -388,15 +391,24 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
       var keys = Object.keys(resp);
       if (keys) {
         info = resp[keys[0]].toString();
-        $info.text(info);
-        // $infoLogin.text(info);
 
-        if (keys[0] == "driver_cancel_confirmed_match" && info === "") {
-          clearDriverInfo ();
+        dbInfo = processDbInfo(info);
 
-          driverProposedMatches();
-          driverConfirmedMatches();
+        if (keys[0] == "driver_cancel_confirmed_match") {
+          if (dbInfo.code === "0") {
+            dbDescription = dbInfo.description;
+            
+            clearDriverInfo ();
+
+            driverProposedMatches();
+            driverConfirmedMatches();
+          }
+          else {
+            dbDescription = "Error: " + dbInfo.description;
+          }
         }
+
+        $info.text(dbDescription);
       }
     }
   };
@@ -420,6 +432,9 @@ function cancelRiderMatchFromButton (UUID_driver, UUID_rider, Score, RiderPhone)
 
   request.onreadystatechange = function () {
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      var dbInfo;
+      var dbDescription = "";
+
       console.log(request.responseText);
 
       var resp = JSON.parse(request.responseText);
@@ -427,15 +442,24 @@ function cancelRiderMatchFromButton (UUID_driver, UUID_rider, Score, RiderPhone)
       var keys = Object.keys(resp);
       if (keys) {
         info = resp[keys[0]].toString();
-        $info.text(info);
-        // $infoLogin.text(info);
 
-        if (keys[0] == "rider_cancel_confirmed_match" && info === "") {
-          clearRiderInfo();
+        dbInfo = processDbInfo(info);
 
-          riderInfo();
-          riderConfirmedMatch();
+        if (keys[0] == "rider_cancel_confirmed_match") {
+          if (dbInfo.code === "0") {
+            description = dbInfo.description;
+
+            clearRiderInfo();
+
+            riderInfo();
+            riderConfirmedMatch();
+          }
+          else {
+            dbDescription = "Error: " + dbInfo.description;
+          }
         }
+
+        $info.text(dbDescription);
       }
     }
   };
