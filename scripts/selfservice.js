@@ -284,6 +284,38 @@ function driverInfo () {
   };
 }
 
+function processDbInfo (info) {
+  // info has the format "(0,"")"
+
+  var infoItems = {};
+
+  var characters = info.split('');
+
+  var data = characters.filter( function (item) {
+    return item != '(' && item != ')' && item != '"' ; 
+  });
+
+  data = data.join('');
+
+  var items = data.split(',');
+
+  if (items[0] != undefined && items[0] != null) {
+    infoItems.code = items[0];
+  }
+  else {
+    infoItems.code = -1;
+  }
+
+  if (items[1] != undefined && items[1] != null) {
+    infoItems.description = items[1];    
+  }
+  else {
+    infoItems.code = "no response from server - please contact phone support";
+  } 
+
+  return infoItems;
+}
+
 function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhone) {
 
   var acceptUrl = remoteUrl + '/accept-driver-match?UUID_driver='   + UUID_driver +
@@ -298,22 +330,34 @@ function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
 
   request.onreadystatechange = function () {
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      var dbInfo;
+      var dbDescription = ""
+
       console.log(request.responseText);
 
       var resp = JSON.parse(request.responseText);
 
       var keys = Object.keys(resp);
       if (keys) {
-        info = resp[keys[0]].toString();
-        $info.text(info);
-        // $infoLogin.text(info);
+        info = resp[keys[0]].toString(); 
 
-        if (keys[0] == "driver_confirm_match" && info === "") {
-          clearDriverInfo ();
+        dbInfo = processDbInfo(info);
 
-          driverProposedMatches();
-          driverConfirmedMatches();
+        if (keys[0] == "driver_confirm_match") {
+          if (dbInfo.code === "0") {
+            dbDescription = dbInfo.description;
+
+            clearDriverInfo ();
+
+            driverProposedMatches();
+            driverConfirmedMatches();
+          }
+          else {
+            dbDescription = "Error: " + dbInfo.description;
+          }
         }
+
+        $info.text(dbDescription);
       }
     }
   };
