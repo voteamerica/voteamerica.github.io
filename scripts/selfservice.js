@@ -222,7 +222,7 @@ function driverExists () {
 
       var keys = Object.keys(resp);
       if (keys) {
-        info = resp[keys[0]].toString();
+        var info = resp[keys[0]].toString();
         // $info.text(info);
         $infoLogin.text(info);
 
@@ -339,7 +339,7 @@ function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
 
       var keys = Object.keys(resp);
       if (keys) {
-        info = resp[keys[0]].toString(); 
+        var info = resp[keys[0]].toString(); 
 
         dbInfo = processDbInfo(info);
 
@@ -390,7 +390,7 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
 
       var keys = Object.keys(resp);
       if (keys) {
-        info = resp[keys[0]].toString();
+        var info = resp[keys[0]].toString();
 
         dbInfo = processDbInfo(info);
 
@@ -441,7 +441,7 @@ function cancelRiderMatchFromButton (UUID_driver, UUID_rider, Score, RiderPhone)
 
       var keys = Object.keys(resp);
       if (keys) {
-        info = resp[keys[0]].toString();
+        var info = resp[keys[0]].toString();
 
         dbInfo = processDbInfo(info);
 
@@ -588,7 +588,7 @@ function riderExists () {
 
       var keys = Object.keys(resp);
       if (keys) {
-        info = resp[keys[0]].toString();
+        var info = resp[keys[0]].toString();
         // $info.text(info);
         $infoLogin.text(info);
 
