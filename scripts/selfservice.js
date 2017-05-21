@@ -510,7 +510,6 @@ function driverProposedMatches () {
 
         $(listSelector).append('<li> UUID_driver - ' + val.driver_proposed_matches.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + val.driver_proposed_matches.uuid_rider + '</li>');
-        $(listSelector).append('<li> Score - ' + val.driver_proposed_matches.score + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider name - ' + val.driver_proposed_matches.RiderFirstName + ' ' + val.driver_proposed_matches.RiderLastName + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider phone - ' + val.driver_proposed_matches.RiderPhone + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider email - ' + val.driver_proposed_matches.RiderEmail + '</li>');
@@ -556,7 +555,6 @@ function driverConfirmedMatches () {
 
         $(listSelector).append('<li> UUID_driver - ' + val.driver_confirmed_matches.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + val.driver_confirmed_matches.uuid_rider + '</li>');
-        $(listSelector).append('<li> Score - ' + val.driver_confirmed_matches.score + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider name - ' + val.driver_confirmed_matches.RiderFirstName + ' ' + val.driver_confirmed_matches.RiderLastName + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider phone - ' + val.driver_confirmed_matches.RiderPhone + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider email - ' + val.driver_confirmed_matches.RiderEmail + '</li>');
@@ -681,7 +679,6 @@ function riderConfirmedMatch () {
 
         $(listSelector).append('<li> UUID_driver - ' + resp.rider_confirmed_match.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + resp.rider_confirmed_match.uuid_rider + '</li>');
-        $(listSelector).append('<li> Score - ' + resp.rider_confirmed_match.score + '</li>');
         $(listSelector).append('<li>  driver name - ' + resp.rider_confirmed_match.DriverFirstName + ' ' + resp.rider_confirmed_match.DriverLastName + '</li>');
         $(listSelector).append('<li>  driver phone - ' + resp.rider_confirmed_match.DriverPhone + '</li>');
         $(listSelector).append('<li>  driver email - ' + resp.rider_confirmed_match.DriverEmail + '</li>');
