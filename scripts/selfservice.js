@@ -174,6 +174,10 @@ function logout() {
 
 
 function sendAjaxRequest(ajaxData, ajaxPath) {
+  // (please leave this comment here, thanks)
+  // Generate url based on url stub, path (API action) and data (parameters)
+  // e.g. http://localhost:8000/cancel-ride-request?
+  //        UUID=8f32bb40-512a-4676-bca1-455f8ffb68d9&RiderPhone=test
   var url = tinyQuery.set(ajaxData, remoteUrl + ajaxPath);
 
   $info.html('⏳ Loading&hellip;');
@@ -316,6 +320,47 @@ function processDbInfo (info) {
   return infoItems;
 }
 
+function driverPageUpdate () {
+  clearDriverInfo ();
+
+  driverInfo();
+  driverProposedMatches();
+  driverConfirmedMatches();
+}
+
+function riderPageUpdate () {
+  clearRiderInfo();
+
+  riderInfo();
+  riderConfirmedMatch();
+}
+
+function handleMatchActionResponse (response, $info, expectedKey, successCode, errorPrefix, pageUpdateFn) {
+  var keys = Object.keys(response);
+  var firstKey = keys[0];
+  var dbDescription = "";
+  var dbInfo;
+
+  if (keys) {
+    var info = response[firstKey].toString(); 
+
+    dbInfo = processDbInfo(info);
+
+    if (firstKey === expectedKey) {
+      if (dbInfo.code === successCode) {
+        dbDescription = dbInfo.description;
+
+        pageUpdateFn();
+      }
+      else {
+        dbDescription = errorPrefix + dbInfo.description;
+      }
+    }
+
+    $info.text(dbDescription);
+  }
+}
+
 function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhone) {
 
   var acceptUrl = remoteUrl + '/accept-driver-match?UUID_driver='   + UUID_driver +
@@ -330,35 +375,14 @@ function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
 
   request.onreadystatechange = function () {
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      var dbInfo;
-      var dbDescription = "";
-
       console.log(request.responseText);
 
-      var resp = JSON.parse(request.responseText);
+      var response = JSON.parse(request.responseText);
 
-      var keys = Object.keys(resp);
-      if (keys) {
-        var info = resp[keys[0]].toString(); 
-
-        dbInfo = processDbInfo(info);
-
-        if (keys[0] == "driver_confirm_match") {
-          if (dbInfo.code === "0") {
-            dbDescription = dbInfo.description;
-
-            clearDriverInfo ();
-
-            driverProposedMatches();
-            driverConfirmedMatches();
-          }
-          else {
-            dbDescription = "Error: " + dbInfo.description;
-          }
-        }
-
-        $info.text(dbDescription);
-      }
+      handleMatchActionResponse
+        (response, $info, 
+          "driver_confirm_match", "0", "Error: ", 
+          driverPageUpdate);
     }
   };
 }
@@ -381,35 +405,14 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
 
   request.onreadystatechange = function () {
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      var dbInfo;
-      var dbDescription = ""
-
       console.log(request.responseText);
 
-      var resp = JSON.parse(request.responseText);
+      var response = JSON.parse(request.responseText);
 
-      var keys = Object.keys(resp);
-      if (keys) {
-        var info = resp[keys[0]].toString();
-
-        dbInfo = processDbInfo(info);
-
-        if (keys[0] == "driver_cancel_confirmed_match") {
-          if (dbInfo.code === "0") {
-            dbDescription = dbInfo.description;
-            
-            clearDriverInfo ();
-
-            driverProposedMatches();
-            driverConfirmedMatches();
-          }
-          else {
-            dbDescription = "Error: " + dbInfo.description;
-          }
-        }
-
-        $info.text(dbDescription);
-      }
+      handleMatchActionResponse
+        (response, $info, 
+          "driver_cancel_confirmed_match", "0", "Error: ", 
+          driverPageUpdate);
     }
   };
 }
@@ -432,35 +435,14 @@ function cancelRiderMatchFromButton (UUID_driver, UUID_rider, Score, RiderPhone)
 
   request.onreadystatechange = function () {
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      var dbInfo;
-      var dbDescription = "";
-
       console.log(request.responseText);
 
-      var resp = JSON.parse(request.responseText);
+      var response = JSON.parse(request.responseText);
 
-      var keys = Object.keys(resp);
-      if (keys) {
-        var info = resp[keys[0]].toString();
-
-        dbInfo = processDbInfo(info);
-
-        if (keys[0] == "rider_cancel_confirmed_match") {
-          if (dbInfo.code === "0") {
-            description = dbInfo.description;
-
-            clearRiderInfo();
-
-            riderInfo();
-            riderConfirmedMatch();
-          }
-          else {
-            dbDescription = "Error: " + dbInfo.description;
-          }
-        }
-
-        $info.text(dbDescription);
-      }
+      handleMatchActionResponse
+        (response, $info, 
+          "rider_cancel_confirmed_match", "0", "Error: ", 
+          riderPageUpdate);
     }
   };
 }
