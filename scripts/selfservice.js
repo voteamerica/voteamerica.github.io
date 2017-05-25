@@ -174,6 +174,10 @@ function logout() {
 
 
 function sendAjaxRequest(ajaxData, ajaxPath) {
+  // (please leave this comment here, thanks)
+  // Generate url based on url stub, path (API action) and data (parameters)
+  // e.g. http://localhost:8000/cancel-ride-request?
+  //        UUID=8f32bb40-512a-4676-bca1-455f8ffb68d9&RiderPhone=test
   var url = tinyQuery.set(ajaxData, remoteUrl + ajaxPath);
 
   $info.html('⏳ Loading&hellip;');
@@ -222,7 +226,7 @@ function driverExists () {
 
       var keys = Object.keys(resp);
       if (keys) {
-        info = resp[keys[0]].toString();
+        var info = resp[keys[0]].toString();
         // $info.text(info);
         $infoLogin.text(info);
 
@@ -284,6 +288,79 @@ function driverInfo () {
   };
 }
 
+function processDbInfo (info) {
+  // info has the format "(0,"")"
+
+  var infoItems = {};
+
+  var characters = info.split('');
+
+  var data = characters.filter( function (item) {
+    return item != '(' && item != ')' && item != '"' ; 
+  });
+
+  data = data.join('');
+
+  var items = data.split(',');
+
+  if (items[0] != undefined && items[0] != null) {
+    infoItems.code = items[0];
+  }
+  else {
+    infoItems.code = -1;
+  }
+
+  if (items[1] != undefined && items[1] != null) {
+    infoItems.description = items[1];    
+  }
+  else {
+    infoItems.code = "no response from server - please contact phone support";
+  } 
+
+  return infoItems;
+}
+
+function driverPageUpdate () {
+  clearDriverInfo ();
+
+  driverInfo();
+  driverProposedMatches();
+  driverConfirmedMatches();
+}
+
+function riderPageUpdate () {
+  clearRiderInfo();
+
+  riderInfo();
+  riderConfirmedMatch();
+}
+
+function handleMatchActionResponse (response, $info, expectedKey, successCode, errorPrefix, pageUpdateFn) {
+  var keys = Object.keys(response);
+  var firstKey = keys[0];
+  var dbDescription = "";
+  var dbInfo;
+
+  if (keys) {
+    var info = response[firstKey].toString(); 
+
+    dbInfo = processDbInfo(info);
+
+    if (firstKey === expectedKey) {
+      if (dbInfo.code === successCode) {
+        dbDescription = dbInfo.description;
+
+        pageUpdateFn();
+      }
+      else {
+        dbDescription = errorPrefix + dbInfo.description;
+      }
+    }
+
+    $info.text(dbDescription);
+  }
+}
+
 function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhone) {
 
   var acceptUrl = remoteUrl + '/accept-driver-match?UUID_driver='   + UUID_driver +
@@ -300,21 +377,12 @@ function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
       console.log(request.responseText);
 
-      var resp = JSON.parse(request.responseText);
+      var response = JSON.parse(request.responseText);
 
-      var keys = Object.keys(resp);
-      if (keys) {
-        info = resp[keys[0]].toString();
-        $info.text(info);
-        // $infoLogin.text(info);
-
-        if (keys[0] == "driver_confirm_match" && info === "") {
-          clearDriverInfo ();
-
-          driverProposedMatches();
-          driverConfirmedMatches();
-        }
-      }
+      handleMatchActionResponse
+        (response, $info, 
+          "driver_confirm_match", "0", "Error: ", 
+          driverPageUpdate);
     }
   };
 }
@@ -339,21 +407,12 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
       console.log(request.responseText);
 
-      var resp = JSON.parse(request.responseText);
+      var response = JSON.parse(request.responseText);
 
-      var keys = Object.keys(resp);
-      if (keys) {
-        info = resp[keys[0]].toString();
-        $info.text(info);
-        // $infoLogin.text(info);
-
-        if (keys[0] == "driver_cancel_confirmed_match" && info === "") {
-          clearDriverInfo ();
-
-          driverProposedMatches();
-          driverConfirmedMatches();
-        }
-      }
+      handleMatchActionResponse
+        (response, $info, 
+          "driver_cancel_confirmed_match", "0", "Error: ", 
+          driverPageUpdate);
     }
   };
 }
@@ -378,21 +437,12 @@ function cancelRiderMatchFromButton (UUID_driver, UUID_rider, Score, RiderPhone)
     if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
       console.log(request.responseText);
 
-      var resp = JSON.parse(request.responseText);
+      var response = JSON.parse(request.responseText);
 
-      var keys = Object.keys(resp);
-      if (keys) {
-        info = resp[keys[0]].toString();
-        $info.text(info);
-        // $infoLogin.text(info);
-
-        if (keys[0] == "rider_cancel_confirmed_match" && info === "") {
-          clearRiderInfo();
-
-          riderInfo();
-          riderConfirmedMatch();
-        }
-      }
+      handleMatchActionResponse
+        (response, $info, 
+          "rider_cancel_confirmed_match", "0", "Error: ", 
+          riderPageUpdate);
     }
   };
 }
@@ -442,18 +492,14 @@ function driverProposedMatches () {
 
         $(listSelector).append('<li> UUID_driver - ' + val.driver_proposed_matches.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + val.driver_proposed_matches.uuid_rider + '</li>');
-        $(listSelector).append('<li> Score - ' + val.driver_proposed_matches.score + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider name - ' + val.driver_proposed_matches.RiderFirstName + ' ' + val.driver_proposed_matches.RiderLastName + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider phone - ' + val.driver_proposed_matches.RiderPhone + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider email - ' + val.driver_proposed_matches.RiderEmail + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider collection - ' + val.driver_proposed_matches.RiderCollectionZIP + ' ' + val.driver_proposed_matches.RiderCollectionAddress + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider drop off - ' + val.driver_proposed_matches.RiderDropOffZIP + ' ' + val.driver_proposed_matches.RiderDestinationAddress + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider contact method, notes - ' + val.driver_proposed_matches.RiderPreferredContact + ' ' + val.driver_proposed_matches.RiderAccommodationNotes + '</li>');
-        // $(listSelector).append('<li> Accept - <a href="' + acceptUrl + '">Accept</a></li>');
         $(listSelector).append('<li class="list_button">' + acceptButtonInList + '</li>');
-        // $(listSelector).append('<li> (after clicking Accept, refresh browser page) </li>');
-        
-
+       
         // https://api.carpoolvote.com/v2.0/accept-driver-match?UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897&Score=123&DriverPhone=123
       });
     }
@@ -488,7 +534,6 @@ function driverConfirmedMatches () {
 
         $(listSelector).append('<li> UUID_driver - ' + val.driver_confirmed_matches.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + val.driver_confirmed_matches.uuid_rider + '</li>');
-        $(listSelector).append('<li> Score - ' + val.driver_confirmed_matches.score + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider name - ' + val.driver_confirmed_matches.RiderFirstName + ' ' + val.driver_confirmed_matches.RiderLastName + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider phone - ' + val.driver_confirmed_matches.RiderPhone + '</li>');
         $(listSelector).append('<li class="match-info-item">  rider email - ' + val.driver_confirmed_matches.RiderEmail + '</li>');
@@ -525,7 +570,7 @@ function riderExists () {
 
       var keys = Object.keys(resp);
       if (keys) {
-        info = resp[keys[0]].toString();
+        var info = resp[keys[0]].toString();
         // $info.text(info);
         $infoLogin.text(info);
 
@@ -613,13 +658,10 @@ function riderConfirmedMatch () {
 
         $(listSelector).append('<li> UUID_driver - ' + resp.rider_confirmed_match.uuid_driver + '</li>');
         $(listSelector).append('<li>  UUID_rider - ' + resp.rider_confirmed_match.uuid_rider + '</li>');
-        $(listSelector).append('<li> Score - ' + resp.rider_confirmed_match.score + '</li>');
-        $(listSelector).append('<li>  driver name - ' + resp.rider_confirmed_match.DriverFirstName + ' ' + resp.rider_confirmed_match.DriverLastName + '</li>');
-        $(listSelector).append('<li>  driver phone - ' + resp.rider_confirmed_match.DriverPhone + '</li>');
-        $(listSelector).append('<li>  driver email - ' + resp.rider_confirmed_match.DriverEmail + '</li>');
-        $(listSelector).append('<li>' + cancelButtonInList + '</li>');
-        // $(listSelector).append('<li> (after clicking Cancel, refresh browser page) </li>');
-        $(listSelector).append('<li> </li>');
+        $(listSelector).append('<li class="match-info-item">  driver name - ' + resp.rider_confirmed_match.DriverFirstName + ' ' + resp.rider_confirmed_match.DriverLastName + '</li>');
+        $(listSelector).append('<li class="match-info-item">  driver phone - ' + resp.rider_confirmed_match.DriverPhone + '</li>');
+        $(listSelector).append('<li class="match-info-item">  driver email - ' + resp.rider_confirmed_match.DriverEmail + '</li>');
+        $(listSelector).append('<li class="list_button">' + cancelButtonInList + '</li>');
       }
     }
   };
