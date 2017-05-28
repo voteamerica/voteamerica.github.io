@@ -512,54 +512,57 @@ $(function(){
     initialise();
 });
 
+/**
+ * This displays an address form, using the autocomplete feature
+ * of the Google Places API to help users fill in the information.
+ * Because `initAutocomplete()` is called after the autocomplete script
+ * is downloaded (as part of the script parameters, see `_includes/footer.html`)
+ * as a dynamic callback, it needs to be available globally
+ * See https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+ * for more information
+ */
 
-// This displays an address form, using the autocomplete feature
-// of the Google Places API to help users fill in the information.
-
-// Because `initAutocomplete()` is called after the autocomplete script
-// is downloaded (as part of the script parameters, see `_includes/footer.html`)
-// it is available globally
-
-/// See https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
-/// for more information
-
-var placeSearch, autocomplete = {
+(function(w) {
+  var autocomplete = {
     riderCollectionAddress: null,
     riderDestinationAddress: null
-};
+  };
 
-function initAutocomplete() {
+  w.initAutocomplete = function() {
     // Create the autocomplete object for each autocomplete input,
     // restricting the search to geographical location types.
     for (var key in autocomplete) {
-	if (autocomplete.hasOwnProperty(key)) {
-	    autocomplete[key] = new google.maps.places.Autocomplete(
-		/** @type {!HTMLInputElement} */(document.getElementById(key)),
-		{types: ['geocode']});
-	}
+      if (autocomplete.hasOwnProperty(key)) {
+	autocomplete[key] = new google.maps.places.Autocomplete(
+	  /** @type {!HTMLInputElement} */(document.getElementById(key)),
+	  {types: ['geocode']});
+      }
     }
-}
+  }
 
-// Bias the autocomplete object to the user's geographical location,
-// as supplied by the browser's 'navigator.geolocation' object.
+  /**
+   * Bias the autocomplete object to the user's geographical location,
+   * as supplied by the browser's 'navigator.geolocation' object.
+   */
 
-function geolocate() {
+  w.autocompleteGeolocate = function() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var geolocation = {
-		lat: position.coords.latitude,
-		lng: position.coords.longitude
-            };
-            var circle = new google.maps.Circle({
-		center: geolocation,
-		radius: position.coords.accuracy
-            });
-
-	    for (var key in autocomplete) {
-		if (autocomplete.hasOwnProperty(key)) {
-		    autocomplete.setBounds(circle.getBounds());
-		}
-	    }
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = {
+	  lat: position.coords.latitude,
+	  lng: position.coords.longitude
+        };
+        var circle = new google.maps.Circle({
+	  center: geolocation,
+	  radius: position.coords.accuracy
         });
+
+	for (var key in autocomplete) {
+	  if (autocomplete.hasOwnProperty(key)) {
+	    autocomplete[key].setBounds(circle.getBounds());
+	  }
+	}
+      });
     }
-}
+  }
+})(window);
