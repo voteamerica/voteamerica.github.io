@@ -125,10 +125,23 @@ permalink: /
                                 <input type="checkbox" name="TwoWayTripNeeded" id="rideReturn" /> I need a two-way trip.
                             </label>
                         </div>
+                        <div class="form-group checkbox">
+                            <label for="riderDoesNotSpeakEnglish">
+                                <input type="checkbox" name="NoEnglish" id="riderDoesNotSpeakEnglish" /> I can only communicate in a language other than English.
+                            </label>
+                        </div>
                         <div class="form-group">
-                            <label for="RiderAccommodationNotes">Notes <i class="optional">Optional</i></label>
+                            <label for="RiderAccommodationNotes">Other Requirements <i class="optional">Optional</i></label>
                             <textarea class="form-input" id="RiderAccommodationNotes"
                             placeholder="Accommodation requirements e.g. service animal, assistance folding equipment, assistance entering/exiting the vehicle, child car seat or booster (please include age), must also collect non-voting assistant or companion, or anything else the driver should know." name="RiderAccommodationNotes" rows="4"></textarea>
+                            <small>Please let us know of any other accommodation requirements.</small>
+                            <ul>
+                                <li><small>Service animal</small></li>
+                                <li><small>Assistance folding equipment</small></li>
+                                <li><small>Assistance entering/ exiting the Vehicle</small></li>
+                                <li><small>Child car seat or booster (please include age)</small></li>
+                                <li><small>Etc.</small></li>
+                            </ul>
                         </div>
                     </fieldset>
 
@@ -182,10 +195,10 @@ permalink: /
                     <div class="form-group checkbox">
                         <label for="RiderAgreeTnC">
                             <input type="checkbox" id="RiderAgreeTnC" name="RiderAgreeTnC" required /> I agree to the <a href="terms-conditions/" target="_blank">Terms &amp; Conditions</a>.
-                        </label>
-                        <small>I understand that Carpool Vote LLC will share my contact details with the driver if there's a match. (Carpool Vote LLC will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day of you've asked us not to stay in touch.)</small>
-                        <small>I understand that Carpool Vote LLC provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote LLC is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote LLC cannot be responsible if anything goes wrong.</small>
-                        <small>I understand that Carpool Vote cannot guarantee that I will find ride by using the platform, or that a driver will provide a ride as agreed. I will keep looking for a ride until I have reached my destination.</small>
+                        </label>                                             
+                        <small>I understand that Carpool Vote LLC will share my contact details with the driver if there's a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day if you've asked us not to stay in touch.)</small>
+                        <small>I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.</small>
+                        <small>I understand that Carpool Vote cannot guarantee that I will find a ride by using the platform, or that a driver will complete the ride as agreed. In that case, I will keep looking for a ride until I have reached my destination.</small>
                         <small>I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.</small>
                     </div>
 
@@ -276,17 +289,14 @@ permalink: /
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <label for="driverPhone">Phone number (cell preferred)</label>
+                            <label for="driverPhone">Cell phone number</label>
                             <input type="tel" class="form-input" id="driverPhone" placeholder="Phone" name="DriverPhone" required />
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group checkbox checkbox--multi">
-                            <p>Preferred method of contact</p>
+                            <p>Preferred notification method (choose as many as you like)</p>
                             <label>
                                 <input type="checkbox" name="DriverPreferredContact" value="Email" /> Email
-                            </label>
-                            <label>
-                                <input type="checkbox" name="DriverPreferredContact" value="Phone" /> Phone
                             </label>
                             <label>
                                 <input type="checkbox" name="DriverPreferredContact" value="SMS" /> SMS
@@ -298,8 +308,8 @@ permalink: /
                         <label for="DriverAgreeTnC">
                             <input type="checkbox" id="DriverAgreeTnC" name="DriverAgreeTnC" required /> I agree to the <a href="terms-conditions/" target="_blank">Terms &amp; Conditions</a>
                         </label>
-                        <small>I understand that Carpool Vote LCC will share my contact details with the driver if there's a match. (Carpool Vote LLC will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day of you've asked us not to stay in touch.)</small>
-                        <small>I understand that Carpool Vote LLC provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote LLC is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote LLC cannot be responsible if anything goes wrong.</small>
+                        <small>I understand that Carpool Vote LCC will share my contact details with the driver if there's a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day if you've asked us not to stay in touch.)</small>
+                        <small>I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote LLC cannot be responsible if anything goes wrong.</small>
                         <small>I understand that Carpool Vote cannot guarantee that I will find appropriate matches through the platform, or that any agreed ride will occur. I take full responsibility for any cost related to using the platform.</small>
                         <small>I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.</small>
                     </div>
@@ -359,12 +369,17 @@ permalink: /
                     </ul>
                 </div>
             </div>
-            <div class="bannerbox" id="countdown" style="display: none;">
-                <h2 class="bannerbox__title">2016 Election Countdown Clock</h2>
+            <div class="bannerbox" id="countdown">
+                <h2 class="bannerbox__title">Upcoming Elections</h2>
+                <!-- Developer Note: There used to be a third-party widget that counted down to the 2016 Presidential election. A new countdown widget
+                needs to be developed. For now, we will include info on the 2017 special elections.-->
                 <div class="bannerbox__content">
-                    <iframe src="http://www.270towin.com/2016-countdown-clock/widget300x200.php" width="300" height="200" style="border:none; max-width:100%">
-                        Browser not supported. Visit <a href="http://www.270towin.com/">www.270towin.com</a>
-                    </iframe>
+                    <ul>
+                        <li><strong>New Jersey state primaries:</strong> June 6, 2017</li>
+                        <li><strong>Virginia state primaries:</strong> June 15, 2017</li>
+                        <li><strong>New Jersey and Virginia state elections:</strong> November 7</li>
+                    </ul>
+                    <a href="https://ballotpedia.org/State_legislative_special_elections,_2017">2017 special elections</a>
                 </div>
             </div>
             <div class="bannerbox" id="righttovote">
