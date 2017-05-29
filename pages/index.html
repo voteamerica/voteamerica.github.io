@@ -75,7 +75,7 @@ permalink: /
                         <div class="form-column">
                             <div class="form-group">
                                 <label for="riderCollectionAddress">Pick up address</label>
-                                <input type="text" class="form-input" id="riderCollectionAddress" placeholder="Your pick up address" name="RiderCollectionAddress" required>
+                                <input type="text" class="form-input" id="riderCollectionAddress" placeholder="Your pick up address" name="RiderCollectionAddress" onFocus="autocompleteGeolocate()" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
@@ -85,7 +85,7 @@ permalink: /
                             </div>
                             <div class="form-group">
                                 <label for="riderDestinationAddress">Destination address</label>
-                                <input type="text" class="form-input" id="riderDestinationAddress" placeholder="Your destination address" name="RiderDestinationAddress" required>
+                                <input type="text" class="form-input" id="riderDestinationAddress" placeholder="Your destination address" name="RiderDestinationAddress" onFocus="autocompleteGeolocate()" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
