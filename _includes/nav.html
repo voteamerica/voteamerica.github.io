@@ -19,23 +19,29 @@
             <img id="logo" class="logo__img" src="{{ baseurl }}images/logo.png" alt="Carpool Vote" width=709 height=187 />
         </a>
 
-        <ul id="nav-links" class="nav__links">
+        <div class="nav__links">
+          <ul id="nav-links" class="nav__links_list">
             {% if page.navigation == 'full' %}
-                <li class="nav__item nav__story">
-                    <a href="{{ baseurl }}story/" class="nav__link story" id="story-link">Our story</a>
-                </li>
-                <li class="nav__item nav__how">
-                    <a href="{{ baseurl }}how-it-works/" class="nav__link">How it works</a>
-                </li>
-                <li class="nav__item nav__support">
-                    <a href="{{ baseurl }}#howtoclaim" class="nav__link scroll">Voting info</a>
-                </li>
+            <li class="nav__item nav__story">
+              <a href="{{ baseurl }}story/" class="nav__link story" id="story-link">Our story</a>
+            </li>
+            <li class="nav__item nav__how">
+              <a href="{{ baseurl }}how-it-works/" class="nav__link">How it works</a>
+            </li>
+            <li class="nav__item nav__support">
+              <a href="{{ baseurl }}#howtoclaim" class="nav__link scroll">Voting info</a>
+            </li>
             {% else %}
-                <li class="nav__item nav__story">
-                    <a href="{{ baseurl }}" class="nav__link" id="home-link">Back to Home</a>
-                </li>
+            <li class="nav__item nav__support">
+              <a href="{{ baseurl }}" class="nav__link" id="home-link">Back to Home</a>
+            </li>
             {% endif %}
-        </ul>
+          </ul>
+
+          {% if page.url != '/self-service/' %}
+          <a class="nav__link" href="{{ baseurl }}self-service/">My Rides</a>
+          {% endif %}
+        </div>
 
         <ul class="social">
             <li role="presentation" class="social__twitter">

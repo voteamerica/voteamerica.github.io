@@ -271,6 +271,12 @@ a.twitter-mention-button {
     text-align: center;
 }
 
+.nav__links_list {
+    margin-top: 0;
+    margin-bot: 5px;
+    padding-left: 0;
+}
+
 .nav__item {
     display: inline;
     border-right: solid 1px #297bbb;
