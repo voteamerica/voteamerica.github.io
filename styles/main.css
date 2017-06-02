@@ -441,6 +441,10 @@ legend {
     margin-bottom: 20px;
 }
 
+.form-inline {
+    display: inline-block;
+}
+
 label {
     display: block;
     font-weight: bold;
