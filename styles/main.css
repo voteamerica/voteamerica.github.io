@@ -445,6 +445,10 @@ legend {
     display: inline-block;
 }
 
+.form-inline-other-requirements {
+    margin-right: 1em;
+}
+
 label {
     display: block;
     font-weight: bold;
