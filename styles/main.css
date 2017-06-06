@@ -441,6 +441,14 @@ legend {
     margin-bottom: 20px;
 }
 
+.form-inline {
+    display: inline-block;
+}
+
+.form-inline-other-requirements {
+    margin-right: 1em;
+}
+
 label {
     display: block;
     font-weight: bold;
