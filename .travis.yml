@@ -20,11 +20,19 @@ install:
   - sudo pip install docker-compose
   - docker-compose version
 
+  - echo install
+
   - pwd
 
   - git clone --single-branch --branch master https://github.com/jkbits1/backend /home/travis/build/jkbits1/be
 
+  - ls /home/travis/build/jkbits1/be
+
 before_script:
+  - echo before
+
+  - ls /home/travis/build/jkbits1/be
+
   - docker-compose -f /home/travis/build/jkbits1/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml build --build-arg REPO=https://github.com/jkbits1/voteamerica.github.io --build-arg BRANCH_NAME=$TRAVIS_BRANCH --build-arg CACHEBUST=$(date +%s) cp-front-end
 
   - docker-compose -f /home/travis/build/jkbits1/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml up -d
