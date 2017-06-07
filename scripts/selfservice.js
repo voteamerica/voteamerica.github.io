@@ -5,7 +5,13 @@ if (!remoteUrl) {
 var driverLoggedIn = false;
 var riderLoggedIn = false;
 
-var driverCancelledStatus = "Canceled";
+var DRIVER_CANCELLED_STATUS = "Canceled";
+var DRIVER_PAUSED_TEXT = "Paused Notifications";
+var DB_SUCCESS_CODE = "0";
+var DB_ERROR_PREFIX = "Error: ";
+
+var DRIVER_PAUSE_BUTTON_TEXT = "Pause Driver Match Request";
+var DRIVER_RESUME_BUTTON_TEXT = "Resume Driver Match Request";
 
 // Create a data object containing all URL query string data:
 var data = tinyQuery.getAll();
@@ -85,10 +91,14 @@ function updateUI(uuid, type, phone) {
 }
 
 function updateUIbyDriverStatus (driverStatus) {
-  var driverNotCancelled = driverStatus !== driverCancelledStatus;
+  var driverNotCancelled = driverStatus !== DRIVER_CANCELLED_STATUS;
 
   $manage.find('#btnCancelDriveOffer').toggle(driverNotCancelled);
   $manage.find('#btnPauseDriverMatch').toggle(driverNotCancelled);
+}
+
+function updateUIbyDriverReadyToMatch (readyToMatch) {
+  $manage.find('#btnPauseDriverMatch').toggle(readyToMatch);
 }
 
 $manage
@@ -153,17 +163,6 @@ function acceptDriverMatch() {
       DriverPhone: data.phone
     },
     '/accept-driver-match'
-  );
-}
-
-// refactor to work like cancellation
-function pauseDriverMatch() {
-  sendAjaxRequest(
-    {
-      UUID: data.uuid,
-      DriverPhone: data.phone
-    },
-    '/pause-driver-match'
   );
 }
 
@@ -274,12 +273,20 @@ function driverInfo () {
           var driverInfo = resp[keys[0]];
           var listSelector = "#driverInfo ul";
 
-          if (driverInfo.status != undefined && driverInfo.status === driverCancelledStatus) {
+          if (driverInfo.status != undefined && driverInfo.status === DRIVER_CANCELLED_STATUS) {
             
             updateUIbyDriverStatus(driverInfo.status);
 
             $(listSelector).append('<li><strong>' + driverInfo.status.toUpperCase() + '</strong></li>');            
           }
+
+          if (driverInfo.ReadyToMatch != undefined && driverInfo.ReadyToMatch === false) {
+            
+            updateUIbyDriverReadyToMatch(driverInfo.ReadyToMatch);
+
+            $(listSelector).append('<li><strong>' + DRIVER_PAUSED_TEXT.toUpperCase() + '</strong></li>');            
+          }
+
 
           $(listSelector).append('<li>' + driverInfo.DriverFirstName + '</li>');
           $(listSelector).append('<li>' + driverInfo.DriverLastName + '</li>');
@@ -387,7 +394,7 @@ function acceptDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
 
       handleMatchActionResponse
         (response, $info, 
-          "driver_confirm_match", "0", "Error: ", 
+          "driver_confirm_match", DB_SUCCESS_CODE, DB_ERROR_PREFIX, 
           driverPageUpdate);
     }
   };
@@ -417,7 +424,7 @@ function cancelDriverMatchFromButton (UUID_driver, UUID_rider, Score, DriverPhon
 
       handleMatchActionResponse
         (response, $info, 
-          "driver_cancel_confirmed_match", "0", "Error: ", 
+          "driver_cancel_confirmed_match", DB_SUCCESS_CODE, DB_ERROR_PREFIX, 
           driverPageUpdate);
     }
   };
@@ -447,7 +454,7 @@ function cancelRiderMatchFromButton (UUID_driver, UUID_rider, Score, RiderPhone)
 
       handleMatchActionResponse
         (response, $info, 
-          "rider_cancel_confirmed_match", "0", "Error: ", 
+          "rider_cancel_confirmed_match", DB_SUCCESS_CODE, DB_ERROR_PREFIX, 
           riderPageUpdate);
     }
   };
@@ -688,13 +695,35 @@ function cancelDriveOffer() {
     function (response) {
       handleMatchActionResponse
         (response, $info, 
-          "driver_cancel_drive_offer", "0", "Error: ",
+          "driver_cancel_drive_offer", DB_SUCCESS_CODE, DB_ERROR_PREFIX,
           driverPageUpdate);
     });
   // .fail(function(err) {
   //   $info.text('⚠️ ' + err.statusText);
   // });
 }
+
+function pauseDriverMatch() {
+
+  accessCarpoolvoteAPI(
+    createAPIurl({
+        UUID: data.uuid,
+        DriverPhone: data.phone
+      },
+      '/pause-driver-match'
+    ),                                                     
+    function (response) {
+      handleMatchActionResponse
+        (response, $info, 
+          "driver_pause_match", DB_SUCCESS_CODE, DB_ERROR_PREFIX,
+          driverPageUpdate);
+    });
+  // .fail(function(err) {
+  //   $info.text('⚠️ ' + err.statusText);
+  // });
+}
+
+
 
 // dev artifact, to be removed
 function handleActionResponse (response, $info, successCode, errorPrefix, pageUpdateFn) {
