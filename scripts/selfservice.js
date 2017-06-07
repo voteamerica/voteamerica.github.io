@@ -156,6 +156,7 @@ function acceptDriverMatch() {
   );
 }
 
+// refactor to work like cancellation
 function pauseDriverMatch() {
   sendAjaxRequest(
     {
