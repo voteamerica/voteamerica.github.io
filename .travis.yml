@@ -20,6 +20,8 @@ install:
   - sudo pip install docker-compose
   - docker-compose version
 
+  - pwd
+
   - git clone --single-branch --branch master https://github.com/jkbits1/backend jkbits1/be
 
 before_script:
