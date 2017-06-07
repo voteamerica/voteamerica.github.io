@@ -20,19 +20,19 @@ install:
   - sudo pip install docker-compose
   - docker-compose version
 
-  - mkdir /usr/local/be
-  - cd /usr/local/be
+  - mkdir /var/be
+  - cd /var/be
 
   - git clone --single-branch --branch master https://github.com/jkbits1/backend \
 
 before_script:
-  - docker-compose -f /usr/local/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml build --build-arg REPO=https://github.com/jkbits1/voteamerica.github.io --build-arg BRANCH_NAME=$TRAVIS_BRANCH --build-arg CACHEBUST=$(date +%s) cp-front-end
+  - docker-compose -f /var/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml build --build-arg REPO=https://github.com/jkbits1/voteamerica.github.io --build-arg BRANCH_NAME=$TRAVIS_BRANCH --build-arg CACHEBUST=$(date +%s) cp-front-end
 
-  - docker-compose -f /usr/local/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml up -d
+  - docker-compose -f /var/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml up -d
 
 script:
   # - ./docker/compose-tests.sh
-  - /usr/local/be/backend/docker/compose-tests.sh match
+  - /var/be/backend/docker/compose-tests.sh match
 
 after_script:
-  - docker-compose -f /usr/local/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml down
+  - docker-compose -f /var/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml down
