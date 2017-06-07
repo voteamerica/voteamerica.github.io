@@ -20,19 +20,19 @@ install:
   - sudo pip install docker-compose
   - docker-compose version
 
-  - mkdir /usr/src/app/be
-  - cd /usr/src/app/be
+  - mkdir /usr/local/be
+  - cd /usr/local/be
 
   - git clone --single-branch --branch master https://github.com/jkbits1/backend \
 
 before_script:
-  - docker-compose -f /usr/src/app/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml build --build-arg REPO=https://github.com/jkbits1/voteamerica.github.io --build-arg BRANCH_NAME=$TRAVIS_BRANCH --build-arg CACHEBUST=$(date +%s) cp-front-end
+  - docker-compose -f /usr/local/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml build --build-arg REPO=https://github.com/jkbits1/voteamerica.github.io --build-arg BRANCH_NAME=$TRAVIS_BRANCH --build-arg CACHEBUST=$(date +%s) cp-front-end
 
-  - docker-compose -f /usr/src/app/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml up -d
+  - docker-compose -f /usr/local/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml up -d
 
 script:
   # - ./docker/compose-tests.sh
-  - /usr/src/app/be/backend/docker/compose-tests.sh match
+  - /usr/local/be/backend/docker/compose-tests.sh match
 
 after_script:
-  - docker-compose -f /usr/src/app/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml down
+  - docker-compose -f /usr/local/be/backend/docker/compose/full-stack-test/docker-compose-dev-build-test.yml down
