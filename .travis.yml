@@ -38,8 +38,7 @@ before_script:
   - docker-compose -f $HOME/build/jkbits1/be/docker/compose/full-stack-test/docker-compose-dev-build-test.yml up -d
 
 script:
-  # - ./docker/compose-tests.sh
-  - $HOME/build/jkbits1/be/docker/compose-tests.sh match
+  - $HOME/build/jkbits1/be/docker/compose-tests.sh pause-cancel
 
 after_script:
   - docker-compose -f $HOME/build/jkbits1/be/docker/compose/full-stack-test/docker-compose-dev-build-test.yml down
