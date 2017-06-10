@@ -5,6 +5,7 @@ if (!remoteUrl) {
 var driverLoggedIn = false;
 var riderLoggedIn = false;
 
+var RIDER_CANCELLED_STATUS  = "Canceled";
 var DRIVER_CANCELLED_STATUS = "Canceled";
 var DRIVER_PAUSED_TEXT = "Paused Notifications";
 var DB_SUCCESS_CODE = "0";
@@ -101,6 +102,12 @@ function updateUIbyDriverReadyToMatch (readyToMatch) {
   $manage.find('#btnPauseDriverMatch').toggle(readyToMatch);
 }
 
+function updateUIbyRiderStatus (riderStatus) {
+  var riderNotCancelled = riderStatus !== RIDER_CANCELLED_STATUS;
+
+  $manage.find('#btnCancelRideRequest').toggle(riderNotCancelled);
+}
+
 $manage
   .on('click', '#btnCancelRideRequest', cancelRideRequest)
   .on('click', '#btnCancelRiderMatch', cancelRiderMatch)
@@ -110,19 +117,6 @@ $manage
   .on('click', '#btnAcceptDriverMatch', acceptDriverMatch)
   .on('click', '#logout', logout);
 
-
-function cancelRideRequest() {
-  if (!window.confirm('This will cancel your ride request. Are you sure you want to proceed?')) {
-    return;
-  }
-  sendAjaxRequest(
-    {
-      UUID: data.uuid,
-      RiderPhone: data.phone
-    },
-    '/cancel-ride-request'
-  );
-}
 
 function cancelRiderMatch() {
   if (!window.confirm('This will cancel your ride match. Are you sure you want to proceed?')) {
@@ -249,22 +243,14 @@ function driverExists () {
 function driverInfo () {
 //http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
 
-  var url =
-    remoteUrl + '/driver-info?' +
-    'UUID=' + data.uuid +
-    '&DriverPhone=' + data.phone;
-
-  var request = new XMLHttpRequest();
-
-  request.open("GET", url);
-  request.send();
-
-  request.onreadystatechange = function () {
-    if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      console.log(request.responseText);
-
-      var resp = JSON.parse(request.responseText);
-
+  accessCarpoolvoteAPI(    
+    createAPIurl({
+        UUID: data.uuid,
+        DriverPhone: data.phone
+      },
+      '/driver-info'
+    ), 
+    function (resp) {
       var keys = Object.keys(resp);
       if (keys) {
 
@@ -287,7 +273,6 @@ function driverInfo () {
             $(listSelector).append('<li><strong>' + DRIVER_PAUSED_TEXT.toUpperCase() + '</strong></li>');            
           }
 
-
           $(listSelector).append('<li>' + driverInfo.DriverFirstName + '</li>');
           $(listSelector).append('<li>' + driverInfo.DriverLastName + '</li>');
           $(listSelector).append('<li>' + driverInfo.UUID + '</li>');
@@ -295,10 +280,9 @@ function driverInfo () {
           $(listSelector).append('<li>' + driverInfo.DriverEmail + '</li>');
           $(listSelector).append('<li>' + driverInfo.DriverPhone + '</li>');
           $(listSelector).append('<li>' + driverInfo.DriverLicenseNumber + '</li>');
-        }
       }
     }
-  };
+  });
 }
 
 function processDbInfo (info) {
@@ -605,42 +589,45 @@ function riderExists () {
 }
 
 function riderInfo () {
-  var url =
-    remoteUrl + '/rider-info?' +
-    'UUID=' + data.uuid +
-    '&RiderPhone=' + data.phone;
 
-  var request = new XMLHttpRequest();
-
-  request.open("GET", url);
-  request.send();
-
-  request.onreadystatechange = function () {
-    if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      console.log(request.responseText);
-
-      var resp = JSON.parse(request.responseText);
-
+  accessCarpoolvoteAPI(
+    createAPIurl({
+        UUID: data.uuid,
+        RiderPhone: data.phone
+      },
+      '/rider-info'
+    ), 
+    function (resp) {
       var keys = Object.keys(resp);
+
       if (keys) {
 
         if (keys[0] == "rider_info" ) {
+          var li = "";
 
           var riderInfo = resp[keys[0]];
 
           var riderInfoList = [riderInfo.RiderFirstName, riderInfo.RiderLastName, riderInfo.UUID, riderInfo.RiderCollectionZIP, riderInfo.RiderEmail, riderInfo.RiderPhone];
           var tempList = '';
 
-          for(let i = 0; i < riderInfoList.length; i++) {
-            li = '<li>' + riderInfoList[i] + '</li>';
-            tempList += li;
+          if (riderInfo.status != undefined && riderInfo.status === RIDER_CANCELLED_STATUS) {
+            
+            updateUIbyRiderStatus(riderInfo.status);
+
+            li = '<li><strong>' + riderInfo.status.toUpperCase() + '</strong></li>';            
           }
+
+          tempList += li;
+
+          riderInfoList.map(function (value, idx, infoList){
+            li = '<li>' + riderInfoList[idx] + '</li>';
+            tempList += li;
+          });
 
           $("#riderInfo ul").append(tempList);
         }
       }
-    }
-  };
+    });
 }
 
 function riderConfirmedMatch () {
@@ -722,6 +709,31 @@ function pauseDriverMatch() {
   //   $info.text('⚠️ ' + err.statusText);
   // });
 }
+
+function cancelRideRequest() {
+  if (!window.confirm('This will cancel your ride request. Are you sure you want to proceed?')) {
+    return;
+  }
+
+  accessCarpoolvoteAPI(
+    createAPIurl({
+        UUID: data.uuid,
+        RiderPhone: data.phone
+      },
+      '/cancel-ride-request'
+    ),                                                     
+    function (response) {
+      handleMatchActionResponse
+        (response, $info, 
+          "rider_cancel_ride_request", DB_SUCCESS_CODE, DB_ERROR_PREFIX,
+          riderPageUpdate);
+    });
+  // .fail(function(err) {
+  //   $info.text('⚠️ ' + err.statusText);
+  // });
+}
+
+
 
 
 
