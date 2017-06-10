@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/jkbits1/voteamerica.github.io.svg?branch=slfsvc-driver-cancel)](https://travis-ci.org/jkbits1/voteamerica.github.io)
 
 # Carpool Vote
 
