@@ -1,4 +1,3 @@
-
 # Carpool Vote
 
 Carpool Vote connects volunteer drivers with anybody who needs a ride to claim their vote. We are a nonpartisan organisation: Our goal is to increase voter turnout and improve representation.
