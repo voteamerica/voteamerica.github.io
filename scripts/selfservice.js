@@ -607,7 +607,8 @@ function riderInfo () {
 
           var riderInfo = resp[keys[0]];
 
-          var riderInfoList = [riderInfo.RiderFirstName, riderInfo.RiderLastName, riderInfo.UUID, riderInfo.RiderCollectionZIP, riderInfo.RiderEmail, riderInfo.RiderPhone];
+          var infoListCaptions  = ["First Name", "Last Name", "UUID", "Collection ZIP", "Email", "Phone"];
+          var riderInfoList     = [riderInfo.RiderFirstName, riderInfo.RiderLastName, riderInfo.UUID, riderInfo.RiderCollectionZIP, riderInfo.RiderEmail, riderInfo.RiderPhone];
           var tempList = '';
 
           if (riderInfo.status != undefined && riderInfo.status === RIDER_CANCELLED_STATUS) {
@@ -619,9 +620,20 @@ function riderInfo () {
 
           tempList += li;
 
-          riderInfoList.map(function (value, idx, infoList){
-            li = '<li>' + riderInfoList[idx] + '</li>';
-            tempList += li;
+          var spanCaptions = infoListCaptions.map(function (caption) {
+            return "<span class='liLabel'>" + caption + "</span>"; 
+          });
+      
+          var liTexts = riderInfoList.map(function (riderInfoItem, idx) {
+            return spanCaptions[idx] + " - " + riderInfoItem;
+          });
+
+          liItems = liTexts.map(function (value) {
+            return '<li class="liInfo">' + value + '</li>';
+          });
+
+          liItems.forEach(function (liItem) {
+            tempList += liItem;
           });
 
           $("#riderInfo ul").append(tempList);
@@ -761,7 +773,7 @@ function handleActionResponse (response, $info, successCode, errorPrefix, pageUp
       dbDescription = errorPrefix + dbInfo.description;
     }
 
-    $info.text('ℹ️ ' + dbDescription);
+    $info.text('ii ' + dbDescription);
   }
 }
 
