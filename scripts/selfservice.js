@@ -588,6 +588,28 @@ function riderExists () {
   };
 }
 
+function createListItems (captions, details) {
+  var listItemsFragment = '';
+
+  var spanCaptions = captions.map(function (caption) {
+    return "<span class='liLabel'>" + caption + "</span>"; 
+  });
+
+  var liTexts = details.map(function (infoItem, idx) {
+    return spanCaptions[idx] + infoItem;
+  });
+
+  liItems = liTexts.map(function (value) {
+    return '<li class="liInfo">' + value + '</li>';
+  });
+
+  liItems.forEach(function (liItem) {
+    listItemsFragment += liItem;
+  });
+
+  return listItemsFragment;
+}
+
 function riderInfo () {
 
   accessCarpoolvoteAPI(
@@ -620,21 +642,7 @@ function riderInfo () {
 
           tempList += li;
 
-          var spanCaptions = infoListCaptions.map(function (caption) {
-            return "<span class='liLabel'>" + caption + "</span>"; 
-          });
-      
-          var liTexts = riderInfoList.map(function (riderInfoItem, idx) {
-            return spanCaptions[idx] + " - " + riderInfoItem;
-          });
-
-          liItems = liTexts.map(function (value) {
-            return '<li class="liInfo">' + value + '</li>';
-          });
-
-          liItems.forEach(function (liItem) {
-            tempList += liItem;
-          });
+          tempList += createListItems(infoListCaptions, riderInfoList);
 
           $("#riderInfo ul").append(tempList);
         }
@@ -744,10 +752,6 @@ function cancelRideRequest() {
   //   $info.text('⚠️ ' + err.statusText);
   // });
 }
-
-
-
-
 
 // dev artifact, to be removed
 function handleActionResponse (response, $info, successCode, errorPrefix, pageUpdateFn) {

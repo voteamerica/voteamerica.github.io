@@ -915,8 +915,26 @@ li.match-info-item {
     margin-bottom: 7px;
 }
 
+h2.self-service-heading {
+    /*margin-bottom: -2px;*/
+    margin-bottom: 20px;
+    margin-top: 25px;
+}
+
 h3.self-service-heading {
     margin-bottom: -2px;
+}
+
+.liLabel {
+    width: 140px;
+    display: inline-block;
+    font-weight: 700;
+}
+
+.liInfo {
+    list-style-type: none;
+    margin-left: -24px;
+
 }
 
 @media (min-width: 960px) {
