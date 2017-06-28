@@ -773,19 +773,6 @@ label {
     margin-bottom: 10px;
 }
 
-.self-service {
-    min-height: 300px;
-}
-
-.self-service .button {
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-#info {
-    font-weight: bold;
-}
-
 .text-inline{
 	display: inline-block;
 	margin-left:5px;
@@ -913,6 +900,7 @@ li.list_button{
 li.match-info-item {
     list-style-type: none;
     margin-bottom: 7px;
+    margin-left: -24px;
 }
 
 h2.self-service-heading {
@@ -931,11 +919,30 @@ h3.self-service-heading {
     font-weight: 700;
 }
 
-.liInfo {
+.self-service {
+    min-height: 300px;
+}
+
+.self-service .button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+button.self-service-list-button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 115px;
+}
+
+#info {
+    font-weight: bold;
+}
+
+/*.liInfo {
     list-style-type: none;
     margin-left: -24px;
-
-}
+}*/
 
 @media (min-width: 960px) {
     .support-banner {
