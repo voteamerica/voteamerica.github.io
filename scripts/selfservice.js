@@ -666,22 +666,14 @@ function riderInfo () {
 function riderConfirmedMatch () {
 //http://localhost:8000/rider-confirmed-match?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
 
-  var url =
-    remoteUrl + '/rider-confirmed-match?' +
-    'UUID=' + data.uuid +
-    '&RiderPhone=' + data.phone;
-
-  var request = new XMLHttpRequest();
-
-  request.open("GET", url);
-  request.send();
-
-  request.onreadystatechange = function () {
-    if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      console.log(request.responseText);
-
-      var resp = JSON.parse(request.responseText);
-
+  accessCarpoolvoteAPI(
+    createAPIurl({
+        UUID: data.uuid,
+        RiderPhone: data.phone
+      },
+      '/rider-confirmed-match'
+    ), 
+  function (resp) {
       var cancelButtonInList =  createListButton("cancelRiderMatchFromButton", "Cancel", ' class="button button--danger" ',
             resp.rider_confirmed_match.uuid_driver, resp.rider_confirmed_match.uuid_rider,
             resp.rider_confirmed_match.score, data.phone);
@@ -696,8 +688,7 @@ function riderConfirmedMatch () {
         $(listSelector).append('<li class="match-info-item">  driver email - ' + resp.rider_confirmed_match.DriverEmail + '</li>');
         $(listSelector).append('<li class="list_button">' + cancelButtonInList + '</li>');
       }
-    }
-  };
+  });
 }
 
 function cancelDriveOffer() {
