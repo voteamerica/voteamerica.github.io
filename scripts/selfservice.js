@@ -255,31 +255,46 @@ function driverInfo () {
       if (keys) {
 
         if (keys[0] == "driver_info" ) {
-
-          var driverInfo = resp[keys[0]];
-          var listSelector = "#driverInfo ul";
+          var driverInfo        = resp[keys[0]];
+          var listItems          = '';
+          var li                = "";
+          var listSelector      = "#driverInfo ul";
+          var infoListCaptions  = ["First Name", "Last Name", "UUID", "Collection ZIP", "Email", "Phone", "License Number"];
+          var driverInfoList     = [driverInfo.DriverFirstName, driverInfo.DriverLastName, driverInfo.UUID, driverInfo.DriverCollectionZIP, driverInfo.DriverEmail, driverInfo.DriverPhone, driverInfo.DriverLicenseNumber];
 
           if (driverInfo.status != undefined && driverInfo.status === DRIVER_CANCELLED_STATUS) {
             
             updateUIbyDriverStatus(driverInfo.status);
 
-            $(listSelector).append('<li><strong>' + driverInfo.status.toUpperCase() + '</strong></li>');            
+            li = '<li><strong>' + driverInfo.status.toUpperCase() + '</strong></li>';
+
+            // $(listSelector).append();
           }
+
+          listItems += li;
 
           if (driverInfo.ReadyToMatch != undefined && driverInfo.ReadyToMatch === false) {
             
             updateUIbyDriverReadyToMatch(driverInfo.ReadyToMatch);
 
-            $(listSelector).append('<li><strong>' + DRIVER_PAUSED_TEXT.toUpperCase() + '</strong></li>');            
+            li = '<li><strong>' + DRIVER_PAUSED_TEXT.toUpperCase() + '</strong></li>';
+
+            // $(listSelector).append();
           }
 
-          $(listSelector).append('<li>' + driverInfo.DriverFirstName + '</li>');
-          $(listSelector).append('<li>' + driverInfo.DriverLastName + '</li>');
-          $(listSelector).append('<li>' + driverInfo.UUID + '</li>');
-          $(listSelector).append('<li>' + driverInfo.DriverCollectionZIP + '</li>');
-          $(listSelector).append('<li>' + driverInfo.DriverEmail + '</li>');
-          $(listSelector).append('<li>' + driverInfo.DriverPhone + '</li>');
-          $(listSelector).append('<li>' + driverInfo.DriverLicenseNumber + '</li>');
+          listItems += li;
+
+          listItems += createListItems(infoListCaptions, driverInfoList);
+
+          $(listSelector).append(listItems);
+
+          // $(listSelector).append('<li>' + driverInfo.DriverFirstName + '</li>');
+          // $(listSelector).append('<li>' + driverInfo.DriverLastName + '</li>');
+          // $(listSelector).append('<li>' + driverInfo.UUID + '</li>');
+          // $(listSelector).append('<li>' + driverInfo.DriverCollectionZIP + '</li>');
+          // $(listSelector).append('<li>' + driverInfo.DriverEmail + '</li>');
+          // $(listSelector).append('<li>' + driverInfo.DriverPhone + '</li>');
+          // $(listSelector).append('<li>' + driverInfo.DriverLicenseNumber + '</li>');
       }
     }
   });
@@ -625,13 +640,11 @@ function riderInfo () {
       if (keys) {
 
         if (keys[0] == "rider_info" ) {
-          var li = "";
-
-          var riderInfo = resp[keys[0]];
-
+          var riderInfo         = resp[keys[0]];
+          var listItems          = '';
+          var li                = "";
           var infoListCaptions  = ["First Name", "Last Name", "UUID", "Collection ZIP", "Email", "Phone"];
           var riderInfoList     = [riderInfo.RiderFirstName, riderInfo.RiderLastName, riderInfo.UUID, riderInfo.RiderCollectionZIP, riderInfo.RiderEmail, riderInfo.RiderPhone];
-          var tempList = '';
 
           if (riderInfo.status != undefined && riderInfo.status === RIDER_CANCELLED_STATUS) {
             
@@ -640,11 +653,11 @@ function riderInfo () {
             li = '<li><strong>' + riderInfo.status.toUpperCase() + '</strong></li>';            
           }
 
-          tempList += li;
+          listItems += li;
 
-          tempList += createListItems(infoListCaptions, riderInfoList);
+          listItems += createListItems(infoListCaptions, riderInfoList);
 
-          $("#riderInfo ul").append(tempList);
+          $("#riderInfo ul").append(listItems);
         }
       }
     });
