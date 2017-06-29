@@ -899,7 +899,7 @@ li.list_button{
 
 li.match-info-item {
     list-style-type: none;
-    margin-bottom: 7px;
+    /*margin-bottom: 7px;*/
     margin-left: -24px;
 }
 
@@ -917,6 +917,7 @@ h3.self-service-heading {
     width: 140px;
     display: inline-block;
     font-weight: 700;
+    line-height: 1.4em;
 }
 
 .self-service {

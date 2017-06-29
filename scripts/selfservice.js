@@ -267,8 +267,6 @@ function driverInfo () {
             updateUIbyDriverStatus(driverInfo.status);
 
             li = '<li><strong>' + driverInfo.status.toUpperCase() + '</strong></li>';
-
-            // $(listSelector).append();
           }
 
           listItems += li;
@@ -278,8 +276,6 @@ function driverInfo () {
             updateUIbyDriverReadyToMatch(driverInfo.ReadyToMatch);
 
             li = '<li><strong>' + DRIVER_PAUSED_TEXT.toUpperCase() + '</strong></li>';
-
-            // $(listSelector).append();
           }
 
           listItems += li;
@@ -465,92 +461,134 @@ function createListButton (dbFunctionName, buttonCaption, buttonClass,
 }
 
 function driverProposedMatches () {
-  var url =
-    remoteUrl + '/driver-proposed-matches?' +
-    'UUID=' + data.uuid +
-    '&DriverPhone=' + data.phone;
+  // var url =
+  //   remoteUrl + '/driver-proposed-matches?' +
+  //   'UUID=' + data.uuid +
+  //   '&DriverPhone=' + data.phone;
 
-  var request = new XMLHttpRequest();
+  // var request = new XMLHttpRequest();
 
-  request.open("GET", url);
-  request.send();
+  // request.open("GET", url);
+  // request.send();
 
-  request.onreadystatechange = function () {
-    if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      console.log(request.responseText);
+  // request.onreadystatechange = 
 
-      var resp = JSON.parse(request.responseText);
+  accessCarpoolvoteAPI(
+    createAPIurl({
+        UUID: data.uuid,
+        DriverPhone: data.phone
+      },
+      '/driver-proposed-matches'
+    ), 
+  
+  function (resp) {
+    // if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+    //   console.log(request.responseText);
 
-      resp.forEach(val => {
-// var acceptUrl = remoteUrl + '/accept-driver-match?UUID_driver=' + val.driver_proposed_matches.uuid_driver +
-//                             '&UUID_rider=' + val.driver_proposed_matches.uuid_rider +
-//                             '&Score=' + val.driver_proposed_matches.score +
-//                             '&DriverPhone=' + data.phone;
+    //   var resp = JSON.parse(request.responseText);
 
-        var acceptButtonInList =
-          createListButton("acceptDriverMatchFromButton", "Accept", ' class="button" ',
-            val.driver_proposed_matches.uuid_driver, val.driver_proposed_matches.uuid_rider,
-            val.driver_proposed_matches.score, data.phone);
+      resp.forEach(match => {
+        var listItems           = '';
+        var li                  = "";
+        var infoListCaptions    = 
+              [ "UUID_driver", "UUID_rider"
+              , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Contact Method and Notes"
+              ];
+        var matchInfoList       = 
+          [ match.driver_proposed_matches.uuid_driver
+          , match.driver_proposed_matches.uuid_rider
+          , match.driver_proposed_matches.RiderCollectionZIP + ' ' + match.driver_proposed_matches.RiderCollectionAddress
+          , match.driver_proposed_matches.RiderDropOffZIP + ' ' + match.driver_proposed_matches.RiderDestinationAddress
+          , match.driver_proposed_matches.RiderPreferredContact + ' ' + match.driver_proposed_matches.RiderAccommodationNotes
+          ];
+
         var listSelector = "#driverProposedMatches ul";
+        var acceptButtonInList =
+          createListButton("acceptDriverMatchFromButton", "Accept", ' class="button self-service-list-button" ',
+            match.driver_proposed_matches.uuid_driver, match.driver_proposed_matches.uuid_rider,
+            match.driver_proposed_matches.score, data.phone);
 
+        // $(listSelector).append('<li>UUID_driver - ' + match.driver_proposed_matches.uuid_driver + '</li>');
+        // $(listSelector).append('<li>UUID_rider - ' + match.driver_proposed_matches.uuid_rider + '</li>');
+        // // $(listSelector).append('<li class="match-info-item">  rider name - ' + match.driver_proposed_matches.RiderFirstName + ' ' + match.driver_proposed_matches.RiderLastName + '</li>');
+        // // $(listSelector).append('<li class="match-info-item">  rider phone - ' + match.driver_proposed_matches.RiderPhone + '</li>');
+        // // $(listSelector).append('<li class="match-info-item">  rider email - ' + match.driver_proposed_matches.RiderEmail + '</li>');
+        // $(listSelector).append('<li class="match-info-item">  rider collection - ' + match.driver_proposed_matches.RiderCollectionZIP + ' ' + match.driver_proposed_matches.RiderCollectionAddress + '</li>');
+        // $(listSelector).append('<li class="match-info-item">  rider drop off - ' + match.driver_proposed_matches.RiderDropOffZIP + ' ' + match.driver_proposed_matches.RiderDestinationAddress + '</li>');
+        // $(listSelector).append('<li class="match-info-item">  rider contact method, notes - ' + match.driver_proposed_matches.RiderPreferredContact + ' ' + match.driver_proposed_matches.RiderAccommodationNotes + '</li>');
+        // $(listSelector).append('<li class="list_button">' + acceptButtonInList + '</li>');
 
-        $(listSelector).append('<li> UUID_driver - ' + val.driver_proposed_matches.uuid_driver + '</li>');
-        $(listSelector).append('<li>  UUID_rider - ' + val.driver_proposed_matches.uuid_rider + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  rider name - ' + val.driver_proposed_matches.RiderFirstName + ' ' + val.driver_proposed_matches.RiderLastName + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  rider phone - ' + val.driver_proposed_matches.RiderPhone + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  rider email - ' + val.driver_proposed_matches.RiderEmail + '</li>');
-        $(listSelector).append('<li class="match-info-item">  rider collection - ' + val.driver_proposed_matches.RiderCollectionZIP + ' ' + val.driver_proposed_matches.RiderCollectionAddress + '</li>');
-        $(listSelector).append('<li class="match-info-item">  rider drop off - ' + val.driver_proposed_matches.RiderDropOffZIP + ' ' + val.driver_proposed_matches.RiderDestinationAddress + '</li>');
-        $(listSelector).append('<li class="match-info-item">  rider contact method, notes - ' + val.driver_proposed_matches.RiderPreferredContact + ' ' + val.driver_proposed_matches.RiderAccommodationNotes + '</li>');
-        $(listSelector).append('<li class="list_button">' + acceptButtonInList + '</li>');
-       
+        listItems += createListItems(infoListCaptions, matchInfoList);
+        listItems += '<li class="list_button">' + acceptButtonInList + '</li>';
+
+        $(listSelector).append(listItems);      
+
         // https://api.carpoolvote.com/v2.0/accept-driver-match?UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897&Score=123&DriverPhone=123
+        // var acceptUrl = remoteUrl + '/accept-driver-match?UUID_driver=' + match.driver_proposed_matches.uuid_driver +
+        //                             '&UUID_rider=' + match.driver_proposed_matches.uuid_rider +
+        //                             '&Score=' + match.driver_proposed_matches.score +
+        //                             '&DriverPhone=' + data.phone;
       });
-    }
-  };
+  });
 }
 
 function driverConfirmedMatches () {
-  var url =
-    remoteUrl + '/driver-confirmed-matches?' +
-    'UUID=' + data.uuid +
-    '&DriverPhone=' + data.phone;
+  // https://api.carpoolvote.com/v2.0/cancel-driver-match?UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897&Score=123&DriverPhone=123
 
-  var request = new XMLHttpRequest();
+  accessCarpoolvoteAPI(
+    createAPIurl({
+        UUID: data.uuid,
+        DriverPhone: data.phone
+      },
+      '/driver-confirmed-matches'
+    ), 
+  
+  function (resp) {
+      resp.forEach(match => {
+        var listItems           = '';
+        var li                  = "";
+        var infoListCaptions    = 
+              [ "UUID_driver", "UUID_rider", "Rider Name", "Rider Phone", "Rider Email"
+              , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Contact Method and Notes"
+              ];
+        var matchInfoList       = 
+          [ match.driver_confirmed_matches.uuid_driver
+          , match.driver_confirmed_matches.uuid_rider
+          , match.driver_confirmed_matches.RiderFirstName + ' ' + match.driver_confirmed_matches.RiderLastName
+          , match.driver_confirmed_matches.RiderPhone
+          , match.driver_confirmed_matches.RiderEmail
+          , match.driver_confirmed_matches.RiderCollectionZIP + ' ' + match.driver_confirmed_matches.RiderCollectionAddress
+          , match.driver_confirmed_matches.RiderDropOffZIP + ' ' + match.driver_confirmed_matches.RiderDestinationAddress
+          , match.driver_confirmed_matches.RiderPreferredContact + ' ' + match.driver_confirmed_matches.RiderAccommodationNotes
+          ];
 
-  request.open("GET", url);
-  request.send();
-
-  request.onreadystatechange = function () {
-    if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      console.log(request.responseText);
-
-      var resp = JSON.parse(request.responseText);
-
-      resp.forEach(val => {
-
-        var cancelButtonInList =  createListButton("cancelDriverMatchFromButton", "Cancel", ' class="button button--danger" ',
-            val.driver_confirmed_matches.uuid_driver, val.driver_confirmed_matches.uuid_rider,
-            val.driver_confirmed_matches.score, data.phone);
         var listSelector = "#driverConfirmedMatches ul";
+        var cancelButtonInList = 
+              createListButton("cancelDriverMatchFromButton", 
+                "Cancel", 
+                ' class="button button--danger self-service-list-button" ',
+                match.driver_confirmed_matches.uuid_driver, match.driver_confirmed_matches.uuid_rider,
+                match.driver_confirmed_matches.score, data.phone);
 
-        var tmpList = '';
+        // var tmpList = '';
 
-        $(listSelector).append('<li> UUID_driver - ' + val.driver_confirmed_matches.uuid_driver + '</li>');
-        $(listSelector).append('<li>  UUID_rider - ' + val.driver_confirmed_matches.uuid_rider + '</li>');
-        $(listSelector).append('<li class="match-info-item">  rider name - ' + val.driver_confirmed_matches.RiderFirstName + ' ' + val.driver_confirmed_matches.RiderLastName + '</li>');
-        $(listSelector).append('<li class="match-info-item">  rider phone - ' + val.driver_confirmed_matches.RiderPhone + '</li>');
-        $(listSelector).append('<li class="match-info-item">  rider email - ' + val.driver_confirmed_matches.RiderEmail + '</li>');
-        $(listSelector).append('<li class="match-info-item">  rider collection - ' + val.driver_confirmed_matches.RiderCollectionZIP + ' ' + val.driver_confirmed_matches.RiderCollectionAddress + '</li>');
-        $(listSelector).append('<li class="match-info-item">  rider drop off - ' + val.driver_confirmed_matches.RiderDropOffZIP + ' ' + val.driver_confirmed_matches.RiderDestinationAddress + '</li>');
-        $(listSelector).append('<li class="match-info-item">  rider contact method, notes - ' + val.driver_confirmed_matches.RiderPreferredContact + ' ' + val.driver_confirmed_matches.RiderAccommodationNotes + '</li>');
-        $(listSelector).append('<li class="list_button">' + cancelButtonInList + '</li>');
-        // $(listSelector).append('<li> (after clicking Cancel, refresh browser page) </li>');
+        // $(listSelector).append('<li> UUID_driver - ' + match.driver_confirmed_matches.uuid_driver + '</li>');
+        // $(listSelector).append('<li>  UUID_rider - ' + match.driver_confirmed_matches.uuid_rider + '</li>');
+        // $(listSelector).append('<li class="match-info-item">  rider name - ' + match.driver_confirmed_matches.RiderFirstName + ' ' + match.driver_confirmed_matches.RiderLastName + '</li>');
+        // $(listSelector).append('<li class="match-info-item">  rider phone - ' + match.driver_confirmed_matches.RiderPhone + '</li>');
+        // $(listSelector).append('<li class="match-info-item">  rider email - ' + match.driver_confirmed_matches.RiderEmail + '</li>');
+        // $(listSelector).append('<li class="match-info-item">  rider collection - ' + match.driver_confirmed_matches.RiderCollectionZIP + ' ' + match.driver_confirmed_matches.RiderCollectionAddress + '</li>');
+        // $(listSelector).append('<li class="match-info-item">  rider drop off - ' + match.driver_confirmed_matches.RiderDropOffZIP + ' ' + match.driver_confirmed_matches.RiderDestinationAddress + '</li>');
+        // $(listSelector).append('<li class="match-info-item">  rider contact method, notes - ' + match.driver_confirmed_matches.RiderPreferredContact + ' ' + match.driver_confirmed_matches.RiderAccommodationNotes + '</li>');
 
-        // https://api.carpoolvote.com/v2.0/cancel-driver-match?UUID_driver=1e6e274d-ad33-4127-9f02-f35b48a07897&UUID_rider=1e6e274d-ad33-4127-9f02-f35b48a07897&Score=123&DriverPhone=123
+        // $(listSelector).append('<li class="list_button">' + cancelButtonInList + '</li>');
+
+        listItems += createListItems(infoListCaptions, matchInfoList);
+        listItems += '<li class="list_button">' + cancelButtonInList + '</li>';
+
+        $(listSelector).append(listItems);      
       });
-    }
-  };
+    });
 }
 
 function riderExists () {
@@ -668,7 +706,6 @@ function riderConfirmedMatch () {
   function (resp) {
       var listItems           = '';
       var li                  = "";
-      var cancelButtonInList  = "";
       var infoListCaptions    = ["UUID_driver", "UUID_rider", "Driver Name", "Driver Phone", "Driver Email"];
       var matchInfoList       = 
         [ resp.rider_confirmed_match.uuid_driver
@@ -679,21 +716,15 @@ function riderConfirmedMatch () {
         ];
 
       if (resp.rider_confirmed_match.uuid_driver !== null) {
-        var listSelector = "#riderConfirmedMatch ul";
-
-        listItems += createListItems(infoListCaptions, matchInfoList);
-
-        // $(listSelector).append('<li> UUID_driver - ' + resp.rider_confirmed_match.uuid_driver + '</li>');
-        // $(listSelector).append('<li>  UUID_rider - ' + resp.rider_confirmed_match.uuid_rider + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  driver name - ' + resp.rider_confirmed_match.DriverFirstName + ' ' + resp.rider_confirmed_match.DriverLastName + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  driver phone - ' + resp.rider_confirmed_match.DriverPhone + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  driver email - ' + resp.rider_confirmed_match.DriverEmail + '</li>');
-
-        cancelButtonInList =
-         createListButton("cancelRiderMatchFromButton", "Cancel", ' class="button button--danger self-service-list-button" ',
+        var listSelector        = "#riderConfirmedMatch ul";
+        var cancelButtonInList  = 
+          createListButton("cancelRiderMatchFromButton", 
+            "Cancel", 
+            ' class="button button--danger self-service-list-button" ',
             resp.rider_confirmed_match.uuid_driver, resp.rider_confirmed_match.uuid_rider,
             resp.rider_confirmed_match.score, data.phone);
 
+        listItems += createListItems(infoListCaptions, matchInfoList);
         listItems += '<li class="list_button">' + cancelButtonInList + '</li>';
 
         $(listSelector).append(listItems);      
