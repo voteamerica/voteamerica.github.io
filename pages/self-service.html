@@ -41,44 +41,34 @@ title: Manage your matches
                 <div id="manage" style="display:none" aria-hidden="true">
                     <p>Welcome to the new self-service admin page. Please note that this section is still a work in progress. Some features are still under contruction, and may be a little temperamental. If you encounter any issues, please <a href="mailto:selfservice@carpoolvote.com">email us</a>. Thank you for your understanding!</p>
                     <p id="infoAdmin"></p>
-                    
+
+                    <!--https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute  -->
+                    <!--https://www.w3.org/TR/wai-aria/states_and_properties#aria-labelledby-->
                     <div id="driverInfo">
-                        <h2 class="self-service-heading">Driver Info</h2>
-                        <ul>
-
-                        </ul>
-
+                        <h2 id="driverInfoHeader" class="self-service-heading">Driver Info</h2>
+                        <ul aria-labelledby="driverInfoHeader"></ul>
                     </div>
-
                     
                     <div id="driverProposedMatches">
-                        <h2 class="self-service-heading">Driver Proposed Matches</h2>
-                        <ul>
-                            
-                        </ul>
+                        <h2 id="driverProposedHeader" class="self-service-heading">Driver Proposed Matches</h2>
+                        <ul aria-labelledby="driverProposedHeader"></ul>
                         <br><br>
                     </div>
                     
                     <div id="driverConfirmedMatches">
-                        <h2 class="self-service-heading">Driver Confirmed Matches</h2>
-                        <ul>
-                            
-                        </ul>
+                        <h2 id="driverConfirmedHeader" class="self-service-heading">Driver Confirmed Matches</h2>
+                        <ul aria-labelledby="driverConfirmedHeader"></ul>
                         <br><br>
                     </div>
                     
                     <div id="riderInfo">
-                        <h2 class="self-service-heading">Rider Info</h2>
-                        <ul>
-
-                        </ul>
+                        <h2 id="riderInfoHeader" class="self-service-heading">Rider Info</h2>
+                        <ul aria-labelledby="riderInfoHeader"></ul>
                     </div>
                     
                     <div id="riderConfirmedMatch">
-                        <h2 class="self-service-heading">Rider Confirmed Match</h2>
-                        <ul>
-                            
-                        </ul>
+                        <h2 id="riderConfirmedHeader" class="self-service-heading">Rider Confirmed Match</h2>
+                        <ul aria-labelledby="riderConfirmedHeader"></ul>
                         <br><br>
                     </div>
 
