@@ -30,11 +30,11 @@ if (data.uuid_rider) {
 }
 
 // Cache jQuery selectors:
-var $login = $('#login'),
-  $manage = $('#manage'),
-  $manageLogin = $('#manageLogin'),
-  $info = $manage.find('#info'),
-  $infoLogin = $manageLogin.find('#info')
+var $login      = $('#login'),
+  $manage       = $('#manage'),
+  $info         = $('#manage #infoAdmin'),
+  $manageLogin  = $('#manageLogin'),
+  $infoLogin    = $('#manageLogin #infoLogin')
   ;
 
 
