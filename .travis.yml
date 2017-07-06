@@ -26,12 +26,17 @@ install:
 
   - echo "event" $TRAVIS_EVENT_TYPE
 
+  # - BE_BRANCH=master
+  - BE_BRANCH=docker-test
+
+  - echo BE BRANCH $BE_BRANCH
+
   - echo install
 
   - pwd
 
-  # - git clone --single-branch --branch master https://github.com/jkbits1/backend $HOME/build/jkbits1/be
-  - git clone --single-branch --branch master https://github.com/voteamerica/backend $HOME/build/voteamerica/be
+  # - git clone --single-branch --branch master https://github.com/voteamerica/backend $HOME/build/voteamerica/be
+  - git clone --single-branch --branch $BE_BRANCH https://github.com/voteamerica/backend $HOME/build/voteamerica/be
 
   - ls $HOME/build/voteamerica/be
 
