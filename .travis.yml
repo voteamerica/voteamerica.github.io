@@ -26,8 +26,8 @@ install:
 
   - echo "event" $TRAVIS_EVENT_TYPE
 
-  # - BE_REPO=https://github.com/voteamerica/backend
-  - BE_REPO=https://github.com/jkbits1/backend
+  # - BE_REPO=voteamerica/backend
+  - BE_REPO=jkbits1/backend
 
   # - BE_BRANCH=master
   - BE_BRANCH=docker-test
@@ -40,7 +40,7 @@ install:
   - pwd
 
   # - git clone --single-branch --branch master https://github.com/voteamerica/backend $HOME/build/voteamerica/be
-  - git clone --single-branch --branch $BE_BRANCH $BE_REPO $HOME/build/voteamerica/be
+  - git clone --single-branch --branch $BE_BRANCH https://github.com/$BE_REPO $HOME/build/voteamerica/be
 
   - ls $HOME/build/voteamerica/be
 
