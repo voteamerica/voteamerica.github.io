@@ -827,11 +827,6 @@ button.self-service-list-button {
     font-weight: bold;
 }
 
-/*.liInfo {
-    list-style-type: none;
-    margin-left: -24px;
-}*/
-
 /* Media queries */
 
 @media (min-width: 400px) {

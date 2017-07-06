@@ -798,34 +798,6 @@ function cancelRideRequest() {
   // });
 }
 
-// dev artifact, to be removed
-function handleActionResponse (response, $info, successCode, errorPrefix, pageUpdateFn) {
-  var keys = Object.keys(response);
-  var firstKey = keys[0];
-  var dbDescription = "";
-  var dbInfo;
-
-  if (keys) {
-    // info = dbInfo[keys[0]].toString();
-    // $info.text('ℹ️ ' + info);
-
-    var info = response[firstKey].toString(); 
-
-    dbInfo = processDbInfo(info);
-
-    if (dbInfo.code === successCode) {
-      dbDescription = dbInfo.description;
-
-      pageUpdateFn();
-    }
-    else {
-      dbDescription = errorPrefix + dbInfo.description;
-    }
-
-    $info.text('ii ' + dbDescription);
-  }
-}
-
 function createAPIurl (params, apiRoute) {
   var url = "";
 
