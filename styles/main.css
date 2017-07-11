@@ -773,6 +773,40 @@ label {
     margin-bottom: 10px;
 }
 
+.text-inline{
+	display: inline-block;
+	margin-left:5px;
+}
+
+/* Self service page */
+li.list_button{
+    list-style-type: none;
+    margin-bottom: 30px;
+}
+
+li.match-info-item {
+    list-style-type: none;
+    /*margin-bottom: 7px;*/
+    margin-left: -24px;
+}
+
+h2.self-service-heading {
+    /*margin-bottom: -2px;*/
+    margin-bottom: 20px;
+    margin-top: 25px;
+}
+
+h3.self-service-heading {
+    margin-bottom: -2px;
+}
+
+.liLabel {
+    width: 140px;
+    display: inline-block;
+    font-weight: 700;
+    line-height: 1.4em;
+}
+
 .self-service {
     min-height: 300px;
 }
@@ -782,13 +816,15 @@ label {
     margin-bottom: 10px;
 }
 
-#info {
-    font-weight: bold;
+button.self-service-list-button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 115px;
 }
 
-.text-inline{
-	display: inline-block;
-	margin-left:5px;
+#info {
+    font-weight: bold;
 }
 
 /* Media queries */
@@ -902,21 +938,6 @@ label {
         margin-left: 15px;
         margin-right: 15px;
     }
-}
-
-/* Self service page */
-li.list_button{
-    list-style-type: none;
-    margin-bottom: 30px;
-}
-
-li.match-info-item {
-    list-style-type: none;
-    margin-bottom: 7px;
-}
-
-h3.self-service-heading {
-    margin-bottom: -2px;
 }
 
 @media (min-width: 960px) {
