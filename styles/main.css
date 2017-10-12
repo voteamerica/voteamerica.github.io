@@ -988,6 +988,11 @@ button.self-service-list-button {
         float: left;
     }
 
+    .polling-place {
+      max-width: 298px;
+      float: right;
+    }
+
     .time-range-slider {
         max-width: 700px;
     }
