@@ -557,8 +557,7 @@ label {
     margin: 5px 10px 0 10px;
 }
 
-.has-error label,
-.has-error .help-block {
+.has-error {
     color: #a94442;
 }
 
