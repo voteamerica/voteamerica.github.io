@@ -4,15 +4,15 @@
         <div class="wrapper">
             <ul class="footer__links footer__links--left">
                 <li><strong>Contact us:</strong> <a href="mailto:together@carpoolvote.com">together@carpoolvote.com</a></li>
-                {% if page.url != '/faq' %}
+                {% if page.url != '/faq/' %}
                     <li><a href="{{ baseurl }}faq/">Frequently-Asked Questions</a></li>
                 {% endif %}
             </ul>
             <ul class="footer__links footer__links--right">
-                {% if page.url != '/self-service' %}
+                {% if page.url != '/self-service/' %}
                     <li><a href="{{ baseurl }}self-service/">Self-service portal</a></li>
                 {% endif %}
-                {% if page.url != '/terms-conditions' %}
+                {% if page.url != '/terms-conditions/' %}
                     <li><a href="{{ baseurl }}terms-conditions/">Terms &amp; conditions</a></li>
                 {% endif %}
             </ul>
