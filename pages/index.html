@@ -334,7 +334,12 @@ permalink: /
             <!-- Map CSS is inherited from Leaflet, but need to set a minimum height -->
             <div class="bannerbox__content">
                 <p>This map shows voters who still need a ride and available volunteer drivers.</p>
-                <div id="map" style="height: 400px; width: 100%;"></div>
+                <p id="mapLoadingMessage">Loading requested rides and volunteers...</p>
+                <p id="noMapDataAvailable" style="display:none">
+                    We don't have any participants to map at the moment. As soon as someone (maybe you!) reqeuests a ride 
+                    or offers a ride, they will show up here.
+                </div>
+                <div id="map" style="height: 400px; width: 100%; display:none;"></div>
             </div>
         </div>
         <div id="grid" class="about__padding" data-columns>
