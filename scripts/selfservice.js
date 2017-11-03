@@ -68,15 +68,14 @@ $login.validator().on('submit', function(e) {
     riderExists();
   }
 
-  // done in driver exists
-  //
-  // $(this).slideUp(300).attr('aria-hidden','true');
-  // $manage.slideDown(300).attr('aria-hidden','false');
-  // updateUI();
   e.preventDefault();
 });
 
 function updateUI(uuid, type, phone) {
+  // Hide login form and show user info
+  $login.slideUp(300).attr('aria-hidden','true');
+  $manage.slideDown(300).attr('aria-hidden','false');
+
   // NOTE: this handling isn't quite correct, so avoid refactoring without full testing
   var dataTypeDriver = data.type === 'driver';
   var dataTypeRider  = data.type === 'rider';
@@ -225,8 +224,6 @@ function driverExists () {
         if (keys[0] == "driver_exists" && info === "") {
           driverLoggedIn = true;
 
-          $(this).slideUp(300).attr('aria-hidden','true');
-          $manage.slideDown(300).attr('aria-hidden','false');
           updateUI();
 
           clearDriverInfo ();
@@ -619,8 +616,6 @@ function riderExists () {
         if (keys[0] == "rider_exists" && info === "") {
           riderLoggedIn = true;
 
-          $(this).slideUp(300).attr('aria-hidden','true');
-          $manage.slideDown(300).attr('aria-hidden','false');
           updateUI();
 
           clearRiderInfo ();
