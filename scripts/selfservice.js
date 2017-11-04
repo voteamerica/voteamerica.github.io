@@ -82,10 +82,9 @@ function updateUI(uuid, type, phone) {
 
   $manage.find('#btnCancelDriveOffer').toggle(dataTypeDriver);
   $manage.find('#btnPauseDriverMatch').toggle(dataTypeDriver);
-  $manage.find('#btnCancelDriverMatch').toggle(dataTypeRider && data.uuid_driver !== undefined && data.score !== 'undefined');
+  $manage.find('#btnCancelMatch').toggle(data.uuid_driver !== undefined && data.score !== 'undefined');
 
   $manage.find('#btnCancelRideRequest').toggle(dataTypeRider);
-  $manage.find('#btnCancelRiderMatch').toggle(dataTypeRider && data.uuid_driver !== undefined && data.score !== 'undefined');
 
   $manage.find('#btnAcceptDriverMatch').toggle(dataTypeRider && data.uuid_driver !== undefined && data.score !== 'undefined');
 }
@@ -109,15 +108,14 @@ function updateUIbyRiderStatus (riderStatus) {
 
 $manage
   .on('click', '#btnCancelRideRequest', cancelRideRequest)
-  .on('click', '#btnCancelRiderMatch', cancelRiderMatch)
+  .on('click', '#btnCancelMatch', cancelMatch)
   .on('click', '#btnCancelDriveOffer', cancelDriveOffer)
-  .on('click', '#btnCancelDriverMatch', cancelDriverMatch)
   .on('click', '#btnPauseDriverMatch', pauseDriverMatch)
   .on('click', '#btnAcceptDriverMatch', acceptDriverMatch)
   .on('click', '#logout', logout);
 
 
-function cancelRiderMatch() {
+function cancelMatch() {
   if (!window.confirm('This will cancel your ride match. Are you sure you want to proceed?')) {
     return;
   }
@@ -128,22 +126,7 @@ function cancelRiderMatch() {
       Score: data.score,
       RiderPhone: data.phone
     },
-    '/cancel-rider-match'
-  );
-}
-
-function cancelDriverMatch() {
-  if (!window.confirm('This will cancel your ride match. Are you sure you want to proceed?')) {
-    return;
-  }
-  sendAjaxRequest(
-    {
-      UUID_driver: data.uuid_driver,
-      UUID_rider: data.uuid,
-      Score: data.score,
-      RiderPhone: data.phone
-    },
-    '/cancel-driver-match'
+    '/cancel-' + data.type + '-match'
   );
 }
 
