@@ -1,13 +1,13 @@
-var data = tinyQuery.getAll();
+var queryStringData = tinyQuery.getAll();
 
-if (data.code !== '0') {
+if (queryStringData.code !== '0') {
   $('#thanks').hide();
 
   var responseInfo = ['code', 'info'].filter(function(d) {
-			return data[d];
+			return queryStringData[d];
 		})
 		.map(function(d) {
-			return '<p><small>Response ' + d + ': <b>' + data[d] + '</b></small></p>';
+			return '<p><small>Response ' + d + ': <b>' + queryStringData[d] + '</b></small></p>';
 		})
 		.join('');
 
