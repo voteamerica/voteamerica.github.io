@@ -3,13 +3,13 @@ var data = tinyQuery.getAll();
 if (data.code !== '0') {
   $('#thanks').hide();
 
-  var $sorry = $('#sorry');
-  $sorry.show();
+  var responseInfo = ['code', 'info'].filter(function(d) {
+			return data[d];
+		})
+		.map(function(d) {
+			return '<p><small>Response ' + d + ': <b>' + data[d] + '</b></small></p>';
+		})
+		.join('');
 
-  if (data.code) {
-  	$sorry.append('<p><small>Response code: <b>' + data.code + '</b></small></p>');
-  }
-  if (data.info) {
-  	$sorry.append('<p><small>Response info: <b>' + data.info + '</b></small></p>');
-  }
+  $('#sorry').show().append(responseInfo);
 }
