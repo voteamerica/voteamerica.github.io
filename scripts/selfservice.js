@@ -777,20 +777,7 @@ function cancelRideRequest() {
 }
 
 function createAPIurl (params, apiRoute) {
-  var url = "";
-
-  var keys = Object.keys(params);
-
-  keys.forEach(function (key, idx) {
-    if (idx > 0) {
-      url += "&";
-    }
-    url += key + "=" + params[key].toString();    
-  });
-
-  url = remoteUrl + apiRoute + "?" + url;
-
-  return url;
+  return tinyQuery.set(params, remoteUrl + apiRoute);
 }
 
 function accessCarpoolvoteAPI (url, handlerFunction) {
