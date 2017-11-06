@@ -830,7 +830,7 @@ button.self-service-list-button {
 
 @media (min-width: 400px) {
     .nav__link {
-        font-size: 1em;
+        font-size: 16px;
     }
 }
 
@@ -1012,7 +1012,7 @@ button.self-service-list-button {
     }
 
     .nav__link {
-        font-size: 1.125em;
+        font-size: 18px;
         margin-left: 10px;
     }
 
