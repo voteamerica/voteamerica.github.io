@@ -161,7 +161,7 @@ li {
     font-weight: bolder;
     cursor: pointer;
     padding: 0 5px;
-    font-size: 40px;
+    font-size: 2.5em;
     transition: all ease 0.1s;
     outline: none;
     text-decoration: none;
@@ -238,7 +238,7 @@ li {
     color: white;
     text-decoration: none;
     border-radius: 3px;
-    font-size: 11px;
+    font-size: 0.6875em;
     font-weight: bold;
     padding: 5px 6px 3px;
     font-family: Helvetica, Arial, sans-serif;
@@ -282,7 +282,7 @@ a.twitter-mention-button {
 
 .nav__link {
     padding: 0 10px;
-    font-size: 14px;
+    font-size: 0.875em;
     text-decoration: none;
 }
 
@@ -380,7 +380,7 @@ a.twitter-mention-button {
 
 .ride__title {
     margin-top: 0;
-    font-size: 22px;
+    font-size: 1.375em;
     text-transform: uppercase;
     text-align: center;
     color: #e64a4a;
@@ -457,7 +457,7 @@ label {
 }
 
 .optional {
-    font-size: 12px;
+    font-size: 0.75em;
     color: #999;
     margin-left: 15px;
     font-style: normal;
@@ -570,7 +570,7 @@ label {
     display: block;
     margin-top: 7px;
     margin-bottom: 10px;
-    font-size: 13px;
+    font-size: 0.8125em;
 }
 
 .has-error.checkbox .help-block {
@@ -667,7 +667,7 @@ label {
     right: 8px;
     top: 6px;
     opacity: 0.6;
-    font-size: 25px;
+    font-size: 1.5625em;
 }
 
 .available-times__row:hover .remove-time {
@@ -702,7 +702,7 @@ label {
     padding: 10px;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.125em;
     margin: 0 0 1em;
     letter-spacing: 1px;
     color: white;
@@ -830,7 +830,7 @@ button.self-service-list-button {
 
 @media (min-width: 400px) {
     .nav__link {
-        font-size: 16px;
+        font-size: 1em;
     }
 }
 
@@ -863,11 +863,11 @@ button.self-service-list-button {
     }
 
     .ride__title {
-        font-size: 26px;
+        font-size: 1.625em;
     }
 
     .ride__text {
-        font-size: 16px;
+        font-size: 1em;
     }
 
     .forms .bannerbox__content {
@@ -911,7 +911,7 @@ button.self-service-list-button {
     }
 
     .remove-time {
-        font-size: 35px;
+        font-size: 2.1875em;
         right: 30px;
         top: 50%;
         margin-top: -21px;
@@ -1012,7 +1012,7 @@ button.self-service-list-button {
     }
 
     .nav__link {
-        font-size: 18px;
+        font-size: 1.125em;
         margin-left: 10px;
     }
 
