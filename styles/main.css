@@ -228,8 +228,33 @@ li {
     margin: 0 5px;
 }
 
-.social__twitter {
-    top: 2px;
+.social__twitter a {
+    display: inline-block;
+    background-color: #00aced;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 0.6875em;
+    font-weight: bold;
+    padding: 5px 6px 3px;
+    font-family: Helvetica, Arial, sans-serif;
+    vertical-align: top;
+}
+
+.social__twitter a:before {
+    content: '';
+    background: url('../images/twitterIcon.png') no-repeat center;
+    background-size: contain;
+    width: 16px;
+    height: 12px;
+    display: inline-block;
+    margin: -1px 4px 0 0;
+    vertical-align: top;
+    transform: scale(0.9);
+}
+
+.social__twitter a:hover {
+    background-color: #0084b4;
 }
 
 .social__youtube a {
@@ -244,6 +269,7 @@ li {
     font-family: Helvetica, Arial, sans-serif;
     vertical-align: top;
 }
+
 .social__youtube a:before {
     content: '';
     background: url('../images/youtubeIcon.png') no-repeat center;
@@ -255,12 +281,9 @@ li {
     vertical-align: top;
     transform: scale(0.9);
 }
+
 .social__youtube a:hover {
     background-color: #cc181e;
-}
-
-a.twitter-mention-button {
-    visibility: hidden; /* Don't show link til it's loaded */
 }
 
 
