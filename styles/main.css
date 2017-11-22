@@ -257,6 +257,35 @@ li {
     background-color: #0084b4;
 }
 
+.social__facebook a {
+    display: inline-block;
+    background-color: #4267b2;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 0.6875em;
+    font-weight: bold;
+    padding: 5px 6px 3px;
+    font-family: Helvetica, Arial, sans-serif;
+    vertical-align: top;
+}
+
+.social__facebook a:before {
+    content: '';
+    background: url('../images/facebookIcon.png') no-repeat center;
+    background-size: contain;
+    width: 16px;
+    height: 12px;
+    display: inline-block;
+    margin: -1px 4px 0 0;
+    vertical-align: top;
+    transform: scale(0.9);
+}
+
+.social__facebook a:hover {
+    background-color: #3b5998;
+}
+
 .social__youtube a {
     display: inline-block;
     background-color: #e62117;
