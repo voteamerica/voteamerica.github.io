@@ -10,7 +10,12 @@ We have a [Slack team](https://carpool-vote.slack.com/)! Please [email us](mailt
 
 ## Technical
 
-This site runs on [Jekyll](https://jekyllrb.com/), and is hosted on [Github Pages](https://jekyllrb.com/docs/github-pages/) from this respository. We have an API set up at https://github.com/voteamerica/backend. The current live version of the API can be accessed via https://api.carpoolvote.com/live/, while a test version is at https://api.carpoolvote.com/test/.
+This site runs on [Jekyll](https://jekyllrb.com/), and is hosted on [Github Pages](https://jekyllrb.com/docs/github-pages/) from this respository. We have an API set up at https://github.com/voteamerica/backend. The current live version of the API can be accessed via https://api.carpoolvote.com/live/, while a test version is at https://api.carpoolvote.com/test/. We currently have a staging environment connected to the test API at https://www.richardwestenra.com/voteamerica.github.io/.
+
+### Installation
+You'll need to have Ruby installed if you haven't already (ideally via a ruby version manager like [rbenv](https://github.com/rbenv/rbenv) or [RVM](https://rvm.io/)), and also [install Jekyll and Bundler](https://jekyllrb.com/docs/quickstart/) with `gem install jekyll bundler`.
+
+Once Jekyll is installed, you can start a local server using `jekyll serve`. To connect to the test API (instead of the live one), run `jekyll serve --config _config.yml,_config-dev.yml` instead.
 
 ### URLs
 
