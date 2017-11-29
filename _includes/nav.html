@@ -1,17 +1,3 @@
-<!-- Load Facebook SDK for JavaScript -->
-<div id="fb-root"></div>
-<script>
-    // Facebook SDK
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
 <header class="header">
     <p class="support-banner">For help using Carpool Vote, call or SMS: <a href="tel:5406569388">540-656-9388</a></p>
     <nav class="nav wrapper">
@@ -38,14 +24,17 @@
         </ul>
 
         <ul class="social">
-            <li role="presentation" class="social__twitter">
-                <a href="https://twitter.com/intent/tweet" class="twitter-mention-button" data-text="Support #VotingRights in 2017 #USelections. Sign up via @carpoolvote: Linking drivers with voters needing a ride." data-url="http://carpoolvote.com" data-related="" data-show-count="false">Tweet to help others find out about this!</a>
-                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <li role="presentation" class="social__links social__twitter">
+                <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2F127.0.0.1%3A4000%2F&ref_src=twsrc%5Etfw&text=Support%20%23VotingRights%20in%202017%20%23USelections.%20Sign%20up%20via%20%40carpoolvote%3A%20Linking%20drivers%20with%20voters%20needing%20a%20ride.&tw_p=tweetbutton&url=http%3A%2F%2Fcarpoolvote.com" 
+                onClick="MyWindow=window.open('https://twitter.com/intent/tweet?original_referer=http%3A%2F%2F127.0.0.1%3A4000%2F&ref_src=twsrc%5Etfw&text=Support%20%23VotingRights%20in%202017%20%23USelections.%20Sign%20up%20via%20%40carpoolvote%3A%20Linking%20drivers%20with%20voters%20needing%20a%20ride.&tw_p=tweetbutton&url=http%3A%2F%2Fcarpoolvote.com',
+                'MyWindow',width=600,height=400); return false;">Tweet</a>
             </li>
-            <li role="presentation" class="social__facebook">
-                <div class="fb-share-button" data-href="http://carpoolvote.com?v=1" data-layout="button"></div>
+            <li role="presentation" class="social__links social__facebook">
+                <a href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=http%3A%2F%2Fcarpoolvote.com%2F%3Fv%3D1&display=popup&ref=plugin&src=share_button" 
+                onClick="MyWindow=window.open('https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=http%3A%2F%2Fcarpoolvote.com%2F%3Fv%3D1&display=popup&ref=plugin&src=share_button',
+                'MyWindow',width=600,height=400); return false;">Share</a>
             </li>
-            <li role="presentation" class="social__youtube">
+            <li role="presentation" class="social__links social__youtube">
                 <a href="https://www.youtube.com/channel/UCY1aS3TMDGxVbckA7Va0QFA?sub_confirmation=1" target="_blank">YouTube</a>
             </li>
         </ul>
