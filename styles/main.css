@@ -302,7 +302,7 @@ li {
     border-right: solid 1px #297bbb;
 }
 
-.nav__support {
+.nav__item:last-child {
     border-right: 0;
 }
 
