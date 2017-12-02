@@ -7,17 +7,17 @@
 
         <ul id="nav-links" class="nav__links">
             {% if page.navigation == 'full' %}
-                <li class="nav__item nav__story">
+                <li class="nav__item">
                     <a href="{{ baseurl }}story/" class="nav__link story" id="story-link">Our story</a>
                 </li>
-                <li class="nav__item nav__how">
+                <li class="nav__item">
                     <a href="{{ baseurl }}how-it-works/" class="nav__link">How it works</a>
                 </li>
-                <li class="nav__item nav__support">
-                    <a href="{{ baseurl }}#howtoclaim" class="nav__link scroll">Voting info</a>
+                <li class="nav__item">
+                    <a href="{{ baseurl }}self-service/" class="nav__link">My rides</a>
                 </li>
             {% else %}
-                <li class="nav__item nav__story">
+                <li class="nav__item">
                     <a href="{{ baseurl }}" class="nav__link" id="home-link">Back to Home</a>
                 </li>
             {% endif %}
