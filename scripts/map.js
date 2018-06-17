@@ -42,6 +42,12 @@ $(document).ready(function () {
         popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
     });
 
+    // var driverIcon = new L.DivIcon({
+    //     className: 'driverIcon',
+    //     html: '<img class="drvIcon" src="images/maki-car-15-blue.png" />'+'<span>3</span>'
+    // });
+
+
 //create geoJSON layer by parsing JSON with geojson.js library
     var jsonRiderParse = GeoJSON.parse(jsonRider, {Point: ['latitude_numeric', 'longitude_numeric']});
     var jsonDriverParse = GeoJSON.parse(jsonDriver, {Point: ['latitude_numeric', 'longitude_numeric']});
@@ -62,6 +68,11 @@ $(document).ready(function () {
         pointToLayer: function (feature, latlng) {
             var marker = L.marker(latlng, {icon: driverIcon});
             marker.bindPopup('<b>Available Drivers: </b>' + feature.properties.count + '</b><br/>' + feature.properties.city + ', ' + feature.properties.state + '<br/>zip: ' + feature.properties.zip);
+            marker.bindTooltip("4", {
+                permanent: true,
+                direction: 'right',
+                offset: [10,0]
+            });
             markers.addLayer(marker);
         }
     });
