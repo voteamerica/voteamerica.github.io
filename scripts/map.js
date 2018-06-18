@@ -2,13 +2,16 @@
 //make leaflet map, load custom icons, pop-ups, and add to a layer group
 $(document).ready(function () {
     $.when(
-    //wait until successful calls of both sources
-    $.getJSON(remoteUrl + '/unmatched-riders'),
-    $.getJSON(remoteUrl + '/unmatched-drivers')
-
-    ).done(function(riderSource, driverSource){
+        //wait until successful calls of both sources
+        $.getJSON(remoteUrl + '/unmatched-riders'),
+        $.getJSON(remoteUrl + '/unmatched-drivers')
+        // ,$.getJSON(remoteUrl + '/vw_unmatched_drivers_details')
+    ).done(function(riderSource, driverSource
+        // , driverDetailsSource
+    ){
         var jsonRider = riderSource[0],
             jsonDriver = driverSource[0];
+            // jsonDriverDetails = driverDetailsSource[0];
 
 //create the map, set the zoom, add it to the 'map' div element
     var map = L.map('map')
