@@ -2,13 +2,16 @@
 //make leaflet map, load custom icons, pop-ups, and add to a layer group
 $(document).ready(function () {
     $.when(
-    //wait until successful calls of both sources
-    $.getJSON(remoteUrl + '/unmatched-riders'),
-    $.getJSON(remoteUrl + '/unmatched-drivers')
-
-    ).done(function(riderSource, driverSource){
+        //wait until successful calls of both sources
+        $.getJSON(remoteUrl + '/unmatched-riders'),
+        $.getJSON(remoteUrl + '/unmatched-drivers'),
+        $.getJSON(remoteUrl + '/drivers-details')
+        // ,$.getJSON(remoteUrl + '/vw_unmatched_drivers_details')
+    ).done(function(riderSource, driverSource, driverDetailsSource
+    ){
         var jsonRider = riderSource[0],
-            jsonDriver = driverSource[0];
+            // jsonDriver = driverSource[0];
+            jsonDriver = driverDetailsSource[0];
 
 //create the map, set the zoom, add it to the 'map' div element
     var map = L.map('map')
@@ -42,6 +45,12 @@ $(document).ready(function () {
         popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
     });
 
+    // var driverIcon = new L.DivIcon({
+    //     className: 'driverIcon',
+    //     html: '<img class="drvIcon" src="images/maki-car-15-blue.png" />'+'<span>3</span>'
+    // });
+
+
 //create geoJSON layer by parsing JSON with geojson.js library
     var jsonRiderParse = GeoJSON.parse(jsonRider, {Point: ['latitude_numeric', 'longitude_numeric']});
     var jsonDriverParse = GeoJSON.parse(jsonDriver, {Point: ['latitude_numeric', 'longitude_numeric']});
@@ -60,8 +69,31 @@ $(document).ready(function () {
 
     var jsonDriverLayer = L.geoJSON(jsonDriverParse, {
         pointToLayer: function (feature, latlng) {
+
+            var seatCount = feature.properties.SeatCount;
+
+            var wheelChairSupport = "";
+            var matchStatus = ""
+
+            if (feature.properties.DriverCanLoadRiderWithWheelchair === "t" || feature.properties.DriverCanLoadRiderWithWheelchair === true) {
+                wheelChairSupport = " W";
+            }
+
+            if (feature.properties.status === "MatchProposed") {
+                matchStatus = " P";
+            } else if (feature.properties.status === "MatchConfirmed") {
+                matchStatus = " M";
+            } 
+
+            var tooltipText = seatCount + wheelChairSupport + matchStatus;
+
             var marker = L.marker(latlng, {icon: driverIcon});
             marker.bindPopup('<b>Available Drivers: </b>' + feature.properties.count + '</b><br/>' + feature.properties.city + ', ' + feature.properties.state + '<br/>zip: ' + feature.properties.zip);
+            marker.bindTooltip(tooltipText, {
+                permanent: true,
+                direction: 'right',
+                offset: [10,0]
+            });
             markers.addLayer(marker);
         }
     });
