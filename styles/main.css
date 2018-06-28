@@ -852,6 +852,21 @@ button.self-service-list-button {
     font-weight: bold;
 }
 
+div.notice {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    padding-left: 180px;
+    padding-right: 210px;
+}
+
+p.notice {
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
 /* Media queries */
 
 @media (min-width: 400px) {
