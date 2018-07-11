@@ -12,7 +12,7 @@ Our website should work on as many devices as possible. This means that it shoul
 
 ## Getting started
 
-- Join the Progressive Coders Network [Slack team](http://progco.de/join)! It's the best way to keep up to date with the project. Please [email us](mailto:admin@progcode.org) if you have questions about the registraton form.
+- Join the [Progressive Coders Network](https://progcode.org) [Slack community](http://progco.de/join)! It's the best way to keep up to date with the project. Please [email us](mailto:admin@progcode.org) if you have questions about the registraton form.
 - If you're new to GitHub and open-source, please familiarise yourself 
 with the [official guidelines](https://guides.github.com/activities/contributing-to-open-source/).
 - Check our GitHub issues to see what needs doing.
