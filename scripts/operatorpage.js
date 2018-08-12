@@ -17,21 +17,13 @@ if (!remoteUrl) {
 // // Create a data object containing all URL query string data:
 // var data = tinyQuery.getAll();
 
-
-// // NOTE: for future refactoring,
-// //       this test is wrong. This page may receive both uuid_driver and uuid_rider.
-// if (data.uuid_driver) {
-//   data.uuid = data.uuid || data.uuid_driver;
-//   data.type = data.type || 'driver';
-// }
-// if (data.uuid_rider) {
-//   data.uuid = data.uuid || data.uuid_rider;
-//   data.type = data.type || 'rider';
-// }
+let token = "";
 
 const $login    = document.getElementById('loginSubmit');
 const $username = document.getElementById('username');
 const $password = document.getElementById('password');
+
+const $getUsersList    = document.getElementById('getUsersList');
 
 //   $manage       = $('#manage'),
 //   $info         = $('#manage #infoAdmin'),
@@ -85,7 +77,14 @@ const handleLoginClick = (e) => {
 //   // updateUI();
 };
 
+const handleGetUsersListClick = e => {
+  // e.preventDefault();
+
+  getUsersList();
+};
+
 $login.onclick = handleLoginClick;
+$getUsersList.onclick = handleGetUsersListClick;
 
 // function updateUI(uuid, type, phone) {
 //   // NOTE: this handling isn't quite correct, so avoid refactoring without full testing
@@ -778,12 +777,16 @@ const createAPIurl = (params, apiRoute) => {
   return url;
 };
 
-const accessCarpoolvoteAPI = (url, handlerFunction) => {
+const accessCarpoolvoteAPI = (url, handlerFunction, useToken = false) => {
   var request = new XMLHttpRequest();
 
   request.open("GET", url);
 
   request.onreadystatechange = handlerDoneCheck;
+
+  if (useToken === true) {
+    request.setRequestHeader('Authorization', `Bearer ${token}`);
+  }
 
   request.send();
 
@@ -808,41 +811,57 @@ const getToken = (username, password) => {
         },
         '/users/authenticate'
       ), 
-      function (resp) {
-        var keys = Object.keys(resp);
-  //       if (keys) {
-  
-  //         if (keys[0] == "driver_info" ) {
-  //           var driverInfo        = resp[keys[0]];
-  //           var listItems          = '';
-  //           var li                = "";
-  //           var listSelector      = "#driverInfo ul";
-  //           var infoListCaptions  = ["First Name", "Last Name", "UUID", "Collection ZIP", "Email", "Phone", "License Number"];
-  //           var driverInfoList     = [driverInfo.DriverFirstName, driverInfo.DriverLastName, driverInfo.UUID, driverInfo.DriverCollectionZIP, driverInfo.DriverEmail, driverInfo.DriverPhone, driverInfo.DriverLicenseNumber];
-  
-  //           if (driverInfo.status != undefined && driverInfo.status === DRIVER_CANCELLED_STATUS) {
-              
-  //             updateUIbyDriverStatus(driverInfo.status);
-  
-  //             li = '<li><strong>' + driverInfo.status.toUpperCase() + '</strong></li>';
-  //           }
-  
-  //           listItems += li;
-  
-  //           if (driverInfo.ReadyToMatch != undefined && driverInfo.ReadyToMatch === false) {
-              
-  //             updateUIbyDriverReadyToMatch(driverInfo.ReadyToMatch);
-  
-  //             li = '<li><strong>' + DRIVER_PAUSED_TEXT.toUpperCase() + '</strong></li>';
-  //           }
-  
-  //           listItems += li;
-  
-  //           listItems += createListItems(infoListCaptions, driverInfoList);
-  
-  //           $(listSelector).append(listItems);
-  //         }
-  //       }
+      resp => {
+        const keys = Object.keys(resp);
+
+        token = resp.id_token;
       });
-  }
+  };
+
+  const getUsersList = () => {
+    // //http://localhost:8000/users/authenticate?username=jk&password=123
+    
+      accessCarpoolvoteAPI(
+        createAPIurl( {}, '/users/list'), 
+        resp => {
+          const keys = Object.keys(resp);
+    
+          token = resp.id_token;
+  
+    //       if (keys) {
+    
+    //         if (keys[0] == "driver_info" ) {
+    //           var driverInfo        = resp[keys[0]];
+    //           var listItems          = '';
+    //           var li                = "";
+    //           var listSelector      = "#driverInfo ul";
+    //           var infoListCaptions  = ["First Name", "Last Name", "UUID", "Collection ZIP", "Email", "Phone", "License Number"];
+    //           var driverInfoList     = [driverInfo.DriverFirstName, driverInfo.DriverLastName, driverInfo.UUID, driverInfo.DriverCollectionZIP, driverInfo.DriverEmail, driverInfo.DriverPhone, driverInfo.DriverLicenseNumber];
+    
+    //           if (driverInfo.status != undefined && driverInfo.status === DRIVER_CANCELLED_STATUS) {
+                
+    //             updateUIbyDriverStatus(driverInfo.status);
+    
+    //             li = '<li><strong>' + driverInfo.status.toUpperCase() + '</strong></li>';
+    //           }
+    
+    //           listItems += li;
+    
+    //           if (driverInfo.ReadyToMatch != undefined && driverInfo.ReadyToMatch === false) {
+                
+    //             updateUIbyDriverReadyToMatch(driverInfo.ReadyToMatch);
+    
+    //             li = '<li><strong>' + DRIVER_PAUSED_TEXT.toUpperCase() + '</strong></li>';
+    //           }
+    
+    //           listItems += li;
+    
+    //           listItems += createListItems(infoListCaptions, driverInfoList);
+    
+    //           $(listSelector).append(listItems);
+    //         }
+    //       }
+        }, 
+        true);
+    };
     

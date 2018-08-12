@@ -33,9 +33,18 @@ title: Manage the system
                     </div>
                 </form>
 
-                <div id="manage" style="display:none" aria-hidden="true">
+                <div id="manage" style="display:block" aria-hidden="true">
                     <p>Welcome to the new operator admin page. Please note that this section is still a work in progress. Some features are still under contruction, and may be a little temperamental. If you encounter any issues, please <a href="mailto:selfservice@carpoolvote.com">email us</a>. Thank you for your understanding!</p>
                     <p id="infoAdmin"></p>
+
+                    <div>                         
+                        <a href="{{ api }}/users/list">users list</a>
+
+                        <button class="button button--large" id="getUsersList">Get Users List</button>
+                    </div>
+                    <div id="usersList">                         
+                        <ul></ul>
+                    </div>
                 </div>
             </div>
         </div>
