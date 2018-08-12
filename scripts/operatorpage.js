@@ -29,8 +29,10 @@ if (!remoteUrl) {
 //   data.type = data.type || 'rider';
 // }
 
-// // Cache jQuery selectors:
-// var $login      = $('#login'),
+const $login    = document.getElementById('loginSubmit');
+const $username = document.getElementById('username');
+const $password = document.getElementById('password');
+
 //   $manage       = $('#manage'),
 //   $info         = $('#manage #infoAdmin'),
 //   $manageLogin  = $('#manageLogin'),
@@ -46,7 +48,15 @@ if (!remoteUrl) {
 // }
 
 
-// $login.validator().on('submit', function(e) {
+// $login.validator().on('submit', 
+
+const handleLoginClick = (e) => {
+  e.preventDefault();
+
+  const username = $username.value;
+  const password = $password.value;
+
+  getToken(username, password);
 //   if (e.isDefaultPrevented()) {
 //     return;
 //   }
@@ -73,8 +83,9 @@ if (!remoteUrl) {
 //   // $(this).slideUp(300).attr('aria-hidden','true');
 //   // $manage.slideDown(300).attr('aria-hidden','false');
 //   // updateUI();
-//   e.preventDefault();
-// });
+};
+
+$login.onclick = handleLoginClick;
 
 // function updateUI(uuid, type, phone) {
 //   // NOTE: this handling isn't quite correct, so avoid refactoring without full testing
@@ -238,54 +249,6 @@ if (!remoteUrl) {
 //       }
 //     }
 //   };
-// }
-
-// function driverInfo () {
-// //http://localhost:8000/driver-exists?UUID=32e5cbd4-1342-4e1e-9076-0147e779a796&DriverPhone=Test
-
-//   accessCarpoolvoteAPI(    
-//     createAPIurl({
-//         UUID: data.uuid,
-//         DriverPhone: data.phone
-//       },
-//       '/driver-info'
-//     ), 
-//     function (resp) {
-//       var keys = Object.keys(resp);
-//       if (keys) {
-
-//         if (keys[0] == "driver_info" ) {
-//           var driverInfo        = resp[keys[0]];
-//           var listItems          = '';
-//           var li                = "";
-//           var listSelector      = "#driverInfo ul";
-//           var infoListCaptions  = ["First Name", "Last Name", "UUID", "Collection ZIP", "Email", "Phone", "License Number"];
-//           var driverInfoList     = [driverInfo.DriverFirstName, driverInfo.DriverLastName, driverInfo.UUID, driverInfo.DriverCollectionZIP, driverInfo.DriverEmail, driverInfo.DriverPhone, driverInfo.DriverLicenseNumber];
-
-//           if (driverInfo.status != undefined && driverInfo.status === DRIVER_CANCELLED_STATUS) {
-            
-//             updateUIbyDriverStatus(driverInfo.status);
-
-//             li = '<li><strong>' + driverInfo.status.toUpperCase() + '</strong></li>';
-//           }
-
-//           listItems += li;
-
-//           if (driverInfo.ReadyToMatch != undefined && driverInfo.ReadyToMatch === false) {
-            
-//             updateUIbyDriverReadyToMatch(driverInfo.ReadyToMatch);
-
-//             li = '<li><strong>' + DRIVER_PAUSED_TEXT.toUpperCase() + '</strong></li>';
-//           }
-
-//           listItems += li;
-
-//           listItems += createListItems(infoListCaptions, driverInfoList);
-
-//           $(listSelector).append(listItems);
-//         }
-//       }
-//     });
 // }
 
 // function processDbInfo (info) {
@@ -798,24 +761,24 @@ if (!remoteUrl) {
 //   // });
 // }
 
-// function createAPIurl (params, apiRoute) {
-//   var url = "";
+const createAPIurl = (params, apiRoute) => {
+  var url = "";
 
-//   var keys = Object.keys(params);
+  var keys = Object.keys(params);
 
-//   keys.forEach(function (key, idx) {
-//     if (idx > 0) {
-//       url += "&";
-//     }
-//     url += key + "=" + params[key].toString();    
-//   });
+  keys.forEach(function (key, idx) {
+    if (idx > 0) {
+      url += "&";
+    }
+    url += key + "=" + params[key].toString();    
+  });
 
-//   url = remoteUrl + apiRoute + "?" + url;
+  url = remoteUrl + apiRoute + "?" + url;
 
-//   return url;
-// }
+  return url;
+};
 
-function accessCarpoolvoteAPI (url, handlerFunction) {
+const accessCarpoolvoteAPI = (url, handlerFunction) => {
   var request = new XMLHttpRequest();
 
   request.open("GET", url);
@@ -833,4 +796,53 @@ function accessCarpoolvoteAPI (url, handlerFunction) {
       handlerFunction(resp);
     }
   }
-}
+};
+
+const getToken = (username, password) => {
+  // //http://localhost:8000/users/authenticate?username=jk&password=123
+  
+    accessCarpoolvoteAPI(
+      createAPIurl({
+          username,
+          password
+        },
+        '/users/authenticate'
+      ), 
+      function (resp) {
+        var keys = Object.keys(resp);
+  //       if (keys) {
+  
+  //         if (keys[0] == "driver_info" ) {
+  //           var driverInfo        = resp[keys[0]];
+  //           var listItems          = '';
+  //           var li                = "";
+  //           var listSelector      = "#driverInfo ul";
+  //           var infoListCaptions  = ["First Name", "Last Name", "UUID", "Collection ZIP", "Email", "Phone", "License Number"];
+  //           var driverInfoList     = [driverInfo.DriverFirstName, driverInfo.DriverLastName, driverInfo.UUID, driverInfo.DriverCollectionZIP, driverInfo.DriverEmail, driverInfo.DriverPhone, driverInfo.DriverLicenseNumber];
+  
+  //           if (driverInfo.status != undefined && driverInfo.status === DRIVER_CANCELLED_STATUS) {
+              
+  //             updateUIbyDriverStatus(driverInfo.status);
+  
+  //             li = '<li><strong>' + driverInfo.status.toUpperCase() + '</strong></li>';
+  //           }
+  
+  //           listItems += li;
+  
+  //           if (driverInfo.ReadyToMatch != undefined && driverInfo.ReadyToMatch === false) {
+              
+  //             updateUIbyDriverReadyToMatch(driverInfo.ReadyToMatch);
+  
+  //             li = '<li><strong>' + DRIVER_PAUSED_TEXT.toUpperCase() + '</strong></li>';
+  //           }
+  
+  //           listItems += li;
+  
+  //           listItems += createListItems(infoListCaptions, driverInfoList);
+  
+  //           $(listSelector).append(listItems);
+  //         }
+  //       }
+      });
+  }
+    
