@@ -1,0 +1,33 @@
+{
+  "name": "voteusfrontend",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.org/voteamerica/voteamerica.github.io.svg?branch=master)](https://travis-ci.org/voteamerica/voteamerica.github.io)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkbits1/voteamerica.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jkbits1/voteamerica.github.io/issues"
+  },
+  "homepage": "https://github.com/jkbits1/voteamerica.github.io#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.4.2",
+    "react-addons-update": "^15.6.2",
+    "react-dom": "^16.4.2",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
+  }
+}
