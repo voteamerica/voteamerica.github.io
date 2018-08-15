@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Driver from './components/Driver.jsx';
+import {createStore} from 'redux';
+import { Provider } from 'react-redux';
+import App from './components/App.jsx';
+import rootReducer from './reducers/index.js';
 
 console.log("entry.js sttxx xnloaded");
 
-class App extends Component {
-    render() {
-        return <Driver />
-    }
-}
+const store = createStore(rootReducer);
 
-render(<App />, document.getElementById('root'));
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>, document.getElementById('root'));

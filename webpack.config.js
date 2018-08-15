@@ -6,7 +6,7 @@ console.log("outputPath", outputPath);
 
 module.exports = {
     watchOptions: {
-        poll: 1000
+        poll: 10000
     },
     entry: "./webpack/entry.js",
     mode: "development",
