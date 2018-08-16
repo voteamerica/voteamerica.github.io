@@ -8,6 +8,7 @@ module.exports = {
     watchOptions: {
         poll: 10000
     },
+    devtool: "source-map",
     entry: "./webpack/entry.js",
     mode: "development",
     output: {
