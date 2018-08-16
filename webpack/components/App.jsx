@@ -6,9 +6,9 @@ import Driver from './Driver.jsx';
 import { login, loginSuccess } from '../actions/index.js';
 
 const mapStateToProps = state => {
-    const {loginInfo} = state;
+    const { apiInfo, loginInfo } = state;
 
-    return {loginInfo};
+    return { apiInfo, loginInfo };
 }
 
 // const mapDispatchToProps = dispatch => {
@@ -26,11 +26,11 @@ class AppBase extends Component {
 
     handleLoginRequestClick(self) {
         return event => {
-            const { login } = self.props;
+            const { apiInfo, login } = self.props;
 
             const token = event.target.value;
 
-            return login(token);
+            return login(apiInfo.apiUrl, 'a', 'b');
         }
     }
 

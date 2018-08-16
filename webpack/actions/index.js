@@ -1,8 +1,8 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS } from './types';
 
-const login = (username, password) => ({
+const login = ( remoteUrlBase, username, password) => ({
     type: LOGIN_REQUEST,
-    payload: { username, password }
+    payload: { remoteUrlBase, username, password }
 });
 
 const loginSuccess = token => ({
