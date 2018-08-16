@@ -23,6 +23,10 @@ Once Jekyll is installed, you can start a local server using `jekyll serve`. To 
 
 The main site is available at http://carpoolvote.com/, but there is a mirror at http://souls2thepolls.org, which redirects to http://carpoolvote.com/?souls2thepolls. This mirror has a [different logo](http://carpoolvote.com/images/logo-souls2thepolls.png) and other small changes, which are handled in [querystring.js](https://github.com/voteamerica/voteamerica.github.io/blob/master/scripts/querystring.js) so that we don't need to maintain two separate websites.
 
+### Operator page
+
+This secured area is built in a modular style. The default style uses React/Redux, although it is possible to use raw JS etc. There is support for an automatically created dev environment (for Windows, Linux and Mac) on https://github.com/voteamerica/backend. 
+
 ## Contributing
 
 If you're interested in contributing to this project, read our guidelines for [how to contribute](docs/contributing.md) first, and also please be aware of our [code of conduct](docs/code-of-conduct.md).

@@ -1,18 +1,13 @@
-import {} from './types';
+import { LOGIN_REQUEST, LOGIN_SUCCESS } from './types';
 
-export const login = (username, password) => ({
-    type: 'LOGIN_SUCCESS',
-    payload: {token: 1}
+const login = (username, password) => ({
+    type: LOGIN_REQUEST,
+    payload: { username, password }
 });
 
-export const loginSuccess = token => ({
-    type: 'LOGIN_SUCCESS',
+const loginSuccess = token => ({
+    type: LOGIN_SUCCESS,
     payload: { token }
 });
 
-// export const loginSuccess = dispatch => token => {
-//     console.log("login token", token);
-
-//     return dispatch(successToken(token));
-// };
-
+export { login, loginSuccess };
