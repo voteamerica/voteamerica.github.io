@@ -11,20 +11,24 @@ const mapStateToProps = state => {
     return {loginInfo};
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        handleLoginSuccess: loginSuccess(dispatch)
-    };
-}
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         handleLoginSuccess: loginSuccess(dispatch)
+//     };
+// }
+
+const mapDispatchToProps = {
+    loginSuccess
+};
 
 class AppBase extends Component {
     handleLoginSuccessClick(self) {
         return event => {
-            const { handleLoginSuccess } = self.props;
+            const { loginSuccess } = self.props;
 
             const token = event.target.value;
 
-            return handleLoginSuccess(token);
+            return loginSuccess(token);
         }
     }
 

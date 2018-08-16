@@ -5,14 +5,14 @@ export const login = (username, password) => ({
     payload: {token: 1}
 });
 
-export const successToken = token => ({
+export const loginSuccess = token => ({
     type: 'LOGIN_SUCCESS',
     payload: { token }
 });
 
-export const loginSuccess = dispatch => token => {
-    console.log("login token", token);
+// export const loginSuccess = dispatch => token => {
+//     console.log("login token", token);
 
-    return dispatch(successToken(token));
-};
+//     return dispatch(successToken(token));
+// };
 
