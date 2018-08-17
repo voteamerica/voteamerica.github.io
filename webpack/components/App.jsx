@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Driver from './Driver.jsx';
 
-import { login, loginSuccess } from '../actions/index.js';
+import { loginDetails, login, loginSuccess } from '../actions/index.js';
 
 const mapStateToProps = state => {
   const { apiInfo, loginInfo } = state;
@@ -18,18 +18,21 @@ const mapStateToProps = state => {
 // }
 
 const mapDispatchToProps = {
+  loginDetails,
   login,
   loginSuccess
 };
 
 class AppBase extends Component {
   handleLoginRequestClick(self) {
-    return event => {
-      const { apiInfo, login } = self.props;
+    return () => {
+      const { apiInfo, loginInfo, login } = self.props;
 
-      const token = event.target.value;
-
-      return login(apiInfo.apiUrl, 'a', 'b');
+      return login(
+        apiInfo.apiUrl,
+        loginInfo.details.username,
+        loginInfo.details.password
+      );
     };
   }
 
@@ -45,11 +48,27 @@ class AppBase extends Component {
 
   handleUsernameChange(self) {
     return event => {
-      console.log('username', event.target.value);
+      const { loginDetails } = self.props;
+      const username = event.target.value;
+
+      return loginDetails({ username });
+    };
+  }
+
+  handlePasswordChange(self) {
+    return event => {
+      const { loginDetails } = self.props;
+      const password = event.target.value;
+
+      return loginDetails({ password });
     };
   }
 
   render() {
+    const { loginInfo } = this.props;
+    const username = loginInfo.details.username || '';
+    const password = loginInfo.details.password || '';
+
     return (
       <div>
         <div id="enter-uuid" className="form-group">
@@ -62,6 +81,7 @@ class AppBase extends Component {
             placeholder="e.g. 1a2b-3c4d-5e6f-7g8hi9j0klmno"
             required
             onChange={this.handleUsernameChange(this)}
+            value={username}
           />
           <div className="help-block with-errors" />
         </div>
@@ -74,6 +94,8 @@ class AppBase extends Component {
             className="form-input form-input--medium"
             placeholder="e.g. 1234567890"
             required
+            onChange={this.handlePasswordChange(this)}
+            value={password}
           />
           <div className="help-block with-errors" />
         </div>
