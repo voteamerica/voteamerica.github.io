@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Driver from './Driver.jsx';
 
-import { loginDetails, login, loginSuccess } from '../actions/index.js';
+import { loginDetails, login, loginSuccess, logout } from '../actions/index.js';
 
 const mapStateToProps = state => {
   const { apiInfo, loginInfo } = state;
@@ -20,7 +20,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   loginDetails,
   login,
-  loginSuccess
+  loginSuccess,
+  logout
 };
 
 class AppBase extends Component {
@@ -33,6 +34,14 @@ class AppBase extends Component {
         loginInfo.details.username,
         loginInfo.details.password
       );
+    };
+  }
+
+  handleLogoutClick(self) {
+    return () => {
+      const { logout } = self.props;
+
+      return logout();
     };
   }
 
@@ -101,18 +110,27 @@ class AppBase extends Component {
           />
           <div className="help-block with-errors" />
         </div>
+        <div>
+          <button onClick={this.handleLoginRequestClick(this)}>Login</button>
+        </div>
+      </div>
+    );
+
+    const loginStatusAndLogoutButton = (
+      <div>
+        <div> Logged in</div>
+        <div>
+          <button onClick={this.handleLogoutClick(this)}>Logout</button>
+        </div>
       </div>
     );
 
     const loginArea =
-      loginInfo.loggedIn === false ? loginButtons : <div>Logged in</div>;
+      loginInfo.loggedIn === false ? loginButtons : loginStatusAndLogoutButton;
 
     return (
       <div>
         {loginArea}
-        <div>
-          <button onClick={this.handleLoginRequestClick(this)}>Login</button>
-        </div>
         <Driver />
       </div>
     );

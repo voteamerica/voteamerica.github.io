@@ -3,7 +3,8 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGIN_ERROR
+  LOGIN_ERROR,
+  LOGOUT
 } from '../actions/types.js';
 
 const loginInfo = (
@@ -21,6 +22,8 @@ const loginInfo = (
     case LOGIN_REQUEST:
     case LOGIN_FAIL:
     case LOGIN_ERROR:
+    case LOGIN_ERROR:
+    case LOGOUT:
       return { ...state, loggedIn: false, token: '' };
     case LOGIN_SUCCESS:
       return { ...state, loggedIn: true, token: action.payload };

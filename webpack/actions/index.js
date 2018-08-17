@@ -1,4 +1,4 @@
-import { LOGIN_DETAILS, LOGIN_REQUEST, LOGIN_SUCCESS } from './types';
+import { LOGIN_DETAILS, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from './types';
 
 const loginDetails = details => ({
   type: LOGIN_DETAILS,
@@ -15,4 +15,9 @@ const loginSuccess = token => ({
   payload: { token }
 });
 
-export { loginDetails, login, loginSuccess };
+const logout = () => ({
+  type: LOGOUT,
+  payload: {}
+});
+
+export { loginDetails, login, loginSuccess, logout };
