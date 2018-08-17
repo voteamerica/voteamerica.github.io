@@ -69,7 +69,9 @@ class AppBase extends Component {
     const username = loginInfo.details.username || '';
     const password = loginInfo.details.password || '';
 
-    return (
+    console.log('logged in', loginInfo.loggedIn === true);
+
+    const loginButtons = (
       <div>
         <div id="enter-uuid" className="form-group">
           <label htmlFor="username">Please enter your username</label>
@@ -99,7 +101,15 @@ class AppBase extends Component {
           />
           <div className="help-block with-errors" />
         </div>
+      </div>
+    );
 
+    const loginArea =
+      loginInfo.loggedIn === false ? loginButtons : <div>Logged in</div>;
+
+    return (
+      <div>
+        {loginArea}
         <div>
           <button onClick={this.handleLoginRequestClick(this)}>Login</button>
         </div>

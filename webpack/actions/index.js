@@ -7,7 +7,7 @@ const loginDetails = details => ({
 
 const login = (remoteUrlBase, username, password) => ({
   type: LOGIN_REQUEST,
-  payload: { remoteUrlBase, username, password }
+  payload: { remoteUrlBase, username, password, successProperty: 'id_token' }
 });
 
 const loginSuccess = token => ({
