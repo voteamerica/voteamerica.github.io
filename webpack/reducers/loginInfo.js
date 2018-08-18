@@ -1,10 +1,9 @@
 import {
+  loginRequestTypes,
   LOGIN_DETAILS,
   LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGIN_ERROR,
-  LOGOUT
+  LOGOUT,
+  GET_DRIVERS_LIST
 } from '../actions/types.js';
 
 const loginInfo = (
@@ -20,13 +19,13 @@ const loginInfo = (
       return { ...state, details };
     }
     case LOGIN_REQUEST:
-    case LOGIN_FAIL:
-    case LOGIN_ERROR:
-    case LOGIN_ERROR:
+    case loginRequestTypes.fail:
+    case loginRequestTypes.error:
     case LOGOUT:
       return { ...state, loggedIn: false, token: '' };
-    case LOGIN_SUCCESS:
+    case loginRequestTypes.success:
       return { ...state, loggedIn: true, token: action.payload };
+    case GET_DRIVERS_LIST:
     default:
       return state;
   }

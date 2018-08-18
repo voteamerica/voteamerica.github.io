@@ -1,4 +1,10 @@
-import { LOGIN_DETAILS, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from './types';
+import {
+  loginRequestTypes,
+  LOGIN_DETAILS,
+  LOGIN_REQUEST,
+  LOGOUT,
+  GET_DRIVERS_LIST
+} from './types';
 
 const loginDetails = details => ({
   type: LOGIN_DETAILS,
@@ -11,7 +17,7 @@ const login = (remoteUrlBase, username, password) => ({
 });
 
 const loginSuccess = token => ({
-  type: LOGIN_SUCCESS,
+  type: loginRequestTypes.success,
   payload: { token }
 });
 
@@ -20,4 +26,9 @@ const logout = () => ({
   payload: {}
 });
 
-export { loginDetails, login, loginSuccess, logout };
+const getDriversList = remoteUrlBase => ({
+  type: GET_DRIVERS_LIST,
+  payload: { remoteUrlBase, successProperty: 'data' }
+});
+
+export { loginDetails, login, loginSuccess, logout, getDriversList };

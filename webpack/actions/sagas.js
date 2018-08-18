@@ -1,33 +1,7 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOGIN_ERROR } from './types';
-import { put, call, takeLatest, takeEvery } from 'redux-saga/effects';
-import { userInfo } from 'os';
+import { put, call, takeLatest } from 'redux-saga/effects';
 
-const createAPIurl = (params, remoteUrl, apiRoute) => {
-  var url = '';
-
-  var keys = Object.keys(params);
-
-  keys.forEach(function(key, idx) {
-    if (idx > 0) {
-      url += '&';
-    }
-    url += key + '=' + params[key].toString();
-  });
-
-  url = remoteUrl + apiRoute + '?' + url;
-
-  return url;
-};
-
-const fetchInfo = async fetchURL => {
-  const resp = await fetch(fetchURL);
-
-  console.log('resp', resp);
-
-  const json = resp.json();
-
-  return json;
-};
+import { loginRequestTypes, LOGIN_REQUEST } from './types.js';
+import { createAPIurl, fetchInfo } from './sagaHelpers.js';
 
 function* fetchLoginRequest(action) {
   try {
@@ -48,12 +22,18 @@ function* fetchLoginRequest(action) {
 
     // if (loginInfo.status === 200) {
     if (loginResult[successProperty] !== undefined) {
-      yield put({ type: LOGIN_SUCCESS, payload: loginResult[successProperty] });
+      yield put({
+        type: loginRequestTypes.success,
+        payload: loginResult[successProperty]
+      });
     } else {
-      yield put({ type: LOGIN_FAIL, payload: loginResult });
+      yield put({ type: loginRequestTypes.fail, payload: loginResult });
     }
   } catch (e) {
-    yield put({ type: LOGIN_ERROR, payload: { message: e.message } });
+    yield put({
+      type: loginRequestTypes.error,
+      payload: { message: e.message }
+    });
   }
 }
 

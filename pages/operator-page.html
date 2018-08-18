@@ -13,7 +13,7 @@ title: Manage the system
         <div class="bannerbox">
             <h1 class="bannerbox__title">Manage the system</h1>
             <div class="bannerbox__content self-service">
-                <form id="login" name="login" action="{{ api }}/users/authenticate" method="post" aria-hidden="false">
+                <form id="login" style="display: none;" name="login" action="{{ api }}/users/authenticate" method="post" aria-hidden="false">
                     <div id="enter-uuid" class="form-group">
                         <label for="username">Please enter your username</label>
                         <input type="text" id="username" name="username" class="form-input form-input--medium" placeholder="e.g. 1a2b-3c4d-5e6f-7g8hi9j0klmno" required />
@@ -37,13 +37,15 @@ title: Manage the system
                     <p>Welcome to the new operator admin page. Please note that this section is still a work in progress. Some features are still under contruction, and may be a little temperamental. If you encounter any issues, please <a href="mailto:selfservice@carpoolvote.com">email us</a>. Thank you for your understanding!</p>
                     <p id="infoAdmin"></p>
 
-                    <div>                         
-                        <a href="{{ api }}/users/list">users list</a>
+                    <div>
+                        <div>                         
+                            <a href="{{ api }}/users/list">users list</a>
 
-                        <button class="button button--large" id="getUsersList">Get Users List</button>
-                    </div>
-                    <div id="usersList">                         
-                        <ul></ul>
+                            <button class="button button--large" id="getUsersList">Get Users List</button>
+                        </div>
+                        <div id="usersList">                         
+                            <ul></ul>
+                        </div>
                     </div>
                     <div id="root">
                     </div>
