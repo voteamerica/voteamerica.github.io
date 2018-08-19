@@ -50,6 +50,11 @@ before_script:
   - echo before
 
   - ls $HOME/build/voteamerica/be
+  - ls $HOME/build/voteamerica/be/docker
+
+  - pwd
+
+  - cd $HOME/build/voteamerica/be/docker
 
   - $HOME/build/voteamerica/be/docker/specific-machine-test-travis-fe.sh cp-front-end   R $TRAVIS_REPO_SLUG $TRAVIS_BRANCH $TRAVIS_EVENT_TYPE $TRAVIS_PULL_REQUEST_SLUG $TRAVIS_PULL_REQUEST_BRANCH
 
