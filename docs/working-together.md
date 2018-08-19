@@ -56,11 +56,11 @@ early and continuous delivery of valuable software.
 5. Our project is built around motivated volunteers. We create a supportive environment and trust each other to get the job done. 
 6. The most efficient and effective method of conveying information to and within our team is 
 
-video call. When time zones don’t permit, messages should go to the relevant Slack channel, tagging all users concerned. IM should be used when data need to be protected. 
+video call. When time zones don't permit, messages should go to the relevant Slack channel, tagging all users concerned. IM should be used when data need to be protected. 
 7. Working software is the primary measure of progress. 
 8. We want this project to be sustainable. Now that the election crunch is over, we work at a pace that we can maintain. 
 9. We pay continuous attention to technical excellence and good design, to enhance agility. 
-10. Simplicity — the art of maximizing the amount of work not done — is essential. 
+10. Simplicity - the art of maximizing the amount of work not done is essential. 
 11. We recognize that best architectures, requirements, and designs emerge from self-organizing teams. 
 12. At regular intervals, we reflect on how to become more effective, then tune and adjust our behavior accordingly. 
   
@@ -69,7 +69,7 @@ video call. When time zones don’t permit, messages should go to the relevant Sla
 
   
 
-The **product owner** (Sasjkia) is responsible for bridging the gap between the service users, partners and other stakeholders, and the development team. She cultivates expertise on the platform, users’ needs, and stakeholder priorities. She works with the development team to help clarify requirements.
+The **product owner** (Sasjkia) is responsible for bridging the gap between the service users, partners and other stakeholders, and the development team. She cultivates expertise on the platform, user's needs, and stakeholder priorities. She works with the development team to help clarify requirements.
 
   
 
@@ -90,6 +90,6 @@ The project will use the below roadmap for development:
 2. **PRODUCT ROADMAP**: The product owner creates a product roadmap. The product roadmap is a high-level view of the platform requirements, with a loose time frame for when we will develop those requirements. 
 3. **RELEASE PLAN**: The product owner creates a release plan. The release plan identifies a high-level timetable for the release of each feature. 
 4. **SPRINT PLANNING**: At the start of each two-week sprint, the team has a video call to determine what requirements will be in the next iteration, then starts creating it 
-5. **SCRUM**: During each sprint, developers post updates in the relevant Slack channel every other day - letting others know what they’ve completed, what they plan to work on, and any roadblocks they may have. This ensures that we all remain on the same page for the remainder of the sprint. 
+5. **SCRUM**: During each sprint, developers post updates in the relevant Slack channel every other day - letting others know what they've completed, what they plan to work on, and any roadblocks they may have. This ensures that we all remain on the same page for the remainder of the sprint. 
 6. **SPRINT REVIEW**: At the end of every sprint, developers report on what was created. The team then tests the iteration. 
 7. **SPRINT RETROSPECTIVE**: After the sprint review, the team discusses how the sprint went and plans for improvements in the next sprint.
