@@ -30,7 +30,7 @@ class DriverBase extends Component {
   }
 
   render() {
-    const { driversInfo } = this.props;
+    const { loginInfo, driversInfo } = this.props;
 
     const showDriver = driver => {
       return <li key={driver.UUID}>{driver.username}</li>;
@@ -46,31 +46,37 @@ class DriverBase extends Component {
 
     return (
       <div>
-        <div>Driver Info</div>
-        <div>
-          <a href="{{ api }}/users/list">users list</a>
-
-          {driversInfo.showDriversList === false ? (
-            <button
-              className="button button--large"
-              id="driverGetUsersList"
-              onClick={this.handleGetDriversListClick(this)}
-            >
-              Show List
-            </button>
-          ) : (
+        {loginInfo.loggedIn === true ? (
+          <div>
+            <div>Driver Info</div>
             <div>
-              <button
-                className="button button--large"
-                id="driverGetUsersList"
-                onClick={this.handleHideDriversListClick(this)}
-              >
-                Hide List
-              </button>
-              {driversList}
+              <a href="{{ api }}/users/list">users list</a>
+
+              {driversInfo.showDriversList === false ? (
+                <button
+                  className="button button--large"
+                  id="driverGetUsersList"
+                  onClick={this.handleGetDriversListClick(this)}
+                >
+                  Show List
+                </button>
+              ) : (
+                <div>
+                  <button
+                    className="button button--large"
+                    id="driverGetUsersList"
+                    onClick={this.handleHideDriversListClick(this)}
+                  >
+                    Hide List
+                  </button>
+                  {driversList}
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          false
+        )}
       </div>
     );
   }
