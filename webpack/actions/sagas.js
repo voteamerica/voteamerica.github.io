@@ -18,7 +18,7 @@ function* fetchLoginRequest(action) {
       '/users/authenticate'
     );
 
-    const loginResult = yield call(fetchInfo, fetchURL);
+    const loginResult = yield call(fetchInfo, { fetchURL });
 
     // if (loginInfo.status === 200) {
     if (loginResult[successProperty] !== undefined) {

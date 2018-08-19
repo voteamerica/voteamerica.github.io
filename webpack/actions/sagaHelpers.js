@@ -1,22 +1,31 @@
 const createAPIurl = (params, remoteUrl, apiRoute) => {
-  var url = '';
+  let urlParams = '';
 
-  var keys = Object.keys(params);
+  const keys = Object.keys(params);
 
   keys.forEach(function(key, idx) {
     if (idx > 0) {
-      url += '&';
+      urlParams += '&';
     }
-    url += key + '=' + params[key].toString();
+
+    urlParams += key + '=' + params[key].toString();
   });
 
-  url = remoteUrl + apiRoute + '?' + url;
+  const baseUrl = remoteUrl + apiRoute;
+
+  const url = urlParams.length > 0 ? baseUrl + '?' + urlParams : baseUrl;
 
   return url;
 };
 
-const fetchInfo = async fetchURL => {
-  const resp = await fetch(fetchURL);
+const fetchInfo = async fetchDetails => {
+  const options = {};
+
+  if (fetchDetails.token && fetchDetails.token.length > 0) {
+    options.headers = { Authorization: `Bearer ${fetchDetails.token}` };
+  }
+
+  const resp = await fetch(fetchDetails.fetchURL, options);
 
   console.log('resp', resp);
 

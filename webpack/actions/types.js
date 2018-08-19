@@ -3,6 +3,7 @@ const LOGIN_REQUEST = 'LOGIN_REQUEST';
 const LOGOUT = 'LOGOUT';
 
 const GET_DRIVERS_LIST = 'GET_DRIVERS_LIST';
+const HIDE_DRIVERS_LIST = 'HIDE_DRIVERS_LIST';
 
 const getAsyncTypes = type => ({
   success: type + '_SUCCESS',
@@ -20,5 +21,6 @@ export {
   loginRequestTypes,
   LOGOUT,
   GET_DRIVERS_LIST,
+  HIDE_DRIVERS_LIST,
   getDriversListTypes
 };

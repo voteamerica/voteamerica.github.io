@@ -5,17 +5,22 @@ import { createAPIurl, fetchInfo } from './sagaHelpers.js';
 
 function* fetchDriversList(action) {
   try {
-    const { remoteUrlBase, successProperty } = action.payload;
+    const { remoteUrlBase, token = '', successProperty } = action.payload;
 
     const fetchURL = createAPIurl({}, remoteUrlBase, '/users/list');
 
-    const loginResult = yield call(fetchInfo, fetchURL);
+    const loginResult = yield call(fetchInfo, { fetchURL, token });
 
-    // if (loginInfo.status === 200) {
     if (loginResult[successProperty] !== undefined) {
+      const payload = {};
+
+      const results = JSON.parse(loginResult[successProperty]);
+
+      payload[successProperty] = results;
+
       yield put({
         type: getDriversListTypes.success,
-        payload: loginResult[successProperty]
+        payload
       });
     } else {
       yield put({ type: getDriversListTypes.fail, payload: loginResult });

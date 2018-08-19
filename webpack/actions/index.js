@@ -3,7 +3,8 @@ import {
   LOGIN_DETAILS,
   LOGIN_REQUEST,
   LOGOUT,
-  GET_DRIVERS_LIST
+  GET_DRIVERS_LIST,
+  HIDE_DRIVERS_LIST
 } from './types';
 
 const loginDetails = details => ({
@@ -26,9 +27,21 @@ const logout = () => ({
   payload: {}
 });
 
-const getDriversList = remoteUrlBase => ({
+const getDriversList = (remoteUrlBase, token) => ({
   type: GET_DRIVERS_LIST,
-  payload: { remoteUrlBase, successProperty: 'data' }
+  payload: { remoteUrlBase, token, successProperty: 'data' }
 });
 
-export { loginDetails, login, loginSuccess, logout, getDriversList };
+const hideDriversList = () => ({
+  type: HIDE_DRIVERS_LIST,
+  payload: {}
+});
+
+export {
+  loginDetails,
+  login,
+  loginSuccess,
+  logout,
+  getDriversList,
+  hideDriversList
+};
