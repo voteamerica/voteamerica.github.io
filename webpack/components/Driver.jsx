@@ -48,10 +48,8 @@ class DriverBase extends Component {
       <div>
         {loginInfo.loggedIn === true ? (
           <div>
-            <div>Driver Info</div>
+            <h2 className="operator-page-heading">Driver Info</h2>
             <div>
-              <a href="{{ api }}/users/list">users list</a>
-
               {driversInfo.showDriversList === false ? (
                 <button
                   className="button button--large"

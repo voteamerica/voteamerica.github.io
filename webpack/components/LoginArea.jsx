@@ -108,10 +108,21 @@ class LoginAreaBase extends Component {
       </div>
     );
 
+    const welcomeDivStyle = {
+      paddingTop: 20,
+      paddingBottom: 20
+    };
+
+    const logoutDivStyle = {
+      paddingBottom: 20
+    };
+
     const loginStatusAndLogoutButton = (
       <div>
-        <div> Logged in</div>
-        <div>
+        <div style={welcomeDivStyle}>
+          Welcome, {loginInfo.details.username}!
+        </div>
+        <div style={logoutDivStyle}>
           <button onClick={this.handleLogoutClick(this)}>Logout</button>
         </div>
       </div>
