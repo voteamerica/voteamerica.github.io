@@ -14,8 +14,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { getDriversList, hideDriversList };
 
-class DriverBase extends Component {
-  handleGetDriversListClick(self) {
+class OperatorBase extends Component {
+  handleGetOperatorsListClick(self) {
     return () => {
       const { apiInfo, getDriversList, loginInfo } = self.props;
       const token = loginInfo.token || '';
@@ -24,7 +24,7 @@ class DriverBase extends Component {
     };
   }
 
-  handleHideDriversListClick(self) {
+  handleHideOperatorsListClick(self) {
     return () => {
       const { hideDriversList } = self.props;
 
@@ -48,16 +48,9 @@ class DriverBase extends Component {
     );
 
     const driverColumns = [
-      { Header: 'First Name', accessor: 'DriverFirstName' },
-      { Header: 'Email', accessor: 'DriverEmail' },
-      { Header: 'Last Name', accessor: 'DriverLastName' },
-      { Header: 'Powerchair', accessor: 'DriverCanLoadRiderWithWheelchair' },
-      { Header: 'Zip', accessor: 'DriverCollectionZIP' },
-      { Header: 'Status', accessor: 'status' },
-      { Header: 'Seats', accessor: 'SeatCount' },
-      { Header: 'License', accessor: 'DriverLicenseNumber' },
-      { Header: 'Phone', accessor: 'DriverPhone' },
-      { Header: 'Org', accessor: 'uuid_organization' }
+      { Header: 'Username', accessor: 'username' },
+      { Header: 'Email', accessor: 'email' },
+      { Header: 'Admin', accessor: 'admin' }
     ];
 
     const driverTableDivStyle = {
@@ -77,7 +70,7 @@ class DriverBase extends Component {
                   id="driverGetUsersList"
                   onClick={this.handleGetDriversListClick(this)}
                 >
-                  Show Drivers List
+                  Show Operators List
                 </button>
               ) : (
                 <div>
@@ -114,9 +107,9 @@ class DriverBase extends Component {
 // { driversList }
 //                     <li>{driver.username}</li>
 
-const Driver = connect(
+const Operator = connect(
   mapStateToProps,
   mapDispatchToProps
-)(DriverBase);
+)(OperatorBase);
 
-export default Driver;
+export default Operator;

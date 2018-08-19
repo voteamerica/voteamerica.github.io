@@ -3,13 +3,11 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import { GET_DRIVERS_LIST, getDriversListTypes } from './types';
 import { createAPIurl, fetchInfo } from './sagaHelpers.js';
 
-const urlPath = '/drivers/list';
-
 function* fetchDriversList(action) {
   try {
     const { remoteUrlBase, token = '', successProperty } = action.payload;
 
-    const fetchURL = createAPIurl({}, remoteUrlBase, urlPath);
+    const fetchURL = createAPIurl({}, remoteUrlBase, '/users/list');
 
     const loginResult = yield call(fetchInfo, { fetchURL, token });
 
