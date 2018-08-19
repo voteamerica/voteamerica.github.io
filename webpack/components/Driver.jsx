@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactTable from 'react-table';
+
+import 'react-table/react-table.css';
 
 import { getDriversList, hideDriversList } from '../actions/index.js';
 
@@ -44,6 +47,17 @@ class DriverBase extends Component {
       </ul>
     );
 
+    const driverColumns = [
+      { Header: 'Username', accessor: 'username' },
+      { Header: 'Email', accessor: 'email' },
+      { Header: 'Admin', accessor: 'admin' }
+    ];
+
+    const driverTableDivStyle = {
+      marginTop: 20,
+      marginBottom: 10
+    };
+
     return (
       <div>
         {loginInfo.loggedIn === true ? (
@@ -56,7 +70,7 @@ class DriverBase extends Component {
                   id="driverGetUsersList"
                   onClick={this.handleGetDriversListClick(this)}
                 >
-                  Show List
+                  Show Drivers List
                 </button>
               ) : (
                 <div>
@@ -67,7 +81,17 @@ class DriverBase extends Component {
                   >
                     Hide List
                   </button>
-                  {driversList}
+                  {driversInfo.drivers ? (
+                    <div style={driverTableDivStyle}>
+                      <ReactTable
+                        defaultPageSize={5}
+                        data={driversInfo.drivers}
+                        columns={driverColumns}
+                      />
+                    </div>
+                  ) : (
+                    false
+                  )}
                 </div>
               )}
             </div>
@@ -80,6 +104,7 @@ class DriverBase extends Component {
   }
 }
 
+// { driversList }
 //                     <li>{driver.username}</li>
 
 const Driver = connect(
