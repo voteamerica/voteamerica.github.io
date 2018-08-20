@@ -32,9 +32,9 @@ if (data.uuid_rider) {
 // Cache jQuery selectors:
 var $login      = $('#login'),
   $manage       = $('#manage'),
-  $info         = $('#manage #infoAdmin'),
+  $info         = $manage.find('#infoAdmin'),
   $manageLogin  = $('#manageLogin'),
-  $infoLogin    = $('#manageLogin #infoLogin')
+  $infoLogin    = $manageLogin.find('#infoLogin')
   ;
 
 
@@ -68,25 +68,23 @@ $login.validator().on('submit', function(e) {
     riderExists();
   }
 
-  // done in driver exists
-  //
-  // $(this).slideUp(300).attr('aria-hidden','true');
-  // $manage.slideDown(300).attr('aria-hidden','false');
-  // updateUI();
   e.preventDefault();
 });
 
 function updateUI(uuid, type, phone) {
+  // Hide login form and show user info
+  $login.slideUp(300).attr('aria-hidden','true');
+  $manage.slideDown(300).attr('aria-hidden','false');
+
   // NOTE: this handling isn't quite correct, so avoid refactoring without full testing
   var dataTypeDriver = data.type === 'driver';
   var dataTypeRider  = data.type === 'rider';
 
   $manage.find('#btnCancelDriveOffer').toggle(dataTypeDriver);
   $manage.find('#btnPauseDriverMatch').toggle(dataTypeDriver);
-  $manage.find('#btnCancelDriverMatch').toggle(dataTypeRider && data.uuid_driver !== undefined && data.score !== 'undefined');
+  $manage.find('#btnCancelMatch').toggle(data.uuid_driver !== undefined && data.score !== 'undefined');
 
   $manage.find('#btnCancelRideRequest').toggle(dataTypeRider);
-  $manage.find('#btnCancelRiderMatch').toggle(dataTypeRider && data.uuid_driver !== undefined && data.score !== 'undefined');
 
   $manage.find('#btnAcceptDriverMatch').toggle(dataTypeRider && data.uuid_driver !== undefined && data.score !== 'undefined');
 }
@@ -110,15 +108,14 @@ function updateUIbyRiderStatus (riderStatus) {
 
 $manage
   .on('click', '#btnCancelRideRequest', cancelRideRequest)
-  .on('click', '#btnCancelRiderMatch', cancelRiderMatch)
+  .on('click', '#btnCancelMatch', cancelMatch)
   .on('click', '#btnCancelDriveOffer', cancelDriveOffer)
-  .on('click', '#btnCancelDriverMatch', cancelDriverMatch)
   .on('click', '#btnPauseDriverMatch', pauseDriverMatch)
   .on('click', '#btnAcceptDriverMatch', acceptDriverMatch)
   .on('click', '#logout', logout);
 
 
-function cancelRiderMatch() {
+function cancelMatch() {
   if (!window.confirm('This will cancel your ride match. Are you sure you want to proceed?')) {
     return;
   }
@@ -129,22 +126,7 @@ function cancelRiderMatch() {
       Score: data.score,
       RiderPhone: data.phone
     },
-    '/cancel-rider-match'
-  );
-}
-
-function cancelDriverMatch() {
-  if (!window.confirm('This will cancel your ride match. Are you sure you want to proceed?')) {
-    return;
-  }
-  sendAjaxRequest(
-    {
-      UUID_driver: data.uuid_driver,
-      UUID_rider: data.uuid,
-      Score: data.score,
-      RiderPhone: data.phone
-    },
-    '/cancel-driver-match'
+    '/cancel-' + data.type + '-match'
   );
 }
 
@@ -225,8 +207,6 @@ function driverExists () {
         if (keys[0] == "driver_exists" && info === "") {
           driverLoggedIn = true;
 
-          $(this).slideUp(300).attr('aria-hidden','true');
-          $manage.slideDown(300).attr('aria-hidden','false');
           updateUI();
 
           clearDriverInfo ();
@@ -619,8 +599,6 @@ function riderExists () {
         if (keys[0] == "rider_exists" && info === "") {
           riderLoggedIn = true;
 
-          $(this).slideUp(300).attr('aria-hidden','true');
-          $manage.slideDown(300).attr('aria-hidden','false');
           updateUI();
 
           clearRiderInfo ();
@@ -799,20 +777,7 @@ function cancelRideRequest() {
 }
 
 function createAPIurl (params, apiRoute) {
-  var url = "";
-
-  var keys = Object.keys(params);
-
-  keys.forEach(function (key, idx) {
-    if (idx > 0) {
-      url += "&";
-    }
-    url += key + "=" + params[key].toString();    
-  });
-
-  url = remoteUrl + apiRoute + "?" + url;
-
-  return url;
+  return tinyQuery.set(params, remoteUrl + apiRoute);
 }
 
 function accessCarpoolvoteAPI (url, handlerFunction) {

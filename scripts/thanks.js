@@ -1,25 +1,15 @@
-var data = tinyQuery.getAll();
+var queryStringData = tinyQuery.getAll();
 
-var heading             = document.getElementById("thanks-header");
-var introPara           = document.getElementById("introPara");
-var successInfo         = document.getElementById("requestSuccessInfo");
-var responseDetails     = document.getElementById("responseDetails");
-var responseCode        = document.getElementById("responseCode");
-var responseText        = document.getElementById("responseText");
+if (queryStringData.code !== '0') {
+  $('#thanks').hide();
 
-var headingFailureText  = document.getElementById("sorryHeading").innerHTML;
-var paraFailureText     = document.getElementById("sorryPara").innerHTML;
+  var responseInfo = ['code', 'info'].filter(function(d) {
+			return queryStringData[d];
+		})
+		.map(function(d) {
+			return '<p><small>Response ' + d + ': <b>' + queryStringData[d] + '</b></small></p>';
+		})
+		.join('');
 
-if (data.code != "0") {
-  heading.innerHTML   = headingFailureText;
-  introPara.innerHTML = paraFailureText;
-
-  successInfo.setAttribute("hidden", "hidden");
-  successInfo.setAttribute("style", "display:none");    
-
-  responseDetails.removeAttribute("hidden");
-  responseDetails.setAttribute("style", "");    
-
-  responseCode.innerHTML = data.code;
-  responseText.innerHTML = data.info;
+  $('#sorry').show().append(responseInfo);
 }

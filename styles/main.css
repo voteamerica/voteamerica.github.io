@@ -803,6 +803,13 @@ label {
 	margin-left:5px;
 }
 
+/* Thanks page */
+.uuid--large {
+    display: block;
+    font-size: 1.5em;
+    margin: 5px 0 20px;
+}
+
 /* Self service page */
 li.list_button{
     list-style-type: none;
