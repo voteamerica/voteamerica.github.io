@@ -1,4 +1,3 @@
----
 # Uses Ubuntu 'trusty' distribution
 sudo: required
 
@@ -11,7 +10,6 @@ env:
 language: ruby
 
 install:
-
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
@@ -58,9 +56,9 @@ before_script:
 
   - $HOME/build/voteamerica/be/docker/specific-machine-test-travis-fe.sh cp-front-end   R $TRAVIS_REPO_SLUG $TRAVIS_BRANCH $TRAVIS_EVENT_TYPE $TRAVIS_PULL_REQUEST_SLUG $TRAVIS_PULL_REQUEST_BRANCH
 
-# these commands create specific machines for test runner, node app and db
-# if working on a dev branch of the backend, uncomment the relevant machines and
-# set the repo/branch that contains the backend dev code
+  # these commands create specific machines for test runner, node app and db
+  # if working on a dev branch of the backend, uncomment the relevant machines and
+  # set the repo/branch that contains the backend dev code
   - $HOME/build/voteamerica/be/docker/specific-machine-test-travis-fe.sh cp-test-runner R $BE_REPO $BE_BRANCH
   - $HOME/build/voteamerica/be/docker/specific-machine-test-travis-fe.sh cp-nodejs      R $BE_REPO $BE_BRANCH
   - $HOME/build/voteamerica/be/docker/specific-machine-test-travis-fe.sh cp-pg-server   R $BE_REPO $BE_BRANCH
@@ -72,7 +70,7 @@ before_script:
   - docker-compose -f $HOME/build/voteamerica/be/docker/compose/full-stack-test/docker-compose-test.yml up -d
 
 script:
-  - $HOME/build/voteamerica/be/docker/compose-tests.sh pause-cancel2
+  - travis_retry $HOME/build/voteamerica/be/docker/compose-tests.sh pause-cancel2
 
 after_script:
   - docker-compose -f $HOME/build/voteamerica/be/docker/compose/full-stack-test/docker-compose-test.yml down
