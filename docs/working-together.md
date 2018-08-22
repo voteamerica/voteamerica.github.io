@@ -16,11 +16,14 @@ The nonhierarchical structure of the project created a space where highly compet
 
 The passion and adaptability of all of the developers were key to ensuring that the platform met the needs of our service users in 2016 - and made it possible to secure continued support from our partners.
 
+## <u>Current Status</u>
+
+We are working together with Slack, please join us using the link in the [contributing page](https://github.com/voteamerica/voteamerica.github.io/blob/master/docs/contributing.md).
   
+## <u>Future Plans</u>
 
-Moving forward, we would like to retain these positive aspects of how we worked 
 
-together, while creating a more sustainable contribution structure. To do this, we will borrow from **Agile project management methodologies.**
+Moving forward, we would like to retain these positive aspects of how we worked together, while creating a more sustainable contribution structure. To do this, we will borrow from **Agile project management methodologies.**
 
   
 
