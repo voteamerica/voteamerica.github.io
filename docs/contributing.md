@@ -10,6 +10,10 @@ It's also very important that the site is accessible to disabled users. All HTML
 
 Our website should work on as many devices as possible. This means that it should be responsive and mobile-friendly design, as well as fast, lightweight, and performant. Assets should be kept as small as possible, and animations should be slick and unobtrusive. We try to support all browsers with >1% market share in the US - including IE11.
 
+Here is some more information about our [values](https://github.com/voteamerica/voteamerica.github.io/blob/master/docs/values.md).
+
+Learn more about how we [work together](https://github.com/voteamerica/voteamerica.github.io/blob/master/docs/working-together.md).
+
 ## Getting started
 
 - Join the [Progressive Coders Network](https://progcode.org) [Slack community](http://progco.de/join)! It's the best way to keep up to date with the project. Please [email us](mailto:admin@progcode.org) if you have questions about the registraton form.
