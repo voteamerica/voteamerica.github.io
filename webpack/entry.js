@@ -21,7 +21,6 @@ function* allSagas() {
 }
 
 sagaMiddleware.run(allSagas);
-// sagaMiddleware.run(loginSaga);
 
 render(
   <Provider store={store}>
