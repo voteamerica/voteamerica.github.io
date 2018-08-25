@@ -10,7 +10,7 @@ import rootReducer from './reducers/index.js';
 import loginSaga from './actions/sagas.js';
 import driversListSaga from './actions/sagaDriversList.js';
 
-console.log('entry.js sttxx xnloaded');
+console.log('entry.js loaded');
 
 const sagaMiddleware = createSagaMiddleware();
 
