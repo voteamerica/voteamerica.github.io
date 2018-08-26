@@ -825,6 +825,16 @@ h3.self-service-heading {
     margin-bottom: -2px;
 }
 
+h2.operator-page-heading {
+    /*margin-bottom: -2px;*/
+    margin-bottom: 20px;
+    margin-top: 25px;
+}
+
+h3.operator-page-heading {
+    margin-bottom: -2px;
+}
+
 .liLabel {
     width: 140px;
     display: inline-block;
