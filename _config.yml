@@ -11,4 +11,5 @@ relative_permalinks: false
 
 api: "https://api.carpoolvote.com/live"
 cp_site: "http://carpoolvote.com"
-exlcude: ['node_modules']
+
+exclude: ['node_modules']
