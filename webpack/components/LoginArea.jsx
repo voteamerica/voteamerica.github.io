@@ -103,7 +103,7 @@ class LoginAreaBase extends Component {
           <div className="help-block with-errors" />
         </div>
         <div>
-          <button onClick={this.handleLoginRequestClick(this)}>Login</button>
+          <button id="login" onClick={this.handleLoginRequestClick(this)}>Login</button>
         </div>
       </div>
     );
@@ -119,11 +119,11 @@ class LoginAreaBase extends Component {
 
     const loginStatusAndLogoutButton = (
       <div>
-        <div style={welcomeDivStyle}>
+        <div id="welcomeMessage" style={welcomeDivStyle}>
           Welcome, {loginInfo.details.username}!
         </div>
         <div style={logoutDivStyle}>
-          <button onClick={this.handleLogoutClick(this)}>Logout</button>
+          <button id="logout" onClick={this.handleLogoutClick(this)}>Logout</button>
         </div>
       </div>
     );
@@ -131,7 +131,7 @@ class LoginAreaBase extends Component {
     const loginArea =
       loginInfo.loggedIn === false ? loginButtons : loginStatusAndLogoutButton;
 
-    return <div>{loginArea}</div>;
+    return <div id="loginArea">{loginArea}</div>;
   }
 }
 
