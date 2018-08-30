@@ -74,7 +74,7 @@ class DriverBase extends Component {
               {driversInfo.showDriversList === false ? (
                 <button
                   className="button button--large"
-                  id="driverGetUsersList"
+                  id="showGetDriversList"
                   onClick={this.handleGetDriversListClick(this)}
                 >
                   Show Drivers List
@@ -83,7 +83,7 @@ class DriverBase extends Component {
                 <div>
                   <button
                     className="button button--large"
-                    id="driverGetUsersList"
+                    id="hideGetDriversList"
                     onClick={this.handleHideDriversListClick(this)}
                   >
                     Hide List
