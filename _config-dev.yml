@@ -2,3 +2,4 @@ encoding: UTF-8
 
 api: "https://api.carpoolvote.com/test"
 cp_site: "http://richardwestenra.com/voteamerica.github.io"
+webpack_bundle: "bundle"

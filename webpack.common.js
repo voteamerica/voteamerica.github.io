@@ -1,20 +1,8 @@
-const path = require('path');
-
-const outputPath = path.resolve(__dirname, 'scripts');
-
-console.log('outputPath', outputPath);
-
 module.exports = {
   watchOptions: {
     poll: 10000
   },
-  devtool: 'cheap-source-map',
-  entry: './webpack/entry.js',
-  mode: 'production',
-  output: {
-    path: outputPath,
-    filename: 'bundle.js'
-  },
+  entry: { app: './webpack/entry.js' },
   module: {
     rules: [
       {

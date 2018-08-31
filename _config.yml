@@ -11,5 +11,6 @@ relative_permalinks: false
 
 api: "https://api.carpoolvote.com/live"
 cp_site: "http://carpoolvote.com"
+webpack_bundle: "bundle-production"
 
 exclude: ['node_modules']

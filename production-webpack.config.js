@@ -7,13 +7,10 @@ const outputPath = path.resolve(__dirname, 'scripts');
 console.log('outputPath', outputPath);
 
 module.exports = merge(common, {
-  mode: 'development',
-  devtool: 'source-map',
+  mode: 'production',
+  devtool: 'cheap-source-map',
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle-production.js',
     path: outputPath
-  },
-  devServer: {
-    contentBase: './scripts'
   }
 });
