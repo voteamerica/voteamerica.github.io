@@ -1,4 +1,6 @@
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const outputPath = path.resolve(__dirname, 'scripts');
 
@@ -8,13 +10,15 @@ module.exports = {
   watchOptions: {
     poll: 10000
   },
-  devtool: 'cheap-source-map',
-  entry: './webpack/entry.js',
-  mode: 'production',
+  entry: { app: './webpack/entry.js' },
   output: {
-    path: outputPath,
-    filename: 'bundle.js'
+    filename: '[name].bundle.js',
+    path: outputPath
   },
+  plugins: [
+    new CleanWebpackPlugin(['scripts']),
+    new HtmlWebpackPlugin({ title: 'Production' })
+  ],
   module: {
     rules: [
       {
