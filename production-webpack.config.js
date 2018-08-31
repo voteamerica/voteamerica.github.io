@@ -8,7 +8,7 @@ console.log('outputPath', outputPath);
 
 module.exports = merge(common, {
   mode: 'production',
-  devtool: 'source-map',
+  devtool: 'cheap-source-map',
   output: {
     filename: 'bundle-production.js',
     path: outputPath
