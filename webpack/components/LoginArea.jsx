@@ -91,7 +91,7 @@ class LoginAreaBase extends Component {
         <div id="enter-phone" className="form-group">
           <label htmlFor="password">Enter your password</label>
           <input
-            type="tel"
+            type="password"
             id="password"
             name="password"
             className="form-input form-input--medium"
