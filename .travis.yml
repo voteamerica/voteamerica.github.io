@@ -70,7 +70,7 @@ before_script:
   - docker-compose -f $HOME/build/voteamerica/be/docker/compose/full-stack-test/docker-compose-test.yml up -d
 
 script:
-  - travis_retry $HOME/build/voteamerica/be/docker/compose-tests.sh pause-cancel2
+  - travis_retry $HOME/build/voteamerica/be/docker/compose-tests.sh full-tests
 
 after_script:
   - docker-compose -f $HOME/build/voteamerica/be/docker/compose/full-stack-test/docker-compose-test.yml down
