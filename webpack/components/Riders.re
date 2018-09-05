@@ -13,7 +13,7 @@ let make = ( ~riders, _children) => {
       <div>{ReasonReact.string("tablexxx")}
       </div>
       <div>
-        <Table className="123" type_={x}  />
+        <Table className="123" type_={x} columns=[||] />
       </div>
     </div>
 };

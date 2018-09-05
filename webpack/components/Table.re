@@ -6,6 +6,7 @@ type jsProps = {
     JS key `type` */
   [@bs.as "type"] type_: string,
   /* value: Js.nullable(int), */
+  columns: array(string),
 };
 
 /* [@bs.module] external tableWrap : ReasonReact.reactClass = "./TableWrap.jsx"; */
@@ -16,13 +17,14 @@ type jsProps = {
 [@bs.module "react-table"] external reactTable : ReasonReact.reactClass = "default";
 
 /* let make = (~className, ~type_, ~value=?, children) => */
-let make = (~className, ~type_, children) =>
+let make = (~className, ~type_, ~columns,  children) =>
   ReasonReact.wrapJsForReason(
     /* ~reactClass=tableWrap, */
     ~reactClass=reactTable,
     ~props=jsProps(
       ~className,
-      ~type_,
+      ~type_,    
+      ~columns,
       /* ~value=Js.Nullable.fromOption(value), */
     ),    
     children,
