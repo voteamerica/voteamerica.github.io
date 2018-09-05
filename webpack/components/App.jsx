@@ -19,16 +19,16 @@ class AppBase extends Component {
       <div>
         <LoginArea />
         <Driver />
-        <Riders riders="test" />
         <RidersList />
-        <RidersPlus />
+        <RidersPlus riders="test" />
       </div>
     );
   }
 }
 
 /*
-  
+        <Riders riders="test" />
+
   */
 
 //         <RidersList />

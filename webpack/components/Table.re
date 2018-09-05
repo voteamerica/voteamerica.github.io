@@ -21,10 +21,6 @@ type jsProps = {
 /* [@bs.module] external reactTable : ReasonReact.reactClass = "react-table"; */
 [@bs.module "react-table"] external reactTable : ReasonReact.reactClass = "default";
 
-let t1 = theader(~header="First Name", ~accessor="DriverFirstName");
-let t2 = theader(~header="Email", ~accessor="DriverEmail");
-let t3 = theader(~header="Last Name", ~accessor="DriverLastName");
-
 let make = (~className, ~type_, ~columns,  children) =>
   ReasonReact.wrapJsForReason(
     /* ~reactClass=tableWrap, */
@@ -32,7 +28,7 @@ let make = (~className, ~type_, ~columns,  children) =>
     ~props=jsProps(
       ~className,
       ~type_,    
-      ~columns=[|t1, t2, t3|],
+      ~columns,
     ),    
     children,
   );
