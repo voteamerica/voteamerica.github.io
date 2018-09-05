@@ -13,6 +13,7 @@ type jsProps = {
   [@bs.as "type"] type_: string,
   /* value: Js.nullable(int), */
   columns: array(theader),
+  defaultPageSize: int
 };
 
 /* [@bs.module] external tableWrap : ReasonReact.reactClass = "./TableWrap.jsx"; */
@@ -29,6 +30,7 @@ let make = (~className, ~type_, ~columns,  children) =>
       ~className,
       ~type_,    
       ~columns,
+      ~defaultPageSize=5,
     ),    
     children,
   );
