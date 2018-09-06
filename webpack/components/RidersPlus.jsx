@@ -4,7 +4,9 @@ import Riders from './Riders.bs.js';
 
 const mapStateToProps = state => {
   // const { apiInfo, loginInfo, driversInfo } = state;
-  const riders = 'testr';
+  const { driversInfo } = state;
+  // const riders = 'testr';
+  const riders = driversInfo.drivers;
 
   return { riders };
 };
