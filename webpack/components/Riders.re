@@ -62,15 +62,19 @@ let make = ( ~riders:array(TypeInfo.rider), _children) => {
     let buttonx = <button> {ReasonReact.string("Hello " ++ s)} </button>;
 
     let name = r => r->TypeInfo.firstNameGet;    
-    
     let names = Array.map(name, riders); 
+
+    let tableRider = rider => TypeInfo.rider(~firstName= rider->TypeInfo.firstNameGet, ~email=rider->TypeInfo.emailGet,  ~lastName=rider->TypeInfo.lastNameGet);
+    
+    let tableRiders = Array.map(tableRider, riders); 
 
     /* let dataInfo = riders; */
       let r1 = TypeInfo.rider(~firstName= "r1", ~email="e1",  ~lastName="t1");
   let r2 = TypeInfo.rider(~firstName= "r2", ~email="e2",  ~lastName="t2");
 
     /* let dataInfo = [||]; */
-    let dataInfo = [|r1, r2|];
+    /* let dataInfo = [|r1, r2|]; */
+    let dataInfo = tableRiders;
 
 
 
