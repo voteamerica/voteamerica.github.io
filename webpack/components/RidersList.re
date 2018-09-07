@@ -1,8 +1,13 @@
-let component = ReasonReact.statelessComponent("CompList");
+let component = ReasonReact.statelessComponent("RidersList");
 
 let listItems = [1, 2, 3];
 
-let fx = item => <li> (ReasonReact.string(string_of_int(item))) </li>;
+let fx = item => {
+
+  let itemString = string_of_int(item);
+
+  <li key={itemString}> {ReasonReact.string(itemString)} </li>
+};
 
 let items = Array.map(fx, [|1, 2, 3|]);
 
