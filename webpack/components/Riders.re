@@ -18,16 +18,16 @@ let t3 = TypeInfo.theader(~header="Last Name", ~accessor="DriverLastName");
   let mn = me.namex; */
 
 /* underscores before names indicate unused variables. We name them for clarity */
-let make = ( ~riders:array(TypeInfo.rider), _children) => {
+let make = (~loginInfo:TypeInfo.loginInfo,  ~ridersInfo:TypeInfo.ridersInfo, _children) => {
   ...component,
   render: (_self) =>{ 
-    let x: int = (Array.length (riders));
+    let x: int = (Array.length (ridersInfo->TypeInfo.ridersGet));
     let s:string = 
       if (x == 0) {
         "0";
       }
       else {
-        let r: TypeInfo.rider = riders[0];
+        let r: TypeInfo.rider = ridersInfo->TypeInfo.ridersGet[0];
 
         r->TypeInfo.firstNameGet;
       };
@@ -39,30 +39,51 @@ let make = ( ~riders:array(TypeInfo.rider), _children) => {
 
     let tableRider = rider => TypeInfo.rider(~firstName= rider->TypeInfo.firstNameGet, ~email=rider->TypeInfo.emailGet,  ~lastName=rider->TypeInfo.lastNameGet);
     
-    let tableRiders = Array.map(tableRider, riders); 
+    let tableRiders = Array.map(tableRider, ridersInfo->TypeInfo.ridersGet); 
 
+    let tableRiders = 
+      if (ridersInfo->TypeInfo.showRidersListGet) {
+        <Table className="123" type_={tableType} columns=[|t1, t2, t3|] data=tableRiders />
+
+      }
+      else {
+        <div>{ReasonReact.string("not showing riders")}</div>
+      };
+
+    let ridersInfoArea = 
+      if (loginInfo->TypeInfo.loggedInGet) {
     <div>
       <div>
         {buttonx}
       </div>
       <div>{ReasonReact.string("tablexxx")}
       </div>
-      <div>
-        <Table className="123" type_={tableType} columns=[|t1, t2, t3|] data=tableRiders />
+      <div>        
+        {tableRiders}
       </div>
-  </div>
+    </div>
+          }
+      else {
+        <div>{ReasonReact.string("no riders info while not logged in")}</div>
+      };
+
+    <div> 
+      {ridersInfoArea}
+    </div>
   }
 };
 
 [@bs.deriving abstract]
 type jsProps = {
-  riders: array(TypeInfo.rider)
+  loginInfo: TypeInfo.loginInfo,
+  ridersInfo: TypeInfo.ridersInfo
 };
 
 let default =
   ReasonReact.wrapReasonForJs(~component, jsProps =>
-    make(
-      ~riders=jsProps->ridersGet,
+      make(
+      ~loginInfo=jsProps->loginInfoGet,
+      ~ridersInfo=jsProps->ridersInfoGet,
       [||],
     )
   );

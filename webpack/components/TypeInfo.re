@@ -10,8 +10,16 @@ type riderTest = {
    namex: string
 };
 
+[@bs.deriving abstract]
+type loginInfo = {
+  loggedIn: bool,
+};
 
-/*  */
+[@bs.deriving abstract]
+type ridersInfo = {
+  showRidersList: bool,
+  riders: array(rider)
+};
 
 [@bs.deriving abstract]
 type theader = {
