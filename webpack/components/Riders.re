@@ -17,27 +17,36 @@ let t3 = TypeInfo.theader(~header="Last Name", ~accessor="DriverLastName");
 
   let mn = me.namex; */
 
-/* underscores before names indicate unused variables. We name them for clarity */
-let make = (~loginInfo:TypeInfo.loginInfo,  ~ridersInfo:TypeInfo.ridersInfo, _children) => {
-  ...component,
-  render: (_self) =>{ 
-    let x: int = (Array.length (ridersInfo->TypeInfo.ridersGet));
-    let s:string = 
-      if (x == 0) {
-        "0";
+let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInfo:TypeInfo.ridersInfo, 
+~getDriversList, 
+_children) => {
+  let handleGetRidersListClick = (_event, _self) => {
+
+    let token = loginInfo->TypeInfo.tokenGet;
+
+    let url = apiInfo->TypeInfo.apiUrlGet;
+
+    Js.log(getDriversList);
+
+    /* for now, this is the most straightforward way to handle the action creator prop */
+    let getList = [%raw {| 
+      function (url, token) {
+            getDriversList(url, token);
+
+            return (1);
       }
-      else {
-        let r: TypeInfo.rider = ridersInfo->TypeInfo.ridersGet[0];
+      |}];
 
-        r->TypeInfo.firstNameGet;
-      };
+    let z = getList(url, token);
 
-    let buttonx = <button> {ReasonReact.string("Hello " ++ s)} </button>;
+    Js.log(z);
+  };
 
-    /* let name = r => r->TypeInfo.firstNameGet;    
-    let names = Array.map(name, riders);  */
-
-    let tableRider = rider => TypeInfo.rider(~firstName= rider->TypeInfo.firstNameGet, ~email=rider->TypeInfo.emailGet,  ~lastName=rider->TypeInfo.lastNameGet);
+  {
+  ...component,
+  render: (self) => { 
+    let tableRider = 
+      rider => TypeInfo.rider(~firstName=rider->TypeInfo.firstNameGet, ~email=rider->TypeInfo.emailGet,  ~lastName=rider->TypeInfo.lastNameGet);
     
     let tableRiders = Array.map(tableRider, ridersInfo->TypeInfo.ridersGet); 
 
@@ -47,18 +56,25 @@ let make = (~loginInfo:TypeInfo.loginInfo,  ~ridersInfo:TypeInfo.ridersInfo, _ch
 
       }
       else {
-        <div>{ReasonReact.string("not showing riders")}</div>
+        <div>
+          <button
+            className="button button--large"
+            id="showGetDriversList" 
+            onClick={self.handle(handleGetRidersListClick)}
+          >{ReasonReact.string("Show Riders List")}
+          </button>
+
+        </div>
       };
+
+      let tableDivStyle = ReactDOMRe.Style.make(~marginTop="5px", ~marginBottom="15px", ());
+
 
     let ridersInfoArea = 
       if (loginInfo->TypeInfo.loggedInGet) {
     <div>
-      <div>
-        {buttonx}
-      </div>
-      <div>{ReasonReact.string("tablexxx")}
-      </div>
-      <div>        
+      <h2 className="operator-page-heading">{ReasonReact.string("Rider Info")}</h2>
+      <div style={tableDivStyle}>        
         {tableRiders}
       </div>
     </div>
@@ -71,19 +87,23 @@ let make = (~loginInfo:TypeInfo.loginInfo,  ~ridersInfo:TypeInfo.ridersInfo, _ch
       {ridersInfoArea}
     </div>
   }
-};
+}};
 
 [@bs.deriving abstract]
 type jsProps = {
   loginInfo: TypeInfo.loginInfo,
-  ridersInfo: TypeInfo.ridersInfo
+  apiInfo: TypeInfo.apiInfo,
+  ridersInfo: TypeInfo.ridersInfo,  
+  getDriversList: (string, string) => string
 };
 
 let default =
   ReasonReact.wrapReasonForJs(~component, jsProps =>
       make(
       ~loginInfo=jsProps->loginInfoGet,
+      ~apiInfo=jsProps->apiInfoGet,
       ~ridersInfo=jsProps->ridersInfoGet,
+      ~getDriversList=jsProps->getDriversListGet,
       [||],
     )
   );

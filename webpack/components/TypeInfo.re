@@ -13,6 +13,12 @@ type riderTest = {
 [@bs.deriving abstract]
 type loginInfo = {
   loggedIn: bool,
+  token: string,
+};
+
+[@bs.deriving abstract]
+type apiInfo = {
+  apiUrl: string 
 };
 
 [@bs.deriving abstract]

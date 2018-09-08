@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 
 import Riders from './Riders.bs.js';
 
+import { getDriversList, hideDriversList } from '../actions/index.js';
+
 const mapStateToProps = state => {
-  // const { apiInfo, loginInfo, driversInfo } = state;
-  const { loginInfo, driversInfo } = state;
+  const { apiInfo, loginInfo, driversInfo } = state;
 
   const riders = driversInfo.drivers;
   const showRidersList = driversInfo.showDriversList;
@@ -15,10 +16,10 @@ const mapStateToProps = state => {
 
   const ridersInfo = { ...driversInfo, showRidersList, riders };
 
-  return { loginInfo, ridersInfo };
+  return { apiInfo, loginInfo, ridersInfo };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { getDriversList, hideDriversList };
 
 const RidersPlus = connect(
   mapStateToProps,
