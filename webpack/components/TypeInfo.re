@@ -38,24 +38,7 @@ type theader = {
   accessor: string
 };
 
-/* [@bs.deriving abstract]
-type riderTableJsProps = {
-  /* some example fields */
-  className: string,
-  /* `type` is reserved in Reason. use `type_` and make it still compile to the
-    JS key `type` */
-  [@bs.as "type"] type_: string,
-  /* value: Js.nullable(int), */
-  columns: array(theader),
-  defaultPageSize: int,
-  data: array(rider)
-}; */
-
-/* type tableItem = 
-  | rider 
-  | driver; */
-
-  /* this compiles, but couldn't use it for table props */
+/* this compiles, but couldn't use it for table props */
 type tbItem ('a) = TI ('a);
 
 type riderTableItem = TI rider;
@@ -64,8 +47,6 @@ type driverTableItem = TI driver;
 /* seems a reasonable compromise, but do need both constructor and type */
 type tableItem = | R(rider) | D(driver);
 
-/* type xt = array(rider); */
-
 /* this works, but prefer extra info for type being already defined */
 /* type tisTest = 
   | RT( string, string  ) 
@@ -73,12 +54,10 @@ type tableItem = | R(rider) | D(driver);
 
 [@bs.deriving abstract]
 type tableBaseJsProps = {
-  /* some example fields */
   className: string,
   /* `type` is reserved in Reason. use `type_` and make it still compile to the
     JS key `type` */
   [@bs.as "type"] type_: string,
-  /* value: Js.nullable(int), */
   columns: array(theader),
   defaultPageSize: int,
 };
@@ -91,29 +70,23 @@ type xriderTableJsProps = {
 
 [@bs.deriving abstract]
 type riderTableJsProps = {
-  /* some example fields */
   className: string,
   /* `type` is reserved in Reason. use `type_` and make it still compile to the
     JS key `type` */
   [@bs.as "type"] type_: string,
-  /* value: Js.nullable(int), */
   columns: array(theader),
   defaultPageSize: int,
-  /* data: array(tableItem) */
   data: array(rider)
 };
 
 [@bs.deriving abstract]
 type driverTableJsProps = {
-  /* some example fields */
   className: string,
   /* `type` is reserved in Reason. use `type_` and make it still compile to the
     JS key `type` */
   [@bs.as "type"] type_: string,
-  /* value: Js.nullable(int), */
   columns: array(theader),
   defaultPageSize: int,
-  /* data: array(tableItem) */
   data: array(driver)
 };
 

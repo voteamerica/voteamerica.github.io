@@ -1,6 +1,6 @@
 let component = ReasonReact.statelessComponent("Riders");
 
-let tableType = "123";
+let tableType = "riders";
 
 let t1 = TypeInfo.theader(~header="First Name", ~accessor="DriverFirstName");
 let t2 = TypeInfo.theader(~header="Email", ~accessor="DriverEmail");
@@ -18,22 +18,7 @@ _children) => {
 
     let url = apiInfo->TypeInfo.apiUrlGet;
 
-    /* NOTE: without this step, prop is not available in raw section */
-    /* Js.log(getRidersList); */
-
-    /* for now, this is the most straightforward way to handle the action creator prop */
-    /* let getList = [%raw {| 
-      function (url, token) {
-            ~getRidersList(url, token);
-
-            return (1);
-      }
-      |}]; */
-
-    /* let z = getList(url, token); */
-
-
-    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed versin of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
     let gl: ((string, string) => unit, string, string) => unit = [%raw (fx, url, token) => "{ fx(url, token); return 0; }"];
 
     gl(getRidersList, url, token);
@@ -42,30 +27,9 @@ _children) => {
   };
 
   let handleHideDriversListClick = (_event, _self) => {
-    /* NOTE: without this step, prop is not available in raw section */
-    /* Js.log(hideRidersList);     */
-
-    /* let hideList = [%raw {|
-      function () {
-        hideRidersList();
-
-        return (2);
-      }
-      |}]; */
-
-      /* let hl: (unit => unit) => unit = [%raw (fx) => "{ fx(); return 0; }"]; */
-
-      /* let hll: unit => unit = hideRidersList; */
-
-    /* let a = hideList(); */
-    /* let a =  */
-    /* hl(hideRidersList); */
-    /* hll(); */
-
     /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
     hideRidersList();
 
-    /* Js.log(a); */
     ();
   };
 
@@ -76,13 +40,6 @@ _children) => {
       rider => TypeInfo.rider(~firstName=rider->TypeInfo.firstNameGet, ~email=rider->TypeInfo.emailGet,  ~lastName=rider->TypeInfo.lastNameGet); 
 
     let tableRiders = Array.map(tableRider, ridersInfo->TypeInfo.ridersGet); 
-
-    /* let tableRiderTis =     
-      rider => TypeInfo.R(TypeInfo.rider(~firstName=rider->TypeInfo.firstNameGet, ~email=rider->TypeInfo.emailGet,  ~lastName=rider->TypeInfo.lastNameGet));
-
-    let tableRidersTis = Array.map(tableRiderTis, ridersInfo->TypeInfo.ridersGet); 
-
-    Js.log(tableRidersTis); */
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
@@ -124,7 +81,6 @@ _children) => {
     </div>
           }
       else {
-        /* <div>{ReasonReact.string("no riders info while not logged in")}</div> */
         ReasonReact.null;
       };
 
