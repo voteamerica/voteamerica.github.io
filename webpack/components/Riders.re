@@ -18,7 +18,8 @@ let t3 = TypeInfo.theader(~header="Last Name", ~accessor="DriverLastName");
   let mn = me.namex; */
 
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInfo:TypeInfo.ridersInfo, 
-~getDriversList, 
+~getRidersList, 
+~hideRidersList,
 _children) => {
   let handleGetRidersListClick = (_event, _self) => {
 
@@ -26,12 +27,12 @@ _children) => {
 
     let url = apiInfo->TypeInfo.apiUrlGet;
 
-    Js.log(getDriversList);
+    Js.log(getRidersList);
 
     /* for now, this is the most straightforward way to handle the action creator prop */
     let getList = [%raw {| 
       function (url, token) {
-            getDriversList(url, token);
+            getRidersList(url, token);
 
             return (1);
       }
@@ -46,20 +47,41 @@ _children) => {
   ...component,
   render: (self) => { 
     let tableRider = 
-      rider => TypeInfo.rider(~firstName=rider->TypeInfo.firstNameGet, ~email=rider->TypeInfo.emailGet,  ~lastName=rider->TypeInfo.lastNameGet);
-    
+      rider => TypeInfo.rider(~firstName=rider->TypeInfo.firstNameGet, ~email=rider->TypeInfo.emailGet,  ~lastName=rider->TypeInfo.lastNameGet); 
+
     let tableRiders = Array.map(tableRider, ridersInfo->TypeInfo.ridersGet); 
 
-    let tableRiders = 
-      if (ridersInfo->TypeInfo.showRidersListGet) {
-        <Table className="123" type_={tableType} columns=[|t1, t2, t3|] data=tableRiders />
+    /* let tableRiderTis =     
+      rider => TypeInfo.R(TypeInfo.rider(~firstName=rider->TypeInfo.firstNameGet, ~email=rider->TypeInfo.emailGet,  ~lastName=rider->TypeInfo.lastNameGet));
 
+    let tableRidersTis = Array.map(tableRiderTis, ridersInfo->TypeInfo.ridersGet); 
+
+    Js.log(tableRidersTis); */
+
+    let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
+
+    /*             onClick={this.handleHideDriversListClick(this)}
+ */
+    let tableRidersJSX = 
+      if (ridersInfo->TypeInfo.showRidersListGet) {
+        <div>
+          <button
+            className="button button--large"
+            id="hideGetRidersList"
+          >{ReasonReact.string("Hide List")}
+          </button>
+          <div style={tableDivStyle}> 
+            <Table propsCtr={TypeInfo.riderTableJsProps}  className="123" type_={tableType} columns=[|t1, t2, t3|] 
+            data=tableRiders
+            />
+          </div>
+        </div>
       }
       else {
         <div>
           <button
             className="button button--large"
-            id="showGetDriversList" 
+            id="showGetRidersList" 
             onClick={self.handle(handleGetRidersListClick)}
           >{ReasonReact.string("Show Riders List")}
           </button>
@@ -67,15 +89,12 @@ _children) => {
         </div>
       };
 
-      let tableDivStyle = ReactDOMRe.Style.make(~marginTop="5px", ~marginBottom="15px", ());
-
-
     let ridersInfoArea = 
       if (loginInfo->TypeInfo.loggedInGet) {
     <div>
       <h2 className="operator-page-heading">{ReasonReact.string("Rider Info")}</h2>
-      <div style={tableDivStyle}>        
-        {tableRiders}
+      <div>        
+        {tableRidersJSX}
       </div>
     </div>
           }
@@ -94,7 +113,8 @@ type jsProps = {
   loginInfo: TypeInfo.loginInfo,
   apiInfo: TypeInfo.apiInfo,
   ridersInfo: TypeInfo.ridersInfo,  
-  getDriversList: (string, string) => string
+  getRidersList: (string, string) => string,
+  hideRidersList: (string, string) => string,
 };
 
 let default =
@@ -103,7 +123,8 @@ let default =
       ~loginInfo=jsProps->loginInfoGet,
       ~apiInfo=jsProps->apiInfoGet,
       ~ridersInfo=jsProps->ridersInfoGet,
-      ~getDriversList=jsProps->getDriversListGet,
+      ~getRidersList=jsProps->getRidersListGet,
+      ~hideRidersList=jsProps->hideRidersListGet,
       [||],
     )
   );

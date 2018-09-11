@@ -1,3 +1,5 @@
+import { put, call } from 'redux-saga/effects';
+
 const createAPIurl = (params, remoteUrl, apiRoute) => {
   let urlParams = '';
 
@@ -34,4 +36,36 @@ const fetchInfo = async fetchDetails => {
   return json;
 };
 
-export { createAPIurl, fetchInfo };
+const createFetchItemsList = (getItemsListTypes, urlPath) => {
+  return function* fetchItemsList(action) {
+    try {
+      const { remoteUrlBase, token = '', successProperty } = action.payload;
+
+      const fetchURL = createAPIurl({}, remoteUrlBase, urlPath);
+
+      const loginResult = yield call(fetchInfo, { fetchURL, token });
+
+      if (loginResult[successProperty] !== undefined) {
+        const payload = {};
+
+        const results = JSON.parse(loginResult[successProperty]);
+
+        payload[successProperty] = results;
+
+        yield put({
+          type: getItemsListTypes.success,
+          payload
+        });
+      } else {
+        yield put({ type: getItemsListTypes.fail, payload: loginResult });
+      }
+    } catch (e) {
+      yield put({
+        type: getItemsListTypes.error,
+        payload: { message: e.message }
+      });
+    }
+  };
+};
+
+export { createAPIurl, fetchInfo, createFetchItemsList };

@@ -5,12 +5,13 @@
 /* [@bs.module] external reactTable : ReasonReact.reactClass = "react-table"; */
 [@bs.module "react-table"] external reactTable : ReasonReact.reactClass = "default";
 
-let make = (~className, ~type_, ~columns, ~data, children) =>{
+/* This table supports the display of different data types. The first param is a JsProps constructor, for which the data field is the type of the data to display, e.g. rider or driver */
+let make = (~propsCtr, ~className, ~type_, ~columns, ~data, children) =>{
 
   ReasonReact.wrapJsForReason(
     /* ~reactClass=tableWrap, */
     ~reactClass=reactTable,
-    ~props=TypeInfo.riderTableJsProps(
+    ~props=propsCtr(
       ~className,
       ~type_,    
       ~columns,

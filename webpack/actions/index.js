@@ -4,7 +4,8 @@ import {
   LOGIN_REQUEST,
   LOGOUT,
   GET_DRIVERS_LIST,
-  HIDE_DRIVERS_LIST
+  HIDE_DRIVERS_LIST,
+  ridersGetHideListTypes
 } from './types';
 
 const loginDetails = details => ({
@@ -27,6 +28,16 @@ const logout = () => ({
   payload: {}
 });
 
+const getItemsList = itemsGetListType => (remoteUrlBase, token) => ({
+  type: itemsGetListType,
+  payload: { remoteUrlBase, token, successProperty: 'data' }
+});
+
+const hideItemsList = itemsHideListType => () => ({
+  type: itemsHideListType,
+  payload: {}
+});
+
 const getDriversList = (remoteUrlBase, token) => ({
   type: GET_DRIVERS_LIST,
   payload: { remoteUrlBase, token, successProperty: 'data' }
@@ -37,11 +48,16 @@ const hideDriversList = () => ({
   payload: {}
 });
 
+const getRidersList = getItemsList(ridersGetHideListTypes.get);
+const hideRidersList = hideItemsList(ridersGetHideListTypes.hide);
+
 export {
   loginDetails,
   login,
   loginSuccess,
   logout,
   getDriversList,
-  hideDriversList
+  hideDriversList,
+  getRidersList,
+  hideRidersList
 };

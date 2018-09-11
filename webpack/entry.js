@@ -9,6 +9,7 @@ import App from './components/App.jsx';
 import rootReducer from './reducers/index.js';
 import loginSaga from './actions/sagas.js';
 import driversListSaga from './actions/sagaDriversList.js';
+import ridersListSaga from './actions/sagaRidersList.js';
 
 console.log('entry.js loaded');
 
@@ -17,7 +18,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 function* allSagas() {
-  yield all([fork(loginSaga), fork(driversListSaga)]);
+  yield all([fork(loginSaga), fork(driversListSaga), fork(ridersListSaga)]);
 }
 
 sagaMiddleware.run(allSagas);
