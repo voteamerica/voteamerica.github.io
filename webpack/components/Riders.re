@@ -6,16 +6,7 @@ let t1 = TypeInfo.theader(~header="First Name", ~accessor="DriverFirstName");
 let t2 = TypeInfo.theader(~header="Email", ~accessor="DriverEmail");
 let t3 = TypeInfo.theader(~header="Last Name", ~accessor="DriverLastName");
 
-/* [@bs.deriving abstract] */
-    /* type person = {
-      age: int,
-      namex: string
-    }; */
-
-/* 
-  let me: person = {age: 20, namex: "Big Reason"};
-
-  let mn = me.namex; */
+let tableColumns = [| t1, t2, t3 |];
 
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInfo:TypeInfo.ridersInfo, 
 ~getRidersList, 
@@ -27,20 +18,55 @@ _children) => {
 
     let url = apiInfo->TypeInfo.apiUrlGet;
 
-    Js.log(getRidersList);
+    /* NOTE: without this step, prop is not available in raw section */
+    /* Js.log(getRidersList); */
 
     /* for now, this is the most straightforward way to handle the action creator prop */
-    let getList = [%raw {| 
+    /* let getList = [%raw {| 
       function (url, token) {
-            getRidersList(url, token);
+            ~getRidersList(url, token);
 
             return (1);
       }
-      |}];
+      |}]; */
 
-    let z = getList(url, token);
+    /* let z = getList(url, token); */
 
-    Js.log(z);
+
+    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed versin of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+    let gl: ((string, string) => unit, string, string) => unit = [%raw (fx, url, token) => "{ fx(url, token); return 0; }"];
+
+    gl(getRidersList, url, token);
+
+    ();
+  };
+
+  let handleHideDriversListClick = (_event, _self) => {
+    /* NOTE: without this step, prop is not available in raw section */
+    /* Js.log(hideRidersList);     */
+
+    /* let hideList = [%raw {|
+      function () {
+        hideRidersList();
+
+        return (2);
+      }
+      |}]; */
+
+      /* let hl: (unit => unit) => unit = [%raw (fx) => "{ fx(); return 0; }"]; */
+
+      /* let hll: unit => unit = hideRidersList; */
+
+    /* let a = hideList(); */
+    /* let a =  */
+    /* hl(hideRidersList); */
+    /* hll(); */
+
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    hideRidersList();
+
+    /* Js.log(a); */
+    ();
   };
 
   {
@@ -60,18 +86,17 @@ _children) => {
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
-    /*             onClick={this.handleHideDriversListClick(this)}
- */
     let tableRidersJSX = 
       if (ridersInfo->TypeInfo.showRidersListGet) {
         <div>
           <button
             className="button button--large"
-            id="hideGetRidersList"
+            id="hideGetRidersList" 
+            onClick={self.handle(handleHideDriversListClick)}
           >{ReasonReact.string("Hide List")}
           </button>
           <div style={tableDivStyle}> 
-            <Table propsCtr={TypeInfo.riderTableJsProps}  className="123" type_={tableType} columns=[|t1, t2, t3|] 
+            <Table propsCtr={TypeInfo.riderTableJsProps}  className="123" type_={tableType} columns={tableColumns}
             data=tableRiders
             />
           </div>
@@ -99,7 +124,8 @@ _children) => {
     </div>
           }
       else {
-        <div>{ReasonReact.string("no riders info while not logged in")}</div>
+        /* <div>{ReasonReact.string("no riders info while not logged in")}</div> */
+        ReasonReact.null;
       };
 
     <div> 
@@ -113,8 +139,8 @@ type jsProps = {
   loginInfo: TypeInfo.loginInfo,
   apiInfo: TypeInfo.apiInfo,
   ridersInfo: TypeInfo.ridersInfo,  
-  getRidersList: (string, string) => string,
-  hideRidersList: (string, string) => string,
+  getRidersList: (string, string) => unit,
+  hideRidersList: unit => unit,
 };
 
 let default =

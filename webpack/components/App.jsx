@@ -19,20 +19,11 @@ class AppBase extends Component {
       <div>
         <LoginArea />
         <Driver />
-        <RidersList />
-        <RidersPlus riders="test" />
+        <RidersPlus />
       </div>
     );
   }
 }
-
-/*
-        <Riders riders="test" />
-
-  */
-
-//         <RidersList />
-//         <Riders />
 
 const App = connect(
   mapStateToProps,

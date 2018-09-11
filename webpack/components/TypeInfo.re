@@ -103,6 +103,20 @@ type riderTableJsProps = {
   data: array(rider)
 };
 
+[@bs.deriving abstract]
+type driverTableJsProps = {
+  /* some example fields */
+  className: string,
+  /* `type` is reserved in Reason. use `type_` and make it still compile to the
+    JS key `type` */
+  [@bs.as "type"] type_: string,
+  /* value: Js.nullable(int), */
+  columns: array(theader),
+  defaultPageSize: int,
+  /* data: array(tableItem) */
+  data: array(driver)
+};
+
 type xyz = X | Y | Z;
 
 type xyzz = [`X | `Y | `Z];
