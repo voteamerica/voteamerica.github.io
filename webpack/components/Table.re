@@ -25,15 +25,30 @@ let make = (~propsCtr, ~className, ~type_, ~columns, ~data, ~onClick, children) 
         Js.log(x);
         Js.log(y);
 
+
+        let fxx: TypeInfo.onClickFnX = (a, b) => {
+          Js.log(state);
+
+          Js.log(a);
+          Js.log(b);
+
+          ();
+        };
+
+        let xx = TypeInfo.getTdPropsClickHandler(~onClick=fxx);
+
+        xx;
+
+
         /* : ((unit) => ((string, string) => unit))  */
 
-        let gl: (string, string, string, string) => TypeInfo.getTdPropsClickHandler = [%raw (state, rowInfo, x, y) => " return { onClick: (e, handleOriginal) => { console.log('clicked!'); if (handleOriginal) { handleOriginal(); } } }; "];
+        /* let gl: (string, string, string, string) => TypeInfo.getTdPropsClickHandler = [%raw (state, rowInfo, x, y) => " return { onClick: (e, handleOriginal) => { console.log('clicked!'); if (handleOriginal) { handleOriginal(); } } }; "];
 
         /*  */
 
         let x = gl(state, rowInfo, x, y);
 
-        x;
+        x; */
 
         /* gl; */
         }
