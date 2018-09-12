@@ -27,7 +27,7 @@ let make = (~propsCtr, ~className, ~type_, ~columns, ~data, ~onClick, children) 
 
         /* : ((unit) => ((string, string) => unit))  */
 
-        let gl: (string, string, string, string) => ((string, string) => unit) = [%raw (state, rowInfo, x, y) => " return { onClick: (e, handleOriginal) => { console.log('clicked!'); if (handleOriginal) { handleOriginal(); } } }; "];
+        let gl: (string, string, string, string) => TypeInfo.getTdPropsClickHandler = [%raw (state, rowInfo, x, y) => " return { onClick: (e, handleOriginal) => { console.log('clicked!'); if (handleOriginal) { handleOriginal(); } } }; "];
 
         /*  */
 

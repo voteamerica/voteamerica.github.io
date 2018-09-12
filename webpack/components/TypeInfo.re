@@ -38,6 +38,14 @@ type theader = {
   accessor: string
 };
 
+type onClickFnX = (string, string) => unit;
+
+[@bs.deriving abstract]
+type getTdPropsClickHandler = {
+  /* [@bs.as "onClick"] onClick: string, */
+  onClick: onClickFnX
+};
+
 /* this compiles, but couldn't use it for table props */
 type tbItem ('a) = TI ('a);
 
@@ -78,7 +86,7 @@ type riderTableJsProps = {
   defaultPageSize: int,
   data: array(rider),
   onClick: ReactEvent.Mouse.t => unit,
-  getTdProps: (string, string, string, string) => ((string, string) => unit)
+  getTdProps: (string, string, string, string) => getTdPropsClickHandler
 };
 
 /*

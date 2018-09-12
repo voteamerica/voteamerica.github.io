@@ -6,6 +6,17 @@ let t1 = TypeInfo.theader(~header="First Name", ~accessor="DriverFirstName");
 let t2 = TypeInfo.theader(~header="Email", ~accessor="DriverEmail");
 let t3 = TypeInfo.theader(~header="Last Name", ~accessor="DriverLastName");
 
+let fxx: TypeInfo.onClickFnX = (a, b) => {
+  Js.log(a);
+  Js.log(b);
+
+  ();
+}
+
+let xx = TypeInfo.getTdPropsClickHandler(~onClick=fxx);
+
+Js.log(xx);
+
 let tableColumns = [| t1, t2, t3 |];
 
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInfo:TypeInfo.ridersInfo, 
