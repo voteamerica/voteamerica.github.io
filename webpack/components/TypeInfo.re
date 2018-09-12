@@ -78,7 +78,7 @@ type riderTableJsProps = {
   defaultPageSize: int,
   data: array(rider),
   onClick: ReactEvent.Mouse.t => unit,
-  getTdProps: (string, string, string, string, unit) => ((string, string) => unit)
+  getTdProps: (string, string, string, string) => ((string, string) => unit)
 };
 
 /*
