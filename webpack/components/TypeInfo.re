@@ -38,12 +38,12 @@ type theader = {
   accessor: string
 };
 
-type onClickFnX = (string, string) => unit;
+type tableOnClickHandler = (ReactEvent.Form.t, unit => unit) => unit;
 
 [@bs.deriving abstract]
 type getTdPropsClickHandler = {
   /* [@bs.as "onClick"] onClick: string, */
-  onClick: onClickFnX
+  onClick: tableOnClickHandler
 };
 
 /* this compiles, but couldn't use it for table props */

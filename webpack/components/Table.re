@@ -18,19 +18,26 @@ let make = (~propsCtr, ~className, ~type_, ~columns, ~data, ~onClick, children) 
       ~defaultPageSize=5,
       ~data,
       ~onClick,
-      ~getTdProps = (state, rowInfo, x, y) => {
+      ~getTdProps = (state, rowInfo, column, instance) => {
         Js.log("click");
         Js.log(state);
         Js.log(rowInfo);
-        Js.log(x);
-        Js.log(y);
+        Js.log(column);
+        Js.log(instance);
 
 
-        let fxx: TypeInfo.onClickFnX = (a, b) => {
+        let fxx: TypeInfo.tableOnClickHandler = (e, handleOriginal) => {
           Js.log(state);
+          Js.log(rowInfo);
+          Js.log(column);
+          Js.log(instance);
 
-          Js.log(a);
-          Js.log(b);
+          /* Js.log(e.target); */
+          Js.log(ReactEvent.Form.target(e));
+
+          Js.log(handleOriginal);
+
+          handleOriginal();
 
           ();
         };
