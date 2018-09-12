@@ -12,6 +12,14 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInf
 ~getRidersList, 
 ~hideRidersList,
 _children) => {
+
+  let handleTableClick = (_event, _self) => {
+    
+    Js.log(_event);
+
+    ();
+  };
+
   let handleGetRidersListClick = (_event, _self) => {
 
     let token = loginInfo->TypeInfo.tokenGet;
@@ -55,6 +63,7 @@ _children) => {
           <div style={tableDivStyle}> 
             <Table propsCtr={TypeInfo.riderTableJsProps}  className="123" type_={tableType} columns={tableColumns}
             data=tableRiders
+            onClick={self.handle(handleTableClick)}
             />
           </div>
         </div>

@@ -76,8 +76,14 @@ type riderTableJsProps = {
   [@bs.as "type"] type_: string,
   columns: array(theader),
   defaultPageSize: int,
-  data: array(rider)
+  data: array(rider),
+  onClick: ReactEvent.Mouse.t => unit,
+  getTdProps: (string, string, string, string, unit) => ((string, string) => unit)
 };
+
+/*
+  getTdProps: (string, string, string, string) => unit
+*/
 
 [@bs.deriving abstract]
 type driverTableJsProps = {
