@@ -20,15 +20,6 @@ type theader = {
   accessor: string
 };
 
-type tableOnClickHandler = (ReactEvent.Form.t, option( unit => unit)) => unit;
-
-[@bs.deriving abstract]
-type getTdPropsClickHandler = {
-  onClick: tableOnClickHandler
-};
-
-type getTdPropsHandler = (string, string, string, string) => getTdPropsClickHandler;
-
 [@bs.deriving abstract]
 type driverTableJsProps = {
   className: string,

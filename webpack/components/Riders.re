@@ -7,10 +7,26 @@ type rider = {
    [@bs.as "DriverLastName"] lastName: string
 };
 
+type tableOnClickHandler = (ReactEvent.Form.t, option( unit => unit)) => unit;
+
+[@bs.deriving abstract]
+type getTdPropsClickHandler = {
+  onClick: tableOnClickHandler
+};
+
+[@bs.deriving abstract]
+type riderRowInfo = {
+  original: rider 
+};
+
+type getTdPropsHandler = (string, option(riderRowInfo), string, string) => getTdPropsClickHandler;
+
 [@bs.deriving abstract]
 type ridersInfo = {
   showRidersList: bool,
-  riders: array(rider)
+  riders: array(rider),
+  showCurrentRiderDetails: bool,
+  currentRider: (rider)
 };
 
 [@bs.deriving abstract]
@@ -20,8 +36,7 @@ type riderTableJsProps = {
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
   data: array(rider),
-  onClick: ReactEvent.Mouse.t => unit,
-  getTdProps: TypeInfo.getTdPropsHandler
+  getTdProps: getTdPropsHandler
 };
 
 let tableType = "riders";
@@ -36,48 +51,54 @@ let riderTableColumns =
   riderTableCol3 
   |];
 
-let ridersTdPropsHandler: TypeInfo.getTdPropsHandler = (state, rowInfo, column, instance) => {
-  Js.log("click");
-  Js.log(state);
-  Js.log(rowInfo);
-  Js.log(column);
-  Js.log(instance);
-
-  let fxx: TypeInfo.tableOnClickHandler = (e, handleOriginal) => {
-    Js.log(state);
-    Js.log(rowInfo);
-    Js.log(column);
-    Js.log(instance);
-
-    Js.log(ReactEvent.Form.target(e));
-
-    Js.log(handleOriginal);
-
-    switch handleOriginal {
-      | None => ()
-      | Some(fn) => fn()
-    };
-
-    ();
-  };
-
-  let clickHandlerObjectWrapper = TypeInfo.getTdPropsClickHandler(~onClick=fxx);
-  
-  clickHandlerObjectWrapper;
-};
-
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInfo:ridersInfo, 
 ~getRidersList, 
 ~hideRidersList,
+~showCurrentRider,
+~hideCurrentRider,
 _children) => {
 
-  let handleTableClick = (_event, _self) => {    
-    Js.log(_event);
+  let ridersTdPropsHandler: getTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
 
-    ();
+    let tableClickHandler: tableOnClickHandler = (_e, handleOriginalOption) => {
+      /* Js.log(ReactEvent.Form.target(e)); */
+      /* Js.log(handleOriginal); */
+
+      switch (rowInfoOption) {
+      | None => {
+          /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+          hideCurrentRider();
+
+          ();
+      }
+      | Some(rowInfo) => {
+          Js.log(rowInfo); 
+
+          /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+          let sr: (rider => unit, option(rider)) => unit = [%raw (fx, riderDetails) => "{ fx(riderDetails); return 0; }"];
+
+          let currentRiderFirstName =rowInfo->originalGet->firstNameGet;
+
+          let currentRider = rider(~firstName=currentRiderFirstName, ~email=rowInfo->originalGet->emailGet,  ~lastName=rowInfo->originalGet->lastNameGet);
+
+          sr(showCurrentRider, Some(currentRider));
+        }
+      };
+
+      switch handleOriginalOption {
+        | None => ()
+        | Some(handleOriginal) => handleOriginal()
+      };
+
+      ();
+    };
+
+    let clickHandlerObjectWrapper = getTdPropsClickHandler(~onClick=tableClickHandler);
+    
+    clickHandlerObjectWrapper;
   };
 
-  let handleGetRidersListClick = (_event, _self) => {
+  let handleGetRidersListClick = (_event) => {
     let token = loginInfo->TypeInfo.tokenGet;
     let url = apiInfo->TypeInfo.apiUrlGet;
 
@@ -89,7 +110,7 @@ _children) => {
     ();
   };
 
-  let handleHideDriversListClick = (_event, _self) => {
+  let handleHideDriversListClick = (_event) => {
     /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
     hideRidersList();
 
@@ -98,7 +119,7 @@ _children) => {
 
   {
   ...component,
-  render: (self) => { 
+  render: (_self) => { 
     let tableRider = riderDetails:rider => 
       rider(~firstName=riderDetails->firstNameGet, ~email=riderDetails->emailGet,  ~lastName=riderDetails->lastNameGet);
 
@@ -106,22 +127,34 @@ _children) => {
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
+    let currentRiderInfo = currentRider => {
+      <div>{ReasonReact.string("Current rider info")}
+        <div>{ReasonReact.string(currentRider->firstNameGet ++ " " ++ currentRider->lastNameGet) }
+        </div>
+        <div>{ReasonReact.string(currentRider->emailGet)}
+        </div>
+      </div>
+    };
+
     let tableRidersJSX = 
       if (ridersInfo->showRidersListGet) {
         <div>
           <button
             className="button button--large"
             id="hideGetRidersList" 
-            onClick={self.handle(handleHideDriversListClick)}
+            onClick={handleHideDriversListClick}
           >{ReasonReact.string("Hide List")}
           </button>
           <div style={tableDivStyle}> 
             <Table propsCtr={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
             data=tableRiders
-            onClick={self.handle(handleTableClick)}
             getTdProps={ridersTdPropsHandler}
             />
           </div>
+          {switch (ridersInfo->showCurrentRiderDetailsGet) {
+          | true => {currentRiderInfo(ridersInfo->currentRiderGet)}
+          | false => <div>{ReasonReact.string("No rider selected")}</div> 
+          }; }
         </div>
       }
       else {
@@ -129,7 +162,8 @@ _children) => {
           <button
             className="button button--large"
             id="showGetRidersList" 
-            onClick={self.handle(handleGetRidersListClick)}
+            /* onClick={self.handle(handleGetRidersListClick)} */
+            onClick={handleGetRidersListClick}
           >{ReasonReact.string("Show Riders List")}
           </button>
         </div>
@@ -161,6 +195,8 @@ type jsProps = {
   ridersInfo: ridersInfo,  
   getRidersList: (string, string) => unit,
   hideRidersList: unit => unit,
+  showCurrentRider: rider => unit,
+  hideCurrentRider: unit => unit,
 };
 
 let default =
@@ -171,6 +207,8 @@ let default =
       ~ridersInfo=jsProps->ridersInfoGet,
       ~getRidersList=jsProps->getRidersListGet,
       ~hideRidersList=jsProps->hideRidersListGet,
+      ~showCurrentRider=jsProps->showCurrentRiderGet,
+      ~hideCurrentRider=jsProps->hideCurrentRiderGet,
       [||],
     )
   );

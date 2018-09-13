@@ -15,6 +15,13 @@ const itemsGetHideListTypes = itemType => ({
 
 const ridersGetHideListTypes = itemsGetHideListTypes('RIDERS');
 
+const currentItemShowHideTypes = itemType => ({
+  show: 'SHOW_CURRENT_' + itemType,
+  hide: 'HIDE_CURRENT_' + itemType
+});
+
+const currentRiderShowHideTypes = currentItemShowHideTypes('RIDER');
+
 const getAsyncTypes = type => ({
   success: type + '_SUCCESS',
   fail: type + '_FAIL',
@@ -37,5 +44,6 @@ export {
   driversType,
   ridersGetHideListTypes,
   getRidersListTypes,
-  ridersType
+  ridersType,
+  currentRiderShowHideTypes
 };

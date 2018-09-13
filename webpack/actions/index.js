@@ -5,7 +5,8 @@ import {
   LOGOUT,
   GET_DRIVERS_LIST,
   HIDE_DRIVERS_LIST,
-  ridersGetHideListTypes
+  ridersGetHideListTypes,
+  currentRiderShowHideTypes
 } from './types';
 
 const loginDetails = details => ({
@@ -51,6 +52,20 @@ const hideDriversList = () => ({
 const getRidersList = getItemsList(ridersGetHideListTypes.get);
 const hideRidersList = hideItemsList(ridersGetHideListTypes.hide);
 
+const showCurrentItem = currentItemShowType => riderDetails => ({
+  type: currentItemShowType,
+  payload: { riderDetails }
+});
+
+const hideCurrentItem = currentItemHideType => () => ({
+  type: currentItemHideType,
+  payload: {}
+});
+
+const showCurrentRider = showCurrentItem(currentRiderShowHideTypes.show);
+
+const hideCurrentRider = hideCurrentItem(currentRiderShowHideTypes.hide);
+
 export {
   loginDetails,
   login,
@@ -59,5 +74,7 @@ export {
   getDriversList,
   hideDriversList,
   getRidersList,
-  hideRidersList
+  hideRidersList,
+  showCurrentRider,
+  hideCurrentRider
 };
