@@ -33,10 +33,10 @@ type driverTableJsProps = {
 
 /* [@bs.deriving abstract]
 type tableBaseJsProps = {
-  className: string,
+  className: string, */
   /* `type` is reserved in Reason. use `type_` and make it still compile to the
     JS key `type` */
-  [@bs.as "type"] type_: string,
+/*  [@bs.as "type"] type_: string,
   columns: array(theader),
   defaultPageSize: int,
 }; */

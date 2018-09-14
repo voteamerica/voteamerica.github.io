@@ -33,6 +33,14 @@ var riderTableColumns = /* array */[
   riderTableCol3
 ];
 
+function tableRider(riderDetails) {
+  return {
+          RiderFirstName: riderDetails.RiderFirstName,
+          RiderEmail: riderDetails.RiderEmail,
+          RiderLastName: riderDetails.RiderLastName
+        };
+}
+
 function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, showCurrentRider, hideCurrentRider, _) {
   var ridersTdPropsHandler = function (_, rowInfoOption, _$1, _$2) {
     return {
@@ -41,12 +49,8 @@ function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, sho
                   var rowInfo = Js_primitive.valFromOption(rowInfoOption);
                   console.log(rowInfo);
                   var sr = function (fx,riderDetails){{ fx(riderDetails); return 0; }};
-                  var currentRiderFirstName = rowInfo.original.RiderFirstName;
-                  var currentRider = {
-                    RiderFirstName: currentRiderFirstName,
-                    RiderEmail: rowInfo.original.RiderEmail,
-                    RiderLastName: rowInfo.original.RiderLastName
-                  };
+                  var riderDetails = rowInfo.original;
+                  var currentRider = tableRider(riderDetails);
                   sr(showCurrentRider, Js_primitive.some(currentRider));
                 } else {
                   Curry._1(hideCurrentRider, /* () */0);
@@ -80,13 +84,6 @@ function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, sho
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              var tableRider = function (riderDetails) {
-                return {
-                        RiderFirstName: riderDetails.RiderFirstName,
-                        RiderEmail: riderDetails.RiderEmail,
-                        RiderLastName: riderDetails.RiderLastName
-                      };
-              };
               var tableRiders = $$Array.map(tableRider, ridersInfo.riders);
               var tableDivStyle = {
                 marginTop: "20px",
@@ -143,6 +140,7 @@ exports.riderTableCol1 = riderTableCol1;
 exports.riderTableCol2 = riderTableCol2;
 exports.riderTableCol3 = riderTableCol3;
 exports.riderTableColumns = riderTableColumns;
+exports.tableRider = tableRider;
 exports.make = make;
 exports.$$default = $$default;
 exports.default = $$default;

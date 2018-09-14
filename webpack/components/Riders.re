@@ -51,6 +51,9 @@ let riderTableColumns =
   riderTableCol3 
   |];
 
+let tableRider = riderDetails:rider => 
+      rider(~firstName=riderDetails->firstNameGet, ~email=riderDetails->emailGet,  ~lastName=riderDetails->lastNameGet);
+
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInfo:ridersInfo, 
 ~getRidersList, 
 ~hideRidersList,
@@ -77,9 +80,8 @@ _children) => {
           /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
           let sr: (rider => unit, option(rider)) => unit = [%raw (fx, riderDetails) => "{ fx(riderDetails); return 0; }"];
 
-          let currentRiderFirstName =rowInfo->originalGet->firstNameGet;
-
-          let currentRider = rider(~firstName=currentRiderFirstName, ~email=rowInfo->originalGet->emailGet,  ~lastName=rowInfo->originalGet->lastNameGet);
+          let riderDetails = rowInfo->originalGet;
+          let currentRider = tableRider(riderDetails);
 
           sr(showCurrentRider, Some(currentRider));
         }
@@ -120,9 +122,6 @@ _children) => {
   {
   ...component,
   render: (_self) => { 
-    let tableRider = riderDetails:rider => 
-      rider(~firstName=riderDetails->firstNameGet, ~email=riderDetails->emailGet,  ~lastName=riderDetails->lastNameGet);
-
     let tableRiders:array(rider) = Array.map(tableRider, ridersInfo->ridersGet); 
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
@@ -163,7 +162,6 @@ _children) => {
           <button
             className="button button--large"
             id="showGetRidersList" 
-            /* onClick={self.handle(handleGetRidersListClick)} */
             onClick={handleGetRidersListClick}
           >{ReasonReact.string("Show Riders List")}
           </button>

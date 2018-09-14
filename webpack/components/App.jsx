@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 
 import LoginArea from './LoginArea.jsx';
 import Driver from './Driver.jsx';
-import RidersList from './RidersList.bs.js';
-import Riders from './Riders.bs.js';
 import RidersPlus from './RidersPlus.jsx';
-
-import { loginDetails, login, loginSuccess, logout } from '../actions/index.js';
 
 const mapStateToProps = state => ({});
 
