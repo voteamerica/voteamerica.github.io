@@ -127,8 +127,6 @@ _children) => {
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
-    let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
-
     let currentRiderInfo = currentRider => {
       <div>
         <h3>{ReasonReact.string("Current rider info:")}</h3>
