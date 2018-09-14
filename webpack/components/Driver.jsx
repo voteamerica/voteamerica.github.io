@@ -57,6 +57,12 @@ class DriverBase extends Component {
       { Header: 'Seats', accessor: 'SeatCount' },
       { Header: 'License', accessor: 'DriverLicenseNumber' },
       { Header: 'Phone', accessor: 'DriverPhone' },
+      { Header: 'Collection ZIP', accessor: 'DriverCollectionZIP' },
+      { Header: 'Radius', accessor: 'DriverCollectionRadius' },
+      { Header: 'Drive Times', accessor: 'AvailableDriveTimesLocal' },
+      { Header: 'Status', accessor: 'status' },
+      { Header: 'Created', accessor: 'created_ts' },
+      { Header: 'Updated', accessor: 'last_updated_ts' },
       { Header: 'Org', accessor: 'uuid_organization' }
     ];
 

@@ -4,7 +4,9 @@ import {
   LOGIN_REQUEST,
   LOGOUT,
   GET_DRIVERS_LIST,
-  HIDE_DRIVERS_LIST
+  HIDE_DRIVERS_LIST,
+  ridersGetHideListTypes,
+  currentRiderShowHideTypes
 } from './types';
 
 const loginDetails = details => ({
@@ -27,6 +29,16 @@ const logout = () => ({
   payload: {}
 });
 
+const getItemsList = itemsGetListType => (remoteUrlBase, token) => ({
+  type: itemsGetListType,
+  payload: { remoteUrlBase, token, successProperty: 'data' }
+});
+
+const hideItemsList = itemsHideListType => () => ({
+  type: itemsHideListType,
+  payload: {}
+});
+
 const getDriversList = (remoteUrlBase, token) => ({
   type: GET_DRIVERS_LIST,
   payload: { remoteUrlBase, token, successProperty: 'data' }
@@ -37,11 +49,32 @@ const hideDriversList = () => ({
   payload: {}
 });
 
+const getRidersList = getItemsList(ridersGetHideListTypes.get);
+const hideRidersList = hideItemsList(ridersGetHideListTypes.hide);
+
+const showCurrentItem = currentItemShowType => riderDetails => ({
+  type: currentItemShowType,
+  payload: { riderDetails }
+});
+
+const hideCurrentItem = currentItemHideType => () => ({
+  type: currentItemHideType,
+  payload: {}
+});
+
+const showCurrentRider = showCurrentItem(currentRiderShowHideTypes.show);
+
+const hideCurrentRider = hideCurrentItem(currentRiderShowHideTypes.hide);
+
 export {
   loginDetails,
   login,
   loginSuccess,
   logout,
   getDriversList,
-  hideDriversList
+  hideDriversList,
+  getRidersList,
+  hideRidersList,
+  showCurrentRider,
+  hideCurrentRider
 };

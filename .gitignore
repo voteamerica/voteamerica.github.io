@@ -7,3 +7,6 @@ bower_components
 _site/
 scripts/bundle.js
 *.map
+
+lib/
+.merlin
