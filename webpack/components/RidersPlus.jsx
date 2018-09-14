@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Riders from './Riders.bs.js';
+import RidersBase from './Riders.bs.js';
 
 import {
   getRidersList,
@@ -25,6 +25,6 @@ const mapDispatchToProps = {
 const RidersPlus = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Riders);
+)(RidersBase);
 
 export default RidersPlus;

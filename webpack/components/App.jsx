@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import LoginArea from './LoginArea.jsx';
 import Driver from './Driver.jsx';
-import RidersPlus from './RidersPlus.jsx';
+import Riders from './RidersPlus.jsx';
 
 const mapStateToProps = state => ({});
 
@@ -15,7 +15,7 @@ class AppBase extends Component {
       <div>
         <LoginArea />
         <Driver />
-        <RidersPlus />
+        <Riders />
       </div>
     );
   }
