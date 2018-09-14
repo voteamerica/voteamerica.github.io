@@ -2,9 +2,9 @@ let component = ReasonReact.statelessComponent("Riders");
 
 [@bs.deriving abstract]
 type rider = {
-   [@bs.as "DriverFirstName"] firstName: string,
-   [@bs.as "DriverEmail"] email: string,
-   [@bs.as "DriverLastName"] lastName: string
+   [@bs.as "RiderFirstName"] firstName: string,
+   [@bs.as "RiderEmail"] email: string,
+   [@bs.as "RiderLastName"] lastName: string,
 };
 
 type tableOnClickHandler = (ReactEvent.Form.t, option( unit => unit)) => unit;
@@ -41,9 +41,9 @@ type riderTableJsProps = {
 
 let tableType = "riders";
 
-let riderTableCol1 = TypeInfo.theader(~header="First Name", ~accessor="DriverFirstName");
-let riderTableCol2 = TypeInfo.theader(~header="Email", ~accessor="DriverEmail");
-let riderTableCol3 = TypeInfo.theader(~header="Last Name", ~accessor="DriverLastName");
+let riderTableCol1 = TypeInfo.theader(~header="First Name", ~accessor="RiderFirstName");
+let riderTableCol2 = TypeInfo.theader(~header="Email", ~accessor="RiderEmail");
+let riderTableCol3 = TypeInfo.theader(~header="Last Name", ~accessor="RiderLastName");
 
 let riderTableColumns = 
   [| riderTableCol1, 
@@ -127,8 +127,11 @@ _children) => {
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
+    let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
+
     let currentRiderInfo = currentRider => {
-      <div>{ReasonReact.string("Current rider info")}
+      <div>
+        <h3>{ReasonReact.string("Current rider info:")}</h3>
         <div>{ReasonReact.string(currentRider->firstNameGet ++ " " ++ currentRider->lastNameGet) }
         </div>
         <div>{ReasonReact.string(currentRider->emailGet)}

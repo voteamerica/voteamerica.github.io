@@ -3,7 +3,7 @@ import { takeLatest } from 'redux-saga/effects';
 import { ridersGetHideListTypes, getRidersListTypes } from './types';
 import { createFetchItemsList } from './sagaHelpers';
 
-const ridersUrlPath = '/drivers/list';
+const ridersUrlPath = '/riders/list';
 
 function* ridersListSaga() {
   yield takeLatest(
