@@ -28,16 +28,56 @@ var riderTableCol3 = {
 };
 
 var riderTableColumns = /* array */[
+  {
+    Header: "uuid",
+    accessor: "UUID"
+  },
   riderTableCol1,
   riderTableCol2,
-  riderTableCol3
+  riderTableCol3,
+  {
+    Header: "Phone",
+    accessor: "RiderPhone"
+  },
+  {
+    Header: "Collection ZIP",
+    accessor: "RiderCollectionZIP"
+  },
+  {
+    Header: "Dropoff ZIP",
+    accessor: "RiderDropOffZIP"
+  },
+  {
+    Header: "Created",
+    accessor: "created_ts"
+  },
+  {
+    Header: "Updated",
+    accessor: "last_updated_ts"
+  },
+  {
+    Header: "Status",
+    accessor: "status"
+  },
+  {
+    Header: "Org",
+    accessor: "uuid_organization"
+  }
 ];
 
 function tableRider(riderDetails) {
   return {
+          UUID: riderDetails.UUID,
           RiderFirstName: riderDetails.RiderFirstName,
           RiderEmail: riderDetails.RiderEmail,
-          RiderLastName: riderDetails.RiderLastName
+          RiderLastName: riderDetails.RiderLastName,
+          RiderPhone: riderDetails.RiderPhone,
+          RiderCollectionZIP: riderDetails.RiderCollectionZIP,
+          RiderDropOffZIP: riderDetails.RiderDropOffZIP,
+          created_ts: riderDetails.created_ts,
+          last_updated_ts: riderDetails.last_updated_ts,
+          status: riderDetails.status,
+          uuid_organization: riderDetails.uuid_organization
         };
 }
 

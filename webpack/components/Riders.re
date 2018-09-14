@@ -2,9 +2,34 @@ let component = ReasonReact.statelessComponent("Riders");
 
 [@bs.deriving abstract]
 type rider = {
+   [@bs.as "UUID"] uuid: string,
    [@bs.as "RiderFirstName"] firstName: string,
    [@bs.as "RiderEmail"] email: string,
    [@bs.as "RiderLastName"] lastName: string,
+   [@bs.as "RiderPhone"] phone: string,
+   [@bs.as "RiderCollectionZIP"] collectionZip: string,
+   [@bs.as "RiderDropOffZIP"] dropOffZIP: string,
+    /* "AvailableRideTimesLocal" character varying(2000),
+    "TotalPartySize" integer DEFAULT 1 NOT NULL,
+    "TwoWayTripNeeded" boolean NOT NULL,
+    "RiderIsVulnerable" boolean NOT NULL,
+    "RiderWillNotTalkPolitics" boolean NOT NULL,
+    "PleaseStayInTouch" boolean NOT NULL,
+    "NeedWheelchair" boolean NOT NULL,
+    "RiderPreferredContact" character varying(50),
+    "RiderAccommodationNotes" character varying(1000),
+    "RiderLegalConsent" boolean NOT NULL,
+    "ReadyToMatch" boolean DEFAULT true NOT NULL, */
+   [@bs.as "created_ts"] created: string,
+   [@bs.as "last_updated_ts"] updated: string,
+ 
+ /*   status_info text,
+    "RiderWillBeSafe" boolean NOT NULL,
+	"RiderCollectionStreetNumber" character varying(10),
+    "RiderCollectionAddress" character varying(1000),
+    "RiderDestinationAddress" character varying(1000), */
+   status: string,
+   [@bs.as "uuid_organization"] organization: string,
 };
 
 type tableOnClickHandler = (ReactEvent.Form.t, option( unit => unit)) => unit;
@@ -46,13 +71,31 @@ let riderTableCol2 = TypeInfo.theader(~header="Email", ~accessor="RiderEmail");
 let riderTableCol3 = TypeInfo.theader(~header="Last Name", ~accessor="RiderLastName");
 
 let riderTableColumns = 
-  [| riderTableCol1, 
+  [| 
+  TypeInfo.theader(~header="uuid", ~accessor="UUID"),riderTableCol1, 
   riderTableCol2, 
-  riderTableCol3 
+  riderTableCol3,
+  TypeInfo.theader(~header="Phone", ~accessor="RiderPhone"),
+  TypeInfo.theader(~header="Collection ZIP", ~accessor="RiderCollectionZIP"),
+  TypeInfo.theader(~header="Dropoff ZIP", ~accessor="RiderDropOffZIP"),
+  TypeInfo.theader(~header="Created", ~accessor="created_ts"),
+  TypeInfo.theader(~header="Updated", ~accessor="last_updated_ts"),
+  TypeInfo.theader(~header="Status", ~accessor="status"),
+  TypeInfo.theader(~header="Org", ~accessor="uuid_organization"),
   |];
 
 let tableRider = riderDetails:rider => 
-      rider(~firstName=riderDetails->firstNameGet, ~email=riderDetails->emailGet,  ~lastName=riderDetails->lastNameGet);
+      rider(
+        ~uuid=riderDetails->uuidGet,
+        ~firstName=riderDetails->firstNameGet, ~email=riderDetails->emailGet,  ~lastName=riderDetails->lastNameGet,
+        ~phone=riderDetails->phoneGet,
+        ~collectionZip=riderDetails->collectionZipGet,
+        ~dropOffZIP=riderDetails->dropOffZIPGet,
+        ~organization=riderDetails->organizationGet,
+        ~status=riderDetails->statusGet,
+        ~created=riderDetails->createdGet,
+        ~updated=riderDetails->updatedGet,
+        );
 
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInfo:ridersInfo, 
 ~getRidersList, 
