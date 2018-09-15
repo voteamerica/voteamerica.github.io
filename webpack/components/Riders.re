@@ -31,13 +31,6 @@ type rider = {
    [@bs.as "uuid_organization"] organization: string
 };
 
-/* type tableOnClickHandler = (ReactEvent.Form.t, option( unit => unit)) => unit;
-
-[@bs.deriving abstract]
-type getTdPropsClickHandler = {
-  onClick: tableOnClickHandler
-}; */
-
 [@bs.deriving abstract]
 type riderRowInfo = {
   original: rider 
