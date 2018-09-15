@@ -27,6 +27,7 @@ const currentItemShowHideTypes = itemType => ({
   hide: 'HIDE_CURRENT_' + itemType
 });
 
+const currentDriverShowHideTypes = currentItemShowHideTypes(driverType);
 const currentRiderShowHideTypes = currentItemShowHideTypes(riderType);
 const currentMatchShowHideTypes = currentItemShowHideTypes(matchType);
 
@@ -50,7 +51,7 @@ export {
   GET_DRIVERS_LIST,
   HIDE_DRIVERS_LIST,
   getDriverListTypes,
-  driversType,
+  currentDriverShowHideTypes,
   ridersGetHideListTypes,
   getRiderListTypes,
   currentRiderShowHideTypes,

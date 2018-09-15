@@ -12,29 +12,23 @@ var component = ReasonReact.statelessComponent("Riders");
 
 var tableType = "riders";
 
-var riderTableCol1 = {
-  Header: "First Name",
-  accessor: "RiderFirstName"
-};
-
-var riderTableCol2 = {
-  Header: "Email",
-  accessor: "RiderEmail"
-};
-
-var riderTableCol3 = {
-  Header: "Last Name",
-  accessor: "RiderLastName"
-};
-
 var riderTableColumns = /* array */[
   {
     Header: "uuid",
     accessor: "UUID"
   },
-  riderTableCol1,
-  riderTableCol2,
-  riderTableCol3,
+  {
+    Header: "First Name",
+    accessor: "RiderFirstName"
+  },
+  {
+    Header: "Email",
+    accessor: "RiderEmail"
+  },
+  {
+    Header: "Last Name",
+    accessor: "RiderLastName"
+  },
   {
     Header: "Phone",
     accessor: "RiderPhone"
@@ -60,8 +54,72 @@ var riderTableColumns = /* array */[
     accessor: "status"
   },
   {
+    Header: "Status Info",
+    accessor: "status_info"
+  },
+  {
     Header: "Org",
     accessor: "uuid_organization"
+  },
+  {
+    Header: "Collection Street Number",
+    accessor: "RiderCollectionStreetNumber"
+  },
+  {
+    Header: "Collection Address",
+    accessor: "RiderCollectionAddress"
+  },
+  {
+    Header: "Destination Address",
+    accessor: "RiderDestinationAddress"
+  },
+  {
+    Header: "Ride Times Local",
+    accessor: "AvailableRideTimesLocal"
+  },
+  {
+    Header: "Party Size",
+    accessor: "TotalPartySize"
+  },
+  {
+    Header: "Two Way Trip",
+    accessor: "TwoWayTripNeeded"
+  },
+  {
+    Header: "Is Vulnerable",
+    accessor: "RiderIsVulnerable"
+  },
+  {
+    Header: "No Politics Talk",
+    accessor: "RiderWillNotTalkPolitics"
+  },
+  {
+    Header: "Stay In Touch",
+    accessor: "PleaseStayInTouch"
+  },
+  {
+    Header: "Need Wheelchair",
+    accessor: "NeedWheelchair"
+  },
+  {
+    Header: "Contact Method",
+    accessor: "RiderPreferredContact"
+  },
+  {
+    Header: "Rider Notes",
+    accessor: "RiderAccommodationNotes"
+  },
+  {
+    Header: "Legal Consent",
+    accessor: "RiderLegalConsent"
+  },
+  {
+    Header: "Ready To Match",
+    accessor: "ReadyToMatch"
+  },
+  {
+    Header: "Will Be Safe",
+    accessor: "RiderWillBeSafe"
   }
 ];
 
@@ -74,8 +132,24 @@ function tableRider(itemDetails) {
           RiderPhone: itemDetails.RiderPhone,
           RiderCollectionZIP: itemDetails.RiderCollectionZIP,
           RiderDropOffZIP: itemDetails.RiderDropOffZIP,
+          AvailableRideTimesLocal: itemDetails.AvailableRideTimesLocal,
+          TotalPartySize: itemDetails.TotalPartySize,
+          TwoWayTripNeeded: itemDetails.TwoWayTripNeeded,
+          RiderIsVulnerable: itemDetails.RiderIsVulnerable,
+          RiderWillNotTalkPolitics: itemDetails.RiderWillNotTalkPolitics,
+          PleaseStayInTouch: itemDetails.PleaseStayInTouch,
+          NeedWheelchair: itemDetails.NeedWheelchair,
+          RiderPreferredContact: itemDetails.RiderPreferredContact,
+          RiderAccommodationNotes: itemDetails.RiderAccommodationNotes,
+          RiderLegalConsent: itemDetails.RiderLegalConsent,
+          ReadyToMatch: itemDetails.ReadyToMatch,
           created_ts: itemDetails.created_ts,
           last_updated_ts: itemDetails.last_updated_ts,
+          status_info: itemDetails.status_info,
+          RiderWillBeSafe: itemDetails.RiderWillBeSafe,
+          RiderCollectionStreetNumber: itemDetails.RiderCollectionStreetNumber,
+          RiderCollectionAddress: itemDetails.RiderCollectionAddress,
+          RiderDestinationAddress: itemDetails.RiderDestinationAddress,
           status: itemDetails.status,
           uuid_organization: itemDetails.uuid_organization
         };
@@ -176,9 +250,6 @@ var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
 
 exports.component = component;
 exports.tableType = tableType;
-exports.riderTableCol1 = riderTableCol1;
-exports.riderTableCol2 = riderTableCol2;
-exports.riderTableCol3 = riderTableCol3;
 exports.riderTableColumns = riderTableColumns;
 exports.tableRider = tableRider;
 exports.make = make;

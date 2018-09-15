@@ -9,34 +9,26 @@ type rider = {
    [@bs.as "RiderPhone"] phone: string,
    [@bs.as "RiderCollectionZIP"] collectionZip: string,
    [@bs.as "RiderDropOffZIP"] dropOffZIP: string,
-    /* "AvailableRideTimesLocal" character varying(2000),
-    "TotalPartySize" integer DEFAULT 1 NOT NULL,
-    "TwoWayTripNeeded" boolean NOT NULL,
-    "RiderIsVulnerable" boolean NOT NULL,
-    "RiderWillNotTalkPolitics" boolean NOT NULL,
-    "PleaseStayInTouch" boolean NOT NULL,
-    "NeedWheelchair" boolean NOT NULL,
-    "RiderPreferredContact" character varying(50),
-    "RiderAccommodationNotes" character varying(1000),
-    "RiderLegalConsent" boolean NOT NULL,
-    "ReadyToMatch" boolean DEFAULT true NOT NULL, */
+   [@bs.as "AvailableRideTimesLocal"] rideTimesLocal: string,
+   [@bs.as "TotalPartySize"] partySize: string,
+   [@bs.as "TwoWayTripNeeded"] twoWayTrip: bool,
+   [@bs.as "RiderIsVulnerable"] riderVulnerable: bool,
+   [@bs.as "RiderWillNotTalkPolitics"] noPoliticsTalk: bool,
+   [@bs.as "PleaseStayInTouch"] stayInTouch: bool,
+   [@bs.as "NeedWheelchair"] needWheelchair: bool,
+   [@bs.as "RiderPreferredContact"] contactMethod: bool,
+   [@bs.as "RiderAccommodationNotes"] riderNotes: bool,
+   [@bs.as "RiderLegalConsent"] legalConsent: bool,
+   [@bs.as "ReadyToMatch"] readyToMatch: bool,
    [@bs.as "created_ts"] created: string,
    [@bs.as "last_updated_ts"] updated: string,
- 
- /*   status_info text,
-    "RiderWillBeSafe" boolean NOT NULL,
-	"RiderCollectionStreetNumber" character varying(10),
-    "RiderCollectionAddress" character varying(1000),
-    "RiderDestinationAddress" character varying(1000), */
-   status: string,
-   [@bs.as "uuid_organization"] organization: string,
-};
-
-type tableOnClickHandler = (ReactEvent.Form.t, option( unit => unit)) => unit;
-
-[@bs.deriving abstract]
-type getTdPropsClickHandler = {
-  onClick: tableOnClickHandler
+   status_info: string,
+   [@bs.as "RiderWillBeSafe"] willBeSafe: bool,
+   [@bs.as "RiderCollectionStreetNumber"] collectionStreetNumber: string,
+   [@bs.as "RiderCollectionAddress"] collectionAddress: string,
+   [@bs.as "RiderDestinationAddress"] destinationAddress: string,
+    status: string,
+   [@bs.as "uuid_organization"] organization: string
 };
 
 [@bs.deriving abstract]
@@ -44,7 +36,7 @@ type riderRowInfo = {
   original: rider 
 };
 
-type getTdPropsHandler = (string, option(riderRowInfo), string, string) => getTdPropsClickHandler;
+type getTdPropsHandler = (string, option(riderRowInfo), string, string) => TypeInfo.getTdPropsClickHandler;
 
 [@bs.deriving abstract]
 type ridersInfo = {
@@ -66,28 +58,43 @@ type riderTableJsProps = {
 
 let tableType = "riders";
 
-let riderTableCol1 = TypeInfo.theader(~header="First Name", ~accessor="RiderFirstName");
-let riderTableCol2 = TypeInfo.theader(~header="Email", ~accessor="RiderEmail");
-let riderTableCol3 = TypeInfo.theader(~header="Last Name", ~accessor="RiderLastName");
-
 let riderTableColumns = 
   [| 
-  TypeInfo.theader(~header="uuid", ~accessor="UUID"),riderTableCol1, 
-  riderTableCol2, 
-  riderTableCol3,
+  TypeInfo.theader(~header="uuid", ~accessor="UUID"),
+  TypeInfo.theader(~header="First Name", ~accessor="RiderFirstName"), 
+  TypeInfo.theader(~header="Email", ~accessor="RiderEmail"), 
+  TypeInfo.theader(~header="Last Name", ~accessor="RiderLastName"),
   TypeInfo.theader(~header="Phone", ~accessor="RiderPhone"),
   TypeInfo.theader(~header="Collection ZIP", ~accessor="RiderCollectionZIP"),
   TypeInfo.theader(~header="Dropoff ZIP", ~accessor="RiderDropOffZIP"),
   TypeInfo.theader(~header="Created", ~accessor="created_ts"),
   TypeInfo.theader(~header="Updated", ~accessor="last_updated_ts"),
   TypeInfo.theader(~header="Status", ~accessor="status"),
+  TypeInfo.theader(~header="Status Info", ~accessor="status_info"),
   TypeInfo.theader(~header="Org", ~accessor="uuid_organization"),
+   TypeInfo.theader(~header="Collection Street Number", ~accessor="RiderCollectionStreetNumber"),
+   TypeInfo.theader(~header="Collection Address", ~accessor="RiderCollectionAddress"),
+   TypeInfo.theader(~header="Destination Address", ~accessor="RiderDestinationAddress"),
+   TypeInfo.theader(~header="Ride Times Local", ~accessor="AvailableRideTimesLocal"), 
+   TypeInfo.theader(~header="Party Size", ~accessor="TotalPartySize"),
+   TypeInfo.theader(~header="Two Way Trip", ~accessor="TwoWayTripNeeded"),
+   TypeInfo.theader(~header="Is Vulnerable", ~accessor="RiderIsVulnerable"),
+   TypeInfo.theader(~header="No Politics Talk", ~accessor="RiderWillNotTalkPolitics"),
+   TypeInfo.theader(~header="Stay In Touch", ~accessor="PleaseStayInTouch"),
+   TypeInfo.theader(~header="Need Wheelchair", ~accessor="NeedWheelchair"),
+   TypeInfo.theader(~header="Contact Method", ~accessor="RiderPreferredContact"),
+   TypeInfo.theader(~header="Rider Notes", ~accessor="RiderAccommodationNotes"),
+   TypeInfo.theader(~header="Legal Consent", ~accessor="RiderLegalConsent"),
+   TypeInfo.theader(~header="Ready To Match", ~accessor="ReadyToMatch"),
+   TypeInfo.theader(~header="Will Be Safe", ~accessor="RiderWillBeSafe"),
   |];
 
 let tableRider = itemDetails:rider => 
       rider(
         ~uuid=itemDetails->uuidGet,
-        ~firstName=itemDetails->firstNameGet, ~email=itemDetails->emailGet,  ~lastName=itemDetails->lastNameGet,
+        ~firstName=itemDetails->firstNameGet, 
+        ~email=itemDetails->emailGet,  
+        ~lastName=itemDetails->lastNameGet,
         ~phone=itemDetails->phoneGet,
         ~collectionZip=itemDetails->collectionZipGet,
         ~dropOffZIP=itemDetails->dropOffZIPGet,
@@ -95,6 +102,22 @@ let tableRider = itemDetails:rider =>
         ~status=itemDetails->statusGet,
         ~created=itemDetails->createdGet,
         ~updated=itemDetails->updatedGet,
+        ~rideTimesLocal=itemDetails->rideTimesLocalGet,
+        ~twoWayTrip=itemDetails->twoWayTripGet,
+        ~partySize=itemDetails->partySizeGet,
+        ~riderVulnerable=itemDetails->riderVulnerableGet,
+        ~noPoliticsTalk=itemDetails->noPoliticsTalkGet,
+        ~stayInTouch=itemDetails->stayInTouchGet,
+        ~needWheelchair=itemDetails->needWheelchairGet,
+        ~contactMethod=itemDetails->contactMethodGet,
+        ~riderNotes=itemDetails->riderNotesGet,
+        ~legalConsent=itemDetails->legalConsentGet,
+        ~readyToMatch=itemDetails->readyToMatchGet,
+        ~status_info=itemDetails->status_infoGet,
+        ~willBeSafe=itemDetails->willBeSafeGet,
+        ~collectionStreetNumber=itemDetails->collectionStreetNumberGet,
+        ~collectionAddress=itemDetails->collectionAddressGet,
+        ~destinationAddress=itemDetails->destinationAddressGet,
         );
 
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInfo:ridersInfo, 
@@ -106,7 +129,7 @@ _children) => {
 
   let ridersTdPropsHandler: getTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
 
-    let tableClickHandler: tableOnClickHandler = (_e, handleOriginalOption) => {
+    let tableClickHandler: TypeInfo.tableOnClickHandler = (_e, handleOriginalOption) => {
       /* Js.log(ReactEvent.Form.target(e)); */
       /* Js.log(handleOriginal); */
 
@@ -138,7 +161,7 @@ _children) => {
       ();
     };
 
-    let clickHandlerObjectWrapper = getTdPropsClickHandler(~onClick=tableClickHandler);
+    let clickHandlerObjectWrapper = TypeInfo.getTdPropsClickHandler(~onClick=tableClickHandler);
     
     clickHandlerObjectWrapper;
   };
