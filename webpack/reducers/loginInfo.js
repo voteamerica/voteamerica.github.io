@@ -2,8 +2,7 @@ import {
   loginRequestTypes,
   LOGIN_DETAILS,
   LOGIN_REQUEST,
-  LOGOUT,
-  GET_DRIVERS_LIST
+  LOGOUT
 } from '../actions/types.js';
 
 const loginInfo = (
@@ -25,7 +24,6 @@ const loginInfo = (
       return { ...state, loggedIn: false, token: '' };
     case loginRequestTypes.success:
       return { ...state, loggedIn: true, token: action.payload };
-    case GET_DRIVERS_LIST:
     default:
       return state;
   }

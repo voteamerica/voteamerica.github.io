@@ -5,6 +5,7 @@ import {
   LOGOUT,
   GET_DRIVERS_LIST,
   HIDE_DRIVERS_LIST,
+  currentDriverShowHideTypes,
   ridersGetHideListTypes,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
@@ -45,7 +46,6 @@ const getDriversList = (remoteUrlBase, token) => ({
   type: GET_DRIVERS_LIST,
   payload: { remoteUrlBase, token, successProperty: 'data' }
 });
-
 const hideDriversList = () => ({
   type: HIDE_DRIVERS_LIST,
   payload: {}
@@ -67,6 +67,9 @@ const hideCurrentItem = currentItemHideType => () => ({
   payload: {}
 });
 
+const showCurrentDriver = showCurrentItem(currentDriverShowHideTypes.show);
+const hideCurrentDriver = hideCurrentItem(currentDriverShowHideTypes.hide);
+
 const showCurrentRider = showCurrentItem(currentRiderShowHideTypes.show);
 const hideCurrentRider = hideCurrentItem(currentRiderShowHideTypes.hide);
 
@@ -80,6 +83,8 @@ export {
   logout,
   getDriversList,
   hideDriversList,
+  showCurrentDriver,
+  hideCurrentDriver,
   getRidersList,
   hideRidersList,
   showCurrentRider,
