@@ -3,6 +3,13 @@ type driver = {
    [@bs.as "DriverFirstName"] driverFirstName: string,
 };
 
+type tableOnClickHandler = (ReactEvent.Form.t, option( unit => unit)) => unit;
+
+[@bs.deriving abstract]
+type getTdPropsClickHandler = {
+  onClick: tableOnClickHandler
+};
+
 [@bs.deriving abstract]
 type loginInfo = {
   loggedIn: bool,
