@@ -12,40 +12,22 @@ var component = ReasonReact.statelessComponent("Matches");
 
 var tableType = "matches";
 
-var matchTableCol1 = {
-  Header: "First Name",
-  accessor: "RiderFirstName"
-};
-
-var matchTableCol2 = {
-  Header: "Email",
-  accessor: "RiderEmail"
-};
-
-var matchTableCol3 = {
-  Header: "Last Name",
-  accessor: "RiderLastName"
-};
-
 var matchTableColumns = /* array */[
   {
-    Header: "uuid",
-    accessor: "UUID"
-  },
-  matchTableCol1,
-  matchTableCol2,
-  matchTableCol3,
-  {
-    Header: "Phone",
-    accessor: "RiderPhone"
+    Header: "Driver",
+    accessor: "uuid_driver"
   },
   {
-    Header: "Collection ZIP",
-    accessor: "RiderCollectionZIP"
+    Header: "Rider",
+    accessor: "uuid_rider"
   },
   {
-    Header: "Dropoff ZIP",
-    accessor: "RiderDropOffZIP"
+    Header: "Driver Notes",
+    accessor: "driver_notes"
+  },
+  {
+    Header: "Rider Notes",
+    accessor: "rider_notes"
   },
   {
     Header: "Created",
@@ -60,24 +42,21 @@ var matchTableColumns = /* array */[
     accessor: "status"
   },
   {
-    Header: "Org",
-    accessor: "uuid_organization"
+    Header: "Score",
+    accessor: "score"
   }
 ];
 
 function tableMatch(itemDetails) {
   return {
-          UUID: itemDetails.UUID,
-          RiderFirstName: itemDetails.RiderFirstName,
-          RiderEmail: itemDetails.RiderEmail,
-          RiderLastName: itemDetails.RiderLastName,
-          RiderPhone: itemDetails.RiderPhone,
-          RiderCollectionZIP: itemDetails.RiderCollectionZIP,
-          RiderDropOffZIP: itemDetails.RiderDropOffZIP,
+          status: itemDetails.status,
+          uuid_driver: itemDetails.uuid_driver,
+          uuid_rider: itemDetails.uuid_rider,
+          driver_notes: itemDetails.driver_notes,
+          rider_notes: itemDetails.rider_notes,
           created_ts: itemDetails.created_ts,
           last_updated_ts: itemDetails.last_updated_ts,
-          status: itemDetails.status,
-          uuid_organization: itemDetails.uuid_organization
+          score: itemDetails.score
         };
 }
 
@@ -130,7 +109,7 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
                 marginBottom: "10px"
               };
               var currentMatchInfo = function (currentMatch) {
-                return React.createElement("div", undefined, React.createElement("h3", undefined, "Current match info:"), React.createElement("div", undefined, currentMatch.RiderFirstName + (" " + currentMatch.RiderLastName)), React.createElement("div", undefined, currentMatch.RiderEmail));
+                return React.createElement("div", undefined, React.createElement("h3", undefined, "Current match info:"), React.createElement("div", undefined, "Driver uuid: " + currentMatch.uuid_driver), React.createElement("div", undefined, "Rider uuid: " + currentMatch.uuid_rider), React.createElement("div", undefined, currentMatch.status));
               };
               var tableMatchesJSX;
               if (matchesInfo.showMatchList) {
@@ -176,9 +155,6 @@ var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
 
 exports.component = component;
 exports.tableType = tableType;
-exports.matchTableCol1 = matchTableCol1;
-exports.matchTableCol2 = matchTableCol2;
-exports.matchTableCol3 = matchTableCol3;
 exports.matchTableColumns = matchTableColumns;
 exports.tableMatch = tableMatch;
 exports.make = make;

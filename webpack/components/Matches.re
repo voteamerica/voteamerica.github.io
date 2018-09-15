@@ -1,40 +1,20 @@
 let component = ReasonReact.statelessComponent("Matches");
 
 [@bs.deriving abstract]
-type matchx = {
-   [@bs.as "UUID"] uuid: string,
-   [@bs.as "RiderFirstName"] firstName: string,
-   [@bs.as "RiderEmail"] email: string,
-   [@bs.as "RiderLastName"] lastName: string,
-   [@bs.as "RiderPhone"] phone: string,
-   [@bs.as "RiderCollectionZIP"] collectionZip: string,
-   [@bs.as "RiderDropOffZIP"] dropOffZIP: string,
-    /* "AvailableRideTimesLocal" character varying(2000),
-    "TotalPartySize" integer DEFAULT 1 NOT NULL,
-    "TwoWayTripNeeded" boolean NOT NULL,
-    "RiderIsVulnerable" boolean NOT NULL,
-    "RiderWillNotTalkPolitics" boolean NOT NULL,
-    "PleaseStayInTouch" boolean NOT NULL,
-    "NeedWheelchair" boolean NOT NULL,
-    "RiderPreferredContact" character varying(50),
-    "RiderAccommodationNotes" character varying(1000),
-    "RiderLegalConsent" boolean NOT NULL,
-    "ReadyToMatch" boolean DEFAULT true NOT NULL, */
-   [@bs.as "created_ts"] created: string,
-   [@bs.as "last_updated_ts"] updated: string,
- 
- /*   status_info text,
-    "RiderWillBeSafe" boolean NOT NULL,
-	"RiderCollectionStreetNumber" character varying(10),
-    "RiderCollectionAddress" character varying(1000),
-    "RiderDestinationAddress" character varying(1000), */
+type systemMatch = {
    status: string,
-   [@bs.as "uuid_organization"] organization: string,
+  uuid_driver: string,
+  uuid_rider: string,
+  driver_notes: string,
+	rider_notes: string,
+  [@bs.as "created_ts"] created: string,
+  [@bs.as "last_updated_ts"] updated: string,
+  score: int,
 };
 
 [@bs.deriving abstract]
 type matchRowInfo = {
-  original: matchx 
+  original: systemMatch 
 };
 
 type getTdPropsHandler = (string, option(matchRowInfo), string, string) => TypeInfo.getTdPropsClickHandler;
@@ -42,9 +22,9 @@ type getTdPropsHandler = (string, option(matchRowInfo), string, string) => TypeI
 [@bs.deriving abstract]
 type matchesInfo = {
   showMatchList: bool,
-  matches: array(matchx),
+  matches: array(systemMatch),
   showCurrentMatchDetails: bool,
-  currentMatch: (matchx)
+  currentMatch: (systemMatch)
 };
 
 [@bs.deriving abstract]
@@ -53,40 +33,33 @@ type matchTableJsProps = {
   [@bs.as "type"] type_: string,
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
-  data: array(matchx),
+  data: array(systemMatch),
   getTdProps: getTdPropsHandler
 };
 
 let tableType = "matches";
 
-let matchTableCol1 = TypeInfo.theader(~header="First Name", ~accessor="RiderFirstName");
-let matchTableCol2 = TypeInfo.theader(~header="Email", ~accessor="RiderEmail");
-let matchTableCol3 = TypeInfo.theader(~header="Last Name", ~accessor="RiderLastName");
-
 let matchTableColumns = 
   [| 
-  TypeInfo.theader(~header="uuid", ~accessor="UUID"),matchTableCol1, 
-  matchTableCol2, 
-  matchTableCol3,
-  TypeInfo.theader(~header="Phone", ~accessor="RiderPhone"),
-  TypeInfo.theader(~header="Collection ZIP", ~accessor="RiderCollectionZIP"),
-  TypeInfo.theader(~header="Dropoff ZIP", ~accessor="RiderDropOffZIP"),
+  TypeInfo.theader(~header="Driver", ~accessor="uuid_driver"),
+  TypeInfo.theader(~header="Rider", ~accessor="uuid_rider"), 
+  TypeInfo.theader(~header="Driver Notes", ~accessor="driver_notes"),
+  TypeInfo.theader(~header="Rider Notes", ~accessor="rider_notes"),
   TypeInfo.theader(~header="Created", ~accessor="created_ts"),
   TypeInfo.theader(~header="Updated", ~accessor="last_updated_ts"),
   TypeInfo.theader(~header="Status", ~accessor="status"),
-  TypeInfo.theader(~header="Org", ~accessor="uuid_organization"),
+  TypeInfo.theader(~header="Score", ~accessor="score"),
   |];
 
- let tableMatch = itemDetails:matchx => matchx(
-  ~uuid=itemDetails->uuidGet,
-  ~firstName=itemDetails->firstNameGet, ~email=itemDetails->emailGet,  ~lastName=itemDetails->lastNameGet,
-  ~phone=itemDetails->phoneGet,
-  ~collectionZip=itemDetails->collectionZipGet,
-  ~dropOffZIP=itemDetails->dropOffZIPGet,
-  ~organization=itemDetails->organizationGet,
+ let tableMatch = itemDetails:systemMatch => systemMatch(
+  ~uuid_driver=itemDetails->uuid_driverGet,
+  ~uuid_rider=itemDetails->uuid_riderGet,
+  ~driver_notes=itemDetails->driver_notesGet,
+  ~rider_notes=itemDetails->rider_notesGet,
   ~status=itemDetails->statusGet,
   ~created=itemDetails->createdGet,
   ~updated=itemDetails->updatedGet,
+  ~score=itemDetails->scoreGet,
 );
 
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
@@ -113,7 +86,7 @@ _children) => {
           Js.log(rowInfo); 
 
           /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
-          let sr: (matchx => unit, option(matchx)) => unit = [%raw (fx, itemDetails) => "{ fx(itemDetails); return 0; }"];
+          let sr: (systemMatch => unit, option(systemMatch)) => unit = [%raw (fx, itemDetails) => "{ fx(itemDetails); return 0; }"];
 
           let itemDetails = rowInfo->originalGet;
           let currentMatch = tableMatch(itemDetails);
@@ -157,16 +130,18 @@ _children) => {
   {
   ...component,
   render: (_self) => { 
-    let tableMatches:array(matchx) = Array.map(tableMatch, matchesInfo->matchesGet); 
+    let tableMatches:array(systemMatch) = Array.map(tableMatch, matchesInfo->matchesGet); 
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
     let currentMatchInfo = currentMatch => {
       <div>
         <h3>{ReasonReact.string("Current match info:")}</h3>
-        <div>{ReasonReact.string(currentMatch->firstNameGet ++ " " ++ currentMatch->lastNameGet) }
+        <div>{ReasonReact.string("Driver uuid: " ++ currentMatch->uuid_driverGet)}
         </div>
-        <div>{ReasonReact.string(currentMatch->emailGet)}
+        <div>{ReasonReact.string("Rider uuid: " ++ currentMatch->uuid_riderGet) }
+        </div>
+        <div>{ReasonReact.string(currentMatch->statusGet)}
         </div>
       </div>
     };
@@ -229,7 +204,7 @@ type jsProps = {
   matchesInfo: matchesInfo,  
   getMatchesList: (string, string) => unit,
   hideMatchesList: unit => unit,
-  showCurrentMatch: matchx => unit,
+  showCurrentMatch: systemMatch => unit,
   hideCurrentMatch: unit => unit,
 };
 
