@@ -1,12 +1,12 @@
 import {
-  getRidersListTypes,
+  getRiderListTypes,
   ridersGetHideListTypes,
   currentRiderShowHideTypes
 } from '../actions/types';
 
 const ridersInfo = (
   state = {
-    showRidersList: false,
+    showRiderList: false,
     riders: [],
     showCurrentRiderDetails: false,
     currentRider: {}
@@ -14,20 +14,20 @@ const ridersInfo = (
   action
 ) => {
   switch (action.type) {
-    case getRidersListTypes.success: {
+    case getRiderListTypes.success: {
       const { data: riders } = action.payload;
 
-      return { ...state, showRidersList: true, riders };
+      return { ...state, showRiderList: true, riders };
     }
 
     case ridersGetHideListTypes.hide:
-      return { ...state, showRidersList: false, riders: [] };
+      return { ...state, showRiderList: false, riders: [] };
 
     case currentRiderShowHideTypes.show:
       return {
         ...state,
         showCurrentRiderDetails: true,
-        currentRider: action.payload.riderDetails
+        currentRider: action.payload.itemDetails
       };
 
     case currentRiderShowHideTypes.hide:

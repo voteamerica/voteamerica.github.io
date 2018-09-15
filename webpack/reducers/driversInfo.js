@@ -1,11 +1,11 @@
-import { getDriversListTypes, HIDE_DRIVERS_LIST } from '../actions/types';
+import { getDriverListTypes, HIDE_DRIVERS_LIST } from '../actions/types';
 
 const driversInfo = (
   state = { showDriversList: false, drivers: [] },
   action
 ) => {
   switch (action.type) {
-    case getDriversListTypes.success: {
+    case getDriverListTypes.success: {
       const { data: drivers } = action.payload;
 
       return { ...state, showDriversList: true, drivers };

@@ -1,6 +1,6 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 
-import { GET_DRIVERS_LIST, getDriversListTypes } from './types';
+import { GET_DRIVERS_LIST, getDriverListTypes } from './types';
 import { createAPIurl, fetchInfo } from './sagaHelpers.js';
 
 const urlPath = '/drivers/list';
@@ -21,15 +21,15 @@ function* fetchDriversList(action) {
       payload[successProperty] = results;
 
       yield put({
-        type: getDriversListTypes.success,
+        type: getDriverListTypes.success,
         payload
       });
     } else {
-      yield put({ type: getDriversListTypes.fail, payload: loginResult });
+      yield put({ type: getDriverListTypes.fail, payload: loginResult });
     }
   } catch (e) {
     yield put({
-      type: getDriversListTypes.error,
+      type: getDriverListTypes.error,
       payload: { message: e.message }
     });
   }

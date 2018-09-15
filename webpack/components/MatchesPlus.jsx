@@ -3,26 +3,23 @@ import { connect } from 'react-redux';
 import MatchesBase from './Matches.bs.js';
 
 import {
-  getRidersList,
-  hideRidersList,
-  showCurrentRider,
-  hideCurrentRider
+  getMatchesList,
+  hideMatchesList,
+  showCurrentMatch,
+  hideCurrentMatch
 } from '../actions/index.js';
 
 const mapStateToProps = state => {
-  const { apiInfo, loginInfo, ridersInfo } = state;
-
-  const matches = ridersInfo.riders;
-  const matchesInfo = { ...ridersInfo, matches };
+  const { apiInfo, loginInfo, matchesInfo } = state;
 
   return { apiInfo, loginInfo, matchesInfo };
 };
 
 const mapDispatchToProps = {
-  getRidersList,
-  hideRidersList,
-  showCurrentRider,
-  hideCurrentRider
+  getMatchesList,
+  hideMatchesList,
+  showCurrentMatch,
+  hideCurrentMatch
 };
 
 const MatchesPlus = connect(

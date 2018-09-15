@@ -8,33 +8,33 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 var Table$VoteUSReason = require("./Table.bs.js");
 
-var component = ReasonReact.statelessComponent("Riders");
+var component = ReasonReact.statelessComponent("Matches");
 
-var tableType = "riders";
+var tableType = "matches";
 
-var riderTableCol1 = {
+var matchTableCol1 = {
   Header: "First Name",
   accessor: "RiderFirstName"
 };
 
-var riderTableCol2 = {
+var matchTableCol2 = {
   Header: "Email",
   accessor: "RiderEmail"
 };
 
-var riderTableCol3 = {
+var matchTableCol3 = {
   Header: "Last Name",
   accessor: "RiderLastName"
 };
 
-var riderTableColumns = /* array */[
+var matchTableColumns = /* array */[
   {
     Header: "uuid",
     accessor: "UUID"
   },
-  riderTableCol1,
-  riderTableCol2,
-  riderTableCol3,
+  matchTableCol1,
+  matchTableCol2,
+  matchTableCol3,
   {
     Header: "Phone",
     accessor: "RiderPhone"
@@ -65,7 +65,7 @@ var riderTableColumns = /* array */[
   }
 ];
 
-function tableRider(itemDetails) {
+function tableMatch(itemDetails) {
   return {
           UUID: itemDetails.UUID,
           RiderFirstName: itemDetails.RiderFirstName,
@@ -81,8 +81,8 @@ function tableRider(itemDetails) {
         };
 }
 
-function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, showCurrentRider, hideCurrentRider, _) {
-  var ridersTdPropsHandler = function (_, rowInfoOption, _$1, _$2) {
+function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, showCurrentMatch, hideCurrentMatch, _) {
+  var matchesTdPropsHandler = function (_, rowInfoOption, _$1, _$2) {
     return {
             onClick: (function (_, handleOriginalOption) {
                 if (rowInfoOption !== undefined) {
@@ -90,10 +90,10 @@ function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, sho
                   console.log(rowInfo);
                   var sr = function (fx,itemDetails){{ fx(itemDetails); return 0; }};
                   var itemDetails = rowInfo.original;
-                  var currentRider = tableRider(itemDetails);
-                  sr(showCurrentRider, Js_primitive.some(currentRider));
+                  var currentMatch = tableMatch(itemDetails);
+                  sr(showCurrentMatch, Js_primitive.some(currentMatch));
                 } else {
-                  Curry._1(hideCurrentRider, /* () */0);
+                  Curry._1(hideCurrentMatch, /* () */0);
                 }
                 if (handleOriginalOption !== undefined) {
                   Curry._1(handleOriginalOption, /* () */0);
@@ -102,15 +102,15 @@ function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, sho
               })
           };
   };
-  var handleGetRiderListClick = function () {
+  var handleGetMatchListClick = function () {
     var token = loginInfo.token;
     var url = apiInfo.apiUrl;
     var gl = function (fx,url,token){{ fx(url, token); return 0; }};
-    gl(getRidersList, url, token);
+    gl(getMatchesList, url, token);
     return /* () */0;
   };
-  var handleHideRiderListClick = function () {
-    Curry._1(hideRidersList, /* () */0);
+  var handleHideMatchListClick = function () {
+    Curry._1(hideMatchesList, /* () */0);
     return /* () */0;
   };
   return /* record */[
@@ -124,21 +124,21 @@ function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, sho
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              var tableRiders = $$Array.map(tableRider, ridersInfo.riders);
+              var tableMatches = $$Array.map(tableMatch, matchesInfo.matches);
               var tableDivStyle = {
                 marginTop: "20px",
                 marginBottom: "10px"
               };
-              var currentRiderInfo = function (currentRider) {
-                return React.createElement("div", undefined, React.createElement("h3", undefined, "Current rider info:"), React.createElement("div", undefined, currentRider.RiderFirstName + (" " + currentRider.RiderLastName)), React.createElement("div", undefined, currentRider.RiderEmail));
+              var currentMatchInfo = function (currentMatch) {
+                return React.createElement("div", undefined, React.createElement("h3", undefined, "Current match info:"), React.createElement("div", undefined, currentMatch.RiderFirstName + (" " + currentMatch.RiderLastName)), React.createElement("div", undefined, currentMatch.RiderEmail));
               };
-              var tableRidersJSX;
-              if (ridersInfo.showRiderList) {
-                var match = ridersInfo.showCurrentRiderDetails;
-                tableRidersJSX = React.createElement("div", undefined, React.createElement("button", {
+              var tableMatchesJSX;
+              if (matchesInfo.showMatchList) {
+                var match = matchesInfo.showCurrentMatchDetails;
+                tableMatchesJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",
-                          id: "hideGetRidersList",
-                          onClick: handleHideRiderListClick
+                          id: "hideGetMatchList",
+                          onClick: handleHideMatchListClick
                         }, "Hide List"), React.createElement("div", {
                           style: tableDivStyle
                         }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5) {
@@ -150,18 +150,18 @@ function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, sho
                                             data: prim$4,
                                             getTdProps: prim$5
                                           };
-                                  }), "basicRiderTable", tableType, riderTableColumns, tableRiders, ridersTdPropsHandler, /* array */[]))), match ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
+                                  }), "basicMatchTable", tableType, matchTableColumns, tableMatches, matchesTdPropsHandler, /* array */[]))), match ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
               } else {
-                tableRidersJSX = React.createElement("div", undefined, React.createElement("button", {
+                tableMatchesJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",
-                          id: "showGetRidersList",
-                          onClick: handleGetRiderListClick
-                        }, "Show Riders List"));
+                          id: "showGetMatchList",
+                          onClick: handleGetMatchListClick
+                        }, "Show Matches List"));
               }
-              var ridersInfoArea = loginInfo.loggedIn ? React.createElement("div", undefined, React.createElement("h2", {
+              var matchesInfoArea = loginInfo.loggedIn ? React.createElement("div", undefined, React.createElement("h2", {
                           className: "operator-page-heading"
-                        }, "Rider Info"), React.createElement("div", undefined, tableRidersJSX)) : null;
-              return React.createElement("div", undefined, ridersInfoArea);
+                        }, "Matches Info"), React.createElement("div", undefined, tableMatchesJSX)) : null;
+              return React.createElement("div", undefined, matchesInfoArea);
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],
@@ -171,16 +171,16 @@ function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, sho
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
+        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, /* array */[]);
       }));
 
 exports.component = component;
 exports.tableType = tableType;
-exports.riderTableCol1 = riderTableCol1;
-exports.riderTableCol2 = riderTableCol2;
-exports.riderTableCol3 = riderTableCol3;
-exports.riderTableColumns = riderTableColumns;
-exports.tableRider = tableRider;
+exports.matchTableCol1 = matchTableCol1;
+exports.matchTableCol2 = matchTableCol2;
+exports.matchTableCol3 = matchTableCol3;
+exports.matchTableColumns = matchTableColumns;
+exports.tableMatch = tableMatch;
 exports.make = make;
 exports.$$default = $$default;
 exports.default = $$default;
