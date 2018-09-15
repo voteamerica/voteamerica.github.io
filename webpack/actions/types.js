@@ -5,22 +5,30 @@ const LOGOUT = 'LOGOUT';
 const GET_DRIVERS_LIST = 'GET_DRIVERS_LIST';
 const HIDE_DRIVERS_LIST = 'HIDE_DRIVERS_LIST';
 
-const driversType = 'DRIVERS';
-const ridersType = 'RIDERS';
+const driverType = 'DRIVER';
+const riderType = 'RIDERS';
+const matchType = 'MATCH';
+
+const driverListType = 'DRIVERS';
+const riderListType = 'RIDERS';
+const matchListType = 'MATCHES';
 
 const itemsGetHideListTypes = itemType => ({
   get: 'GET_' + itemType + '_LIST',
   hide: 'HIDE_' + itemType + '_LIST'
 });
 
-const ridersGetHideListTypes = itemsGetHideListTypes('RIDERS');
+const driversGetHideListTypes = itemsGetHideListTypes(driverListType);
+const ridersGetHideListTypes = itemsGetHideListTypes(riderListType);
+const matchesGetHideListTypes = itemsGetHideListTypes(matchListType);
 
 const currentItemShowHideTypes = itemType => ({
   show: 'SHOW_CURRENT_' + itemType,
   hide: 'HIDE_CURRENT_' + itemType
 });
 
-const currentRiderShowHideTypes = currentItemShowHideTypes('RIDER');
+const currentRiderShowHideTypes = currentItemShowHideTypes(riderType);
+const currentMatchShowHideTypes = currentItemShowHideTypes(matchType);
 
 const getAsyncTypes = type => ({
   success: type + '_SUCCESS',
@@ -30,8 +38,9 @@ const getAsyncTypes = type => ({
 
 const loginRequestTypes = getAsyncTypes(LOGIN_REQUEST);
 
-const getDriversListTypes = getAsyncTypes(GET_DRIVERS_LIST);
-const getRidersListTypes = getAsyncTypes(ridersGetHideListTypes.get);
+const getDriverListTypes = getAsyncTypes(driversGetHideListTypes.get);
+const getRiderListTypes = getAsyncTypes(ridersGetHideListTypes.get);
+const getMatchListTypes = getAsyncTypes(matchesGetHideListTypes.get);
 
 export {
   LOGIN_DETAILS,
@@ -40,10 +49,12 @@ export {
   LOGOUT,
   GET_DRIVERS_LIST,
   HIDE_DRIVERS_LIST,
-  getDriversListTypes,
+  getDriverListTypes,
   driversType,
   ridersGetHideListTypes,
-  getRidersListTypes,
-  ridersType,
-  currentRiderShowHideTypes
+  getRiderListTypes,
+  currentRiderShowHideTypes,
+  matchesGetHideListTypes,
+  getMatchListTypes,
+  currentMatchShowHideTypes
 };

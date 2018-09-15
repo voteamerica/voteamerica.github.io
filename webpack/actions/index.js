@@ -6,7 +6,9 @@ import {
   GET_DRIVERS_LIST,
   HIDE_DRIVERS_LIST,
   ridersGetHideListTypes,
-  currentRiderShowHideTypes
+  currentRiderShowHideTypes,
+  matchesGetHideListTypes,
+  currentMatchShowHideTypes
 } from './types';
 
 const loginDetails = details => ({
@@ -52,9 +54,12 @@ const hideDriversList = () => ({
 const getRidersList = getItemsList(ridersGetHideListTypes.get);
 const hideRidersList = hideItemsList(ridersGetHideListTypes.hide);
 
-const showCurrentItem = currentItemShowType => riderDetails => ({
+const getMatchesList = getItemsList(matchesGetHideListTypes.get);
+const hideMatchesList = hideItemsList(matchesGetHideListTypes.hide);
+
+const showCurrentItem = currentItemShowType => itemDetails => ({
   type: currentItemShowType,
-  payload: { riderDetails }
+  payload: { itemDetails }
 });
 
 const hideCurrentItem = currentItemHideType => () => ({
@@ -63,8 +68,10 @@ const hideCurrentItem = currentItemHideType => () => ({
 });
 
 const showCurrentRider = showCurrentItem(currentRiderShowHideTypes.show);
-
 const hideCurrentRider = hideCurrentItem(currentRiderShowHideTypes.hide);
+
+const showCurrentMatch = showCurrentItem(currentMatchShowHideTypes.show);
+const hideCurrentMatch = hideCurrentItem(currentMatchShowHideTypes.hide);
 
 export {
   loginDetails,
@@ -76,5 +83,9 @@ export {
   getRidersList,
   hideRidersList,
   showCurrentRider,
-  hideCurrentRider
+  hideCurrentRider,
+  getMatchesList,
+  hideMatchesList,
+  showCurrentMatch,
+  hideCurrentMatch
 };

@@ -48,7 +48,7 @@ type getTdPropsHandler = (string, option(riderRowInfo), string, string) => getTd
 
 [@bs.deriving abstract]
 type ridersInfo = {
-  showRidersList: bool,
+  showRiderList: bool,
   riders: array(rider),
   showCurrentRiderDetails: bool,
   currentRider: (rider)
@@ -84,17 +84,17 @@ let riderTableColumns =
   TypeInfo.theader(~header="Org", ~accessor="uuid_organization"),
   |];
 
-let tableRider = riderDetails:rider => 
+let tableRider = itemDetails:rider => 
       rider(
-        ~uuid=riderDetails->uuidGet,
-        ~firstName=riderDetails->firstNameGet, ~email=riderDetails->emailGet,  ~lastName=riderDetails->lastNameGet,
-        ~phone=riderDetails->phoneGet,
-        ~collectionZip=riderDetails->collectionZipGet,
-        ~dropOffZIP=riderDetails->dropOffZIPGet,
-        ~organization=riderDetails->organizationGet,
-        ~status=riderDetails->statusGet,
-        ~created=riderDetails->createdGet,
-        ~updated=riderDetails->updatedGet,
+        ~uuid=itemDetails->uuidGet,
+        ~firstName=itemDetails->firstNameGet, ~email=itemDetails->emailGet,  ~lastName=itemDetails->lastNameGet,
+        ~phone=itemDetails->phoneGet,
+        ~collectionZip=itemDetails->collectionZipGet,
+        ~dropOffZIP=itemDetails->dropOffZIPGet,
+        ~organization=itemDetails->organizationGet,
+        ~status=itemDetails->statusGet,
+        ~created=itemDetails->createdGet,
+        ~updated=itemDetails->updatedGet,
         );
 
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInfo:ridersInfo, 
@@ -121,10 +121,10 @@ _children) => {
           Js.log(rowInfo); 
 
           /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
-          let sr: (rider => unit, option(rider)) => unit = [%raw (fx, riderDetails) => "{ fx(riderDetails); return 0; }"];
+          let sr: (rider => unit, option(rider)) => unit = [%raw (fx, itemDetails) => "{ fx(itemDetails); return 0; }"];
 
-          let riderDetails = rowInfo->originalGet;
-          let currentRider = tableRider(riderDetails);
+          let itemDetails = rowInfo->originalGet;
+          let currentRider = tableRider(itemDetails);
 
           sr(showCurrentRider, Some(currentRider));
         }
@@ -143,7 +143,7 @@ _children) => {
     clickHandlerObjectWrapper;
   };
 
-  let handleGetRidersListClick = (_event) => {
+  let handleGetRiderListClick = (_event) => {
     let token = loginInfo->TypeInfo.tokenGet;
     let url = apiInfo->TypeInfo.apiUrlGet;
 
@@ -155,7 +155,7 @@ _children) => {
     ();
   };
 
-  let handleHideDriversListClick = (_event) => {
+  let handleHideRiderListClick = (_event) => {
     /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
     hideRidersList();
 
@@ -180,12 +180,12 @@ _children) => {
     };
 
     let tableRidersJSX = 
-      if (ridersInfo->showRidersListGet) {
+      if (ridersInfo->showRiderListGet) {
         <div>
           <button
             className="button button--large"
             id="hideGetRidersList" 
-            onClick={handleHideDriversListClick}
+            onClick={handleHideRiderListClick}
           >{ReasonReact.string("Hide List")}
           </button>
           <div style={tableDivStyle}> 
@@ -205,7 +205,7 @@ _children) => {
           <button
             className="button button--large"
             id="showGetRidersList" 
-            onClick={handleGetRidersListClick}
+            onClick={handleGetRiderListClick}
           >{ReasonReact.string("Show Riders List")}
           </button>
         </div>
