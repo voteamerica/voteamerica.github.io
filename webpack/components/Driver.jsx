@@ -34,12 +34,16 @@ class DriverBase extends Component {
         console.log('driver click');
 
         if (rowInfo !== undefined) {
+          const UUID = rowInfo.original.UUID;
           const firstName = rowInfo.original.DriverFirstName;
           const lastName = rowInfo.original.DriverLastName;
+          const phone = rowInfo.original.DriverPhone;
 
           showCurrentDriver({
+            UUID,
             DriverFirstName: firstName,
-            DriverLastName: lastName
+            DriverLastName: lastName,
+            DriverPhone: phone
           });
         } else {
           hideCurrentDriver({});
@@ -111,6 +115,32 @@ class DriverBase extends Component {
       marginBottom: 10
     };
 
+    const currentDriverInfo = showCurrentDriverDetails => {
+      if (!showCurrentDriverDetails) {
+        return <div>No driver selected</div>;
+      }
+
+      const currentDriver = driversInfo.currentDriver;
+      const uriPhone = encodeURI(currentDriver.DriverPhone);
+      const selfServiceUrl =
+        '../self-service/?type=driver&uuid=' +
+        currentDriver.UUID +
+        '&code=0&info&phone=' +
+        uriPhone;
+
+      return (
+        <div>
+          <h3>Current Driver Info</h3>
+          <div>
+            {currentDriver.DriverFirstName + ' ' + currentDriver.DriverLastName}
+          </div>
+          <div>
+            <a href={selfServiceUrl}>Self Service Page</a>
+          </div>
+        </div>
+      );
+    };
+
     return (
       <div>
         {loginInfo.loggedIn === true ? (
@@ -144,18 +174,7 @@ class DriverBase extends Component {
                           getTdProps={this.getTdPropsHandler(this)}
                         />
                       </div>
-                      {driversInfo.showCurrentDriverDetails ? (
-                        <div>
-                          <h3>Current Driver Info</h3>
-                          <div>
-                            {driversInfo.currentDriver.DriverFirstName +
-                              ' ' +
-                              driversInfo.currentDriver.DriverLastName}
-                          </div>
-                        </div>
-                      ) : (
-                        <div>No driver selected</div>
-                      )}
+                      {currentDriverInfo(driversInfo.showCurrentDriverDetails)}
                     </div>
                   ) : (
                     false

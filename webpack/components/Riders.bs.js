@@ -204,7 +204,11 @@ function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, sho
                 marginBottom: "10px"
               };
               var currentRiderInfo = function (currentRider) {
-                return React.createElement("div", undefined, React.createElement("h3", undefined, "Current rider info:"), React.createElement("div", undefined, currentRider.RiderFirstName + (" " + currentRider.RiderLastName)), React.createElement("div", undefined, currentRider.RiderEmail));
+                var uriPhone = encodeURI(currentRider.RiderPhone);
+                var selfServiceUrl = "../self-service/?type=rider&uuid=" + (currentRider.UUID + ("&code=0&info&phone=" + uriPhone));
+                return React.createElement("div", undefined, React.createElement("h3", undefined, "Current rider info:"), React.createElement("div", undefined, currentRider.RiderFirstName + (" " + currentRider.RiderLastName)), React.createElement("div", undefined, currentRider.RiderEmail), React.createElement("div", undefined, React.createElement("a", {
+                                    href: selfServiceUrl
+                                  }, "Self Service Page")));
               };
               var tableRidersJSX;
               if (ridersInfo.showRiderList) {

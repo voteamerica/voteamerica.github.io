@@ -1,3 +1,5 @@
+[@bs.val] external encodeURI: string => string = "encodeURI";
+
 [@bs.deriving abstract]
 type driver = {
    [@bs.as "DriverFirstName"] driverFirstName: string,

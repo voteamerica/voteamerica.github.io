@@ -193,11 +193,18 @@ _children) => {
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
     let currentRiderInfo = currentRider => {
+      let uriPhone = TypeInfo.encodeURI(currentRider->phoneGet);
+
+      let selfServiceUrl = "../self-service/?type=rider&uuid=" ++ currentRider->uuidGet ++ "&code=0&info&phone=" ++ uriPhone;
+
       <div>
         <h3>{ReasonReact.string("Current rider info:")}</h3>
         <div>{ReasonReact.string(currentRider->firstNameGet ++ " " ++ currentRider->lastNameGet) }
         </div>
         <div>{ReasonReact.string(currentRider->emailGet)}
+        </div>
+        <div>
+          <a href={selfServiceUrl}>{ReasonReact.string( "Self Service Page")}</a>
         </div>
       </div>
     };

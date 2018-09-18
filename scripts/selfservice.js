@@ -45,6 +45,12 @@ if (data.type) {
   $login.find('#enter-type').remove();
 }
 
+if (data.phone) {
+  const phoneEntry = document.getElementById('enter-phone');
+
+  phoneEntry.remove();
+}
+
 
 $login.validator().on('submit', function(e) {
   if (e.isDefaultPrevented()) {
@@ -52,7 +58,7 @@ $login.validator().on('submit', function(e) {
   }
   data.uuid = data.uuid || $(this).find('#inputUUID').val();
   data.type = data.type || $(this).find('#enter-type').find('input:checked').val();
-  data.phone = $(this).find('#inputPhoneNumber').val();
+  data.phone = data.phone || $(this).find('#inputPhoneNumber').val();
 
   if (data.type === "driver") {
     $manage.find('#riderInfo').toggle(false);
