@@ -10,9 +10,9 @@ import {
 } from '../actions/index.js';
 
 const mapStateToProps = state => {
-  const { apiInfo, loginInfo, ridersInfo } = state;
+  const { apiInfo, loginInfo, ridersInfo, matchesInfo } = state;
 
-  return { apiInfo, loginInfo, ridersInfo };
+  return { apiInfo, loginInfo, ridersInfo, matchesInfo };
 };
 
 const mapDispatchToProps = {

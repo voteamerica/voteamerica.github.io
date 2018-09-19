@@ -10,12 +10,11 @@ import {
   showCurrentDriver,
   hideCurrentDriver
 } from '../actions/index.js';
-import { currentDriverShowHideTypes } from '../actions/types.js';
 
 const mapStateToProps = state => {
-  const { apiInfo, loginInfo, driversInfo } = state;
+  const { apiInfo, loginInfo, driversInfo, matchesInfo } = state;
 
-  return { apiInfo, loginInfo, driversInfo };
+  return { apiInfo, loginInfo, driversInfo, matchesInfo };
 };
 
 const mapDispatchToProps = {
@@ -28,6 +27,9 @@ const mapDispatchToProps = {
 class DriverBase extends Component {
   getTdPropsHandler(self) {
     return (state, rowInfo, column, instance) => {
+      const { driversInfo, matchesInfo } = this.props;
+      const itemUuid = rowInfo !== undefined ? rowInfo.original.UUID : '';
+
       const tableClickHandler = (e, handleOriginal) => {
         const { showCurrentDriver, hideCurrentDriver } = self.props;
 
@@ -54,8 +56,31 @@ class DriverBase extends Component {
         }
       };
 
+      const getRowBkgColour = () => {
+        let col = 'none';
+
+        if (itemUuid == matchesInfo.currentMatch.uuid_driver) {
+          col = 'violet';
+        } else if (itemUuid == driversInfo.currentDriver.UUID) {
+          col = 'green';
+        }
+
+        return col;
+      };
+
+      const getRowTextColour = () => {
+        const col =
+          itemUuid == driversInfo.currentDriver.UUID ? 'white' : 'black';
+
+        return col;
+      };
+
       const handlerWrapper = {
-        onClick: tableClickHandler
+        onClick: tableClickHandler,
+        style: {
+          background: getRowBkgColour(),
+          color: getRowTextColour()
+        }
       };
 
       return handlerWrapper;

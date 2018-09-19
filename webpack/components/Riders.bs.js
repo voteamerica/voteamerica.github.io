@@ -7,6 +7,7 @@ var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 var Table$VoteUSReason = require("./Table.bs.js");
+var TypeInfo$VoteUSReason = require("./TypeInfo.bs.js");
 
 var component = ReasonReact.statelessComponent("Riders");
 
@@ -155,25 +156,48 @@ function tableRider(itemDetails) {
         };
 }
 
-function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, showCurrentRider, hideCurrentRider, _) {
+function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, showCurrentRider, hideCurrentRider, _) {
   var ridersTdPropsHandler = function (_, rowInfoOption, _$1, _$2) {
+    var itemUuid = rowInfoOption !== undefined ? Js_primitive.valFromOption(rowInfoOption).original.UUID : "";
+    var tableClickHandler = function (_, handleOriginalOption) {
+      if (rowInfoOption !== undefined) {
+        var rowInfo = Js_primitive.valFromOption(rowInfoOption);
+        console.log(rowInfo);
+        var sr = function (fx,itemDetails){{ fx(itemDetails); return 0; }};
+        var itemDetails = rowInfo.original;
+        var currentRider = tableRider(itemDetails);
+        sr(showCurrentRider, Js_primitive.some(currentRider));
+      } else {
+        Curry._1(hideCurrentRider, /* () */0);
+      }
+      if (handleOriginalOption !== undefined) {
+        Curry._1(handleOriginalOption, /* () */0);
+      }
+      return /* () */0;
+    };
+    var getRowBkgColour = function () {
+      if (itemUuid === matchesInfo.currentMatch.uuid_rider) {
+        return TypeInfo$VoteUSReason.highlightMatchedRowBackgroundColour;
+      } else if (itemUuid === ridersInfo.currentRider.UUID) {
+        return TypeInfo$VoteUSReason.highlightSelectedRowBackgroundColour;
+      } else {
+        return TypeInfo$VoteUSReason.defaultRowBackgroundColour;
+      }
+    };
+    var getRowTextColour = function () {
+      if (itemUuid === ridersInfo.currentRider.UUID) {
+        return TypeInfo$VoteUSReason.highlightSelectedRowForegroundColour;
+      } else {
+        return TypeInfo$VoteUSReason.defaultRowForegroundColour;
+      }
+    };
+    var bkgStyle = {
+      background: getRowBkgColour(/* () */0),
+      color: getRowTextColour(/* () */0)
+    };
     return {
-            onClick: (function (_, handleOriginalOption) {
-                if (rowInfoOption !== undefined) {
-                  var rowInfo = Js_primitive.valFromOption(rowInfoOption);
-                  console.log(rowInfo);
-                  var sr = function (fx,itemDetails){{ fx(itemDetails); return 0; }};
-                  var itemDetails = rowInfo.original;
-                  var currentRider = tableRider(itemDetails);
-                  sr(showCurrentRider, Js_primitive.some(currentRider));
-                } else {
-                  Curry._1(hideCurrentRider, /* () */0);
-                }
-                if (handleOriginalOption !== undefined) {
-                  Curry._1(handleOriginalOption, /* () */0);
-                }
-                return /* () */0;
-              })
+            onClick: tableClickHandler,
+            style: bkgStyle
           };
   };
   var handleGetRiderListClick = function () {
@@ -249,7 +273,7 @@ function make(loginInfo, apiInfo, ridersInfo, getRidersList, hideRidersList, sho
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
+        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
       }));
 
 exports.component = component;

@@ -17,7 +17,7 @@ type matchRowInfo = {
   original: systemMatch 
 };
 
-type getTdPropsHandler = (string, option(matchRowInfo), string, string) => TypeInfo.getTdPropsClickHandler;
+type matchGetTdPropsHandler = (string, option(matchRowInfo), string, string) => TypeInfo.getTdPropsClickHandlerAndStyle;
 
 [@bs.deriving abstract]
 type matchesInfo = {
@@ -34,7 +34,7 @@ type matchTableJsProps = {
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
   data: array(systemMatch),
-  getTdProps: getTdPropsHandler
+  getTdProps: matchGetTdPropsHandler
 };
 
 let tableType = "matches";
@@ -69,20 +69,30 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesIn
 ~hideCurrentMatch,
 _children) => {
 
-  let matchesTdPropsHandler: getTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
+  let matchesTdPropsHandler: matchGetTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
 
+    let itemDriverUuid = switch rowInfoOption {
+      | None => ""
+      | Some(rowInfo) => rowInfo->originalGet->uuid_driverGet
+    };
+    
+    let itemRiderUuid = switch rowInfoOption {
+      | None => ""
+      | Some(rowInfo) => rowInfo->originalGet->uuid_riderGet
+    };
+      
     let tableClickHandler: TypeInfo.tableOnClickHandler = (_e, handleOriginalOption) => {
-      /* Js.log(ReactEvent.Form.target(e)); */
-      /* Js.log(handleOriginal); */
+    /* Js.log(ReactEvent.Form.target(e)); */
+    /* Js.log(handleOriginal); */
 
       switch (rowInfoOption) {
-      | None => {
-          /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
-          hideCurrentMatch();
+        | None => {
+            /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+            hideCurrentMatch();
 
-          ();
-      }
-      | Some(rowInfo) => {
+            ();
+        }
+        | Some(rowInfo) => {
           Js.log(rowInfo); 
 
           /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
@@ -103,9 +113,20 @@ _children) => {
       ();
     };
 
-    let clickHandlerObjectWrapper = TypeInfo.getTdPropsClickHandler(~onClick=tableClickHandler);
+    let getBkgColour = () => {
+      if (itemDriverUuid == matchesInfo->currentMatchGet->uuid_driverGet && itemRiderUuid == matchesInfo->currentMatchGet->uuid_riderGet) {
+        TypeInfo.highlightSelectedRowBackgroundColour
+      }
+      else {
+        TypeInfo.defaultRowBackgroundColour
+      }
+    };
+
+    let bkgStyle = ReactDOMRe.Style.make(~background=getBkgColour(), ());
+
+    let clickHandlerAndStyleObjectWrapper = TypeInfo.getTdPropsClickHandlerAndStyle(~onClick=tableClickHandler, ~style=bkgStyle);
     
-    clickHandlerObjectWrapper;
+    clickHandlerAndStyleObjectWrapper;
   };
 
   let handleGetMatchListClick = (_event) => {

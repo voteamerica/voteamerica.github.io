@@ -1,5 +1,14 @@
 [@bs.val] external encodeURI: string => string = "encodeURI";
 
+let defaultRowBackgroundColour = "none";
+let highlightSelectedRowBackgroundColour = "green";
+
+let defaultRowForegroundColour = "black";
+let highlightSelectedRowForegroundColour = "white";
+
+let highlightMatchedRowForegroundColour = "black";
+let highlightMatchedRowBackgroundColour = "violet";
+
 [@bs.deriving abstract]
 type driver = {
    [@bs.as "DriverFirstName"] driverFirstName: string,
@@ -10,6 +19,12 @@ type tableOnClickHandler = (ReactEvent.Form.t, option( unit => unit)) => unit;
 [@bs.deriving abstract]
 type getTdPropsClickHandler = {
   onClick: tableOnClickHandler
+};
+
+[@bs.deriving abstract]
+type getTdPropsClickHandlerAndStyle = {
+  onClick: tableOnClickHandler,
+  style: ReactDOMRe.style,
 };
 
 [@bs.deriving abstract]
