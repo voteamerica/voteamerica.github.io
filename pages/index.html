@@ -60,6 +60,25 @@ permalink: /
 
                     <p>Please enter your details in the form below, and our automatic matching algorithm will use this information to try to find you a driver.</p>
 
+                    <fieldset class="rider-select-org">
+                        <legend>Choose your organisation</legend>
+
+                        <p>Please choose this carefully as otherwise you may be asked to re-enter your details. Check with your organisation if you are not sure.</p>
+
+                        <div class="form-column">
+                            <div class="form-group">
+                                <input id="RidingOnBehalfOfOrganization" name="RidingOnBehalfOfOrganization" type="hidden" value="true">
+                                <label for="RidingOBOOrganizationName">Organisation name</label>
+                                <select id="RidingOBOOrganizationName" name="RidingOBOOrganizationName" required>
+                                    <option value="None">None</option>
+                                    <option value="NAACP">NAACP</option>
+                                    <option value="AAPD">AAPD</option>
+                                    <option value="PPC">PPC</option>
+                                    <option value="MDCC">MDCC</option>
+                                </select>                        
+                            </div>
+                    </fieldset>
+                    
                     <fieldset class="date-time-pickers">
                         <legend>Dates and Times Available</legend>
 
@@ -222,6 +241,25 @@ permalink: /
                 <div class="bannerbox__content">
                     <a class="close-form button--cancel" href="#intro" aria-label="Close form" role="button" aria-controls="offer-ride">&times;</a>
 
+                    <fieldset class="driver-select-org">
+                        <legend>Choose your organisation</legend>
+
+                        <p>Please choose this carefully as otherwise you may be asked to re-enter your details. Check with your organisation if you are not sure.</p>
+
+                        <div class="form-column">
+                            <div class="form-group">
+                                <input id="DrivingOnBehalfOfOrganization" name="DrivingOnBehalfOfOrganization" type="hidden" value="true">
+                                <label for="DrivingOBOOrganizationName">Organisation name</label>
+                                <select id="DrivingOBOOrganizationName" name="DrivingOBOOrganizationName" required>
+                                    <option value="None">None</option>
+                                    <option value="NAACP">NAACP</option>
+                                    <option value="AAPD">AAPD</option>
+                                    <option value="PPC">PPC</option>
+                                    <option value="MDCC">MDCC</option>
+                                </select>                        
+                            </div>
+                    </fieldset>
+                        
                     <fieldset class="date-time-pickers">
                         <legend>What can you offer?</legend>
 

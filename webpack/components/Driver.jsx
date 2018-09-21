@@ -10,12 +10,11 @@ import {
   showCurrentDriver,
   hideCurrentDriver
 } from '../actions/index.js';
-import { currentDriverShowHideTypes } from '../actions/types.js';
 
 const mapStateToProps = state => {
-  const { apiInfo, loginInfo, driversInfo } = state;
+  const { apiInfo, loginInfo, driversInfo, matchesInfo } = state;
 
-  return { apiInfo, loginInfo, driversInfo };
+  return { apiInfo, loginInfo, driversInfo, matchesInfo };
 };
 
 const mapDispatchToProps = {
@@ -28,18 +27,25 @@ const mapDispatchToProps = {
 class DriverBase extends Component {
   getTdPropsHandler(self) {
     return (state, rowInfo, column, instance) => {
+      const { driversInfo, matchesInfo } = this.props;
+      const itemUuid = rowInfo !== undefined ? rowInfo.original.UUID : '';
+
       const tableClickHandler = (e, handleOriginal) => {
         const { showCurrentDriver, hideCurrentDriver } = self.props;
 
         console.log('driver click');
 
         if (rowInfo !== undefined) {
+          const UUID = rowInfo.original.UUID;
           const firstName = rowInfo.original.DriverFirstName;
           const lastName = rowInfo.original.DriverLastName;
+          const phone = rowInfo.original.DriverPhone;
 
           showCurrentDriver({
+            UUID,
             DriverFirstName: firstName,
-            DriverLastName: lastName
+            DriverLastName: lastName,
+            DriverPhone: phone
           });
         } else {
           hideCurrentDriver({});
@@ -50,8 +56,31 @@ class DriverBase extends Component {
         }
       };
 
+      const getRowBkgColour = () => {
+        let col = 'none';
+
+        if (itemUuid == matchesInfo.currentMatch.uuid_driver) {
+          col = 'violet';
+        } else if (itemUuid == driversInfo.currentDriver.UUID) {
+          col = 'green';
+        }
+
+        return col;
+      };
+
+      const getRowTextColour = () => {
+        const col =
+          itemUuid == driversInfo.currentDriver.UUID ? 'white' : 'black';
+
+        return col;
+      };
+
       const handlerWrapper = {
-        onClick: tableClickHandler
+        onClick: tableClickHandler,
+        style: {
+          background: getRowBkgColour(),
+          color: getRowTextColour()
+        }
       };
 
       return handlerWrapper;
@@ -111,6 +140,32 @@ class DriverBase extends Component {
       marginBottom: 10
     };
 
+    const currentDriverInfo = showCurrentDriverDetails => {
+      if (!showCurrentDriverDetails) {
+        return <div>No driver selected</div>;
+      }
+
+      const currentDriver = driversInfo.currentDriver;
+      const uriPhone = encodeURI(currentDriver.DriverPhone);
+      const selfServiceUrl =
+        '../self-service/?type=driver&uuid=' +
+        currentDriver.UUID +
+        '&code=0&info&phone=' +
+        uriPhone;
+
+      return (
+        <div>
+          <h3>Current Driver Info</h3>
+          <div>
+            {currentDriver.DriverFirstName + ' ' + currentDriver.DriverLastName}
+          </div>
+          <div>
+            <a href={selfServiceUrl}>Self Service Page</a>
+          </div>
+        </div>
+      );
+    };
+
     return (
       <div>
         {loginInfo.loggedIn === true ? (
@@ -144,18 +199,7 @@ class DriverBase extends Component {
                           getTdProps={this.getTdPropsHandler(this)}
                         />
                       </div>
-                      {driversInfo.showCurrentDriverDetails ? (
-                        <div>
-                          <h3>Current Driver Info</h3>
-                          <div>
-                            {driversInfo.currentDriver.DriverFirstName +
-                              ' ' +
-                              driversInfo.currentDriver.DriverLastName}
-                          </div>
-                        </div>
-                      ) : (
-                        <div>No driver selected</div>
-                      )}
+                      {currentDriverInfo(driversInfo.showCurrentDriverDetails)}
                     </div>
                   ) : (
                     false

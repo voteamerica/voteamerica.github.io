@@ -7,6 +7,7 @@ var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 var Table$VoteUSReason = require("./Table.bs.js");
+var TypeInfo$VoteUSReason = require("./TypeInfo.bs.js");
 
 var component = ReasonReact.statelessComponent("Matches");
 
@@ -62,23 +63,37 @@ function tableMatch(itemDetails) {
 
 function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, showCurrentMatch, hideCurrentMatch, _) {
   var matchesTdPropsHandler = function (_, rowInfoOption, _$1, _$2) {
+    var itemDriverUuid = rowInfoOption !== undefined ? Js_primitive.valFromOption(rowInfoOption).original.uuid_driver : "";
+    var itemRiderUuid = rowInfoOption !== undefined ? Js_primitive.valFromOption(rowInfoOption).original.uuid_rider : "";
+    var tableClickHandler = function (_, handleOriginalOption) {
+      if (rowInfoOption !== undefined) {
+        var rowInfo = Js_primitive.valFromOption(rowInfoOption);
+        console.log(rowInfo);
+        var sr = function (fx,itemDetails){{ fx(itemDetails); return 0; }};
+        var itemDetails = rowInfo.original;
+        var currentMatch = tableMatch(itemDetails);
+        sr(showCurrentMatch, Js_primitive.some(currentMatch));
+      } else {
+        Curry._1(hideCurrentMatch, /* () */0);
+      }
+      if (handleOriginalOption !== undefined) {
+        Curry._1(handleOriginalOption, /* () */0);
+      }
+      return /* () */0;
+    };
+    var getBkgColour = function () {
+      if (itemDriverUuid === matchesInfo.currentMatch.uuid_driver && itemRiderUuid === matchesInfo.currentMatch.uuid_rider) {
+        return TypeInfo$VoteUSReason.highlightSelectedRowBackgroundColour;
+      } else {
+        return TypeInfo$VoteUSReason.defaultRowBackgroundColour;
+      }
+    };
+    var bkgStyle = {
+      background: getBkgColour(/* () */0)
+    };
     return {
-            onClick: (function (_, handleOriginalOption) {
-                if (rowInfoOption !== undefined) {
-                  var rowInfo = Js_primitive.valFromOption(rowInfoOption);
-                  console.log(rowInfo);
-                  var sr = function (fx,itemDetails){{ fx(itemDetails); return 0; }};
-                  var itemDetails = rowInfo.original;
-                  var currentMatch = tableMatch(itemDetails);
-                  sr(showCurrentMatch, Js_primitive.some(currentMatch));
-                } else {
-                  Curry._1(hideCurrentMatch, /* () */0);
-                }
-                if (handleOriginalOption !== undefined) {
-                  Curry._1(handleOriginalOption, /* () */0);
-                }
-                return /* () */0;
-              })
+            onClick: tableClickHandler,
+            style: bkgStyle
           };
   };
   var handleGetMatchListClick = function () {

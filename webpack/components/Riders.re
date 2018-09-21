@@ -36,14 +36,14 @@ type riderRowInfo = {
   original: rider 
 };
 
-type getTdPropsHandler = (string, option(riderRowInfo), string, string) => TypeInfo.getTdPropsClickHandler;
+type riderGetTdPropsHandler = (string, option(riderRowInfo), string, string) => TypeInfo.getTdPropsClickHandlerAndStyle;
 
 [@bs.deriving abstract]
 type ridersInfo = {
   showRiderList: bool,
   riders: array(rider),
   showCurrentRiderDetails: bool,
-  currentRider: (rider)
+  currentRider: (rider),  
 };
 
 [@bs.deriving abstract]
@@ -53,7 +53,7 @@ type riderTableJsProps = {
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
   data: array(rider),
-  getTdProps: getTdPropsHandler
+  getTdProps: riderGetTdPropsHandler
 };
 
 let tableType = "riders";
@@ -120,14 +120,20 @@ let tableRider = itemDetails:rider =>
         ~destinationAddress=itemDetails->destinationAddressGet,
         );
 
-let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~ridersInfo:ridersInfo, 
+let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, 
+~ridersInfo:ridersInfo,
+~matchesInfo:Matches.matchesInfo, 
 ~getRidersList, 
 ~hideRidersList,
 ~showCurrentRider,
 ~hideCurrentRider,
 _children) => {
 
-  let ridersTdPropsHandler: getTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
+  let ridersTdPropsHandler: riderGetTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
+    let itemUuid = switch (rowInfoOption) {
+    | None => ""
+    | Some(rowInfo) => rowInfo->originalGet->uuidGet
+    };
 
     let tableClickHandler: TypeInfo.tableOnClickHandler = (_e, handleOriginalOption) => {
       /* Js.log(ReactEvent.Form.target(e)); */
@@ -147,6 +153,7 @@ _children) => {
           let sr: (rider => unit, option(rider)) => unit = [%raw (fx, itemDetails) => "{ fx(itemDetails); return 0; }"];
 
           let itemDetails = rowInfo->originalGet;
+
           let currentRider = tableRider(itemDetails);
 
           sr(showCurrentRider, Some(currentRider));
@@ -161,9 +168,33 @@ _children) => {
       ();
     };
 
-    let clickHandlerObjectWrapper = TypeInfo.getTdPropsClickHandler(~onClick=tableClickHandler);
+    let getRowBkgColour = () => {
+      if (itemUuid == matchesInfo->Matches.currentMatchGet->Matches.uuid_riderGet) {
+        TypeInfo.highlightMatchedRowBackgroundColour
+      }
+      else 
+      if ( itemUuid == ridersInfo->currentRiderGet->uuidGet) { 
+        TypeInfo.highlightSelectedRowBackgroundColour
+      }
+      else { 
+        TypeInfo.defaultRowBackgroundColour
+      }
+    };
+
+    let getRowTextColour = () => {
+        if ( itemUuid == ridersInfo->currentRiderGet->uuidGet) { 
+          TypeInfo.highlightSelectedRowForegroundColour
+        }
+        else { 
+          TypeInfo.defaultRowForegroundColour
+        }
+    };
+
+    let bkgStyle = ReactDOMRe.Style.make(~background=getRowBkgColour(), ~color=getRowTextColour(), ());
+
+    let clickHandlerAndStyleObjectWrapper = TypeInfo.getTdPropsClickHandlerAndStyle(~onClick=tableClickHandler, ~style=bkgStyle);
     
-    clickHandlerObjectWrapper;
+    clickHandlerAndStyleObjectWrapper;
   };
 
   let handleGetRiderListClick = (_event) => {
@@ -193,11 +224,18 @@ _children) => {
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
     let currentRiderInfo = currentRider => {
+      let uriPhone = TypeInfo.encodeURI(currentRider->phoneGet);
+
+      let selfServiceUrl = "../self-service/?type=rider&uuid=" ++ currentRider->uuidGet ++ "&code=0&info&phone=" ++ uriPhone;
+
       <div>
         <h3>{ReasonReact.string("Current rider info:")}</h3>
         <div>{ReasonReact.string(currentRider->firstNameGet ++ " " ++ currentRider->lastNameGet) }
         </div>
         <div>{ReasonReact.string(currentRider->emailGet)}
+        </div>
+        <div>
+          <a href={selfServiceUrl}>{ReasonReact.string( "Self Service Page")}</a>
         </div>
       </div>
     };
@@ -258,6 +296,7 @@ type jsProps = {
   loginInfo: TypeInfo.loginInfo,
   apiInfo: TypeInfo.apiInfo,
   ridersInfo: ridersInfo,  
+  matchesInfo: Matches.matchesInfo,
   getRidersList: (string, string) => unit,
   hideRidersList: unit => unit,
   showCurrentRider: rider => unit,
@@ -270,6 +309,7 @@ let default =
       ~loginInfo=jsProps->loginInfoGet,
       ~apiInfo=jsProps->apiInfoGet,
       ~ridersInfo=jsProps->ridersInfoGet,
+      ~matchesInfo=jsProps->matchesInfoGet,
       ~getRidersList=jsProps->getRidersListGet,
       ~hideRidersList=jsProps->hideRidersListGet,
       ~showCurrentRider=jsProps->showCurrentRiderGet,
