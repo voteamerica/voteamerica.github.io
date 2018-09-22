@@ -35,6 +35,10 @@ body {
     max-width: 850px;
 }
 
+.operator-page-single-column {
+    max-width: 80%;
+}
+
 .offset-top {
     margin-top: -120px;
 }
