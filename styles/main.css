@@ -872,8 +872,9 @@ div.notice {
     font-size: 18px;
     padding-top: 10px;
     padding-bottom: 40px;
-    padding-left: 180px;
-    padding-right: 210px;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 800px;
 }
 
 p.notice {
