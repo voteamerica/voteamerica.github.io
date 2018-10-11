@@ -170,14 +170,17 @@ _children) => {
     let tableMatchesJSX = 
       if (matchesInfo->showMatchListGet) {
         <div>
-          <button
-            className="button button--large"
-            id="hideGetMatchList" 
-            onClick={handleHideMatchListClick}
-          >{ReasonReact.string("Hide List")}
-          </button>
+            <div>
+              <button
+                className="button button--large"
+                id="hideMatchListButton" 
+                onClick={handleHideMatchListClick}
+              >{ReasonReact.string("Hide List")}
+              </button>
+              <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshMatchesListButton" onClick={handleGetMatchListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
+            </div>
           <div style={tableDivStyle}> 
-            <Table propsCtr={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
+            <Table props={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
             data=tableMatches
             getTdProps={matchesTdPropsHandler}
             />

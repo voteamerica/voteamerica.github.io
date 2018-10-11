@@ -8,6 +8,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 var Table$VoteUSReason = require("./Table.bs.js");
 var TypeInfo$VoteUSReason = require("./TypeInfo.bs.js");
+var LeftPaddedButton$VoteUSReason = require("./ui/LeftPaddedButton.bs.js");
 
 var component = ReasonReact.statelessComponent("Riders");
 
@@ -237,11 +238,17 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
               var tableRidersJSX;
               if (ridersInfo.showRiderList) {
                 var match = ridersInfo.showCurrentRiderDetails;
-                tableRidersJSX = React.createElement("div", undefined, React.createElement("button", {
-                          className: "button button--large",
-                          id: "hideGetRidersList",
-                          onClick: handleHideRiderListClick
-                        }, "Hide List"), React.createElement("div", {
+                tableRidersJSX = React.createElement("div", undefined, React.createElement("div", undefined, React.createElement("button", {
+                              className: "button button--large",
+                              id: "hideRidersListButton",
+                              onClick: handleHideRiderListClick
+                            }, "Hide List"), ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make((function (prim, prim$1, prim$2) {
+                                    return {
+                                            className: prim,
+                                            id: prim$1,
+                                            onClick: prim$2
+                                          };
+                                  }), "button button--large", "refreshRidersListButton", handleGetRiderListClick, /* array */["Refresh List"]))), React.createElement("div", {
                           style: tableDivStyle
                         }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5) {
                                     return {

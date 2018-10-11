@@ -3,10 +3,10 @@
 
 var Curry = require("bs-platform/lib/js/curry.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var ReactTable = require("react-table");
+var LeftPaddedButtonJsx = require("./LeftPaddedButton.jsx");
 
-function make(props, className, type_, columns, data, getTdProps, children) {
-  return ReasonReact.wrapJsForReason(ReactTable.default, Curry._6(props, className, type_, columns, 5, data, getTdProps), children);
+function make(props, className, id, onClick, children) {
+  return ReasonReact.wrapJsForReason(LeftPaddedButtonJsx.default, Curry._3(props, className, id, onClick), children);
 }
 
 exports.make = make;

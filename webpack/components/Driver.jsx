@@ -4,6 +4,8 @@ import ReactTable from 'react-table';
 
 import 'react-table/react-table.css';
 
+import LeftPaddedButton from './ui/LeftPaddedButton.jsx';
+
 import {
   getDriversList,
   hideDriversList,
@@ -182,13 +184,22 @@ class DriverBase extends Component {
                 </button>
               ) : (
                 <div>
-                  <button
-                    className="button button--large"
-                    id="hideGetDriversList"
-                    onClick={this.handleHideDriversListClick(this)}
-                  >
-                    Hide List
-                  </button>
+                  <div>
+                    <button
+                      className="button button--large"
+                      id="hideDriversListButton"
+                      onClick={this.handleHideDriversListClick(this)}
+                    >
+                      Hide List
+                    </button>
+                    <LeftPaddedButton
+                      className="button button--large"
+                      id="refreshDriversList"
+                      onClick={this.handleGetDriversListClick(this)}
+                    >
+                      Refresh List
+                    </LeftPaddedButton>
+                  </div>
                   {driversInfo.drivers ? (
                     <div>
                       <div style={driverTableDivStyle}>

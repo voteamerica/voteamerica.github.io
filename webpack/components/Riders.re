@@ -243,14 +243,17 @@ _children) => {
     let tableRidersJSX = 
       if (ridersInfo->showRiderListGet) {
         <div>
-          <button
-            className="button button--large"
-            id="hideGetRidersList" 
-            onClick={handleHideRiderListClick}
-          >{ReasonReact.string("Hide List")}
-          </button>
+          <div> 
+            <button
+              className="button button--large"
+              id="hideRidersListButton" 
+              onClick={handleHideRiderListClick}
+            >{ReasonReact.string("Hide List")}
+            </button>
+            <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
+          </div> 
           <div style={tableDivStyle}> 
-            <Table propsCtr={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
+            <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
             data=tableRiders
             getTdProps={ridersTdPropsHandler}
             />
