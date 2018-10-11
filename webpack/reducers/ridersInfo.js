@@ -1,4 +1,6 @@
 import {
+  DEFAULT_LIST_PAGE_INDEX,
+  DEFAULT_LIST_PAGE_SIZE,
   getRiderListTypes,
   ridersGetHideListTypes,
   currentRiderShowHideTypes
@@ -8,6 +10,8 @@ const ridersInfo = (
   state = {
     showRiderList: false,
     riders: [],
+    listPageIndex: DEFAULT_LIST_PAGE_INDEX,
+    listPageSize: DEFAULT_LIST_PAGE_SIZE,
     showCurrentRiderDetails: false,
     currentRider: {}
   },

@@ -1,4 +1,6 @@
 import {
+  DEFAULT_LIST_PAGE_INDEX,
+  DEFAULT_LIST_PAGE_SIZE,
   getMatchListTypes,
   matchesGetHideListTypes,
   currentMatchShowHideTypes
@@ -8,6 +10,8 @@ const matchesInfo = (
   state = {
     showMatchList: false,
     matches: [],
+    listPageIndex: DEFAULT_LIST_PAGE_INDEX,
+    listPageSize: DEFAULT_LIST_PAGE_SIZE,
     showCurrentMatchDetails: false,
     currentMatch: {}
   },
