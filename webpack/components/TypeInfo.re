@@ -14,6 +14,9 @@ type driver = {
    [@bs.as "DriverFirstName"] driverFirstName: string,
 };
 
+type tableOnPageChangeHandler = int => unit;
+type tableOnPageChangeSizeHandler = (int, int) => unit;
+
 type tableOnClickHandler = (ReactEvent.Form.t, option( unit => unit)) => unit;
 
 [@bs.deriving abstract]

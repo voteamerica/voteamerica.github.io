@@ -34,6 +34,8 @@ type matchTableJsProps = {
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
   data: array(systemMatch),
+  onPageChange: TypeInfo.tableOnPageChangeHandler,
+  onPageSizeChange: TypeInfo.tableOnPageChangeSizeHandler,
   getTdProps: matchGetTdPropsHandler
 };
 
@@ -68,6 +70,14 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesIn
 ~showCurrentMatch,
 ~hideCurrentMatch,
 _children) => {
+
+  let matchesTableOnPageChangeHandler: TypeInfo.tableOnPageChangeHandler = (pageIndex) => {
+    Js.log(pageIndex);
+  };
+
+  let matchesTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, x) => {
+    Js.log(size);
+  };
 
   let matchesTdPropsHandler: matchGetTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
 
@@ -182,6 +192,8 @@ _children) => {
           <div style={tableDivStyle}> 
             <Table props={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
             data=tableMatches
+            onPageChange={matchesTableOnPageChangeHandler}
+            onPageSizeChange={matchesTableOnPageChangeSizeHandler}
             getTdProps={matchesTdPropsHandler}
             />
           </div>

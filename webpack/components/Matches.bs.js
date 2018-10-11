@@ -63,6 +63,14 @@ function tableMatch(itemDetails) {
 }
 
 function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, showCurrentMatch, hideCurrentMatch, _) {
+  var matchesTableOnPageChangeHandler = function (pageIndex) {
+    console.log(pageIndex);
+    return /* () */0;
+  };
+  var matchesTableOnPageChangeSizeHandler = function (size, _) {
+    console.log(size);
+    return /* () */0;
+  };
   var matchesTdPropsHandler = function (_, rowInfoOption, _$1, _$2) {
     var itemDriverUuid = rowInfoOption !== undefined ? Js_primitive.valFromOption(rowInfoOption).original.uuid_driver : "";
     var itemRiderUuid = rowInfoOption !== undefined ? Js_primitive.valFromOption(rowInfoOption).original.uuid_rider : "";

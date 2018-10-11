@@ -27,6 +27,14 @@ const mapDispatchToProps = {
 };
 
 class DriverBase extends Component {
+  driversTableOnPageChangeHandler(pageIndex) {
+    console.log(pageIndex);
+  }
+
+  driversTableOnPageChangeSizeHandler(size, x) {
+    console.log(size);
+  }
+
   getTdPropsHandler(self) {
     return (state, rowInfo, column, instance) => {
       const { driversInfo, matchesInfo } = this.props;
@@ -207,6 +215,10 @@ class DriverBase extends Component {
                           defaultPageSize={5}
                           data={driversInfo.drivers}
                           columns={driverColumns}
+                          onPageChange={this.driversTableOnPageChangeHandler}
+                          onPageSizeChange={
+                            this.driversTableOnPageChangeSizeHandler
+                          }
                           getTdProps={this.getTdPropsHandler(this)}
                         />
                       </div>

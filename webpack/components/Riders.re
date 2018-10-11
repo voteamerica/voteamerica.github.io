@@ -53,6 +53,8 @@ type riderTableJsProps = {
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
   data: array(rider),
+  onPageChange: TypeInfo.tableOnPageChangeHandler,
+  onPageSizeChange: TypeInfo.tableOnPageChangeSizeHandler,
   getTdProps: riderGetTdPropsHandler
 };
 
@@ -128,6 +130,14 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo,
 ~showCurrentRider,
 ~hideCurrentRider,
 _children) => {
+
+  let ridersTableOnPageChangeHandler: TypeInfo.tableOnPageChangeHandler = (pageIndex) => {
+    Js.log(pageIndex);
+  };
+
+  let ridersTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, x) => {
+    Js.log(size);
+  };
 
   let ridersTdPropsHandler: riderGetTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
     let itemUuid = switch (rowInfoOption) {
@@ -255,6 +265,8 @@ _children) => {
           <div style={tableDivStyle}> 
             <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
             data=tableRiders
+            onPageChange={ridersTableOnPageChangeHandler}
+            onPageSizeChange={ridersTableOnPageChangeSizeHandler}
             getTdProps={ridersTdPropsHandler}
             />
           </div>
