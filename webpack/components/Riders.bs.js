@@ -39,6 +39,14 @@ var riderTableColumns = /* array */[
     accessor: "RiderCollectionZIP"
   },
   {
+    Header: "City",
+    accessor: "city"
+  },
+  {
+    Header: "State",
+    accessor: "full_state"
+  },
+  {
     Header: "Dropoff ZIP",
     accessor: "RiderDropOffZIP"
   },
@@ -132,6 +140,8 @@ function tableRider(itemDetails) {
           RiderLastName: itemDetails.RiderLastName,
           RiderPhone: itemDetails.RiderPhone,
           RiderCollectionZIP: itemDetails.RiderCollectionZIP,
+          city: itemDetails.city,
+          full_state: itemDetails.full_state,
           RiderDropOffZIP: itemDetails.RiderDropOffZIP,
           AvailableRideTimesLocal: itemDetails.AvailableRideTimesLocal,
           TotalPartySize: itemDetails.TotalPartySize,

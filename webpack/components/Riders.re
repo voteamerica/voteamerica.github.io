@@ -8,6 +8,8 @@ type rider = {
    [@bs.as "RiderLastName"] lastName: string,
    [@bs.as "RiderPhone"] phone: string,
    [@bs.as "RiderCollectionZIP"] collectionZip: string,
+   city: string,
+   full_state: string,
    [@bs.as "RiderDropOffZIP"] dropOffZIP: string,
    [@bs.as "AvailableRideTimesLocal"] rideTimesLocal: string,
    [@bs.as "TotalPartySize"] partySize: string,
@@ -66,6 +68,8 @@ let riderTableColumns =
   TypeInfo.theader(~header="Last Name", ~accessor="RiderLastName"),
   TypeInfo.theader(~header="Phone", ~accessor="RiderPhone"),
   TypeInfo.theader(~header="Collection ZIP", ~accessor="RiderCollectionZIP"),
+  TypeInfo.theader(~header="City", ~accessor="city"),
+  TypeInfo.theader(~header="State", ~accessor="full_state"),
   TypeInfo.theader(~header="Dropoff ZIP", ~accessor="RiderDropOffZIP"),
   TypeInfo.theader(~header="Created", ~accessor="created_ts"),
   TypeInfo.theader(~header="Updated", ~accessor="last_updated_ts"),
@@ -97,6 +101,8 @@ let tableRider = itemDetails:rider =>
         ~lastName=itemDetails->lastNameGet,
         ~phone=itemDetails->phoneGet,
         ~collectionZip=itemDetails->collectionZipGet,
+        ~city=itemDetails->cityGet,
+        ~full_state=itemDetails->full_stateGet,
         ~dropOffZIP=itemDetails->dropOffZIPGet,
         ~organization=itemDetails->organizationGet,
         ~status=itemDetails->statusGet,
@@ -128,6 +134,21 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo,
 ~showCurrentRider,
 ~hideCurrentRider,
 _children) => {
+
+  let ridersTableOnPageChangeHandler: TypeInfo.tableOnPageChangeHandler = (pageIndex) => {
+    Js.log(pageIndex);
+  };
+
+  let ridersTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, _index) => {
+    Js.log(size);
+
+    let pageIndex = ridersInfo->listPageIndexGet;
+
+    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+    let f: ((int, int) => unit, int, int) => unit = [%raw (fx, index, size) => "{ fx(index, size); return 0; }"];
+
+    f(setInfoRidersList, pageIndex, size);
+  };
 
   let ridersTdPropsHandler: riderGetTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
     let itemUuid = switch (rowInfoOption) {
