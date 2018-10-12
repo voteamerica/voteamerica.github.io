@@ -42,6 +42,8 @@ type riderGetTdPropsHandler = (string, option(riderRowInfo), string, string) => 
 type ridersInfo = {
   showRiderList: bool,
   riders: array(rider),
+  listPageIndex: int,
+  listPageSize: int,
   showCurrentRiderDetails: bool,
   currentRider: (rider),  
 };
@@ -52,6 +54,7 @@ type riderTableJsProps = {
   [@bs.as "type"] type_: string,
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
+  pageSize: int,
   data: array(rider),
   onPageChange: TypeInfo.tableOnPageChangeHandler,
   onPageSizeChange: TypeInfo.tableOnPageChangeSizeHandler,
@@ -127,6 +130,7 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo,
 ~matchesInfo:Matches.matchesInfo, 
 ~getRidersList, 
 ~hideRidersList,
+~setInfoRidersList,
 ~showCurrentRider,
 ~hideCurrentRider,
 _children) => {
@@ -137,6 +141,13 @@ _children) => {
 
   let ridersTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, x) => {
     Js.log(size);
+
+    let pageIndex = ridersInfo->listPageIndexGet;
+
+    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+    let f: ((int, int) => unit, int, int) => unit = [%raw (fx, index, size) => "{ fx(index, size); return 0; }"];
+
+    f(setInfoRidersList, pageIndex, size);
   };
 
   let ridersTdPropsHandler: riderGetTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
@@ -264,6 +275,8 @@ _children) => {
           </div> 
           <div style={tableDivStyle}> 
             <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
+            defaultPageSize={5} /* get this from types default */
+            pageSize={ridersInfo->listPageSizeGet}
             data=tableRiders
             onPageChange={ridersTableOnPageChangeHandler}
             onPageSizeChange={ridersTableOnPageChangeSizeHandler}
@@ -314,6 +327,7 @@ type jsProps = {
   matchesInfo: Matches.matchesInfo,
   getRidersList: (string, string) => unit,
   hideRidersList: unit => unit,
+  setInfoRidersList: (int, int) => unit,
   showCurrentRider: rider => unit,
   hideCurrentRider: unit => unit,
 };
@@ -327,6 +341,7 @@ let default =
       ~matchesInfo=jsProps->matchesInfoGet,
       ~getRidersList=jsProps->getRidersListGet,
       ~hideRidersList=jsProps->hideRidersListGet,
+      ~setInfoRidersList=jsProps->setInfoRidersListGet,
       ~showCurrentRider=jsProps->showCurrentRiderGet,
       ~hideCurrentRider=jsProps->hideCurrentRiderGet,
       [||],

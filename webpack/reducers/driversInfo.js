@@ -3,6 +3,7 @@ import {
   DEFAULT_LIST_PAGE_SIZE,
   getDriverListTypes,
   driversGetHideListTypes,
+  driversListSetInfoType,
   currentDriverShowHideTypes
 } from '../actions/types';
 
@@ -32,6 +33,13 @@ const driversInfo = (
         ...state,
         showCurrentDriverDetails: true,
         currentDriver: action.payload.itemDetails
+      };
+
+    case driversListSetInfoType:
+      return {
+        ...state,
+        listPageIndex: action.payload.listPageIndex,
+        listPageSize: action.payload.listPageSize
       };
 
     case currentDriverShowHideTypes.hide:

@@ -5,6 +5,7 @@ import RidersBase from './Riders.bs.js';
 import {
   getRidersList,
   hideRidersList,
+  setInfoRidersList,
   showCurrentRider,
   hideCurrentRider
 } from '../actions/index.js';
@@ -18,6 +19,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getRidersList,
   hideRidersList,
+  setInfoRidersList,
   showCurrentRider,
   hideCurrentRider
 };

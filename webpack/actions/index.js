@@ -6,10 +6,13 @@ import {
   // GET_DRIVERS_LIST,
   // HIDE_DRIVERS_LIST,
   driversGetHideListTypes,
+  driversListSetInfoType,
   currentDriverShowHideTypes,
   ridersGetHideListTypes,
+  ridersListSetInfoType,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
+  matchesListSetInfoType,
   currentMatchShowHideTypes
 } from './types';
 
@@ -61,6 +64,18 @@ const hideRidersList = hideItemsList(ridersGetHideListTypes.hide);
 const getMatchesList = getItemsList(matchesGetHideListTypes.get);
 const hideMatchesList = hideItemsList(matchesGetHideListTypes.hide);
 
+const setInfoItemsList = itemsListSetInfoType => (
+  listPageIndex,
+  listPageSize
+) => ({
+  type: itemsListSetInfoType,
+  payload: { listPageIndex, listPageSize }
+});
+
+const setInfoDriversList = setInfoItemsList(driversListSetInfoType);
+const setInfoRidersList = setInfoItemsList(ridersListSetInfoType);
+const setInfoMatchesList = setInfoItemsList(matchesListSetInfoType);
+
 const showCurrentItem = currentItemShowType => itemDetails => ({
   type: currentItemShowType,
   payload: { itemDetails }
@@ -87,14 +102,17 @@ export {
   logout,
   getDriversList,
   hideDriversList,
+  setInfoDriversList,
   showCurrentDriver,
   hideCurrentDriver,
   getRidersList,
   hideRidersList,
+  setInfoRidersList,
   showCurrentRider,
   hideCurrentRider,
   getMatchesList,
   hideMatchesList,
+  setInfoMatchesList,
   showCurrentMatch,
   hideCurrentMatch
 };

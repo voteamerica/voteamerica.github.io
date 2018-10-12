@@ -62,14 +62,16 @@ function tableMatch(itemDetails) {
         };
 }
 
-function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, showCurrentMatch, hideCurrentMatch, _) {
+function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, setInfoMatchesList, showCurrentMatch, hideCurrentMatch, _) {
   var matchesTableOnPageChangeHandler = function (pageIndex) {
     console.log(pageIndex);
     return /* () */0;
   };
   var matchesTableOnPageChangeSizeHandler = function (size, _) {
     console.log(size);
-    return /* () */0;
+    var pageIndex = matchesInfo.listPageIndex;
+    var f = function (fx,index,size){{ fx(index, size); return 0; }};
+    return f(setInfoMatchesList, pageIndex, size);
   };
   var matchesTdPropsHandler = function (_, rowInfoOption, _$1, _$2) {
     var itemDriverUuid = rowInfoOption !== undefined ? Js_primitive.valFromOption(rowInfoOption).original.uuid_driver : "";
@@ -150,16 +152,19 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
                                           };
                                   }), "button button--large", "refreshMatchesListButton", handleGetMatchListClick, /* array */["Refresh List"]))), React.createElement("div", {
                           style: tableDivStyle
-                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5) {
+                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
                                     return {
                                             className: prim,
                                             type: prim$1,
                                             columns: prim$2,
                                             defaultPageSize: prim$3,
-                                            data: prim$4,
-                                            getTdProps: prim$5
+                                            pageSize: prim$4,
+                                            data: prim$5,
+                                            onPageChange: prim$6,
+                                            onPageSizeChange: prim$7,
+                                            getTdProps: prim$8
                                           };
-                                  }), "basicMatchTable", tableType, matchTableColumns, tableMatches, matchesTdPropsHandler, /* array */[]))), match ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
+                                  }), "basicMatchTable", tableType, 5, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler, /* array */[]))), match ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
               } else {
                 tableMatchesJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",
@@ -180,7 +185,7 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, /* array */[]);
+        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.setInfoMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, /* array */[]);
       }));
 
 exports.component = component;

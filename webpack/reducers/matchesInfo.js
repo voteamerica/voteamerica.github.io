@@ -3,6 +3,7 @@ import {
   DEFAULT_LIST_PAGE_SIZE,
   getMatchListTypes,
   matchesGetHideListTypes,
+  matchesListSetInfoType,
   currentMatchShowHideTypes
 } from '../actions/types';
 
@@ -32,6 +33,13 @@ const matchesInfo = (
         ...state,
         showCurrentMatchDetails: true,
         currentMatch: action.payload.itemDetails
+      };
+
+    case matchesListSetInfoType:
+      return {
+        ...state,
+        listPageIndex: action.payload.listPageIndex,
+        listPageSize: action.payload.listPageSize
       };
 
     case currentMatchShowHideTypes.hide:

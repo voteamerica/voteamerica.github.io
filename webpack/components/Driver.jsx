@@ -6,9 +6,12 @@ import 'react-table/react-table.css';
 
 import LeftPaddedButton from './ui/LeftPaddedButton.jsx';
 
+import { DEFAULT_LIST_PAGE_SIZE } from '../actions/types.js';
+
 import {
   getDriversList,
   hideDriversList,
+  setInfoDriversList,
   showCurrentDriver,
   hideCurrentDriver
 } from '../actions/index.js';
@@ -22,6 +25,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getDriversList,
   hideDriversList,
+  setInfoDriversList,
   showCurrentDriver,
   hideCurrentDriver
 };
@@ -31,8 +35,16 @@ class DriverBase extends Component {
     console.log(pageIndex);
   }
 
-  driversTableOnPageChangeSizeHandler(size, x) {
-    console.log(size);
+  driversTableOnPageChangeSizeHandler(self) {
+    return (size, x) => {
+      console.log(size);
+
+      const { driversInfo, setInfoDriversList } = self.props;
+
+      const { listPageIndex } = driversInfo;
+
+      return setInfoDriversList(listPageIndex, size);
+    };
   }
 
   getTdPropsHandler(self) {
@@ -212,13 +224,14 @@ class DriverBase extends Component {
                     <div>
                       <div style={driverTableDivStyle}>
                         <ReactTable
-                          defaultPageSize={5}
+                          defaultPageSize={DEFAULT_LIST_PAGE_SIZE}
+                          pageSize={driversInfo.listPageSize}
                           data={driversInfo.drivers}
                           columns={driverColumns}
                           onPageChange={this.driversTableOnPageChangeHandler}
-                          onPageSizeChange={
-                            this.driversTableOnPageChangeSizeHandler
-                          }
+                          onPageSizeChange={this.driversTableOnPageChangeSizeHandler(
+                            this
+                          )}
                           getTdProps={this.getTdPropsHandler(this)}
                         />
                       </div>
