@@ -1,6 +1,6 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 
-import { GET_DRIVERS_LIST, getDriverListTypes } from './types';
+import { driversGetHideListTypes, getDriverListTypes } from './types';
 import { createAPIurl, fetchInfo } from './sagaHelpers.js';
 
 const urlPath = '/drivers/list';
@@ -36,7 +36,7 @@ function* fetchDriversList(action) {
 }
 
 function* driversListSaga() {
-  yield takeLatest(GET_DRIVERS_LIST, fetchDriversList);
+  yield takeLatest(driversGetHideListTypes.get, fetchDriversList);
 }
 
 export default driversListSaga;

@@ -25,6 +25,8 @@ type matchGetTdPropsHandler = (string, option(matchRowInfo), string, string) => 
 type matchesInfo = {
   showMatchList: bool,
   matches: array(systemMatch),
+  listPageIndex: int,
+  listPageSize: int,
   showCurrentMatchDetails: bool,
   currentMatch: (systemMatch)
 };
@@ -35,7 +37,10 @@ type matchTableJsProps = {
   [@bs.as "type"] type_: string,
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
+  pageSize: int,
   data: array(systemMatch),
+  onPageChange: TypeInfo.tableOnPageChangeHandler,
+  onPageSizeChange: TypeInfo.tableOnPageChangeSizeHandler,
   getTdProps: matchGetTdPropsHandler
 };
 
@@ -71,6 +76,7 @@ let matchTableColumns =
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
+~setInfoMatchesList,
 ~showCurrentMatch,
 ~hideCurrentMatch,
 _children) => {
@@ -191,15 +197,22 @@ _children) => {
     let tableMatchesJSX = 
       if (matchesInfo->showMatchListGet) {
         <div>
-          <button
-            className="button button--large"
-            id="hideGetMatchList" 
-            onClick={handleHideMatchListClick}
-          >{ReasonReact.string("Hide List")}
-          </button>
+            <div>
+              <button
+                className="button button--large"
+                id="hideMatchListButton" 
+                onClick={handleHideMatchListClick}
+              >{ReasonReact.string("Hide List")}
+              </button>
+              <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshMatchesListButton" onClick={handleGetMatchListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
+            </div>
           <div style={tableDivStyle}> 
-            <Table propsCtr={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
+            <Table props={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
             data=tableMatches
+            defaultPageSize={5} /* get this from types default */
+            pageSize={matchesInfo->listPageSizeGet}
+            onPageChange={matchesTableOnPageChangeHandler}
+            onPageSizeChange={matchesTableOnPageChangeSizeHandler}
             getTdProps={matchesTdPropsHandler}
             />
           </div>
@@ -246,6 +259,7 @@ type jsProps = {
   matchesInfo: matchesInfo,  
   getMatchesList: (string, string) => unit,
   hideMatchesList: unit => unit,
+  setInfoMatchesList: (int, int) => unit,
   showCurrentMatch: systemMatch => unit,
   hideCurrentMatch: unit => unit,
 };
@@ -258,6 +272,7 @@ let default =
       ~matchesInfo=jsProps->matchesInfoGet,
       ~getMatchesList=jsProps->getMatchesListGet,
       ~hideMatchesList=jsProps->hideMatchesListGet,
+      ~setInfoMatchesList=jsProps->setInfoMatchesListGet,
       ~showCurrentMatch=jsProps->showCurrentMatchGet,
       ~hideCurrentMatch=jsProps->hideCurrentMatchGet,
       [||],

@@ -44,6 +44,8 @@ type riderGetTdPropsHandler = (string, option(riderRowInfo), string, string) => 
 type ridersInfo = {
   showRiderList: bool,
   riders: array(rider),
+  listPageIndex: int,
+  listPageSize: int,
   showCurrentRiderDetails: bool,
   currentRider: (rider),  
 };
@@ -54,7 +56,10 @@ type riderTableJsProps = {
   [@bs.as "type"] type_: string,
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
+  pageSize: int,
   data: array(rider),
+  onPageChange: TypeInfo.tableOnPageChangeHandler,
+  onPageSizeChange: TypeInfo.tableOnPageChangeSizeHandler,
   getTdProps: riderGetTdPropsHandler
 };
 
@@ -131,6 +136,7 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo,
 ~matchesInfo:Matches.matchesInfo, 
 ~getRidersList, 
 ~hideRidersList,
+~setInfoRidersList,
 ~showCurrentRider,
 ~hideCurrentRider,
 _children) => {
@@ -264,15 +270,22 @@ _children) => {
     let tableRidersJSX = 
       if (ridersInfo->showRiderListGet) {
         <div>
-          <button
-            className="button button--large"
-            id="hideGetRidersList" 
-            onClick={handleHideRiderListClick}
-          >{ReasonReact.string("Hide List")}
-          </button>
+          <div> 
+            <button
+              className="button button--large"
+              id="hideRidersListButton" 
+              onClick={handleHideRiderListClick}
+            >{ReasonReact.string("Hide List")}
+            </button>
+            <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
+          </div> 
           <div style={tableDivStyle}> 
-            <Table propsCtr={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
+            <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
+            defaultPageSize={5} /* get this from types default */
+            pageSize={ridersInfo->listPageSizeGet}
             data=tableRiders
+            onPageChange={ridersTableOnPageChangeHandler}
+            onPageSizeChange={ridersTableOnPageChangeSizeHandler}
             getTdProps={ridersTdPropsHandler}
             />
           </div>
@@ -320,6 +333,7 @@ type jsProps = {
   matchesInfo: Matches.matchesInfo,
   getRidersList: (string, string) => unit,
   hideRidersList: unit => unit,
+  setInfoRidersList: (int, int) => unit,
   showCurrentRider: rider => unit,
   hideCurrentRider: unit => unit,
 };
@@ -333,6 +347,7 @@ let default =
       ~matchesInfo=jsProps->matchesInfoGet,
       ~getRidersList=jsProps->getRidersListGet,
       ~hideRidersList=jsProps->hideRidersListGet,
+      ~setInfoRidersList=jsProps->setInfoRidersListGet,
       ~showCurrentRider=jsProps->showCurrentRiderGet,
       ~hideCurrentRider=jsProps->hideCurrentRiderGet,
       [||],

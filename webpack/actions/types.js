@@ -2,8 +2,11 @@ const LOGIN_DETAILS = 'LOGIN_DETAILS';
 const LOGIN_REQUEST = 'LOGIN_REQUEST';
 const LOGOUT = 'LOGOUT';
 
-const GET_DRIVERS_LIST = 'GET_DRIVERS_LIST';
-const HIDE_DRIVERS_LIST = 'HIDE_DRIVERS_LIST';
+// const GET_DRIVERS_LIST = 'GET_DRIVERS_LIST';
+// const HIDE_DRIVERS_LIST = 'HIDE_DRIVERS_LIST';
+
+const DEFAULT_LIST_PAGE_INDEX = 0;
+const DEFAULT_LIST_PAGE_SIZE = 5;
 
 const driverType = 'DRIVER';
 const riderType = 'RIDERS';
@@ -21,6 +24,12 @@ const itemsGetHideListTypes = itemType => ({
 const driversGetHideListTypes = itemsGetHideListTypes(driverListType);
 const ridersGetHideListTypes = itemsGetHideListTypes(riderListType);
 const matchesGetHideListTypes = itemsGetHideListTypes(matchListType);
+
+const itemsListSetInfoTypes = itemType => 'SET_' + itemType + '_LIST_INFO';
+
+const driversListSetInfoType = itemsListSetInfoTypes(driverListType);
+const ridersListSetInfoType = itemsListSetInfoTypes(riderListType);
+const matchesListSetInfoType = itemsListSetInfoTypes(matchListType);
 
 const currentItemShowHideTypes = itemType => ({
   show: 'SHOW_CURRENT_' + itemType,
@@ -48,14 +57,20 @@ export {
   LOGIN_REQUEST,
   loginRequestTypes,
   LOGOUT,
-  GET_DRIVERS_LIST,
-  HIDE_DRIVERS_LIST,
+  // GET_DRIVERS_LIST,
+  // HIDE_DRIVERS_LIST,
+  DEFAULT_LIST_PAGE_INDEX,
+  DEFAULT_LIST_PAGE_SIZE,
+  driversGetHideListTypes,
+  driversListSetInfoType,
   getDriverListTypes,
   currentDriverShowHideTypes,
   ridersGetHideListTypes,
+  ridersListSetInfoType,
   getRiderListTypes,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
+  matchesListSetInfoType,
   getMatchListTypes,
   currentMatchShowHideTypes
 };
