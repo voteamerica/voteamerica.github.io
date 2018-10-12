@@ -23,6 +23,8 @@ type matchGetTdPropsHandler = (string, option(matchRowInfo), string, string) => 
 type matchesInfo = {
   showMatchList: bool,
   matches: array(systemMatch),
+  listPageIndex: int,
+  listPageSize: int,
   showCurrentMatchDetails: bool,
   currentMatch: (systemMatch)
 };
@@ -33,7 +35,10 @@ type matchTableJsProps = {
   [@bs.as "type"] type_: string,
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
+  pageSize: int,
   data: array(systemMatch),
+  onPageChange: TypeInfo.tableOnPageChangeHandler,
+  onPageSizeChange: TypeInfo.tableOnPageChangeSizeHandler,
   getTdProps: matchGetTdPropsHandler
 };
 
@@ -65,9 +70,25 @@ let matchTableColumns =
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
+~setInfoMatchesList,
 ~showCurrentMatch,
 ~hideCurrentMatch,
 _children) => {
+
+  let matchesTableOnPageChangeHandler: TypeInfo.tableOnPageChangeHandler = (pageIndex) => {
+    Js.log(pageIndex);
+  };
+
+  let matchesTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, x) => {
+    Js.log(size);
+
+    let pageIndex = matchesInfo->listPageIndexGet;
+
+    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+    let f: ((int, int) => unit, int, int) => unit = [%raw (fx, index, size) => "{ fx(index, size); return 0; }"];
+
+    f(setInfoMatchesList, pageIndex, size);
+  };
 
   let matchesTdPropsHandler: matchGetTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
 
@@ -170,15 +191,22 @@ _children) => {
     let tableMatchesJSX = 
       if (matchesInfo->showMatchListGet) {
         <div>
-          <button
-            className="button button--large"
-            id="hideGetMatchList" 
-            onClick={handleHideMatchListClick}
-          >{ReasonReact.string("Hide List")}
-          </button>
+            <div>
+              <button
+                className="button button--large"
+                id="hideMatchListButton" 
+                onClick={handleHideMatchListClick}
+              >{ReasonReact.string("Hide List")}
+              </button>
+              <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshMatchesListButton" onClick={handleGetMatchListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
+            </div>
           <div style={tableDivStyle}> 
-            <Table propsCtr={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
+            <Table props={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
             data=tableMatches
+            defaultPageSize={5} /* get this from types default */
+            pageSize={matchesInfo->listPageSizeGet}
+            onPageChange={matchesTableOnPageChangeHandler}
+            onPageSizeChange={matchesTableOnPageChangeSizeHandler}
             getTdProps={matchesTdPropsHandler}
             />
           </div>
@@ -225,6 +253,7 @@ type jsProps = {
   matchesInfo: matchesInfo,  
   getMatchesList: (string, string) => unit,
   hideMatchesList: unit => unit,
+  setInfoMatchesList: (int, int) => unit,
   showCurrentMatch: systemMatch => unit,
   hideCurrentMatch: unit => unit,
 };
@@ -237,6 +266,7 @@ let default =
       ~matchesInfo=jsProps->matchesInfoGet,
       ~getMatchesList=jsProps->getMatchesListGet,
       ~hideMatchesList=jsProps->hideMatchesListGet,
+      ~setInfoMatchesList=jsProps->setInfoMatchesListGet,
       ~showCurrentMatch=jsProps->showCurrentMatchGet,
       ~hideCurrentMatch=jsProps->hideCurrentMatchGet,
       [||],

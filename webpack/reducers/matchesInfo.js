@@ -1,6 +1,9 @@
 import {
+  DEFAULT_LIST_PAGE_INDEX,
+  DEFAULT_LIST_PAGE_SIZE,
   getMatchListTypes,
   matchesGetHideListTypes,
+  matchesListSetInfoType,
   currentMatchShowHideTypes
 } from '../actions/types';
 
@@ -8,6 +11,8 @@ const matchesInfo = (
   state = {
     showMatchList: false,
     matches: [],
+    listPageIndex: DEFAULT_LIST_PAGE_INDEX,
+    listPageSize: DEFAULT_LIST_PAGE_SIZE,
     showCurrentMatchDetails: false,
     currentMatch: {}
   },
@@ -28,6 +33,13 @@ const matchesInfo = (
         ...state,
         showCurrentMatchDetails: true,
         currentMatch: action.payload.itemDetails
+      };
+
+    case matchesListSetInfoType:
+      return {
+        ...state,
+        listPageIndex: action.payload.listPageIndex,
+        listPageSize: action.payload.listPageSize
       };
 
     case currentMatchShowHideTypes.hide:

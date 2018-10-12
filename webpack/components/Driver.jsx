@@ -4,9 +4,14 @@ import ReactTable from 'react-table';
 
 import 'react-table/react-table.css';
 
+import LeftPaddedButton from './ui/LeftPaddedButton.jsx';
+
+import { DEFAULT_LIST_PAGE_SIZE } from '../actions/types.js';
+
 import {
   getDriversList,
   hideDriversList,
+  setInfoDriversList,
   showCurrentDriver,
   hideCurrentDriver
 } from '../actions/index.js';
@@ -20,11 +25,28 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getDriversList,
   hideDriversList,
+  setInfoDriversList,
   showCurrentDriver,
   hideCurrentDriver
 };
 
 class DriverBase extends Component {
+  driversTableOnPageChangeHandler(pageIndex) {
+    console.log(pageIndex);
+  }
+
+  driversTableOnPageChangeSizeHandler(self) {
+    return (size, x) => {
+      console.log(size);
+
+      const { driversInfo, setInfoDriversList } = self.props;
+
+      const { listPageIndex } = driversInfo;
+
+      return setInfoDriversList(listPageIndex, size);
+    };
+  }
+
   getTdPropsHandler(self) {
     return (state, rowInfo, column, instance) => {
       const { driversInfo, matchesInfo } = this.props;
@@ -182,20 +204,34 @@ class DriverBase extends Component {
                 </button>
               ) : (
                 <div>
-                  <button
-                    className="button button--large"
-                    id="hideGetDriversList"
-                    onClick={this.handleHideDriversListClick(this)}
-                  >
-                    Hide List
-                  </button>
+                  <div>
+                    <button
+                      className="button button--large"
+                      id="hideDriversListButton"
+                      onClick={this.handleHideDriversListClick(this)}
+                    >
+                      Hide List
+                    </button>
+                    <LeftPaddedButton
+                      className="button button--large"
+                      id="refreshDriversList"
+                      onClick={this.handleGetDriversListClick(this)}
+                    >
+                      Refresh List
+                    </LeftPaddedButton>
+                  </div>
                   {driversInfo.drivers ? (
                     <div>
                       <div style={driverTableDivStyle}>
                         <ReactTable
-                          defaultPageSize={5}
+                          defaultPageSize={DEFAULT_LIST_PAGE_SIZE}
+                          pageSize={driversInfo.listPageSize}
                           data={driversInfo.drivers}
                           columns={driverColumns}
+                          onPageChange={this.driversTableOnPageChangeHandler}
+                          onPageSizeChange={this.driversTableOnPageChangeSizeHandler(
+                            this
+                          )}
                           getTdProps={this.getTdPropsHandler(this)}
                         />
                       </div>

@@ -12,8 +12,21 @@ module.exports = {
           {
             loader: 'babel-loader',
             query: {
-              presets: ['react'],
-              plugins: ['transform-object-rest-spread']
+              presets: ['@babel/preset-env', '@babel/preset-react'],
+              plugins: [
+                [
+                  '@babel/plugin-transform-runtime',
+                  {
+                    corejs: false,
+                    helpers: true,
+                    regenerator: true,
+                    useESModules: false
+                  }
+                ],
+                '@babel/plugin-transform-regenerator',
+                '@babel/plugin-proposal-object-rest-spread',
+                'babel-plugin-styled-components'
+              ]
             }
           }
         ]
@@ -23,5 +36,9 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }
     ]
+  },
+  performance: {
+    maxEntrypointSize: 300000,
+    maxAssetSize: 300000
   }
 };

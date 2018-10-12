@@ -1,6 +1,9 @@
 import {
+  DEFAULT_LIST_PAGE_INDEX,
+  DEFAULT_LIST_PAGE_SIZE,
   getDriverListTypes,
-  HIDE_DRIVERS_LIST,
+  driversGetHideListTypes,
+  driversListSetInfoType,
   currentDriverShowHideTypes
 } from '../actions/types';
 
@@ -8,6 +11,8 @@ const driversInfo = (
   state = {
     showDriversList: false,
     drivers: [],
+    listPageIndex: DEFAULT_LIST_PAGE_INDEX,
+    listPageSize: DEFAULT_LIST_PAGE_SIZE,
     showCurrentDriverDetails: false,
     currentDriver: {}
   },
@@ -20,7 +25,7 @@ const driversInfo = (
       return { ...state, showDriversList: true, drivers };
     }
 
-    case HIDE_DRIVERS_LIST:
+    case driversGetHideListTypes.hide:
       return { ...state, showDriversList: false, drivers: [] };
 
     case currentDriverShowHideTypes.show:
@@ -28,6 +33,13 @@ const driversInfo = (
         ...state,
         showCurrentDriverDetails: true,
         currentDriver: action.payload.itemDetails
+      };
+
+    case driversListSetInfoType:
+      return {
+        ...state,
+        listPageIndex: action.payload.listPageIndex,
+        listPageSize: action.payload.listPageSize
       };
 
     case currentDriverShowHideTypes.hide:

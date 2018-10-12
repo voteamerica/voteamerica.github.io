@@ -3,12 +3,16 @@ import {
   LOGIN_DETAILS,
   LOGIN_REQUEST,
   LOGOUT,
-  GET_DRIVERS_LIST,
-  HIDE_DRIVERS_LIST,
+  // GET_DRIVERS_LIST,
+  // HIDE_DRIVERS_LIST,
+  driversGetHideListTypes,
+  driversListSetInfoType,
   currentDriverShowHideTypes,
   ridersGetHideListTypes,
+  ridersListSetInfoType,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
+  matchesListSetInfoType,
   currentMatchShowHideTypes
 } from './types';
 
@@ -42,20 +46,35 @@ const hideItemsList = itemsHideListType => () => ({
   payload: {}
 });
 
-const getDriversList = (remoteUrlBase, token) => ({
-  type: GET_DRIVERS_LIST,
-  payload: { remoteUrlBase, token, successProperty: 'data' }
-});
-const hideDriversList = () => ({
-  type: HIDE_DRIVERS_LIST,
-  payload: {}
-});
+// const getDriversList = (remoteUrlBase, token) => ({
+//   type: GET_DRIVERS_LIST,
+//   payload: { remoteUrlBase, token, successProperty: 'data' }
+// });
+// const hideDriversList = () => ({
+//   type: HIDE_DRIVERS_LIST,
+//   payload: {}
+// });
+
+const getDriversList = getItemsList(driversGetHideListTypes.get);
+const hideDriversList = hideItemsList(driversGetHideListTypes.hide);
 
 const getRidersList = getItemsList(ridersGetHideListTypes.get);
 const hideRidersList = hideItemsList(ridersGetHideListTypes.hide);
 
 const getMatchesList = getItemsList(matchesGetHideListTypes.get);
 const hideMatchesList = hideItemsList(matchesGetHideListTypes.hide);
+
+const setInfoItemsList = itemsListSetInfoType => (
+  listPageIndex,
+  listPageSize
+) => ({
+  type: itemsListSetInfoType,
+  payload: { listPageIndex, listPageSize }
+});
+
+const setInfoDriversList = setInfoItemsList(driversListSetInfoType);
+const setInfoRidersList = setInfoItemsList(ridersListSetInfoType);
+const setInfoMatchesList = setInfoItemsList(matchesListSetInfoType);
 
 const showCurrentItem = currentItemShowType => itemDetails => ({
   type: currentItemShowType,
@@ -83,14 +102,17 @@ export {
   logout,
   getDriversList,
   hideDriversList,
+  setInfoDriversList,
   showCurrentDriver,
   hideCurrentDriver,
   getRidersList,
   hideRidersList,
+  setInfoRidersList,
   showCurrentRider,
   hideCurrentRider,
   getMatchesList,
   hideMatchesList,
+  setInfoMatchesList,
   showCurrentMatch,
   hideCurrentMatch
 };

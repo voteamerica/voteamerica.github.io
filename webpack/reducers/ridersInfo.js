@@ -1,6 +1,9 @@
 import {
+  DEFAULT_LIST_PAGE_INDEX,
+  DEFAULT_LIST_PAGE_SIZE,
   getRiderListTypes,
   ridersGetHideListTypes,
+  ridersListSetInfoType,
   currentRiderShowHideTypes
 } from '../actions/types';
 
@@ -8,6 +11,8 @@ const ridersInfo = (
   state = {
     showRiderList: false,
     riders: [],
+    listPageIndex: DEFAULT_LIST_PAGE_INDEX,
+    listPageSize: DEFAULT_LIST_PAGE_SIZE,
     showCurrentRiderDetails: false,
     currentRider: {}
   },
@@ -28,6 +33,13 @@ const ridersInfo = (
         ...state,
         showCurrentRiderDetails: true,
         currentRider: action.payload.itemDetails
+      };
+
+    case ridersListSetInfoType:
+      return {
+        ...state,
+        listPageIndex: action.payload.listPageIndex,
+        listPageSize: action.payload.listPageSize
       };
 
     case currentRiderShowHideTypes.hide:
