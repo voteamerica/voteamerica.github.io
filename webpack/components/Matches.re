@@ -4,7 +4,9 @@ let component = ReasonReact.statelessComponent("Matches");
 type systemMatch = {
    status: string,
   uuid_driver: string,
-  uuid_rider: string,
+  uuid_rider: string,     
+  city: string,
+  full_state: string,
   driver_notes: string,
 	rider_notes: string,
   [@bs.as "created_ts"] created: string,
@@ -48,6 +50,8 @@ let matchTableColumns =
   [| 
   TypeInfo.theader(~header="Driver", ~accessor="uuid_driver"),
   TypeInfo.theader(~header="Rider", ~accessor="uuid_rider"), 
+  TypeInfo.theader(~header="City", ~accessor="city"),
+  TypeInfo.theader(~header="State", ~accessor="full_state"),
   TypeInfo.theader(~header="Driver Notes", ~accessor="driver_notes"),
   TypeInfo.theader(~header="Rider Notes", ~accessor="rider_notes"),
   TypeInfo.theader(~header="Created", ~accessor="created_ts"),
@@ -61,6 +65,8 @@ let matchTableColumns =
   ~uuid_rider=itemDetails->uuid_riderGet,
   ~driver_notes=itemDetails->driver_notesGet,
   ~rider_notes=itemDetails->rider_notesGet,
+  ~city=itemDetails->cityGet,
+  ~full_state=itemDetails->full_stateGet,
   ~status=itemDetails->statusGet,
   ~created=itemDetails->createdGet,
   ~updated=itemDetails->updatedGet,
@@ -79,7 +85,7 @@ _children) => {
     Js.log(pageIndex);
   };
 
-  let matchesTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, x) => {
+  let matchesTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, _index) => {
     Js.log(size);
 
     let pageIndex = matchesInfo->listPageIndexGet;

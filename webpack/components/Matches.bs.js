@@ -24,6 +24,14 @@ var matchTableColumns = /* array */[
     accessor: "uuid_rider"
   },
   {
+    Header: "City",
+    accessor: "city"
+  },
+  {
+    Header: "State",
+    accessor: "full_state"
+  },
+  {
     Header: "Driver Notes",
     accessor: "driver_notes"
   },
@@ -54,6 +62,8 @@ function tableMatch(itemDetails) {
           status: itemDetails.status,
           uuid_driver: itemDetails.uuid_driver,
           uuid_rider: itemDetails.uuid_rider,
+          city: itemDetails.city,
+          full_state: itemDetails.full_state,
           driver_notes: itemDetails.driver_notes,
           rider_notes: itemDetails.rider_notes,
           created_ts: itemDetails.created_ts,
