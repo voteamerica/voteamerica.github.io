@@ -2,6 +2,26 @@
 'use strict';
 
 
+var cellValueToString = function (row){{ return String(row.value); }};
+
+var cellValueRaw = function (row){{ return row.value; }};
+
+function thcCreator(header, accessor) {
+  return {
+          Header: header,
+          accessor: accessor,
+          Cell: cellValueRaw
+        };
+}
+
+function thcCreatorBool(header, accessor) {
+  return {
+          Header: header,
+          accessor: accessor,
+          Cell: cellValueToString
+        };
+}
+
 var defaultRowBackgroundColour = "none";
 
 var highlightSelectedRowBackgroundColour = "green";
@@ -20,4 +40,8 @@ exports.defaultRowForegroundColour = defaultRowForegroundColour;
 exports.highlightSelectedRowForegroundColour = highlightSelectedRowForegroundColour;
 exports.highlightMatchedRowForegroundColour = highlightMatchedRowForegroundColour;
 exports.highlightMatchedRowBackgroundColour = highlightMatchedRowBackgroundColour;
+exports.cellValueToString = cellValueToString;
+exports.cellValueRaw = cellValueRaw;
+exports.thcCreator = thcCreator;
+exports.thcCreatorBool = thcCreatorBool;
 /* No side effect */

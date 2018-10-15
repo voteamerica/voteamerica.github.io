@@ -32,12 +32,8 @@ var matchTableColumns = /* array */[
     accessor: "full_state"
   },
   {
-    Header: "Driver Notes",
-    accessor: "driver_notes"
-  },
-  {
-    Header: "Rider Notes",
-    accessor: "rider_notes"
+    Header: "Status",
+    accessor: "status"
   },
   {
     Header: "Created",
@@ -48,8 +44,40 @@ var matchTableColumns = /* array */[
     accessor: "last_updated_ts"
   },
   {
-    Header: "Status",
-    accessor: "status"
+    Header: "DriverCollectionZIP",
+    accessor: "DriverCollectionZIP"
+  },
+  {
+    Header: "Drive Times - Local",
+    accessor: "AvailableDriveTimesLocal"
+  },
+  {
+    Header: "Seat Count",
+    accessor: "SeatCount"
+  },
+  {
+    Header: "License Number",
+    accessor: "DriverLicenseNumber"
+  },
+  {
+    Header: "Driving for Organization",
+    accessor: "DrivingOBOOrganizationName"
+  },
+  {
+    Header: "Driver First Name",
+    accessor: "DriverFirstName"
+  },
+  {
+    Header: "Driver Last Name",
+    accessor: "DriverLastName"
+  },
+  {
+    Header: "Driver Notes",
+    accessor: "driver_notes"
+  },
+  {
+    Header: "Rider Notes",
+    accessor: "rider_notes"
   },
   {
     Header: "Score",
@@ -64,6 +92,13 @@ function tableMatch(itemDetails) {
           uuid_rider: itemDetails.uuid_rider,
           city: itemDetails.city,
           full_state: itemDetails.full_state,
+          DriverCollectionZIP: itemDetails.DriverCollectionZIP,
+          AvailableDriveTimesLocal: itemDetails.AvailableDriveTimesLocal,
+          SeatCount: itemDetails.SeatCount,
+          DriverLicenseNumber: itemDetails.DriverLicenseNumber,
+          DrivingOBOOrganizationName: itemDetails.DrivingOBOOrganizationName,
+          DriverFirstName: itemDetails.DriverFirstName,
+          DriverLastName: itemDetails.DriverLastName,
           driver_notes: itemDetails.driver_notes,
           rider_notes: itemDetails.rider_notes,
           created_ts: itemDetails.created_ts,

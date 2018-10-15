@@ -44,7 +44,28 @@ type apiInfo = {
 [@bs.deriving abstract]
 type theader = {
   [@bs.as "Header"] header: string, 
-  accessor: string
+  accessor: string, 
+};
+
+type cellValueToStringHandler = unit => string;
+
+let cellValueToString: cellValueToStringHandler = [%raw (row) => "{ return String(row.value); }"];
+
+let cellValueRaw: cellValueToStringHandler = [%raw (row) => "{ return row.value; }"];
+
+[@bs.deriving abstract]
+type theaderCell = {
+  [@bs.as "Header"] header: string, 
+  accessor: string, 
+  [@bs.as "Cell"] cell: cellValueToStringHandler, 
+};
+
+let thcCreator = (~header, ~accessor) => {
+  theaderCell(~header, ~accessor, ~cell=cellValueRaw);
+};
+
+let thcCreatorBool = (~header, ~accessor) => {
+  theaderCell(~header, ~accessor, ~cell=cellValueToString);
 };
 
 [@bs.deriving abstract]
