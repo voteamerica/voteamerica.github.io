@@ -134,8 +134,8 @@ class DriverBase extends Component {
     const driverColumns = [
       { Header: 'UUID', accessor: 'UUID' },
       { Header: 'First Name', accessor: 'DriverFirstName' },
-      { Header: 'Email', accessor: 'DriverEmail' },
       { Header: 'Last Name', accessor: 'DriverLastName' },
+      { Header: 'Email', accessor: 'DriverEmail' },
       {
         Header: 'Powerchair',
         accessor: 'DriverCanLoadRiderWithWheelchair',
