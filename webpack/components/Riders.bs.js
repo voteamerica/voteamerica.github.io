@@ -15,122 +15,37 @@ var component = ReasonReact.statelessComponent("Riders");
 var tableType = "riders";
 
 var riderTableColumns = /* array */[
-  {
-    Header: "uuid",
-    accessor: "UUID"
-  },
-  {
-    Header: "First Name",
-    accessor: "RiderFirstName"
-  },
-  {
-    Header: "Email",
-    accessor: "RiderEmail"
-  },
-  {
-    Header: "Last Name",
-    accessor: "RiderLastName"
-  },
-  {
-    Header: "Phone",
-    accessor: "RiderPhone"
-  },
-  {
-    Header: "Collection ZIP",
-    accessor: "RiderCollectionZIP"
-  },
-  {
-    Header: "City",
-    accessor: "city"
-  },
-  {
-    Header: "State",
-    accessor: "full_state"
-  },
-  {
-    Header: "Dropoff ZIP",
-    accessor: "RiderDropOffZIP"
-  },
-  {
-    Header: "Created",
-    accessor: "created_ts"
-  },
-  {
-    Header: "Updated",
-    accessor: "last_updated_ts"
-  },
-  {
-    Header: "Status",
-    accessor: "status"
-  },
-  {
-    Header: "Status Info",
-    accessor: "status_info"
-  },
-  {
-    Header: "Org",
-    accessor: "uuid_organization"
-  },
-  {
-    Header: "Collection Street Number",
-    accessor: "RiderCollectionStreetNumber"
-  },
-  {
-    Header: "Collection Address",
-    accessor: "RiderCollectionAddress"
-  },
-  {
-    Header: "Destination Address",
-    accessor: "RiderDestinationAddress"
-  },
-  {
-    Header: "Ride Times Local",
-    accessor: "AvailableRideTimesLocal"
-  },
-  {
-    Header: "Party Size",
-    accessor: "TotalPartySize"
-  },
-  {
-    Header: "Two Way Trip",
-    accessor: "TwoWayTripNeeded"
-  },
-  {
-    Header: "Is Vulnerable",
-    accessor: "RiderIsVulnerable"
-  },
-  {
-    Header: "No Politics Talk",
-    accessor: "RiderWillNotTalkPolitics"
-  },
-  {
-    Header: "Stay In Touch",
-    accessor: "PleaseStayInTouch"
-  },
-  {
-    Header: "Need Wheelchair",
-    accessor: "NeedWheelchair"
-  },
-  {
-    Header: "Contact Method",
-    accessor: "RiderPreferredContact"
-  },
-  {
-    Header: "Rider Notes",
-    accessor: "RiderAccommodationNotes"
-  },
-  {
-    Header: "Legal Consent",
-    accessor: "RiderLegalConsent"
-  },
-  {
-    Header: "Ready To Match",
-    accessor: "ReadyToMatch"
-  },
-  {
-    Header: "Will Be Safe",
-    accessor: "RiderWillBeSafe"
-  }
+  TypeInfo$VoteUSReason.thcCreator("uuid", "UUID"),
+  TypeInfo$VoteUSReason.thcCreator("First Name", "RiderFirstName"),
+  TypeInfo$VoteUSReason.thcCreator("Last Name", "RiderLastName"),
+  TypeInfo$VoteUSReason.thcCreator("Email", "RiderEmail"),
+  TypeInfo$VoteUSReason.thcCreator("Phone", "RiderPhone"),
+  TypeInfo$VoteUSReason.thcCreator("Collection ZIP", "RiderCollectionZIP"),
+  TypeInfo$VoteUSReason.thcCreator("City", "city"),
+  TypeInfo$VoteUSReason.thcCreator("State", "full_state"),
+  TypeInfo$VoteUSReason.thcCreator("Dropoff ZIP", "RiderDropOffZIP"),
+  TypeInfo$VoteUSReason.thcCreator("Created", "created_ts"),
+  TypeInfo$VoteUSReason.thcCreator("Updated", "last_updated_ts"),
+  TypeInfo$VoteUSReason.thcCreator("Status", "status"),
+  TypeInfo$VoteUSReason.thcCreator("Status Info", "status_info"),
+  TypeInfo$VoteUSReason.thcCreator("Org ID", "uuid_organization"),
+  TypeInfo$VoteUSReason.thcCreator("Org Name", "OrganizationName"),
+  TypeInfo$VoteUSReason.thcCreator("Collection Street Number", "RiderCollectionStreetNumber"),
+  TypeInfo$VoteUSReason.thcCreator("Collection Address", "RiderCollectionAddress"),
+  TypeInfo$VoteUSReason.thcCreator("Destination Address", "RiderDestinationAddress"),
+  TypeInfo$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal"),
+  TypeInfo$VoteUSReason.thcCreator("Party Size", "TotalPartySize"),
+  TypeInfo$VoteUSReason.thcCreatorBool("Two Way Trip", "TwoWayTripNeeded"),
+  TypeInfo$VoteUSReason.thcCreatorBool("Is Vulnerable", "RiderIsVulnerable"),
+  TypeInfo$VoteUSReason.thcCreatorBool("No Politics Talk", "RiderWillNotTalkPolitics"),
+  TypeInfo$VoteUSReason.thcCreatorBool("Stay In Touch", "PleaseStayInTouch"),
+  TypeInfo$VoteUSReason.thcCreatorBool("Need Wheelchair", "NeedWheelchair"),
+  TypeInfo$VoteUSReason.thcCreator("Contact Method", "RiderPreferredContact"),
+  TypeInfo$VoteUSReason.thcCreator("Rider Notes", "RiderAccommodationNotes"),
+  TypeInfo$VoteUSReason.thcCreatorBool("Legal Consent", "RiderLegalConsent"),
+  TypeInfo$VoteUSReason.thcCreatorBool("Ready To Match", "ReadyToMatch"),
+  TypeInfo$VoteUSReason.thcCreatorBool("Will Be Safe", "RiderWillBeSafe"),
+  TypeInfo$VoteUSReason.thcCreator("Time zone", "timezone")
 ];
 
 function tableRider(itemDetails) {
@@ -163,7 +78,9 @@ function tableRider(itemDetails) {
           RiderCollectionAddress: itemDetails.RiderCollectionAddress,
           RiderDestinationAddress: itemDetails.RiderDestinationAddress,
           status: itemDetails.status,
-          uuid_organization: itemDetails.uuid_organization
+          uuid_organization: itemDetails.uuid_organization,
+          OrganizationName: itemDetails.OrganizationName,
+          timezone: itemDetails.timezone
         };
 }
 

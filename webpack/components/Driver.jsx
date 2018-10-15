@@ -129,12 +129,18 @@ class DriverBase extends Component {
   render() {
     const { loginInfo, driversInfo } = this.props;
 
+    const cellBoolToString = row => String(row.value);
+
     const driverColumns = [
       { Header: 'UUID', accessor: 'UUID' },
       { Header: 'First Name', accessor: 'DriverFirstName' },
       { Header: 'Email', accessor: 'DriverEmail' },
       { Header: 'Last Name', accessor: 'DriverLastName' },
-      { Header: 'Powerchair', accessor: 'DriverCanLoadRiderWithWheelchair' },
+      {
+        Header: 'Powerchair',
+        accessor: 'DriverCanLoadRiderWithWheelchair',
+        Cell: cellBoolToString
+      },
       { Header: 'Status', accessor: 'status' },
       { Header: 'Seats', accessor: 'SeatCount' },
       { Header: 'License', accessor: 'DriverLicenseNumber' },
@@ -150,12 +156,32 @@ class DriverBase extends Component {
       { Header: 'Updated', accessor: 'last_updated_ts' },
       { Header: 'Org', accessor: 'uuid_organization' },
       { Header: 'OrgOBO', accessor: 'DrivingOBOOrganizationName' },
-      { Header: 'Details Visible', accessor: 'RidersCanSeeDriverDetails' },
-      { Header: 'No Politics', accessor: 'DriverWillNotTalkPolitics' },
-      { Header: 'Ready To Match', accessor: 'ReadyToMatch' },
-      { Header: 'Stay In Touch', accessor: 'PleaseStayInTouch' },
+      {
+        Header: 'Details Visible',
+        accessor: 'RidersCanSeeDriverDetails',
+        Cell: ({ value }) => String(value)
+      },
+      {
+        Header: 'No Politics',
+        accessor: 'DriverWillNotTalkPolitics',
+        Cell: ({ value }) => String(value)
+      },
+      {
+        Header: 'Ready To Match',
+        accessor: 'ReadyToMatch',
+        Cell: ({ value }) => String(value)
+      },
+      {
+        Header: 'Stay In Touch',
+        accessor: 'PleaseStayInTouch',
+        Cell: ({ value }) => String(value)
+      },
       { Header: 'Contact Method', accessor: 'DriverPreferredContact' },
-      { Header: 'Will Take Care', accessor: 'DriverWillTakeCare' }
+      {
+        Header: 'Will Take Care',
+        accessor: 'DriverWillTakeCare',
+        Cell: ({ value }) => String(value)
+      }
     ];
 
     const driverTableDivStyle = {
