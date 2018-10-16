@@ -329,7 +329,7 @@ _children) => {
             >{ReasonReact.string("Hide List")}
             </button>
             <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
-          </div> 
+          </div>
           <div> 
             <div className="form-group checkbox" style={checkboxAreaStyle}>
               <label className="" style={checkboxLabelStyle} htmlFor="hideExpired">{ReasonReact.string("Hide Expired/Cancelled")}

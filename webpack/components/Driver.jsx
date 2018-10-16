@@ -12,6 +12,8 @@ import {
   getDriversList,
   hideDriversList,
   setInfoDriversList,
+  hideExpiredDriversList,
+  hideConfirmedDriversList,
   showCurrentDriver,
   hideCurrentDriver
 } from '../actions/index.js';
@@ -26,6 +28,8 @@ const mapDispatchToProps = {
   getDriversList,
   hideDriversList,
   setInfoDriversList,
+  hideExpiredDriversList,
+  hideConfirmedDriversList,
   showCurrentDriver,
   hideCurrentDriver
 };
@@ -109,6 +113,22 @@ class DriverBase extends Component {
     };
   }
 
+  driversTableHideExpiredHandler(self) {
+    return () => {
+      const { hideExpiredDriversList } = self.props;
+
+      hideExpiredDriversList();
+    };
+  }
+
+  driversTableHideConfirmedHandler(self) {
+    return () => {
+      const { hideConfirmedDriversList } = self.props;
+
+      hideConfirmedDriversList();
+    };
+  }
+
   handleGetDriversListClick(self) {
     return () => {
       const { apiInfo, getDriversList, loginInfo } = self.props;
@@ -189,6 +209,10 @@ class DriverBase extends Component {
       marginBottom: 10
     };
 
+    const checkboxAreaStyle = { marginTop: '20px', display: 'inline-block' };
+
+    const checkboxLabelStyle = { paddingRight: '40px' };
+
     const currentDriverInfo = showCurrentDriverDetails => {
       if (!showCurrentDriverDetails) {
         return <div>No driver selected</div>;
@@ -214,6 +238,36 @@ class DriverBase extends Component {
         </div>
       );
     };
+
+    const driversAll = driversInfo.drivers;
+
+    const filterExpiredDrivers = drivers => {
+      if (driversInfo.hideExpiredCanceled === true) {
+        const filterDrivers = driver =>
+          driver.status !== 'Expired' && driver.status !== 'Canceled';
+
+        const driversNotExpired = drivers.filter(filterDrivers);
+
+        return driversNotExpired;
+      } else {
+        return drivers;
+      }
+    };
+
+    let filterConfirmedDrivers = drivers => {
+      if (driversInfo.hideConfirmed === true) {
+        let filterDrivers = driver => driver.status !== 'MatchConfirmed';
+
+        let driversNotConfirmed = drivers.filter(filterDrivers);
+
+        return driversNotConfirmed;
+      } else {
+        return drivers;
+      }
+    };
+
+    const tableDriversStepOne = filterExpiredDrivers(driversAll);
+    const tableDrivers = filterConfirmedDrivers(tableDriversStepOne);
 
     return (
       <div>
@@ -247,13 +301,56 @@ class DriverBase extends Component {
                       Refresh List
                     </LeftPaddedButton>
                   </div>
-                  {driversInfo.drivers ? (
+                  {tableDrivers ? (
                     <div>
+                      <div>
+                        <div
+                          className="form-group checkbox"
+                          style={checkboxAreaStyle}
+                        >
+                          <label
+                            className=""
+                            style={checkboxLabelStyle}
+                            htmlFor="hideExpired"
+                          >
+                            Hide Expired/Cancelled
+                          </label>
+                          <input
+                            className=""
+                            type="checkbox"
+                            id="hideExpired"
+                            checked={driversInfo.hideExpiredCanceled}
+                            onChange={this.driversTableHideExpiredHandler(this)}
+                          />
+                        </div>
+                        <div
+                          className="form-group checkbox"
+                          style={checkboxAreaStyle}
+                        >
+                          <label
+                            className=""
+                            style={checkboxLabelStyle}
+                            htmlFor="hideConfirmed"
+                          >
+                            Hide Confirmed
+                          </label>
+                          <input
+                            className=""
+                            type="checkbox"
+                            id="hideConfirmed"
+                            checked={driversInfo.hideConfirmed}
+                            onChange={this.driversTableHideConfirmedHandler(
+                              this
+                            )}
+                          />
+                        </div>
+                      </div>
+
                       <div style={driverTableDivStyle}>
                         <ReactTable
                           defaultPageSize={DEFAULT_LIST_PAGE_SIZE}
                           pageSize={driversInfo.listPageSize}
-                          data={driversInfo.drivers}
+                          data={tableDrivers}
                           columns={driverColumns}
                           onPageChange={this.driversTableOnPageChangeHandler}
                           onPageSizeChange={this.driversTableOnPageChangeSizeHandler(
