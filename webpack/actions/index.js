@@ -7,12 +7,15 @@ import {
   // HIDE_DRIVERS_LIST,
   driversGetHideListTypes,
   driversListSetInfoType,
+  driversListHideExpiredType,
   currentDriverShowHideTypes,
   ridersGetHideListTypes,
   ridersListSetInfoType,
+  ridersListHideExpiredType,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
   matchesListSetInfoType,
+  matchesListHideExpiredType,
   currentMatchShowHideTypes
 } from './types';
 
@@ -76,6 +79,14 @@ const setInfoDriversList = setInfoItemsList(driversListSetInfoType);
 const setInfoRidersList = setInfoItemsList(ridersListSetInfoType);
 const setInfoMatchesList = setInfoItemsList(matchesListSetInfoType);
 
+const hideExpiredItemsList = itemsListHideExpiredType => () => ({
+  type: itemsListHideExpiredType,
+  payload: {}
+});
+const hideExpiredDriversList = setInfoItemsList(driversListHideExpiredType);
+const hideExpiredRidersList = hideExpiredItemsList(ridersListHideExpiredType);
+const hideExpiredMatchesList = setInfoItemsList(matchesListHideExpiredType);
+
 const showCurrentItem = currentItemShowType => itemDetails => ({
   type: currentItemShowType,
   payload: { itemDetails }
@@ -103,16 +114,19 @@ export {
   getDriversList,
   hideDriversList,
   setInfoDriversList,
+  hideExpiredDriversList,
   showCurrentDriver,
   hideCurrentDriver,
   getRidersList,
   hideRidersList,
   setInfoRidersList,
+  hideExpiredRidersList,
   showCurrentRider,
   hideCurrentRider,
   getMatchesList,
   hideMatchesList,
   setInfoMatchesList,
+  hideExpiredMatchesList,
   showCurrentMatch,
   hideCurrentMatch
 };

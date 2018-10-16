@@ -31,6 +31,12 @@ const driversListSetInfoType = itemsListSetInfoTypes(driverListType);
 const ridersListSetInfoType = itemsListSetInfoTypes(riderListType);
 const matchesListSetInfoType = itemsListSetInfoTypes(matchListType);
 
+const itemsListHideExpiredTypes = itemType => itemType + '_LIST_HIDE_EXPIRED';
+
+const driversListHideExpiredType = itemsListHideExpiredTypes(driverListType);
+const ridersListHideExpiredType = itemsListHideExpiredTypes(riderListType);
+const matchesListHideExpiredType = itemsListHideExpiredTypes(matchListType);
+
 const currentItemShowHideTypes = itemType => ({
   show: 'SHOW_CURRENT_' + itemType,
   hide: 'HIDE_CURRENT_' + itemType
@@ -64,13 +70,16 @@ export {
   driversGetHideListTypes,
   driversListSetInfoType,
   getDriverListTypes,
+  driversListHideExpiredType,
   currentDriverShowHideTypes,
   ridersGetHideListTypes,
   ridersListSetInfoType,
   getRiderListTypes,
+  ridersListHideExpiredType,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
   matchesListSetInfoType,
+  matchesListHideExpiredType,
   getMatchListTypes,
   currentMatchShowHideTypes
 };

@@ -85,7 +85,7 @@ function tableRider(itemDetails) {
         };
 }
 
-function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, showCurrentRider, hideCurrentRider, _) {
+function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, showCurrentRider, hideCurrentRider, _) {
   var ridersTableOnPageChangeHandler = function (pageIndex) {
     console.log(pageIndex);
     return /* () */0;
@@ -139,6 +139,9 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
             style: bkgStyle
           };
   };
+  var ridersTableHideExpiredHandler = function () {
+    return Curry._1(hideExpiredRidersList, /* () */0);
+  };
   var handleGetRiderListClick = function () {
     var token = loginInfo.token;
     var url = apiInfo.apiUrl;
@@ -186,7 +189,16 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
                                             id: prim$1,
                                             onClick: prim$2
                                           };
-                                  }), "button button--large", "refreshRidersListButton", handleGetRiderListClick, /* array */["Refresh List"]))), React.createElement("div", {
+                                  }), "button button--large", "refreshRidersListButton", handleGetRiderListClick, /* array */["Refresh List"]))), React.createElement("div", undefined, React.createElement("label", {
+                              className: "",
+                              htmlFor: "hideExpired"
+                            }, "Hide Expired/Cancelled"), React.createElement("input", {
+                              className: "",
+                              id: "hideExpired",
+                              checked: ridersInfo.hideExpiredCanceled,
+                              type: "checkbox",
+                              onChange: ridersTableHideExpiredHandler
+                            })), React.createElement("div", {
                           style: tableDivStyle
                         }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
                                     return {
@@ -221,7 +233,7 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.setInfoRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
+        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.setInfoRidersList, jsProps.hideExpiredRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
       }));
 
 exports.component = component;

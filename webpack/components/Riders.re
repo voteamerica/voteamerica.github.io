@@ -48,6 +48,7 @@ type ridersInfo = {
   riders: array(rider),
   listPageIndex: int,
   listPageSize: int,
+  hideExpiredCanceled: bool,
   showCurrentRiderDetails: bool,
   currentRider: (rider),  
 };
@@ -143,6 +144,7 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo,
 ~getRidersList, 
 ~hideRidersList,
 ~setInfoRidersList,
+~hideExpiredRidersList,
 ~showCurrentRider,
 ~hideCurrentRider,
 _children) => {
@@ -230,6 +232,10 @@ _children) => {
     clickHandlerAndStyleObjectWrapper;
   };
 
+  let ridersTableHideExpiredHandler = unit => {
+    hideExpiredRidersList();
+  }
+
   let handleGetRiderListClick = (_event) => {
     let token = loginInfo->TypeInfo.tokenGet;
     let url = apiInfo->TypeInfo.apiUrlGet;
@@ -284,6 +290,11 @@ _children) => {
             >{ReasonReact.string("Hide List")}
             </button>
             <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
+          </div> 
+          <div>
+            <label className="" htmlFor="hideExpired">{ReasonReact.string("Hide Expired/Cancelled")}</label>
+            <input className="" type_="checkbox" id="hideExpired" checked={ridersInfo->hideExpiredCanceledGet} onChange={ridersTableHideExpiredHandler} 
+            />
           </div> 
           <div style={tableDivStyle}> 
             <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
@@ -340,6 +351,7 @@ type jsProps = {
   getRidersList: (string, string) => unit,
   hideRidersList: unit => unit,
   setInfoRidersList: (int, int) => unit,
+  hideExpiredRidersList: unit => unit,
   showCurrentRider: rider => unit,
   hideCurrentRider: unit => unit,
 };
@@ -354,6 +366,7 @@ let default =
       ~getRidersList=jsProps->getRidersListGet,
       ~hideRidersList=jsProps->hideRidersListGet,
       ~setInfoRidersList=jsProps->setInfoRidersListGet,
+      ~hideExpiredRidersList=jsProps->hideExpiredRidersListGet,
       ~showCurrentRider=jsProps->showCurrentRiderGet,
       ~hideCurrentRider=jsProps->hideCurrentRiderGet,
       [||],

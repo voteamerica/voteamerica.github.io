@@ -6,6 +6,7 @@ import {
   getRidersList,
   hideRidersList,
   setInfoRidersList,
+  hideExpiredRidersList,
   showCurrentRider,
   hideCurrentRider
 } from '../actions/index.js';
@@ -20,6 +21,7 @@ const mapDispatchToProps = {
   getRidersList,
   hideRidersList,
   setInfoRidersList,
+  hideExpiredRidersList,
   showCurrentRider,
   hideCurrentRider
 };

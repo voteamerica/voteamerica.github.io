@@ -4,6 +4,7 @@ import {
   getRiderListTypes,
   ridersGetHideListTypes,
   ridersListSetInfoType,
+  ridersListHideExpiredType,
   currentRiderShowHideTypes
 } from '../actions/types';
 
@@ -13,6 +14,7 @@ const ridersInfo = (
     riders: [],
     listPageIndex: DEFAULT_LIST_PAGE_INDEX,
     listPageSize: DEFAULT_LIST_PAGE_SIZE,
+    hideExpiredCanceled: false,
     showCurrentRiderDetails: false,
     currentRider: {}
   },
@@ -44,6 +46,9 @@ const ridersInfo = (
 
     case currentRiderShowHideTypes.hide:
       return { ...state, showCurrentRiderDetails: false, currentRider: {} };
+
+    case ridersListHideExpiredType:
+      return { ...state, hideExpiredCanceled: !state.hideExpiredCanceled };
 
     default:
       return state;
