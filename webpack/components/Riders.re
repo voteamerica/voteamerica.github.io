@@ -277,6 +277,10 @@ _children) => {
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
+    let checkboxAreaStyle = ReactDOMRe.Style.make(~marginTop="20px", ());
+
+    let checkboxLabelStyle = ReactDOMRe.Style.make(~paddingRight="40px", ());
+
     let currentRiderInfo = currentRider => {
       let uriPhone = TypeInfo.encodeURI(currentRider->phoneGet);
 
@@ -306,10 +310,10 @@ _children) => {
             </button>
             <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
           </div> 
-          <div>
-            <label className="" htmlFor="hideExpired">{ReasonReact.string("Hide Expired/Cancelled")}</label>
-            <input className="" type_="checkbox" id="hideExpired" checked={ridersInfo->hideExpiredCanceledGet} onChange={ridersTableHideExpiredHandler} 
-            />
+          <div className="form-group checkbox" style={checkboxAreaStyle}>
+            <label className="" style={checkboxLabelStyle} htmlFor="hideExpired">{ReasonReact.string("Hide Expired/Cancelled")}
+            </label>
+            <input className="" type_="checkbox" id="hideExpired" checked={ridersInfo->hideExpiredCanceledGet} onChange={ridersTableHideExpiredHandler} />
           </div> 
           <div style={tableDivStyle}> 
             <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
