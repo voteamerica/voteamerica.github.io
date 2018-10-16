@@ -232,7 +232,7 @@ _children) => {
     clickHandlerAndStyleObjectWrapper;
   };
 
-  let ridersTableHideExpiredHandler = unit => {
+  let ridersTableHideExpiredHandler = _ => {
     hideExpiredRidersList();
   }
 
@@ -258,7 +258,22 @@ _children) => {
   {
   ...component,
   render: (_self) => { 
-    let tableRiders:array(rider) = Array.map(tableRider, ridersInfo->ridersGet); 
+    let tableRidersAll:array(rider) = Array.map(tableRider, ridersInfo->ridersGet); 
+
+    let filterRiders = riders => {
+      if (ridersInfo->hideExpiredCanceledGet === true) {
+        let filterExpiredRiders = rider => rider->statusGet !== "Expired" && rider->statusGet !== "Canceled";
+
+        let ridersNotExpired = Utils.filterArray(~f=filterExpiredRiders, riders);
+          
+        ridersNotExpired;
+      }
+      else {
+        riders;
+      };
+    };
+
+    let tableRiders = filterRiders(tableRidersAll);
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 

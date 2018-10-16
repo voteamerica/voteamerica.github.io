@@ -211,8 +211,6 @@ _children) => {
       }  */
       else  {
         let keyMatched = k=>{
-          /* Js.log(k); */
-
           if (k == key) {
             true;
           }
@@ -228,9 +226,6 @@ _children) => {
     };
 
     let tableMatches = Utils.filterArray(~f=filterProposedAndConfirmed, tableMatchesAll); 
-
-    /* Js.log(confirmsKeys);
-    Js.log(tableMatches); */
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
