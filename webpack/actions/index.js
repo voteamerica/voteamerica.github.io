@@ -8,14 +8,17 @@ import {
   driversGetHideListTypes,
   driversListSetInfoType,
   driversListHideExpiredType,
+  driversListHideConfirmedType,
   currentDriverShowHideTypes,
   ridersGetHideListTypes,
   ridersListSetInfoType,
   ridersListHideExpiredType,
+  ridersListHideConfirmedType,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
   matchesListSetInfoType,
   matchesListHideExpiredType,
+  matchesListHideConfirmedType,
   currentMatchShowHideTypes
 } from './types';
 
@@ -83,9 +86,23 @@ const hideExpiredItemsList = itemsListHideExpiredType => () => ({
   type: itemsListHideExpiredType,
   payload: {}
 });
-const hideExpiredDriversList = setInfoItemsList(driversListHideExpiredType);
+const hideExpiredDriversList = hideExpiredItemsList(driversListHideExpiredType);
 const hideExpiredRidersList = hideExpiredItemsList(ridersListHideExpiredType);
-const hideExpiredMatchesList = setInfoItemsList(matchesListHideExpiredType);
+const hideExpiredMatchesList = hideExpiredItemsList(matchesListHideExpiredType);
+
+const hideConfirmedItemsList = itemsListHideConfirmedType => () => ({
+  type: itemsListHideConfirmedType,
+  payload: {}
+});
+const hideConfirmedDriversList = hideConfirmedItemsList(
+  driversListHideConfirmedType
+);
+const hideConfirmedRidersList = hideConfirmedItemsList(
+  ridersListHideConfirmedType
+);
+const hideConfirmedMatchesList = hideConfirmedItemsList(
+  matchesListHideConfirmedType
+);
 
 const showCurrentItem = currentItemShowType => itemDetails => ({
   type: currentItemShowType,
@@ -115,18 +132,21 @@ export {
   hideDriversList,
   setInfoDriversList,
   hideExpiredDriversList,
+  hideConfirmedDriversList,
   showCurrentDriver,
   hideCurrentDriver,
   getRidersList,
   hideRidersList,
   setInfoRidersList,
   hideExpiredRidersList,
+  hideConfirmedRidersList,
   showCurrentRider,
   hideCurrentRider,
   getMatchesList,
   hideMatchesList,
   setInfoMatchesList,
   hideExpiredMatchesList,
+  hideConfirmedMatchesList,
   showCurrentMatch,
   hideCurrentMatch
 };

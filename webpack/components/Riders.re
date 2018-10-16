@@ -49,6 +49,7 @@ type ridersInfo = {
   listPageIndex: int,
   listPageSize: int,
   hideExpiredCanceled: bool,
+  hideConfirmed: bool,
   showCurrentRiderDetails: bool,
   currentRider: (rider),  
 };
@@ -145,6 +146,7 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo,
 ~hideRidersList,
 ~setInfoRidersList,
 ~hideExpiredRidersList,
+~hideConfirmedRidersList,
 ~showCurrentRider,
 ~hideCurrentRider,
 _children) => {
@@ -236,6 +238,10 @@ _children) => {
     hideExpiredRidersList();
   }
 
+  let ridersTableHideConfirmedHandler = _ => {
+    hideConfirmedRidersList();
+  }
+
   let handleGetRiderListClick = (_event) => {
     let token = loginInfo->TypeInfo.tokenGet;
     let url = apiInfo->TypeInfo.apiUrlGet;
@@ -258,13 +264,11 @@ _children) => {
   {
   ...component,
   render: (_self) => { 
-    let tableRidersAll:array(rider) = Array.map(tableRider, ridersInfo->ridersGet); 
-
-    let filterRiders = riders => {
+    let filterExpiredRiders = riders => {
       if (ridersInfo->hideExpiredCanceledGet === true) {
-        let filterExpiredRiders = rider => rider->statusGet !== "Expired" && rider->statusGet !== "Canceled";
+        let filterRiders = rider => rider->statusGet !== "Expired" && rider->statusGet !== "Canceled";
 
-        let ridersNotExpired = Utils.filterArray(~f=filterExpiredRiders, riders);
+        let ridersNotExpired = Utils.filterArray(~f=filterRiders, riders);
           
         ridersNotExpired;
       }
@@ -273,11 +277,27 @@ _children) => {
       };
     };
 
-    let tableRiders = filterRiders(tableRidersAll);
+    let filterConfirmedRiders = riders => {
+      if (ridersInfo->hideConfirmedGet === true) {
+        let filterRiders = rider => rider->statusGet !== "MatchConfirmed";
+
+        let ridersNotConfirmed = Utils.filterArray(~f=filterRiders, riders);
+          
+        ridersNotConfirmed;
+      }
+      else {
+        riders;
+      };
+    };
+
+    let tableRidersAll:array(rider) = Array.map(tableRider, ridersInfo->ridersGet); 
+
+    let tableRidersStepOne = filterExpiredRiders(tableRidersAll);
+    let tableRiders = filterConfirmedRiders(tableRidersStepOne);
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
-    let checkboxAreaStyle = ReactDOMRe.Style.make(~marginTop="20px", ());
+    let checkboxAreaStyle = ReactDOMRe.Style.make(~marginTop="20px", ~display="inline-block", ());
 
     let checkboxLabelStyle = ReactDOMRe.Style.make(~paddingRight="40px", ());
 
@@ -310,10 +330,17 @@ _children) => {
             </button>
             <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
           </div> 
-          <div className="form-group checkbox" style={checkboxAreaStyle}>
-            <label className="" style={checkboxLabelStyle} htmlFor="hideExpired">{ReasonReact.string("Hide Expired/Cancelled")}
-            </label>
-            <input className="" type_="checkbox" id="hideExpired" checked={ridersInfo->hideExpiredCanceledGet} onChange={ridersTableHideExpiredHandler} />
+          <div> 
+            <div className="form-group checkbox" style={checkboxAreaStyle}>
+              <label className="" style={checkboxLabelStyle} htmlFor="hideExpired">{ReasonReact.string("Hide Expired/Cancelled")}
+              </label>
+              <input className="" type_="checkbox" id="hideExpired" checked={ridersInfo->hideExpiredCanceledGet} onChange={ridersTableHideExpiredHandler} />
+            </div> 
+            <div className="form-group checkbox" style={checkboxAreaStyle}>
+              <label className="" style={checkboxLabelStyle} htmlFor="hideConfirmed">{ReasonReact.string("Hide Confirmed")}
+              </label>
+              <input className="" type_="checkbox" id="hideConfirmed" checked={ridersInfo->hideConfirmedGet} onChange={ridersTableHideConfirmedHandler} />
+            </div> 
           </div> 
           <div style={tableDivStyle}> 
             <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
@@ -371,6 +398,7 @@ type jsProps = {
   hideRidersList: unit => unit,
   setInfoRidersList: (int, int) => unit,
   hideExpiredRidersList: unit => unit,
+  hideConfirmedRidersList: unit => unit,
   showCurrentRider: rider => unit,
   hideCurrentRider: unit => unit,
 };
@@ -386,6 +414,7 @@ let default =
       ~hideRidersList=jsProps->hideRidersListGet,
       ~setInfoRidersList=jsProps->setInfoRidersListGet,
       ~hideExpiredRidersList=jsProps->hideExpiredRidersListGet,
+      ~hideConfirmedRidersList=jsProps->hideConfirmedRidersListGet,
       ~showCurrentRider=jsProps->showCurrentRiderGet,
       ~hideCurrentRider=jsProps->hideCurrentRiderGet,
       [||],
