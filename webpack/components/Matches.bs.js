@@ -7,7 +7,8 @@ var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 var Table$VoteUSReason = require("./Table.bs.js");
-var TypeInfo$VoteUSReason = require("./TypeInfo.bs.js");
+var Utils$VoteUSReason = require("./Utils.bs.js");
+var Defaults$VoteUSReason = require("./Defaults.bs.js");
 var LeftPaddedButton$VoteUSReason = require("./ui/LeftPaddedButton.bs.js");
 
 var component = ReasonReact.statelessComponent("Matches");
@@ -139,9 +140,9 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
     };
     var getBkgColour = function () {
       if (itemDriverUuid === matchesInfo.currentMatch.uuid_driver && itemRiderUuid === matchesInfo.currentMatch.uuid_rider) {
-        return TypeInfo$VoteUSReason.highlightSelectedRowBackgroundColour;
+        return Defaults$VoteUSReason.highlightSelectedRowBackgroundColour;
       } else {
-        return TypeInfo$VoteUSReason.defaultRowBackgroundColour;
+        return Defaults$VoteUSReason.defaultRowBackgroundColour;
       }
     };
     var bkgStyle = {
@@ -174,7 +175,26 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              var tableMatches = $$Array.map(tableMatch, matchesInfo.matches);
+              var tableMatchesAll = $$Array.map(tableMatch, matchesInfo.matches);
+              var confirms = Utils$VoteUSReason.filterArray((function (m) {
+                      return m.status === "MatchConfirmed";
+                    }), tableMatchesAll);
+              var confirmsKeys = $$Array.map((function (c) {
+                      return c.uuid_rider;
+                    }), confirms);
+              var filterProposedAndConfirmed = function (m) {
+                var s = m.status;
+                var key = m.uuid_rider;
+                if (s !== "MatchProposed" && s !== "ExtendedMatch") {
+                  return true;
+                } else {
+                  var keyMatched = function (k) {
+                    return k === key;
+                  };
+                  return !Utils$VoteUSReason.existsArray(keyMatched, confirmsKeys);
+                }
+              };
+              var tableMatches = Utils$VoteUSReason.filterArray(filterProposedAndConfirmed, tableMatchesAll);
               var tableDivStyle = {
                 marginTop: "20px",
                 marginBottom: "10px"

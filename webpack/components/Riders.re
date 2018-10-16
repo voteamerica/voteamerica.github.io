@@ -69,37 +69,37 @@ let tableType = "riders";
 
 let riderTableColumns = 
   [| 
-  TypeInfo.thcCreator(~header="uuid", ~accessor="UUID"),
-  TypeInfo.thcCreator(~header="First Name", ~accessor="RiderFirstName"), 
-  TypeInfo.thcCreator(~header="Last Name", ~accessor="RiderLastName"),
-  TypeInfo.thcCreator(~header="Email", ~accessor="RiderEmail"), 
-  TypeInfo.thcCreator(~header="Phone", ~accessor="RiderPhone"),
-  TypeInfo.thcCreator(~header="Collection ZIP", ~accessor="RiderCollectionZIP"),
-  TypeInfo.thcCreator(~header="City", ~accessor="city"),
-  TypeInfo.thcCreator(~header="State", ~accessor="full_state"),
-  TypeInfo.thcCreator(~header="Dropoff ZIP", ~accessor="RiderDropOffZIP"),
-  TypeInfo.thcCreator(~header="Created", ~accessor="created_ts"),
-  TypeInfo.thcCreator(~header="Updated", ~accessor="last_updated_ts"),
-  TypeInfo.thcCreator(~header="Status", ~accessor="status"),
-  TypeInfo.thcCreator(~header="Status Info", ~accessor="status_info"),
-  TypeInfo.thcCreator(~header="Org ID", ~accessor="uuid_organization"),
-  TypeInfo.thcCreator(~header="Org Name", ~accessor="OrganizationName"),
-   TypeInfo.thcCreator(~header="Collection Street Number", ~accessor="RiderCollectionStreetNumber"),
-   TypeInfo.thcCreator(~header="Collection Address", ~accessor="RiderCollectionAddress"),
-   TypeInfo.thcCreator(~header="Destination Address", ~accessor="RiderDestinationAddress"),
-   TypeInfo.thcCreator(~header="Ride Times Local", ~accessor="AvailableRideTimesLocal"), 
-   TypeInfo.thcCreator(~header="Party Size", ~accessor="TotalPartySize"),
-   TypeInfo.thcCreatorBool(~header="Two Way Trip", ~accessor="TwoWayTripNeeded"),
-   TypeInfo.thcCreatorBool(~header="Is Vulnerable", ~accessor="RiderIsVulnerable"),
-   TypeInfo.thcCreatorBool(~header="No Politics Talk", ~accessor="RiderWillNotTalkPolitics"),
-   TypeInfo.thcCreatorBool(~header="Stay In Touch", ~accessor="PleaseStayInTouch"),
-   TypeInfo.thcCreatorBool(~header="Need Wheelchair", ~accessor="NeedWheelchair"),
-   TypeInfo.thcCreator(~header="Contact Method", ~accessor="RiderPreferredContact"),
-   TypeInfo.thcCreator(~header="Rider Notes", ~accessor="RiderAccommodationNotes"),
-   TypeInfo.thcCreatorBool(~header="Legal Consent", ~accessor="RiderLegalConsent"),
-   TypeInfo.thcCreatorBool(~header="Ready To Match", ~accessor="ReadyToMatch"),
-   TypeInfo.thcCreatorBool(~header="Will Be Safe", ~accessor="RiderWillBeSafe"),
-   TypeInfo.thcCreator(~header="Time zone", ~accessor="timezone"),
+    Utils.thcCreator(~header="uuid", ~accessor="UUID"),
+    Utils.thcCreator(~header="First Name", ~accessor="RiderFirstName"), 
+    Utils.thcCreator(~header="Last Name", ~accessor="RiderLastName"),
+    Utils.thcCreator(~header="Email", ~accessor="RiderEmail"), 
+    Utils.thcCreator(~header="Phone", ~accessor="RiderPhone"),
+    Utils.thcCreator(~header="Collection ZIP", ~accessor="RiderCollectionZIP"),
+    Utils.thcCreator(~header="City", ~accessor="city"),
+    Utils.thcCreator(~header="State", ~accessor="full_state"),
+    Utils.thcCreator(~header="Dropoff ZIP", ~accessor="RiderDropOffZIP"),
+    Utils.thcCreator(~header="Created", ~accessor="created_ts"),
+    Utils.thcCreator(~header="Updated", ~accessor="last_updated_ts"),
+    Utils.thcCreator(~header="Status", ~accessor="status"),
+    Utils.thcCreator(~header="Status Info", ~accessor="status_info"),
+    Utils.thcCreator(~header="Org ID", ~accessor="uuid_organization"),
+    Utils.thcCreator(~header="Org Name", ~accessor="OrganizationName"),
+    Utils.thcCreator(~header="Collection Street Number", ~accessor="RiderCollectionStreetNumber"),
+    Utils.thcCreator(~header="Collection Address", ~accessor="RiderCollectionAddress"),
+    Utils.thcCreator(~header="Destination Address", ~accessor="RiderDestinationAddress"),
+    Utils.thcCreator(~header="Ride Times Local", ~accessor="AvailableRideTimesLocal"), 
+    Utils.thcCreator(~header="Party Size", ~accessor="TotalPartySize"),
+    Utils.thcCreatorBool(~header="Two Way Trip", ~accessor="TwoWayTripNeeded"),
+    Utils.thcCreatorBool(~header="Is Vulnerable", ~accessor="RiderIsVulnerable"),
+    Utils.thcCreatorBool(~header="No Politics Talk", ~accessor="RiderWillNotTalkPolitics"),
+    Utils.thcCreatorBool(~header="Stay In Touch", ~accessor="PleaseStayInTouch"),
+    Utils.thcCreatorBool(~header="Need Wheelchair", ~accessor="NeedWheelchair"),
+    Utils.thcCreator(~header="Contact Method", ~accessor="RiderPreferredContact"),
+    Utils.thcCreator(~header="Rider Notes", ~accessor="RiderAccommodationNotes"),
+    Utils.thcCreatorBool(~header="Legal Consent", ~accessor="RiderLegalConsent"),
+    Utils.thcCreatorBool(~header="Ready To Match", ~accessor="ReadyToMatch"),
+    Utils.thcCreatorBool(~header="Will Be Safe", ~accessor="RiderWillBeSafe"),
+    Utils.thcCreator(~header="Time zone", ~accessor="timezone"),
   |];
 
 let tableRider = itemDetails:rider => 
@@ -203,23 +203,23 @@ _children) => {
 
     let getRowBkgColour = () => {
       if (itemUuid == matchesInfo->Matches.currentMatchGet->Matches.uuid_riderGet) {
-        TypeInfo.highlightMatchedRowBackgroundColour
+        Defaults.highlightMatchedRowBackgroundColour
       }
       else 
       if ( itemUuid == ridersInfo->currentRiderGet->uuidGet) { 
-        TypeInfo.highlightSelectedRowBackgroundColour
+        Defaults.highlightSelectedRowBackgroundColour
       }
       else { 
-        TypeInfo.defaultRowBackgroundColour
+        Defaults.defaultRowBackgroundColour
       }
     };
 
     let getRowTextColour = () => {
         if ( itemUuid == ridersInfo->currentRiderGet->uuidGet) { 
-          TypeInfo.highlightSelectedRowForegroundColour
+          Defaults.highlightSelectedRowForegroundColour
         }
         else { 
-          TypeInfo.defaultRowForegroundColour
+          Defaults.defaultRowForegroundColour
         }
     };
 

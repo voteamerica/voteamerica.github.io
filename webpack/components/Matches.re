@@ -157,10 +157,10 @@ _children) => {
 
     let getBkgColour = () => {
       if (itemDriverUuid == matchesInfo->currentMatchGet->uuid_driverGet && itemRiderUuid == matchesInfo->currentMatchGet->uuid_riderGet) {
-        TypeInfo.highlightSelectedRowBackgroundColour
+        Defaults.highlightSelectedRowBackgroundColour
       }
       else {
-        TypeInfo.defaultRowBackgroundColour
+        Defaults.defaultRowBackgroundColour
       }
     };
 
@@ -193,7 +193,44 @@ _children) => {
   {
   ...component,
   render: (_self) => { 
-    let tableMatches:array(systemMatch) = Array.map(tableMatch, matchesInfo->matchesGet); 
+    let tableMatchesAll:array(systemMatch) = Array.map(tableMatch, matchesInfo->matchesGet); 
+
+    let confirms = Utils.filterArray(~f=m=>m->statusGet=="MatchConfirmed", tableMatchesAll);
+
+    let confirmsKeys = Array.map(c => c->uuid_riderGet, confirms);
+
+    let filterProposedAndConfirmed = m => {
+      let s = m->statusGet;
+      let key = m->uuid_riderGet;
+      
+      if (s != "MatchProposed" && s != "ExtendedMatch") {
+        true;
+      } 
+      /* else if (s == "ExtendedMatch") {
+        false;
+      }  */
+      else  {
+        let keyMatched = k=>{
+          /* Js.log(k); */
+
+          if (k == key) {
+            true;
+          }
+          else {
+            false;
+          }
+        };
+
+        let xx = Utils.existsArray(~f=keyMatched, confirmsKeys);
+
+        not(xx);
+      }
+    };
+
+    let tableMatches = Utils.filterArray(~f=filterProposedAndConfirmed, tableMatchesAll); 
+
+    /* Js.log(confirmsKeys);
+    Js.log(tableMatches); */
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
