@@ -1,14 +1,5 @@
 [@bs.val] external encodeURI: string => string = "encodeURI";
 
-let defaultRowBackgroundColour = "none";
-let highlightSelectedRowBackgroundColour = "green";
-
-let defaultRowForegroundColour = "black";
-let highlightSelectedRowForegroundColour = "white";
-
-let highlightMatchedRowForegroundColour = "black";
-let highlightMatchedRowBackgroundColour = "violet";
-
 [@bs.deriving abstract]
 type driver = {
    [@bs.as "DriverFirstName"] driverFirstName: string,
@@ -49,23 +40,11 @@ type theader = {
 
 type cellValueToStringHandler = unit => string;
 
-let cellValueToString: cellValueToStringHandler = [%raw (row) => "{ return String(row.value); }"];
-
-let cellValueRaw: cellValueToStringHandler = [%raw (row) => "{ return row.value; }"];
-
 [@bs.deriving abstract]
 type theaderCell = {
   [@bs.as "Header"] header: string, 
   accessor: string, 
   [@bs.as "Cell"] cell: cellValueToStringHandler, 
-};
-
-let thcCreator = (~header, ~accessor) => {
-  theaderCell(~header, ~accessor, ~cell=cellValueRaw);
-};
-
-let thcCreatorBool = (~header, ~accessor) => {
-  theaderCell(~header, ~accessor, ~cell=cellValueToString);
 };
 
 [@bs.deriving abstract]

@@ -7,12 +7,18 @@ import {
   // HIDE_DRIVERS_LIST,
   driversGetHideListTypes,
   driversListSetInfoType,
+  driversListHideExpiredType,
+  driversListHideConfirmedType,
   currentDriverShowHideTypes,
   ridersGetHideListTypes,
   ridersListSetInfoType,
+  ridersListHideExpiredType,
+  ridersListHideConfirmedType,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
   matchesListSetInfoType,
+  matchesListHideExpiredType,
+  matchesListHideConfirmedType,
   currentMatchShowHideTypes
 } from './types';
 
@@ -76,6 +82,28 @@ const setInfoDriversList = setInfoItemsList(driversListSetInfoType);
 const setInfoRidersList = setInfoItemsList(ridersListSetInfoType);
 const setInfoMatchesList = setInfoItemsList(matchesListSetInfoType);
 
+const hideExpiredItemsList = itemsListHideExpiredType => () => ({
+  type: itemsListHideExpiredType,
+  payload: {}
+});
+const hideExpiredDriversList = hideExpiredItemsList(driversListHideExpiredType);
+const hideExpiredRidersList = hideExpiredItemsList(ridersListHideExpiredType);
+const hideExpiredMatchesList = hideExpiredItemsList(matchesListHideExpiredType);
+
+const hideConfirmedItemsList = itemsListHideConfirmedType => () => ({
+  type: itemsListHideConfirmedType,
+  payload: {}
+});
+const hideConfirmedDriversList = hideConfirmedItemsList(
+  driversListHideConfirmedType
+);
+const hideConfirmedRidersList = hideConfirmedItemsList(
+  ridersListHideConfirmedType
+);
+const hideConfirmedMatchesList = hideConfirmedItemsList(
+  matchesListHideConfirmedType
+);
+
 const showCurrentItem = currentItemShowType => itemDetails => ({
   type: currentItemShowType,
   payload: { itemDetails }
@@ -103,16 +131,22 @@ export {
   getDriversList,
   hideDriversList,
   setInfoDriversList,
+  hideExpiredDriversList,
+  hideConfirmedDriversList,
   showCurrentDriver,
   hideCurrentDriver,
   getRidersList,
   hideRidersList,
   setInfoRidersList,
+  hideExpiredRidersList,
+  hideConfirmedRidersList,
   showCurrentRider,
   hideCurrentRider,
   getMatchesList,
   hideMatchesList,
   setInfoMatchesList,
+  hideExpiredMatchesList,
+  hideConfirmedMatchesList,
   showCurrentMatch,
   hideCurrentMatch
 };

@@ -7,7 +7,8 @@ var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 var Table$VoteUSReason = require("./Table.bs.js");
-var TypeInfo$VoteUSReason = require("./TypeInfo.bs.js");
+var Utils$VoteUSReason = require("./Utils.bs.js");
+var Defaults$VoteUSReason = require("./Defaults.bs.js");
 var LeftPaddedButton$VoteUSReason = require("./ui/LeftPaddedButton.bs.js");
 
 var component = ReasonReact.statelessComponent("Matches");
@@ -107,7 +108,7 @@ function tableMatch(itemDetails) {
         };
 }
 
-function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, setInfoMatchesList, showCurrentMatch, hideCurrentMatch, _) {
+function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, _) {
   var matchesTableOnPageChangeHandler = function (pageIndex) {
     console.log(pageIndex);
     return /* () */0;
@@ -139,9 +140,9 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
     };
     var getBkgColour = function () {
       if (itemDriverUuid === matchesInfo.currentMatch.uuid_driver && itemRiderUuid === matchesInfo.currentMatch.uuid_rider) {
-        return TypeInfo$VoteUSReason.highlightSelectedRowBackgroundColour;
+        return Defaults$VoteUSReason.highlightSelectedRowBackgroundColour;
       } else {
-        return TypeInfo$VoteUSReason.defaultRowBackgroundColour;
+        return Defaults$VoteUSReason.defaultRowBackgroundColour;
       }
     };
     var bkgStyle = {
@@ -151,6 +152,12 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
             onClick: tableClickHandler,
             style: bkgStyle
           };
+  };
+  var matchesTableHideExpiredHandler = function () {
+    return Curry._1(hideExpiredMatchesList, /* () */0);
+  };
+  var matchesTableHideConfirmedHandler = function () {
+    return Curry._1(hideConfirmedMatchesList, /* () */0);
   };
   var handleGetMatchListClick = function () {
     var token = loginInfo.token;
@@ -174,10 +181,64 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              var tableMatches = $$Array.map(tableMatch, matchesInfo.matches);
+              var tableMatchesAll = $$Array.map(tableMatch, matchesInfo.matches);
+              var confirms = Utils$VoteUSReason.filterArray((function (m) {
+                      return m.status === "MatchConfirmed";
+                    }), tableMatchesAll);
+              var confirmsKeys = $$Array.map((function (c) {
+                      return c.uuid_rider;
+                    }), confirms);
+              var filterProposedAndConfirmed = function (m) {
+                var s = m.status;
+                var key = m.uuid_rider;
+                if (s !== "MatchProposed" && s !== "ExtendedMatch") {
+                  return true;
+                } else if (s === "ExtendedMatch") {
+                  return false;
+                } else {
+                  var keyMatched = function (k) {
+                    return k === key;
+                  };
+                  return !Utils$VoteUSReason.existsArray(keyMatched, confirmsKeys);
+                }
+              };
+              var filterExpiredMatches = function (matches) {
+                if (matchesInfo.hideExpiredCanceled === true) {
+                  var filterMatches = function (rider) {
+                    if (rider.status !== "Expired") {
+                      return rider.status !== "Canceled";
+                    } else {
+                      return false;
+                    }
+                  };
+                  return Utils$VoteUSReason.filterArray(filterMatches, matches);
+                } else {
+                  return matches;
+                }
+              };
+              var filterConfirmedMatches = function (matches) {
+                if (matchesInfo.hideConfirmed === true) {
+                  var filterMatches = function (rider) {
+                    return rider.status !== "MatchConfirmed";
+                  };
+                  return Utils$VoteUSReason.filterArray(filterMatches, matches);
+                } else {
+                  return matches;
+                }
+              };
+              var tableMatchesStepZero = Utils$VoteUSReason.filterArray(filterProposedAndConfirmed, tableMatchesAll);
+              var tableMatchesStepOne = filterExpiredMatches(tableMatchesStepZero);
+              var tableMatches = filterConfirmedMatches(tableMatchesStepOne);
               var tableDivStyle = {
                 marginTop: "20px",
                 marginBottom: "10px"
+              };
+              var checkboxAreaStyle = {
+                display: "inline-block",
+                marginTop: "20px"
+              };
+              var checkboxLabelStyle = {
+                paddingRight: "40px"
               };
               var currentMatchInfo = function (currentMatch) {
                 return React.createElement("div", undefined, React.createElement("h3", undefined, "Current match info:"), React.createElement("div", undefined, "Driver uuid: " + currentMatch.uuid_driver), React.createElement("div", undefined, "Rider uuid: " + currentMatch.uuid_rider), React.createElement("div", undefined, currentMatch.status));
@@ -195,7 +256,33 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
                                             id: prim$1,
                                             onClick: prim$2
                                           };
-                                  }), "button button--large", "refreshMatchesListButton", handleGetMatchListClick, /* array */["Refresh List"]))), React.createElement("div", {
+                                  }), "button button--large", "refreshMatchesListButton", handleGetMatchListClick, /* array */["Refresh List"]))), React.createElement("div", undefined, React.createElement("div", {
+                              className: "form-group checkbox",
+                              style: checkboxAreaStyle
+                            }, React.createElement("label", {
+                                  className: "",
+                                  style: checkboxLabelStyle,
+                                  htmlFor: "hideExpired"
+                                }, "Hide Expired/Cancelled"), React.createElement("input", {
+                                  className: "",
+                                  id: "hideExpired",
+                                  checked: matchesInfo.hideExpiredCanceled,
+                                  type: "checkbox",
+                                  onChange: matchesTableHideExpiredHandler
+                                })), React.createElement("div", {
+                              className: "form-group checkbox",
+                              style: checkboxAreaStyle
+                            }, React.createElement("label", {
+                                  className: "",
+                                  style: checkboxLabelStyle,
+                                  htmlFor: "hideConfirmed"
+                                }, "Hide Confirmed"), React.createElement("input", {
+                                  className: "",
+                                  id: "hideConfirmed",
+                                  checked: matchesInfo.hideConfirmed,
+                                  type: "checkbox",
+                                  onChange: matchesTableHideConfirmedHandler
+                                }))), React.createElement("div", {
                           style: tableDivStyle
                         }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
                                     return {
@@ -230,7 +317,7 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.setInfoMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, /* array */[]);
+        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, /* array */[]);
       }));
 
 exports.component = component;

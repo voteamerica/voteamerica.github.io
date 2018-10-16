@@ -7,7 +7,8 @@ var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 var Table$VoteUSReason = require("./Table.bs.js");
-var TypeInfo$VoteUSReason = require("./TypeInfo.bs.js");
+var Utils$VoteUSReason = require("./Utils.bs.js");
+var Defaults$VoteUSReason = require("./Defaults.bs.js");
 var LeftPaddedButton$VoteUSReason = require("./ui/LeftPaddedButton.bs.js");
 
 var component = ReasonReact.statelessComponent("Riders");
@@ -15,37 +16,37 @@ var component = ReasonReact.statelessComponent("Riders");
 var tableType = "riders";
 
 var riderTableColumns = /* array */[
-  TypeInfo$VoteUSReason.thcCreator("uuid", "UUID"),
-  TypeInfo$VoteUSReason.thcCreator("First Name", "RiderFirstName"),
-  TypeInfo$VoteUSReason.thcCreator("Last Name", "RiderLastName"),
-  TypeInfo$VoteUSReason.thcCreator("Email", "RiderEmail"),
-  TypeInfo$VoteUSReason.thcCreator("Phone", "RiderPhone"),
-  TypeInfo$VoteUSReason.thcCreator("Collection ZIP", "RiderCollectionZIP"),
-  TypeInfo$VoteUSReason.thcCreator("City", "city"),
-  TypeInfo$VoteUSReason.thcCreator("State", "full_state"),
-  TypeInfo$VoteUSReason.thcCreator("Dropoff ZIP", "RiderDropOffZIP"),
-  TypeInfo$VoteUSReason.thcCreator("Created", "created_ts"),
-  TypeInfo$VoteUSReason.thcCreator("Updated", "last_updated_ts"),
-  TypeInfo$VoteUSReason.thcCreator("Status", "status"),
-  TypeInfo$VoteUSReason.thcCreator("Status Info", "status_info"),
-  TypeInfo$VoteUSReason.thcCreator("Org ID", "uuid_organization"),
-  TypeInfo$VoteUSReason.thcCreator("Org Name", "OrganizationName"),
-  TypeInfo$VoteUSReason.thcCreator("Collection Street Number", "RiderCollectionStreetNumber"),
-  TypeInfo$VoteUSReason.thcCreator("Collection Address", "RiderCollectionAddress"),
-  TypeInfo$VoteUSReason.thcCreator("Destination Address", "RiderDestinationAddress"),
-  TypeInfo$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal"),
-  TypeInfo$VoteUSReason.thcCreator("Party Size", "TotalPartySize"),
-  TypeInfo$VoteUSReason.thcCreatorBool("Two Way Trip", "TwoWayTripNeeded"),
-  TypeInfo$VoteUSReason.thcCreatorBool("Is Vulnerable", "RiderIsVulnerable"),
-  TypeInfo$VoteUSReason.thcCreatorBool("No Politics Talk", "RiderWillNotTalkPolitics"),
-  TypeInfo$VoteUSReason.thcCreatorBool("Stay In Touch", "PleaseStayInTouch"),
-  TypeInfo$VoteUSReason.thcCreatorBool("Need Wheelchair", "NeedWheelchair"),
-  TypeInfo$VoteUSReason.thcCreator("Contact Method", "RiderPreferredContact"),
-  TypeInfo$VoteUSReason.thcCreator("Rider Notes", "RiderAccommodationNotes"),
-  TypeInfo$VoteUSReason.thcCreatorBool("Legal Consent", "RiderLegalConsent"),
-  TypeInfo$VoteUSReason.thcCreatorBool("Ready To Match", "ReadyToMatch"),
-  TypeInfo$VoteUSReason.thcCreatorBool("Will Be Safe", "RiderWillBeSafe"),
-  TypeInfo$VoteUSReason.thcCreator("Time zone", "timezone")
+  Utils$VoteUSReason.thcCreator("uuid", "UUID"),
+  Utils$VoteUSReason.thcCreator("First Name", "RiderFirstName"),
+  Utils$VoteUSReason.thcCreator("Last Name", "RiderLastName"),
+  Utils$VoteUSReason.thcCreator("Email", "RiderEmail"),
+  Utils$VoteUSReason.thcCreator("Phone", "RiderPhone"),
+  Utils$VoteUSReason.thcCreator("Collection ZIP", "RiderCollectionZIP"),
+  Utils$VoteUSReason.thcCreator("City", "city"),
+  Utils$VoteUSReason.thcCreator("State", "full_state"),
+  Utils$VoteUSReason.thcCreator("Dropoff ZIP", "RiderDropOffZIP"),
+  Utils$VoteUSReason.thcCreator("Created", "created_ts"),
+  Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts"),
+  Utils$VoteUSReason.thcCreator("Status", "status"),
+  Utils$VoteUSReason.thcCreator("Status Info", "status_info"),
+  Utils$VoteUSReason.thcCreator("Org ID", "uuid_organization"),
+  Utils$VoteUSReason.thcCreator("Org Name", "OrganizationName"),
+  Utils$VoteUSReason.thcCreator("Collection Street Number", "RiderCollectionStreetNumber"),
+  Utils$VoteUSReason.thcCreator("Collection Address", "RiderCollectionAddress"),
+  Utils$VoteUSReason.thcCreator("Destination Address", "RiderDestinationAddress"),
+  Utils$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal"),
+  Utils$VoteUSReason.thcCreator("Party Size", "TotalPartySize"),
+  Utils$VoteUSReason.thcCreatorBool("Two Way Trip", "TwoWayTripNeeded"),
+  Utils$VoteUSReason.thcCreatorBool("Is Vulnerable", "RiderIsVulnerable"),
+  Utils$VoteUSReason.thcCreatorBool("No Politics Talk", "RiderWillNotTalkPolitics"),
+  Utils$VoteUSReason.thcCreatorBool("Stay In Touch", "PleaseStayInTouch"),
+  Utils$VoteUSReason.thcCreatorBool("Need Wheelchair", "NeedWheelchair"),
+  Utils$VoteUSReason.thcCreator("Contact Method", "RiderPreferredContact"),
+  Utils$VoteUSReason.thcCreator("Rider Notes", "RiderAccommodationNotes"),
+  Utils$VoteUSReason.thcCreatorBool("Legal Consent", "RiderLegalConsent"),
+  Utils$VoteUSReason.thcCreatorBool("Ready To Match", "ReadyToMatch"),
+  Utils$VoteUSReason.thcCreatorBool("Will Be Safe", "RiderWillBeSafe"),
+  Utils$VoteUSReason.thcCreator("Time zone", "timezone")
 ];
 
 function tableRider(itemDetails) {
@@ -84,7 +85,7 @@ function tableRider(itemDetails) {
         };
 }
 
-function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, showCurrentRider, hideCurrentRider, _) {
+function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentRider, hideCurrentRider, _) {
   var ridersTableOnPageChangeHandler = function (pageIndex) {
     console.log(pageIndex);
     return /* () */0;
@@ -115,18 +116,18 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
     };
     var getRowBkgColour = function () {
       if (itemUuid === matchesInfo.currentMatch.uuid_rider) {
-        return TypeInfo$VoteUSReason.highlightMatchedRowBackgroundColour;
+        return Defaults$VoteUSReason.highlightMatchedRowBackgroundColour;
       } else if (itemUuid === ridersInfo.currentRider.UUID) {
-        return TypeInfo$VoteUSReason.highlightSelectedRowBackgroundColour;
+        return Defaults$VoteUSReason.highlightSelectedRowBackgroundColour;
       } else {
-        return TypeInfo$VoteUSReason.defaultRowBackgroundColour;
+        return Defaults$VoteUSReason.defaultRowBackgroundColour;
       }
     };
     var getRowTextColour = function () {
       if (itemUuid === ridersInfo.currentRider.UUID) {
-        return TypeInfo$VoteUSReason.highlightSelectedRowForegroundColour;
+        return Defaults$VoteUSReason.highlightSelectedRowForegroundColour;
       } else {
-        return TypeInfo$VoteUSReason.defaultRowForegroundColour;
+        return Defaults$VoteUSReason.defaultRowForegroundColour;
       }
     };
     var bkgStyle = {
@@ -137,6 +138,12 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
             onClick: tableClickHandler,
             style: bkgStyle
           };
+  };
+  var ridersTableHideExpiredHandler = function () {
+    return Curry._1(hideExpiredRidersList, /* () */0);
+  };
+  var ridersTableHideConfirmedHandler = function () {
+    return Curry._1(hideConfirmedRidersList, /* () */0);
   };
   var handleGetRiderListClick = function () {
     var token = loginInfo.token;
@@ -160,10 +167,43 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              var tableRiders = $$Array.map(tableRider, ridersInfo.riders);
+              var filterExpiredRiders = function (riders) {
+                if (ridersInfo.hideExpiredCanceled === true) {
+                  var filterRiders = function (rider) {
+                    if (rider.status !== "Expired") {
+                      return rider.status !== "Canceled";
+                    } else {
+                      return false;
+                    }
+                  };
+                  return Utils$VoteUSReason.filterArray(filterRiders, riders);
+                } else {
+                  return riders;
+                }
+              };
+              var filterConfirmedRiders = function (riders) {
+                if (ridersInfo.hideConfirmed === true) {
+                  var filterRiders = function (rider) {
+                    return rider.status !== "MatchConfirmed";
+                  };
+                  return Utils$VoteUSReason.filterArray(filterRiders, riders);
+                } else {
+                  return riders;
+                }
+              };
+              var tableRidersAll = $$Array.map(tableRider, ridersInfo.riders);
+              var tableRidersStepOne = filterExpiredRiders(tableRidersAll);
+              var tableRiders = filterConfirmedRiders(tableRidersStepOne);
               var tableDivStyle = {
                 marginTop: "20px",
                 marginBottom: "10px"
+              };
+              var checkboxAreaStyle = {
+                display: "inline-block",
+                marginTop: "20px"
+              };
+              var checkboxLabelStyle = {
+                paddingRight: "40px"
               };
               var currentRiderInfo = function (currentRider) {
                 var uriPhone = encodeURI(currentRider.RiderPhone);
@@ -185,7 +225,33 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
                                             id: prim$1,
                                             onClick: prim$2
                                           };
-                                  }), "button button--large", "refreshRidersListButton", handleGetRiderListClick, /* array */["Refresh List"]))), React.createElement("div", {
+                                  }), "button button--large", "refreshRidersListButton", handleGetRiderListClick, /* array */["Refresh List"]))), React.createElement("div", undefined, React.createElement("div", {
+                              className: "form-group checkbox",
+                              style: checkboxAreaStyle
+                            }, React.createElement("label", {
+                                  className: "",
+                                  style: checkboxLabelStyle,
+                                  htmlFor: "hideExpired"
+                                }, "Hide Expired/Cancelled"), React.createElement("input", {
+                                  className: "",
+                                  id: "hideExpired",
+                                  checked: ridersInfo.hideExpiredCanceled,
+                                  type: "checkbox",
+                                  onChange: ridersTableHideExpiredHandler
+                                })), React.createElement("div", {
+                              className: "form-group checkbox",
+                              style: checkboxAreaStyle
+                            }, React.createElement("label", {
+                                  className: "",
+                                  style: checkboxLabelStyle,
+                                  htmlFor: "hideConfirmed"
+                                }, "Hide Confirmed"), React.createElement("input", {
+                                  className: "",
+                                  id: "hideConfirmed",
+                                  checked: ridersInfo.hideConfirmed,
+                                  type: "checkbox",
+                                  onChange: ridersTableHideConfirmedHandler
+                                }))), React.createElement("div", {
                           style: tableDivStyle
                         }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
                                     return {
@@ -220,7 +286,7 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.setInfoRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
+        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.setInfoRidersList, jsProps.hideExpiredRidersList, jsProps.hideConfirmedRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
       }));
 
 exports.component = component;

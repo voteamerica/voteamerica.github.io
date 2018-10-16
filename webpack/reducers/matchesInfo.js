@@ -4,6 +4,8 @@ import {
   getMatchListTypes,
   matchesGetHideListTypes,
   matchesListSetInfoType,
+  matchesListHideExpiredType,
+  matchesListHideConfirmedType,
   currentMatchShowHideTypes
 } from '../actions/types';
 
@@ -13,6 +15,8 @@ const matchesInfo = (
     matches: [],
     listPageIndex: DEFAULT_LIST_PAGE_INDEX,
     listPageSize: DEFAULT_LIST_PAGE_SIZE,
+    hideExpiredCanceled: false,
+    hideConfirmed: false,
     showCurrentMatchDetails: false,
     currentMatch: {}
   },
@@ -44,6 +48,12 @@ const matchesInfo = (
 
     case currentMatchShowHideTypes.hide:
       return { ...state, showCurrentMatchDetails: false, currentMatch: {} };
+
+    case matchesListHideExpiredType:
+      return { ...state, hideExpiredCanceled: !state.hideExpiredCanceled };
+
+    case matchesListHideConfirmedType:
+      return { ...state, hideConfirmed: !state.hideConfirmed };
 
     default:
       return state;

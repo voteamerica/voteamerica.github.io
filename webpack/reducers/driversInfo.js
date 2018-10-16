@@ -4,6 +4,8 @@ import {
   getDriverListTypes,
   driversGetHideListTypes,
   driversListSetInfoType,
+  driversListHideExpiredType,
+  driversListHideConfirmedType,
   currentDriverShowHideTypes
 } from '../actions/types';
 
@@ -13,6 +15,8 @@ const driversInfo = (
     drivers: [],
     listPageIndex: DEFAULT_LIST_PAGE_INDEX,
     listPageSize: DEFAULT_LIST_PAGE_SIZE,
+    hideExpiredCanceled: false,
+    hideConfirmed: false,
     showCurrentDriverDetails: false,
     currentDriver: {}
   },
@@ -44,6 +48,12 @@ const driversInfo = (
 
     case currentDriverShowHideTypes.hide:
       return { ...state, showCurrentDriverDetails: false, currentDriver: {} };
+
+    case driversListHideExpiredType:
+      return { ...state, hideExpiredCanceled: !state.hideExpiredCanceled };
+
+    case driversListHideConfirmedType:
+      return { ...state, hideConfirmed: !state.hideConfirmed };
 
     default:
       return state;

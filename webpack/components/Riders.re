@@ -48,6 +48,8 @@ type ridersInfo = {
   riders: array(rider),
   listPageIndex: int,
   listPageSize: int,
+  hideExpiredCanceled: bool,
+  hideConfirmed: bool,
   showCurrentRiderDetails: bool,
   currentRider: (rider),  
 };
@@ -69,37 +71,37 @@ let tableType = "riders";
 
 let riderTableColumns = 
   [| 
-  TypeInfo.thcCreator(~header="uuid", ~accessor="UUID"),
-  TypeInfo.thcCreator(~header="First Name", ~accessor="RiderFirstName"), 
-  TypeInfo.thcCreator(~header="Last Name", ~accessor="RiderLastName"),
-  TypeInfo.thcCreator(~header="Email", ~accessor="RiderEmail"), 
-  TypeInfo.thcCreator(~header="Phone", ~accessor="RiderPhone"),
-  TypeInfo.thcCreator(~header="Collection ZIP", ~accessor="RiderCollectionZIP"),
-  TypeInfo.thcCreator(~header="City", ~accessor="city"),
-  TypeInfo.thcCreator(~header="State", ~accessor="full_state"),
-  TypeInfo.thcCreator(~header="Dropoff ZIP", ~accessor="RiderDropOffZIP"),
-  TypeInfo.thcCreator(~header="Created", ~accessor="created_ts"),
-  TypeInfo.thcCreator(~header="Updated", ~accessor="last_updated_ts"),
-  TypeInfo.thcCreator(~header="Status", ~accessor="status"),
-  TypeInfo.thcCreator(~header="Status Info", ~accessor="status_info"),
-  TypeInfo.thcCreator(~header="Org ID", ~accessor="uuid_organization"),
-  TypeInfo.thcCreator(~header="Org Name", ~accessor="OrganizationName"),
-   TypeInfo.thcCreator(~header="Collection Street Number", ~accessor="RiderCollectionStreetNumber"),
-   TypeInfo.thcCreator(~header="Collection Address", ~accessor="RiderCollectionAddress"),
-   TypeInfo.thcCreator(~header="Destination Address", ~accessor="RiderDestinationAddress"),
-   TypeInfo.thcCreator(~header="Ride Times Local", ~accessor="AvailableRideTimesLocal"), 
-   TypeInfo.thcCreator(~header="Party Size", ~accessor="TotalPartySize"),
-   TypeInfo.thcCreatorBool(~header="Two Way Trip", ~accessor="TwoWayTripNeeded"),
-   TypeInfo.thcCreatorBool(~header="Is Vulnerable", ~accessor="RiderIsVulnerable"),
-   TypeInfo.thcCreatorBool(~header="No Politics Talk", ~accessor="RiderWillNotTalkPolitics"),
-   TypeInfo.thcCreatorBool(~header="Stay In Touch", ~accessor="PleaseStayInTouch"),
-   TypeInfo.thcCreatorBool(~header="Need Wheelchair", ~accessor="NeedWheelchair"),
-   TypeInfo.thcCreator(~header="Contact Method", ~accessor="RiderPreferredContact"),
-   TypeInfo.thcCreator(~header="Rider Notes", ~accessor="RiderAccommodationNotes"),
-   TypeInfo.thcCreatorBool(~header="Legal Consent", ~accessor="RiderLegalConsent"),
-   TypeInfo.thcCreatorBool(~header="Ready To Match", ~accessor="ReadyToMatch"),
-   TypeInfo.thcCreatorBool(~header="Will Be Safe", ~accessor="RiderWillBeSafe"),
-   TypeInfo.thcCreator(~header="Time zone", ~accessor="timezone"),
+    Utils.thcCreator(~header="uuid", ~accessor="UUID"),
+    Utils.thcCreator(~header="First Name", ~accessor="RiderFirstName"), 
+    Utils.thcCreator(~header="Last Name", ~accessor="RiderLastName"),
+    Utils.thcCreator(~header="Email", ~accessor="RiderEmail"), 
+    Utils.thcCreator(~header="Phone", ~accessor="RiderPhone"),
+    Utils.thcCreator(~header="Collection ZIP", ~accessor="RiderCollectionZIP"),
+    Utils.thcCreator(~header="City", ~accessor="city"),
+    Utils.thcCreator(~header="State", ~accessor="full_state"),
+    Utils.thcCreator(~header="Dropoff ZIP", ~accessor="RiderDropOffZIP"),
+    Utils.thcCreator(~header="Created", ~accessor="created_ts"),
+    Utils.thcCreator(~header="Updated", ~accessor="last_updated_ts"),
+    Utils.thcCreator(~header="Status", ~accessor="status"),
+    Utils.thcCreator(~header="Status Info", ~accessor="status_info"),
+    Utils.thcCreator(~header="Org ID", ~accessor="uuid_organization"),
+    Utils.thcCreator(~header="Org Name", ~accessor="OrganizationName"),
+    Utils.thcCreator(~header="Collection Street Number", ~accessor="RiderCollectionStreetNumber"),
+    Utils.thcCreator(~header="Collection Address", ~accessor="RiderCollectionAddress"),
+    Utils.thcCreator(~header="Destination Address", ~accessor="RiderDestinationAddress"),
+    Utils.thcCreator(~header="Ride Times Local", ~accessor="AvailableRideTimesLocal"), 
+    Utils.thcCreator(~header="Party Size", ~accessor="TotalPartySize"),
+    Utils.thcCreatorBool(~header="Two Way Trip", ~accessor="TwoWayTripNeeded"),
+    Utils.thcCreatorBool(~header="Is Vulnerable", ~accessor="RiderIsVulnerable"),
+    Utils.thcCreatorBool(~header="No Politics Talk", ~accessor="RiderWillNotTalkPolitics"),
+    Utils.thcCreatorBool(~header="Stay In Touch", ~accessor="PleaseStayInTouch"),
+    Utils.thcCreatorBool(~header="Need Wheelchair", ~accessor="NeedWheelchair"),
+    Utils.thcCreator(~header="Contact Method", ~accessor="RiderPreferredContact"),
+    Utils.thcCreator(~header="Rider Notes", ~accessor="RiderAccommodationNotes"),
+    Utils.thcCreatorBool(~header="Legal Consent", ~accessor="RiderLegalConsent"),
+    Utils.thcCreatorBool(~header="Ready To Match", ~accessor="ReadyToMatch"),
+    Utils.thcCreatorBool(~header="Will Be Safe", ~accessor="RiderWillBeSafe"),
+    Utils.thcCreator(~header="Time zone", ~accessor="timezone"),
   |];
 
 let tableRider = itemDetails:rider => 
@@ -143,6 +145,8 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo,
 ~getRidersList, 
 ~hideRidersList,
 ~setInfoRidersList,
+~hideExpiredRidersList,
+~hideConfirmedRidersList,
 ~showCurrentRider,
 ~hideCurrentRider,
 _children) => {
@@ -203,23 +207,23 @@ _children) => {
 
     let getRowBkgColour = () => {
       if (itemUuid == matchesInfo->Matches.currentMatchGet->Matches.uuid_riderGet) {
-        TypeInfo.highlightMatchedRowBackgroundColour
+        Defaults.highlightMatchedRowBackgroundColour
       }
       else 
       if ( itemUuid == ridersInfo->currentRiderGet->uuidGet) { 
-        TypeInfo.highlightSelectedRowBackgroundColour
+        Defaults.highlightSelectedRowBackgroundColour
       }
       else { 
-        TypeInfo.defaultRowBackgroundColour
+        Defaults.defaultRowBackgroundColour
       }
     };
 
     let getRowTextColour = () => {
         if ( itemUuid == ridersInfo->currentRiderGet->uuidGet) { 
-          TypeInfo.highlightSelectedRowForegroundColour
+          Defaults.highlightSelectedRowForegroundColour
         }
         else { 
-          TypeInfo.defaultRowForegroundColour
+          Defaults.defaultRowForegroundColour
         }
     };
 
@@ -229,6 +233,14 @@ _children) => {
     
     clickHandlerAndStyleObjectWrapper;
   };
+
+  let ridersTableHideExpiredHandler = _ => {
+    hideExpiredRidersList();
+  }
+
+  let ridersTableHideConfirmedHandler = _ => {
+    hideConfirmedRidersList();
+  }
 
   let handleGetRiderListClick = (_event) => {
     let token = loginInfo->TypeInfo.tokenGet;
@@ -252,9 +264,42 @@ _children) => {
   {
   ...component,
   render: (_self) => { 
-    let tableRiders:array(rider) = Array.map(tableRider, ridersInfo->ridersGet); 
+    let filterExpiredRiders = riders => {
+      if (ridersInfo->hideExpiredCanceledGet === true) {
+        let filterRiders = rider => rider->statusGet !== "Expired" && rider->statusGet !== "Canceled";
+
+        let ridersNotExpired = Utils.filterArray(~f=filterRiders, riders);
+          
+        ridersNotExpired;
+      }
+      else {
+        riders;
+      };
+    };
+
+    let filterConfirmedRiders = riders => {
+      if (ridersInfo->hideConfirmedGet === true) {
+        let filterRiders = rider => rider->statusGet !== "MatchConfirmed";
+
+        let ridersNotConfirmed = Utils.filterArray(~f=filterRiders, riders);
+          
+        ridersNotConfirmed;
+      }
+      else {
+        riders;
+      };
+    };
+
+    let tableRidersAll:array(rider) = Array.map(tableRider, ridersInfo->ridersGet); 
+
+    let tableRidersStepOne = filterExpiredRiders(tableRidersAll);
+    let tableRiders = filterConfirmedRiders(tableRidersStepOne);
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
+
+    let checkboxAreaStyle = ReactDOMRe.Style.make(~marginTop="20px", ~display="inline-block", ());
+
+    let checkboxLabelStyle = ReactDOMRe.Style.make(~paddingRight="40px", ());
 
     let currentRiderInfo = currentRider => {
       let uriPhone = TypeInfo.encodeURI(currentRider->phoneGet);
@@ -284,6 +329,18 @@ _children) => {
             >{ReasonReact.string("Hide List")}
             </button>
             <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
+          </div>
+          <div> 
+            <div className="form-group checkbox" style={checkboxAreaStyle}>
+              <label className="" style={checkboxLabelStyle} htmlFor="hideExpired">{ReasonReact.string("Hide Expired/Cancelled")}
+              </label>
+              <input className="" type_="checkbox" id="hideExpired" checked={ridersInfo->hideExpiredCanceledGet} onChange={ridersTableHideExpiredHandler} />
+            </div> 
+            <div className="form-group checkbox" style={checkboxAreaStyle}>
+              <label className="" style={checkboxLabelStyle} htmlFor="hideConfirmed">{ReasonReact.string("Hide Confirmed")}
+              </label>
+              <input className="" type_="checkbox" id="hideConfirmed" checked={ridersInfo->hideConfirmedGet} onChange={ridersTableHideConfirmedHandler} />
+            </div> 
           </div> 
           <div style={tableDivStyle}> 
             <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
@@ -340,6 +397,8 @@ type jsProps = {
   getRidersList: (string, string) => unit,
   hideRidersList: unit => unit,
   setInfoRidersList: (int, int) => unit,
+  hideExpiredRidersList: unit => unit,
+  hideConfirmedRidersList: unit => unit,
   showCurrentRider: rider => unit,
   hideCurrentRider: unit => unit,
 };
@@ -354,6 +413,8 @@ let default =
       ~getRidersList=jsProps->getRidersListGet,
       ~hideRidersList=jsProps->hideRidersListGet,
       ~setInfoRidersList=jsProps->setInfoRidersListGet,
+      ~hideExpiredRidersList=jsProps->hideExpiredRidersListGet,
+      ~hideConfirmedRidersList=jsProps->hideConfirmedRidersListGet,
       ~showCurrentRider=jsProps->showCurrentRiderGet,
       ~hideCurrentRider=jsProps->hideCurrentRiderGet,
       [||],

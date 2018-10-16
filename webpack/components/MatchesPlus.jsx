@@ -6,6 +6,8 @@ import {
   getMatchesList,
   hideMatchesList,
   setInfoMatchesList,
+  hideExpiredMatchesList,
+  hideConfirmedMatchesList,
   showCurrentMatch,
   hideCurrentMatch
 } from '../actions/index.js';
@@ -20,6 +22,8 @@ const mapDispatchToProps = {
   getMatchesList,
   hideMatchesList,
   setInfoMatchesList,
+  hideExpiredMatchesList,
+  hideConfirmedMatchesList,
   showCurrentMatch,
   hideCurrentMatch
 };

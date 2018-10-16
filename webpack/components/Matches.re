@@ -34,6 +34,8 @@ type matchesInfo = {
   matches: array(systemMatch),
   listPageIndex: int,
   listPageSize: int,
+  hideExpiredCanceled: bool,
+  hideConfirmed: bool,
   showCurrentMatchDetails: bool,
   currentMatch: (systemMatch)
 };
@@ -92,6 +94,8 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesIn
 ~getMatchesList, 
 ~hideMatchesList,
 ~setInfoMatchesList,
+~hideExpiredMatchesList,
+~hideConfirmedMatchesList,
 ~showCurrentMatch,
 ~hideCurrentMatch,
 _children) => {
@@ -157,10 +161,10 @@ _children) => {
 
     let getBkgColour = () => {
       if (itemDriverUuid == matchesInfo->currentMatchGet->uuid_driverGet && itemRiderUuid == matchesInfo->currentMatchGet->uuid_riderGet) {
-        TypeInfo.highlightSelectedRowBackgroundColour
+        Defaults.highlightSelectedRowBackgroundColour
       }
       else {
-        TypeInfo.defaultRowBackgroundColour
+        Defaults.defaultRowBackgroundColour
       }
     };
 
@@ -170,6 +174,14 @@ _children) => {
     
     clickHandlerAndStyleObjectWrapper;
   };
+
+  let matchesTableHideExpiredHandler = _ => {
+    hideExpiredMatchesList();
+  }
+
+  let matchesTableHideConfirmedHandler = _ => {
+    hideConfirmedMatchesList();
+  }
 
   let handleGetMatchListClick = (_event) => {
     let token = loginInfo->TypeInfo.tokenGet;
@@ -193,9 +205,74 @@ _children) => {
   {
   ...component,
   render: (_self) => { 
-    let tableMatches:array(systemMatch) = Array.map(tableMatch, matchesInfo->matchesGet); 
+    let tableMatchesAll:array(systemMatch) = Array.map(tableMatch, matchesInfo->matchesGet); 
+
+    let confirms = Utils.filterArray(~f=m=>m->statusGet=="MatchConfirmed", tableMatchesAll);
+
+    let confirmsKeys = Array.map(c => c->uuid_riderGet, confirms);
+
+    let filterProposedAndConfirmed = m => {
+      let s = m->statusGet;
+      let key = m->uuid_riderGet;
+      
+      if (s != "MatchProposed" && s != "ExtendedMatch") {
+        true;
+      } 
+      else if (s == "ExtendedMatch") {
+        false;
+      } 
+      else  {
+        let keyMatched = k=>{
+          if (k == key) {
+            true;
+          }
+          else {
+            false;
+          }
+        };
+
+        let xx = Utils.existsArray(~f=keyMatched, confirmsKeys);
+
+        not(xx);
+      }
+    };
+
+    let filterExpiredMatches = matches => {
+      if (matchesInfo->hideExpiredCanceledGet === true) {
+        let filterMatches = rider => rider->statusGet !== "Expired" && rider->statusGet !== "Canceled";
+
+        let matchesNotExpired = Utils.filterArray(~f=filterMatches, matches);
+          
+        matchesNotExpired;
+      }
+      else {
+        matches;
+      };
+    };
+
+    let filterConfirmedMatches = matches => {
+      if (matchesInfo->hideConfirmedGet === true) {
+        let filterMatches = rider => rider->statusGet !== "MatchConfirmed";
+
+        let matchesNotConfirmed = Utils.filterArray(~f=filterMatches, matches);
+          
+        matchesNotConfirmed;
+      }
+      else {
+        matches;
+      };
+    };
+
+    let tableMatchesStepZero = Utils.filterArray(~f=filterProposedAndConfirmed, tableMatchesAll); 
+
+    let tableMatchesStepOne = filterExpiredMatches(tableMatchesStepZero);
+    let tableMatches = filterConfirmedMatches(tableMatchesStepOne);
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
+
+    let checkboxAreaStyle = ReactDOMRe.Style.make(~marginTop="20px", ~display="inline-block", ());
+
+    let checkboxLabelStyle = ReactDOMRe.Style.make(~paddingRight="40px", ());
 
     let currentMatchInfo = currentMatch => {
       <div>
@@ -221,6 +298,18 @@ _children) => {
               </button>
               <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshMatchesListButton" onClick={handleGetMatchListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
             </div>
+          <div> 
+            <div className="form-group checkbox" style={checkboxAreaStyle}>
+              <label className="" style={checkboxLabelStyle} htmlFor="hideExpired">{ReasonReact.string("Hide Expired/Cancelled")}
+              </label>
+              <input className="" type_="checkbox" id="hideExpired" checked={matchesInfo->hideExpiredCanceledGet} onChange={matchesTableHideExpiredHandler} />
+            </div> 
+            <div className="form-group checkbox" style={checkboxAreaStyle}>
+              <label className="" style={checkboxLabelStyle} htmlFor="hideConfirmed">{ReasonReact.string("Hide Confirmed")}
+              </label>
+              <input className="" type_="checkbox" id="hideConfirmed" checked={matchesInfo->hideConfirmedGet} onChange={matchesTableHideConfirmedHandler} />
+            </div> 
+          </div> 
           <div style={tableDivStyle}> 
             <Table props={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
             data=tableMatches
@@ -274,7 +363,9 @@ type jsProps = {
   matchesInfo: matchesInfo,  
   getMatchesList: (string, string) => unit,
   hideMatchesList: unit => unit,
-  setInfoMatchesList: (int, int) => unit,
+  setInfoMatchesList: (int, int) => unit,  
+  hideExpiredMatchesList: unit => unit,
+  hideConfirmedMatchesList: unit => unit,
   showCurrentMatch: systemMatch => unit,
   hideCurrentMatch: unit => unit,
 };
@@ -288,6 +379,8 @@ let default =
       ~getMatchesList=jsProps->getMatchesListGet,
       ~hideMatchesList=jsProps->hideMatchesListGet,
       ~setInfoMatchesList=jsProps->setInfoMatchesListGet,
+      ~hideExpiredMatchesList=jsProps->hideExpiredMatchesListGet,
+      ~hideConfirmedMatchesList=jsProps->hideConfirmedMatchesListGet,
       ~showCurrentMatch=jsProps->showCurrentMatchGet,
       ~hideCurrentMatch=jsProps->hideCurrentMatchGet,
       [||],
