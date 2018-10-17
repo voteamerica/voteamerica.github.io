@@ -19,7 +19,8 @@ import {
   matchesListSetInfoType,
   matchesListHideExpiredType,
   matchesListHideConfirmedType,
-  currentMatchShowHideTypes
+  currentMatchShowHideTypes,
+  matchesOtherDriverGetHideListTypes
 } from './types';
 
 const loginDetails = details => ({
@@ -52,15 +53,6 @@ const hideItemsList = itemsHideListType => () => ({
   payload: {}
 });
 
-// const getDriversList = (remoteUrlBase, token) => ({
-//   type: GET_DRIVERS_LIST,
-//   payload: { remoteUrlBase, token, successProperty: 'data' }
-// });
-// const hideDriversList = () => ({
-//   type: HIDE_DRIVERS_LIST,
-//   payload: {}
-// });
-
 const getDriversList = getItemsList(driversGetHideListTypes.get);
 const hideDriversList = hideItemsList(driversGetHideListTypes.hide);
 
@@ -69,6 +61,13 @@ const hideRidersList = hideItemsList(ridersGetHideListTypes.hide);
 
 const getMatchesList = getItemsList(matchesGetHideListTypes.get);
 const hideMatchesList = hideItemsList(matchesGetHideListTypes.hide);
+
+const getMatchesOtherDriverList = getItemsList(
+  matchesOtherDriverGetHideListTypes.get
+);
+const hideMatchesOtherDriverList = hideItemsList(
+  matchesOtherDriverGetHideListTypes.hide
+);
 
 const setInfoItemsList = itemsListSetInfoType => (
   listPageIndex,
@@ -148,5 +147,7 @@ export {
   hideExpiredMatchesList,
   hideConfirmedMatchesList,
   showCurrentMatch,
-  hideCurrentMatch
+  hideCurrentMatch,
+  getMatchesOtherDriverList,
+  hideMatchesOtherDriverList
 };

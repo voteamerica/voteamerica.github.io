@@ -15,6 +15,7 @@ const matchType = 'MATCH';
 const driverListType = 'DRIVERS';
 const riderListType = 'RIDERS';
 const matchListType = 'MATCHES';
+const matchOtherDriverListType = 'MATCHES_OTHER_DRIVER';
 
 const itemsGetHideListTypes = itemType => ({
   get: 'GET_' + itemType + '_LIST',
@@ -24,6 +25,9 @@ const itemsGetHideListTypes = itemType => ({
 const driversGetHideListTypes = itemsGetHideListTypes(driverListType);
 const ridersGetHideListTypes = itemsGetHideListTypes(riderListType);
 const matchesGetHideListTypes = itemsGetHideListTypes(matchListType);
+const matchesOtherDriverGetHideListTypes = itemsGetHideListTypes(
+  matchOtherDriverListType
+);
 
 const itemsListSetInfoTypes = itemType => 'SET_' + itemType + '_LIST_INFO';
 
@@ -66,6 +70,9 @@ const loginRequestTypes = getAsyncTypes(LOGIN_REQUEST);
 const getDriverListTypes = getAsyncTypes(driversGetHideListTypes.get);
 const getRiderListTypes = getAsyncTypes(ridersGetHideListTypes.get);
 const getMatchListTypes = getAsyncTypes(matchesGetHideListTypes.get);
+const getMatchOtherDriverListTypes = getAsyncTypes(
+  matchesOtherDriverGetHideListTypes.get
+);
 
 export {
   LOGIN_DETAILS,
@@ -93,5 +100,7 @@ export {
   matchesListHideExpiredType,
   matchesListHideConfirmedType,
   getMatchListTypes,
-  currentMatchShowHideTypes
+  currentMatchShowHideTypes,
+  matchesOtherDriverGetHideListTypes,
+  getMatchOtherDriverListTypes
 };

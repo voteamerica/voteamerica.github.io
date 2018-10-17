@@ -4,11 +4,13 @@ import loginInfo from './loginInfo.js';
 import driversInfo from './driversInfo';
 import ridersInfo from './ridersInfo';
 import matchesInfo from './matchesInfo';
+import matchesOtherDriverInfo from './matchesOtherDriverInfo';
 
 export default combineReducers({
   apiInfo,
   loginInfo,
   driversInfo,
   ridersInfo,
-  matchesInfo
+  matchesInfo,
+  matchesOtherDriverInfo
 });

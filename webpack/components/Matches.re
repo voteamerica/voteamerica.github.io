@@ -90,7 +90,7 @@ let matchTableColumns =
   ~score=itemDetails->scoreGet,
 );
 
-let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
+let make = (~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
 ~setInfoMatchesList,
@@ -340,7 +340,7 @@ _children) => {
     let matchesInfoArea = 
       if (loginInfo->TypeInfo.loggedInGet) {
         <div>
-          <h2 className="operator-page-heading">{ReasonReact.string("Matches Info")}</h2>
+          <h2 className="operator-page-heading">{ReasonReact.string(sectionHeading)}</h2>
           <div>        
             {tableMatchesJSX}
           </div>
@@ -358,6 +358,7 @@ _children) => {
 
 [@bs.deriving abstract]
 type jsProps = {
+  sectionHeading: string,
   loginInfo: TypeInfo.loginInfo,
   apiInfo: TypeInfo.apiInfo,
   matchesInfo: matchesInfo,  
@@ -373,6 +374,7 @@ type jsProps = {
 let default =
   ReasonReact.wrapReasonForJs(~component, jsProps =>
       make(
+        ~sectionHeading=jsProps->sectionHeadingGet,
       ~loginInfo=jsProps->loginInfoGet,
       ~apiInfo=jsProps->apiInfoGet,
       ~matchesInfo=jsProps->matchesInfoGet,
