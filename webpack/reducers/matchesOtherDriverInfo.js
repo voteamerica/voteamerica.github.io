@@ -2,15 +2,14 @@ import {
   DEFAULT_LIST_PAGE_INDEX,
   DEFAULT_LIST_PAGE_SIZE,
   LOGOUT,
-  getMatchListTypes,
-  matchesGetHideListTypes,
-  matchesListSetInfoType,
-  matchesListHideExpiredType,
-  matchesListHideConfirmedType,
-  currentMatchShowHideTypes
+  getMatchOtherDriverListTypes,
+  matchesOtherDriverGetHideListTypes,
+  matchesOtherDriverListSetInfoType,
+  matchesOtherDriverListHideExpiredType,
+  matchesOtherDriverListHideConfirmedType
 } from '../actions/types';
 
-const matchesInfo = (
+const matchesOtherDriverInfo = (
   state = {
     showMatchList: false,
     matches: [],
@@ -34,36 +33,26 @@ const matchesInfo = (
         currentMatch: {}
       };
 
-    case getMatchListTypes.success: {
+    case getMatchOtherDriverListTypes.success: {
       const { data: matches } = action.payload;
 
       return { ...state, showMatchList: true, matches };
     }
 
-    case matchesGetHideListTypes.hide:
+    case matchesOtherDriverGetHideListTypes.hide:
       return { ...state, showMatchList: false, matches: [] };
 
-    case currentMatchShowHideTypes.show:
-      return {
-        ...state,
-        showCurrentMatchDetails: true,
-        currentMatch: action.payload.itemDetails
-      };
-
-    case matchesListSetInfoType:
+    case matchesOtherDriverListSetInfoType:
       return {
         ...state,
         listPageIndex: action.payload.listPageIndex,
         listPageSize: action.payload.listPageSize
       };
 
-    case currentMatchShowHideTypes.hide:
-      return { ...state, showCurrentMatchDetails: false, currentMatch: {} };
-
-    case matchesListHideExpiredType:
+    case matchesOtherDriverListHideExpiredType:
       return { ...state, hideExpiredCanceled: !state.hideExpiredCanceled };
 
-    case matchesListHideConfirmedType:
+    case matchesOtherDriverListHideConfirmedType:
       return { ...state, hideConfirmed: !state.hideConfirmed };
 
     default:
@@ -71,4 +60,4 @@ const matchesInfo = (
   }
 };
 
-export default matchesInfo;
+export default matchesOtherDriverInfo;

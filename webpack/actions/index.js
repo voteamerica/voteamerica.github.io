@@ -1,4 +1,5 @@
 import {
+  NO_OP,
   loginRequestTypes,
   LOGIN_DETAILS,
   LOGIN_REQUEST,
@@ -19,8 +20,17 @@ import {
   matchesListSetInfoType,
   matchesListHideExpiredType,
   matchesListHideConfirmedType,
-  currentMatchShowHideTypes
+  currentMatchShowHideTypes,
+  matchesOtherDriverGetHideListTypes,
+  matchesOtherDriverListSetInfoType,
+  matchesOtherDriverListHideExpiredType,
+  matchesOtherDriverListHideConfirmedType
 } from './types';
+
+const noOp = (a, b, c) => ({
+  type: NO_OP,
+  payload: { a, b, c }
+});
 
 const loginDetails = details => ({
   type: LOGIN_DETAILS,
@@ -52,15 +62,6 @@ const hideItemsList = itemsHideListType => () => ({
   payload: {}
 });
 
-// const getDriversList = (remoteUrlBase, token) => ({
-//   type: GET_DRIVERS_LIST,
-//   payload: { remoteUrlBase, token, successProperty: 'data' }
-// });
-// const hideDriversList = () => ({
-//   type: HIDE_DRIVERS_LIST,
-//   payload: {}
-// });
-
 const getDriversList = getItemsList(driversGetHideListTypes.get);
 const hideDriversList = hideItemsList(driversGetHideListTypes.hide);
 
@@ -69,6 +70,13 @@ const hideRidersList = hideItemsList(ridersGetHideListTypes.hide);
 
 const getMatchesList = getItemsList(matchesGetHideListTypes.get);
 const hideMatchesList = hideItemsList(matchesGetHideListTypes.hide);
+
+const getMatchesOtherDriverList = getItemsList(
+  matchesOtherDriverGetHideListTypes.get
+);
+const hideMatchesOtherDriverList = hideItemsList(
+  matchesOtherDriverGetHideListTypes.hide
+);
 
 const setInfoItemsList = itemsListSetInfoType => (
   listPageIndex,
@@ -81,6 +89,9 @@ const setInfoItemsList = itemsListSetInfoType => (
 const setInfoDriversList = setInfoItemsList(driversListSetInfoType);
 const setInfoRidersList = setInfoItemsList(ridersListSetInfoType);
 const setInfoMatchesList = setInfoItemsList(matchesListSetInfoType);
+const setInfoMatchesOtherDriverList = setInfoItemsList(
+  matchesOtherDriverListSetInfoType
+);
 
 const hideExpiredItemsList = itemsListHideExpiredType => () => ({
   type: itemsListHideExpiredType,
@@ -89,6 +100,9 @@ const hideExpiredItemsList = itemsListHideExpiredType => () => ({
 const hideExpiredDriversList = hideExpiredItemsList(driversListHideExpiredType);
 const hideExpiredRidersList = hideExpiredItemsList(ridersListHideExpiredType);
 const hideExpiredMatchesList = hideExpiredItemsList(matchesListHideExpiredType);
+const hideExpiredMatchesOtherDriverList = hideExpiredItemsList(
+  matchesOtherDriverListHideExpiredType
+);
 
 const hideConfirmedItemsList = itemsListHideConfirmedType => () => ({
   type: itemsListHideConfirmedType,
@@ -102,6 +116,9 @@ const hideConfirmedRidersList = hideConfirmedItemsList(
 );
 const hideConfirmedMatchesList = hideConfirmedItemsList(
   matchesListHideConfirmedType
+);
+const hideConfirmedMatchesOtherDriverList = hideConfirmedItemsList(
+  matchesOtherDriverListHideConfirmedType
 );
 
 const showCurrentItem = currentItemShowType => itemDetails => ({
@@ -124,6 +141,7 @@ const showCurrentMatch = showCurrentItem(currentMatchShowHideTypes.show);
 const hideCurrentMatch = hideCurrentItem(currentMatchShowHideTypes.hide);
 
 export {
+  noOp,
   loginDetails,
   login,
   loginSuccess,
@@ -148,5 +166,10 @@ export {
   hideExpiredMatchesList,
   hideConfirmedMatchesList,
   showCurrentMatch,
-  hideCurrentMatch
+  hideCurrentMatch,
+  getMatchesOtherDriverList,
+  hideMatchesOtherDriverList,
+  setInfoMatchesOtherDriverList,
+  hideExpiredMatchesOtherDriverList,
+  hideConfirmedMatchesOtherDriverList
 };

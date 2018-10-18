@@ -35,19 +35,23 @@ const mapDispatchToProps = {
 };
 
 class DriverBase extends Component {
-  driversTableOnPageChangeHandler(pageIndex) {
-    console.log(pageIndex);
+  driversTableOnPageChangeHandler(self) {
+    return pageIndex => {
+      const { driversInfo, setInfoDriversList } = self.props;
+
+      const { listPageSize } = driversInfo;
+
+      return setInfoDriversList(pageIndex, listPageSize);
+    };
   }
 
   driversTableOnPageChangeSizeHandler(self) {
-    return (size, x) => {
-      console.log(size);
-
+    return (size, pageIndex) => {
       const { driversInfo, setInfoDriversList } = self.props;
 
-      const { listPageIndex } = driversInfo;
+      // const { listPageIndex } = driversInfo;
 
-      return setInfoDriversList(listPageIndex, size);
+      return setInfoDriversList(pageIndex, size);
     };
   }
 
@@ -352,7 +356,9 @@ class DriverBase extends Component {
                           pageSize={driversInfo.listPageSize}
                           data={tableDrivers}
                           columns={driverColumns}
-                          onPageChange={this.driversTableOnPageChangeHandler}
+                          onPageChange={this.driversTableOnPageChangeHandler(
+                            this
+                          )}
                           onPageSizeChange={this.driversTableOnPageChangeSizeHandler(
                             this
                           )}

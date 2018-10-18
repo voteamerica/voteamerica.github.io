@@ -5,12 +5,13 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var ReactTable = require("react-table");
 
-function make(props, className, type_, defaultPageSize, pageSize, columns, data, onPageChange, onPageSizeChange, getTdProps, children) {
+function make(props, className, type_, defaultPageSize, page, pageSize, columns, data, onPageChange, onPageSizeChange, getTdProps, children) {
   return ReasonReact.wrapJsForReason(ReactTable.default, Curry.app(props, [
                   className,
                   type_,
                   columns,
                   defaultPageSize,
+                  page,
                   pageSize,
                   data,
                   onPageChange,

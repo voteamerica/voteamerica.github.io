@@ -14,6 +14,16 @@ type systemMatch = {
   [@bs.as "DrivingOBOOrganizationName"] drivingOBOOrganizationName: string,
   [@bs.as "DriverFirstName"] driverFirstName: string,
   [@bs.as "DriverLastName"] driverLastName: string,
+  [@bs.as "RiderFirstName"] firstName: string,
+  [@bs.as "RiderEmail"] email: string,
+  [@bs.as "RiderLastName"] lastName: string,
+  [@bs.as "RiderPhone"] phone: string,
+  [@bs.as "RiderCollectionZIP"] collectionZip: string,
+  [@bs.as "RiderDropOffZIP"] dropOffZIP: string,
+  [@bs.as "AvailableRideTimesLocal"] rideTimesLocal: string,
+  [@bs.as "RiderCollectionStreetNumber"] collectionStreetNumber: string,
+  [@bs.as "RiderCollectionAddress"] collectionAddress: string,
+  [@bs.as "RiderDestinationAddress"] destinationAddress: string,
   driver_notes: string,
 	rider_notes: string,
   [@bs.as "created_ts"] created: string,
@@ -46,6 +56,7 @@ type matchTableJsProps = {
   [@bs.as "type"] type_: string,
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
+  page: int,
   pageSize: int,
   data: array(systemMatch),
   onPageChange: TypeInfo.tableOnPageChangeHandler,
@@ -70,10 +81,20 @@ let matchTableColumns =
   TypeInfo.theader(~header="Driving for Organization", ~accessor="DrivingOBOOrganizationName"),
   TypeInfo.theader(~header="Driver First Name", ~accessor="DriverFirstName"),
   TypeInfo.theader(~header="Driver Last Name", ~accessor="DriverLastName"),
+  TypeInfo.theader(~header="Rider First Name", ~accessor="RiderFirstName"), 
+  TypeInfo.theader(~header="Rider Last Name", ~accessor="RiderLastName"),
+  TypeInfo.theader(~header="Rider Email", ~accessor="RiderEmail"), 
+  TypeInfo.theader(~header="Rider Phone", ~accessor="RiderPhone"),
+  TypeInfo.theader(~header="Rider Collection ZIP", ~accessor="RiderCollectionZIP"),
+  TypeInfo.theader(~header="Rider Dropoff ZIP", ~accessor="RiderDropOffZIP"),
+  TypeInfo.theader(~header="Rider Collection Street Number", ~accessor="RiderCollectionStreetNumber"),
+  TypeInfo.theader(~header="Rider Collection Address", ~accessor="RiderCollectionAddress"),
+  TypeInfo.theader(~header="Rider Destination Address", ~accessor="RiderDestinationAddress"),
+  TypeInfo.theader(~header="Ride Times Local", ~accessor="AvailableRideTimesLocal"), 
   TypeInfo.theader(~header="Driver Notes", ~accessor="driver_notes"),
   TypeInfo.theader(~header="Rider Notes", ~accessor="rider_notes"),
   TypeInfo.theader(~header="Score", ~accessor="score"),
-  |];
+  |]; 
 
  let tableMatch = itemDetails:systemMatch => systemMatch(
   ~uuid_driver=itemDetails->uuid_driverGet,
@@ -85,12 +106,22 @@ let matchTableColumns =
   ~status=itemDetails->statusGet,
   ~driverCollectionZIP=itemDetails->driverCollectionZIPGet,~availableDriveTimesLocal=itemDetails->availableDriveTimesLocalGet,~seatCount=itemDetails->seatCountGet,~driverLicenseNumber=itemDetails->driverLicenseNumberGet,
   ~drivingOBOOrganizationName=itemDetails->drivingOBOOrganizationNameGet,~driverFirstName=itemDetails->driverFirstNameGet,~driverLastName=itemDetails->driverLastNameGet,
+  ~firstName=itemDetails->firstNameGet, 
+  ~email=itemDetails->emailGet,  
+  ~lastName=itemDetails->lastNameGet,
+  ~phone=itemDetails->phoneGet,
+  ~collectionZip=itemDetails->collectionZipGet,
+  ~dropOffZIP=itemDetails->dropOffZIPGet,
+  ~rideTimesLocal=itemDetails->rideTimesLocalGet,
+  ~collectionStreetNumber=itemDetails->collectionStreetNumberGet,
+  ~collectionAddress=itemDetails->collectionAddressGet,
+  ~destinationAddress=itemDetails->destinationAddressGet,
   ~created=itemDetails->createdGet,
   ~updated=itemDetails->updatedGet,
   ~score=itemDetails->scoreGet,
 );
 
-let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
+let make = (~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
 ~setInfoMatchesList,
@@ -101,18 +132,15 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesIn
 _children) => {
 
   let matchesTableOnPageChangeHandler: TypeInfo.tableOnPageChangeHandler = (pageIndex) => {
-    Js.log(pageIndex);
+    let pageSize = matchesInfo->listPageSizeGet;
+
+    Utils.setInfoJs(setInfoMatchesList, pageIndex, pageSize);
   };
 
-  let matchesTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, _index) => {
-    Js.log(size);
+  let matchesTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, pageIndex) => {
+    /* let pageIndex = matchesInfo->listPageIndexGet; */
 
-    let pageIndex = matchesInfo->listPageIndexGet;
-
-    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
-    let f: ((int, int) => unit, int, int) => unit = [%raw (fx, index, size) => "{ fx(index, size); return 0; }"];
-
-    f(setInfoMatchesList, pageIndex, size);
+    Utils.setInfoJs(setInfoMatchesList, pageIndex, size);
   };
 
   let matchesTdPropsHandler: matchGetTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
@@ -139,7 +167,7 @@ _children) => {
             ();
         }
         | Some(rowInfo) => {
-          Js.log(rowInfo); 
+          /* Js.log(rowInfo);  */
 
           /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
           let sr: (systemMatch => unit, option(systemMatch)) => unit = [%raw (fx, itemDetails) => "{ fx(itemDetails); return 0; }"];
@@ -314,6 +342,7 @@ _children) => {
             <Table props={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
             data=tableMatches
             defaultPageSize={5} /* get this from types default */
+            page={matchesInfo->listPageIndexGet}
             pageSize={matchesInfo->listPageSizeGet}
             onPageChange={matchesTableOnPageChangeHandler}
             onPageSizeChange={matchesTableOnPageChangeSizeHandler}
@@ -340,7 +369,7 @@ _children) => {
     let matchesInfoArea = 
       if (loginInfo->TypeInfo.loggedInGet) {
         <div>
-          <h2 className="operator-page-heading">{ReasonReact.string("Matches Info")}</h2>
+          <h2 className="operator-page-heading">{ReasonReact.string(sectionHeading)}</h2>
           <div>        
             {tableMatchesJSX}
           </div>
@@ -358,6 +387,7 @@ _children) => {
 
 [@bs.deriving abstract]
 type jsProps = {
+  sectionHeading: string,
   loginInfo: TypeInfo.loginInfo,
   apiInfo: TypeInfo.apiInfo,
   matchesInfo: matchesInfo,  
@@ -373,6 +403,7 @@ type jsProps = {
 let default =
   ReasonReact.wrapReasonForJs(~component, jsProps =>
       make(
+        ~sectionHeading=jsProps->sectionHeadingGet,
       ~loginInfo=jsProps->loginInfoGet,
       ~apiInfo=jsProps->apiInfoGet,
       ~matchesInfo=jsProps->matchesInfoGet,

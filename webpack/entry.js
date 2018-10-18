@@ -11,6 +11,7 @@ import loginSaga from './actions/sagas.js';
 import driversListSaga from './actions/sagaDriversList.js';
 import ridersListSaga from './actions/sagaRidersList.js';
 import matchListSaga from './actions/sagaMatchList.js';
+import matchOtherDriverListSaga from './actions/sagaMatchOtherDriverList.js';
 
 console.log('entry.js loaded');
 
@@ -23,7 +24,8 @@ function* allSagas() {
     fork(loginSaga),
     fork(driversListSaga),
     fork(ridersListSaga),
-    fork(matchListSaga)
+    fork(matchListSaga),
+    fork(matchOtherDriverListSaga)
   ]);
 }
 
