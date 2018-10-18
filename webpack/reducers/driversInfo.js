@@ -1,6 +1,7 @@
 import {
   DEFAULT_LIST_PAGE_INDEX,
   DEFAULT_LIST_PAGE_SIZE,
+  LOGOUT,
   getDriverListTypes,
   driversGetHideListTypes,
   driversListSetInfoType,
@@ -23,6 +24,16 @@ const driversInfo = (
   action
 ) => {
   switch (action.type) {
+    case LOGOUT:
+      return {
+        ...state,
+        showDriversList: false,
+        matches: [],
+        listPageIndex: DEFAULT_LIST_PAGE_INDEX,
+        showCurrentDriverDetails: false,
+        currentDriver: {}
+      };
+
     case getDriverListTypes.success: {
       const { data: drivers } = action.payload;
 

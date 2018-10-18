@@ -73,6 +73,46 @@ var matchTableColumns = /* array */[
     accessor: "DriverLastName"
   },
   {
+    Header: "Rider First Name",
+    accessor: "RiderFirstName"
+  },
+  {
+    Header: "Rider Last Name",
+    accessor: "RiderLastName"
+  },
+  {
+    Header: "Rider Email",
+    accessor: "RiderEmail"
+  },
+  {
+    Header: "Rider Phone",
+    accessor: "RiderPhone"
+  },
+  {
+    Header: "Rider Collection ZIP",
+    accessor: "RiderCollectionZIP"
+  },
+  {
+    Header: "Rider Dropoff ZIP",
+    accessor: "RiderDropOffZIP"
+  },
+  {
+    Header: "Rider Collection Street Number",
+    accessor: "RiderCollectionStreetNumber"
+  },
+  {
+    Header: "Rider Collection Address",
+    accessor: "RiderCollectionAddress"
+  },
+  {
+    Header: "Rider Destination Address",
+    accessor: "RiderDestinationAddress"
+  },
+  {
+    Header: "Ride Times Local",
+    accessor: "AvailableRideTimesLocal"
+  },
+  {
     Header: "Driver Notes",
     accessor: "driver_notes"
   },
@@ -100,6 +140,16 @@ function tableMatch(itemDetails) {
           DrivingOBOOrganizationName: itemDetails.DrivingOBOOrganizationName,
           DriverFirstName: itemDetails.DriverFirstName,
           DriverLastName: itemDetails.DriverLastName,
+          RiderFirstName: itemDetails.RiderFirstName,
+          RiderEmail: itemDetails.RiderEmail,
+          RiderLastName: itemDetails.RiderLastName,
+          RiderPhone: itemDetails.RiderPhone,
+          RiderCollectionZIP: itemDetails.RiderCollectionZIP,
+          RiderDropOffZIP: itemDetails.RiderDropOffZIP,
+          AvailableRideTimesLocal: itemDetails.AvailableRideTimesLocal,
+          RiderCollectionStreetNumber: itemDetails.RiderCollectionStreetNumber,
+          RiderCollectionAddress: itemDetails.RiderCollectionAddress,
+          RiderDestinationAddress: itemDetails.RiderDestinationAddress,
           driver_notes: itemDetails.driver_notes,
           rider_notes: itemDetails.rider_notes,
           created_ts: itemDetails.created_ts,
@@ -108,26 +158,21 @@ function tableMatch(itemDetails) {
         };
 }
 
-function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, _) {
+function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, _) {
   var matchesTableOnPageChangeHandler = function (pageIndex) {
-    console.log(pageIndex);
-    return /* () */0;
+    var pageSize = matchesInfo.listPageSize;
+    return Utils$VoteUSReason.setInfoJs(setInfoMatchesList, pageIndex, pageSize);
   };
-  var matchesTableOnPageChangeSizeHandler = function (size, _) {
-    console.log(size);
-    var pageIndex = matchesInfo.listPageIndex;
-    var f = function (fx,index,size){{ fx(index, size); return 0; }};
-    return f(setInfoMatchesList, pageIndex, size);
+  var matchesTableOnPageChangeSizeHandler = function (size, pageIndex) {
+    return Utils$VoteUSReason.setInfoJs(setInfoMatchesList, pageIndex, size);
   };
   var matchesTdPropsHandler = function (_, rowInfoOption, _$1, _$2) {
     var itemDriverUuid = rowInfoOption !== undefined ? Js_primitive.valFromOption(rowInfoOption).original.uuid_driver : "";
     var itemRiderUuid = rowInfoOption !== undefined ? Js_primitive.valFromOption(rowInfoOption).original.uuid_rider : "";
     var tableClickHandler = function (_, handleOriginalOption) {
       if (rowInfoOption !== undefined) {
-        var rowInfo = Js_primitive.valFromOption(rowInfoOption);
-        console.log(rowInfo);
         var sr = function (fx,itemDetails){{ fx(itemDetails); return 0; }};
-        var itemDetails = rowInfo.original;
+        var itemDetails = Js_primitive.valFromOption(rowInfoOption).original;
         var currentMatch = tableMatch(itemDetails);
         sr(showCurrentMatch, Js_primitive.some(currentMatch));
       } else {
@@ -284,19 +329,20 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
                                   onChange: matchesTableHideConfirmedHandler
                                 }))), React.createElement("div", {
                           style: tableDivStyle
-                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
+                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
                                     return {
                                             className: prim,
                                             type: prim$1,
                                             columns: prim$2,
                                             defaultPageSize: prim$3,
-                                            pageSize: prim$4,
-                                            data: prim$5,
-                                            onPageChange: prim$6,
-                                            onPageSizeChange: prim$7,
-                                            getTdProps: prim$8
+                                            page: prim$4,
+                                            pageSize: prim$5,
+                                            data: prim$6,
+                                            onPageChange: prim$7,
+                                            onPageSizeChange: prim$8,
+                                            getTdProps: prim$9
                                           };
-                                  }), "basicMatchTable", tableType, 5, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler, /* array */[]))), match ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
+                                  }), "basicMatchTable", tableType, 5, matchesInfo.listPageIndex, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler, /* array */[]))), match ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
               } else {
                 tableMatchesJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",
@@ -306,7 +352,7 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
               }
               var matchesInfoArea = loginInfo.loggedIn ? React.createElement("div", undefined, React.createElement("h2", {
                           className: "operator-page-heading"
-                        }, "Matches Info"), React.createElement("div", undefined, tableMatchesJSX)) : null;
+                        }, sectionHeading), React.createElement("div", undefined, tableMatchesJSX)) : null;
               return React.createElement("div", undefined, matchesInfoArea);
             }),
           /* initialState */component[/* initialState */10],
@@ -317,7 +363,7 @@ function make(loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, 
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, /* array */[]);
+        return make(jsProps.sectionHeading, jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, /* array */[]);
       }));
 
 exports.component = component;

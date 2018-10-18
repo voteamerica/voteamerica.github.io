@@ -87,23 +87,18 @@ function tableRider(itemDetails) {
 
 function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentRider, hideCurrentRider, _) {
   var ridersTableOnPageChangeHandler = function (pageIndex) {
-    console.log(pageIndex);
-    return /* () */0;
+    var pageSize = ridersInfo.listPageSize;
+    return Utils$VoteUSReason.setInfoJs(setInfoRidersList, pageIndex, pageSize);
   };
-  var ridersTableOnPageChangeSizeHandler = function (size, _) {
-    console.log(size);
-    var pageIndex = ridersInfo.listPageIndex;
-    var f = function (fx,index,size){{ fx(index, size); return 0; }};
-    return f(setInfoRidersList, pageIndex, size);
+  var ridersTableOnPageChangeSizeHandler = function (size, pageIndex) {
+    return Utils$VoteUSReason.setInfoJs(setInfoRidersList, pageIndex, size);
   };
   var ridersTdPropsHandler = function (_, rowInfoOption, _$1, _$2) {
     var itemUuid = rowInfoOption !== undefined ? Js_primitive.valFromOption(rowInfoOption).original.UUID : "";
     var tableClickHandler = function (_, handleOriginalOption) {
       if (rowInfoOption !== undefined) {
-        var rowInfo = Js_primitive.valFromOption(rowInfoOption);
-        console.log(rowInfo);
         var sr = function (fx,itemDetails){{ fx(itemDetails); return 0; }};
-        var itemDetails = rowInfo.original;
+        var itemDetails = Js_primitive.valFromOption(rowInfoOption).original;
         var currentRider = tableRider(itemDetails);
         sr(showCurrentRider, Js_primitive.some(currentRider));
       } else {
@@ -253,19 +248,20 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
                                   onChange: ridersTableHideConfirmedHandler
                                 }))), React.createElement("div", {
                           style: tableDivStyle
-                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
+                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
                                     return {
                                             className: prim,
                                             type: prim$1,
                                             columns: prim$2,
                                             defaultPageSize: prim$3,
-                                            pageSize: prim$4,
-                                            data: prim$5,
-                                            onPageChange: prim$6,
-                                            onPageSizeChange: prim$7,
-                                            getTdProps: prim$8
+                                            page: prim$4,
+                                            pageSize: prim$5,
+                                            data: prim$6,
+                                            onPageChange: prim$7,
+                                            onPageSizeChange: prim$8,
+                                            getTdProps: prim$9
                                           };
-                                  }), "basicRiderTable", tableType, 5, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler, /* array */[]))), match ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
+                                  }), "basicRiderTable", tableType, 5, ridersInfo.listPageIndex, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler, /* array */[]))), match ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
               } else {
                 tableRidersJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",

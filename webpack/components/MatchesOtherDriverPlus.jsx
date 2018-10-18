@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import MatchesBase from './Matches.bs.js';
 
 import {
+  noOp,
   getMatchesOtherDriverList,
   hideMatchesOtherDriverList,
-  setInfoMatchesList,
-  hideExpiredMatchesList,
-  hideConfirmedMatchesList,
-  showCurrentMatch,
-  hideCurrentMatch
+  setInfoMatchesOtherDriverList,
+  hideExpiredMatchesOtherDriverList,
+  hideConfirmedMatchesOtherDriverList
 } from '../actions/index.js';
 
 const mapStateToProps = state => {
@@ -21,11 +20,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getMatchesList: getMatchesOtherDriverList,
   hideMatchesList: hideMatchesOtherDriverList,
-  setInfoMatchesList,
-  hideExpiredMatchesList,
-  hideConfirmedMatchesList,
-  showCurrentMatch,
-  hideCurrentMatch
+  setInfoMatchesList: setInfoMatchesOtherDriverList,
+  hideExpiredMatchesList: hideExpiredMatchesOtherDriverList,
+  hideConfirmedMatchesList: hideConfirmedMatchesOtherDriverList,
+  showCurrentMatch: noOp,
+  hideCurrentMatch: noOp
 };
 
 const MatchesOtherPlus = connect(

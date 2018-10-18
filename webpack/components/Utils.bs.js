@@ -8,6 +8,8 @@ var cellValueToString = function (row){{ return String(row.value); }};
 
 var cellValueRaw = function (row){{ return row.value; }};
 
+var setInfoJs = function (fx,index,size){{ fx(index, size); return 0; }};
+
 function thcCreator(header, accessor) {
   return {
           Header: header,
@@ -34,6 +36,7 @@ function existsArray(f, arr) {
 
 exports.cellValueToString = cellValueToString;
 exports.cellValueRaw = cellValueRaw;
+exports.setInfoJs = setInfoJs;
 exports.thcCreator = thcCreator;
 exports.thcCreatorBool = thcCreatorBool;
 exports.filterArray = filterArray;

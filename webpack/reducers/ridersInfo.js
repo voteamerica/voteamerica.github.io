@@ -1,6 +1,7 @@
 import {
   DEFAULT_LIST_PAGE_INDEX,
   DEFAULT_LIST_PAGE_SIZE,
+  LOGOUT,
   getRiderListTypes,
   ridersGetHideListTypes,
   ridersListSetInfoType,
@@ -23,6 +24,16 @@ const ridersInfo = (
   action
 ) => {
   switch (action.type) {
+    case LOGOUT:
+      return {
+        ...state,
+        showRiderList: false,
+        matches: [],
+        listPageIndex: DEFAULT_LIST_PAGE_INDEX,
+        showCurrentRiderDetails: false,
+        currentRider: {}
+      };
+
     case getRiderListTypes.success: {
       const { data: riders } = action.payload;
 

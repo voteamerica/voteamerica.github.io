@@ -1,3 +1,5 @@
+const NO_OP = 'NO_OP';
+
 const LOGIN_DETAILS = 'LOGIN_DETAILS';
 const LOGIN_REQUEST = 'LOGIN_REQUEST';
 const LOGOUT = 'LOGOUT';
@@ -34,12 +36,18 @@ const itemsListSetInfoTypes = itemType => 'SET_' + itemType + '_LIST_INFO';
 const driversListSetInfoType = itemsListSetInfoTypes(driverListType);
 const ridersListSetInfoType = itemsListSetInfoTypes(riderListType);
 const matchesListSetInfoType = itemsListSetInfoTypes(matchListType);
+const matchesOtherDriverListSetInfoType = itemsListSetInfoTypes(
+  matchOtherDriverListType
+);
 
 const itemsListHideExpiredTypes = itemType => itemType + '_LIST_HIDE_EXPIRED';
 
 const driversListHideExpiredType = itemsListHideExpiredTypes(driverListType);
 const ridersListHideExpiredType = itemsListHideExpiredTypes(riderListType);
 const matchesListHideExpiredType = itemsListHideExpiredTypes(matchListType);
+const matchesOtherDriverListHideExpiredType = itemsListHideExpiredTypes(
+  matchOtherDriverListType
+);
 
 const itemsListHideConfirmedTypes = itemType =>
   itemType + '_LIST_HIDE_CONFIRMED';
@@ -49,6 +57,9 @@ const driversListHideConfirmedType = itemsListHideConfirmedTypes(
 );
 const ridersListHideConfirmedType = itemsListHideConfirmedTypes(riderListType);
 const matchesListHideConfirmedType = itemsListHideConfirmedTypes(matchListType);
+const matchesOtherDriverListHideConfirmedType = itemsListHideConfirmedTypes(
+  matchOtherDriverListType
+);
 
 const currentItemShowHideTypes = itemType => ({
   show: 'SHOW_CURRENT_' + itemType,
@@ -75,12 +86,11 @@ const getMatchOtherDriverListTypes = getAsyncTypes(
 );
 
 export {
+  NO_OP,
   LOGIN_DETAILS,
   LOGIN_REQUEST,
   loginRequestTypes,
   LOGOUT,
-  // GET_DRIVERS_LIST,
-  // HIDE_DRIVERS_LIST,
   DEFAULT_LIST_PAGE_INDEX,
   DEFAULT_LIST_PAGE_SIZE,
   driversGetHideListTypes,
@@ -102,5 +112,8 @@ export {
   getMatchListTypes,
   currentMatchShowHideTypes,
   matchesOtherDriverGetHideListTypes,
+  matchesOtherDriverListSetInfoType,
+  matchesOtherDriverListHideExpiredType,
+  matchesOtherDriverListHideConfirmedType,
   getMatchOtherDriverListTypes
 };

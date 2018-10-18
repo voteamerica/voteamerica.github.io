@@ -6,6 +6,9 @@ let cellValueRaw: TypeInfo.cellValueToStringHandler = [%raw
   row => "{ return row.value; }"
 ];
 
+/* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+let setInfoJs: ((int, int) => unit, int, int) => unit = [%raw (fx, index, size) => "{ fx(index, size); return 0; }"];
+
 let thcCreator = (~header, ~accessor) =>
   TypeInfo.theaderCell(~header, ~accessor, ~cell=cellValueRaw);
 

@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { loginDetails, login, loginSuccess, logout } from '../actions/index.js';
+import {
+  loginDetails,
+  login,
+  loginSuccess,
+  logout,
+  getDriversList,
+  getRidersList,
+  getMatchesList,
+  getMatchesOtherDriverList
+} from '../actions/index.js';
 
 const mapStateToProps = state => {
   const { apiInfo, loginInfo } = state;
@@ -13,7 +22,11 @@ const mapDispatchToProps = {
   loginDetails,
   login,
   loginSuccess,
-  logout
+  logout,
+  getDriversList,
+  getRidersList,
+  getMatchesList,
+  getMatchesOtherDriverList
 };
 
 class LoginAreaBase extends Component {
@@ -65,6 +78,25 @@ class LoginAreaBase extends Component {
     };
   }
 
+  handlePopulatePage(self) {
+    return () => {
+      const {
+        apiInfo,
+        loginInfo,
+        getDriversList,
+        getRidersList,
+        getMatchesList,
+        getMatchesOtherDriverList
+      } = self.props;
+
+      getDriversList(apiInfo.apiUrl, loginInfo.token);
+      getRidersList(apiInfo.apiUrl, loginInfo.token);
+      getMatchesList(apiInfo.apiUrl, loginInfo.token);
+
+      return getMatchesOtherDriverList(apiInfo.apiUrl, loginInfo.token);
+    };
+  }
+
   render() {
     const { loginInfo } = this.props;
     const username = loginInfo.details.username || '';
@@ -103,7 +135,9 @@ class LoginAreaBase extends Component {
           <div className="help-block with-errors" />
         </div>
         <div>
-          <button id="login" onClick={this.handleLoginRequestClick(this)}>Login</button>
+          <button id="login" onClick={this.handleLoginRequestClick(this)}>
+            Login
+          </button>
         </div>
       </div>
     );
@@ -123,7 +157,23 @@ class LoginAreaBase extends Component {
           Welcome, {loginInfo.details.username}!
         </div>
         <div style={logoutDivStyle}>
-          <button id="logout" onClick={this.handleLogoutClick(this)}>Logout</button>
+          <button id="logout" onClick={this.handleLogoutClick(this)}>
+            Logout
+          </button>
+          <button
+            id="refreshSession"
+            style={{ marginLeft: 135 }}
+            onClick={this.handleLoginRequestClick(this)}
+          >
+            Refresh Session
+          </button>
+          <button
+            id="refreshPage"
+            style={{ marginLeft: 135 }}
+            onClick={this.handlePopulatePage(this)}
+          >
+            Populate Page
+          </button>
         </div>
       </div>
     );

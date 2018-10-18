@@ -1,6 +1,7 @@
 import {
   DEFAULT_LIST_PAGE_INDEX,
   DEFAULT_LIST_PAGE_SIZE,
+  LOGOUT,
   getMatchListTypes,
   matchesGetHideListTypes,
   matchesListSetInfoType,
@@ -23,6 +24,16 @@ const matchesInfo = (
   action
 ) => {
   switch (action.type) {
+    case LOGOUT:
+      return {
+        ...state,
+        showMatchList: false,
+        matches: [],
+        listPageIndex: DEFAULT_LIST_PAGE_INDEX,
+        showCurrentMatchDetails: false,
+        currentMatch: {}
+      };
+
     case getMatchListTypes.success: {
       const { data: matches } = action.payload;
 

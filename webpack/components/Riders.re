@@ -60,6 +60,7 @@ type riderTableJsProps = {
   [@bs.as "type"] type_: string,
   columns: array(TypeInfo.theaderCell),
   defaultPageSize: int,
+  page: int,
   pageSize: int,
   data: array(rider),
   onPageChange: TypeInfo.tableOnPageChangeHandler,
@@ -152,18 +153,15 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo,
 _children) => {
 
   let ridersTableOnPageChangeHandler: TypeInfo.tableOnPageChangeHandler = (pageIndex) => {
-    Js.log(pageIndex);
+    let pageSize = ridersInfo->listPageSizeGet;
+
+    Utils.setInfoJs(setInfoRidersList, pageIndex, pageSize);
   };
 
-  let ridersTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, _index) => {
-    Js.log(size);
+  let ridersTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, pageIndex) => {
+    /* let pageIndex = ridersInfo->listPageIndexGet; */
 
-    let pageIndex = ridersInfo->listPageIndexGet;
-
-    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
-    let f: ((int, int) => unit, int, int) => unit = [%raw (fx, index, size) => "{ fx(index, size); return 0; }"];
-
-    f(setInfoRidersList, pageIndex, size);
+    Utils.setInfoJs(setInfoRidersList, pageIndex, size);
   };
 
   let ridersTdPropsHandler: riderGetTdPropsHandler = (_state, rowInfoOption, _column, _instance) => {
@@ -184,7 +182,7 @@ _children) => {
           ();
       }
       | Some(rowInfo) => {
-          Js.log(rowInfo); 
+          /* Js.log(rowInfo);  */
 
           /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
           let sr: (rider => unit, option(rider)) => unit = [%raw (fx, itemDetails) => "{ fx(itemDetails); return 0; }"];
@@ -345,6 +343,7 @@ _children) => {
           <div style={tableDivStyle}> 
             <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
             defaultPageSize={5} /* get this from types default */
+            page={ridersInfo->listPageIndexGet}
             pageSize={ridersInfo->listPageSizeGet}
             data=tableRiders
             onPageChange={ridersTableOnPageChangeHandler}
