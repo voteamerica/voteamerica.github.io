@@ -4,8 +4,6 @@ import {
   LOGIN_DETAILS,
   LOGIN_REQUEST,
   LOGOUT,
-  // GET_DRIVERS_LIST,
-  // HIDE_DRIVERS_LIST,
   driversGetHideListTypes,
   driversListSetInfoType,
   driversListHideExpiredType,
