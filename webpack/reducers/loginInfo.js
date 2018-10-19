@@ -2,11 +2,15 @@ import {
   loginRequestTypes,
   LOGIN_DETAILS,
   LOGIN_REQUEST,
-  LOGOUT
+  LOGOUT,
+  getDriverListTypes,
+  getRiderListTypes,
+  getMatchListTypes,
+  getMatchOtherDriverListTypes
 } from '../actions/types.js';
 
 const loginInfo = (
-  state = { details: {}, loggedIn: false, token: '' },
+  state = { details: {}, loggedIn: false, token: '', expiredToken: false },
   action
 ) => {
   switch (action.type) {
@@ -23,7 +27,22 @@ const loginInfo = (
     case LOGOUT:
       return { ...state, loggedIn: false, token: '' };
     case loginRequestTypes.success:
-      return { ...state, loggedIn: true, token: action.payload };
+      return {
+        ...state,
+        loggedIn: true,
+        token: action.payload,
+        expiredToken: false
+      };
+
+    case getDriverListTypes.fail:
+    case getRiderListTypes.fail:
+    case getMatchListTypes.fail:
+    case getMatchOtherDriverListTypes.fail: {
+      const newState = { ...state, expiredToken: true };
+
+      return newState;
+    }
+
     default:
       return state;
   }

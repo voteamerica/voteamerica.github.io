@@ -156,6 +156,13 @@ class LoginAreaBase extends Component {
         <div id="welcomeMessage" style={welcomeDivStyle}>
           Welcome, {loginInfo.details.username}!
         </div>
+        {loginInfo.expiredToken ? (
+          <div style={logoutDivStyle}>
+            <span style={{ color: 'red' }}>
+              Session Expired - click refresh session
+            </span>
+          </div>
+        ) : null}
         <div style={logoutDivStyle}>
           <button id="logout" onClick={this.handleLogoutClick(this)}>
             Logout
