@@ -159,7 +159,7 @@ class LoginAreaBase extends Component {
         {loginInfo.expiredToken ? (
           <div style={logoutDivStyle}>
             <span style={{ color: 'red' }}>
-              Session Expired - click refresh session
+              Session Expired - click Refresh session button
             </span>
           </div>
         ) : null}
@@ -172,14 +172,14 @@ class LoginAreaBase extends Component {
             style={{ marginLeft: 135 }}
             onClick={this.handleLoginRequestClick(this)}
           >
-            Refresh Session
+            Refresh session
           </button>
           <button
             id="refreshPage"
             style={{ marginLeft: 135 }}
             onClick={this.handlePopulatePage(this)}
           >
-            Populate Page
+            Populate page
           </button>
         </div>
       </div>
