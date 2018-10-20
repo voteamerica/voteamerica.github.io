@@ -6,6 +6,7 @@ import Driver from './Driver.jsx';
 import Riders from './RidersPlus.jsx';
 import Matches from './MatchesPlus.jsx';
 import MatchesOtherDriver from './MatchesOtherDriverPlus.jsx';
+import UploadArea from './UploadArea.jsx';
 
 const mapStateToProps = state => ({});
 
@@ -20,6 +21,7 @@ class AppBase extends Component {
         <Riders />
         <Matches sectionHeading="Matches Info" />
         <MatchesOtherDriver sectionHeading="Matches Other Driver Info" />
+        <UploadArea />
       </div>
     );
   }
