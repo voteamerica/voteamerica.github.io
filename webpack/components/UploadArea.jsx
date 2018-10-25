@@ -15,8 +15,8 @@ const UploadInfoDiv = styled.div`
 `;
 
 const UploadInfoListItemDiv = styled.div`
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const mapStateToProps = state => {
@@ -79,6 +79,8 @@ class UploadAreaBase extends Component {
       uploadInfo.processingResults.uploadCount;
 
     const errorsLoadedStyle = notAllRowsInputIntoDb ? { color: 'red' } : {};
+
+    const errorDataRowStyle = {};
 
     return (
       <div id="uploadArea">
@@ -167,19 +169,22 @@ class UploadAreaBase extends Component {
                     {uploadInfo.processingResults.inputErrors &&
                     uploadInfo.processingResults.inputErrors.length > 0 ? (
                       <UploadInfoDiv>
-                        Input errors:&nbsp;
+                        <h3>Input errors:</h3>
                         <ul>
                           {uploadInfo.processingResults.inputErrors.map(
                             (r, index) => (
                               <li key={index}>
                                 <UploadInfoListItemDiv>
-                                  Error type: {r.type.toString()}
+                                  <strong>Error type: </strong>
+                                  {r.type.toString()}
                                 </UploadInfoListItemDiv>
                                 <UploadInfoListItemDiv>
-                                  Db error: {r.error.toString()}
+                                  <strong>Db error: </strong>
+                                  {r.error.toString()}
                                 </UploadInfoListItemDiv>
                                 <UploadInfoListItemDiv>
-                                  Data row: {JSON.stringify(r.data)}
+                                  <strong>Data row:</strong>{' '}
+                                  {JSON.stringify(r.data)}
                                 </UploadInfoListItemDiv>
                               </li>
                             )
