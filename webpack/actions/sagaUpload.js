@@ -22,7 +22,10 @@ function* postUpload(action) {
       fileDetails
     });
 
-    if (loginResult[successProperty] !== undefined) {
+    if (
+      loginResult[successProperty] !== undefined &&
+      loginResult[successProperty].error === undefined
+    ) {
       const payload = {};
 
       // const results = JSON.parse(loginResult[successProperty]);
