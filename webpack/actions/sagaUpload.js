@@ -28,7 +28,6 @@ function* postUpload(action) {
     ) {
       const payload = {};
 
-      // const results = JSON.parse(loginResult[successProperty]);
       const results = loginResult[successProperty];
 
       payload[successProperty] = results;

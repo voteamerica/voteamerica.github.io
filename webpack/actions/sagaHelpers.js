@@ -31,7 +31,6 @@ const baseFetchInfo = (options = {}) => async fetchDetails => {
 
   if (fetchDetails.fileDetails) {
     options.body = fetchDetails.fileDetails;
-    // delete options.headers['Content-Type'];
     options.headers = {
       ...options.headers,
       'content-type': 'multipart/form-data'

@@ -45010,8 +45010,7 @@ var baseFetchInfo = function baseFetchInfo() {
                   break;
                 }
 
-                options.body = fetchDetails.fileDetails; // delete options.headers['Content-Type'];
-
+                options.body = fetchDetails.fileDetails;
                 options.headers = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, options.headers, {
                   'content-type': 'multipart/form-data'
                 });
@@ -45322,8 +45321,7 @@ function postUpload(action) {
             break;
           }
 
-          payload = {}; // const results = JSON.parse(loginResult[successProperty]);
-
+          payload = {};
           results = loginResult[successProperty];
           payload[successProperty] = results;
           _context.next = 12;
@@ -47453,14 +47451,6 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = {
-  // loginDetails,
-  // login,
-  // loginSuccess,
-  // logout,
-  // getDriversList,
-  // getRidersList,
-  // getMatchesList,
-  // getMatchesOtherDriverList
   uploadFileChosen: _actions_index_js__WEBPACK_IMPORTED_MODULE_8__["uploadFileChosen"],
   postUploadFile: _actions_index_js__WEBPACK_IMPORTED_MODULE_8__["postUploadFile"]
 };
@@ -47571,13 +47561,6 @@ function (_Component) {
 
   return UploadAreaBase;
 }(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
-/*
-{uploadInfo.fileChosen === true &&
-                      uploadInfo.fileBeingProcessed === true ? <div>File being processed </div> :
-                  false
-                )}
-*/
-
 
 var UploadArea = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, mapDispatchToProps)(UploadAreaBase);
 /* harmony default export */ __webpack_exports__["default"] = (UploadArea);

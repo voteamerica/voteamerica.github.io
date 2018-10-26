@@ -26,14 +26,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  // loginDetails,
-  // login,
-  // loginSuccess,
-  // logout,
-  // getDriversList,
-  // getRidersList,
-  // getMatchesList,
-  // getMatchesOtherDriverList
   uploadFileChosen,
   postUploadFile
 };
@@ -237,13 +229,6 @@ class UploadAreaBase extends Component {
     );
   }
 }
-
-/*
-{uploadInfo.fileChosen === true &&
-                      uploadInfo.fileBeingProcessed === true ? <div>File being processed </div> :
-                  false
-                )}
-*/
 
 const UploadArea = connect(
   mapStateToProps,
