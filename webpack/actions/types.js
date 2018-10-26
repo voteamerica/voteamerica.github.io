@@ -19,6 +19,9 @@ const riderListType = 'RIDERS';
 const matchListType = 'MATCHES';
 const matchOtherDriverListType = 'MATCHES_OTHER_DRIVER';
 
+const UPLOAD_FILE_CHOSEN = 'UPLOAD_FILE_CHOSEN';
+const POST_UPLOAD = 'POST_UPLOAD';
+
 const itemsGetHideListTypes = itemType => ({
   get: 'GET_' + itemType + '_LIST',
   hide: 'HIDE_' + itemType + '_LIST'
@@ -85,6 +88,8 @@ const getMatchOtherDriverListTypes = getAsyncTypes(
   matchesOtherDriverGetHideListTypes.get
 );
 
+const postUploadAsyncTypes = getAsyncTypes(POST_UPLOAD);
+
 export {
   NO_OP,
   LOGIN_DETAILS,
@@ -115,5 +120,8 @@ export {
   matchesOtherDriverListSetInfoType,
   matchesOtherDriverListHideExpiredType,
   matchesOtherDriverListHideConfirmedType,
-  getMatchOtherDriverListTypes
+  getMatchOtherDriverListTypes,
+  UPLOAD_FILE_CHOSEN,
+  POST_UPLOAD,
+  postUploadAsyncTypes
 };

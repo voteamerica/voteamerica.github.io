@@ -22,7 +22,10 @@ import {
   matchesOtherDriverGetHideListTypes,
   matchesOtherDriverListSetInfoType,
   matchesOtherDriverListHideExpiredType,
-  matchesOtherDriverListHideConfirmedType
+  matchesOtherDriverListHideConfirmedType,
+  UPLOAD_FILE_CHOSEN,
+  POST_UPLOAD,
+  postUploadAsyncTypes
 } from './types';
 
 const noOp = (a, b, c) => ({
@@ -138,6 +141,16 @@ const hideCurrentRider = hideCurrentItem(currentRiderShowHideTypes.hide);
 const showCurrentMatch = showCurrentItem(currentMatchShowHideTypes.show);
 const hideCurrentMatch = hideCurrentItem(currentMatchShowHideTypes.hide);
 
+const uploadFileChosen = fileDetails => ({
+  type: UPLOAD_FILE_CHOSEN,
+  payload: { fileDetails }
+});
+
+const postUploadFile = (remoteUrlBase, token, fileDetails) => ({
+  type: POST_UPLOAD,
+  payload: { remoteUrlBase, token, fileDetails, successProperty: 'data' }
+});
+
 export {
   noOp,
   loginDetails,
@@ -169,5 +182,7 @@ export {
   hideMatchesOtherDriverList,
   setInfoMatchesOtherDriverList,
   hideExpiredMatchesOtherDriverList,
-  hideConfirmedMatchesOtherDriverList
+  hideConfirmedMatchesOtherDriverList,
+  uploadFileChosen,
+  postUploadFile
 };

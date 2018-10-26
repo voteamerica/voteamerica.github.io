@@ -5,6 +5,7 @@ import driversInfo from './driversInfo';
 import ridersInfo from './ridersInfo';
 import matchesInfo from './matchesInfo';
 import matchesOtherDriverInfo from './matchesOtherDriverInfo';
+import uploadInfo from './uploadInfo';
 
 export default combineReducers({
   apiInfo,
@@ -12,5 +13,6 @@ export default combineReducers({
   driversInfo,
   ridersInfo,
   matchesInfo,
-  matchesOtherDriverInfo
+  matchesOtherDriverInfo,
+  uploadInfo
 });

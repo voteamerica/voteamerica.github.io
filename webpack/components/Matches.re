@@ -261,7 +261,7 @@ _children) => {
 
         let xx = Utils.existsArray(~f=keyMatched, confirmsKeys);
 
-        not(xx);
+        !(xx);
       }
     };
 

@@ -1,3 +1,4 @@
+const axios = require('axios');
 import { put, call } from 'redux-saga/effects';
 
 const createAPIurl = (params, remoteUrl, apiRoute) => {
@@ -20,21 +21,40 @@ const createAPIurl = (params, remoteUrl, apiRoute) => {
   return url;
 };
 
-const fetchInfo = async fetchDetails => {
-  const options = {};
-
+const baseFetchInfo = (options = {}) => async fetchDetails => {
   if (fetchDetails.token && fetchDetails.token.length > 0) {
     options.headers = { Authorization: `Bearer ${fetchDetails.token}` };
   }
 
-  const resp = await fetch(fetchDetails.fetchURL, options);
+  let resp = {};
+  let json = {};
+
+  if (fetchDetails.fileDetails) {
+    options.body = fetchDetails.fileDetails;
+    options.headers = {
+      ...options.headers,
+      'content-type': 'multipart/form-data'
+    };
+
+    const formData = new FormData();
+    formData.append('file', fetchDetails.fileDetails);
+
+    resp = await axios.post(fetchDetails.fetchURL, formData, options);
+
+    json = resp;
+  } else {
+    resp = await fetch(fetchDetails.fetchURL, options);
+
+    json = resp.json();
+  }
 
   console.log('resp', resp);
 
-  const json = resp.json();
-
   return json;
 };
+
+const fetchInfo = baseFetchInfo();
+const postInfo = baseFetchInfo({ method: 'POST' });
 
 const createFetchItemsList = (getItemsListTypes, urlPath) => {
   return function* fetchItemsList(action) {
@@ -68,4 +88,4 @@ const createFetchItemsList = (getItemsListTypes, urlPath) => {
   };
 };
 
-export { createAPIurl, fetchInfo, createFetchItemsList };
+export { createAPIurl, fetchInfo, postInfo, createFetchItemsList };
