@@ -133,6 +133,33 @@ class UploadAreaBase extends Component {
                 )}
                 {uploadInfo.fileChosen === true &&
                 uploadInfo.fileBeingProcessed === false &&
+                uploadInfo.showEntireFailInfo === true ? (
+                  <div>
+                    <UploadInfoDiv>
+                      <span>
+                        <strong style={{ color: 'red' }}>IMPORTANT:</strong>
+                        &nbsp;
+                        <strong>NO</strong>
+                        &nbsp; records were input into the db. Review the
+                        information below to resolve this.
+                      </span>
+                    </UploadInfoDiv>
+                    <UploadInfoDiv>
+                      <strong>Error message:&nbsp;</strong>
+                      {uploadInfo.processingResults.entireFailError}
+                    </UploadInfoDiv>
+                    <UploadInfoDiv>
+                      <strong>Error type:&nbsp;</strong>
+                      <span style={errorsLoadedStyle}>
+                        {uploadInfo.processingResults.entireFailType}
+                      </span>
+                    </UploadInfoDiv>
+                  </div>
+                ) : (
+                  false
+                )}
+                {uploadInfo.fileChosen === true &&
+                uploadInfo.fileBeingProcessed === false &&
                 uploadInfo.showProcessingResults === true ? (
                   <div>
                     {notAllRowsInputIntoDb ? (
@@ -183,8 +210,10 @@ class UploadAreaBase extends Component {
                                   {r.error.toString()}
                                 </UploadInfoListItemDiv>
                                 <UploadInfoListItemDiv>
-                                  <strong>Data row:</strong>{' '}
-                                  {JSON.stringify(r.data)}
+                                  <strong>Data row:</strong>
+                                  <div style={{ marginTop: 8 }}>
+                                    {JSON.stringify(r.data)}
+                                  </div>
                                 </UploadInfoListItemDiv>
                               </li>
                             )

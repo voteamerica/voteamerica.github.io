@@ -45317,7 +45317,7 @@ function postUpload(action) {
         case 5:
           loginResult = _context.sent;
 
-          if (!(loginResult[successProperty] !== undefined)) {
+          if (!(loginResult[successProperty] !== undefined && loginResult[successProperty].error === undefined)) {
             _context.next = 14;
             break;
           }
@@ -47417,7 +47417,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/index.js */ "./webpack/actions/index.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/index.js */ "./webpack/actions/index.js");
 
 
 
@@ -47426,6 +47427,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+var SubmitButton = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].button.withConfig({
+  displayName: "UploadArea__SubmitButton",
+  componentId: "sc-1tbbh6c-0"
+})(["margin-top:0px;margin-bottom:20px;"]);
+var UploadInfoDiv = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].div.withConfig({
+  displayName: "UploadArea__UploadInfoDiv",
+  componentId: "sc-1tbbh6c-1"
+})(["margin-top:10px;margin-bottom:10px;"]);
+var UploadInfoListItemDiv = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].div.withConfig({
+  displayName: "UploadArea__UploadInfoListItemDiv",
+  componentId: "sc-1tbbh6c-2"
+})(["margin-top:10px;margin-bottom:10px;"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   var apiInfo = state.apiInfo,
@@ -47447,8 +47461,8 @@ var mapDispatchToProps = {
   // getRidersList,
   // getMatchesList,
   // getMatchesOtherDriverList
-  uploadFileChosen: _actions_index_js__WEBPACK_IMPORTED_MODULE_7__["uploadFileChosen"],
-  postUploadFile: _actions_index_js__WEBPACK_IMPORTED_MODULE_7__["postUploadFile"]
+  uploadFileChosen: _actions_index_js__WEBPACK_IMPORTED_MODULE_8__["uploadFileChosen"],
+  postUploadFile: _actions_index_js__WEBPACK_IMPORTED_MODULE_8__["postUploadFile"]
 };
 
 var UploadAreaBase =
@@ -47494,36 +47508,74 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var loginInfo = this.props.loginInfo;
+      var _this$props = this.props,
+          uploadInfo = _this$props.uploadInfo,
+          loginInfo = _this$props.loginInfo;
+      var fileChoiceStyle = {
+        marginBottom: 20
+      };
+      var notAllRowsInputIntoDb = uploadInfo.processingResults.recordsReceived > uploadInfo.processingResults.uploadCount;
+      var errorsLoadedStyle = notAllRowsInputIntoDb ? {
+        color: 'red'
+      } : {};
+      var errorDataRowStyle = {};
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         id: "uploadArea"
       }, loginInfo.loggedIn === true ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h2", {
         style: {
           marginTop: 40
         }
-      }, "Upload Area"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", null, "NOTE: take care not to upload the same file twice, as this will create duplicates on the system"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("form", {
+      }, "Upload Area"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", null, "IMPORTANT:")), "\xA0 take care not to upload the same file twice, as this will create duplicates on the system"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("form", {
         action: "http://localhost:8000/bulk-upload",
         method: "post",
         encType: "multipart/form-data"
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("label", {
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        style: fileChoiceStyle
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("label", {
         htmlFor: "file"
       }, "Choose file to upload"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("input", {
+        style: {
+          marginTop: 10
+        },
         type: "file",
         id: "file",
         name: "file",
         onChange: this.fileChoiceButtonClickHandler(this)
-      })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("button", {
+      })), uploadInfo.fileChosen === true && uploadInfo.fileBeingProcessed === false ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(SubmitButton, {
         className: "button button--large",
         id: "postUploadButton",
         onClick: this.postButtonClickHandler(this)
-      }, "Submit"))))) : false);
+      }, "Submit")) : react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, uploadInfo.fileChosen === true && uploadInfo.fileBeingProcessed === true ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, "File being processed ") : false), uploadInfo.fileChosen === true && uploadInfo.fileBeingProcessed === false && uploadInfo.showEntireFailInfo === true ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(UploadInfoDiv, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", {
+        style: {
+          color: 'red'
+        }
+      }, "IMPORTANT:"), "\xA0", react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", null, "NO"), "\xA0 records were input into the db. Review the information below to resolve this.")), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(UploadInfoDiv, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", null, "Error message:\xA0"), uploadInfo.processingResults.entireFailError), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(UploadInfoDiv, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", null, "Error type:\xA0"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", {
+        style: errorsLoadedStyle
+      }, uploadInfo.processingResults.entireFailType))) : false, uploadInfo.fileChosen === true && uploadInfo.fileBeingProcessed === false && uploadInfo.showProcessingResults === true ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, notAllRowsInputIntoDb ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", {
+        style: {
+          color: 'red'
+        }
+      }, "IMPORTANT:"), ' ', "Not all records were input into the db. Review the information below to resolve this.")) : false, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(UploadInfoDiv, null, "Records received:\xA0", uploadInfo.processingResults.recordsReceived), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(UploadInfoDiv, null, "Records loaded into db:\xA0", react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", {
+        style: errorsLoadedStyle
+      }, uploadInfo.processingResults.uploadCount)), uploadInfo.processingResults.inputErrorsCount && uploadInfo.processingResults.inputErrorsCount > 0 ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(UploadInfoDiv, null, "Input errors count:\xA0", uploadInfo.processingResults.inputErrorsCount) : false, uploadInfo.processingResults.inputErrors && uploadInfo.processingResults.inputErrors.length > 0 ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(UploadInfoDiv, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h3", null, "Input errors:"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("ul", null, uploadInfo.processingResults.inputErrors.map(function (r, index) {
+        return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("li", {
+          key: index
+        }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(UploadInfoListItemDiv, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", null, "Error type: "), r.type.toString()), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(UploadInfoListItemDiv, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", null, "Db error: "), r.error.toString()), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(UploadInfoListItemDiv, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", null, "Data row:"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+          style: {
+            marginTop: 8
+          }
+        }, JSON.stringify(r.data))));
+      }))) : false) : false))) : false);
     }
   }]);
 
   return UploadAreaBase;
 }(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
 /*
-
+{uploadInfo.fileChosen === true &&
+                      uploadInfo.fileBeingProcessed === true ? <div>File being processed </div> :
+                  false
+                )}
 */
 
 
@@ -48222,11 +48274,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./webpack/actions/types.js");
 
 
+var defaultProcessingResults = {
+  recordsReceived: 0,
+  uploadCount: 0,
+  inputErrors: [],
+  inputErrorsCount: 0,
+  entireFailError: '',
+  entireFailType: ''
+};
 
 var uploadInfo = function uploadInfo() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
     fileDetails: {},
-    fileChosen: false
+    fileChosen: false,
+    fileBeingProcessed: false,
+    showProcessingResults: false,
+    showEntireFailInfo: false,
+    processingResults: defaultProcessingResults
   };
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
@@ -48234,15 +48298,84 @@ var uploadInfo = function uploadInfo() {
     case _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["UPLOAD_FILE_CHOSEN"]:
       {
         var payload = action.payload;
-        var fileDetails = payload.fileDetails; // const fileChosen = filenameTest !== undefined && filenameTest.length > 0;
-        // const filename = filenameTest !== undefined ? filenameTest : '';
+        var fileDetails = payload.fileDetails;
 
         var newState = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
           fileDetails: fileDetails,
-          fileChosen: true
+          fileChosen: true,
+          showProcessingResults: false,
+          showEntireFailInfo: false
         });
 
         return newState;
+      }
+
+    case _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["POST_UPLOAD"]:
+      {
+        var _newState = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+          fileBeingProcessed: true,
+          showProcessingResults: false,
+          showEntireFailInfo: false,
+          processingResults: defaultProcessingResults
+        });
+
+        return _newState;
+      }
+
+    case _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["postUploadAsyncTypes"].fail:
+      {
+        var newProcessingResults = action.payload.data;
+        var fileBeingProcessed = false;
+
+        var processingResults = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state.processingResults, {
+          entireFailError: newProcessingResults.error,
+          entireFailType: newProcessingResults.type
+        }); // system did not process csv successfully, no rows were not added to db
+
+
+        return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+          fileBeingProcessed: fileBeingProcessed,
+          showEntireFailInfo: true,
+          processingResults: processingResults
+        });
+      }
+
+    case _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["postUploadAsyncTypes"].success:
+      {
+        var _processingResults = action.payload.data;
+        var showProcessingResults = true;
+        var _fileBeingProcessed = false;
+
+        if (_processingResults.recordsReceived !== undefined) {
+          // system processed csv successfully, all rows were not added to db
+          return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+            showProcessingResults: showProcessingResults,
+            fileBeingProcessed: _fileBeingProcessed,
+            processingResults: _processingResults
+          });
+        } else if (_processingResults.recordsReceived === undefined && _processingResults.err && _processingResults.err.inputErrors) {
+          // system processed csv successfully but at least some rows were not added to db
+          var _newProcessingResults = {
+            inputErrors: _processingResults.err.inputErrors,
+            inputErrorsCount: _processingResults.err.inputErrorsCount
+          };
+          var replyDetailsLength = _processingResults.err.replyDetailsLength;
+
+          if (replyDetailsLength) {
+            _newProcessingResults = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _newProcessingResults, {
+              recordsReceived: replyDetailsLength.recordsReceived,
+              uploadCount: replyDetailsLength.uploadCount
+            });
+          }
+
+          return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+            showProcessingResults: showProcessingResults,
+            fileBeingProcessed: _fileBeingProcessed,
+            processingResults: _newProcessingResults
+          });
+        } else {
+          return state;
+        }
       }
 
     default:

@@ -4,18 +4,23 @@ import {
   postUploadAsyncTypes
 } from '../actions/types.js';
 
+const defaultProcessingResults = {
+  recordsReceived: 0,
+  uploadCount: 0,
+  inputErrors: [],
+  inputErrorsCount: 0,
+  entireFailError: '',
+  entireFailType: ''
+};
+
 const uploadInfo = (
   state = {
     fileDetails: {},
     fileChosen: false,
     fileBeingProcessed: false,
     showProcessingResults: false,
-    processingResults: {
-      recordsReceived: 0,
-      uploadCount: 0,
-      inputErrors: [],
-      inputErrorsCount: 0
-    }
+    showEntireFailInfo: false,
+    processingResults: defaultProcessingResults
   },
   action
 ) => {
@@ -24,15 +29,12 @@ const uploadInfo = (
       const { payload } = action;
       const { fileDetails } = payload;
 
-      // const fileChosen = filenameTest !== undefined && filenameTest.length > 0;
-
-      // const filename = filenameTest !== undefined ? filenameTest : '';
-
       const newState = {
         ...state,
         fileDetails,
         fileChosen: true,
-        showProcessingResults: false
+        showProcessingResults: false,
+        showEntireFailInfo: false
       };
 
       return newState;
@@ -42,10 +44,31 @@ const uploadInfo = (
       const newState = {
         ...state,
         fileBeingProcessed: true,
-        showProcessingResults: false
+        showProcessingResults: false,
+        showEntireFailInfo: false,
+        processingResults: defaultProcessingResults
       };
 
       return newState;
+    }
+
+    case postUploadAsyncTypes.fail: {
+      const { data: newProcessingResults } = action.payload;
+      const fileBeingProcessed = false;
+
+      const processingResults = {
+        ...state.processingResults,
+        entireFailError: newProcessingResults.error,
+        entireFailType: newProcessingResults.type
+      };
+
+      // system did not process csv successfully, no rows were not added to db
+      return {
+        ...state,
+        fileBeingProcessed,
+        showEntireFailInfo: true,
+        processingResults
+      };
     }
 
     case postUploadAsyncTypes.success: {
@@ -53,14 +76,15 @@ const uploadInfo = (
       const showProcessingResults = true;
       const fileBeingProcessed = false;
 
-      if (processingResults.recordsReceived !== undefined)
+      if (processingResults.recordsReceived !== undefined) {
+        // system processed csv successfully, all rows were not added to db
         return {
           ...state,
           showProcessingResults,
           fileBeingProcessed,
           processingResults
         };
-      else if (
+      } else if (
         processingResults.recordsReceived === undefined &&
         processingResults.err &&
         processingResults.err.inputErrors
