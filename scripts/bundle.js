@@ -45352,7 +45352,8 @@ function postUpload(action) {
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _types__WEBPACK_IMPORTED_MODULE_2__["postUploadAsyncTypes"].error,
             payload: {
-              message: _context.t0.message
+              message: _context.t0.message,
+              errorInfo: _context.t0
             }
           });
 
@@ -48305,14 +48306,16 @@ var uploadInfo = function uploadInfo() {
         return _newState;
       }
 
-    case _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["postUploadAsyncTypes"].fail:
+    case _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["postUploadAsyncTypes"].error:
       {
-        var newProcessingResults = action.payload.data;
+        var _action$payload = action.payload,
+            message = _action$payload.message,
+            errorInfo = _action$payload.errorInfo;
         var fileBeingProcessed = false;
 
         var processingResults = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state.processingResults, {
-          entireFailError: newProcessingResults.error,
-          entireFailType: newProcessingResults.type
+          entireFailError: message,
+          entireFailType: errorInfo.response.statusText + ' - Status Code: ' + errorInfo.response.status
         }); // system did not process csv successfully, no rows were not added to db
 
 
@@ -48323,26 +48326,44 @@ var uploadInfo = function uploadInfo() {
         });
       }
 
-    case _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["postUploadAsyncTypes"].success:
+    case _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["postUploadAsyncTypes"].fail:
       {
-        var _processingResults = action.payload.data;
-        var showProcessingResults = true;
+        var newProcessingResults = action.payload.data;
         var _fileBeingProcessed = false;
 
-        if (_processingResults.recordsReceived !== undefined) {
+        var _processingResults = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state.processingResults, {
+          entireFailError: newProcessingResults.error,
+          entireFailType: newProcessingResults.type
+        }); // system did not process csv successfully, no rows were not added to db
+
+
+        return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+          fileBeingProcessed: _fileBeingProcessed,
+          showEntireFailInfo: true,
+          processingResults: _processingResults
+        });
+      }
+
+    case _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["postUploadAsyncTypes"].success:
+      {
+        var _processingResults2 = action.payload.data;
+        var showProcessingResults = true;
+        var _fileBeingProcessed2 = false;
+
+        if (_processingResults2.recordsReceived !== undefined) {
           // system processed csv successfully, all rows were not added to db
           return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
             showProcessingResults: showProcessingResults,
-            fileBeingProcessed: _fileBeingProcessed,
-            processingResults: _processingResults
+            fileBeingProcessed: _fileBeingProcessed2,
+            processingResults: _processingResults2
           });
-        } else if (_processingResults.recordsReceived === undefined && _processingResults.err && _processingResults.err.inputErrors) {
+        } else if (_processingResults2.recordsReceived === undefined && _processingResults2.err && _processingResults2.err.inputErrors) {
           // system processed csv successfully but at least some rows were not added to db
           var _newProcessingResults = {
-            inputErrors: _processingResults.err.inputErrors,
-            inputErrorsCount: _processingResults.err.inputErrorsCount
+            inputErrors: _processingResults2.err.inputErrors,
+            inputErrorsCount: _processingResults2.err.inputErrorsCount
           };
-          var replyDetailsLength = _processingResults.err.replyDetailsLength;
+          var replyDetailsLength = _processingResults2.err.replyDetailsLength;
 
           if (replyDetailsLength) {
             _newProcessingResults = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _newProcessingResults, {
@@ -48353,7 +48374,7 @@ var uploadInfo = function uploadInfo() {
 
           return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
             showProcessingResults: showProcessingResults,
-            fileBeingProcessed: _fileBeingProcessed,
+            fileBeingProcessed: _fileBeingProcessed2,
             processingResults: _newProcessingResults
           });
         } else {

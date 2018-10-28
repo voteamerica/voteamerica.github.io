@@ -52,6 +52,28 @@ const uploadInfo = (
       return newState;
     }
 
+    case postUploadAsyncTypes.error: {
+      const { message, errorInfo } = action.payload;
+      const fileBeingProcessed = false;
+
+      const processingResults = {
+        ...state.processingResults,
+        entireFailError: message,
+        entireFailType:
+          errorInfo.response.statusText +
+          ' - Status Code: ' +
+          errorInfo.response.status
+      };
+
+      // system did not process csv successfully, no rows were not added to db
+      return {
+        ...state,
+        fileBeingProcessed,
+        showEntireFailInfo: true,
+        processingResults
+      };
+    }
+
     case postUploadAsyncTypes.fail: {
       const { data: newProcessingResults } = action.payload;
       const fileBeingProcessed = false;

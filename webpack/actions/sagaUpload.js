@@ -42,7 +42,7 @@ function* postUpload(action) {
   } catch (e) {
     yield put({
       type: postUploadAsyncTypes.error,
-      payload: { message: e.message }
+      payload: { message: e.message, errorInfo: e }
     });
   }
 }
