@@ -66,17 +66,7 @@ class DriverBase extends Component {
         console.log('driver click');
 
         if (rowInfo !== undefined) {
-          const UUID = rowInfo.original.UUID;
-          const firstName = rowInfo.original.DriverFirstName;
-          const lastName = rowInfo.original.DriverLastName;
-          const phone = rowInfo.original.DriverPhone;
-
-          showCurrentDriver({
-            UUID,
-            DriverFirstName: firstName,
-            DriverLastName: lastName,
-            DriverPhone: phone
-          });
+          showCurrentDriver(rowInfo.original);
         } else {
           hideCurrentDriver({});
         }
