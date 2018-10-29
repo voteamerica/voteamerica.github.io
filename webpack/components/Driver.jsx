@@ -212,6 +212,16 @@ class DriverBase extends Component {
       marginBottom: 10
     };
 
+    const currentDriverItemDivStyle = {
+      marginBottom: 10
+    };
+
+    const currentDriverItemSpanStyle = {
+      marginLeft: 10
+    };
+
+    const currentDriverLinkStyle = { marginLeft: 10 };
+
     const checkboxAreaStyle = { marginTop: '20px', display: 'inline-block' };
 
     const checkboxLabelStyle = { paddingRight: '40px' };
@@ -232,10 +242,33 @@ class DriverBase extends Component {
       return (
         <div>
           <h3>Current Driver Info</h3>
-          <div>
-            {currentDriver.DriverFirstName + ' ' + currentDriver.DriverLastName}
+          <div style={currentDriverItemDivStyle}>
+            <span style={currentDriverItemSpanStyle}>
+              {currentDriver.DriverFirstName +
+                ' ' +
+                currentDriver.DriverLastName}
+            </span>
+            {currentDriver.Overflow === true ? (
+              <span style={currentDriverItemSpanStyle}>
+                Multiple trips: <strong style={{ color: 'red' }}>Yes</strong>
+              </span>
+            ) : (
+              false
+            )}
+            {currentDriver.MatchCount > 0 ? (
+              <span style={currentDriverItemSpanStyle}>
+                Matches: <strong>{currentDriver.MatchCount}</strong>
+              </span>
+            ) : (
+              false
+            )}
+            {currentDriver.DriverCanLoadRiderWithWheelchair === true ? (
+              <span style={currentDriverItemSpanStyle}>Powerchair support</span>
+            ) : (
+              false
+            )}
           </div>
-          <div>
+          <div style={currentDriverLinkStyle}>
             <a href={selfServiceUrl}>Self Service Page</a>
           </div>
         </div>
