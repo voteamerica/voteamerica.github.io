@@ -167,6 +167,15 @@ class DriverBase extends Component {
       },
       { Header: 'Status', accessor: 'status' },
       { Header: 'Seats', accessor: 'SeatCount' },
+      { Header: 'Matches', accessor: 'MatchCount' },
+      { Header: 'Riders', accessor: 'TotalRiders' },
+      {
+        Header: 'Overflow',
+        accessor: 'Overflow',
+        Cell: ({ value }) => String(value)
+      },
+      { Header: 'Available Seats', accessor: 'SeatsAvailable' },
+      { Header: 'Trips', accessor: 'minimumTripCount' },
       { Header: 'License', accessor: 'DriverLicenseNumber' },
       { Header: 'Phone', accessor: 'DriverPhone' },
       { Header: 'Collection ZIP', accessor: 'DriverCollectionZIP' },
