@@ -14,6 +14,7 @@ import {
   setInfoDriversList,
   hideExpiredDriversList,
   hideConfirmedDriversList,
+  showCurrentMatchOnlyDriversList,
   showCurrentDriver,
   hideCurrentDriver
 } from '../actions/index.js';
@@ -30,6 +31,7 @@ const mapDispatchToProps = {
   setInfoDriversList,
   hideExpiredDriversList,
   hideConfirmedDriversList,
+  showCurrentMatchOnlyDriversList,
   showCurrentDriver,
   hideCurrentDriver
 };
@@ -123,6 +125,14 @@ class DriverBase extends Component {
     };
   }
 
+  driversTableShowCurrentMatchDriverOnlyHandler(self) {
+    return () => {
+      const { showCurrentMatchOnlyDriversList } = self.props;
+
+      showCurrentMatchOnlyDriversList();
+    };
+  }
+
   handleGetDriversListClick(self) {
     return () => {
       const { apiInfo, getDriversList, loginInfo } = self.props;
@@ -141,7 +151,7 @@ class DriverBase extends Component {
   }
 
   render() {
-    const { loginInfo, driversInfo } = this.props;
+    const { loginInfo, driversInfo, matchesInfo } = this.props;
 
     const cellBoolToString = row => String(row.value);
 
@@ -306,7 +316,22 @@ class DriverBase extends Component {
     };
 
     const tableDriversStepOne = filterExpiredDrivers(driversAll);
-    const tableDrivers = filterConfirmedDrivers(tableDriversStepOne);
+    const tableDriversStepTwo = filterConfirmedDrivers(tableDriversStepOne);
+
+    let filterCurrentMatchDriverOnly = drivers => {
+      if (driversInfo.showCurrentMatchDriverOnly === true) {
+        let filterDrivers = driver =>
+          driver.UUID == matchesInfo.currentMatch.uuid_driver;
+
+        let driversCurrentMatchOnly = drivers.filter(filterDrivers);
+
+        return driversCurrentMatchOnly;
+      } else {
+        return drivers;
+      }
+    };
+
+    const tableDrivers = filterCurrentMatchDriverOnly(tableDriversStepTwo);
 
     return (
       <div>
@@ -379,6 +404,27 @@ class DriverBase extends Component {
                             id="hideConfirmed"
                             checked={driversInfo.hideConfirmed}
                             onChange={this.driversTableHideConfirmedHandler(
+                              this
+                            )}
+                          />
+                        </div>
+                        <div
+                          className="form-group checkbox"
+                          style={checkboxAreaStyle}
+                        >
+                          <label
+                            className=""
+                            style={checkboxLabelStyle}
+                            htmlFor="showCurrentMatchDriverOnly"
+                          >
+                            Show Current Match Driver Only
+                          </label>
+                          <input
+                            className=""
+                            type="checkbox"
+                            id="showCurrentMatchDriverOnly"
+                            checked={driversInfo.showCurrentMatchDriverOnly}
+                            onChange={this.driversTableShowCurrentMatchDriverOnlyHandler(
                               this
                             )}
                           />

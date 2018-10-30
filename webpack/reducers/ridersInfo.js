@@ -7,6 +7,7 @@ import {
   ridersListSetInfoType,
   ridersListHideExpiredType,
   ridersListHideConfirmedType,
+  ridersListShowCurrentMatchOnlyType,
   currentRiderShowHideTypes
 } from '../actions/types';
 
@@ -18,6 +19,7 @@ const ridersInfo = (
     listPageSize: DEFAULT_LIST_PAGE_SIZE,
     hideExpiredCanceled: false,
     hideConfirmed: false,
+    showCurrentMatchRiderOnly: false,
     showCurrentRiderDetails: false,
     currentRider: {}
   },
@@ -65,6 +67,12 @@ const ridersInfo = (
 
     case ridersListHideConfirmedType:
       return { ...state, hideConfirmed: !state.hideConfirmed };
+
+    case ridersListShowCurrentMatchOnlyType:
+      return {
+        ...state,
+        showCurrentMatchRiderOnly: !state.showCurrentMatchRiderOnly
+      };
 
     default:
       return state;

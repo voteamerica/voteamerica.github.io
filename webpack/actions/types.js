@@ -64,6 +64,16 @@ const matchesOtherDriverListHideConfirmedType = itemsListHideConfirmedTypes(
   matchOtherDriverListType
 );
 
+const itemsListShowCurrentMatchOnlyTypes = itemType =>
+  itemType + '_LIST_SHOW_CURRENT_MATCH_ONLY';
+
+const driversListShowCurrentMatchOnlyType = itemsListShowCurrentMatchOnlyTypes(
+  driverListType
+);
+const ridersListShowCurrentMatchOnlyType = itemsListShowCurrentMatchOnlyTypes(
+  riderListType
+);
+
 const currentItemShowHideTypes = itemType => ({
   show: 'SHOW_CURRENT_' + itemType,
   hide: 'HIDE_CURRENT_' + itemType
@@ -103,12 +113,14 @@ export {
   getDriverListTypes,
   driversListHideExpiredType,
   driversListHideConfirmedType,
+  driversListShowCurrentMatchOnlyType,
   currentDriverShowHideTypes,
   ridersGetHideListTypes,
   ridersListSetInfoType,
   getRiderListTypes,
   ridersListHideExpiredType,
   ridersListHideConfirmedType,
+  ridersListShowCurrentMatchOnlyType,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
   matchesListSetInfoType,

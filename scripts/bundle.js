@@ -44610,7 +44610,7 @@ module.exports = function(originalModule) {
 /*!**********************************!*\
   !*** ./webpack/actions/index.js ***!
   \**********************************/
-/*! exports provided: noOp, loginDetails, login, loginSuccess, logout, getDriversList, hideDriversList, setInfoDriversList, hideExpiredDriversList, hideConfirmedDriversList, showCurrentDriver, hideCurrentDriver, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentRider, hideCurrentRider, getMatchesList, hideMatchesList, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, getMatchesOtherDriverList, hideMatchesOtherDriverList, setInfoMatchesOtherDriverList, hideExpiredMatchesOtherDriverList, hideConfirmedMatchesOtherDriverList, uploadFileChosen, postUploadFile */
+/*! exports provided: noOp, loginDetails, login, loginSuccess, logout, getDriversList, hideDriversList, setInfoDriversList, hideExpiredDriversList, hideConfirmedDriversList, showCurrentMatchOnlyDriversList, showCurrentDriver, hideCurrentDriver, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, getMatchesList, hideMatchesList, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, getMatchesOtherDriverList, hideMatchesOtherDriverList, setInfoMatchesOtherDriverList, hideExpiredMatchesOtherDriverList, hideConfirmedMatchesOtherDriverList, uploadFileChosen, postUploadFile */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44625,6 +44625,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInfoDriversList", function() { return setInfoDriversList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideExpiredDriversList", function() { return hideExpiredDriversList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideConfirmedDriversList", function() { return hideConfirmedDriversList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showCurrentMatchOnlyDriversList", function() { return showCurrentMatchOnlyDriversList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showCurrentDriver", function() { return showCurrentDriver; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideCurrentDriver", function() { return hideCurrentDriver; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRidersList", function() { return getRidersList; });
@@ -44632,6 +44633,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInfoRidersList", function() { return setInfoRidersList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideExpiredRidersList", function() { return hideExpiredRidersList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideConfirmedRidersList", function() { return hideConfirmedRidersList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showCurrentMatchOnlyRidersList", function() { return showCurrentMatchOnlyRidersList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showCurrentRider", function() { return showCurrentRider; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideCurrentRider", function() { return hideCurrentRider; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMatchesList", function() { return getMatchesList; });
@@ -44772,6 +44774,18 @@ var hideConfirmedDriversList = hideConfirmedItemsList(_types__WEBPACK_IMPORTED_M
 var hideConfirmedRidersList = hideConfirmedItemsList(_types__WEBPACK_IMPORTED_MODULE_0__["ridersListHideConfirmedType"]);
 var hideConfirmedMatchesList = hideConfirmedItemsList(_types__WEBPACK_IMPORTED_MODULE_0__["matchesListHideConfirmedType"]);
 var hideConfirmedMatchesOtherDriverList = hideConfirmedItemsList(_types__WEBPACK_IMPORTED_MODULE_0__["matchesOtherDriverListHideConfirmedType"]);
+
+var showCurrentMatchOnlyItemsList = function showCurrentMatchOnlyItemsList(itemsListShowCurrentMatchOnlyType) {
+  return function () {
+    return {
+      type: itemsListShowCurrentMatchOnlyType,
+      payload: {}
+    };
+  };
+};
+
+var showCurrentMatchOnlyDriversList = showCurrentMatchOnlyItemsList(_types__WEBPACK_IMPORTED_MODULE_0__["driversListShowCurrentMatchOnlyType"]);
+var showCurrentMatchOnlyRidersList = showCurrentMatchOnlyItemsList(_types__WEBPACK_IMPORTED_MODULE_0__["ridersListShowCurrentMatchOnlyType"]);
 
 var showCurrentItem = function showCurrentItem(currentItemShowType) {
   return function (itemDetails) {
@@ -45502,7 +45516,7 @@ function loginSaga() {
 /*!**********************************!*\
   !*** ./webpack/actions/types.js ***!
   \**********************************/
-/*! exports provided: NO_OP, LOGIN_DETAILS, LOGIN_REQUEST, loginRequestTypes, LOGOUT, DEFAULT_LIST_PAGE_INDEX, DEFAULT_LIST_PAGE_SIZE, driversGetHideListTypes, driversListSetInfoType, getDriverListTypes, driversListHideExpiredType, driversListHideConfirmedType, currentDriverShowHideTypes, ridersGetHideListTypes, ridersListSetInfoType, getRiderListTypes, ridersListHideExpiredType, ridersListHideConfirmedType, currentRiderShowHideTypes, matchesGetHideListTypes, matchesListSetInfoType, matchesListHideExpiredType, matchesListHideConfirmedType, getMatchListTypes, currentMatchShowHideTypes, matchesOtherDriverGetHideListTypes, matchesOtherDriverListSetInfoType, matchesOtherDriverListHideExpiredType, matchesOtherDriverListHideConfirmedType, getMatchOtherDriverListTypes, UPLOAD_FILE_CHOSEN, POST_UPLOAD, postUploadAsyncTypes */
+/*! exports provided: NO_OP, LOGIN_DETAILS, LOGIN_REQUEST, loginRequestTypes, LOGOUT, DEFAULT_LIST_PAGE_INDEX, DEFAULT_LIST_PAGE_SIZE, driversGetHideListTypes, driversListSetInfoType, getDriverListTypes, driversListHideExpiredType, driversListHideConfirmedType, driversListShowCurrentMatchOnlyType, currentDriverShowHideTypes, ridersGetHideListTypes, ridersListSetInfoType, getRiderListTypes, ridersListHideExpiredType, ridersListHideConfirmedType, ridersListShowCurrentMatchOnlyType, currentRiderShowHideTypes, matchesGetHideListTypes, matchesListSetInfoType, matchesListHideExpiredType, matchesListHideConfirmedType, getMatchListTypes, currentMatchShowHideTypes, matchesOtherDriverGetHideListTypes, matchesOtherDriverListSetInfoType, matchesOtherDriverListHideExpiredType, matchesOtherDriverListHideConfirmedType, getMatchOtherDriverListTypes, UPLOAD_FILE_CHOSEN, POST_UPLOAD, postUploadAsyncTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45519,12 +45533,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDriverListTypes", function() { return getDriverListTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driversListHideExpiredType", function() { return driversListHideExpiredType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driversListHideConfirmedType", function() { return driversListHideConfirmedType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driversListShowCurrentMatchOnlyType", function() { return driversListShowCurrentMatchOnlyType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentDriverShowHideTypes", function() { return currentDriverShowHideTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ridersGetHideListTypes", function() { return ridersGetHideListTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ridersListSetInfoType", function() { return ridersListSetInfoType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRiderListTypes", function() { return getRiderListTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ridersListHideExpiredType", function() { return ridersListHideExpiredType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ridersListHideConfirmedType", function() { return ridersListHideConfirmedType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ridersListShowCurrentMatchOnlyType", function() { return ridersListShowCurrentMatchOnlyType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentRiderShowHideTypes", function() { return currentRiderShowHideTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesGetHideListTypes", function() { return matchesGetHideListTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesListSetInfoType", function() { return matchesListSetInfoType; });
@@ -45596,6 +45612,13 @@ var driversListHideConfirmedType = itemsListHideConfirmedTypes(driverListType);
 var ridersListHideConfirmedType = itemsListHideConfirmedTypes(riderListType);
 var matchesListHideConfirmedType = itemsListHideConfirmedTypes(matchListType);
 var matchesOtherDriverListHideConfirmedType = itemsListHideConfirmedTypes(matchOtherDriverListType);
+
+var itemsListShowCurrentMatchOnlyTypes = function itemsListShowCurrentMatchOnlyTypes(itemType) {
+  return itemType + '_LIST_SHOW_CURRENT_MATCH_ONLY';
+};
+
+var driversListShowCurrentMatchOnlyType = itemsListShowCurrentMatchOnlyTypes(driverListType);
+var ridersListShowCurrentMatchOnlyType = itemsListShowCurrentMatchOnlyTypes(riderListType);
 
 var currentItemShowHideTypes = function currentItemShowHideTypes(itemType) {
   return {
@@ -45791,6 +45814,7 @@ var mapDispatchToProps = {
   setInfoDriversList: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["setInfoDriversList"],
   hideExpiredDriversList: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["hideExpiredDriversList"],
   hideConfirmedDriversList: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["hideConfirmedDriversList"],
+  showCurrentMatchOnlyDriversList: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["showCurrentMatchOnlyDriversList"],
   showCurrentDriver: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["showCurrentDriver"],
   hideCurrentDriver: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["hideCurrentDriver"]
 };
@@ -45846,16 +45870,7 @@ function (_Component) {
           console.log('driver click');
 
           if (rowInfo !== undefined) {
-            var UUID = rowInfo.original.UUID;
-            var firstName = rowInfo.original.DriverFirstName;
-            var lastName = rowInfo.original.DriverLastName;
-            var phone = rowInfo.original.DriverPhone;
-            showCurrentDriver({
-              UUID: UUID,
-              DriverFirstName: firstName,
-              DriverLastName: lastName,
-              DriverPhone: phone
-            });
+            showCurrentDriver(rowInfo.original);
           } else {
             hideCurrentDriver({});
           }
@@ -45909,6 +45924,14 @@ function (_Component) {
       };
     }
   }, {
+    key: "driversTableShowCurrentMatchDriverOnlyHandler",
+    value: function driversTableShowCurrentMatchDriverOnlyHandler(self) {
+      return function () {
+        var showCurrentMatchOnlyDriversList = self.props.showCurrentMatchOnlyDriversList;
+        showCurrentMatchOnlyDriversList();
+      };
+    }
+  }, {
     key: "handleGetDriversListClick",
     value: function handleGetDriversListClick(self) {
       return function () {
@@ -45933,7 +45956,8 @@ function (_Component) {
     value: function render() {
       var _this$props2 = this.props,
           loginInfo = _this$props2.loginInfo,
-          driversInfo = _this$props2.driversInfo;
+          driversInfo = _this$props2.driversInfo,
+          matchesInfo = _this$props2.matchesInfo;
 
       var cellBoolToString = function cellBoolToString(row) {
         return String(row.value);
@@ -45961,6 +45985,25 @@ function (_Component) {
       }, {
         Header: 'Seats',
         accessor: 'SeatCount'
+      }, {
+        Header: 'Matches',
+        accessor: 'MatchCount'
+      }, {
+        Header: 'Riders',
+        accessor: 'TotalRiders'
+      }, {
+        Header: 'Overflow',
+        accessor: 'Overflow',
+        Cell: function Cell(_ref) {
+          var value = _ref.value;
+          return String(value);
+        }
+      }, {
+        Header: 'Available Seats',
+        accessor: 'SeatsAvailable'
+      }, {
+        Header: 'Trips',
+        accessor: 'minimumTripCount'
       }, {
         Header: 'License',
         accessor: 'DriverLicenseNumber'
@@ -46003,29 +46046,29 @@ function (_Component) {
       }, {
         Header: 'Details Visible',
         accessor: 'RidersCanSeeDriverDetails',
-        Cell: function Cell(_ref) {
-          var value = _ref.value;
-          return String(value);
-        }
-      }, {
-        Header: 'No Politics',
-        accessor: 'DriverWillNotTalkPolitics',
         Cell: function Cell(_ref2) {
           var value = _ref2.value;
           return String(value);
         }
       }, {
-        Header: 'Ready To Match',
-        accessor: 'ReadyToMatch',
+        Header: 'No Politics',
+        accessor: 'DriverWillNotTalkPolitics',
         Cell: function Cell(_ref3) {
           var value = _ref3.value;
           return String(value);
         }
       }, {
-        Header: 'Stay In Touch',
-        accessor: 'PleaseStayInTouch',
+        Header: 'Ready To Match',
+        accessor: 'ReadyToMatch',
         Cell: function Cell(_ref4) {
           var value = _ref4.value;
+          return String(value);
+        }
+      }, {
+        Header: 'Stay In Touch',
+        accessor: 'PleaseStayInTouch',
+        Cell: function Cell(_ref5) {
+          var value = _ref5.value;
           return String(value);
         }
       }, {
@@ -46034,14 +46077,23 @@ function (_Component) {
       }, {
         Header: 'Will Take Care',
         accessor: 'DriverWillTakeCare',
-        Cell: function Cell(_ref5) {
-          var value = _ref5.value;
+        Cell: function Cell(_ref6) {
+          var value = _ref6.value;
           return String(value);
         }
       }];
       var driverTableDivStyle = {
         marginTop: 20,
         marginBottom: 10
+      };
+      var currentDriverItemDivStyle = {
+        marginBottom: 10
+      };
+      var currentDriverItemSpanStyle = {
+        marginLeft: 10
+      };
+      var currentDriverLinkStyle = {
+        marginLeft: 10
       };
       var checkboxAreaStyle = {
         marginTop: '20px',
@@ -46059,7 +46111,25 @@ function (_Component) {
         var currentDriver = driversInfo.currentDriver;
         var uriPhone = encodeURI(currentDriver.DriverPhone);
         var selfServiceUrl = '../self-service/?type=driver&uuid=' + currentDriver.UUID + '&code=0&info&phone=' + uriPhone;
-        return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h3", null, "Current Driver Info"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, currentDriver.DriverFirstName + ' ' + currentDriver.DriverLastName), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("a", {
+        return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h3", null, "Current Driver Info"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+          style: currentDriverItemDivStyle
+        }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", {
+          style: currentDriverItemSpanStyle
+        }, currentDriver.DriverFirstName + ' ' + currentDriver.DriverLastName), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", {
+          style: currentDriverItemSpanStyle
+        }, currentDriver.DriverEmail), currentDriver.Overflow === true ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", {
+          style: currentDriverItemSpanStyle
+        }, "Multiple trips: ", react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", {
+          style: {
+            color: 'red'
+          }
+        }, "Yes")) : false, currentDriver.MatchCount > 0 ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", {
+          style: currentDriverItemSpanStyle
+        }, "Matches: ", react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", null, currentDriver.MatchCount)) : false, currentDriver.DriverCanLoadRiderWithWheelchair === true ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", {
+          style: currentDriverItemSpanStyle
+        }, "Powerchair support") : false), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+          style: currentDriverLinkStyle
+        }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("a", {
           href: selfServiceUrl
         }, "Self Service Page")));
       };
@@ -46093,7 +46163,22 @@ function (_Component) {
       };
 
       var tableDriversStepOne = filterExpiredDrivers(driversAll);
-      var tableDrivers = filterConfirmedDrivers(tableDriversStepOne);
+      var tableDriversStepTwo = filterConfirmedDrivers(tableDriversStepOne);
+
+      var filterCurrentMatchDriverOnly = function filterCurrentMatchDriverOnly(drivers) {
+        if (driversInfo.showCurrentMatchDriverOnly === true) {
+          var filterDrivers = function filterDrivers(driver) {
+            return driver.UUID == matchesInfo.currentMatch.uuid_driver;
+          };
+
+          var driversCurrentMatchOnly = drivers.filter(filterDrivers);
+          return driversCurrentMatchOnly;
+        } else {
+          return drivers;
+        }
+      };
+
+      var tableDrivers = filterCurrentMatchDriverOnly(tableDriversStepTwo);
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, loginInfo.loggedIn === true ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h2", {
         className: "operator-page-heading"
       }, "Driver Info"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, driversInfo.showDriversList === false ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("button", {
@@ -46134,6 +46219,19 @@ function (_Component) {
         id: "hideConfirmed",
         checked: driversInfo.hideConfirmed,
         onChange: this.driversTableHideConfirmedHandler(this)
+      })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "form-group checkbox",
+        style: checkboxAreaStyle
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("label", {
+        className: "",
+        style: checkboxLabelStyle,
+        htmlFor: "showCurrentMatchDriverOnly"
+      }, "Show Current Match Driver Only"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("input", {
+        className: "",
+        type: "checkbox",
+        id: "showCurrentMatchDriverOnly",
+        checked: driversInfo.showCurrentMatchDriverOnly,
+        onChange: this.driversTableShowCurrentMatchDriverOnlyHandler(this)
       }))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         style: driverTableDivStyle
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_table__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -46738,9 +46836,48 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
       var checkboxLabelStyle = {
         paddingRight: "40px"
       };
+      var currentMatchItemDivStyle = {
+        marginBottom: "10px"
+      };
+      var currentMatchItemSpanStyle = {
+        marginLeft: "10px"
+      };
+
+      var currentMatchStatusSpanStyle = function currentMatchStatusSpanStyle(status) {
+        var match = status !== "MatchConfirmed";
+
+        if (match) {
+          return {
+            marginLeft: "10px"
+          };
+        } else {
+          return {
+            fontWeight: "700",
+            marginLeft: "10px"
+          };
+        }
+      };
 
       var currentMatchInfo = function currentMatchInfo(currentMatch) {
-        return React.createElement("div", undefined, React.createElement("h3", undefined, "Current match info:"), React.createElement("div", undefined, "Driver uuid: " + currentMatch.uuid_driver), React.createElement("div", undefined, "Rider uuid: " + currentMatch.uuid_rider), React.createElement("div", undefined, currentMatch.status));
+        return React.createElement("div", undefined, React.createElement("h3", undefined, "Current match info:"), React.createElement("div", {
+          style: currentMatchItemDivStyle
+        }, React.createElement("span", {
+          style: currentMatchItemSpanStyle
+        }, "Driver uuid: " + currentMatch.uuid_driver), React.createElement("span", {
+          style: currentMatchItemSpanStyle
+        }, currentMatch.DriverFirstName + (" " + currentMatch.DriverLastName))), React.createElement("div", {
+          style: currentMatchItemDivStyle
+        }, React.createElement("span", {
+          style: currentMatchItemSpanStyle
+        }, "Rider uuid: " + currentMatch.uuid_rider), React.createElement("span", {
+          style: currentMatchItemSpanStyle
+        }, currentMatch.RiderFirstName + (" " + currentMatch.RiderLastName)), React.createElement("span", {
+          style: currentMatchItemSpanStyle
+        }, currentMatch.RiderEmail)), React.createElement("div", {
+          style: currentMatchItemDivStyle
+        }, React.createElement("span", {
+          style: currentMatchStatusSpanStyle(currentMatch.status)
+        }, currentMatch.status)));
       };
 
       var tableMatchesJSX;
@@ -47007,7 +47144,7 @@ function tableRider(itemDetails) {
   };
 }
 
-function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentRider, hideCurrentRider, _) {
+function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, _) {
   var ridersTableOnPageChangeHandler = function ridersTableOnPageChangeHandler(pageIndex) {
     var pageSize = ridersInfo.listPageSize;
     return Utils$VoteUSReason.setInfoJs(setInfoRidersList, pageIndex, pageSize);
@@ -47090,6 +47227,12 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
 
   var ridersTableHideConfirmedHandler = function ridersTableHideConfirmedHandler() {
     return Curry._1(hideConfirmedRidersList,
+    /* () */
+    0);
+  };
+
+  var ridersTableShowCurrentMatchRiderOnlyHandler = function ridersTableShowCurrentMatchRiderOnlyHandler() {
+    return Curry._1(showCurrentMatchOnlyRidersList,
     /* () */
     0);
   };
@@ -47194,7 +47337,21 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
 
       var tableRidersAll = $$Array.map(tableRider, ridersInfo.riders);
       var tableRidersStepOne = filterExpiredRiders(tableRidersAll);
-      var tableRiders = filterConfirmedRiders(tableRidersStepOne);
+      var tableRidersStepTwo = filterConfirmedRiders(tableRidersStepOne);
+
+      var filterCurrentMatchRiderOnly = function filterCurrentMatchRiderOnly(riders) {
+        if (ridersInfo.showCurrentMatchRiderOnly === true) {
+          var filterRiders = function filterRiders(rider) {
+            return rider.UUID === matchesInfo.currentMatch.uuid_rider;
+          };
+
+          return Utils$VoteUSReason.filterArray(filterRiders, riders);
+        } else {
+          return riders;
+        }
+      };
+
+      var tableRiders = filterCurrentMatchRiderOnly(tableRidersStepTwo);
       var tableDivStyle = {
         marginTop: "20px",
         marginBottom: "10px"
@@ -47206,13 +47363,37 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
       var checkboxLabelStyle = {
         paddingRight: "40px"
       };
+      var currentRiderItemDivStyle = {
+        marginBottom: "10px"
+      };
+      var currentRiderItemSpanStyle = {
+        marginLeft: "10px"
+      };
 
       var currentRiderInfo = function currentRiderInfo(currentRider) {
         var uriPhone = encodeURI(currentRider.RiderPhone);
         var selfServiceUrl = "../self-service/?type=rider&uuid=" + (currentRider.UUID + ("&code=0&info&phone=" + uriPhone));
-        return React.createElement("div", undefined, React.createElement("h3", undefined, "Current rider info:"), React.createElement("div", undefined, currentRider.RiderFirstName + (" " + currentRider.RiderLastName)), React.createElement("div", undefined, currentRider.RiderEmail), React.createElement("div", undefined, React.createElement("a", {
+        var match = currentRider.NeedWheelchair;
+        var match$1 = currentRider.TotalPartySize > 1;
+        return React.createElement("div", undefined, React.createElement("h3", undefined, "Current rider info:"), React.createElement("div", {
+          style: currentRiderItemDivStyle
+        }, React.createElement("span", {
+          style: currentRiderItemSpanStyle
+        }, currentRider.RiderFirstName + (" " + currentRider.RiderLastName)), React.createElement("span", {
+          style: currentRiderItemSpanStyle
+        }, currentRider.RiderEmail), match ? React.createElement("span", {
+          style: currentRiderItemSpanStyle
+        }, "Powerchair user") : null, match$1 ? React.createElement("span", undefined, React.createElement("span", {
+          style: currentRiderItemSpanStyle
+        }, "Party size: "), React.createElement("span", {
+          style: currentRiderItemSpanStyle
+        }, React.createElement("strong", undefined, String(currentRider.TotalPartySize)))) : null), React.createElement("div", {
+          style: currentRiderItemDivStyle
+        }, React.createElement("span", {
+          style: currentRiderItemSpanStyle
+        }, React.createElement("a", {
           href: selfServiceUrl
-        }, "Self Service Page")));
+        }, "Self Service Page"))));
       };
 
       var tableRidersJSX;
@@ -47257,6 +47438,19 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
           checked: ridersInfo.hideConfirmed,
           type: "checkbox",
           onChange: ridersTableHideConfirmedHandler
+        })), React.createElement("div", {
+          className: "form-group checkbox",
+          style: checkboxAreaStyle
+        }, React.createElement("label", {
+          className: "",
+          style: checkboxLabelStyle,
+          htmlFor: "showCurrentMatchRiderOnly"
+        }, "Show Current Match Rider Only"), React.createElement("input", {
+          className: "",
+          id: "showCurrentMatchRiderOnly",
+          checked: ridersInfo.showCurrentMatchRiderOnly,
+          type: "checkbox",
+          onChange: ridersTableShowCurrentMatchRiderOnlyHandler
         }))), React.createElement("div", {
           style: tableDivStyle
         }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
@@ -47308,7 +47502,7 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, function (jsProps) {
-  return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.setInfoRidersList, jsProps.hideExpiredRidersList, jsProps.hideConfirmedRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider,
+  return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.setInfoRidersList, jsProps.hideExpiredRidersList, jsProps.hideConfirmedRidersList, jsProps.showCurrentMatchOnlyRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider,
   /* array */
   []);
 });
@@ -47360,6 +47554,7 @@ var mapDispatchToProps = {
   setInfoRidersList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["setInfoRidersList"],
   hideExpiredRidersList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideExpiredRidersList"],
   hideConfirmedRidersList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideConfirmedRidersList"],
+  showCurrentMatchOnlyRidersList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["showCurrentMatchOnlyRidersList"],
   showCurrentRider: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["showCurrentRider"],
   hideCurrentRider: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideCurrentRider"]
 };
@@ -47809,6 +48004,7 @@ var driversInfo = function driversInfo() {
     listPageSize: _actions_types__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_LIST_PAGE_SIZE"],
     hideExpiredCanceled: false,
     hideConfirmed: false,
+    showCurrentMatchDriverOnly: false,
     showCurrentDriverDetails: false,
     currentDriver: {}
   };
@@ -47865,6 +48061,11 @@ var driversInfo = function driversInfo() {
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["driversListHideConfirmedType"]:
       return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
         hideConfirmed: !state.hideConfirmed
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["driversListShowCurrentMatchOnlyType"]:
+      return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        showCurrentMatchDriverOnly: !state.showCurrentMatchDriverOnly
       });
 
     default:
@@ -48177,6 +48378,7 @@ var ridersInfo = function ridersInfo() {
     listPageSize: _actions_types__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_LIST_PAGE_SIZE"],
     hideExpiredCanceled: false,
     hideConfirmed: false,
+    showCurrentMatchRiderOnly: false,
     showCurrentRiderDetails: false,
     currentRider: {}
   };
@@ -48233,6 +48435,11 @@ var ridersInfo = function ridersInfo() {
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["ridersListHideConfirmedType"]:
       return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
         hideConfirmed: !state.hideConfirmed
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["ridersListShowCurrentMatchOnlyType"]:
+      return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        showCurrentMatchRiderOnly: !state.showCurrentMatchRiderOnly
       });
 
     default:
