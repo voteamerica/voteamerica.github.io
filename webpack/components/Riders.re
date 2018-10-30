@@ -140,6 +140,21 @@ let tableRider = itemDetails:rider =>
         ~timezone=itemDetails->timezoneGet,
         );
 
+[@bs.deriving abstract]
+type jsProps = {
+  loginInfo: TypeInfo.loginInfo,
+  apiInfo: TypeInfo.apiInfo,
+  ridersInfo: ridersInfo,  
+  matchesInfo: Matches.matchesInfo,
+  getRidersList: (string, string) => unit,
+  hideRidersList: unit => unit,
+  setInfoRidersList: (int, int) => unit,
+  hideExpiredRidersList: unit => unit,
+  hideConfirmedRidersList: unit => unit,
+  showCurrentRider: rider => unit,
+  hideCurrentRider: unit => unit,
+};
+
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, 
 ~ridersInfo:ridersInfo,
 ~matchesInfo:Matches.matchesInfo, 
@@ -419,21 +434,6 @@ _children) => {
     </div>
   }
 }};
-
-[@bs.deriving abstract]
-type jsProps = {
-  loginInfo: TypeInfo.loginInfo,
-  apiInfo: TypeInfo.apiInfo,
-  ridersInfo: ridersInfo,  
-  matchesInfo: Matches.matchesInfo,
-  getRidersList: (string, string) => unit,
-  hideRidersList: unit => unit,
-  setInfoRidersList: (int, int) => unit,
-  hideExpiredRidersList: unit => unit,
-  hideConfirmedRidersList: unit => unit,
-  showCurrentRider: rider => unit,
-  hideCurrentRider: unit => unit,
-};
 
 let default =
   ReasonReact.wrapReasonForJs(~component, jsProps =>
