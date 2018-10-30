@@ -248,6 +248,9 @@ class DriverBase extends Component {
                 ' ' +
                 currentDriver.DriverLastName}
             </span>
+            <span style={currentDriverItemSpanStyle}>
+              {currentDriver.DriverEmail}
+            </span>
             {currentDriver.Overflow === true ? (
               <span style={currentDriverItemSpanStyle}>
                 Multiple trips: <strong style={{ color: 'red' }}>Yes</strong>

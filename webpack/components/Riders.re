@@ -12,7 +12,7 @@ type rider = {
    full_state: string,
    [@bs.as "RiderDropOffZIP"] dropOffZIP: string,
    [@bs.as "AvailableRideTimesLocal"] rideTimesLocal: string,
-   [@bs.as "TotalPartySize"] partySize: string,
+   [@bs.as "TotalPartySize"] partySize: int,
    [@bs.as "TwoWayTripNeeded"] twoWayTrip: bool,
    [@bs.as "RiderIsVulnerable"] riderVulnerable: bool,
    [@bs.as "RiderWillNotTalkPolitics"] noPoliticsTalk: bool,
@@ -299,6 +299,12 @@ _children) => {
 
     let checkboxLabelStyle = ReactDOMRe.Style.make(~paddingRight="40px", ());
 
+    let currentRiderItemDivStyle = ReactDOMRe.Style.make(~marginBottom="10px",());
+
+    let currentRiderItemSpanStyle = ReactDOMRe.Style.make(
+    ~marginLeft="10px", ()
+    );
+
     let currentRiderInfo = currentRider => {
       let uriPhone = TypeInfo.encodeURI(currentRider->phoneGet);
 
@@ -306,12 +312,39 @@ _children) => {
 
       <div>
         <h3>{ReasonReact.string("Current rider info:")}</h3>
-        <div>{ReasonReact.string(currentRider->firstNameGet ++ " " ++ currentRider->lastNameGet) }
-        </div>
-        <div>{ReasonReact.string(currentRider->emailGet)}
-        </div>
-        <div>
-          <a href={selfServiceUrl}>{ReasonReact.string( "Self Service Page")}</a>
+        
+        <div style={currentRiderItemDivStyle}>
+          <span style={currentRiderItemSpanStyle}>{ReasonReact.string(currentRider->firstNameGet ++ " " ++ currentRider->lastNameGet) }
+          </span>
+          <span style={currentRiderItemSpanStyle}>{ReasonReact.string(currentRider->emailGet)}
+          </span>
+          {
+            switch currentRider->needWheelchairGet {
+            | true => {
+          <span style={currentRiderItemSpanStyle}>{ReasonReact.string("Powerchair user")}
+          </span>}
+            | false => ReasonReact.null
+            };
+           }
+           {
+            switch (currentRider->partySizeGet > 1) {
+              | true => {
+                  <span>              
+                    <span style={currentRiderItemSpanStyle}>    {ReasonReact.string("Party size: ")}
+                    </span>
+                    <span style={currentRiderItemSpanStyle}>
+                    <strong>
+                      {ReasonReact.string(string_of_int(currentRider->partySizeGet))}
+                    </strong>                    
+                    </span>
+                  </span>
+                }   
+              | false => ReasonReact.null
+            }
+          }
+        </div>        
+        <div style={currentRiderItemDivStyle}><span style={currentRiderItemSpanStyle}>
+          <a href={selfServiceUrl}>{ReasonReact.string( "Self Service Page")}</a></span>
         </div>
       </div>
     };
