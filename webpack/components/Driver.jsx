@@ -182,7 +182,11 @@ class DriverBase extends Component {
       { Header: 'City', accessor: 'city' },
       { Header: 'State', accessor: 'full_state' },
       { Header: 'Radius', accessor: 'DriverCollectionRadius' },
-      { Header: 'Drive Times', accessor: 'AvailableDriveTimesLocal' },
+      {
+        Header: 'Drive Times',
+        accessor: 'AvailableDriveTimesLocal',
+        width: 160
+      },
       { Header: 'Status', accessor: 'status' },
       { Header: 'Status Info', accessor: 'status_info' },
       { Header: 'Created', accessor: 'created_ts' },
