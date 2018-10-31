@@ -46024,7 +46024,8 @@ function (_Component) {
         accessor: 'DriverCollectionRadius'
       }, {
         Header: 'Drive Times',
-        accessor: 'AvailableDriveTimesLocal'
+        accessor: 'AvailableDriveTimesLocal',
+        width: 160
       }, {
         Header: 'Status',
         accessor: 'status'
