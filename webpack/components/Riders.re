@@ -12,7 +12,7 @@ type rider = {
    full_state: string,
    [@bs.as "RiderDropOffZIP"] dropOffZIP: string,
    [@bs.as "AvailableRideTimesLocal"] rideTimesLocal: string,
-   [@bs.as "TotalPartySize"] partySize: string,
+   [@bs.as "TotalPartySize"] partySize: int,
    [@bs.as "TwoWayTripNeeded"] twoWayTrip: bool,
    [@bs.as "RiderIsVulnerable"] riderVulnerable: bool,
    [@bs.as "RiderWillNotTalkPolitics"] noPoliticsTalk: bool,
@@ -50,6 +50,7 @@ type ridersInfo = {
   listPageSize: int,
   hideExpiredCanceled: bool,
   hideConfirmed: bool,
+  showCurrentMatchRiderOnly: bool,
   showCurrentRiderDetails: bool,
   currentRider: (rider),  
 };
@@ -140,6 +141,22 @@ let tableRider = itemDetails:rider =>
         ~timezone=itemDetails->timezoneGet,
         );
 
+[@bs.deriving abstract]
+type jsProps = {
+  loginInfo: TypeInfo.loginInfo,
+  apiInfo: TypeInfo.apiInfo,
+  ridersInfo: ridersInfo,  
+  matchesInfo: Matches.matchesInfo,
+  getRidersList: (string, string) => unit,
+  hideRidersList: unit => unit,
+  setInfoRidersList: (int, int) => unit,
+  hideExpiredRidersList: unit => unit,
+  hideConfirmedRidersList: unit => unit,
+  showCurrentMatchOnlyRidersList: unit => unit,
+  showCurrentRider: rider => unit,
+  hideCurrentRider: unit => unit,
+};
+
 let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, 
 ~ridersInfo:ridersInfo,
 ~matchesInfo:Matches.matchesInfo, 
@@ -148,6 +165,7 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo,
 ~setInfoRidersList,
 ~hideExpiredRidersList,
 ~hideConfirmedRidersList,
+~showCurrentMatchOnlyRidersList,
 ~showCurrentRider,
 ~hideCurrentRider,
 _children) => {
@@ -240,6 +258,10 @@ _children) => {
     hideConfirmedRidersList();
   }
 
+  let ridersTableShowCurrentMatchRiderOnlyHandler = _ => {
+    showCurrentMatchOnlyRidersList();
+  }
+
   let handleGetRiderListClick = (_event) => {
     let token = loginInfo->TypeInfo.tokenGet;
     let url = apiInfo->TypeInfo.apiUrlGet;
@@ -291,13 +313,34 @@ _children) => {
     let tableRidersAll:array(rider) = Array.map(tableRider, ridersInfo->ridersGet); 
 
     let tableRidersStepOne = filterExpiredRiders(tableRidersAll);
-    let tableRiders = filterConfirmedRiders(tableRidersStepOne);
+    let tableRidersStepTwo = filterConfirmedRiders(tableRidersStepOne);
+
+    let filterCurrentMatchRiderOnly = riders => {
+      if (ridersInfo->showCurrentMatchRiderOnlyGet == true){
+        let filterRiders = rider => rider->uuidGet == matchesInfo->Matches.currentMatchGet->Matches.uuid_riderGet;
+
+        let ridersCurrentMatchOnly = Utils.filterArray(~f=filterRiders, riders);
+          
+        ridersCurrentMatchOnly;
+      }
+      else {
+        riders;
+      }; 
+    };
+
+    let tableRiders = filterCurrentMatchRiderOnly(tableRidersStepTwo);
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
     let checkboxAreaStyle = ReactDOMRe.Style.make(~marginTop="20px", ~display="inline-block", ());
 
     let checkboxLabelStyle = ReactDOMRe.Style.make(~paddingRight="40px", ());
+
+    let currentRiderItemDivStyle = ReactDOMRe.Style.make(~marginBottom="10px",());
+
+    let currentRiderItemSpanStyle = ReactDOMRe.Style.make(
+    ~marginLeft="10px", ()
+    );
 
     let currentRiderInfo = currentRider => {
       let uriPhone = TypeInfo.encodeURI(currentRider->phoneGet);
@@ -306,12 +349,39 @@ _children) => {
 
       <div>
         <h3>{ReasonReact.string("Current rider info:")}</h3>
-        <div>{ReasonReact.string(currentRider->firstNameGet ++ " " ++ currentRider->lastNameGet) }
-        </div>
-        <div>{ReasonReact.string(currentRider->emailGet)}
-        </div>
-        <div>
-          <a href={selfServiceUrl}>{ReasonReact.string( "Self Service Page")}</a>
+        
+        <div style={currentRiderItemDivStyle}>
+          <span style={currentRiderItemSpanStyle}>{ReasonReact.string(currentRider->firstNameGet ++ " " ++ currentRider->lastNameGet) }
+          </span>
+          <span style={currentRiderItemSpanStyle}>{ReasonReact.string(currentRider->emailGet)}
+          </span>
+          {
+            switch currentRider->needWheelchairGet {
+            | true => {
+          <span style={currentRiderItemSpanStyle}>{ReasonReact.string("Powerchair user")}
+          </span>}
+            | false => ReasonReact.null
+            };
+           }
+           {
+            switch (currentRider->partySizeGet > 1) {
+              | true => {
+                  <span>              
+                    <span style={currentRiderItemSpanStyle}>    {ReasonReact.string("Party size: ")}
+                    </span>
+                    <span style={currentRiderItemSpanStyle}>
+                    <strong>
+                      {ReasonReact.string(string_of_int(currentRider->partySizeGet))}
+                    </strong>                    
+                    </span>
+                  </span>
+                }   
+              | false => ReasonReact.null
+            }
+          }
+        </div>        
+        <div style={currentRiderItemDivStyle}><span style={currentRiderItemSpanStyle}>
+          <a href={selfServiceUrl}>{ReasonReact.string( "Self Service Page")}</a></span>
         </div>
       </div>
     };
@@ -338,6 +408,11 @@ _children) => {
               <label className="" style={checkboxLabelStyle} htmlFor="hideConfirmed">{ReasonReact.string("Hide Confirmed")}
               </label>
               <input className="" type_="checkbox" id="hideConfirmed" checked={ridersInfo->hideConfirmedGet} onChange={ridersTableHideConfirmedHandler} />
+            </div> 
+            <div className="form-group checkbox" style={checkboxAreaStyle}>
+              <label className="" style={checkboxLabelStyle} htmlFor="showCurrentMatchRiderOnly">{ReasonReact.string("Show Current Match Rider Only")}
+              </label>
+              <input className="" type_="checkbox" id="showCurrentMatchRiderOnly" checked={ridersInfo->showCurrentMatchRiderOnlyGet} onChange={ridersTableShowCurrentMatchRiderOnlyHandler} />
             </div> 
           </div> 
           <div style={tableDivStyle}> 
@@ -387,21 +462,6 @@ _children) => {
   }
 }};
 
-[@bs.deriving abstract]
-type jsProps = {
-  loginInfo: TypeInfo.loginInfo,
-  apiInfo: TypeInfo.apiInfo,
-  ridersInfo: ridersInfo,  
-  matchesInfo: Matches.matchesInfo,
-  getRidersList: (string, string) => unit,
-  hideRidersList: unit => unit,
-  setInfoRidersList: (int, int) => unit,
-  hideExpiredRidersList: unit => unit,
-  hideConfirmedRidersList: unit => unit,
-  showCurrentRider: rider => unit,
-  hideCurrentRider: unit => unit,
-};
-
 let default =
   ReasonReact.wrapReasonForJs(~component, jsProps =>
       make(
@@ -414,6 +474,7 @@ let default =
       ~setInfoRidersList=jsProps->setInfoRidersListGet,
       ~hideExpiredRidersList=jsProps->hideExpiredRidersListGet,
       ~hideConfirmedRidersList=jsProps->hideConfirmedRidersListGet,
+      ~showCurrentMatchOnlyRidersList=jsProps->showCurrentMatchOnlyRidersListGet,
       ~showCurrentRider=jsProps->showCurrentRiderGet,
       ~hideCurrentRider=jsProps->hideCurrentRiderGet,
       [||],

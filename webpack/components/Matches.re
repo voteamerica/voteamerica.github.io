@@ -121,6 +121,21 @@ let matchTableColumns =
   ~score=itemDetails->scoreGet,
 );
 
+[@bs.deriving abstract]
+type jsProps = {
+  sectionHeading: string,
+  loginInfo: TypeInfo.loginInfo,
+  apiInfo: TypeInfo.apiInfo,
+  matchesInfo: matchesInfo,  
+  getMatchesList: (string, string) => unit,
+  hideMatchesList: unit => unit,
+  setInfoMatchesList: (int, int) => unit,  
+  hideExpiredMatchesList: unit => unit,
+  hideConfirmedMatchesList: unit => unit,
+  showCurrentMatch: systemMatch => unit,
+  hideCurrentMatch: unit => unit,
+};
+
 let make = (~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
@@ -302,14 +317,38 @@ _children) => {
 
     let checkboxLabelStyle = ReactDOMRe.Style.make(~paddingRight="40px", ());
 
+    let currentMatchItemDivStyle = ReactDOMRe.Style.make(~marginBottom="10px",());
+
+    let currentMatchItemSpanStyle = ReactDOMRe.Style.make(
+    ~marginLeft="10px", ()
+    );
+
+    let currentMatchStatusSpanStyle = status => switch (status != "MatchConfirmed") {
+    | true => ReactDOMRe.Style.make(
+    ~marginLeft="10px", ()
+    );
+    | false => ReactDOMRe.Style.make(
+    ~marginLeft="10px", ~fontWeight="700", ()
+    );
+    }; 
+
+
     let currentMatchInfo = currentMatch => {
       <div>
         <h3>{ReasonReact.string("Current match info:")}</h3>
-        <div>{ReasonReact.string("Driver uuid: " ++ currentMatch->uuid_driverGet)}
+        <div style={currentMatchItemDivStyle}>
+          <span style={currentMatchItemSpanStyle}>{ReasonReact.string("Driver uuid: " ++ currentMatch->uuid_driverGet)}</span>
+          <span style={currentMatchItemSpanStyle}>{ReasonReact.string(currentMatch->driverFirstNameGet ++ " " ++ currentMatch->driverLastNameGet )}</span>
         </div>
-        <div>{ReasonReact.string("Rider uuid: " ++ currentMatch->uuid_riderGet) }
+        <div style={currentMatchItemDivStyle}>
+          <span style={currentMatchItemSpanStyle}>    {ReasonReact.string("Rider uuid: " ++ currentMatch->uuid_riderGet) }</span>
+          <span style={currentMatchItemSpanStyle}>{ReasonReact.string(currentMatch->firstNameGet ++ " " ++currentMatch->lastNameGet )}</span>
+          <span style={currentMatchItemSpanStyle}>{ReasonReact.string(currentMatch->emailGet)}</span>
         </div>
-        <div>{ReasonReact.string(currentMatch->statusGet)}
+        <div style={currentMatchItemDivStyle}>          
+          <span style={currentMatchStatusSpanStyle(currentMatch->statusGet)}>          
+          {ReasonReact.string(currentMatch->statusGet)}
+          </span>
         </div>
       </div>
     };
@@ -383,21 +422,7 @@ _children) => {
       {matchesInfoArea}
     </div>
   }
-}};
-
-[@bs.deriving abstract]
-type jsProps = {
-  sectionHeading: string,
-  loginInfo: TypeInfo.loginInfo,
-  apiInfo: TypeInfo.apiInfo,
-  matchesInfo: matchesInfo,  
-  getMatchesList: (string, string) => unit,
-  hideMatchesList: unit => unit,
-  setInfoMatchesList: (int, int) => unit,  
-  hideExpiredMatchesList: unit => unit,
-  hideConfirmedMatchesList: unit => unit,
-  showCurrentMatch: systemMatch => unit,
-  hideCurrentMatch: unit => unit,
+}
 };
 
 let default =
@@ -417,3 +442,4 @@ let default =
       [||],
     )
   );
+

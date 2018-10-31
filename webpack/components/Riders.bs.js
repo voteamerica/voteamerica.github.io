@@ -85,7 +85,7 @@ function tableRider(itemDetails) {
         };
 }
 
-function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentRider, hideCurrentRider, _) {
+function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, _) {
   var ridersTableOnPageChangeHandler = function (pageIndex) {
     var pageSize = ridersInfo.listPageSize;
     return Utils$VoteUSReason.setInfoJs(setInfoRidersList, pageIndex, pageSize);
@@ -140,6 +140,9 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
   var ridersTableHideConfirmedHandler = function () {
     return Curry._1(hideConfirmedRidersList, /* () */0);
   };
+  var ridersTableShowCurrentMatchRiderOnlyHandler = function () {
+    return Curry._1(showCurrentMatchOnlyRidersList, /* () */0);
+  };
   var handleGetRiderListClick = function () {
     var token = loginInfo.token;
     var url = apiInfo.apiUrl;
@@ -188,7 +191,18 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
               };
               var tableRidersAll = $$Array.map(tableRider, ridersInfo.riders);
               var tableRidersStepOne = filterExpiredRiders(tableRidersAll);
-              var tableRiders = filterConfirmedRiders(tableRidersStepOne);
+              var tableRidersStepTwo = filterConfirmedRiders(tableRidersStepOne);
+              var filterCurrentMatchRiderOnly = function (riders) {
+                if (ridersInfo.showCurrentMatchRiderOnly === true) {
+                  var filterRiders = function (rider) {
+                    return rider.UUID === matchesInfo.currentMatch.uuid_rider;
+                  };
+                  return Utils$VoteUSReason.filterArray(filterRiders, riders);
+                } else {
+                  return riders;
+                }
+              };
+              var tableRiders = filterCurrentMatchRiderOnly(tableRidersStepTwo);
               var tableDivStyle = {
                 marginTop: "20px",
                 marginBottom: "10px"
@@ -200,12 +214,36 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
               var checkboxLabelStyle = {
                 paddingRight: "40px"
               };
+              var currentRiderItemDivStyle = {
+                marginBottom: "10px"
+              };
+              var currentRiderItemSpanStyle = {
+                marginLeft: "10px"
+              };
               var currentRiderInfo = function (currentRider) {
                 var uriPhone = encodeURI(currentRider.RiderPhone);
                 var selfServiceUrl = "../self-service/?type=rider&uuid=" + (currentRider.UUID + ("&code=0&info&phone=" + uriPhone));
-                return React.createElement("div", undefined, React.createElement("h3", undefined, "Current rider info:"), React.createElement("div", undefined, currentRider.RiderFirstName + (" " + currentRider.RiderLastName)), React.createElement("div", undefined, currentRider.RiderEmail), React.createElement("div", undefined, React.createElement("a", {
-                                    href: selfServiceUrl
-                                  }, "Self Service Page")));
+                var match = currentRider.NeedWheelchair;
+                var match$1 = currentRider.TotalPartySize > 1;
+                return React.createElement("div", undefined, React.createElement("h3", undefined, "Current rider info:"), React.createElement("div", {
+                                style: currentRiderItemDivStyle
+                              }, React.createElement("span", {
+                                    style: currentRiderItemSpanStyle
+                                  }, currentRider.RiderFirstName + (" " + currentRider.RiderLastName)), React.createElement("span", {
+                                    style: currentRiderItemSpanStyle
+                                  }, currentRider.RiderEmail), match ? React.createElement("span", {
+                                      style: currentRiderItemSpanStyle
+                                    }, "Powerchair user") : null, match$1 ? React.createElement("span", undefined, React.createElement("span", {
+                                          style: currentRiderItemSpanStyle
+                                        }, "Party size: "), React.createElement("span", {
+                                          style: currentRiderItemSpanStyle
+                                        }, React.createElement("strong", undefined, String(currentRider.TotalPartySize)))) : null), React.createElement("div", {
+                                style: currentRiderItemDivStyle
+                              }, React.createElement("span", {
+                                    style: currentRiderItemSpanStyle
+                                  }, React.createElement("a", {
+                                        href: selfServiceUrl
+                                      }, "Self Service Page"))));
               };
               var tableRidersJSX;
               if (ridersInfo.showRiderList) {
@@ -246,6 +284,19 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
                                   checked: ridersInfo.hideConfirmed,
                                   type: "checkbox",
                                   onChange: ridersTableHideConfirmedHandler
+                                })), React.createElement("div", {
+                              className: "form-group checkbox",
+                              style: checkboxAreaStyle
+                            }, React.createElement("label", {
+                                  className: "",
+                                  style: checkboxLabelStyle,
+                                  htmlFor: "showCurrentMatchRiderOnly"
+                                }, "Show Current Match Rider Only"), React.createElement("input", {
+                                  className: "",
+                                  id: "showCurrentMatchRiderOnly",
+                                  checked: ridersInfo.showCurrentMatchRiderOnly,
+                                  type: "checkbox",
+                                  onChange: ridersTableShowCurrentMatchRiderOnlyHandler
                                 }))), React.createElement("div", {
                           style: tableDivStyle
                         }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
@@ -282,7 +333,7 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.setInfoRidersList, jsProps.hideExpiredRidersList, jsProps.hideConfirmedRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
+        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.setInfoRidersList, jsProps.hideExpiredRidersList, jsProps.hideConfirmedRidersList, jsProps.showCurrentMatchOnlyRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
       }));
 
 exports.component = component;

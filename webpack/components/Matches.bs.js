@@ -285,8 +285,45 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
               var checkboxLabelStyle = {
                 paddingRight: "40px"
               };
+              var currentMatchItemDivStyle = {
+                marginBottom: "10px"
+              };
+              var currentMatchItemSpanStyle = {
+                marginLeft: "10px"
+              };
+              var currentMatchStatusSpanStyle = function (status) {
+                var match = status !== "MatchConfirmed";
+                if (match) {
+                  return {
+                          marginLeft: "10px"
+                        };
+                } else {
+                  return {
+                          fontWeight: "700",
+                          marginLeft: "10px"
+                        };
+                }
+              };
               var currentMatchInfo = function (currentMatch) {
-                return React.createElement("div", undefined, React.createElement("h3", undefined, "Current match info:"), React.createElement("div", undefined, "Driver uuid: " + currentMatch.uuid_driver), React.createElement("div", undefined, "Rider uuid: " + currentMatch.uuid_rider), React.createElement("div", undefined, currentMatch.status));
+                return React.createElement("div", undefined, React.createElement("h3", undefined, "Current match info:"), React.createElement("div", {
+                                style: currentMatchItemDivStyle
+                              }, React.createElement("span", {
+                                    style: currentMatchItemSpanStyle
+                                  }, "Driver uuid: " + currentMatch.uuid_driver), React.createElement("span", {
+                                    style: currentMatchItemSpanStyle
+                                  }, currentMatch.DriverFirstName + (" " + currentMatch.DriverLastName))), React.createElement("div", {
+                                style: currentMatchItemDivStyle
+                              }, React.createElement("span", {
+                                    style: currentMatchItemSpanStyle
+                                  }, "Rider uuid: " + currentMatch.uuid_rider), React.createElement("span", {
+                                    style: currentMatchItemSpanStyle
+                                  }, currentMatch.RiderFirstName + (" " + currentMatch.RiderLastName)), React.createElement("span", {
+                                    style: currentMatchItemSpanStyle
+                                  }, currentMatch.RiderEmail)), React.createElement("div", {
+                                style: currentMatchItemDivStyle
+                              }, React.createElement("span", {
+                                    style: currentMatchStatusSpanStyle(currentMatch.status)
+                                  }, currentMatch.status)));
               };
               var tableMatchesJSX;
               if (matchesInfo.showMatchList) {

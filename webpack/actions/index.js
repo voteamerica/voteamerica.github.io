@@ -8,11 +8,13 @@ import {
   driversListSetInfoType,
   driversListHideExpiredType,
   driversListHideConfirmedType,
+  driversListShowCurrentMatchOnlyType,
   currentDriverShowHideTypes,
   ridersGetHideListTypes,
   ridersListSetInfoType,
   ridersListHideExpiredType,
   ridersListHideConfirmedType,
+  ridersListShowCurrentMatchOnlyType,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
   matchesListSetInfoType,
@@ -122,6 +124,17 @@ const hideConfirmedMatchesOtherDriverList = hideConfirmedItemsList(
   matchesOtherDriverListHideConfirmedType
 );
 
+const showCurrentMatchOnlyItemsList = itemsListShowCurrentMatchOnlyType => () => ({
+  type: itemsListShowCurrentMatchOnlyType,
+  payload: {}
+});
+const showCurrentMatchOnlyDriversList = showCurrentMatchOnlyItemsList(
+  driversListShowCurrentMatchOnlyType
+);
+const showCurrentMatchOnlyRidersList = showCurrentMatchOnlyItemsList(
+  ridersListShowCurrentMatchOnlyType
+);
+
 const showCurrentItem = currentItemShowType => itemDetails => ({
   type: currentItemShowType,
   payload: { itemDetails }
@@ -162,6 +175,7 @@ export {
   setInfoDriversList,
   hideExpiredDriversList,
   hideConfirmedDriversList,
+  showCurrentMatchOnlyDriversList,
   showCurrentDriver,
   hideCurrentDriver,
   getRidersList,
@@ -169,6 +183,7 @@ export {
   setInfoRidersList,
   hideExpiredRidersList,
   hideConfirmedRidersList,
+  showCurrentMatchOnlyRidersList,
   showCurrentRider,
   hideCurrentRider,
   getMatchesList,
