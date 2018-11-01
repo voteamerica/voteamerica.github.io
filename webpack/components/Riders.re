@@ -361,6 +361,10 @@ _children) => {
     ~marginLeft="10px", ()
     );
 
+    let downloadLinkAnchorStyle = ReactDOMRe.Style.make(
+    ~marginLeft="15px", ()
+    );
+
     let currentRiderInfo = currentRider => {
       let uriPhone = TypeInfo.encodeURI(currentRider->phoneGet);
 
@@ -405,6 +409,20 @@ _children) => {
       </div>
     };
 
+    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+    let createBlob: array(rider) => string = [%raw (riders) => "{ 
+      const jsonr = JSON.stringify(riders);
+      const blob = new Blob([jsonr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      return url; }"];
+
+    let urlBlob: string = 
+      switch (ridersInfo->showDownloadLinkGet) {
+              | true => createBlob(tableRidersAll);
+              | false => "";
+      };
+
     let tableRidersJSX = 
       if (ridersInfo->showRiderListGet) {
         <div>
@@ -416,8 +434,13 @@ _children) => {
             >{ReasonReact.string("Hide List")}
             </button>
             <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
-            {switch (ridersInfo->showDownloadLink) {
-              | true => <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="hideRidersListDownloadLinkButton" onClick={handleHideRidersListDownloadLinkClick} >{ReasonReact.string("Hide Download Link")}</LeftPaddedButton>
+            {switch (ridersInfo->showDownloadLinkGet) {
+              | true => <span>
+                <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="hideRidersListDownloadLinkButton" onClick={handleHideRidersListDownloadLinkClick} >{ReasonReact.string("Hide Download Link")}</LeftPaddedButton>
+                <a style={downloadLinkAnchorStyle} className="button button--large" download="riders - backup.json" href={urlBlob}>
+                  {ReasonReact.string("Download backup")}
+                </a>
+              </span>
               | false => <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showRidersListDownloadLinkButton" onClick={handleShowRidersListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton>}
             }
           </div>

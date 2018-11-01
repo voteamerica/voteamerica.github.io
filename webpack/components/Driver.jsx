@@ -154,6 +154,22 @@ class DriverBase extends Component {
     };
   }
 
+  handleShowDriversListDownloadLinkClick(self) {
+    return () => {
+      const { showDriversListDownloadLink } = self.props;
+
+      return showDriversListDownloadLink();
+    };
+  }
+
+  handleHideDriversListDownloadLinkClick(self) {
+    return () => {
+      const { hideDriversListDownloadLink } = self.props;
+
+      return hideDriversListDownloadLink();
+    };
+  }
+
   render() {
     const { loginInfo, driversInfo, matchesInfo } = this.props;
 
@@ -296,7 +312,7 @@ class DriverBase extends Component {
       );
     };
 
-    const driversAll = driversInfo.drivers;
+    const tableDriversAll = driversInfo.drivers;
 
     const filterExpiredDrivers = drivers => {
       if (driversInfo.hideExpiredCanceled === true) {
@@ -323,7 +339,7 @@ class DriverBase extends Component {
       }
     };
 
-    const tableDriversStepOne = filterExpiredDrivers(driversAll);
+    const tableDriversStepOne = filterExpiredDrivers(tableDriversAll);
     const tableDriversStepTwo = filterConfirmedDrivers(tableDriversStepOne);
 
     let filterCurrentMatchDriverOnly = drivers => {
@@ -341,9 +357,9 @@ class DriverBase extends Component {
 
     const tableDrivers = filterCurrentMatchDriverOnly(tableDriversStepTwo);
 
-    const jsondr = JSON.stringify(tableDrivers);
+    const jsondr = JSON.stringify(tableDriversAll);
     const blob = new Blob([jsondr], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
+    const urlBlob = URL.createObjectURL(blob);
 
     return (
       <div>
@@ -376,9 +392,39 @@ class DriverBase extends Component {
                     >
                       Refresh List
                     </LeftPaddedButton>
-                    <a download="backup.json" href={url}>
-                      Download backup
-                    </a>
+                    {driversInfo.showDownloadLink === true ? (
+                      <span>
+                        <LeftPaddedButton
+                          props={LeftPaddedButton.leftPaddedButtonProps}
+                          className="button button--large"
+                          id="hideDriversListDownloadLinkButton"
+                          onClick={this.handleHideDriversListDownloadLinkClick(
+                            this
+                          )}
+                        >
+                          Hide Download Link
+                        </LeftPaddedButton>
+                        <a
+                          style={{ marginLeft: 15 }}
+                          className="button button--large"
+                          download="drivers - backup.json"
+                          href={urlBlob}
+                        >
+                          Download backup
+                        </a>
+                      </span>
+                    ) : (
+                      <LeftPaddedButton
+                        props={LeftPaddedButton.leftPaddedButtonProps}
+                        className="button button--large"
+                        id="showDriversListDownloadLinkButton"
+                        onClick={this.handleShowDriversListDownloadLinkClick(
+                          this
+                        )}
+                      >
+                        Show Download Link
+                      </LeftPaddedButton>
+                    )}
                   </div>
                   {tableDrivers ? (
                     <div>
