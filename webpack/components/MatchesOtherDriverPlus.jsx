@@ -6,6 +6,8 @@ import {
   noOp,
   getMatchesOtherDriverList,
   hideMatchesOtherDriverList,
+  showMatchesOtherDriverListDownloadLink,
+  hideMatchesOtherDriverListDownloadLink,
   setInfoMatchesOtherDriverList,
   hideExpiredMatchesOtherDriverList,
   hideConfirmedMatchesOtherDriverList
@@ -20,6 +22,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getMatchesList: getMatchesOtherDriverList,
   hideMatchesList: hideMatchesOtherDriverList,
+  showMatchesListDownloadLink: showMatchesOtherDriverListDownloadLink,
+  hideMatchesListDownloadLink: hideMatchesOtherDriverListDownloadLink,
   setInfoMatchesList: setInfoMatchesOtherDriverList,
   hideExpiredMatchesList: hideExpiredMatchesOtherDriverList,
   hideConfirmedMatchesList: hideConfirmedMatchesOtherDriverList,

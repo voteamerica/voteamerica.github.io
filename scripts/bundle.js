@@ -44610,7 +44610,7 @@ module.exports = function(originalModule) {
 /*!**********************************!*\
   !*** ./webpack/actions/index.js ***!
   \**********************************/
-/*! exports provided: noOp, loginDetails, login, loginSuccess, logout, getDriversList, hideDriversList, setInfoDriversList, hideExpiredDriversList, hideConfirmedDriversList, showCurrentMatchOnlyDriversList, showCurrentDriver, hideCurrentDriver, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, getMatchesList, hideMatchesList, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, getMatchesOtherDriverList, hideMatchesOtherDriverList, setInfoMatchesOtherDriverList, hideExpiredMatchesOtherDriverList, hideConfirmedMatchesOtherDriverList, uploadFileChosen, postUploadFile */
+/*! exports provided: noOp, loginDetails, login, loginSuccess, logout, getDriversList, hideDriversList, showDriversListDownloadLink, hideDriversListDownloadLink, setInfoDriversList, hideExpiredDriversList, hideConfirmedDriversList, showCurrentMatchOnlyDriversList, showCurrentDriver, hideCurrentDriver, getRidersList, hideRidersList, showRidersListDownloadLink, hideRidersListDownloadLink, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, getMatchesOtherDriverList, hideMatchesOtherDriverList, showMatchesOtherDriverListDownloadLink, hideMatchesOtherDriverListDownloadLink, setInfoMatchesOtherDriverList, hideExpiredMatchesOtherDriverList, hideConfirmedMatchesOtherDriverList, uploadFileChosen, postUploadFile */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44622,6 +44622,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDriversList", function() { return getDriversList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideDriversList", function() { return hideDriversList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showDriversListDownloadLink", function() { return showDriversListDownloadLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideDriversListDownloadLink", function() { return hideDriversListDownloadLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInfoDriversList", function() { return setInfoDriversList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideExpiredDriversList", function() { return hideExpiredDriversList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideConfirmedDriversList", function() { return hideConfirmedDriversList; });
@@ -44630,6 +44632,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideCurrentDriver", function() { return hideCurrentDriver; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRidersList", function() { return getRidersList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideRidersList", function() { return hideRidersList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showRidersListDownloadLink", function() { return showRidersListDownloadLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideRidersListDownloadLink", function() { return hideRidersListDownloadLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInfoRidersList", function() { return setInfoRidersList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideExpiredRidersList", function() { return hideExpiredRidersList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideConfirmedRidersList", function() { return hideConfirmedRidersList; });
@@ -44638,6 +44642,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideCurrentRider", function() { return hideCurrentRider; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMatchesList", function() { return getMatchesList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideMatchesList", function() { return hideMatchesList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showMatchesListDownloadLink", function() { return showMatchesListDownloadLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideMatchesListDownloadLink", function() { return hideMatchesListDownloadLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInfoMatchesList", function() { return setInfoMatchesList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideExpiredMatchesList", function() { return hideExpiredMatchesList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideConfirmedMatchesList", function() { return hideConfirmedMatchesList; });
@@ -44645,6 +44651,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideCurrentMatch", function() { return hideCurrentMatch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMatchesOtherDriverList", function() { return getMatchesOtherDriverList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideMatchesOtherDriverList", function() { return hideMatchesOtherDriverList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showMatchesOtherDriverListDownloadLink", function() { return showMatchesOtherDriverListDownloadLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideMatchesOtherDriverListDownloadLink", function() { return hideMatchesOtherDriverListDownloadLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInfoMatchesOtherDriverList", function() { return setInfoMatchesOtherDriverList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideExpiredMatchesOtherDriverList", function() { return hideExpiredMatchesOtherDriverList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideConfirmedMatchesOtherDriverList", function() { return hideConfirmedMatchesOtherDriverList; });
@@ -44729,6 +44737,33 @@ var getMatchesList = getItemsList(_types__WEBPACK_IMPORTED_MODULE_0__["matchesGe
 var hideMatchesList = hideItemsList(_types__WEBPACK_IMPORTED_MODULE_0__["matchesGetHideListTypes"].hide);
 var getMatchesOtherDriverList = getItemsList(_types__WEBPACK_IMPORTED_MODULE_0__["matchesOtherDriverGetHideListTypes"].get);
 var hideMatchesOtherDriverList = hideItemsList(_types__WEBPACK_IMPORTED_MODULE_0__["matchesOtherDriverGetHideListTypes"].hide);
+
+var showItemsListDownloadLink = function showItemsListDownloadLink(itemsListShowDownloadLinkType) {
+  return function () {
+    return {
+      type: itemsListShowDownloadLinkType,
+      payload: {}
+    };
+  };
+};
+
+var hideItemsListDownloadLink = function hideItemsListDownloadLink(itemsListHideDownloadLinkType) {
+  return function () {
+    return {
+      type: itemsListHideDownloadLinkType,
+      payload: {}
+    };
+  };
+};
+
+var showDriversListDownloadLink = showItemsListDownloadLink(_types__WEBPACK_IMPORTED_MODULE_0__["driversListDownloadLinkShowHideTypes"].show);
+var hideDriversListDownloadLink = hideItemsListDownloadLink(_types__WEBPACK_IMPORTED_MODULE_0__["driversListDownloadLinkShowHideTypes"].hide);
+var showRidersListDownloadLink = showItemsListDownloadLink(_types__WEBPACK_IMPORTED_MODULE_0__["ridersListDownloadLinkShowHideTypes"].show);
+var hideRidersListDownloadLink = hideItemsListDownloadLink(_types__WEBPACK_IMPORTED_MODULE_0__["ridersListDownloadLinkShowHideTypes"].hide);
+var showMatchesListDownloadLink = showItemsListDownloadLink(_types__WEBPACK_IMPORTED_MODULE_0__["matchesListDownloadLinkShowHideTypes"].show);
+var hideMatchesListDownloadLink = hideItemsListDownloadLink(_types__WEBPACK_IMPORTED_MODULE_0__["matchesListDownloadLinkShowHideTypes"].hide);
+var showMatchesOtherDriverListDownloadLink = showItemsListDownloadLink(_types__WEBPACK_IMPORTED_MODULE_0__["matchesOtherDriverListDownloadLinkShowHideTypes"].show);
+var hideMatchesOtherDriverListDownloadLink = hideItemsListDownloadLink(_types__WEBPACK_IMPORTED_MODULE_0__["matchesOtherDriverListDownloadLinkShowHideTypes"].hide);
 
 var setInfoItemsList = function setInfoItemsList(itemsListSetInfoType) {
   return function (listPageIndex, listPageSize) {
@@ -45516,7 +45551,7 @@ function loginSaga() {
 /*!**********************************!*\
   !*** ./webpack/actions/types.js ***!
   \**********************************/
-/*! exports provided: NO_OP, LOGIN_DETAILS, LOGIN_REQUEST, loginRequestTypes, LOGOUT, DEFAULT_LIST_PAGE_INDEX, DEFAULT_LIST_PAGE_SIZE, driversGetHideListTypes, driversListSetInfoType, getDriverListTypes, driversListHideExpiredType, driversListHideConfirmedType, driversListShowCurrentMatchOnlyType, currentDriverShowHideTypes, ridersGetHideListTypes, ridersListSetInfoType, getRiderListTypes, ridersListHideExpiredType, ridersListHideConfirmedType, ridersListShowCurrentMatchOnlyType, currentRiderShowHideTypes, matchesGetHideListTypes, matchesListSetInfoType, matchesListHideExpiredType, matchesListHideConfirmedType, getMatchListTypes, currentMatchShowHideTypes, matchesOtherDriverGetHideListTypes, matchesOtherDriverListSetInfoType, matchesOtherDriverListHideExpiredType, matchesOtherDriverListHideConfirmedType, getMatchOtherDriverListTypes, UPLOAD_FILE_CHOSEN, POST_UPLOAD, postUploadAsyncTypes */
+/*! exports provided: NO_OP, LOGIN_DETAILS, LOGIN_REQUEST, loginRequestTypes, LOGOUT, DEFAULT_LIST_PAGE_INDEX, DEFAULT_LIST_PAGE_SIZE, driversGetHideListTypes, driversListShowCurrentMatchOnlyType, driversListSetInfoType, getDriverListTypes, driversListHideExpiredType, driversListHideConfirmedType, currentDriverShowHideTypes, driversListDownloadLinkShowHideTypes, ridersGetHideListTypes, ridersListDownloadLinkShowHideTypes, ridersListSetInfoType, getRiderListTypes, ridersListHideExpiredType, ridersListHideConfirmedType, ridersListShowCurrentMatchOnlyType, currentRiderShowHideTypes, matchesGetHideListTypes, matchesListDownloadLinkShowHideTypes, matchesListSetInfoType, matchesListHideExpiredType, matchesListHideConfirmedType, getMatchListTypes, currentMatchShowHideTypes, matchesOtherDriverGetHideListTypes, matchesOtherDriverListDownloadLinkShowHideTypes, matchesOtherDriverListSetInfoType, matchesOtherDriverListHideExpiredType, matchesOtherDriverListHideConfirmedType, getMatchOtherDriverListTypes, UPLOAD_FILE_CHOSEN, POST_UPLOAD, postUploadAsyncTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45529,13 +45564,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_LIST_PAGE_INDEX", function() { return DEFAULT_LIST_PAGE_INDEX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_LIST_PAGE_SIZE", function() { return DEFAULT_LIST_PAGE_SIZE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driversGetHideListTypes", function() { return driversGetHideListTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driversListShowCurrentMatchOnlyType", function() { return driversListShowCurrentMatchOnlyType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driversListSetInfoType", function() { return driversListSetInfoType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDriverListTypes", function() { return getDriverListTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driversListHideExpiredType", function() { return driversListHideExpiredType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driversListHideConfirmedType", function() { return driversListHideConfirmedType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driversListShowCurrentMatchOnlyType", function() { return driversListShowCurrentMatchOnlyType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentDriverShowHideTypes", function() { return currentDriverShowHideTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driversListDownloadLinkShowHideTypes", function() { return driversListDownloadLinkShowHideTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ridersGetHideListTypes", function() { return ridersGetHideListTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ridersListDownloadLinkShowHideTypes", function() { return ridersListDownloadLinkShowHideTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ridersListSetInfoType", function() { return ridersListSetInfoType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRiderListTypes", function() { return getRiderListTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ridersListHideExpiredType", function() { return ridersListHideExpiredType; });
@@ -45543,12 +45580,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ridersListShowCurrentMatchOnlyType", function() { return ridersListShowCurrentMatchOnlyType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentRiderShowHideTypes", function() { return currentRiderShowHideTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesGetHideListTypes", function() { return matchesGetHideListTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesListDownloadLinkShowHideTypes", function() { return matchesListDownloadLinkShowHideTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesListSetInfoType", function() { return matchesListSetInfoType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesListHideExpiredType", function() { return matchesListHideExpiredType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesListHideConfirmedType", function() { return matchesListHideConfirmedType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMatchListTypes", function() { return getMatchListTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentMatchShowHideTypes", function() { return currentMatchShowHideTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesOtherDriverGetHideListTypes", function() { return matchesOtherDriverGetHideListTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesOtherDriverListDownloadLinkShowHideTypes", function() { return matchesOtherDriverListDownloadLinkShowHideTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesOtherDriverListSetInfoType", function() { return matchesOtherDriverListSetInfoType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesOtherDriverListHideExpiredType", function() { return matchesOtherDriverListHideExpiredType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesOtherDriverListHideConfirmedType", function() { return matchesOtherDriverListHideConfirmedType; });
@@ -45585,6 +45624,18 @@ var driversGetHideListTypes = itemsGetHideListTypes(driverListType);
 var ridersGetHideListTypes = itemsGetHideListTypes(riderListType);
 var matchesGetHideListTypes = itemsGetHideListTypes(matchListType);
 var matchesOtherDriverGetHideListTypes = itemsGetHideListTypes(matchOtherDriverListType);
+
+var downloadLinkShowHideTypes = function downloadLinkShowHideTypes(itemType) {
+  return {
+    show: 'SHOW_DOWNLOAD_' + itemType,
+    hide: 'HIDE_DOWNLOAD_' + itemType
+  };
+};
+
+var driversListDownloadLinkShowHideTypes = downloadLinkShowHideTypes(driverListType);
+var ridersListDownloadLinkShowHideTypes = downloadLinkShowHideTypes(riderListType);
+var matchesListDownloadLinkShowHideTypes = downloadLinkShowHideTypes(matchListType);
+var matchesOtherDriverListDownloadLinkShowHideTypes = downloadLinkShowHideTypes(matchOtherDriverListType);
 
 var itemsListSetInfoTypes = function itemsListSetInfoTypes(itemType) {
   return 'SET_' + itemType + '_LIST_INFO';
@@ -45811,6 +45862,8 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = {
   getDriversList: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["getDriversList"],
   hideDriversList: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["hideDriversList"],
+  showDriversListDownloadLink: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["showDriversListDownloadLink"],
+  hideDriversListDownloadLink: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["hideDriversListDownloadLink"],
   setInfoDriversList: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["setInfoDriversList"],
   hideExpiredDriversList: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["hideExpiredDriversList"],
   hideConfirmedDriversList: _actions_index_js__WEBPACK_IMPORTED_MODULE_11__["hideConfirmedDriversList"],
@@ -45949,6 +46002,22 @@ function (_Component) {
       return function () {
         var hideDriversList = self.props.hideDriversList;
         return hideDriversList();
+      };
+    }
+  }, {
+    key: "handleShowDriversListDownloadLinkClick",
+    value: function handleShowDriversListDownloadLinkClick(self) {
+      return function () {
+        var showDriversListDownloadLink = self.props.showDriversListDownloadLink;
+        return showDriversListDownloadLink();
+      };
+    }
+  }, {
+    key: "handleHideDriversListDownloadLinkClick",
+    value: function handleHideDriversListDownloadLinkClick(self) {
+      return function () {
+        var hideDriversListDownloadLink = self.props.hideDriversListDownloadLink;
+        return hideDriversListDownloadLink();
       };
     }
   }, {
@@ -46135,7 +46204,7 @@ function (_Component) {
         }, "Self Service Page")));
       };
 
-      var driversAll = driversInfo.drivers;
+      var tableDriversAll = driversInfo.drivers;
 
       var filterExpiredDrivers = function filterExpiredDrivers(drivers) {
         if (driversInfo.hideExpiredCanceled === true) {
@@ -46163,7 +46232,7 @@ function (_Component) {
         }
       };
 
-      var tableDriversStepOne = filterExpiredDrivers(driversAll);
+      var tableDriversStepOne = filterExpiredDrivers(tableDriversAll);
       var tableDriversStepTwo = filterConfirmedDrivers(tableDriversStepOne);
 
       var filterCurrentMatchDriverOnly = function filterCurrentMatchDriverOnly(drivers) {
@@ -46180,6 +46249,11 @@ function (_Component) {
       };
 
       var tableDrivers = filterCurrentMatchDriverOnly(tableDriversStepTwo);
+      var jsondr = JSON.stringify(tableDriversAll);
+      var blob = new Blob([jsondr], {
+        type: 'application/json'
+      });
+      var urlBlob = URL.createObjectURL(blob);
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, loginInfo.loggedIn === true ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h2", {
         className: "operator-page-heading"
       }, "Driver Info"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, driversInfo.showDriversList === false ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("button", {
@@ -46194,7 +46268,24 @@ function (_Component) {
         className: "button button--large",
         id: "refreshDriversList",
         onClick: this.handleGetDriversListClick(this)
-      }, "Refresh List")), tableDrivers ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+      }, "Refresh List"), driversInfo.showDownloadLink === true ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_ui_LeftPaddedButton_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        props: _ui_LeftPaddedButton_jsx__WEBPACK_IMPORTED_MODULE_9__["default"].leftPaddedButtonProps,
+        className: "button button--large",
+        id: "hideDriversListDownloadLinkButton",
+        onClick: this.handleHideDriversListDownloadLinkClick(this)
+      }, "Hide Download Link"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("a", {
+        style: {
+          marginLeft: 15
+        },
+        className: "button button--large",
+        download: "drivers - backup.json",
+        href: urlBlob
+      }, "Download backup")) : react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_ui_LeftPaddedButton_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        props: _ui_LeftPaddedButton_jsx__WEBPACK_IMPORTED_MODULE_9__["default"].leftPaddedButtonProps,
+        className: "button button--large",
+        id: "showDriversListDownloadLinkButton",
+        onClick: this.handleShowDriversListDownloadLinkClick(this)
+      }, "Show Download Link")), tableDrivers ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         className: "form-group checkbox",
         style: checkboxAreaStyle
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("label", {
@@ -46625,7 +46716,7 @@ function tableMatch(itemDetails) {
   };
 }
 
-function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, _) {
+function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, _) {
   var matchesTableOnPageChangeHandler = function matchesTableOnPageChangeHandler(pageIndex) {
     var pageSize = matchesInfo.listPageSize;
     return Utils$VoteUSReason.setInfoJs(setInfoMatchesList, pageIndex, pageSize);
@@ -46720,6 +46811,28 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
 
   var handleHideMatchListClick = function handleHideMatchListClick() {
     Curry._1(hideMatchesList,
+    /* () */
+    0);
+
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var handleShowMatchesListDownloadLinkClick = function handleShowMatchesListDownloadLinkClick() {
+    Curry._1(showMatchesListDownloadLink,
+    /* () */
+    0);
+
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var handleHideMatchesListDownloadLinkClick = function handleHideMatchesListDownloadLinkClick() {
+    Curry._1(hideMatchesListDownloadLink,
     /* () */
     0);
 
@@ -46843,6 +46956,9 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
       var currentMatchItemSpanStyle = {
         marginLeft: "10px"
       };
+      var downloadLinkAnchorStyle = {
+        marginLeft: "15px"
+      };
 
       var currentMatchStatusSpanStyle = function currentMatchStatusSpanStyle(status) {
         var match = status !== "MatchConfirmed";
@@ -46881,10 +46997,24 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
         }, currentMatch.status)));
       };
 
+      var createBlob = function createBlob(matches) {
+        {
+          var jsonr = JSON.stringify(matches);
+          var blob = new Blob([jsonr], {
+            type: 'application/json'
+          });
+          var url = URL.createObjectURL(blob);
+          return url;
+        }
+      };
+
+      var match = matchesInfo.showDownloadLink;
+      var urlBlob = match ? createBlob(tableMatchesAll) : "";
       var tableMatchesJSX;
 
       if (matchesInfo.showMatchList) {
-        var match = matchesInfo.showCurrentMatchDetails;
+        var match$1 = matchesInfo.showDownloadLink;
+        var match$2 = matchesInfo.showCurrentMatchDetails;
         tableMatchesJSX = React.createElement("div", undefined, React.createElement("div", undefined, React.createElement("button", {
           className: "button button--large",
           id: "hideMatchListButton",
@@ -46897,7 +47027,28 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
           };
         }, "button button--large", "refreshMatchesListButton", handleGetMatchListClick,
         /* array */
-        ["Refresh List"]))), React.createElement("div", undefined, React.createElement("div", {
+        ["Refresh List"])), match$1 ? React.createElement("span", undefined, ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make(function (prim, prim$1, prim$2) {
+          return {
+            className: prim,
+            id: prim$1,
+            onClick: prim$2
+          };
+        }, "button button--large", "hideMatchesListDownloadLinkButton", handleHideMatchesListDownloadLinkClick,
+        /* array */
+        ["Hide Download Link"])), React.createElement("a", {
+          className: "button button--large",
+          style: downloadLinkAnchorStyle,
+          download: "matches - backup.json",
+          href: urlBlob
+        }, "Download backup")) : ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make(function (prim, prim$1, prim$2) {
+          return {
+            className: prim,
+            id: prim$1,
+            onClick: prim$2
+          };
+        }, "button button--large", "showMatchesListDownloadLinkButton", handleShowMatchesListDownloadLinkClick,
+        /* array */
+        ["Show Download Link"]))), React.createElement("div", undefined, React.createElement("div", {
           className: "form-group checkbox",
           style: checkboxAreaStyle
         }, React.createElement("label", {
@@ -46940,7 +47091,7 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
           };
         }, "basicMatchTable", tableType, 5, matchesInfo.listPageIndex, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler,
         /* array */
-        []))), match ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
+        []))), match$2 ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
       } else {
         tableMatchesJSX = React.createElement("div", undefined, React.createElement("button", {
           className: "button button--large",
@@ -46974,7 +47125,7 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, function (jsProps) {
-  return make(jsProps.sectionHeading, jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch,
+  return make(jsProps.sectionHeading, jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.showMatchesListDownloadLink, jsProps.hideMatchesListDownloadLink, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch,
   /* array */
   []);
 });
@@ -47021,6 +47172,8 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = {
   getMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["getMatchesOtherDriverList"],
   hideMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideMatchesOtherDriverList"],
+  showMatchesListDownloadLink: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["showMatchesOtherDriverListDownloadLink"],
+  hideMatchesListDownloadLink: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideMatchesOtherDriverListDownloadLink"],
   setInfoMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["setInfoMatchesOtherDriverList"],
   hideExpiredMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideExpiredMatchesOtherDriverList"],
   hideConfirmedMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideConfirmedMatchesOtherDriverList"],
@@ -47063,6 +47216,8 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = {
   getMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["getMatchesList"],
   hideMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideMatchesList"],
+  showMatchesListDownloadLink: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["showMatchesListDownloadLink"],
+  hideMatchesListDownloadLink: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideMatchesListDownloadLink"],
   setInfoMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["setInfoMatchesList"],
   hideExpiredMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideExpiredMatchesList"],
   hideConfirmedMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideConfirmedMatchesList"],
@@ -47145,7 +47300,7 @@ function tableRider(itemDetails) {
   };
 }
 
-function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, _) {
+function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, showRidersListDownloadLink, hideRidersListDownloadLink, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, _) {
   var ridersTableOnPageChangeHandler = function ridersTableOnPageChangeHandler(pageIndex) {
     var pageSize = ridersInfo.listPageSize;
     return Utils$VoteUSReason.setInfoJs(setInfoRidersList, pageIndex, pageSize);
@@ -47267,6 +47422,28 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
     );
   };
 
+  var handleShowRidersListDownloadLinkClick = function handleShowRidersListDownloadLinkClick() {
+    Curry._1(showRidersListDownloadLink,
+    /* () */
+    0);
+
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var handleHideRidersListDownloadLinkClick = function handleHideRidersListDownloadLinkClick() {
+    Curry._1(hideRidersListDownloadLink,
+    /* () */
+    0);
+
+    return (
+      /* () */
+      0
+    );
+  };
+
   return (
     /* record */
     [
@@ -47370,6 +47547,9 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
       var currentRiderItemSpanStyle = {
         marginLeft: "10px"
       };
+      var downloadLinkAnchorStyle = {
+        marginLeft: "15px"
+      };
 
       var currentRiderInfo = function currentRiderInfo(currentRider) {
         var uriPhone = encodeURI(currentRider.RiderPhone);
@@ -47397,10 +47577,24 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
         }, "Self Service Page"))));
       };
 
+      var createBlob = function createBlob(riders) {
+        {
+          var jsonr = JSON.stringify(riders);
+          var blob = new Blob([jsonr], {
+            type: 'application/json'
+          });
+          var url = URL.createObjectURL(blob);
+          return url;
+        }
+      };
+
+      var match = ridersInfo.showDownloadLink;
+      var urlBlob = match ? createBlob(tableRidersAll) : "";
       var tableRidersJSX;
 
       if (ridersInfo.showRiderList) {
-        var match = ridersInfo.showCurrentRiderDetails;
+        var match$1 = ridersInfo.showDownloadLink;
+        var match$2 = ridersInfo.showCurrentRiderDetails;
         tableRidersJSX = React.createElement("div", undefined, React.createElement("div", undefined, React.createElement("button", {
           className: "button button--large",
           id: "hideRidersListButton",
@@ -47413,7 +47607,28 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
           };
         }, "button button--large", "refreshRidersListButton", handleGetRiderListClick,
         /* array */
-        ["Refresh List"]))), React.createElement("div", undefined, React.createElement("div", {
+        ["Refresh List"])), match$1 ? React.createElement("span", undefined, ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make(function (prim, prim$1, prim$2) {
+          return {
+            className: prim,
+            id: prim$1,
+            onClick: prim$2
+          };
+        }, "button button--large", "hideRidersListDownloadLinkButton", handleHideRidersListDownloadLinkClick,
+        /* array */
+        ["Hide Download Link"])), React.createElement("a", {
+          className: "button button--large",
+          style: downloadLinkAnchorStyle,
+          download: "riders - backup.json",
+          href: urlBlob
+        }, "Download backup")) : ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make(function (prim, prim$1, prim$2) {
+          return {
+            className: prim,
+            id: prim$1,
+            onClick: prim$2
+          };
+        }, "button button--large", "showRidersListDownloadLinkButton", handleShowRidersListDownloadLinkClick,
+        /* array */
+        ["Show Download Link"]))), React.createElement("div", undefined, React.createElement("div", {
           className: "form-group checkbox",
           style: checkboxAreaStyle
         }, React.createElement("label", {
@@ -47469,7 +47684,7 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
           };
         }, "basicRiderTable", tableType, 5, ridersInfo.listPageIndex, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler,
         /* array */
-        []))), match ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
+        []))), match$2 ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
       } else {
         tableRidersJSX = React.createElement("div", undefined, React.createElement("button", {
           className: "button button--large",
@@ -47503,7 +47718,7 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, function (jsProps) {
-  return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.setInfoRidersList, jsProps.hideExpiredRidersList, jsProps.hideConfirmedRidersList, jsProps.showCurrentMatchOnlyRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider,
+  return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.showRidersListDownloadLink, jsProps.hideRidersListDownloadLink, jsProps.setInfoRidersList, jsProps.hideExpiredRidersList, jsProps.hideConfirmedRidersList, jsProps.showCurrentMatchOnlyRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider,
   /* array */
   []);
 });
@@ -47552,6 +47767,8 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = {
   getRidersList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["getRidersList"],
   hideRidersList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideRidersList"],
+  showRidersListDownloadLink: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["showRidersListDownloadLink"],
+  hideRidersListDownloadLink: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideRidersListDownloadLink"],
   setInfoRidersList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["setInfoRidersList"],
   hideExpiredRidersList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideExpiredRidersList"],
   hideConfirmedRidersList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideConfirmedRidersList"],
@@ -48007,7 +48224,8 @@ var driversInfo = function driversInfo() {
     hideConfirmed: false,
     showCurrentMatchDriverOnly: false,
     showCurrentDriverDetails: false,
-    currentDriver: {}
+    currentDriver: {},
+    showDownloadLink: false
   };
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
@@ -48034,6 +48252,12 @@ var driversInfo = function driversInfo() {
       return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
         showDriversList: false,
         drivers: []
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["driversListDownloadLinkShowHideTypes"].show:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["driversListDownloadLinkShowHideTypes"].hide:
+      return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        showDownloadLink: !state.showDownloadLink
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["currentDriverShowHideTypes"].show:
@@ -48212,7 +48436,8 @@ var matchesInfo = function matchesInfo() {
     hideExpiredCanceled: false,
     hideConfirmed: false,
     showCurrentMatchDetails: false,
-    currentMatch: {}
+    currentMatch: {},
+    showDownloadLink: false
   };
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
@@ -48239,6 +48464,12 @@ var matchesInfo = function matchesInfo() {
       return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
         showMatchList: false,
         matches: []
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["matchesListDownloadLinkShowHideTypes"].show:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["matchesListDownloadLinkShowHideTypes"].hide:
+      return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        showDownloadLink: !state.showDownloadLink
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["currentMatchShowHideTypes"].show:
@@ -48302,7 +48533,8 @@ var matchesOtherDriverInfo = function matchesOtherDriverInfo() {
     hideExpiredCanceled: false,
     hideConfirmed: false,
     showCurrentMatchDetails: false,
-    currentMatch: {}
+    currentMatch: {},
+    showDownloadLink: false
   };
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
@@ -48329,6 +48561,12 @@ var matchesOtherDriverInfo = function matchesOtherDriverInfo() {
       return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
         showMatchList: false,
         matches: []
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["matchesOtherDriverListDownloadLinkShowHideTypes"].show:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["matchesOtherDriverListDownloadLinkShowHideTypes"].hide:
+      return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        showDownloadLink: !state.showDownloadLink
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["matchesOtherDriverListSetInfoType"]:
@@ -48381,7 +48619,8 @@ var ridersInfo = function ridersInfo() {
     hideConfirmed: false,
     showCurrentMatchRiderOnly: false,
     showCurrentRiderDetails: false,
-    currentRider: {}
+    currentRider: {},
+    showDownloadLink: false
   };
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
@@ -48408,6 +48647,12 @@ var ridersInfo = function ridersInfo() {
       return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
         showRiderList: false,
         riders: []
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["ridersListDownloadLinkShowHideTypes"].show:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["ridersListDownloadLinkShowHideTypes"].hide:
+      return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        showDownloadLink: !state.showDownloadLink
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["currentRiderShowHideTypes"].show:

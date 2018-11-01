@@ -9,22 +9,26 @@ import {
   driversListHideExpiredType,
   driversListHideConfirmedType,
   driversListShowCurrentMatchOnlyType,
+  driversListDownloadLinkShowHideTypes,
   currentDriverShowHideTypes,
   ridersGetHideListTypes,
   ridersListSetInfoType,
   ridersListHideExpiredType,
   ridersListHideConfirmedType,
   ridersListShowCurrentMatchOnlyType,
+  ridersListDownloadLinkShowHideTypes,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
   matchesListSetInfoType,
   matchesListHideExpiredType,
   matchesListHideConfirmedType,
+  matchesListDownloadLinkShowHideTypes,
   currentMatchShowHideTypes,
   matchesOtherDriverGetHideListTypes,
   matchesOtherDriverListSetInfoType,
   matchesOtherDriverListHideExpiredType,
   matchesOtherDriverListHideConfirmedType,
+  matchesOtherDriverListDownloadLinkShowHideTypes,
   UPLOAD_FILE_CHOSEN,
   POST_UPLOAD,
   postUploadAsyncTypes
@@ -79,6 +83,44 @@ const getMatchesOtherDriverList = getItemsList(
 );
 const hideMatchesOtherDriverList = hideItemsList(
   matchesOtherDriverGetHideListTypes.hide
+);
+
+const showItemsListDownloadLink = itemsListShowDownloadLinkType => () => ({
+  type: itemsListShowDownloadLinkType,
+  payload: {}
+});
+
+const hideItemsListDownloadLink = itemsListHideDownloadLinkType => () => ({
+  type: itemsListHideDownloadLinkType,
+  payload: {}
+});
+
+const showDriversListDownloadLink = showItemsListDownloadLink(
+  driversListDownloadLinkShowHideTypes.show
+);
+const hideDriversListDownloadLink = hideItemsListDownloadLink(
+  driversListDownloadLinkShowHideTypes.hide
+);
+
+const showRidersListDownloadLink = showItemsListDownloadLink(
+  ridersListDownloadLinkShowHideTypes.show
+);
+const hideRidersListDownloadLink = hideItemsListDownloadLink(
+  ridersListDownloadLinkShowHideTypes.hide
+);
+
+const showMatchesListDownloadLink = showItemsListDownloadLink(
+  matchesListDownloadLinkShowHideTypes.show
+);
+const hideMatchesListDownloadLink = hideItemsListDownloadLink(
+  matchesListDownloadLinkShowHideTypes.hide
+);
+
+const showMatchesOtherDriverListDownloadLink = showItemsListDownloadLink(
+  matchesOtherDriverListDownloadLinkShowHideTypes.show
+);
+const hideMatchesOtherDriverListDownloadLink = hideItemsListDownloadLink(
+  matchesOtherDriverListDownloadLinkShowHideTypes.hide
 );
 
 const setInfoItemsList = itemsListSetInfoType => (
@@ -172,6 +214,8 @@ export {
   logout,
   getDriversList,
   hideDriversList,
+  showDriversListDownloadLink,
+  hideDriversListDownloadLink,
   setInfoDriversList,
   hideExpiredDriversList,
   hideConfirmedDriversList,
@@ -180,6 +224,8 @@ export {
   hideCurrentDriver,
   getRidersList,
   hideRidersList,
+  showRidersListDownloadLink,
+  hideRidersListDownloadLink,
   setInfoRidersList,
   hideExpiredRidersList,
   hideConfirmedRidersList,
@@ -188,6 +234,8 @@ export {
   hideCurrentRider,
   getMatchesList,
   hideMatchesList,
+  showMatchesListDownloadLink,
+  hideMatchesListDownloadLink,
   setInfoMatchesList,
   hideExpiredMatchesList,
   hideConfirmedMatchesList,
@@ -195,6 +243,8 @@ export {
   hideCurrentMatch,
   getMatchesOtherDriverList,
   hideMatchesOtherDriverList,
+  showMatchesOtherDriverListDownloadLink,
+  hideMatchesOtherDriverListDownloadLink,
   setInfoMatchesOtherDriverList,
   hideExpiredMatchesOtherDriverList,
   hideConfirmedMatchesOtherDriverList,

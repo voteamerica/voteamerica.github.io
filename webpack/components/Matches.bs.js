@@ -158,7 +158,7 @@ function tableMatch(itemDetails) {
         };
 }
 
-function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, _) {
+function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, _) {
   var matchesTableOnPageChangeHandler = function (pageIndex) {
     var pageSize = matchesInfo.listPageSize;
     return Utils$VoteUSReason.setInfoJs(setInfoMatchesList, pageIndex, pageSize);
@@ -213,6 +213,14 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
   };
   var handleHideMatchListClick = function () {
     Curry._1(hideMatchesList, /* () */0);
+    return /* () */0;
+  };
+  var handleShowMatchesListDownloadLinkClick = function () {
+    Curry._1(showMatchesListDownloadLink, /* () */0);
+    return /* () */0;
+  };
+  var handleHideMatchesListDownloadLinkClick = function () {
+    Curry._1(hideMatchesListDownloadLink, /* () */0);
     return /* () */0;
   };
   return /* record */[
@@ -291,6 +299,9 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
               var currentMatchItemSpanStyle = {
                 marginLeft: "10px"
               };
+              var downloadLinkAnchorStyle = {
+                marginLeft: "15px"
+              };
               var currentMatchStatusSpanStyle = function (status) {
                 var match = status !== "MatchConfirmed";
                 if (match) {
@@ -325,9 +336,18 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
                                     style: currentMatchStatusSpanStyle(currentMatch.status)
                                   }, currentMatch.status)));
               };
+              var createBlob = function (matches){{ 
+      const jsonr = JSON.stringify(matches);
+      const blob = new Blob([jsonr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      return url; }};
+              var match = matchesInfo.showDownloadLink;
+              var urlBlob = match ? createBlob(tableMatchesAll) : "";
               var tableMatchesJSX;
               if (matchesInfo.showMatchList) {
-                var match = matchesInfo.showCurrentMatchDetails;
+                var match$1 = matchesInfo.showDownloadLink;
+                var match$2 = matchesInfo.showCurrentMatchDetails;
                 tableMatchesJSX = React.createElement("div", undefined, React.createElement("div", undefined, React.createElement("button", {
                               className: "button button--large",
                               id: "hideMatchListButton",
@@ -338,7 +358,24 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
                                             id: prim$1,
                                             onClick: prim$2
                                           };
-                                  }), "button button--large", "refreshMatchesListButton", handleGetMatchListClick, /* array */["Refresh List"]))), React.createElement("div", undefined, React.createElement("div", {
+                                  }), "button button--large", "refreshMatchesListButton", handleGetMatchListClick, /* array */["Refresh List"])), match$1 ? React.createElement("span", undefined, ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make((function (prim, prim$1, prim$2) {
+                                          return {
+                                                  className: prim,
+                                                  id: prim$1,
+                                                  onClick: prim$2
+                                                };
+                                        }), "button button--large", "hideMatchesListDownloadLinkButton", handleHideMatchesListDownloadLinkClick, /* array */["Hide Download Link"])), React.createElement("a", {
+                                    className: "button button--large",
+                                    style: downloadLinkAnchorStyle,
+                                    download: "matches - backup.json",
+                                    href: urlBlob
+                                  }, "Download backup")) : ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make((function (prim, prim$1, prim$2) {
+                                      return {
+                                              className: prim,
+                                              id: prim$1,
+                                              onClick: prim$2
+                                            };
+                                    }), "button button--large", "showMatchesListDownloadLinkButton", handleShowMatchesListDownloadLinkClick, /* array */["Show Download Link"]))), React.createElement("div", undefined, React.createElement("div", {
                               className: "form-group checkbox",
                               style: checkboxAreaStyle
                             }, React.createElement("label", {
@@ -379,7 +416,7 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
                                             onPageSizeChange: prim$8,
                                             getTdProps: prim$9
                                           };
-                                  }), "basicMatchTable", tableType, 5, matchesInfo.listPageIndex, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler, /* array */[]))), match ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
+                                  }), "basicMatchTable", tableType, 5, matchesInfo.listPageIndex, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler, /* array */[]))), match$2 ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
               } else {
                 tableMatchesJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",
@@ -400,7 +437,7 @@ function make(sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, h
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.sectionHeading, jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, /* array */[]);
+        return make(jsProps.sectionHeading, jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.showMatchesListDownloadLink, jsProps.hideMatchesListDownloadLink, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, /* array */[]);
       }));
 
 exports.component = component;

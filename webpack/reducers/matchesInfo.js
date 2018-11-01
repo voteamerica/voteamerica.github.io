@@ -3,6 +3,7 @@ import {
   DEFAULT_LIST_PAGE_SIZE,
   LOGOUT,
   getMatchListTypes,
+  matchesListDownloadLinkShowHideTypes,
   matchesGetHideListTypes,
   matchesListSetInfoType,
   matchesListHideExpiredType,
@@ -19,7 +20,8 @@ const matchesInfo = (
     hideExpiredCanceled: false,
     hideConfirmed: false,
     showCurrentMatchDetails: false,
-    currentMatch: {}
+    currentMatch: {},
+    showDownloadLink: false
   },
   action
 ) => {
@@ -42,6 +44,10 @@ const matchesInfo = (
 
     case matchesGetHideListTypes.hide:
       return { ...state, showMatchList: false, matches: [] };
+
+    case matchesListDownloadLinkShowHideTypes.show:
+    case matchesListDownloadLinkShowHideTypes.hide:
+      return { ...state, showDownloadLink: !state.showDownloadLink };
 
     case currentMatchShowHideTypes.show:
       return {

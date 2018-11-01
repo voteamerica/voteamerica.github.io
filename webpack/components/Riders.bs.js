@@ -85,7 +85,7 @@ function tableRider(itemDetails) {
         };
 }
 
-function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, _) {
+function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRidersList, showRidersListDownloadLink, hideRidersListDownloadLink, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, _) {
   var ridersTableOnPageChangeHandler = function (pageIndex) {
     var pageSize = ridersInfo.listPageSize;
     return Utils$VoteUSReason.setInfoJs(setInfoRidersList, pageIndex, pageSize);
@@ -154,6 +154,14 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
     Curry._1(hideRidersList, /* () */0);
     return /* () */0;
   };
+  var handleShowRidersListDownloadLinkClick = function () {
+    Curry._1(showRidersListDownloadLink, /* () */0);
+    return /* () */0;
+  };
+  var handleHideRidersListDownloadLinkClick = function () {
+    Curry._1(hideRidersListDownloadLink, /* () */0);
+    return /* () */0;
+  };
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -220,6 +228,9 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
               var currentRiderItemSpanStyle = {
                 marginLeft: "10px"
               };
+              var downloadLinkAnchorStyle = {
+                marginLeft: "15px"
+              };
               var currentRiderInfo = function (currentRider) {
                 var uriPhone = encodeURI(currentRider.RiderPhone);
                 var selfServiceUrl = "../self-service/?type=rider&uuid=" + (currentRider.UUID + ("&code=0&info&phone=" + uriPhone));
@@ -245,9 +256,18 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
                                         href: selfServiceUrl
                                       }, "Self Service Page"))));
               };
+              var createBlob = function (riders){{ 
+      const jsonr = JSON.stringify(riders);
+      const blob = new Blob([jsonr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      return url; }};
+              var match = ridersInfo.showDownloadLink;
+              var urlBlob = match ? createBlob(tableRidersAll) : "";
               var tableRidersJSX;
               if (ridersInfo.showRiderList) {
-                var match = ridersInfo.showCurrentRiderDetails;
+                var match$1 = ridersInfo.showDownloadLink;
+                var match$2 = ridersInfo.showCurrentRiderDetails;
                 tableRidersJSX = React.createElement("div", undefined, React.createElement("div", undefined, React.createElement("button", {
                               className: "button button--large",
                               id: "hideRidersListButton",
@@ -258,7 +278,24 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
                                             id: prim$1,
                                             onClick: prim$2
                                           };
-                                  }), "button button--large", "refreshRidersListButton", handleGetRiderListClick, /* array */["Refresh List"]))), React.createElement("div", undefined, React.createElement("div", {
+                                  }), "button button--large", "refreshRidersListButton", handleGetRiderListClick, /* array */["Refresh List"])), match$1 ? React.createElement("span", undefined, ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make((function (prim, prim$1, prim$2) {
+                                          return {
+                                                  className: prim,
+                                                  id: prim$1,
+                                                  onClick: prim$2
+                                                };
+                                        }), "button button--large", "hideRidersListDownloadLinkButton", handleHideRidersListDownloadLinkClick, /* array */["Hide Download Link"])), React.createElement("a", {
+                                    className: "button button--large",
+                                    style: downloadLinkAnchorStyle,
+                                    download: "riders - backup.json",
+                                    href: urlBlob
+                                  }, "Download backup")) : ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make((function (prim, prim$1, prim$2) {
+                                      return {
+                                              className: prim,
+                                              id: prim$1,
+                                              onClick: prim$2
+                                            };
+                                    }), "button button--large", "showRidersListDownloadLinkButton", handleShowRidersListDownloadLinkClick, /* array */["Show Download Link"]))), React.createElement("div", undefined, React.createElement("div", {
                               className: "form-group checkbox",
                               style: checkboxAreaStyle
                             }, React.createElement("label", {
@@ -312,7 +349,7 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
                                             onPageSizeChange: prim$8,
                                             getTdProps: prim$9
                                           };
-                                  }), "basicRiderTable", tableType, 5, ridersInfo.listPageIndex, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler, /* array */[]))), match ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
+                                  }), "basicRiderTable", tableType, 5, ridersInfo.listPageIndex, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler, /* array */[]))), match$2 ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
               } else {
                 tableRidersJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",
@@ -333,7 +370,7 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.setInfoRidersList, jsProps.hideExpiredRidersList, jsProps.hideConfirmedRidersList, jsProps.showCurrentMatchOnlyRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
+        return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.ridersInfo, jsProps.matchesInfo, jsProps.getRidersList, jsProps.hideRidersList, jsProps.showRidersListDownloadLink, jsProps.hideRidersListDownloadLink, jsProps.setInfoRidersList, jsProps.hideExpiredRidersList, jsProps.hideConfirmedRidersList, jsProps.showCurrentMatchOnlyRidersList, jsProps.showCurrentRider, jsProps.hideCurrentRider, /* array */[]);
       }));
 
 exports.component = component;

@@ -11,6 +11,8 @@ import { DEFAULT_LIST_PAGE_SIZE } from '../actions/types.js';
 import {
   getDriversList,
   hideDriversList,
+  showDriversListDownloadLink,
+  hideDriversListDownloadLink,
   setInfoDriversList,
   hideExpiredDriversList,
   hideConfirmedDriversList,
@@ -28,6 +30,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getDriversList,
   hideDriversList,
+  showDriversListDownloadLink,
+  hideDriversListDownloadLink,
   setInfoDriversList,
   hideExpiredDriversList,
   hideConfirmedDriversList,
@@ -147,6 +151,22 @@ class DriverBase extends Component {
       const { hideDriversList } = self.props;
 
       return hideDriversList();
+    };
+  }
+
+  handleShowDriversListDownloadLinkClick(self) {
+    return () => {
+      const { showDriversListDownloadLink } = self.props;
+
+      return showDriversListDownloadLink();
+    };
+  }
+
+  handleHideDriversListDownloadLinkClick(self) {
+    return () => {
+      const { hideDriversListDownloadLink } = self.props;
+
+      return hideDriversListDownloadLink();
     };
   }
 
@@ -292,7 +312,7 @@ class DriverBase extends Component {
       );
     };
 
-    const driversAll = driversInfo.drivers;
+    const tableDriversAll = driversInfo.drivers;
 
     const filterExpiredDrivers = drivers => {
       if (driversInfo.hideExpiredCanceled === true) {
@@ -319,7 +339,7 @@ class DriverBase extends Component {
       }
     };
 
-    const tableDriversStepOne = filterExpiredDrivers(driversAll);
+    const tableDriversStepOne = filterExpiredDrivers(tableDriversAll);
     const tableDriversStepTwo = filterConfirmedDrivers(tableDriversStepOne);
 
     let filterCurrentMatchDriverOnly = drivers => {
@@ -336,6 +356,10 @@ class DriverBase extends Component {
     };
 
     const tableDrivers = filterCurrentMatchDriverOnly(tableDriversStepTwo);
+
+    const jsondr = JSON.stringify(tableDriversAll);
+    const blob = new Blob([jsondr], { type: 'application/json' });
+    const urlBlob = URL.createObjectURL(blob);
 
     return (
       <div>
@@ -368,6 +392,39 @@ class DriverBase extends Component {
                     >
                       Refresh List
                     </LeftPaddedButton>
+                    {driversInfo.showDownloadLink === true ? (
+                      <span>
+                        <LeftPaddedButton
+                          props={LeftPaddedButton.leftPaddedButtonProps}
+                          className="button button--large"
+                          id="hideDriversListDownloadLinkButton"
+                          onClick={this.handleHideDriversListDownloadLinkClick(
+                            this
+                          )}
+                        >
+                          Hide Download Link
+                        </LeftPaddedButton>
+                        <a
+                          style={{ marginLeft: 15 }}
+                          className="button button--large"
+                          download="drivers - backup.json"
+                          href={urlBlob}
+                        >
+                          Download backup
+                        </a>
+                      </span>
+                    ) : (
+                      <LeftPaddedButton
+                        props={LeftPaddedButton.leftPaddedButtonProps}
+                        className="button button--large"
+                        id="showDriversListDownloadLinkButton"
+                        onClick={this.handleShowDriversListDownloadLinkClick(
+                          this
+                        )}
+                      >
+                        Show Download Link
+                      </LeftPaddedButton>
+                    )}
                   </div>
                   {tableDrivers ? (
                     <div>

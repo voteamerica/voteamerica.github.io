@@ -5,6 +5,8 @@ import MatchesBase from './Matches.bs.js';
 import {
   getMatchesList,
   hideMatchesList,
+  showMatchesListDownloadLink,
+  hideMatchesListDownloadLink,
   setInfoMatchesList,
   hideExpiredMatchesList,
   hideConfirmedMatchesList,
@@ -21,6 +23,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getMatchesList,
   hideMatchesList,
+  showMatchesListDownloadLink,
+  hideMatchesListDownloadLink,
   setInfoMatchesList,
   hideExpiredMatchesList,
   hideConfirmedMatchesList,

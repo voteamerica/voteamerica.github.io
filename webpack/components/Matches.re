@@ -40,7 +40,8 @@ type matchGetTdPropsHandler = (string, option(matchRowInfo), string, string) => 
 
 [@bs.deriving abstract]
 type matchesInfo = {
-  showMatchList: bool,
+  showMatchList: bool,  
+  showDownloadLink: bool,
   matches: array(systemMatch),
   listPageIndex: int,
   listPageSize: int,
@@ -129,6 +130,8 @@ type jsProps = {
   matchesInfo: matchesInfo,  
   getMatchesList: (string, string) => unit,
   hideMatchesList: unit => unit,
+  showMatchesListDownloadLink: unit => unit,
+  hideMatchesListDownloadLink: unit => unit,
   setInfoMatchesList: (int, int) => unit,  
   hideExpiredMatchesList: unit => unit,
   hideConfirmedMatchesList: unit => unit,
@@ -139,6 +142,8 @@ type jsProps = {
 let make = (~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
+~showMatchesListDownloadLink,
+~hideMatchesListDownloadLink,
 ~setInfoMatchesList,
 ~hideExpiredMatchesList,
 ~hideConfirmedMatchesList,
@@ -245,6 +250,20 @@ _children) => {
     ();
   };
 
+  let handleShowMatchesListDownloadLinkClick = (_event) => {
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    showMatchesListDownloadLink();
+
+    ();
+  };
+
+  let handleHideMatchesListDownloadLinkClick = (_event) => {
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    hideMatchesListDownloadLink();
+
+    ();
+  };
+
   {
   ...component,
   render: (_self) => { 
@@ -323,6 +342,10 @@ _children) => {
     ~marginLeft="10px", ()
     );
 
+    let downloadLinkAnchorStyle = ReactDOMRe.Style.make(
+    ~marginLeft="15px", ()
+    );
+
     let currentMatchStatusSpanStyle = status => switch (status != "MatchConfirmed") {
     | true => ReactDOMRe.Style.make(
     ~marginLeft="10px", ()
@@ -353,6 +376,20 @@ _children) => {
       </div>
     };
 
+    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+    let createBlob: array(systemMatch) => string = [%raw (matches) => "{ 
+      const jsonr = JSON.stringify(matches);
+      const blob = new Blob([jsonr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      return url; }"];
+
+    let urlBlob: string = 
+      switch (matchesInfo->showDownloadLinkGet) {
+              | true => createBlob(tableMatchesAll);
+              | false => "";
+      };
+
     let tableMatchesJSX = 
       if (matchesInfo->showMatchListGet) {
         <div>
@@ -364,6 +401,15 @@ _children) => {
               >{ReasonReact.string("Hide List")}
               </button>
               <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshMatchesListButton" onClick={handleGetMatchListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
+              {switch (matchesInfo->showDownloadLinkGet) {
+                | true => <span>
+                  <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="hideMatchesListDownloadLinkButton" onClick={handleHideMatchesListDownloadLinkClick} >{ReasonReact.string("Hide Download Link")}</LeftPaddedButton>
+                  <a style={downloadLinkAnchorStyle} className="button button--large" download="matches - backup.json" href={urlBlob}>
+                    {ReasonReact.string("Download backup")}
+                  </a>
+                </span>
+                | false => <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showMatchesListDownloadLinkButton" onClick={handleShowMatchesListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton>}
+              }
             </div>
           <div> 
             <div className="form-group checkbox" style={checkboxAreaStyle}>
@@ -434,6 +480,8 @@ let default =
       ~matchesInfo=jsProps->matchesInfoGet,
       ~getMatchesList=jsProps->getMatchesListGet,
       ~hideMatchesList=jsProps->hideMatchesListGet,
+      ~showMatchesListDownloadLink=jsProps->showMatchesListDownloadLinkGet,
+      ~hideMatchesListDownloadLink=jsProps->hideMatchesListDownloadLinkGet,
       ~setInfoMatchesList=jsProps->setInfoMatchesListGet,
       ~hideExpiredMatchesList=jsProps->hideExpiredMatchesListGet,
       ~hideConfirmedMatchesList=jsProps->hideConfirmedMatchesListGet,
