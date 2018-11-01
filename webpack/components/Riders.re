@@ -45,6 +45,7 @@ type riderGetTdPropsHandler = (string, option(riderRowInfo), string, string) => 
 [@bs.deriving abstract]
 type ridersInfo = {
   showRiderList: bool,
+  showDownloadLink: bool,
   riders: array(rider),
   listPageIndex: int,
   listPageSize: int,
@@ -149,6 +150,8 @@ type jsProps = {
   matchesInfo: Matches.matchesInfo,
   getRidersList: (string, string) => unit,
   hideRidersList: unit => unit,
+  showRidersListDownloadLink: unit => unit,
+  hideRidersListDownloadLink: unit => unit,
   setInfoRidersList: (int, int) => unit,
   hideExpiredRidersList: unit => unit,
   hideConfirmedRidersList: unit => unit,
@@ -162,6 +165,8 @@ let make = (~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo,
 ~matchesInfo:Matches.matchesInfo, 
 ~getRidersList, 
 ~hideRidersList,
+~showRidersListDownloadLink,
+~hideRidersListDownloadLink,
 ~setInfoRidersList,
 ~hideExpiredRidersList,
 ~hideConfirmedRidersList,
@@ -277,6 +282,20 @@ _children) => {
   let handleHideRiderListClick = (_event) => {
     /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
     hideRidersList();
+
+    ();
+  };
+
+  let handleShowRidersListDownloadLinkClick = (_event) => {
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    showRidersListDownloadLink();
+
+    ();
+  };
+
+  let handleHideRidersListDownloadLinkClick = (_event) => {
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    hideRidersListDownloadLink();
 
     ();
   };
@@ -397,6 +416,10 @@ _children) => {
             >{ReasonReact.string("Hide List")}
             </button>
             <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
+            {switch (ridersInfo->showDownloadLink) {
+              | true => <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="hideRidersListDownloadLinkButton" onClick={handleHideRidersListDownloadLinkClick} >{ReasonReact.string("Hide Download Link")}</LeftPaddedButton>
+              | false => <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showRidersListDownloadLinkButton" onClick={handleShowRidersListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton>}
+            }
           </div>
           <div> 
             <div className="form-group checkbox" style={checkboxAreaStyle}>
@@ -471,6 +494,8 @@ let default =
       ~matchesInfo=jsProps->matchesInfoGet,
       ~getRidersList=jsProps->getRidersListGet,
       ~hideRidersList=jsProps->hideRidersListGet,
+      ~showRidersListDownloadLink=jsProps->showRidersListDownloadLinkGet,
+      ~hideRidersListDownloadLink=jsProps->hideRidersListDownloadLinkGet,
       ~setInfoRidersList=jsProps->setInfoRidersListGet,
       ~hideExpiredRidersList=jsProps->hideExpiredRidersListGet,
       ~hideConfirmedRidersList=jsProps->hideConfirmedRidersListGet,

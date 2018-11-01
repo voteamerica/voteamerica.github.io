@@ -4,6 +4,7 @@ import {
   LOGOUT,
   getRiderListTypes,
   ridersGetHideListTypes,
+  ridersListDownloadLinkShowHideTypes,
   ridersListSetInfoType,
   ridersListHideExpiredType,
   ridersListHideConfirmedType,
@@ -21,7 +22,8 @@ const ridersInfo = (
     hideConfirmed: false,
     showCurrentMatchRiderOnly: false,
     showCurrentRiderDetails: false,
-    currentRider: {}
+    currentRider: {},
+    showDownloadLink: false
   },
   action
 ) => {
@@ -44,6 +46,10 @@ const ridersInfo = (
 
     case ridersGetHideListTypes.hide:
       return { ...state, showRiderList: false, riders: [] };
+
+    case ridersListDownloadLinkShowHideTypes.show:
+    case ridersListDownloadLinkShowHideTypes.hide:
+      return { ...state, showDownloadLink: !state.showDownloadLink };
 
     case currentRiderShowHideTypes.show:
       return {

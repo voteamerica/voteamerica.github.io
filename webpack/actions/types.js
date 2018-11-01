@@ -34,6 +34,24 @@ const matchesOtherDriverGetHideListTypes = itemsGetHideListTypes(
   matchOtherDriverListType
 );
 
+const downloadLinkShowHideTypes = itemType => ({
+  show: 'SHOW_DOWNLOAD_' + itemType,
+  hide: 'HIDE_DOWNLOAD_' + itemType
+});
+
+const driversListDownloadLinkShowHideTypes = downloadLinkShowHideTypes(
+  driverListType
+);
+const ridersListDownloadLinkShowHideTypes = downloadLinkShowHideTypes(
+  riderListType
+);
+const matchesListDownloadLinkShowHideTypes = downloadLinkShowHideTypes(
+  matchListType
+);
+const matchesOtherDriverListDownloadLinkShowHideTypes = downloadLinkShowHideTypes(
+  matchOtherDriverListType
+);
+
 const itemsListSetInfoTypes = itemType => 'SET_' + itemType + '_LIST_INFO';
 
 const driversListSetInfoType = itemsListSetInfoTypes(driverListType);
@@ -109,13 +127,15 @@ export {
   DEFAULT_LIST_PAGE_INDEX,
   DEFAULT_LIST_PAGE_SIZE,
   driversGetHideListTypes,
+  driversListShowCurrentMatchOnlyType,
   driversListSetInfoType,
   getDriverListTypes,
   driversListHideExpiredType,
   driversListHideConfirmedType,
-  driversListShowCurrentMatchOnlyType,
   currentDriverShowHideTypes,
+  driversListDownloadLinkShowHideTypes,
   ridersGetHideListTypes,
+  ridersListDownloadLinkShowHideTypes,
   ridersListSetInfoType,
   getRiderListTypes,
   ridersListHideExpiredType,
@@ -123,12 +143,14 @@ export {
   ridersListShowCurrentMatchOnlyType,
   currentRiderShowHideTypes,
   matchesGetHideListTypes,
+  matchesListDownloadLinkShowHideTypes,
   matchesListSetInfoType,
   matchesListHideExpiredType,
   matchesListHideConfirmedType,
   getMatchListTypes,
   currentMatchShowHideTypes,
   matchesOtherDriverGetHideListTypes,
+  matchesOtherDriverListDownloadLinkShowHideTypes,
   matchesOtherDriverListSetInfoType,
   matchesOtherDriverListHideExpiredType,
   matchesOtherDriverListHideConfirmedType,

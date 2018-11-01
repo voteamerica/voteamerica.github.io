@@ -40,7 +40,8 @@ type matchGetTdPropsHandler = (string, option(matchRowInfo), string, string) => 
 
 [@bs.deriving abstract]
 type matchesInfo = {
-  showMatchList: bool,
+  showMatchList: bool,  
+  showDownloadLink: bool,
   matches: array(systemMatch),
   listPageIndex: int,
   listPageSize: int,
@@ -129,6 +130,8 @@ type jsProps = {
   matchesInfo: matchesInfo,  
   getMatchesList: (string, string) => unit,
   hideMatchesList: unit => unit,
+  showMatchesListDownloadLink: unit => unit,
+  hideMatchesListDownloadLink: unit => unit,
   setInfoMatchesList: (int, int) => unit,  
   hideExpiredMatchesList: unit => unit,
   hideConfirmedMatchesList: unit => unit,
@@ -139,6 +142,8 @@ type jsProps = {
 let make = (~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
+~showMatchesListDownloadLink,
+~hideMatchesListDownloadLink,
 ~setInfoMatchesList,
 ~hideExpiredMatchesList,
 ~hideConfirmedMatchesList,
@@ -434,6 +439,8 @@ let default =
       ~matchesInfo=jsProps->matchesInfoGet,
       ~getMatchesList=jsProps->getMatchesListGet,
       ~hideMatchesList=jsProps->hideMatchesListGet,
+      ~showMatchesListDownloadLink=jsProps->showMatchesListDownloadLinkGet,
+      ~hideMatchesListDownloadLink=jsProps->hideMatchesListDownloadLinkGet,
       ~setInfoMatchesList=jsProps->setInfoMatchesListGet,
       ~hideExpiredMatchesList=jsProps->hideExpiredMatchesListGet,
       ~hideConfirmedMatchesList=jsProps->hideConfirmedMatchesListGet,

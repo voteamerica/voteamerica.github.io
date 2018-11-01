@@ -11,6 +11,8 @@ import { DEFAULT_LIST_PAGE_SIZE } from '../actions/types.js';
 import {
   getDriversList,
   hideDriversList,
+  showDriversListDownloadLink,
+  hideDriversListDownloadLink,
   setInfoDriversList,
   hideExpiredDriversList,
   hideConfirmedDriversList,
@@ -28,6 +30,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getDriversList,
   hideDriversList,
+  showDriversListDownloadLink,
+  hideDriversListDownloadLink,
   setInfoDriversList,
   hideExpiredDriversList,
   hideConfirmedDriversList,
@@ -337,6 +341,10 @@ class DriverBase extends Component {
 
     const tableDrivers = filterCurrentMatchDriverOnly(tableDriversStepTwo);
 
+    const jsondr = JSON.stringify(tableDrivers);
+    const blob = new Blob([jsondr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
     return (
       <div>
         {loginInfo.loggedIn === true ? (
@@ -368,6 +376,9 @@ class DriverBase extends Component {
                     >
                       Refresh List
                     </LeftPaddedButton>
+                    <a download="backup.json" href={url}>
+                      Download backup
+                    </a>
                   </div>
                   {tableDrivers ? (
                     <div>

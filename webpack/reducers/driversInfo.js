@@ -4,6 +4,7 @@ import {
   LOGOUT,
   getDriverListTypes,
   driversGetHideListTypes,
+  driversListDownloadLinkShowHideTypes,
   driversListSetInfoType,
   driversListHideExpiredType,
   driversListHideConfirmedType,
@@ -21,7 +22,8 @@ const driversInfo = (
     hideConfirmed: false,
     showCurrentMatchDriverOnly: false,
     showCurrentDriverDetails: false,
-    currentDriver: {}
+    currentDriver: {},
+    showDownloadLink: false
   },
   action
 ) => {
@@ -44,6 +46,10 @@ const driversInfo = (
 
     case driversGetHideListTypes.hide:
       return { ...state, showDriversList: false, drivers: [] };
+
+    case driversListDownloadLinkShowHideTypes.show:
+    case driversListDownloadLinkShowHideTypes.hide:
+      return { ...state, showDownloadLink: !state.showDownloadLink };
 
     case currentDriverShowHideTypes.show:
       return {

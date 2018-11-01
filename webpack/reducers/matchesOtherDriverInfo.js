@@ -3,6 +3,7 @@ import {
   DEFAULT_LIST_PAGE_SIZE,
   LOGOUT,
   getMatchOtherDriverListTypes,
+  matchesOtherDriverListDownloadLinkShowHideTypes,
   matchesOtherDriverGetHideListTypes,
   matchesOtherDriverListSetInfoType,
   matchesOtherDriverListHideExpiredType,
@@ -18,7 +19,8 @@ const matchesOtherDriverInfo = (
     hideExpiredCanceled: false,
     hideConfirmed: false,
     showCurrentMatchDetails: false,
-    currentMatch: {}
+    currentMatch: {},
+    showDownloadLink: false
   },
   action
 ) => {
@@ -41,6 +43,10 @@ const matchesOtherDriverInfo = (
 
     case matchesOtherDriverGetHideListTypes.hide:
       return { ...state, showMatchList: false, matches: [] };
+
+    case matchesOtherDriverListDownloadLinkShowHideTypes.show:
+    case matchesOtherDriverListDownloadLinkShowHideTypes.hide:
+      return { ...state, showDownloadLink: !state.showDownloadLink };
 
     case matchesOtherDriverListSetInfoType:
       return {
