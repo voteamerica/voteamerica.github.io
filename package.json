@@ -29,7 +29,7 @@
     "@babel/runtime": "^7.1.2",
     "babel-loader": "^8.0.4",
     "babel-plugin-styled-components": "^1.8.0",
-    "bs-platform": "^4.0.6",
+    "bs-platform": "^4.0.7",
     "css-loader": "^1.0.0",
     "react": "^16.4.2",
     "react-addons-update": "^15.6.2",
