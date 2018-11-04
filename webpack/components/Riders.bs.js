@@ -295,7 +295,7 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
                                         }), "button button--large", "hideRidersListDownloadLinkButton", handleHideRidersListDownloadLinkClick, /* array */["Hide Download Link"])), React.createElement("a", {
                                     className: "button button--large",
                                     style: downloadLinkAnchorStyle,
-                                    download: "riders - backup.json",
+                                    download: loginInfo.details.username + " - riders - backup.json",
                                     href: ridersInfo.urlDownloadBlob
                                   }, "Download backup")) : React.createElement("span", {
                                 style: downloadLinkButtonSpanStyle

@@ -409,7 +409,10 @@ class DriverBase extends Component {
                         <a
                           style={{ marginLeft: 15 }}
                           className="button button--large"
-                          download="drivers - backup.json"
+                          download={
+                            loginInfo.details.username +
+                            ' - drivers - backup.json'
+                          }
                           href={driversInfo.urlDownloadBlob}
                         >
                           Download backup

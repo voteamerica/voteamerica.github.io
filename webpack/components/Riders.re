@@ -440,7 +440,7 @@ _children) => {
             {switch (ridersInfo->showDownloadLinkGet) {
               | true => <span style={downloadLinkButtonSpanStyle}>
                 <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="hideRidersListDownloadLinkButton" onClick={handleHideRidersListDownloadLinkClick} >{ReasonReact.string("Hide Download Link")}</LeftPaddedButton>
-                <a style={downloadLinkAnchorStyle} className="button button--large" download="riders - backup.json" href={ridersInfo->urlDownloadBlobGet}>
+                <a style={downloadLinkAnchorStyle} className="button button--large" download={loginInfo->TypeInfo.detailsGet->TypeInfo.usernameGet ++ " - riders - backup.json"} href={ridersInfo->urlDownloadBlobGet}>
                   {ReasonReact.string("Download backup")}
                 </a>
               </span>

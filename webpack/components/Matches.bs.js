@@ -349,7 +349,7 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
                                     style: currentMatchStatusSpanStyle(currentMatch.status)
                                   }, currentMatch.status)));
               };
-              var downloadBlobName = others ? "matches others - backup.json" : "matches - backup.json";
+              var downloadBlobName = others ? " - matches others - backup.json" : " - matches - backup.json";
               var tableMatchesJSX;
               if (matchesInfo.showMatchList) {
                 var match = matchesInfo.showDownloadLink;
@@ -375,7 +375,7 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
                                         }), "button button--large", "hideMatchesListDownloadLinkButton", handleHideMatchesListDownloadLinkClick, /* array */["Hide Download Link"])), React.createElement("a", {
                                     className: "button button--large",
                                     style: downloadLinkAnchorStyle,
-                                    download: downloadBlobName,
+                                    download: loginInfo.details.username + downloadBlobName,
                                     href: matchesInfo.urlDownloadBlob
                                   }, "Download backup")) : React.createElement("span", {
                                 style: downloadLinkButtonSpanStyle

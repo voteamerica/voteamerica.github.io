@@ -28,9 +28,15 @@ type getTdPropsClickHandlerAndStyle = {
 };
 
 [@bs.deriving abstract]
+type loginInfoDetails = {
+  username: string
+};
+
+[@bs.deriving abstract]
 type loginInfo = {
   loggedIn: bool,
   token: string,
+  details: loginInfoDetails
 };
 
 [@bs.deriving abstract]

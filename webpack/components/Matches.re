@@ -393,8 +393,8 @@ _children) => {
     };
 
     let downloadBlobName = switch others {
-    | true => "matches others - backup.json"
-    | false => "matches - backup.json"
+    | true => " - matches others - backup.json"
+    | false => " - matches - backup.json"
     };
 
     let tableMatchesJSX = 
@@ -411,7 +411,7 @@ _children) => {
               {switch (matchesInfo->showDownloadLinkGet) {
                 | true => <span style={downloadLinkButtonSpanStyle}>
                   <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="hideMatchesListDownloadLinkButton" onClick={handleHideMatchesListDownloadLinkClick} >{ReasonReact.string("Hide Download Link")}</LeftPaddedButton>
-                  <a style={downloadLinkAnchorStyle} className="button button--large" download={downloadBlobName} href={matchesInfo->urlDownloadBlobGet}>
+                  <a style={downloadLinkAnchorStyle} className="button button--large" download={loginInfo->TypeInfo.detailsGet->TypeInfo.usernameGet ++ downloadBlobName} href={matchesInfo->urlDownloadBlobGet}>
                     {ReasonReact.string("Download backup")}
                   </a>
                 </span>

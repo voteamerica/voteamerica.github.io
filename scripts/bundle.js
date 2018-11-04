@@ -45051,10 +45051,9 @@ var baseFetchInfo = function baseFetchInfo() {
                 json = resp.json();
 
               case 18:
-                console.log('resp', resp);
                 return _context.abrupt("return", json);
 
-              case 20:
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -45868,10 +45867,7 @@ function (_Component) {
     key: "driversTableOnPageChangeSizeHandler",
     value: function driversTableOnPageChangeSizeHandler(self) {
       return function (size, pageIndex) {
-        var _self$props2 = self.props,
-            driversInfo = _self$props2.driversInfo,
-            setInfoDriversList = _self$props2.setInfoDriversList; // const { listPageIndex } = driversInfo;
-
+        var setInfoDriversList = self.props.setInfoDriversList;
         return setInfoDriversList(pageIndex, size);
       };
     }
@@ -45887,10 +45883,9 @@ function (_Component) {
         var itemUuid = rowInfo !== undefined ? rowInfo.original.UUID : '';
 
         var tableClickHandler = function tableClickHandler(e, handleOriginal) {
-          var _self$props3 = self.props,
-              showCurrentDriver = _self$props3.showCurrentDriver,
-              hideCurrentDriver = _self$props3.hideCurrentDriver;
-          console.log('driver click');
+          var _self$props2 = self.props,
+              showCurrentDriver = _self$props2.showCurrentDriver,
+              hideCurrentDriver = _self$props2.hideCurrentDriver; // console.log('driver click');
 
           if (rowInfo !== undefined) {
             showCurrentDriver(rowInfo.original);
@@ -45958,10 +45953,10 @@ function (_Component) {
     key: "handleGetDriversListClick",
     value: function handleGetDriversListClick(self) {
       return function () {
-        var _self$props4 = self.props,
-            apiInfo = _self$props4.apiInfo,
-            getDriversList = _self$props4.getDriversList,
-            loginInfo = _self$props4.loginInfo;
+        var _self$props3 = self.props,
+            apiInfo = _self$props3.apiInfo,
+            getDriversList = _self$props3.getDriversList,
+            loginInfo = _self$props3.loginInfo;
         var token = loginInfo.token || '';
         return getDriversList(apiInfo.apiUrl, token);
       };
@@ -45978,9 +45973,9 @@ function (_Component) {
     key: "handleShowDriversListDownloadLinkClick",
     value: function handleShowDriversListDownloadLinkClick(self) {
       return function () {
-        var _self$props5 = self.props,
-            showDriversListDownloadLink = _self$props5.showDriversListDownloadLink,
-            driversInfo = _self$props5.driversInfo;
+        var _self$props4 = self.props,
+            showDriversListDownloadLink = _self$props4.showDriversListDownloadLink,
+            driversInfo = _self$props4.driversInfo;
         var tableDriversAll = driversInfo.drivers;
         var jsondr = JSON.stringify(tableDriversAll);
         var blob = new Blob([jsondr], {
@@ -46256,7 +46251,7 @@ function (_Component) {
           marginLeft: 15
         },
         className: "button button--large",
-        download: "drivers - backup.json",
+        download: loginInfo.details.username + ' - drivers - backup.json',
         href: driversInfo.urlDownloadBlob
       }, "Download backup")) : react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("span", {
         style: downloadLinkButtonSpanStyle
@@ -46319,7 +46314,8 @@ function (_Component) {
   }]);
 
   return DriverBase;
-}(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_5__["Component"]); // page={driversInfo.listPageIndex}
+
 
 var Driver = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, mapDispatchToProps)(DriverBase);
 /* harmony default export */ __webpack_exports__["default"] = (Driver);
@@ -46561,8 +46557,6 @@ var LoginArea = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapS
 
 var $$Array = __webpack_require__(/*! bs-platform/lib/js/array.js */ "./node_modules/bs-platform/lib/js/array.js");
 
-var Curry = __webpack_require__(/*! bs-platform/lib/js/curry.js */ "./node_modules/bs-platform/lib/js/curry.js");
-
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var ReasonReact = __webpack_require__(/*! reason-react/src/ReasonReact.js */ "./node_modules/reason-react/src/ReasonReact.js");
@@ -46725,15 +46719,11 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
         var currentMatch = tableMatch(itemDetails);
         sr(showCurrentMatch, Js_primitive.some(currentMatch));
       } else {
-        Curry._1(hideCurrentMatch,
-        /* () */
-        0);
+        TypeInfo$VoteUSReason.unitArgAction(hideCurrentMatch);
       }
 
       if (handleOriginalOption !== undefined) {
-        Curry._1(handleOriginalOption,
-        /* () */
-        0);
+        TypeInfo$VoteUSReason.unitArgAction(handleOriginalOption);
       }
 
       return (
@@ -46762,15 +46752,19 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
   };
 
   var matchesTableHideExpiredHandler = function matchesTableHideExpiredHandler(param) {
-    return Curry._1(hideExpiredMatchesList,
-    /* () */
-    0);
+    TypeInfo$VoteUSReason.unitArgAction(hideExpiredMatchesList);
+    return (
+      /* () */
+      0
+    );
   };
 
   var matchesTableHideConfirmedHandler = function matchesTableHideConfirmedHandler(param) {
-    return Curry._1(hideConfirmedMatchesList,
-    /* () */
-    0);
+    TypeInfo$VoteUSReason.unitArgAction(hideConfirmedMatchesList);
+    return (
+      /* () */
+      0
+    );
   };
 
   var handleGetMatchListClick = function handleGetMatchListClick(_event) {
@@ -46987,7 +46981,7 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
         }, currentMatch.status)));
       };
 
-      var downloadBlobName = others ? "matches others - backup.json" : "matches - backup.json";
+      var downloadBlobName = others ? " - matches others - backup.json" : " - matches - backup.json";
       var tableMatchesJSX;
 
       if (matchesInfo.showMatchList) {
@@ -47018,7 +47012,7 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
         ["Hide Download Link"])), React.createElement("a", {
           className: "button button--large",
           style: downloadLinkAnchorStyle,
-          download: downloadBlobName,
+          download: loginInfo.details.username + downloadBlobName,
           href: matchesInfo.urlDownloadBlob
         }, "Download backup")) : React.createElement("span", {
           style: downloadLinkButtonSpanStyle
@@ -47058,20 +47052,19 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
           onChange: matchesTableHideConfirmedHandler
         }))), React.createElement("div", {
           style: tableDivStyle
-        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
+        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
           return {
             className: prim,
             type: prim$1,
             columns: prim$2,
             defaultPageSize: prim$3,
-            page: prim$4,
-            pageSize: prim$5,
-            data: prim$6,
-            onPageChange: prim$7,
-            onPageSizeChange: prim$8,
-            getTdProps: prim$9
+            pageSize: prim$4,
+            data: prim$5,
+            onPageChange: prim$6,
+            onPageSizeChange: prim$7,
+            getTdProps: prim$8
           };
-        }, "basicMatchTable", tableType, 5, matchesInfo.listPageIndex, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler,
+        }, "basicMatchTable", tableType, 5, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler,
         /* array */
         []))), match$1 ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
       } else {
@@ -47224,8 +47217,6 @@ var MatchesPlus = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(ma
 
 var $$Array = __webpack_require__(/*! bs-platform/lib/js/array.js */ "./node_modules/bs-platform/lib/js/array.js");
 
-var Curry = __webpack_require__(/*! bs-platform/lib/js/curry.js */ "./node_modules/bs-platform/lib/js/curry.js");
-
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var ReasonReact = __webpack_require__(/*! reason-react/src/ReasonReact.js */ "./node_modules/reason-react/src/ReasonReact.js");
@@ -47310,15 +47301,11 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
         var currentRider = tableRider(itemDetails);
         sr(showCurrentRider, Js_primitive.some(currentRider));
       } else {
-        Curry._1(hideCurrentRider,
-        /* () */
-        0);
+        TypeInfo$VoteUSReason.unitArgAction(hideCurrentRider);
       }
 
       if (handleOriginalOption !== undefined) {
-        Curry._1(handleOriginalOption,
-        /* () */
-        0);
+        TypeInfo$VoteUSReason.unitArgAction(handleOriginalOption);
       }
 
       return (
@@ -47360,21 +47347,27 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
   };
 
   var ridersTableHideExpiredHandler = function ridersTableHideExpiredHandler(param) {
-    return Curry._1(hideExpiredRidersList,
-    /* () */
-    0);
+    TypeInfo$VoteUSReason.unitArgAction(hideExpiredRidersList);
+    return (
+      /* () */
+      0
+    );
   };
 
   var ridersTableHideConfirmedHandler = function ridersTableHideConfirmedHandler(param) {
-    return Curry._1(hideConfirmedRidersList,
-    /* () */
-    0);
+    TypeInfo$VoteUSReason.unitArgAction(hideConfirmedRidersList);
+    return (
+      /* () */
+      0
+    );
   };
 
   var ridersTableShowCurrentMatchRiderOnlyHandler = function ridersTableShowCurrentMatchRiderOnlyHandler(param) {
-    return Curry._1(showCurrentMatchOnlyRidersList,
-    /* () */
-    0);
+    TypeInfo$VoteUSReason.unitArgAction(showCurrentMatchOnlyRidersList);
+    return (
+      /* () */
+      0
+    );
   };
 
   var handleGetRiderListClick = function handleGetRiderListClick(_event) {
@@ -47599,7 +47592,7 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
         ["Hide Download Link"])), React.createElement("a", {
           className: "button button--large",
           style: downloadLinkAnchorStyle,
-          download: "riders - backup.json",
+          download: loginInfo.details.username + " - riders - backup.json",
           href: ridersInfo.urlDownloadBlob
         }, "Download backup")) : React.createElement("span", {
           style: downloadLinkButtonSpanStyle
@@ -47652,20 +47645,19 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
           onChange: ridersTableShowCurrentMatchRiderOnlyHandler
         }))), React.createElement("div", {
           style: tableDivStyle
-        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
+        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
           return {
             className: prim,
             type: prim$1,
             columns: prim$2,
             defaultPageSize: prim$3,
-            page: prim$4,
-            pageSize: prim$5,
-            data: prim$6,
-            onPageChange: prim$7,
-            onPageSizeChange: prim$8,
-            getTdProps: prim$9
+            pageSize: prim$4,
+            data: prim$5,
+            onPageChange: prim$6,
+            onPageSizeChange: prim$7,
+            getTdProps: prim$8
           };
-        }, "basicRiderTable", tableType, 5, ridersInfo.listPageIndex, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler,
+        }, "basicRiderTable", tableType, 5, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler,
         /* array */
         []))), match$1 ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
       } else {
@@ -47781,8 +47773,8 @@ var ReasonReact = __webpack_require__(/*! reason-react/src/ReasonReact.js */ "./
 
 var ReactTable = __webpack_require__(/*! react-table */ "./node_modules/react-table/es/index.js");
 
-function make(props, className, type_, defaultPageSize, page, pageSize, columns, data, onPageChange, onPageSizeChange, getTdProps, children) {
-  return ReasonReact.wrapJsForReason(ReactTable.default, Curry.app(props, [className, type_, columns, defaultPageSize, page, pageSize, data, onPageChange, onPageSizeChange, getTdProps]), children);
+function make(props, className, type_, defaultPageSize, pageSize, columns, data, onPageChange, onPageSizeChange, getTdProps, children) {
+  return ReasonReact.wrapJsForReason(ReactTable.default, Curry.app(props, [className, type_, columns, defaultPageSize, pageSize, data, onPageChange, onPageSizeChange, getTdProps]), children);
 }
 
 exports.make = make;
@@ -48314,6 +48306,7 @@ var driversInfo = function driversInfo() {
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["driversListShowCurrentMatchOnlyType"]:
       return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        // listPageIndex: 1,
         showCurrentMatchDriverOnly: !state.showCurrentMatchDriverOnly
       });
 
@@ -48739,6 +48732,7 @@ var ridersInfo = function ridersInfo() {
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["ridersListShowCurrentMatchOnlyType"]:
       return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        // listPageIndex: 1,
         showCurrentMatchRiderOnly: !state.showCurrentMatchRiderOnly
       });
 
