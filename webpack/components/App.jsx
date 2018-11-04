@@ -19,8 +19,8 @@ class AppBase extends Component {
         <LoginArea />
         <Driver />
         <Riders />
-        <Matches sectionHeading="Matches Info" />
-        <MatchesOtherDriver sectionHeading="Matches Other Driver Info" />
+        <Matches sectionHeading="Matches Info" others={false} />
+        <MatchesOtherDriver sectionHeading="Matches Other Driver Info" others={true} />
         <UploadArea />
       </div>
     );

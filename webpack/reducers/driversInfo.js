@@ -23,7 +23,8 @@ const driversInfo = (
     showCurrentMatchDriverOnly: false,
     showCurrentDriverDetails: false,
     currentDriver: {},
-    showDownloadLink: false
+    showDownloadLink: false,
+    urlDownloadBlob: ''
   },
   action
 ) => {
@@ -47,9 +48,14 @@ const driversInfo = (
     case driversGetHideListTypes.hide:
       return { ...state, showDriversList: false, drivers: [] };
 
-    case driversListDownloadLinkShowHideTypes.show:
+    case driversListDownloadLinkShowHideTypes.show: {
+      const { urlDownloadBlob } = action.payload;
+
+      return { ...state, showDownloadLink: true, urlDownloadBlob };
+    }
+
     case driversListDownloadLinkShowHideTypes.hide:
-      return { ...state, showDownloadLink: !state.showDownloadLink };
+      return { ...state, showDownloadLink: false, urlDownloadBlob: '' };
 
     case currentDriverShowHideTypes.show:
       return {
@@ -77,6 +83,7 @@ const driversInfo = (
     case driversListShowCurrentMatchOnlyType:
       return {
         ...state,
+        // listPageIndex: 1,
         showCurrentMatchDriverOnly: !state.showCurrentMatchDriverOnly
       };
 

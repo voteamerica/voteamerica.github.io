@@ -23,7 +23,8 @@ const ridersInfo = (
     showCurrentMatchRiderOnly: false,
     showCurrentRiderDetails: false,
     currentRider: {},
-    showDownloadLink: false
+    showDownloadLink: false,
+    urlDownloadBlob: ''
   },
   action
 ) => {
@@ -47,9 +48,14 @@ const ridersInfo = (
     case ridersGetHideListTypes.hide:
       return { ...state, showRiderList: false, riders: [] };
 
-    case ridersListDownloadLinkShowHideTypes.show:
+    case ridersListDownloadLinkShowHideTypes.show: {
+      const { urlDownloadBlob } = action.payload;
+
+      return { ...state, showDownloadLink: true, urlDownloadBlob };
+    }
+
     case ridersListDownloadLinkShowHideTypes.hide:
-      return { ...state, showDownloadLink: !state.showDownloadLink };
+      return { ...state, showDownloadLink: false, urlDownloadBlob: '' };
 
     case currentRiderShowHideTypes.show:
       return {
@@ -77,6 +83,7 @@ const ridersInfo = (
     case ridersListShowCurrentMatchOnlyType:
       return {
         ...state,
+        // listPageIndex: 1,
         showCurrentMatchRiderOnly: !state.showCurrentMatchRiderOnly
       };
 

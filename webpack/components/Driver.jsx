@@ -53,9 +53,7 @@ class DriverBase extends Component {
 
   driversTableOnPageChangeSizeHandler(self) {
     return (size, pageIndex) => {
-      const { driversInfo, setInfoDriversList } = self.props;
-
-      // const { listPageIndex } = driversInfo;
+      const { setInfoDriversList } = self.props;
 
       return setInfoDriversList(pageIndex, size);
     };
@@ -69,7 +67,7 @@ class DriverBase extends Component {
       const tableClickHandler = (e, handleOriginal) => {
         const { showCurrentDriver, hideCurrentDriver } = self.props;
 
-        console.log('driver click');
+        // console.log('driver click');
 
         if (rowInfo !== undefined) {
           showCurrentDriver(rowInfo.original);
@@ -156,9 +154,15 @@ class DriverBase extends Component {
 
   handleShowDriversListDownloadLinkClick(self) {
     return () => {
-      const { showDriversListDownloadLink } = self.props;
+      const { showDriversListDownloadLink, driversInfo } = self.props;
 
-      return showDriversListDownloadLink();
+      const tableDriversAll = driversInfo.drivers;
+
+      const jsondr = JSON.stringify(tableDriversAll);
+      const blob = new Blob([jsondr], { type: 'application/json' });
+      const urlBlob = URL.createObjectURL(blob);
+
+      return showDriversListDownloadLink(urlBlob);
     };
   }
 
@@ -357,9 +361,7 @@ class DriverBase extends Component {
 
     const tableDrivers = filterCurrentMatchDriverOnly(tableDriversStepTwo);
 
-    const jsondr = JSON.stringify(tableDriversAll);
-    const blob = new Blob([jsondr], { type: 'application/json' });
-    const urlBlob = URL.createObjectURL(blob);
+    const downloadLinkButtonSpanStyle = { marginLeft: 130 };
 
     return (
       <div>
@@ -393,7 +395,7 @@ class DriverBase extends Component {
                       Refresh List
                     </LeftPaddedButton>
                     {driversInfo.showDownloadLink === true ? (
-                      <span>
+                      <span style={downloadLinkButtonSpanStyle}>
                         <LeftPaddedButton
                           props={LeftPaddedButton.leftPaddedButtonProps}
                           className="button button--large"
@@ -407,23 +409,28 @@ class DriverBase extends Component {
                         <a
                           style={{ marginLeft: 15 }}
                           className="button button--large"
-                          download="drivers - backup.json"
-                          href={urlBlob}
+                          download={
+                            loginInfo.details.username +
+                            ' - drivers - backup.json'
+                          }
+                          href={driversInfo.urlDownloadBlob}
                         >
                           Download backup
                         </a>
                       </span>
                     ) : (
-                      <LeftPaddedButton
-                        props={LeftPaddedButton.leftPaddedButtonProps}
-                        className="button button--large"
-                        id="showDriversListDownloadLinkButton"
-                        onClick={this.handleShowDriversListDownloadLinkClick(
-                          this
-                        )}
-                      >
-                        Show Download Link
-                      </LeftPaddedButton>
+                      <span style={downloadLinkButtonSpanStyle}>
+                        <LeftPaddedButton
+                          props={LeftPaddedButton.leftPaddedButtonProps}
+                          className="button button--large"
+                          id="showDriversListDownloadLinkButton"
+                          onClick={this.handleShowDriversListDownloadLinkClick(
+                            this
+                          )}
+                        >
+                          Show Download Link
+                        </LeftPaddedButton>
+                      </span>
                     )}
                   </div>
                   {tableDrivers ? (
@@ -523,6 +530,8 @@ class DriverBase extends Component {
     );
   }
 }
+
+// page={driversInfo.listPageIndex}
 
 const Driver = connect(
   mapStateToProps,

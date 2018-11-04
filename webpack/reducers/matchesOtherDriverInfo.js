@@ -20,7 +20,8 @@ const matchesOtherDriverInfo = (
     hideConfirmed: false,
     showCurrentMatchDetails: false,
     currentMatch: {},
-    showDownloadLink: false
+    showDownloadLink: false,
+    urlDownloadBlob: ''
   },
   action
 ) => {
@@ -44,9 +45,14 @@ const matchesOtherDriverInfo = (
     case matchesOtherDriverGetHideListTypes.hide:
       return { ...state, showMatchList: false, matches: [] };
 
-    case matchesOtherDriverListDownloadLinkShowHideTypes.show:
+    case matchesOtherDriverListDownloadLinkShowHideTypes.show: {
+      const { urlDownloadBlob } = action.payload;
+
+      return { ...state, showDownloadLink: true, urlDownloadBlob };
+    }
+
     case matchesOtherDriverListDownloadLinkShowHideTypes.hide:
-      return { ...state, showDownloadLink: !state.showDownloadLink };
+      return { ...state, showDownloadLink: false, urlDownloadBlob: '' };
 
     case matchesOtherDriverListSetInfoType:
       return {
