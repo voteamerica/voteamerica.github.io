@@ -281,8 +281,7 @@ _children) => {
   };
 
   let handleHideRiderListClick = (_event) => {
-    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
-    hideRidersList();
+    TypeInfo.unitArgAction(hideRidersList);
 
     ();
   };
@@ -290,7 +289,6 @@ _children) => {
   let handleShowRidersListDownloadLinkClick = (_event) => {
     let tableRidersAll:array(rider) = Array.map(tableRider, ridersInfo->ridersGet); 
 
-    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
     let createBlob: array(rider) => string = [%raw (riders) => "{ 
       const jsonr = JSON.stringify(riders);
       const blob = new Blob([jsonr], { type: 'application/json' });
@@ -300,17 +298,13 @@ _children) => {
 
     let urlBlob: string = createBlob(tableRidersAll);
 
-    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
-    let srldl: (string => unit, string) => unit = [%raw (fx, urlBlob) => "{ fx(urlBlob); return 0; }"];
-
-    srldl(showRidersListDownloadLink, urlBlob);
+    TypeInfo.stringArgAction(showRidersListDownloadLink, urlBlob);
 
     ();
   };
 
   let handleHideRidersListDownloadLinkClick = (_event) => {
-    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
-    hideRidersListDownloadLink();
+    TypeInfo.unitArgAction(hideRidersListDownloadLink);
 
     ();
   };
