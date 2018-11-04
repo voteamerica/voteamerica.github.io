@@ -253,8 +253,8 @@ _children) => {
     let tableMatchesAll:array(systemMatch) = Array.map(tableMatch, matchesInfo->matchesGet); 
 
     let createBlob: array(systemMatch) => string = [%raw (matches) => "{ 
-      const jsonr = JSON.stringify(matches);
-      const blob = new Blob([jsonr], { type: 'application/json' });
+      const jsonm = JSON.stringify(matches);
+      const blob = new Blob([jsonm], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
 
       return url; }"];
@@ -350,6 +350,10 @@ _children) => {
     ~marginLeft="10px", ()
     );
 
+    let downloadLinkButtonSpanStyle = ReactDOMRe.Style.make(
+    ~marginLeft="130px", ()
+    );
+
     let downloadLinkAnchorStyle = ReactDOMRe.Style.make(
     ~marginLeft="15px", ()
     );
@@ -401,13 +405,13 @@ _children) => {
               </button>
               <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshMatchesListButton" onClick={handleGetMatchListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
               {switch (matchesInfo->showDownloadLinkGet) {
-                | true => <span>
+                | true => <span style={downloadLinkButtonSpanStyle}>
                   <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="hideMatchesListDownloadLinkButton" onClick={handleHideMatchesListDownloadLinkClick} >{ReasonReact.string("Hide Download Link")}</LeftPaddedButton>
                   <a style={downloadLinkAnchorStyle} className="button button--large" download={downloadBlobName} href={matchesInfo->urlDownloadBlobGet}>
                     {ReasonReact.string("Download backup")}
                   </a>
                 </span>
-                | false => <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showMatchesListDownloadLinkButton" onClick={handleShowMatchesListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton>}
+                | false =><span style={downloadLinkButtonSpanStyle}> <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showMatchesListDownloadLinkButton" onClick={handleShowMatchesListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton></span>}
               }
             </div>
           <div> 

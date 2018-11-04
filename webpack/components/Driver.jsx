@@ -156,9 +156,15 @@ class DriverBase extends Component {
 
   handleShowDriversListDownloadLinkClick(self) {
     return () => {
-      const { showDriversListDownloadLink } = self.props;
+      const { showDriversListDownloadLink, driversInfo } = self.props;
 
-      return showDriversListDownloadLink();
+      const tableDriversAll = driversInfo.drivers;
+
+      const jsondr = JSON.stringify(tableDriversAll);
+      const blob = new Blob([jsondr], { type: 'application/json' });
+      const urlBlob = URL.createObjectURL(blob);
+
+      return showDriversListDownloadLink(urlBlob);
     };
   }
 
@@ -357,9 +363,7 @@ class DriverBase extends Component {
 
     const tableDrivers = filterCurrentMatchDriverOnly(tableDriversStepTwo);
 
-    const jsondr = JSON.stringify(tableDriversAll);
-    const blob = new Blob([jsondr], { type: 'application/json' });
-    const urlBlob = URL.createObjectURL(blob);
+    const downloadLinkButtonSpanStyle = { marginLeft: 130 };
 
     return (
       <div>
@@ -393,7 +397,7 @@ class DriverBase extends Component {
                       Refresh List
                     </LeftPaddedButton>
                     {driversInfo.showDownloadLink === true ? (
-                      <span>
+                      <span style={downloadLinkButtonSpanStyle}>
                         <LeftPaddedButton
                           props={LeftPaddedButton.leftPaddedButtonProps}
                           className="button button--large"
@@ -408,22 +412,24 @@ class DriverBase extends Component {
                           style={{ marginLeft: 15 }}
                           className="button button--large"
                           download="drivers - backup.json"
-                          href={urlBlob}
+                          href={driversInfo.urlDownloadBlob}
                         >
                           Download backup
                         </a>
                       </span>
                     ) : (
-                      <LeftPaddedButton
-                        props={LeftPaddedButton.leftPaddedButtonProps}
-                        className="button button--large"
-                        id="showDriversListDownloadLinkButton"
-                        onClick={this.handleShowDriversListDownloadLinkClick(
-                          this
-                        )}
-                      >
-                        Show Download Link
-                      </LeftPaddedButton>
+                      <span style={downloadLinkButtonSpanStyle}>
+                        <LeftPaddedButton
+                          props={LeftPaddedButton.leftPaddedButtonProps}
+                          className="button button--large"
+                          id="showDriversListDownloadLinkButton"
+                          onClick={this.handleShowDriversListDownloadLinkClick(
+                            this
+                          )}
+                        >
+                          Show Download Link
+                        </LeftPaddedButton>
+                      </span>
                     )}
                   </div>
                   {tableDrivers ? (

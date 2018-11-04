@@ -219,8 +219,8 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
   var handleShowMatchesListDownloadLinkClick = function (_event) {
     var tableMatchesAll = $$Array.map(tableMatch, matchesInfo.matches);
     var createBlob = function (matches){{ 
-      const jsonr = JSON.stringify(matches);
-      const blob = new Blob([jsonr], { type: 'application/json' });
+      const jsonm = JSON.stringify(matches);
+      const blob = new Blob([jsonm], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
 
       return url; }};
@@ -308,6 +308,9 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
               var currentMatchItemSpanStyle = {
                 marginLeft: "10px"
               };
+              var downloadLinkButtonSpanStyle = {
+                marginLeft: "130px"
+              };
               var downloadLinkAnchorStyle = {
                 marginLeft: "15px"
               };
@@ -360,7 +363,9 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
                                             id: prim$1,
                                             onClick: prim$2
                                           };
-                                  }), "button button--large", "refreshMatchesListButton", handleGetMatchListClick, /* array */["Refresh List"])), match ? React.createElement("span", undefined, ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make((function (prim, prim$1, prim$2) {
+                                  }), "button button--large", "refreshMatchesListButton", handleGetMatchListClick, /* array */["Refresh List"])), match ? React.createElement("span", {
+                                style: downloadLinkButtonSpanStyle
+                              }, ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make((function (prim, prim$1, prim$2) {
                                           return {
                                                   className: prim,
                                                   id: prim$1,
@@ -371,13 +376,15 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
                                     style: downloadLinkAnchorStyle,
                                     download: downloadBlobName,
                                     href: matchesInfo.urlDownloadBlob
-                                  }, "Download backup")) : ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make((function (prim, prim$1, prim$2) {
-                                      return {
-                                              className: prim,
-                                              id: prim$1,
-                                              onClick: prim$2
-                                            };
-                                    }), "button button--large", "showMatchesListDownloadLinkButton", handleShowMatchesListDownloadLinkClick, /* array */["Show Download Link"]))), React.createElement("div", undefined, React.createElement("div", {
+                                  }, "Download backup")) : React.createElement("span", {
+                                style: downloadLinkButtonSpanStyle
+                              }, ReasonReact.element(undefined, undefined, LeftPaddedButton$VoteUSReason.make((function (prim, prim$1, prim$2) {
+                                          return {
+                                                  className: prim,
+                                                  id: prim$1,
+                                                  onClick: prim$2
+                                                };
+                                        }), "button button--large", "showMatchesListDownloadLinkButton", handleShowMatchesListDownloadLinkClick, /* array */["Show Download Link"])))), React.createElement("div", undefined, React.createElement("div", {
                               className: "form-group checkbox",
                               style: checkboxAreaStyle
                             }, React.createElement("label", {

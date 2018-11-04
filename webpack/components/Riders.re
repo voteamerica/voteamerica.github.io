@@ -370,6 +370,10 @@ _children) => {
     ~marginLeft="10px", ()
     );
 
+    let downloadLinkButtonSpanStyle = ReactDOMRe.Style.make(
+    ~marginLeft="130px", ()
+    );
+
     let downloadLinkAnchorStyle = ReactDOMRe.Style.make(
     ~marginLeft="15px", ()
     );
@@ -430,13 +434,13 @@ _children) => {
             </button>
             <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
             {switch (ridersInfo->showDownloadLinkGet) {
-              | true => <span>
+              | true => <span style={downloadLinkButtonSpanStyle}>
                 <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="hideRidersListDownloadLinkButton" onClick={handleHideRidersListDownloadLinkClick} >{ReasonReact.string("Hide Download Link")}</LeftPaddedButton>
                 <a style={downloadLinkAnchorStyle} className="button button--large" download="riders - backup.json" href={ridersInfo->urlDownloadBlobGet}>
                   {ReasonReact.string("Download backup")}
                 </a>
               </span>
-              | false => <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showRidersListDownloadLinkButton" onClick={handleShowRidersListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton>}
+              | false => <span style={downloadLinkButtonSpanStyle}> <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showRidersListDownloadLinkButton" onClick={handleShowRidersListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton></span>}
             }
           </div>
           <div> 
