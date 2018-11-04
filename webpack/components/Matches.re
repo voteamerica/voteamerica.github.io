@@ -42,7 +42,6 @@ type matchGetTdPropsHandler = (string, option(matchRowInfo), string, string) => 
 type matchesInfo = {
   showMatchList: bool,  
   showDownloadLink: bool,
-  urlDownloadBlob: string,
   matches: array(systemMatch),
   listPageIndex: int,
   listPageSize: int,
@@ -125,14 +124,13 @@ let matchTableColumns =
 
 [@bs.deriving abstract]
 type jsProps = {
-  others: bool,
   sectionHeading: string,
   loginInfo: TypeInfo.loginInfo,
   apiInfo: TypeInfo.apiInfo,
   matchesInfo: matchesInfo,  
   getMatchesList: (string, string) => unit,
   hideMatchesList: unit => unit,
-  showMatchesListDownloadLink: string => unit,
+  showMatchesListDownloadLink: unit => unit,
   hideMatchesListDownloadLink: unit => unit,
   setInfoMatchesList: (int, int) => unit,  
   hideExpiredMatchesList: unit => unit,
@@ -141,7 +139,7 @@ type jsProps = {
   hideCurrentMatch: unit => unit,
 };
 
-let make = (~others:bool, ~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
+let make = (~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
 ~showMatchesListDownloadLink,
@@ -160,6 +158,8 @@ _children) => {
   };
 
   let matchesTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, pageIndex) => {
+    /* let pageIndex = matchesInfo->listPageIndexGet; */
+
     Utils.setInfoJs(setInfoMatchesList, pageIndex, size);
   };
 
@@ -244,30 +244,22 @@ _children) => {
   };
 
   let handleHideMatchListClick = (_event) => {
-    TypeInfo.unitArgAction(hideMatchesList);
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    hideMatchesList();
 
     ();
   };
 
   let handleShowMatchesListDownloadLinkClick = (_event) => {
-    let tableMatchesAll:array(systemMatch) = Array.map(tableMatch, matchesInfo->matchesGet); 
-
-    let createBlob: array(systemMatch) => string = [%raw (matches) => "{ 
-      const jsonm = JSON.stringify(matches);
-      const blob = new Blob([jsonm], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-
-      return url; }"];
-
-    let urlBlob: string = createBlob(tableMatchesAll);
-
-    TypeInfo.stringArgAction(showMatchesListDownloadLink, urlBlob);
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    showMatchesListDownloadLink();
 
     ();
   };
 
   let handleHideMatchesListDownloadLinkClick = (_event) => {
-    TypeInfo.unitArgAction(hideMatchesListDownloadLink);
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    hideMatchesListDownloadLink();
 
     ();
   };
@@ -350,10 +342,6 @@ _children) => {
     ~marginLeft="10px", ()
     );
 
-    let downloadLinkButtonSpanStyle = ReactDOMRe.Style.make(
-    ~marginLeft="130px", ()
-    );
-
     let downloadLinkAnchorStyle = ReactDOMRe.Style.make(
     ~marginLeft="15px", ()
     );
@@ -388,10 +376,19 @@ _children) => {
       </div>
     };
 
-    let downloadBlobName = switch others {
-    | true => "matches others - backup.json"
-    | false => "matches - backup.json"
-    };
+    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+    let createBlob: array(systemMatch) => string = [%raw (matches) => "{ 
+      const jsonr = JSON.stringify(matches);
+      const blob = new Blob([jsonr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      return url; }"];
+
+    let urlBlob: string = 
+      switch (matchesInfo->showDownloadLinkGet) {
+              | true => createBlob(tableMatchesAll);
+              | false => "";
+      };
 
     let tableMatchesJSX = 
       if (matchesInfo->showMatchListGet) {
@@ -405,13 +402,13 @@ _children) => {
               </button>
               <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshMatchesListButton" onClick={handleGetMatchListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
               {switch (matchesInfo->showDownloadLinkGet) {
-                | true => <span style={downloadLinkButtonSpanStyle}>
+                | true => <span>
                   <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="hideMatchesListDownloadLinkButton" onClick={handleHideMatchesListDownloadLinkClick} >{ReasonReact.string("Hide Download Link")}</LeftPaddedButton>
-                  <a style={downloadLinkAnchorStyle} className="button button--large" download={downloadBlobName} href={matchesInfo->urlDownloadBlobGet}>
+                  <a style={downloadLinkAnchorStyle} className="button button--large" download="matches - backup.json" href={urlBlob}>
                     {ReasonReact.string("Download backup")}
                   </a>
                 </span>
-                | false =><span style={downloadLinkButtonSpanStyle}> <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showMatchesListDownloadLinkButton" onClick={handleShowMatchesListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton></span>}
+                | false => <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showMatchesListDownloadLinkButton" onClick={handleShowMatchesListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton>}
               }
             </div>
           <div> 
@@ -477,8 +474,7 @@ _children) => {
 let default =
   ReasonReact.wrapReasonForJs(~component, jsProps =>
       make(
-      ~others=jsProps->othersGet,
-      ~sectionHeading=jsProps->sectionHeadingGet,
+        ~sectionHeading=jsProps->sectionHeadingGet,
       ~loginInfo=jsProps->loginInfoGet,
       ~apiInfo=jsProps->apiInfoGet,
       ~matchesInfo=jsProps->matchesInfoGet,

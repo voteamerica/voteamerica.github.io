@@ -23,8 +23,7 @@ const ridersInfo = (
     showCurrentMatchRiderOnly: false,
     showCurrentRiderDetails: false,
     currentRider: {},
-    showDownloadLink: false,
-    urlDownloadBlob: ''
+    showDownloadLink: false
   },
   action
 ) => {
@@ -48,14 +47,9 @@ const ridersInfo = (
     case ridersGetHideListTypes.hide:
       return { ...state, showRiderList: false, riders: [] };
 
-    case ridersListDownloadLinkShowHideTypes.show: {
-      const { urlDownloadBlob } = action.payload;
-
-      return { ...state, showDownloadLink: true, urlDownloadBlob };
-    }
-
+    case ridersListDownloadLinkShowHideTypes.show:
     case ridersListDownloadLinkShowHideTypes.hide:
-      return { ...state, showDownloadLink: false, urlDownloadBlob: '' };
+      return { ...state, showDownloadLink: !state.showDownloadLink };
 
     case currentRiderShowHideTypes.show:
       return {

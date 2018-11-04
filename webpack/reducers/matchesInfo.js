@@ -21,8 +21,7 @@ const matchesInfo = (
     hideConfirmed: false,
     showCurrentMatchDetails: false,
     currentMatch: {},
-    showDownloadLink: false,
-    urlDownloadBlob: ''
+    showDownloadLink: false
   },
   action
 ) => {
@@ -46,14 +45,9 @@ const matchesInfo = (
     case matchesGetHideListTypes.hide:
       return { ...state, showMatchList: false, matches: [] };
 
-    case matchesListDownloadLinkShowHideTypes.show: {
-      const { urlDownloadBlob } = action.payload;
-
-      return { ...state, showDownloadLink: true, urlDownloadBlob };
-    }
-
+    case matchesListDownloadLinkShowHideTypes.show:
     case matchesListDownloadLinkShowHideTypes.hide:
-      return { ...state, showDownloadLink: false, urlDownloadBlob: '' };
+      return { ...state, showDownloadLink: !state.showDownloadLink };
 
     case currentMatchShowHideTypes.show:
       return {

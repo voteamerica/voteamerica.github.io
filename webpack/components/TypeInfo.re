@@ -5,12 +5,6 @@ type driver = {
    [@bs.as "DriverFirstName"] driverFirstName: string,
 };
 
-let unitArgAction: (unit => unit) => unit = [%raw fx => "{ fx(); return 0; }"];
-
-let stringArgAction: (string => unit, string) => unit = [%raw
-  (fx, urlBlob) => "{ fx(urlBlob); return 0; }"
-];
-
 type tableOnPageChangeHandler = int => unit;
 type tableOnPageChangeSizeHandler = (int, int) => unit;
 
