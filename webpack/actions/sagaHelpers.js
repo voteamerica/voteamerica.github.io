@@ -48,7 +48,7 @@ const baseFetchInfo = (options = {}) => async fetchDetails => {
     json = resp.json();
   }
 
-  console.log('resp', resp);
+  // console.log('resp', resp);
 
   return json;
 };

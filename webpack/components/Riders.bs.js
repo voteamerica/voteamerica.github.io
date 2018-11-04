@@ -2,7 +2,6 @@
 'use strict';
 
 var $$Array = require("bs-platform/lib/js/array.js");
-var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
@@ -103,10 +102,10 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
         var currentRider = tableRider(itemDetails);
         sr(showCurrentRider, Js_primitive.some(currentRider));
       } else {
-        Curry._1(hideCurrentRider, /* () */0);
+        TypeInfo$VoteUSReason.unitArgAction(hideCurrentRider);
       }
       if (handleOriginalOption !== undefined) {
-        Curry._1(handleOriginalOption, /* () */0);
+        TypeInfo$VoteUSReason.unitArgAction(handleOriginalOption);
       }
       return /* () */0;
     };
@@ -136,13 +135,13 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
           };
   };
   var ridersTableHideExpiredHandler = function (param) {
-    return Curry._1(hideExpiredRidersList, /* () */0);
+    return TypeInfo$VoteUSReason.unitArgAction(hideExpiredRidersList);
   };
   var ridersTableHideConfirmedHandler = function (param) {
-    return Curry._1(hideConfirmedRidersList, /* () */0);
+    return TypeInfo$VoteUSReason.unitArgAction(hideConfirmedRidersList);
   };
   var ridersTableShowCurrentMatchRiderOnlyHandler = function (param) {
-    return Curry._1(showCurrentMatchOnlyRidersList, /* () */0);
+    return TypeInfo$VoteUSReason.unitArgAction(showCurrentMatchOnlyRidersList);
   };
   var handleGetRiderListClick = function (_event) {
     var token = loginInfo.token;

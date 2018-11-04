@@ -69,7 +69,7 @@ class DriverBase extends Component {
       const tableClickHandler = (e, handleOriginal) => {
         const { showCurrentDriver, hideCurrentDriver } = self.props;
 
-        console.log('driver click');
+        // console.log('driver click');
 
         if (rowInfo !== undefined) {
           showCurrentDriver(rowInfo.original);

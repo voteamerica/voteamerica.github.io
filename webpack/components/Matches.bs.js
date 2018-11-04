@@ -2,7 +2,6 @@
 'use strict';
 
 var $$Array = require("bs-platform/lib/js/array.js");
-var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
@@ -177,10 +176,10 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
         var currentMatch = tableMatch(itemDetails);
         sr(showCurrentMatch, Js_primitive.some(currentMatch));
       } else {
-        Curry._1(hideCurrentMatch, /* () */0);
+        TypeInfo$VoteUSReason.unitArgAction(hideCurrentMatch);
       }
       if (handleOriginalOption !== undefined) {
-        Curry._1(handleOriginalOption, /* () */0);
+        TypeInfo$VoteUSReason.unitArgAction(handleOriginalOption);
       }
       return /* () */0;
     };
@@ -200,10 +199,10 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
           };
   };
   var matchesTableHideExpiredHandler = function (param) {
-    return Curry._1(hideExpiredMatchesList, /* () */0);
+    return TypeInfo$VoteUSReason.unitArgAction(hideExpiredMatchesList);
   };
   var matchesTableHideConfirmedHandler = function (param) {
-    return Curry._1(hideConfirmedMatchesList, /* () */0);
+    return TypeInfo$VoteUSReason.unitArgAction(hideConfirmedMatchesList);
   };
   var handleGetMatchListClick = function (_event) {
     var token = loginInfo.token;

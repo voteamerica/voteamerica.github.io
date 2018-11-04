@@ -181,8 +181,7 @@ _children) => {
 
       switch (rowInfoOption) {
         | None => {
-            /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
-            hideCurrentMatch();
+            TypeInfo.unitArgAction(hideCurrentMatch);
 
             ();
         }
@@ -199,9 +198,10 @@ _children) => {
         }
       };
 
+      /* with bs 4.0.7 js functions with no params need to be called in this way. Before, they could be called directly, although it was different for functions with parameters */
       switch handleOriginalOption {
         | None => ()
-        | Some(handleOriginal) => handleOriginal()
+        | Some(handleOriginal) => TypeInfo.unitArgAction(handleOriginal)
       };
 
       ();
@@ -224,11 +224,11 @@ _children) => {
   };
 
   let matchesTableHideExpiredHandler = _ => {
-    hideExpiredMatchesList();
+    TypeInfo.unitArgAction(hideExpiredMatchesList);
   }
 
   let matchesTableHideConfirmedHandler = _ => {
-    hideConfirmedMatchesList();
+    TypeInfo.unitArgAction(hideConfirmedMatchesList);
   }
 
   let handleGetMatchListClick = (_event) => {
