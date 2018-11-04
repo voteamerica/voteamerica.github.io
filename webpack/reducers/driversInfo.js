@@ -83,6 +83,7 @@ const driversInfo = (
     case driversListShowCurrentMatchOnlyType:
       return {
         ...state,
+        // listPageIndex: 1,
         showCurrentMatchDriverOnly: !state.showCurrentMatchDriverOnly
       };
 

@@ -63,7 +63,7 @@ type riderTableJsProps = {
   [@bs.as "type"] type_: string,
   columns: array(TypeInfo.theaderCell),
   defaultPageSize: int,
-  page: int,
+  /* page: int, */
   pageSize: int,
   data: array(rider),
   onPageChange: TypeInfo.tableOnPageChangeHandler,
@@ -183,8 +183,6 @@ _children) => {
   };
 
   let ridersTableOnPageChangeSizeHandler: TypeInfo.tableOnPageChangeSizeHandler = (size, pageIndex) => {
-    /* let pageIndex = ridersInfo->listPageIndexGet; */
-
     Utils.setInfoJs(setInfoRidersList, pageIndex, size);
   };
 
@@ -258,14 +256,20 @@ _children) => {
 
   let ridersTableHideExpiredHandler = _ => {
     TypeInfo.unitArgAction(hideExpiredRidersList);
+
+    ();
   }
 
   let ridersTableHideConfirmedHandler = _ => {
     TypeInfo.unitArgAction(hideConfirmedRidersList);
+
+    ();
   }
 
   let ridersTableShowCurrentMatchRiderOnlyHandler = _ => {
     TypeInfo.unitArgAction(showCurrentMatchOnlyRidersList);
+
+    ();
   }
 
   let handleGetRiderListClick = (_event) => {
@@ -463,7 +467,6 @@ _children) => {
           <div style={tableDivStyle}> 
             <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
             defaultPageSize={5} /* get this from types default */
-            page={ridersInfo->listPageIndexGet}
             pageSize={ridersInfo->listPageSizeGet}
             data=tableRiders
             onPageChange={ridersTableOnPageChangeHandler}
@@ -506,6 +509,9 @@ _children) => {
     </div>
   }
 }};
+
+/*   page={ridersInfo->listPageIndexGet}
+ */
 
 let default =
   ReasonReact.wrapReasonForJs(~component, jsProps =>

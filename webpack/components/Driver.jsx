@@ -53,9 +53,7 @@ class DriverBase extends Component {
 
   driversTableOnPageChangeSizeHandler(self) {
     return (size, pageIndex) => {
-      const { driversInfo, setInfoDriversList } = self.props;
-
-      // const { listPageIndex } = driversInfo;
+      const { setInfoDriversList } = self.props;
 
       return setInfoDriversList(pageIndex, size);
     };
@@ -529,6 +527,8 @@ class DriverBase extends Component {
     );
   }
 }
+
+// page={driversInfo.listPageIndex}
 
 const Driver = connect(
   mapStateToProps,

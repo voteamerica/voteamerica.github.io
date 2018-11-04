@@ -199,10 +199,12 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
           };
   };
   var matchesTableHideExpiredHandler = function (param) {
-    return TypeInfo$VoteUSReason.unitArgAction(hideExpiredMatchesList);
+    TypeInfo$VoteUSReason.unitArgAction(hideExpiredMatchesList);
+    return /* () */0;
   };
   var matchesTableHideConfirmedHandler = function (param) {
-    return TypeInfo$VoteUSReason.unitArgAction(hideConfirmedMatchesList);
+    TypeInfo$VoteUSReason.unitArgAction(hideConfirmedMatchesList);
+    return /* () */0;
   };
   var handleGetMatchListClick = function (_event) {
     var token = loginInfo.token;
@@ -411,20 +413,19 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
                                   onChange: matchesTableHideConfirmedHandler
                                 }))), React.createElement("div", {
                           style: tableDivStyle
-                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
+                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
                                     return {
                                             className: prim,
                                             type: prim$1,
                                             columns: prim$2,
                                             defaultPageSize: prim$3,
-                                            page: prim$4,
-                                            pageSize: prim$5,
-                                            data: prim$6,
-                                            onPageChange: prim$7,
-                                            onPageSizeChange: prim$8,
-                                            getTdProps: prim$9
+                                            pageSize: prim$4,
+                                            data: prim$5,
+                                            onPageChange: prim$6,
+                                            onPageSizeChange: prim$7,
+                                            getTdProps: prim$8
                                           };
-                                  }), "basicMatchTable", tableType, 5, matchesInfo.listPageIndex, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler, /* array */[]))), match$1 ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
+                                  }), "basicMatchTable", tableType, 5, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler, /* array */[]))), match$1 ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
               } else {
                 tableMatchesJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",

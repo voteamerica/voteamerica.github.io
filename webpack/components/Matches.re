@@ -58,7 +58,7 @@ type matchTableJsProps = {
   [@bs.as "type"] type_: string,
   columns: array(TypeInfo.theader),
   defaultPageSize: int,
-  page: int,
+  /* page: int, */
   pageSize: int,
   data: array(systemMatch),
   onPageChange: TypeInfo.tableOnPageChangeHandler,
@@ -225,10 +225,14 @@ _children) => {
 
   let matchesTableHideExpiredHandler = _ => {
     TypeInfo.unitArgAction(hideExpiredMatchesList);
+
+    ();
   }
 
   let matchesTableHideConfirmedHandler = _ => {
     TypeInfo.unitArgAction(hideConfirmedMatchesList);
+
+    ();
   }
 
   let handleGetMatchListClick = (_event) => {
@@ -430,7 +434,6 @@ _children) => {
             <Table props={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
             data=tableMatches
             defaultPageSize={5} /* get this from types default */
-            page={matchesInfo->listPageIndexGet}
             pageSize={matchesInfo->listPageSizeGet}
             onPageChange={matchesTableOnPageChangeHandler}
             onPageSizeChange={matchesTableOnPageChangeSizeHandler}
@@ -473,6 +476,9 @@ _children) => {
   }
 }
 };
+
+/*   page={matchesInfo->listPageIndexGet}
+    */
 
 let default =
   ReasonReact.wrapReasonForJs(~component, jsProps =>

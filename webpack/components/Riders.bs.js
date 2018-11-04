@@ -135,13 +135,16 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
           };
   };
   var ridersTableHideExpiredHandler = function (param) {
-    return TypeInfo$VoteUSReason.unitArgAction(hideExpiredRidersList);
+    TypeInfo$VoteUSReason.unitArgAction(hideExpiredRidersList);
+    return /* () */0;
   };
   var ridersTableHideConfirmedHandler = function (param) {
-    return TypeInfo$VoteUSReason.unitArgAction(hideConfirmedRidersList);
+    TypeInfo$VoteUSReason.unitArgAction(hideConfirmedRidersList);
+    return /* () */0;
   };
   var ridersTableShowCurrentMatchRiderOnlyHandler = function (param) {
-    return TypeInfo$VoteUSReason.unitArgAction(showCurrentMatchOnlyRidersList);
+    TypeInfo$VoteUSReason.unitArgAction(showCurrentMatchOnlyRidersList);
+    return /* () */0;
   };
   var handleGetRiderListClick = function (_event) {
     var token = loginInfo.token;
@@ -343,20 +346,19 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
                                   onChange: ridersTableShowCurrentMatchRiderOnlyHandler
                                 }))), React.createElement("div", {
                           style: tableDivStyle
-                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
+                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
                                     return {
                                             className: prim,
                                             type: prim$1,
                                             columns: prim$2,
                                             defaultPageSize: prim$3,
-                                            page: prim$4,
-                                            pageSize: prim$5,
-                                            data: prim$6,
-                                            onPageChange: prim$7,
-                                            onPageSizeChange: prim$8,
-                                            getTdProps: prim$9
+                                            pageSize: prim$4,
+                                            data: prim$5,
+                                            onPageChange: prim$6,
+                                            onPageSizeChange: prim$7,
+                                            getTdProps: prim$8
                                           };
-                                  }), "basicRiderTable", tableType, 5, ridersInfo.listPageIndex, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler, /* array */[]))), match$1 ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
+                                  }), "basicRiderTable", tableType, 5, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler, /* array */[]))), match$1 ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
               } else {
                 tableRidersJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",

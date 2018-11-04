@@ -83,6 +83,7 @@ const ridersInfo = (
     case ridersListShowCurrentMatchOnlyType:
       return {
         ...state,
+        // listPageIndex: 1,
         showCurrentMatchRiderOnly: !state.showCurrentMatchRiderOnly
       };
 
