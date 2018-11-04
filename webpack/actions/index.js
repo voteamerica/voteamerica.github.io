@@ -85,9 +85,9 @@ const hideMatchesOtherDriverList = hideItemsList(
   matchesOtherDriverGetHideListTypes.hide
 );
 
-const showItemsListDownloadLink = itemsListShowDownloadLinkType => (urlDownloadBlob) => ({
+const showItemsListDownloadLink = itemsListShowDownloadLinkType => () => ({
   type: itemsListShowDownloadLinkType,
-  payload: {urlDownloadBlob}
+  payload: {}
 });
 
 const hideItemsListDownloadLink = itemsListHideDownloadLinkType => () => ({

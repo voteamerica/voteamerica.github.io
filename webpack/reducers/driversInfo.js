@@ -23,8 +23,7 @@ const driversInfo = (
     showCurrentMatchDriverOnly: false,
     showCurrentDriverDetails: false,
     currentDriver: {},
-    showDownloadLink: false,
-    urlDownloadBlob: ''
+    showDownloadLink: false
   },
   action
 ) => {
@@ -48,14 +47,9 @@ const driversInfo = (
     case driversGetHideListTypes.hide:
       return { ...state, showDriversList: false, drivers: [] };
 
-    case driversListDownloadLinkShowHideTypes.show: {
-      const { urlDownloadBlob } = action.payload;
-
-      return { ...state, showDownloadLink: true, urlDownloadBlob };
-    }
-
+    case driversListDownloadLinkShowHideTypes.show:
     case driversListDownloadLinkShowHideTypes.hide:
-      return { ...state, showDownloadLink: false, urlDownloadBlob: '' };
+      return { ...state, showDownloadLink: !state.showDownloadLink };
 
     case currentDriverShowHideTypes.show:
       return {

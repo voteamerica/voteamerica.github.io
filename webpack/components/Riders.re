@@ -46,7 +46,6 @@ type riderGetTdPropsHandler = (string, option(riderRowInfo), string, string) => 
 type ridersInfo = {
   showRiderList: bool,
   showDownloadLink: bool,
-  urlDownloadBlob: string,
   riders: array(rider),
   listPageIndex: int,
   listPageSize: int,
@@ -151,7 +150,7 @@ type jsProps = {
   matchesInfo: Matches.matchesInfo,
   getRidersList: (string, string) => unit,
   hideRidersList: unit => unit,
-  showRidersListDownloadLink: string => unit,
+  showRidersListDownloadLink: unit => unit,
   hideRidersListDownloadLink: unit => unit,
   setInfoRidersList: (int, int) => unit,
   hideExpiredRidersList: unit => unit,
@@ -281,30 +280,22 @@ _children) => {
   };
 
   let handleHideRiderListClick = (_event) => {
-    TypeInfo.unitArgAction(hideRidersList);
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    hideRidersList();
 
     ();
   };
 
   let handleShowRidersListDownloadLinkClick = (_event) => {
-    let tableRidersAll:array(rider) = Array.map(tableRider, ridersInfo->ridersGet); 
-
-    let createBlob: array(rider) => string = [%raw (riders) => "{ 
-      const jsonr = JSON.stringify(riders);
-      const blob = new Blob([jsonr], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-
-      return url; }"];
-
-    let urlBlob: string = createBlob(tableRidersAll);
-
-    TypeInfo.stringArgAction(showRidersListDownloadLink, urlBlob);
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    showRidersListDownloadLink();
 
     ();
   };
 
   let handleHideRidersListDownloadLinkClick = (_event) => {
-    TypeInfo.unitArgAction(hideRidersListDownloadLink);
+    /* NOTE: if the jsProps type is correct, a (unit => unit) dispatch prop function can be called directly */
+    hideRidersListDownloadLink();
 
     ();
   };
@@ -370,10 +361,6 @@ _children) => {
     ~marginLeft="10px", ()
     );
 
-    let downloadLinkButtonSpanStyle = ReactDOMRe.Style.make(
-    ~marginLeft="130px", ()
-    );
-
     let downloadLinkAnchorStyle = ReactDOMRe.Style.make(
     ~marginLeft="15px", ()
     );
@@ -422,6 +409,20 @@ _children) => {
       </div>
     };
 
+    /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+    let createBlob: array(rider) => string = [%raw (riders) => "{ 
+      const jsonr = JSON.stringify(riders);
+      const blob = new Blob([jsonr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      return url; }"];
+
+    let urlBlob: string = 
+      switch (ridersInfo->showDownloadLinkGet) {
+              | true => createBlob(tableRidersAll);
+              | false => "";
+      };
+
     let tableRidersJSX = 
       if (ridersInfo->showRiderListGet) {
         <div>
@@ -434,13 +435,13 @@ _children) => {
             </button>
             <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="refreshRidersListButton" onClick={handleGetRiderListClick} >{ReasonReact.string("Refresh List")}</LeftPaddedButton>
             {switch (ridersInfo->showDownloadLinkGet) {
-              | true => <span style={downloadLinkButtonSpanStyle}>
+              | true => <span>
                 <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="hideRidersListDownloadLinkButton" onClick={handleHideRidersListDownloadLinkClick} >{ReasonReact.string("Hide Download Link")}</LeftPaddedButton>
-                <a style={downloadLinkAnchorStyle} className="button button--large" download="riders - backup.json" href={ridersInfo->urlDownloadBlobGet}>
+                <a style={downloadLinkAnchorStyle} className="button button--large" download="riders - backup.json" href={urlBlob}>
                   {ReasonReact.string("Download backup")}
                 </a>
               </span>
-              | false => <span style={downloadLinkButtonSpanStyle}> <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showRidersListDownloadLinkButton" onClick={handleShowRidersListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton></span>}
+              | false => <LeftPaddedButton props={LeftPaddedButton.leftPaddedButtonProps} className="button button--large" id="showRidersListDownloadLinkButton" onClick={handleShowRidersListDownloadLinkClick} >{ReasonReact.string("Show Download Link")}</LeftPaddedButton>}
             }
           </div>
           <div> 
