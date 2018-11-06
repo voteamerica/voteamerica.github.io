@@ -486,13 +486,14 @@ function driverProposedMatches () {
         var li                  = "";
         var infoListCaptions    = 
               [ "UUID_driver", "UUID_rider"
-            , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Contact Method(s)", "Rider Notes"
+            , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Available Dates","Rider Contact Method(s)", "Rider Notes"
               ];
         var matchInfoList       = 
           [ match.driver_proposed_matches.uuid_driver
           , match.driver_proposed_matches.uuid_rider
           , match.driver_proposed_matches.RiderCollectionZIP + ' ' + match.driver_proposed_matches.RiderCollectionAddress
           , match.driver_proposed_matches.RiderDropOffZIP + ' ' + match.driver_proposed_matches.RiderDestinationAddress
+          , match.driver_proposed_matches.convert_datetime_to_local_format
           , match.driver_proposed_matches.RiderPreferredContact 
           , match.driver_proposed_matches.RiderAccommodationNotes
           ];
@@ -502,16 +503,6 @@ function driverProposedMatches () {
           createListButton("acceptDriverMatchFromButton", "Accept", ' class="button self-service-list-button" ',
             match.driver_proposed_matches.uuid_driver, match.driver_proposed_matches.uuid_rider,
             match.driver_proposed_matches.score, data.phone);
-
-        // $(listSelector).append('<li>UUID_driver - ' + match.driver_proposed_matches.uuid_driver + '</li>');
-        // $(listSelector).append('<li>UUID_rider - ' + match.driver_proposed_matches.uuid_rider + '</li>');
-        // // $(listSelector).append('<li class="match-info-item">  rider name - ' + match.driver_proposed_matches.RiderFirstName + ' ' + match.driver_proposed_matches.RiderLastName + '</li>');
-        // // $(listSelector).append('<li class="match-info-item">  rider phone - ' + match.driver_proposed_matches.RiderPhone + '</li>');
-        // // $(listSelector).append('<li class="match-info-item">  rider email - ' + match.driver_proposed_matches.RiderEmail + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  rider collection - ' + match.driver_proposed_matches.RiderCollectionZIP + ' ' + match.driver_proposed_matches.RiderCollectionAddress + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  rider drop off - ' + match.driver_proposed_matches.RiderDropOffZIP + ' ' + match.driver_proposed_matches.RiderDestinationAddress + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  rider contact method, notes - ' + match.driver_proposed_matches.RiderPreferredContact + ' ' + match.driver_proposed_matches.RiderAccommodationNotes + '</li>');
-        // $(listSelector).append('<li class="list_button">' + acceptButtonInList + '</li>');
 
         listItems += createListItems(infoListCaptions, matchInfoList);
         listItems += '<li class="list_button">' + acceptButtonInList + '</li>';
