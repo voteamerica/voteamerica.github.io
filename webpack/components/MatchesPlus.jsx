@@ -11,7 +11,9 @@ import {
   hideExpiredMatchesList,
   hideConfirmedMatchesList,
   showCurrentMatch,
-  hideCurrentMatch
+  hideCurrentMatch,
+  showMatchForCurrentDriver,
+  showMatchForCurrentRider
 } from '../actions/index.js';
 
 const mapStateToProps = state => {
@@ -29,7 +31,9 @@ const mapDispatchToProps = {
   hideExpiredMatchesList,
   hideConfirmedMatchesList,
   showCurrentMatch,
-  hideCurrentMatch
+  hideCurrentMatch,
+  showMatchForCurrentDriver,
+  showMatchForCurrentRider
 };
 
 const MatchesPlus = connect(

@@ -8,8 +8,14 @@ import {
   matchesListSetInfoType,
   matchesListHideExpiredType,
   matchesListHideConfirmedType,
-  currentMatchShowHideTypes
+  currentMatchShowHideTypes,
+  currentDriverShowHideTypes,
+  currentRiderShowHideTypes,
+  showMatchForCurrentDriverType,
+  showMatchForCurrentRiderType
 } from '../actions/types';
+
+const defaultCurrentDriverOrRider = { UUID: '' };
 
 const matchesInfo = (
   state = {
@@ -21,6 +27,10 @@ const matchesInfo = (
     hideConfirmed: false,
     showCurrentMatchDetails: false,
     currentMatch: {},
+    currentDriver: defaultCurrentDriverOrRider,
+    currentRider: defaultCurrentDriverOrRider,
+    showMatchForCurrentDriverOnly: false,
+    showMatchForCurrentRiderOnly: false,
     showDownloadLink: false,
     urlDownloadBlob: ''
   },
@@ -34,7 +44,9 @@ const matchesInfo = (
         matches: [],
         listPageIndex: DEFAULT_LIST_PAGE_INDEX,
         showCurrentMatchDetails: false,
-        currentMatch: {}
+        currentMatch: {},
+        currentDriver: defaultCurrentDriverOrRider,
+        currentRider: defaultCurrentDriverOrRider
       };
 
     case getMatchListTypes.success: {
@@ -77,6 +89,44 @@ const matchesInfo = (
 
     case matchesListHideConfirmedType:
       return { ...state, hideConfirmed: !state.hideConfirmed };
+
+    case showMatchForCurrentDriverType: {
+      const showMatchForCurrentDriverOnly = !state.showMatchForCurrentDriverOnly;
+
+      // both checkboxes cannot be true, so other option is either already false or should become so
+      const showMatchForCurrentRiderOnly = false;
+
+      return {
+        ...state,
+        showMatchForCurrentDriverOnly,
+        showMatchForCurrentRiderOnly
+      };
+    }
+
+    case showMatchForCurrentRiderType: {
+      const showMatchForCurrentRiderOnly = !state.showMatchForCurrentRiderOnly;
+
+      // both checkboxes cannot be true, so other option is either already false or should become so
+      const showMatchForCurrentDriverOnly = false;
+
+      return {
+        ...state,
+        showMatchForCurrentDriverOnly,
+        showMatchForCurrentRiderOnly
+      };
+    }
+
+    case currentDriverShowHideTypes.show:
+      return { ...state, currentDriver: action.payload.itemDetails };
+
+    case currentDriverShowHideTypes.hide:
+      return { ...state, currentDriver: defaultCurrentDriverOrRider };
+
+    case currentRiderShowHideTypes.show:
+      return { ...state, currentRider: action.payload.itemDetails };
+
+    case currentRiderShowHideTypes.hide:
+      return { ...state, currentRider: defaultCurrentDriverOrRider };
 
     default:
       return state;

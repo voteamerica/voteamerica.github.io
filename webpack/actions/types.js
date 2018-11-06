@@ -101,6 +101,12 @@ const currentDriverShowHideTypes = currentItemShowHideTypes(driverType);
 const currentRiderShowHideTypes = currentItemShowHideTypes(riderType);
 const currentMatchShowHideTypes = currentItemShowHideTypes(matchType);
 
+const showMatchForCurrentItemType = itemType =>
+  'SHOW_MATCH_FOR_CURRENT_' + itemType;
+
+const showMatchForCurrentDriverType = showMatchForCurrentItemType(driverType);
+const showMatchForCurrentRiderType = showMatchForCurrentItemType(riderType);
+
 const getAsyncTypes = type => ({
   success: type + '_SUCCESS',
   fail: type + '_FAIL',
@@ -155,6 +161,8 @@ export {
   matchesOtherDriverListHideExpiredType,
   matchesOtherDriverListHideConfirmedType,
   getMatchOtherDriverListTypes,
+  showMatchForCurrentDriverType,
+  showMatchForCurrentRiderType,
   UPLOAD_FILE_CHOSEN,
   POST_UPLOAD,
   postUploadAsyncTypes

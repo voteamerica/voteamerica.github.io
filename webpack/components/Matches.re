@@ -1,6 +1,11 @@
 let component = ReasonReact.statelessComponent("Matches");
 
 [@bs.deriving abstract]
+type driverOrRiderPartial = {
+   [@bs.as "UUID"] uuid: string
+};
+
+[@bs.deriving abstract]
 type systemMatch = {
    status: string,
   uuid_driver: string,
@@ -49,7 +54,11 @@ type matchesInfo = {
   hideExpiredCanceled: bool,
   hideConfirmed: bool,
   showCurrentMatchDetails: bool,
-  currentMatch: (systemMatch)
+  currentMatch: (systemMatch),
+  currentDriver: (driverOrRiderPartial),
+  currentRider: (driverOrRiderPartial),
+  showMatchForCurrentDriverOnly: bool,
+  showMatchForCurrentRiderOnly: bool
 };
 
 [@bs.deriving abstract]
@@ -140,9 +149,12 @@ type jsProps = {
   hideConfirmedMatchesList: unit => unit,
   showCurrentMatch: systemMatch => unit,
   hideCurrentMatch: unit => unit,
+  showMatchForCurrentDriver: unit => unit,
+  showMatchForCurrentRider: unit => unit
 };
 
-let make = (~others:bool, ~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
+let make = (~others:bool, ~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, 
+~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
 ~showMatchesListDownloadLink,
@@ -152,6 +164,8 @@ let make = (~others:bool, ~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo,
 ~hideConfirmedMatchesList,
 ~showCurrentMatch,
 ~hideCurrentMatch,
+~showMatchForCurrentDriver,
+~showMatchForCurrentRider,
 _children) => {
 
   let matchesTableOnPageChangeHandler: TypeInfo.tableOnPageChangeHandler = (pageIndex) => {
@@ -232,6 +246,18 @@ _children) => {
 
   let matchesTableHideConfirmedHandler = _ => {
     TypeInfo.unitArgAction(hideConfirmedMatchesList);
+
+    ();
+  }
+
+  let matchesTableShowMatchForCurrentDriverHandler = _ => {
+    TypeInfo.unitArgAction(showMatchForCurrentDriver);
+
+    ();
+  }
+
+  let matchesTableShowMatchForCurrentRiderHandler = _ => {
+    TypeInfo.unitArgAction(showMatchForCurrentRider);
 
     ();
   }
@@ -327,7 +353,7 @@ _children) => {
 
     let filterConfirmedMatches = matches => {
       if (matchesInfo->hideConfirmedGet === true) {
-        let filterMatches = rider => rider->statusGet !== "MatchConfirmed";
+        let filterMatches = match => match->statusGet !== "MatchConfirmed";
 
         let matchesNotConfirmed = Utils.filterArray(~f=filterMatches, matches);
           
@@ -338,10 +364,49 @@ _children) => {
       };
     };
 
+    let filterCurrentRiderMatches = matches => {
+      if (matchesInfo->showMatchForCurrentRiderOnlyGet === true) {
+        let currentRiderUuid = matchesInfo->currentRiderGet->uuidGet;
+
+        /* to be decided - show all or none if no rider selected */
+        /* if (String.length (currentRiderUuid) > 0) { */
+          Js.log("filter matches by current rider" ++ currentRiderUuid);
+
+          let filterMatches = match => match->uuid_riderGet === currentRiderUuid;
+          let matchesForCurrentRider = Utils.filterArray(~f=filterMatches, matches);
+            
+          matchesForCurrentRider; 
+        /* } else {
+          matches;
+        } */
+      }
+      else {
+        matches;
+      };
+    };
+
+    let filterCurrentDriverMatches = matches => {
+      if (matchesInfo->showMatchForCurrentDriverOnlyGet === true) {
+        let currentDriverUuid = matchesInfo->currentDriverGet->uuidGet;
+
+        Js.log("filter matches by current driver" ++ currentDriverUuid);
+
+        let filterMatches = match => match->uuid_driverGet === currentDriverUuid;
+        let matchesForCurrentDriver = Utils.filterArray(~f=filterMatches, matches);
+          
+        matchesForCurrentDriver; 
+      }
+      else {
+        matches;
+      };
+    };
+
     let tableMatchesStepZero = Utils.filterArray(~f=filterProposedAndConfirmed, tableMatchesAll); 
 
     let tableMatchesStepOne = filterExpiredMatches(tableMatchesStepZero);
-    let tableMatches = filterConfirmedMatches(tableMatchesStepOne);
+    let tableMatchesStepTwo = filterConfirmedMatches(tableMatchesStepOne);
+    let tableMatchesStepThree = filterCurrentRiderMatches(tableMatchesStepTwo);
+    let tableMatches = filterCurrentDriverMatches(tableMatchesStepThree);
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
@@ -371,7 +436,6 @@ _children) => {
     ~marginLeft="10px", ~fontWeight="700", ()
     );
     }; 
-
 
     let currentMatchInfo = currentMatch => {
       <div>
@@ -430,6 +494,18 @@ _children) => {
               </label>
               <input className="" type_="checkbox" id="hideConfirmed" checked={matchesInfo->hideConfirmedGet} onChange={matchesTableHideConfirmedHandler} />
             </div> 
+            <span>
+                <div className="form-group checkbox" style={checkboxAreaStyle}>
+                  <label className="" style={checkboxLabelStyle} htmlFor="showMatchForCurrentDriverOnly">{ReasonReact.string("Show Match For Current Driver Only")}
+                  </label>
+                  <input className="" type_="checkbox" id="showMatchForCurrentDriverOnly" checked={matchesInfo->showMatchForCurrentDriverOnlyGet} onChange={matchesTableShowMatchForCurrentDriverHandler} />
+                </div>
+                <div className="form-group checkbox" style={checkboxAreaStyle}>
+                  <label className="" style={checkboxLabelStyle} htmlFor="showMatchForCurrentRiderOnly">{ReasonReact.string("Show Match For Current Rider Only")}
+                  </label>
+                  <input className="" type_="checkbox" id="showMatchForCurrentRiderOnly" checked={matchesInfo->showMatchForCurrentRiderOnlyGet} onChange={matchesTableShowMatchForCurrentRiderHandler} />
+                </div> 
+            </span> 
           </div> 
           <div style={tableDivStyle}> 
             <Table props={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
@@ -498,6 +574,8 @@ let default =
       ~hideConfirmedMatchesList=jsProps->hideConfirmedMatchesListGet,
       ~showCurrentMatch=jsProps->showCurrentMatchGet,
       ~hideCurrentMatch=jsProps->hideCurrentMatchGet,
+      ~showMatchForCurrentDriver=jsProps->showMatchForCurrentDriverGet,
+      ~showMatchForCurrentRider=jsProps->showMatchForCurrentRiderGet,
       [||],
     )
   );
