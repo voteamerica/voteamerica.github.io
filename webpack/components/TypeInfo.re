@@ -57,6 +57,7 @@ type theaderCell = {
   [@bs.as "Header"] header: string, 
   accessor: string, 
   [@bs.as "Cell"] cell: cellValueToStringHandler, 
+  width: int
 };
 
 [@bs.deriving abstract]

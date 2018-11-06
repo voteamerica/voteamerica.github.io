@@ -16,114 +16,33 @@ var component = ReasonReact.statelessComponent("Matches");
 var tableType = "matches";
 
 var matchTableColumns = /* array */[
-  {
-    Header: "Driver",
-    accessor: "uuid_driver"
-  },
-  {
-    Header: "Rider",
-    accessor: "uuid_rider"
-  },
-  {
-    Header: "City",
-    accessor: "city"
-  },
-  {
-    Header: "State",
-    accessor: "full_state"
-  },
-  {
-    Header: "Status",
-    accessor: "status"
-  },
-  {
-    Header: "Created",
-    accessor: "created_ts"
-  },
-  {
-    Header: "Updated",
-    accessor: "last_updated_ts"
-  },
-  {
-    Header: "DriverCollectionZIP",
-    accessor: "DriverCollectionZIP"
-  },
-  {
-    Header: "Drive Times - Local",
-    accessor: "AvailableDriveTimesLocal"
-  },
-  {
-    Header: "Seat Count",
-    accessor: "SeatCount"
-  },
-  {
-    Header: "License Number",
-    accessor: "DriverLicenseNumber"
-  },
-  {
-    Header: "Driving for Organization",
-    accessor: "DrivingOBOOrganizationName"
-  },
-  {
-    Header: "Driver First Name",
-    accessor: "DriverFirstName"
-  },
-  {
-    Header: "Driver Last Name",
-    accessor: "DriverLastName"
-  },
-  {
-    Header: "Rider First Name",
-    accessor: "RiderFirstName"
-  },
-  {
-    Header: "Rider Last Name",
-    accessor: "RiderLastName"
-  },
-  {
-    Header: "Rider Email",
-    accessor: "RiderEmail"
-  },
-  {
-    Header: "Rider Phone",
-    accessor: "RiderPhone"
-  },
-  {
-    Header: "Rider Collection ZIP",
-    accessor: "RiderCollectionZIP"
-  },
-  {
-    Header: "Rider Dropoff ZIP",
-    accessor: "RiderDropOffZIP"
-  },
-  {
-    Header: "Rider Collection Street Number",
-    accessor: "RiderCollectionStreetNumber"
-  },
-  {
-    Header: "Rider Collection Address",
-    accessor: "RiderCollectionAddress"
-  },
-  {
-    Header: "Rider Destination Address",
-    accessor: "RiderDestinationAddress"
-  },
-  {
-    Header: "Ride Times Local",
-    accessor: "AvailableRideTimesLocal"
-  },
-  {
-    Header: "Driver Notes",
-    accessor: "driver_notes"
-  },
-  {
-    Header: "Rider Notes",
-    accessor: "rider_notes"
-  },
-  {
-    Header: "Score",
-    accessor: "score"
-  }
+  Utils$VoteUSReason.thcCreator("Driver", "uuid_driver", 100),
+  Utils$VoteUSReason.thcCreator("Rider", "uuid_rider", 100),
+  Utils$VoteUSReason.thcCreator("City", "city", 100),
+  Utils$VoteUSReason.thcCreator("State", "full_state", 100),
+  Utils$VoteUSReason.thcCreator("Status", "status", 100),
+  Utils$VoteUSReason.thcCreator("Created", "created_ts", 100),
+  Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 100),
+  Utils$VoteUSReason.thcCreator("DriverCollectionZIP", "DriverCollectionZIP", 100),
+  Utils$VoteUSReason.thcCreator("Drive Times - Local", "AvailableDriveTimesLocal", 160),
+  Utils$VoteUSReason.thcCreator("Seat Count", "SeatCount", 100),
+  Utils$VoteUSReason.thcCreator("License Number", "DriverLicenseNumber", 100),
+  Utils$VoteUSReason.thcCreator("Driving for Organization", "DrivingOBOOrganizationName", 100),
+  Utils$VoteUSReason.thcCreator("Driver First Name", "DriverFirstName", 100),
+  Utils$VoteUSReason.thcCreator("Driver Last Name", "DriverLastName", 100),
+  Utils$VoteUSReason.thcCreator("Rider First Name", "RiderFirstName", 100),
+  Utils$VoteUSReason.thcCreator("Rider Last Name", "RiderLastName", 100),
+  Utils$VoteUSReason.thcCreator("Rider Email", "RiderEmail", 100),
+  Utils$VoteUSReason.thcCreator("Rider Phone", "RiderPhone", 100),
+  Utils$VoteUSReason.thcCreator("Rider Collection ZIP", "RiderCollectionZIP", 100),
+  Utils$VoteUSReason.thcCreator("Rider Dropoff ZIP", "RiderDropOffZIP", 100),
+  Utils$VoteUSReason.thcCreator("Rider Collection Street Number", "RiderCollectionStreetNumber", 100),
+  Utils$VoteUSReason.thcCreator("Rider Collection Address", "RiderCollectionAddress", 100),
+  Utils$VoteUSReason.thcCreator("Rider Destination Address", "RiderDestinationAddress", 100),
+  Utils$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal", 160),
+  Utils$VoteUSReason.thcCreator("Driver Notes", "driver_notes", 100),
+  Utils$VoteUSReason.thcCreator("Rider Notes", "rider_notes", 100),
+  Utils$VoteUSReason.thcCreator("Score", "score", 100)
 ];
 
 function tableMatch(itemDetails) {
