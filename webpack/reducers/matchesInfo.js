@@ -8,7 +8,9 @@ import {
   matchesListSetInfoType,
   matchesListHideExpiredType,
   matchesListHideConfirmedType,
-  currentMatchShowHideTypes
+  currentMatchShowHideTypes,
+  showMatchForCurrentDriverType,
+  showMatchForCurrentRiderType
 } from '../actions/types';
 
 const matchesInfo = (
@@ -21,6 +23,8 @@ const matchesInfo = (
     hideConfirmed: false,
     showCurrentMatchDetails: false,
     currentMatch: {},
+    showMatchForCurrentDriverOnly: false,
+    showMatchForCurrentRiderOnly: false,
     showDownloadLink: false,
     urlDownloadBlob: ''
   },
@@ -77,6 +81,32 @@ const matchesInfo = (
 
     case matchesListHideConfirmedType:
       return { ...state, hideConfirmed: !state.hideConfirmed };
+
+    case showMatchForCurrentDriverType: {
+      const showMatchForCurrentDriverOnly = !state.showMatchForCurrentDriverOnly;
+
+      // both checkboxes cannot be true, so other option is either already false or should become so
+      const showMatchForCurrentRiderOnly = false;
+
+      return {
+        ...state,
+        showMatchForCurrentDriverOnly,
+        showMatchForCurrentRiderOnly
+      };
+    }
+
+    case showMatchForCurrentRiderType: {
+      const showMatchForCurrentRiderOnly = !state.showMatchForCurrentRiderOnly;
+
+      // both checkboxes cannot be true, so other option is either already false or should become so
+      const showMatchForCurrentDriverOnly = false;
+
+      return {
+        ...state,
+        showMatchForCurrentDriverOnly,
+        showMatchForCurrentRiderOnly
+      };
+    }
 
     default:
       return state;

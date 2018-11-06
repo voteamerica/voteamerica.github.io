@@ -31,7 +31,8 @@ import {
   matchesOtherDriverListDownloadLinkShowHideTypes,
   UPLOAD_FILE_CHOSEN,
   POST_UPLOAD,
-  postUploadAsyncTypes
+  showMatchForCurrentDriverType,
+  showMatchForCurrentRiderType
 } from './types';
 
 const noOp = (a, b, c) => ({
@@ -196,6 +197,18 @@ const hideCurrentRider = hideCurrentItem(currentRiderShowHideTypes.hide);
 const showCurrentMatch = showCurrentItem(currentMatchShowHideTypes.show);
 const hideCurrentMatch = hideCurrentItem(currentMatchShowHideTypes.hide);
 
+const showMatchForCurrentItem = showMatchForCurrentItemType => () => ({
+  type: showMatchForCurrentItemType,
+  payload: {}
+});
+
+const showMatchForCurrentDriver = showMatchForCurrentItem(
+  showMatchForCurrentDriverType
+);
+const showMatchForCurrentRider = showMatchForCurrentItem(
+  showMatchForCurrentRiderType
+);
+
 const uploadFileChosen = fileDetails => ({
   type: UPLOAD_FILE_CHOSEN,
   payload: { fileDetails }
@@ -248,6 +261,8 @@ export {
   setInfoMatchesOtherDriverList,
   hideExpiredMatchesOtherDriverList,
   hideConfirmedMatchesOtherDriverList,
+  showMatchForCurrentDriver,
+  showMatchForCurrentRider,
   uploadFileChosen,
   postUploadFile
 };

@@ -49,7 +49,9 @@ type matchesInfo = {
   hideExpiredCanceled: bool,
   hideConfirmed: bool,
   showCurrentMatchDetails: bool,
-  currentMatch: (systemMatch)
+  currentMatch: (systemMatch),
+  showMatchForCurrentDriverOnly: bool,
+  showMatchForCurrentRiderOnly: bool
 };
 
 [@bs.deriving abstract]
@@ -140,6 +142,8 @@ type jsProps = {
   hideConfirmedMatchesList: unit => unit,
   showCurrentMatch: systemMatch => unit,
   hideCurrentMatch: unit => unit,
+  showMatchForCurrentDriver: unit => unit,
+  showMatchForCurrentRider: unit => unit
 };
 
 let make = (~others:bool, ~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
@@ -152,6 +156,8 @@ let make = (~others:bool, ~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo,
 ~hideConfirmedMatchesList,
 ~showCurrentMatch,
 ~hideCurrentMatch,
+~showMatchForCurrentDriver,
+~showMatchForCurrentRider,
 _children) => {
 
   let matchesTableOnPageChangeHandler: TypeInfo.tableOnPageChangeHandler = (pageIndex) => {
@@ -232,6 +238,18 @@ _children) => {
 
   let matchesTableHideConfirmedHandler = _ => {
     TypeInfo.unitArgAction(hideConfirmedMatchesList);
+
+    ();
+  }
+
+  let matchesTableShowMatchForCurrentDriverHandler = _ => {
+    TypeInfo.unitArgAction(showMatchForCurrentDriver);
+
+    ();
+  }
+
+  let matchesTableShowMatchForCurrentRiderHandler = _ => {
+    TypeInfo.unitArgAction(showMatchForCurrentRider);
 
     ();
   }
@@ -430,6 +448,18 @@ _children) => {
               </label>
               <input className="" type_="checkbox" id="hideConfirmed" checked={matchesInfo->hideConfirmedGet} onChange={matchesTableHideConfirmedHandler} />
             </div> 
+            <span>
+                <div className="form-group checkbox" style={checkboxAreaStyle}>
+                  <label className="" style={checkboxLabelStyle} htmlFor="showMatchForCurrentDriverOnly">{ReasonReact.string("Show Match For Current Driver Only")}
+                  </label>
+                  <input className="" type_="checkbox" id="showMatchForCurrentDriverOnly" checked={matchesInfo->showMatchForCurrentDriverOnlyGet} onChange={matchesTableShowMatchForCurrentDriverHandler} />
+                </div>
+                <div className="form-group checkbox" style={checkboxAreaStyle}>
+                  <label className="" style={checkboxLabelStyle} htmlFor="showMatchForCurrentRiderOnly">{ReasonReact.string("Show Match For Current Rider Only")}
+                  </label>
+                  <input className="" type_="checkbox" id="showMatchForCurrentRiderOnly" checked={matchesInfo->showMatchForCurrentRiderOnlyGet} onChange={matchesTableShowMatchForCurrentRiderHandler} />
+                </div> 
+            </span> 
           </div> 
           <div style={tableDivStyle}> 
             <Table props={matchTableJsProps}  className="basicMatchTable" type_={tableType} columns={matchTableColumns}
@@ -498,6 +528,8 @@ let default =
       ~hideConfirmedMatchesList=jsProps->hideConfirmedMatchesListGet,
       ~showCurrentMatch=jsProps->showCurrentMatchGet,
       ~hideCurrentMatch=jsProps->hideCurrentMatchGet,
+      ~showMatchForCurrentDriver=jsProps->showMatchForCurrentDriverGet,
+      ~showMatchForCurrentRider=jsProps->showMatchForCurrentRiderGet,
       [||],
     )
   );
