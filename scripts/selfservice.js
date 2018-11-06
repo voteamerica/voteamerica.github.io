@@ -472,13 +472,6 @@ function driverProposedMatches () {
   //   'UUID=' + data.uuid +
   //   '&DriverPhone=' + data.phone;
 
-  // var request = new XMLHttpRequest();
-
-  // request.open("GET", url);
-  // request.send();
-
-  // request.onreadystatechange = 
-
   accessCarpoolvoteAPI(
     createAPIurl({
         UUID: data.uuid,
@@ -488,41 +481,39 @@ function driverProposedMatches () {
     ), 
   
   function (resp) {
-    // if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-    //   console.log(request.responseText);
-
-    //   var resp = JSON.parse(request.responseText);
-
       resp.forEach(match => {
         var listItems           = '';
         var li                  = "";
         var infoListCaptions    = 
               [ "UUID_driver", "UUID_rider"
-              , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Contact Method and Notes"
+            , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Available Dates", "Seats Needed", "Rider Contact Method(s)", "Rider Notes"
               ];
         var matchInfoList       = 
           [ match.driver_proposed_matches.uuid_driver
           , match.driver_proposed_matches.uuid_rider
           , match.driver_proposed_matches.RiderCollectionZIP + ' ' + match.driver_proposed_matches.RiderCollectionAddress
           , match.driver_proposed_matches.RiderDropOffZIP + ' ' + match.driver_proposed_matches.RiderDestinationAddress
-          , match.driver_proposed_matches.RiderPreferredContact + ' ' + match.driver_proposed_matches.RiderAccommodationNotes
+          , match.driver_proposed_matches.convert_datetime_to_local_format
+          , match.driver_proposed_matches.TotalPartySize
+          , match.driver_proposed_matches.RiderPreferredContact 
+          , match.driver_proposed_matches.RiderAccommodationNotes
           ];
+
+        if (match.driver_proposed_matches.NeedWheelchair && match.driver_proposed_matches.NeedWheelchair === true) {
+          infoListCaptions.push("Powerchair user");
+          matchInfoList.push("Yes");
+        }
+
+        if (match.driver_proposed_matches.TwoWayTripNeeded && match.driver_proposed_matches.TwoWayTripNeeded === true) {
+          infoListCaptions.push("Two Way Trip Needed");
+          matchInfoList.push("Yes");
+        }      
 
         var listSelector = "#driverProposedMatches ul";
         var acceptButtonInList =
           createListButton("acceptDriverMatchFromButton", "Accept", ' class="button self-service-list-button" ',
             match.driver_proposed_matches.uuid_driver, match.driver_proposed_matches.uuid_rider,
             match.driver_proposed_matches.score, data.phone);
-
-        // $(listSelector).append('<li>UUID_driver - ' + match.driver_proposed_matches.uuid_driver + '</li>');
-        // $(listSelector).append('<li>UUID_rider - ' + match.driver_proposed_matches.uuid_rider + '</li>');
-        // // $(listSelector).append('<li class="match-info-item">  rider name - ' + match.driver_proposed_matches.RiderFirstName + ' ' + match.driver_proposed_matches.RiderLastName + '</li>');
-        // // $(listSelector).append('<li class="match-info-item">  rider phone - ' + match.driver_proposed_matches.RiderPhone + '</li>');
-        // // $(listSelector).append('<li class="match-info-item">  rider email - ' + match.driver_proposed_matches.RiderEmail + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  rider collection - ' + match.driver_proposed_matches.RiderCollectionZIP + ' ' + match.driver_proposed_matches.RiderCollectionAddress + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  rider drop off - ' + match.driver_proposed_matches.RiderDropOffZIP + ' ' + match.driver_proposed_matches.RiderDestinationAddress + '</li>');
-        // $(listSelector).append('<li class="match-info-item">  rider contact method, notes - ' + match.driver_proposed_matches.RiderPreferredContact + ' ' + match.driver_proposed_matches.RiderAccommodationNotes + '</li>');
-        // $(listSelector).append('<li class="list_button">' + acceptButtonInList + '</li>');
 
         listItems += createListItems(infoListCaptions, matchInfoList);
         listItems += '<li class="list_button">' + acceptButtonInList + '</li>';
@@ -555,7 +546,7 @@ function driverConfirmedMatches () {
         var li                  = "";
         var infoListCaptions    = 
               [ "UUID_driver", "UUID_rider", "Rider Name", "Rider Phone", "Rider Email"
-              , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Contact Method and Notes"
+              , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Available Dates", "Seats Needed","Rider Contact Method(s)", "Rider Notes"
               ];
         var matchInfoList       = 
           [ match.driver_confirmed_matches.uuid_driver
@@ -565,9 +556,21 @@ function driverConfirmedMatches () {
           , match.driver_confirmed_matches.RiderEmail
           , match.driver_confirmed_matches.RiderCollectionZIP + ' ' + match.driver_confirmed_matches.RiderCollectionAddress
           , match.driver_confirmed_matches.RiderDropOffZIP + ' ' + match.driver_confirmed_matches.RiderDestinationAddress
-          , match.driver_confirmed_matches.RiderPreferredContact + ' ' + match.driver_confirmed_matches.RiderAccommodationNotes
-          ];
+          , match.driver_confirmed_matches.convert_datetime_to_local_format
+          , match.driver_confirmed_matches.TotalPartySize
+          , match.driver_confirmed_matches.RiderPreferredContact 
+          , match.driver_confirmed_matches.RiderAccommodationNotes          ];
 
+          if (match.driver_confirmed_matches.NeedWheelchair && match.driver_confirmed_matches.NeedWheelchair === true) {
+            infoListCaptions.push("Powerchair user");
+            matchInfoList.push("Yes");
+          }
+  
+          if (match.driver_confirmed_matches.TwoWayTripNeeded && match.driver_confirmed_matches.TwoWayTripNeeded === true) {
+            infoListCaptions.push("Two Way Trip Needed");
+            matchInfoList.push("Yes");
+          }      
+  
         var listSelector = "#driverConfirmedMatches ul";
         var cancelButtonInList = 
               createListButton("cancelDriverMatchFromButton", 
@@ -712,14 +715,15 @@ function riderConfirmedMatch () {
   function (resp) {
       var listItems           = '';
       var li                  = "";
-      var infoListCaptions    = ["UUID_driver", "UUID_rider", "Driver Name", "Driver Phone", "Driver Email"];
+      var infoListCaptions    = ["UUID_driver", "UUID_rider", "Driver Name", "Driver Phone", "Driver Email", "Driver Available Dates"];
       var matchInfoList       = 
         [ resp.rider_confirmed_match.uuid_driver
         , resp.rider_confirmed_match.uuid_rider
         , resp.rider_confirmed_match.DriverFirstName + ' ' + resp.rider_confirmed_match.DriverLastName 
         , resp.rider_confirmed_match.DriverPhone 
         , resp.rider_confirmed_match.DriverEmail
-        ];
+        , resp.rider_confirmed_match.convert_datetime_to_local_format
+      ];
 
       if (resp.rider_confirmed_match.uuid_driver !== null) {
         var listSelector        = "#riderConfirmedMatch ul";
