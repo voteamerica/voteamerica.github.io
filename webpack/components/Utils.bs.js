@@ -10,19 +10,21 @@ var cellValueRaw = function (row){{ return row.value; }};
 
 var setInfoJs = function (fx,index,size){{ fx(index, size); return 0; }};
 
-function thcCreator(header, accessor) {
+function thcCreator(header, accessor, width) {
   return {
           Header: header,
           accessor: accessor,
-          Cell: cellValueRaw
+          Cell: cellValueRaw,
+          width: width
         };
 }
 
-function thcCreatorBool(header, accessor) {
+function thcCreatorBool(header, accessor, width) {
   return {
           Header: header,
           accessor: accessor,
-          Cell: cellValueToString
+          Cell: cellValueToString,
+          width: width
         };
 }
 
