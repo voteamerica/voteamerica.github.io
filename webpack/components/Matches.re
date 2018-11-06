@@ -139,8 +139,6 @@ type jsProps = {
   sectionHeading: string,
   loginInfo: TypeInfo.loginInfo,
   apiInfo: TypeInfo.apiInfo,
-  /* driversInfo: driversInfo,   */
-  /* ridersInfo: Riders.ridersInfo,   */
   matchesInfo: matchesInfo,  
   getMatchesList: (string, string) => unit,
   hideMatchesList: unit => unit,
@@ -156,8 +154,6 @@ type jsProps = {
 };
 
 let make = (~others:bool, ~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, 
-/* ~driversInfo:driversInfo,  */
-/* ~ridersInfo:Riders.ridersInfo,  */
 ~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
