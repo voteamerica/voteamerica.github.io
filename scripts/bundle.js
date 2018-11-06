@@ -44576,7 +44576,7 @@ module.exports = function(originalModule) {
 /*!**********************************!*\
   !*** ./webpack/actions/index.js ***!
   \**********************************/
-/*! exports provided: noOp, loginDetails, login, loginSuccess, logout, getDriversList, hideDriversList, showDriversListDownloadLink, hideDriversListDownloadLink, setInfoDriversList, hideExpiredDriversList, hideConfirmedDriversList, showCurrentMatchOnlyDriversList, showCurrentDriver, hideCurrentDriver, getRidersList, hideRidersList, showRidersListDownloadLink, hideRidersListDownloadLink, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, getMatchesOtherDriverList, hideMatchesOtherDriverList, showMatchesOtherDriverListDownloadLink, hideMatchesOtherDriverListDownloadLink, setInfoMatchesOtherDriverList, hideExpiredMatchesOtherDriverList, hideConfirmedMatchesOtherDriverList, uploadFileChosen, postUploadFile */
+/*! exports provided: noOp, loginDetails, login, loginSuccess, logout, getDriversList, hideDriversList, showDriversListDownloadLink, hideDriversListDownloadLink, setInfoDriversList, hideExpiredDriversList, hideConfirmedDriversList, showCurrentMatchOnlyDriversList, showCurrentDriver, hideCurrentDriver, getRidersList, hideRidersList, showRidersListDownloadLink, hideRidersListDownloadLink, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, getMatchesOtherDriverList, hideMatchesOtherDriverList, showMatchesOtherDriverListDownloadLink, hideMatchesOtherDriverListDownloadLink, setInfoMatchesOtherDriverList, hideExpiredMatchesOtherDriverList, hideConfirmedMatchesOtherDriverList, showMatchForCurrentDriver, showMatchForCurrentRider, uploadFileChosen, postUploadFile */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44622,6 +44622,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInfoMatchesOtherDriverList", function() { return setInfoMatchesOtherDriverList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideExpiredMatchesOtherDriverList", function() { return hideExpiredMatchesOtherDriverList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideConfirmedMatchesOtherDriverList", function() { return hideConfirmedMatchesOtherDriverList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showMatchForCurrentDriver", function() { return showMatchForCurrentDriver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showMatchForCurrentRider", function() { return showMatchForCurrentRider; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadFileChosen", function() { return uploadFileChosen; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postUploadFile", function() { return postUploadFile; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./webpack/actions/types.js");
@@ -44816,6 +44818,18 @@ var showCurrentRider = showCurrentItem(_types__WEBPACK_IMPORTED_MODULE_0__["curr
 var hideCurrentRider = hideCurrentItem(_types__WEBPACK_IMPORTED_MODULE_0__["currentRiderShowHideTypes"].hide);
 var showCurrentMatch = showCurrentItem(_types__WEBPACK_IMPORTED_MODULE_0__["currentMatchShowHideTypes"].show);
 var hideCurrentMatch = hideCurrentItem(_types__WEBPACK_IMPORTED_MODULE_0__["currentMatchShowHideTypes"].hide);
+
+var showMatchForCurrentItem = function showMatchForCurrentItem(showMatchForCurrentItemType) {
+  return function () {
+    return {
+      type: showMatchForCurrentItemType,
+      payload: {}
+    };
+  };
+};
+
+var showMatchForCurrentDriver = showMatchForCurrentItem(_types__WEBPACK_IMPORTED_MODULE_0__["showMatchForCurrentDriverType"]);
+var showMatchForCurrentRider = showMatchForCurrentItem(_types__WEBPACK_IMPORTED_MODULE_0__["showMatchForCurrentRiderType"]);
 
 var uploadFileChosen = function uploadFileChosen(fileDetails) {
   return {
@@ -45518,7 +45532,7 @@ function loginSaga() {
 /*!**********************************!*\
   !*** ./webpack/actions/types.js ***!
   \**********************************/
-/*! exports provided: NO_OP, LOGIN_DETAILS, LOGIN_REQUEST, loginRequestTypes, LOGOUT, DEFAULT_LIST_PAGE_INDEX, DEFAULT_LIST_PAGE_SIZE, driversGetHideListTypes, driversListShowCurrentMatchOnlyType, driversListSetInfoType, getDriverListTypes, driversListHideExpiredType, driversListHideConfirmedType, currentDriverShowHideTypes, driversListDownloadLinkShowHideTypes, ridersGetHideListTypes, ridersListDownloadLinkShowHideTypes, ridersListSetInfoType, getRiderListTypes, ridersListHideExpiredType, ridersListHideConfirmedType, ridersListShowCurrentMatchOnlyType, currentRiderShowHideTypes, matchesGetHideListTypes, matchesListDownloadLinkShowHideTypes, matchesListSetInfoType, matchesListHideExpiredType, matchesListHideConfirmedType, getMatchListTypes, currentMatchShowHideTypes, matchesOtherDriverGetHideListTypes, matchesOtherDriverListDownloadLinkShowHideTypes, matchesOtherDriverListSetInfoType, matchesOtherDriverListHideExpiredType, matchesOtherDriverListHideConfirmedType, getMatchOtherDriverListTypes, UPLOAD_FILE_CHOSEN, POST_UPLOAD, postUploadAsyncTypes */
+/*! exports provided: NO_OP, LOGIN_DETAILS, LOGIN_REQUEST, loginRequestTypes, LOGOUT, DEFAULT_LIST_PAGE_INDEX, DEFAULT_LIST_PAGE_SIZE, driversGetHideListTypes, driversListShowCurrentMatchOnlyType, driversListSetInfoType, getDriverListTypes, driversListHideExpiredType, driversListHideConfirmedType, currentDriverShowHideTypes, driversListDownloadLinkShowHideTypes, ridersGetHideListTypes, ridersListDownloadLinkShowHideTypes, ridersListSetInfoType, getRiderListTypes, ridersListHideExpiredType, ridersListHideConfirmedType, ridersListShowCurrentMatchOnlyType, currentRiderShowHideTypes, matchesGetHideListTypes, matchesListDownloadLinkShowHideTypes, matchesListSetInfoType, matchesListHideExpiredType, matchesListHideConfirmedType, getMatchListTypes, currentMatchShowHideTypes, matchesOtherDriverGetHideListTypes, matchesOtherDriverListDownloadLinkShowHideTypes, matchesOtherDriverListSetInfoType, matchesOtherDriverListHideExpiredType, matchesOtherDriverListHideConfirmedType, getMatchOtherDriverListTypes, showMatchForCurrentDriverType, showMatchForCurrentRiderType, UPLOAD_FILE_CHOSEN, POST_UPLOAD, postUploadAsyncTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45559,6 +45573,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesOtherDriverListHideExpiredType", function() { return matchesOtherDriverListHideExpiredType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchesOtherDriverListHideConfirmedType", function() { return matchesOtherDriverListHideConfirmedType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMatchOtherDriverListTypes", function() { return getMatchOtherDriverListTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showMatchForCurrentDriverType", function() { return showMatchForCurrentDriverType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showMatchForCurrentRiderType", function() { return showMatchForCurrentRiderType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPLOAD_FILE_CHOSEN", function() { return UPLOAD_FILE_CHOSEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_UPLOAD", function() { return POST_UPLOAD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postUploadAsyncTypes", function() { return postUploadAsyncTypes; });
@@ -45648,6 +45664,13 @@ var currentItemShowHideTypes = function currentItemShowHideTypes(itemType) {
 var currentDriverShowHideTypes = currentItemShowHideTypes(driverType);
 var currentRiderShowHideTypes = currentItemShowHideTypes(riderType);
 var currentMatchShowHideTypes = currentItemShowHideTypes(matchType);
+
+var showMatchForCurrentItemType = function showMatchForCurrentItemType(itemType) {
+  return 'SHOW_MATCH_FOR_CURRENT_' + itemType;
+};
+
+var showMatchForCurrentDriverType = showMatchForCurrentItemType(driverType);
+var showMatchForCurrentRiderType = showMatchForCurrentItemType(riderType);
 
 var getAsyncTypes = function getAsyncTypes(type) {
   return {
@@ -46611,7 +46634,7 @@ function tableMatch(itemDetails) {
   };
 }
 
-function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, _children) {
+function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, showMatchForCurrentDriver, showMatchForCurrentRider, _children) {
   var matchesTableOnPageChangeHandler = function matchesTableOnPageChangeHandler(pageIndex) {
     var pageSize = matchesInfo.listPageSize;
     return Utils$VoteUSReason.setInfoJs(setInfoMatchesList, pageIndex, pageSize);
@@ -46680,6 +46703,22 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
 
   var matchesTableHideConfirmedHandler = function matchesTableHideConfirmedHandler(param) {
     TypeInfo$VoteUSReason.unitArgAction(hideConfirmedMatchesList);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var matchesTableShowMatchForCurrentDriverHandler = function matchesTableShowMatchForCurrentDriverHandler(param) {
+    TypeInfo$VoteUSReason.unitArgAction(showMatchForCurrentDriver);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var matchesTableShowMatchForCurrentRiderHandler = function matchesTableShowMatchForCurrentRiderHandler(param) {
+    TypeInfo$VoteUSReason.unitArgAction(showMatchForCurrentRider);
     return (
       /* () */
       0
@@ -46826,8 +46865,38 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
 
       var filterConfirmedMatches = function filterConfirmedMatches(matches) {
         if (matchesInfo.hideConfirmed === true) {
-          var filterMatches = function filterMatches(rider) {
-            return rider.status !== "MatchConfirmed";
+          var filterMatches = function filterMatches(match_) {
+            return match_.status !== "MatchConfirmed";
+          };
+
+          return Utils$VoteUSReason.filterArray(filterMatches, matches);
+        } else {
+          return matches;
+        }
+      };
+
+      var filterCurrentRiderMatches = function filterCurrentRiderMatches(matches) {
+        if (matchesInfo.showMatchForCurrentRiderOnly === true) {
+          var currentRiderUuid = matchesInfo.currentRider.UUID;
+          console.log("filter matches by current rider" + currentRiderUuid);
+
+          var filterMatches = function filterMatches(match_) {
+            return match_.uuid_rider === currentRiderUuid;
+          };
+
+          return Utils$VoteUSReason.filterArray(filterMatches, matches);
+        } else {
+          return matches;
+        }
+      };
+
+      var filterCurrentDriverMatches = function filterCurrentDriverMatches(matches) {
+        if (matchesInfo.showMatchForCurrentDriverOnly === true) {
+          var currentDriverUuid = matchesInfo.currentDriver.UUID;
+          console.log("filter matches by current driver" + currentDriverUuid);
+
+          var filterMatches = function filterMatches(match_) {
+            return match_.uuid_driver === currentDriverUuid;
           };
 
           return Utils$VoteUSReason.filterArray(filterMatches, matches);
@@ -46838,7 +46907,9 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
 
       var tableMatchesStepZero = Utils$VoteUSReason.filterArray(filterProposedAndConfirmed, tableMatchesAll);
       var tableMatchesStepOne = filterExpiredMatches(tableMatchesStepZero);
-      var tableMatches = filterConfirmedMatches(tableMatchesStepOne);
+      var tableMatchesStepTwo = filterConfirmedMatches(tableMatchesStepOne);
+      var tableMatchesStepThree = filterCurrentRiderMatches(tableMatchesStepTwo);
+      var tableMatches = filterCurrentDriverMatches(tableMatchesStepThree);
       var tableDivStyle = {
         marginTop: "20px",
         marginBottom: "10px"
@@ -46969,7 +47040,33 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
           checked: matchesInfo.hideConfirmed,
           type: "checkbox",
           onChange: matchesTableHideConfirmedHandler
-        }))), React.createElement("div", {
+        })), React.createElement("span", undefined, React.createElement("div", {
+          className: "form-group checkbox",
+          style: checkboxAreaStyle
+        }, React.createElement("label", {
+          className: "",
+          style: checkboxLabelStyle,
+          htmlFor: "showMatchForCurrentDriverOnly"
+        }, "Show Match For Current Driver Only"), React.createElement("input", {
+          className: "",
+          id: "showMatchForCurrentDriverOnly",
+          checked: matchesInfo.showMatchForCurrentDriverOnly,
+          type: "checkbox",
+          onChange: matchesTableShowMatchForCurrentDriverHandler
+        })), React.createElement("div", {
+          className: "form-group checkbox",
+          style: checkboxAreaStyle
+        }, React.createElement("label", {
+          className: "",
+          style: checkboxLabelStyle,
+          htmlFor: "showMatchForCurrentRiderOnly"
+        }, "Show Match For Current Rider Only"), React.createElement("input", {
+          className: "",
+          id: "showMatchForCurrentRiderOnly",
+          checked: matchesInfo.showMatchForCurrentRiderOnly,
+          type: "checkbox",
+          onChange: matchesTableShowMatchForCurrentRiderHandler
+        })))), React.createElement("div", {
           style: tableDivStyle
         }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
           return {
@@ -47019,7 +47116,7 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, function (jsProps) {
-  return make(jsProps.others, jsProps.sectionHeading, jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.showMatchesListDownloadLink, jsProps.hideMatchesListDownloadLink, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch,
+  return make(jsProps.others, jsProps.sectionHeading, jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.showMatchesListDownloadLink, jsProps.hideMatchesListDownloadLink, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, jsProps.showMatchForCurrentDriver, jsProps.showMatchForCurrentRider,
   /* array */
   []);
 });
@@ -47116,7 +47213,9 @@ var mapDispatchToProps = {
   hideExpiredMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideExpiredMatchesList"],
   hideConfirmedMatchesList: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideConfirmedMatchesList"],
   showCurrentMatch: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["showCurrentMatch"],
-  hideCurrentMatch: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideCurrentMatch"]
+  hideCurrentMatch: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["hideCurrentMatch"],
+  showMatchForCurrentDriver: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["showMatchForCurrentDriver"],
+  showMatchForCurrentRider: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["showMatchForCurrentRider"]
 };
 var MatchesPlus = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_Matches_bs_js__WEBPACK_IMPORTED_MODULE_1___default.a);
 /* harmony default export */ __webpack_exports__["default"] = (MatchesPlus);
@@ -48364,6 +48463,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./webpack/actions/types.js");
 
 
+var defaultCurrentDriverOrRider = {
+  UUID: ''
+};
 
 var matchesInfo = function matchesInfo() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
@@ -48375,6 +48477,10 @@ var matchesInfo = function matchesInfo() {
     hideConfirmed: false,
     showCurrentMatchDetails: false,
     currentMatch: {},
+    currentDriver: defaultCurrentDriverOrRider,
+    currentRider: defaultCurrentDriverOrRider,
+    showMatchForCurrentDriverOnly: false,
+    showMatchForCurrentRiderOnly: false,
     showDownloadLink: false,
     urlDownloadBlob: ''
   };
@@ -48387,7 +48493,9 @@ var matchesInfo = function matchesInfo() {
         matches: [],
         listPageIndex: _actions_types__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_LIST_PAGE_INDEX"],
         showCurrentMatchDetails: false,
-        currentMatch: {}
+        currentMatch: {},
+        currentDriver: defaultCurrentDriverOrRider,
+        currentRider: defaultCurrentDriverOrRider
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["getMatchListTypes"].success:
@@ -48446,6 +48554,49 @@ var matchesInfo = function matchesInfo() {
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["matchesListHideConfirmedType"]:
       return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
         hideConfirmed: !state.hideConfirmed
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["showMatchForCurrentDriverType"]:
+      {
+        var showMatchForCurrentDriverOnly = !state.showMatchForCurrentDriverOnly; // both checkboxes cannot be true, so other option is either already false or should become so
+
+        var showMatchForCurrentRiderOnly = false;
+        return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+          showMatchForCurrentDriverOnly: showMatchForCurrentDriverOnly,
+          showMatchForCurrentRiderOnly: showMatchForCurrentRiderOnly
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["showMatchForCurrentRiderType"]:
+      {
+        var _showMatchForCurrentRiderOnly = !state.showMatchForCurrentRiderOnly; // both checkboxes cannot be true, so other option is either already false or should become so
+
+
+        var _showMatchForCurrentDriverOnly = false;
+        return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+          showMatchForCurrentDriverOnly: _showMatchForCurrentDriverOnly,
+          showMatchForCurrentRiderOnly: _showMatchForCurrentRiderOnly
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["currentDriverShowHideTypes"].show:
+      return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        currentDriver: action.payload.itemDetails
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["currentDriverShowHideTypes"].hide:
+      return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        currentDriver: defaultCurrentDriverOrRider
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["currentRiderShowHideTypes"].show:
+      return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        currentRider: action.payload.itemDetails
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["currentRiderShowHideTypes"].hide:
+      return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+        currentRider: defaultCurrentDriverOrRider
       });
 
     default:

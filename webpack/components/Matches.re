@@ -1,14 +1,14 @@
 let component = ReasonReact.statelessComponent("Matches");
 
 [@bs.deriving abstract]
-type driverPartial = {
+type driverOrRiderPartial = {
    [@bs.as "UUID"] uuid: string
 };
 
-[@bs.deriving abstract]
+/* [@bs.deriving abstract]
 type riderPartial = {
    [@bs.as "UUID"] uuid: string,
-};
+}; */
 
 /* [@bs.deriving abstract]
 type driversInfo = { */
@@ -75,8 +75,8 @@ type matchesInfo = {
   hideConfirmed: bool,
   showCurrentMatchDetails: bool,
   currentMatch: (systemMatch),
-  currentDriver: (driverPartial),
-  currentRider: (riderPartial),
+  currentDriver: (driverOrRiderPartial),
+  currentRider: (driverOrRiderPartial),
   showMatchForCurrentDriverOnly: bool,
   showMatchForCurrentRiderOnly: bool
 };
@@ -392,6 +392,7 @@ _children) => {
       if (matchesInfo->showMatchForCurrentRiderOnlyGet === true) {
         let currentRiderUuid = matchesInfo->currentRiderGet->uuidGet;
 
+        /* to be decided - show all or none if no rider selected */
         /* if (String.length (currentRiderUuid) > 0) { */
           Js.log("filter matches by current rider" ++ currentRiderUuid);
 
@@ -408,11 +409,28 @@ _children) => {
       };
     };
 
+    let filterCurrentDriverMatches = matches => {
+      if (matchesInfo->showMatchForCurrentDriverOnlyGet === true) {
+        let currentDriverUuid = matchesInfo->currentDriverGet->uuidGet;
+
+        Js.log("filter matches by current driver" ++ currentDriverUuid);
+
+        let filterMatches = match => match->uuid_driverGet === currentDriverUuid;
+        let matchesForCurrentDriver = Utils.filterArray(~f=filterMatches, matches);
+          
+        matchesForCurrentDriver; 
+      }
+      else {
+        matches;
+      };
+    };
+
     let tableMatchesStepZero = Utils.filterArray(~f=filterProposedAndConfirmed, tableMatchesAll); 
 
     let tableMatchesStepOne = filterExpiredMatches(tableMatchesStepZero);
     let tableMatchesStepTwo = filterConfirmedMatches(tableMatchesStepOne);
-    let tableMatches = filterCurrentRiderMatches(tableMatchesStepTwo);
+    let tableMatchesStepThree = filterCurrentRiderMatches(tableMatchesStepTwo);
+    let tableMatches = filterCurrentDriverMatches(tableMatchesStepThree);
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 

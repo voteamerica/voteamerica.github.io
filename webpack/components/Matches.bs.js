@@ -77,7 +77,7 @@ function tableMatch(itemDetails) {
         };
 }
 
-function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, _children) {
+function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, showMatchForCurrentDriver, showMatchForCurrentRider, _children) {
   var matchesTableOnPageChangeHandler = function (pageIndex) {
     var pageSize = matchesInfo.listPageSize;
     return Utils$VoteUSReason.setInfoJs(setInfoMatchesList, pageIndex, pageSize);
@@ -123,6 +123,14 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
   };
   var matchesTableHideConfirmedHandler = function (param) {
     TypeInfo$VoteUSReason.unitArgAction(hideConfirmedMatchesList);
+    return /* () */0;
+  };
+  var matchesTableShowMatchForCurrentDriverHandler = function (param) {
+    TypeInfo$VoteUSReason.unitArgAction(showMatchForCurrentDriver);
+    return /* () */0;
+  };
+  var matchesTableShowMatchForCurrentRiderHandler = function (param) {
+    TypeInfo$VoteUSReason.unitArgAction(showMatchForCurrentRider);
     return /* () */0;
   };
   var handleGetMatchListClick = function (_event) {
@@ -200,8 +208,32 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
               };
               var filterConfirmedMatches = function (matches) {
                 if (matchesInfo.hideConfirmed === true) {
-                  var filterMatches = function (rider) {
-                    return rider.status !== "MatchConfirmed";
+                  var filterMatches = function (match_) {
+                    return match_.status !== "MatchConfirmed";
+                  };
+                  return Utils$VoteUSReason.filterArray(filterMatches, matches);
+                } else {
+                  return matches;
+                }
+              };
+              var filterCurrentRiderMatches = function (matches) {
+                if (matchesInfo.showMatchForCurrentRiderOnly === true) {
+                  var currentRiderUuid = matchesInfo.currentRider.UUID;
+                  console.log("filter matches by current rider" + currentRiderUuid);
+                  var filterMatches = function (match_) {
+                    return match_.uuid_rider === currentRiderUuid;
+                  };
+                  return Utils$VoteUSReason.filterArray(filterMatches, matches);
+                } else {
+                  return matches;
+                }
+              };
+              var filterCurrentDriverMatches = function (matches) {
+                if (matchesInfo.showMatchForCurrentDriverOnly === true) {
+                  var currentDriverUuid = matchesInfo.currentDriver.UUID;
+                  console.log("filter matches by current driver" + currentDriverUuid);
+                  var filterMatches = function (match_) {
+                    return match_.uuid_driver === currentDriverUuid;
                   };
                   return Utils$VoteUSReason.filterArray(filterMatches, matches);
                 } else {
@@ -210,7 +242,9 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
               };
               var tableMatchesStepZero = Utils$VoteUSReason.filterArray(filterProposedAndConfirmed, tableMatchesAll);
               var tableMatchesStepOne = filterExpiredMatches(tableMatchesStepZero);
-              var tableMatches = filterConfirmedMatches(tableMatchesStepOne);
+              var tableMatchesStepTwo = filterConfirmedMatches(tableMatchesStepOne);
+              var tableMatchesStepThree = filterCurrentRiderMatches(tableMatchesStepTwo);
+              var tableMatches = filterCurrentDriverMatches(tableMatchesStepThree);
               var tableDivStyle = {
                 marginTop: "20px",
                 marginBottom: "10px"
@@ -330,7 +364,33 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
                                   checked: matchesInfo.hideConfirmed,
                                   type: "checkbox",
                                   onChange: matchesTableHideConfirmedHandler
-                                }))), React.createElement("div", {
+                                })), React.createElement("span", undefined, React.createElement("div", {
+                                  className: "form-group checkbox",
+                                  style: checkboxAreaStyle
+                                }, React.createElement("label", {
+                                      className: "",
+                                      style: checkboxLabelStyle,
+                                      htmlFor: "showMatchForCurrentDriverOnly"
+                                    }, "Show Match For Current Driver Only"), React.createElement("input", {
+                                      className: "",
+                                      id: "showMatchForCurrentDriverOnly",
+                                      checked: matchesInfo.showMatchForCurrentDriverOnly,
+                                      type: "checkbox",
+                                      onChange: matchesTableShowMatchForCurrentDriverHandler
+                                    })), React.createElement("div", {
+                                  className: "form-group checkbox",
+                                  style: checkboxAreaStyle
+                                }, React.createElement("label", {
+                                      className: "",
+                                      style: checkboxLabelStyle,
+                                      htmlFor: "showMatchForCurrentRiderOnly"
+                                    }, "Show Match For Current Rider Only"), React.createElement("input", {
+                                      className: "",
+                                      id: "showMatchForCurrentRiderOnly",
+                                      checked: matchesInfo.showMatchForCurrentRiderOnly,
+                                      type: "checkbox",
+                                      onChange: matchesTableShowMatchForCurrentRiderHandler
+                                    })))), React.createElement("div", {
                           style: tableDivStyle
                         }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
                                     return {
@@ -365,7 +425,7 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
 }
 
 var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make(jsProps.others, jsProps.sectionHeading, jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.showMatchesListDownloadLink, jsProps.hideMatchesListDownloadLink, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, /* array */[]);
+        return make(jsProps.others, jsProps.sectionHeading, jsProps.loginInfo, jsProps.apiInfo, jsProps.matchesInfo, jsProps.getMatchesList, jsProps.hideMatchesList, jsProps.showMatchesListDownloadLink, jsProps.hideMatchesListDownloadLink, jsProps.setInfoMatchesList, jsProps.hideExpiredMatchesList, jsProps.hideConfirmedMatchesList, jsProps.showCurrentMatch, jsProps.hideCurrentMatch, jsProps.showMatchForCurrentDriver, jsProps.showMatchForCurrentRider, /* array */[]);
       }));
 
 exports.component = component;
