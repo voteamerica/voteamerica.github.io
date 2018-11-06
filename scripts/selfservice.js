@@ -544,8 +544,8 @@ function driverConfirmedMatches () {
           , match.driver_confirmed_matches.RiderPhone
           , match.driver_confirmed_matches.RiderEmail
           , match.driver_confirmed_matches.RiderCollectionZIP + ' ' + match.driver_confirmed_matches.RiderCollectionAddress
-          , match.driver_confirmed_matches.RiderDropOffZIP + ' ' + match.driver_confirmed_matches.RiderDestinationAddress,
-          match.driver_confirmed_matches.convert_datetime_to_local_format
+          , match.driver_confirmed_matches.RiderDropOffZIP + ' ' + match.driver_confirmed_matches.RiderDestinationAddress
+          , match.driver_confirmed_matches.convert_datetime_to_local_format
           , match.driver_confirmed_matches.RiderPreferredContact 
           , match.driver_confirmed_matches.RiderAccommodationNotes          ];
 
@@ -693,14 +693,15 @@ function riderConfirmedMatch () {
   function (resp) {
       var listItems           = '';
       var li                  = "";
-      var infoListCaptions    = ["UUID_driver", "UUID_rider", "Driver Name", "Driver Phone", "Driver Email"];
+      var infoListCaptions    = ["UUID_driver", "UUID_rider", "Driver Name", "Driver Phone", "Driver Email", "Driver Available Dates"];
       var matchInfoList       = 
         [ resp.rider_confirmed_match.uuid_driver
         , resp.rider_confirmed_match.uuid_rider
         , resp.rider_confirmed_match.DriverFirstName + ' ' + resp.rider_confirmed_match.DriverLastName 
         , resp.rider_confirmed_match.DriverPhone 
         , resp.rider_confirmed_match.DriverEmail
-        ];
+        , resp.rider_confirmed_match.convert_datetime_to_local_format
+      ];
 
       if (resp.rider_confirmed_match.uuid_driver !== null) {
         var listSelector        = "#riderConfirmedMatch ul";
