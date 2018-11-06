@@ -1,6 +1,31 @@
 let component = ReasonReact.statelessComponent("Matches");
 
 [@bs.deriving abstract]
+type driverPartial = {
+   [@bs.as "UUID"] uuid: string
+};
+
+[@bs.deriving abstract]
+type riderPartial = {
+   [@bs.as "UUID"] uuid: string,
+};
+
+/* [@bs.deriving abstract]
+type driversInfo = { */
+  /* showRiderList: bool,
+  showDownloadLink: bool,
+  urlDownloadBlob: string,
+  riders: array(rider),
+  listPageIndex: int,
+  listPageSize: int,
+  hideExpiredCanceled: bool,
+  hideConfirmed: bool,
+  showCurrentMatchRiderOnly: bool,
+  showCurrentRiderDetails: bool, */
+  /* currentDriver: (driver)
+}; */
+
+[@bs.deriving abstract]
 type systemMatch = {
    status: string,
   uuid_driver: string,
@@ -50,6 +75,8 @@ type matchesInfo = {
   hideConfirmed: bool,
   showCurrentMatchDetails: bool,
   currentMatch: (systemMatch),
+  currentDriver: (driverPartial),
+  currentRider: (riderPartial),
   showMatchForCurrentDriverOnly: bool,
   showMatchForCurrentRiderOnly: bool
 };
@@ -132,6 +159,8 @@ type jsProps = {
   sectionHeading: string,
   loginInfo: TypeInfo.loginInfo,
   apiInfo: TypeInfo.apiInfo,
+  /* driversInfo: driversInfo,   */
+  /* ridersInfo: Riders.ridersInfo,   */
   matchesInfo: matchesInfo,  
   getMatchesList: (string, string) => unit,
   hideMatchesList: unit => unit,
@@ -146,7 +175,10 @@ type jsProps = {
   showMatchForCurrentRider: unit => unit
 };
 
-let make = (~others:bool, ~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, ~matchesInfo:matchesInfo, 
+let make = (~others:bool, ~sectionHeading:string, ~loginInfo:TypeInfo.loginInfo, ~apiInfo:TypeInfo.apiInfo, 
+/* ~driversInfo:driversInfo,  */
+/* ~ridersInfo:Riders.ridersInfo,  */
+~matchesInfo:matchesInfo, 
 ~getMatchesList, 
 ~hideMatchesList,
 ~showMatchesListDownloadLink,
@@ -356,10 +388,28 @@ _children) => {
       };
     };
 
+    let filterCurrentRiderMatches = matches => {
+      if (matchesInfo->showMatchForCurrentRiderOnlyGet === true) {
+        Js.log("filter matches by current rider");
+
+        /* currentRider */
+        /* let filterMatches = rider => rider->statusGet !== "MatchConfirmed";
+
+        let matchesNotConfirmed = Utils.filterArray(~f=filterMatches, matches);
+          
+        matchesNotConfirmed; */
+        matches;
+      }
+      else {
+        matches;
+      };
+    };
+
     let tableMatchesStepZero = Utils.filterArray(~f=filterProposedAndConfirmed, tableMatchesAll); 
 
     let tableMatchesStepOne = filterExpiredMatches(tableMatchesStepZero);
-    let tableMatches = filterConfirmedMatches(tableMatchesStepOne);
+    let tableMatchesStepTwo = filterConfirmedMatches(tableMatchesStepOne);
+    let tableMatches = filterCurrentRiderMatches(tableMatchesStepTwo);
 
     let tableDivStyle = ReactDOMRe.Style.make(~marginTop="20px", ~marginBottom="10px", ());
 
@@ -389,7 +439,6 @@ _children) => {
     ~marginLeft="10px", ~fontWeight="700", ()
     );
     }; 
-
 
     let currentMatchInfo = currentMatch => {
       <div>
@@ -518,6 +567,8 @@ let default =
       ~sectionHeading=jsProps->sectionHeadingGet,
       ~loginInfo=jsProps->loginInfoGet,
       ~apiInfo=jsProps->apiInfoGet,
+      /* ~driversInfo=jsProps->driversInfoGet, */
+      /* ~ridersInfo=jsProps->ridersInfoGet, */
       ~matchesInfo=jsProps->matchesInfoGet,
       ~getMatchesList=jsProps->getMatchesListGet,
       ~hideMatchesList=jsProps->hideMatchesListGet,

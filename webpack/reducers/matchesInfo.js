@@ -9,9 +9,13 @@ import {
   matchesListHideExpiredType,
   matchesListHideConfirmedType,
   currentMatchShowHideTypes,
+  currentDriverShowHideTypes,
+  currentRiderShowHideTypes,
   showMatchForCurrentDriverType,
   showMatchForCurrentRiderType
 } from '../actions/types';
+
+const defaultCurrentDriverOrRider = { UUID: '' };
 
 const matchesInfo = (
   state = {
@@ -23,6 +27,8 @@ const matchesInfo = (
     hideConfirmed: false,
     showCurrentMatchDetails: false,
     currentMatch: {},
+    currentDriver: defaultCurrentDriverOrRider,
+    currentRider: defaultCurrentDriverOrRider,
     showMatchForCurrentDriverOnly: false,
     showMatchForCurrentRiderOnly: false,
     showDownloadLink: false,
@@ -38,7 +44,9 @@ const matchesInfo = (
         matches: [],
         listPageIndex: DEFAULT_LIST_PAGE_INDEX,
         showCurrentMatchDetails: false,
-        currentMatch: {}
+        currentMatch: {},
+        currentDriver: defaultCurrentDriverOrRider,
+        currentRider: defaultCurrentDriverOrRider
       };
 
     case getMatchListTypes.success: {
@@ -107,6 +115,18 @@ const matchesInfo = (
         showMatchForCurrentRiderOnly
       };
     }
+
+    case currentDriverShowHideTypes.show:
+      return { ...state, currentDriver: action.payload.itemDetails };
+
+    case currentDriverShowHideTypes.hide:
+      return { ...state, currentDriver: defaultCurrentDriverOrRider };
+
+    case currentRiderShowHideTypes.show:
+      return { ...state, currentRider: action.payload.itemDetails };
+
+    case currentRiderShowHideTypes.hide:
+      return { ...state, currentRider: defaultCurrentDriverOrRider };
 
     default:
       return state;
