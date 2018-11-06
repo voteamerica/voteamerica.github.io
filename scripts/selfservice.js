@@ -535,7 +535,7 @@ function driverConfirmedMatches () {
         var li                  = "";
         var infoListCaptions    = 
               [ "UUID_driver", "UUID_rider", "Rider Name", "Rider Phone", "Rider Email"
-              , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Contact Method and Notes"
+              , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Available Dates","Rider Contact Method(s)", "Rider Notes"
               ];
         var matchInfoList       = 
           [ match.driver_confirmed_matches.uuid_driver
@@ -544,9 +544,10 @@ function driverConfirmedMatches () {
           , match.driver_confirmed_matches.RiderPhone
           , match.driver_confirmed_matches.RiderEmail
           , match.driver_confirmed_matches.RiderCollectionZIP + ' ' + match.driver_confirmed_matches.RiderCollectionAddress
-          , match.driver_confirmed_matches.RiderDropOffZIP + ' ' + match.driver_confirmed_matches.RiderDestinationAddress
-          , match.driver_confirmed_matches.RiderPreferredContact + ' ' + match.driver_confirmed_matches.RiderAccommodationNotes
-          ];
+          , match.driver_confirmed_matches.RiderDropOffZIP + ' ' + match.driver_confirmed_matches.RiderDestinationAddress,
+          match.driver_confirmed_matches.convert_datetime_to_local_format
+          , match.driver_confirmed_matches.RiderPreferredContact 
+          , match.driver_confirmed_matches.RiderAccommodationNotes          ];
 
         var listSelector = "#driverConfirmedMatches ul";
         var cancelButtonInList = 
