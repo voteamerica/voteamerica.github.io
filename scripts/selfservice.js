@@ -486,7 +486,7 @@ function driverProposedMatches () {
         var li                  = "";
         var infoListCaptions    = 
               [ "UUID_driver", "UUID_rider"
-            , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Available Dates","Rider Contact Method(s)", "Rider Notes"
+            , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Available Dates", "Seats Needed", "Rider Contact Method(s)", "Rider Notes"
               ];
         var matchInfoList       = 
           [ match.driver_proposed_matches.uuid_driver
@@ -494,9 +494,20 @@ function driverProposedMatches () {
           , match.driver_proposed_matches.RiderCollectionZIP + ' ' + match.driver_proposed_matches.RiderCollectionAddress
           , match.driver_proposed_matches.RiderDropOffZIP + ' ' + match.driver_proposed_matches.RiderDestinationAddress
           , match.driver_proposed_matches.convert_datetime_to_local_format
+          , match.driver_proposed_matches.TotalPartySize
           , match.driver_proposed_matches.RiderPreferredContact 
           , match.driver_proposed_matches.RiderAccommodationNotes
           ];
+
+        if (match.driver_proposed_matches.NeedWheelchair && match.driver_proposed_matches.NeedWheelchair === true) {
+          infoListCaptions.push("Powerchair user");
+          matchInfoList.push("Yes");
+        }
+
+        if (match.driver_proposed_matches.TwoWayTripNeeded && match.driver_proposed_matches.TwoWayTripNeeded === true) {
+          infoListCaptions.push("Two Way Trip Needed");
+          matchInfoList.push("Yes");
+        }      
 
         var listSelector = "#driverProposedMatches ul";
         var acceptButtonInList =
@@ -535,7 +546,7 @@ function driverConfirmedMatches () {
         var li                  = "";
         var infoListCaptions    = 
               [ "UUID_driver", "UUID_rider", "Rider Name", "Rider Phone", "Rider Email"
-              , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Available Dates","Rider Contact Method(s)", "Rider Notes"
+              , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Available Dates", "Seats Needed","Rider Contact Method(s)", "Rider Notes"
               ];
         var matchInfoList       = 
           [ match.driver_confirmed_matches.uuid_driver
@@ -546,9 +557,20 @@ function driverConfirmedMatches () {
           , match.driver_confirmed_matches.RiderCollectionZIP + ' ' + match.driver_confirmed_matches.RiderCollectionAddress
           , match.driver_confirmed_matches.RiderDropOffZIP + ' ' + match.driver_confirmed_matches.RiderDestinationAddress
           , match.driver_confirmed_matches.convert_datetime_to_local_format
+          , match.driver_confirmed_matches.TotalPartySize
           , match.driver_confirmed_matches.RiderPreferredContact 
           , match.driver_confirmed_matches.RiderAccommodationNotes          ];
 
+          if (match.driver_confirmed_matches.NeedWheelchair && match.driver_confirmed_matches.NeedWheelchair === true) {
+            infoListCaptions.push("Powerchair user");
+            matchInfoList.push("Yes");
+          }
+  
+          if (match.driver_confirmed_matches.TwoWayTripNeeded && match.driver_confirmed_matches.TwoWayTripNeeded === true) {
+            infoListCaptions.push("Two Way Trip Needed");
+            matchInfoList.push("Yes");
+          }      
+  
         var listSelector = "#driverConfirmedMatches ul";
         var cancelButtonInList = 
               createListButton("cancelDriverMatchFromButton", 
