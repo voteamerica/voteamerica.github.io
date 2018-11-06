@@ -472,13 +472,6 @@ function driverProposedMatches () {
   //   'UUID=' + data.uuid +
   //   '&DriverPhone=' + data.phone;
 
-  // var request = new XMLHttpRequest();
-
-  // request.open("GET", url);
-  // request.send();
-
-  // request.onreadystatechange = 
-
   accessCarpoolvoteAPI(
     createAPIurl({
         UUID: data.uuid,
@@ -488,24 +481,20 @@ function driverProposedMatches () {
     ), 
   
   function (resp) {
-    // if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-    //   console.log(request.responseText);
-
-    //   var resp = JSON.parse(request.responseText);
-
       resp.forEach(match => {
         var listItems           = '';
         var li                  = "";
         var infoListCaptions    = 
               [ "UUID_driver", "UUID_rider"
-              , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Contact Method and Notes"
+            , "Rider Collection Zip/Address", "Rider Drop-off Zip/Address", "Rider Contact Method(s)", "Rider Notes"
               ];
         var matchInfoList       = 
           [ match.driver_proposed_matches.uuid_driver
           , match.driver_proposed_matches.uuid_rider
           , match.driver_proposed_matches.RiderCollectionZIP + ' ' + match.driver_proposed_matches.RiderCollectionAddress
           , match.driver_proposed_matches.RiderDropOffZIP + ' ' + match.driver_proposed_matches.RiderDestinationAddress
-          , match.driver_proposed_matches.RiderPreferredContact + ' ' + match.driver_proposed_matches.RiderAccommodationNotes
+          , match.driver_proposed_matches.RiderPreferredContact 
+          , match.driver_proposed_matches.RiderAccommodationNotes
           ];
 
         var listSelector = "#driverProposedMatches ul";
