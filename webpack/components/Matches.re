@@ -5,26 +5,6 @@ type driverOrRiderPartial = {
    [@bs.as "UUID"] uuid: string
 };
 
-/* [@bs.deriving abstract]
-type riderPartial = {
-   [@bs.as "UUID"] uuid: string,
-}; */
-
-/* [@bs.deriving abstract]
-type driversInfo = { */
-  /* showRiderList: bool,
-  showDownloadLink: bool,
-  urlDownloadBlob: string,
-  riders: array(rider),
-  listPageIndex: int,
-  listPageSize: int,
-  hideExpiredCanceled: bool,
-  hideConfirmed: bool,
-  showCurrentMatchRiderOnly: bool,
-  showCurrentRiderDetails: bool, */
-  /* currentDriver: (driver)
-}; */
-
 [@bs.deriving abstract]
 type systemMatch = {
    status: string,
