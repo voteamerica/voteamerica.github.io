@@ -377,7 +377,7 @@ _children) => {
 
     let filterConfirmedMatches = matches => {
       if (matchesInfo->hideConfirmedGet === true) {
-        let filterMatches = rider => rider->statusGet !== "MatchConfirmed";
+        let filterMatches = match => match->statusGet !== "MatchConfirmed";
 
         let matchesNotConfirmed = Utils.filterArray(~f=filterMatches, matches);
           
@@ -390,15 +390,18 @@ _children) => {
 
     let filterCurrentRiderMatches = matches => {
       if (matchesInfo->showMatchForCurrentRiderOnlyGet === true) {
-        Js.log("filter matches by current rider");
+        let currentRiderUuid = matchesInfo->currentRiderGet->uuidGet;
 
-        /* currentRider */
-        /* let filterMatches = rider => rider->statusGet !== "MatchConfirmed";
+        /* if (String.length (currentRiderUuid) > 0) { */
+          Js.log("filter matches by current rider" ++ currentRiderUuid);
 
-        let matchesNotConfirmed = Utils.filterArray(~f=filterMatches, matches);
-          
-        matchesNotConfirmed; */
-        matches;
+          let filterMatches = match => match->uuid_riderGet === currentRiderUuid;
+          let matchesForCurrentRider = Utils.filterArray(~f=filterMatches, matches);
+            
+          matchesForCurrentRider; 
+        /* } else {
+          matches;
+        } */
       }
       else {
         matches;
