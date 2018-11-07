@@ -213,8 +213,8 @@ class DriverBase extends Component {
       },
       { Header: 'Status', accessor: 'status' },
       { Header: 'Status Info', accessor: 'status_info' },
-      { Header: 'Created', accessor: 'created_ts' },
-      { Header: 'Updated', accessor: 'last_updated_ts' },
+      { Header: 'Created', accessor: 'created_ts', width: 160 },
+      { Header: 'Updated', accessor: 'last_updated_ts', width: 160 },
       { Header: 'Org', accessor: 'uuid_organization' },
       { Header: 'OrgOBO', accessor: 'DrivingOBOOrganizationName' },
       {
