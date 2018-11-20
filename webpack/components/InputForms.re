@@ -13,7 +13,7 @@ let make = _children => {
   let withDataAttributesAndChildren = (
     ~data, element, childrenx) => {
 
-      let ll = [||];
+      /* let ll = [||]; */
       
       let cl = 
       ReasonReact.cloneElement(element, ~props=Obj.magic(Js.Dict.fromList(data)), [||]);
@@ -60,7 +60,7 @@ let make = _children => {
   let inputYear = (typeName, rowId) => {  
     let xId = inputId(typeName, rowId, "Year");
 
-    let f = <input className="form-input form-input--tiny input--year" type_="number" placeholder="YYYY" min=2017 required=true />;
+    let f = <input className="form-input form-input--tiny input--year" type_="number" id=xId placeholder="YYYY" min=2017 required=true />;
 
     let data = [("data-field", "year")];
 
@@ -107,19 +107,23 @@ let make = _children => {
   };
 
   let datePickerRow = (typeName, rowId) => {
+
+    let inputDateId =  {typeName ++ "Date" ++ rowId};
+
+    let dateFieldFallback = <div className="form-group text-date-block">
+        <label htmlFor=inputDateId>{ReasonReact.string("Date")}</label>
+        {inputMonth(typeName, rowId)}
+        {inputDay(typeName, rowId)}
+        {inputYear(typeName, rowId)}
+        {inputDate(typeName, rowId)}
+        <div className="help-block with-errors"></div>
+      </div>;
+
     let row = <div id="available-time-row">
         <li className="available-times__row">
             <div className="form-group calendar-date-block">
-                <label htmlFor="{{type}}Date{{id}}">{ReasonReact.string("Date")}</label>
-                <input className="form-input input--date" type_="date" name="{{type}}Date" id="{{type}}Date{{id}}" required=true />
-                <div className="help-block with-errors"></div>
-            </div>
-            <div className="form-group text-date-block">
-                <label htmlFor="{{type}}Date{{id}}">{ReasonReact.string("Date")}</label>
-                {inputMonth(typeName, rowId)}
-                {inputDay(typeName, rowId)}
-                {inputYear(typeName, rowId)}
-                {inputDate(typeName, rowId)}
+                <label htmlFor=inputDateId>{ReasonReact.string("Date")}</label>
+              <input className="form-input input--date" type_="date" name={typeName ++ "Date"} id=inputDateId required=true />
                 <div className="help-block with-errors"></div>
             </div>
             <div className="form-group">
