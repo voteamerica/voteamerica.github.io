@@ -10,30 +10,13 @@ let make = _children => {
 
   let regexPattern="(^\\d{5}$)|(^\\d{5}-\\d{4}$)";
 
-  let withDataAttributesAndChildren = (
-    ~data, element, childrenx) => {
-
-      /* let ll = [||]; */
-      
-      let cl = 
-      ReasonReact.cloneElement(element, ~props=Obj.magic(Js.Dict.fromList(data)), [||]);
+  let withDataAttributes = (data, element) => ReasonReact.cloneElement(element, ~props=Obj.magic(Js.Dict.fromList(data)), [||]);
     
-      cl;
-    };
-
-  let withDataAttributes = (data, element) => withDataAttributesAndChildren(~data=data, element ,[||]);
-
-  let inputDateSection = (fragment, data) =>{
-
-    let x = withDataAttributes(data, fragment
-    );
-
-    x;
-  };
+  let inputDateSection = (fragment, data) => withDataAttributes(data, fragment);
 
   let inputId = (typeName, rowId, sectionName) => typeName ++ sectionName ++ rowId;
 
-  let inputMonth = (typeName, rowId) => {  
+  /* let inputMonth = (typeName, rowId) => {  
     let xId = inputId(typeName, rowId, "Month");
     
     let f = <input className="form-input form-input--tiny input--month" type_="number" id=xId placeholder="MM" min=1 max="12" required=true />;
@@ -55,9 +38,9 @@ let make = _children => {
     let x = inputDateSection(f, data);
 
     x;
-  };
+  }; */
 
-  let inputYear = (typeName, rowId) => {  
+  /* let inputYear = (typeName, rowId) => {  
     let xId = inputId(typeName, rowId, "Year");
 
     let f = <input className="form-input form-input--tiny input--year" type_="number" id=xId placeholder="YYYY" min=2017 required=true />;
@@ -67,14 +50,76 @@ let make = _children => {
     let x = inputDateSection(f, data);
 
     x;
-  };
+  }; */
+
+  /* let inputDate = (typeName, rowId) => {  
+    let xId = inputId(typeName, rowId, "Date");
+    let xName = typeName ++ "Date"
+
+    let f = <input type_="hidden" id=xId className="input--date" name=xName />
+;
+    f;
+  }; */
+
+    /* let dateFieldFallback = <div className="form-group text-date-block">
+        <label htmlFor=inputDateId>{ReasonReact.string("Date")}</label>
+        {inputMonth(typeName, rowId)}
+        {inputDay(typeName, rowId)}
+        {inputYear(typeName, rowId)}
+        {inputDate(typeName, rowId)}
+        <div className="help-block with-errors"></div>
+      </div>; */
+
+    let riderDateChangeHandler = evt => {
+    /* TypeInfo.unitArgAction(hideExpiredRidersList); */
+
+    Js.log(evt);
+
+    let rawDate = ReactEvent.Form.target(evt)##value;
+
+    let parts = Js.String.split("-", rawDate);
+
+    Js.log(parts);
+
+    ();
+  }
+
+    let riderStartTimeChangeHandler = evt => {
+    /* TypeInfo.unitArgAction(hideExpiredRidersList); */
+
+    Js.log(evt);
+
+    let rawTime = ReactEvent.Form.target(evt)##value;
+
+    /* let parts = Js.String.split("-", rawDate); */
+
+    /* Js.log(parts); */
+    Js.log(rawTime);
+
+    ();
+  }
+
+    let riderEndTimeChangeHandler = evt => {
+    /* TypeInfo.unitArgAction(hideExpiredRidersList); */
+
+    Js.log(evt);
+
+    let rawTime = ReactEvent.Form.target(evt)##value;
+
+    /* let parts = Js.String.split("-", rawDate); */
+
+    /* Js.log(parts); */
+    Js.log(rawTime);
+
+    ();
+  }
 
   let inputTimeStart = (typeName, rowId) => {  
     let xName = typeName ++ "TimeStart";
     let xId = inputId(typeName, rowId, "TimeStart");
     let xEnd = "#" ++ inputId(typeName, rowId, "TimeEnd");
 
-    let f = <input className="form-input input--time-start" type_="time" name=xName id=xId min=6 max="22:00" value="06:00" required=true />;
+    let f = <input className="form-input input--time-start" type_="time" name=xName id=xId min=6 max="22:00" value="06:00" required=true onChange={riderStartTimeChangeHandler} />;
 
     let data = [("data-start", xEnd)];
 
@@ -88,7 +133,7 @@ let make = _children => {
     let xId = inputId(typeName, rowId, "TimeEnd");
     let xEnd = "#" ++ inputId(typeName, rowId, "TimeStart");
 
-    let f = <input className="form-input input--time-end" type_="time" name=xName id=xId min=6 max="22:00" value="22:00" required=true />;
+    let f = <input className="form-input input--time-end" type_="time" name=xName id=xId min=6 max="22:00" value="22:00" required=true onChange={riderEndTimeChangeHandler} />;
 
     let data = [("data-end", xEnd)];
 
@@ -97,33 +142,15 @@ let make = _children => {
     x;
   };
 
-  let inputDate = (typeName, rowId) => {  
-    let xId = inputId(typeName, rowId, "Date");
-    let xName = typeName ++ "Date"
-
-    let f = <input type_="hidden" id=xId className="input--date" name=xName />
-;
-    f;
-  };
-
   let datePickerRow = (typeName, rowId) => {
 
     let inputDateId =  {typeName ++ "Date" ++ rowId};
-
-    let dateFieldFallback = <div className="form-group text-date-block">
-        <label htmlFor=inputDateId>{ReasonReact.string("Date")}</label>
-        {inputMonth(typeName, rowId)}
-        {inputDay(typeName, rowId)}
-        {inputYear(typeName, rowId)}
-        {inputDate(typeName, rowId)}
-        <div className="help-block with-errors"></div>
-      </div>;
 
     let row = <div id="available-time-row">
         <li className="available-times__row">
             <div className="form-group calendar-date-block">
                 <label htmlFor=inputDateId>{ReasonReact.string("Date")}</label>
-              <input className="form-input input--date" type_="date" name={typeName ++ "Date"} id=inputDateId required=true />
+              <input className="form-input input--date" type_="date" name={typeName ++ "Date"} id=inputDateId onChange={riderDateChangeHandler} required=true />
                 <div className="help-block with-errors"></div>
             </div>
             <div className="form-group">
@@ -147,8 +174,6 @@ let make = _children => {
   ...component,
   render: _self => {
  
-    /* let ulItems = withDataAttributes([("data-type", "Rider")], ); */
-
     let ulRiderTimes = <ul id="RiderAvailableTimes" className="available-times">{datePickerRow(typeName, rowId)}</ul>
 
     let ulRiderAvailableTimes = withDataAttributes([("data-type", "Rider")], ulRiderTimes);

@@ -32,7 +32,13 @@ import {
   UPLOAD_FILE_CHOSEN,
   POST_UPLOAD,
   showMatchForCurrentDriverType,
-  showMatchForCurrentRiderType
+  showMatchForCurrentRiderType,
+  driverSetDateInfoType,
+  riderSetDateInfoType,
+  driverSetDateType,
+  driverSetTimeTypes,
+  riderSetDateType,
+  riderSetTimeTypes
 } from './types';
 
 const noOp = (a, b, c) => ({
@@ -219,6 +225,16 @@ const postUploadFile = (remoteUrlBase, token, fileDetails) => ({
   payload: { remoteUrlBase, token, fileDetails, successProperty: 'data' }
 });
 
+const setDriverDateInfo = dateInfo => ({
+  type: driverSetDateInfoType,
+  payload: dateInfo
+});
+
+const setRiderDateInfo = dateInfo => ({
+  type: riderSetDateInfoType,
+  payload: dateInfo
+});
+
 export {
   noOp,
   loginDetails,
@@ -264,5 +280,7 @@ export {
   showMatchForCurrentDriver,
   showMatchForCurrentRider,
   uploadFileChosen,
-  postUploadFile
+  postUploadFile,
+  setDriverDateInfo,
+  setRiderDateInfo
 };
