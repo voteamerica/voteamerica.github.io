@@ -4,7 +4,8 @@ const inputFormsInfo = (
     startDateChanged: false,
     endDateChanged: false,
     emailRequired: false,
-    jsonTimesUpdated: false
+    jsonTimesUpdated: false,
+    availableDates: []
   },
   action
 ) => {

@@ -1,5 +1,8 @@
 let component = ReasonReact.statelessComponent("InputForms");
 let make = _children => {
+  let typeName = "Rider";
+  let rowId = string_of_int(0);
+      
   /* https://stackoverflow.com/questions/49039433/how-to-add-a-copyright-symbol-in-reason-react-component */
   let hmtlPlusEntity = <span dangerouslySetInnerHTML={{ "__html": "&plus;" }}></span>;
   let hmtlTimesEntity = <span dangerouslySetInnerHTML={{ "__html": "&times;" }}></span>;
@@ -7,32 +10,31 @@ let make = _children => {
 
   let regexPattern="(^\\d{5}$)|(^\\d{5}-\\d{4}$)";
 
-  let withDataAttributes = (
-  ~data, element
-  ) => ReasonReact.cloneElement(element, ~props=Obj.magic(Js.Dict.fromList(data)),[||]);
+  let withDataAttributesAndChildren = (
+    ~data, element, childrenx) => {
 
-  /* let inputMonth = (typeName, idName) =>{
-
-    let xId = typeName ++ "Month" ++ idName;
+      let ll = [||];
+      
+      let cl = 
+      ReasonReact.cloneElement(element, ~props=Obj.magic(Js.Dict.fromList(data)), [||]);
     
-    let x = withDataAttributes(~data=[("data-field", "month")], <input className="form-input form-input--tiny input--month" type_="number" id=xId placeholder="MM" min="1" max="12" required=true />
-    );
+      cl;
+    };
 
-    x;
-}; */
+  let withDataAttributes = (data, element) => withDataAttributesAndChildren(~data=data, element ,[||]);
 
   let inputDateSection = (fragment, data) =>{
 
-    let x = withDataAttributes(~data=data, fragment
+    let x = withDataAttributes(data, fragment
     );
 
     x;
   };
 
-  let inputId = (typeName, idName, sectionName) => typeName ++ sectionName ++ idName;
+  let inputId = (typeName, rowId, sectionName) => typeName ++ sectionName ++ rowId;
 
-  let inputMonth = (typeName, idName) => {  
-    let xId = inputId(typeName, idName, "Month");
+  let inputMonth = (typeName, rowId) => {  
+    let xId = inputId(typeName, rowId, "Month");
     
     let f = <input className="form-input form-input--tiny input--month" type_="number" id=xId placeholder="MM" min=1 max="12" required=true />;
 
@@ -43,8 +45,8 @@ let make = _children => {
     x;
   };
 
-  let inputDay = (typeName, idName) =>{  
-    let xId = inputId(typeName, idName, "Day");
+  let inputDay = (typeName, rowId) =>{  
+    let xId = inputId(typeName, rowId, "Day");
 
     let f = <input className="form-input form-input--tiny input--day" type_="number" id=xId placeholder="DD" min=1 max="31" required=true />;
 
@@ -55,8 +57,8 @@ let make = _children => {
     x;
   };
 
-  let inputYear = (typeName, idName) => {  
-    let xId = inputId(typeName, idName, "Year");
+  let inputYear = (typeName, rowId) => {  
+    let xId = inputId(typeName, rowId, "Year");
 
     let f = <input className="form-input form-input--tiny input--year" type_="number" placeholder="YYYY" min=2017 required=true />;
 
@@ -67,10 +69,10 @@ let make = _children => {
     x;
   };
 
-  let inputTimeStart = (typeName, idName) => {  
+  let inputTimeStart = (typeName, rowId) => {  
     let xName = typeName ++ "TimeStart";
-    let xId = inputId(typeName, idName, "TimeStart");
-    let xEnd = "#" ++ inputId(typeName, idName, "TimeEnd");
+    let xId = inputId(typeName, rowId, "TimeStart");
+    let xEnd = "#" ++ inputId(typeName, rowId, "TimeEnd");
 
     let f = <input className="form-input input--time-start" type_="time" name=xName id=xId min=6 max="22:00" value="06:00" required=true />;
 
@@ -81,10 +83,10 @@ let make = _children => {
     x;
   };
 
-  let inputTimeEnd = (typeName, idName) => {  
+  let inputTimeEnd = (typeName, rowId) => {  
     let xName = typeName ++ "TimeEnd";
-    let xId = inputId(typeName, idName, "TimeEnd");
-    let xEnd = "#" ++ inputId(typeName, idName, "TimeStart");
+    let xId = inputId(typeName, rowId, "TimeEnd");
+    let xEnd = "#" ++ inputId(typeName, rowId, "TimeStart");
 
     let f = <input className="form-input input--time-end" type_="time" name=xName id=xId min=6 max="22:00" value="22:00" required=true />;
 
@@ -95,8 +97,8 @@ let make = _children => {
     x;
   };
 
-  let inputDate = (typeName, idName) =>{  
-    let xId = inputId(typeName, idName, "Date");
+  let inputDate = (typeName, rowId) => {  
+    let xId = inputId(typeName, rowId, "Date");
     let xName = typeName ++ "Date"
 
     let f = <input type_="hidden" id=xId className="input--date" name=xName />
@@ -104,11 +106,8 @@ let make = _children => {
     f;
   };
 
-  let datePickerRow = {
-    let typeName = "Rider";
-    let rowId = string_of_int(0);
-      
-    let row = <script type_="text/template" id="available-time-row">
+  let datePickerRow = (typeName, rowId) => {
+    let row = <div id="available-time-row">
         <li className="available-times__row">
             <div className="form-group calendar-date-block">
                 <label htmlFor="{{type}}Date{{id}}">{ReasonReact.string("Date")}</label>
@@ -135,7 +134,7 @@ let make = _children => {
             </div>
             <button className="remove-time button--cancel" ariaLabel="Delete time">{hmtlTimesEntity}</button>
         </li>
-    </script>
+    </div>
 
     row;
     };
@@ -143,12 +142,16 @@ let make = _children => {
   {
   ...component,
   render: _self => {
-    
-    let ulRiderAvailableTimes = withDataAttributes(~data=[("data-type", "Rider")], <ul id="RiderAvailableTimes" className="available-times" />);
+ 
+    /* let ulItems = withDataAttributes([("data-type", "Rider")], ); */
 
-    let ulDriverAvailableTimes = withDataAttributes(~data=[("data-type", "Driver")], <ul id="DriverAvailableTimes" className="available-times" />);
+    let ulRiderTimes = <ul id="RiderAvailableTimes" className="available-times">{datePickerRow(typeName, rowId)}</ul>
 
-    let inputRiderPreferredEmailContact = withDataAttributes(~data=[("data-emailID", "#riderEmail")], <input className="toggleRequiredEmail" type_="checkbox" name="RiderPreferredContact" value="Email" />);
+    let ulRiderAvailableTimes = withDataAttributes([("data-type", "Rider")], ulRiderTimes);
+
+    let ulDriverAvailableTimes = withDataAttributes([("data-type", "Driver")], <ul id="DriverAvailableTimes" className="available-times" />);
+
+    let inputRiderPreferredEmailContact = withDataAttributes([("data-emailID", "#riderEmail")], <input className="toggleRequiredEmail" type_="checkbox" name="RiderPreferredContact" value="Email" />);
 
     /*
         <div id="forms" className="forms wrapper offset-top">
