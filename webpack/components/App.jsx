@@ -7,6 +7,7 @@ import Riders from './RidersPlus.jsx';
 import Matches from './MatchesPlus.jsx';
 import MatchesOtherDriver from './MatchesOtherDriverPlus.jsx';
 import UploadArea from './UploadArea.jsx';
+import InputForms from './InputFormsPlus.jsx';
 
 const mapStateToProps = state => ({});
 
@@ -16,12 +17,17 @@ class AppBase extends Component {
   render() {
     return (
       <div>
+        xxx
         <LoginArea />
         <Driver />
         <Riders />
         <Matches sectionHeading="Matches Info" others={false} />
-        <MatchesOtherDriver sectionHeading="Matches Other Driver Info" others={true} />
+        <MatchesOtherDriver
+          sectionHeading="Matches Other Driver Info"
+          others={true}
+        />
         <UploadArea />
+        <InputForms />
       </div>
     );
   }
