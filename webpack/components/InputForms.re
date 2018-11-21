@@ -197,6 +197,62 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     ();
   }
 
+  let riderFormInfoChangeSupport = (evt) => {
+    let changeText = ReactEvent.Form.target(evt)##value;
+
+    let riderInfo = inputFormsInfo->TypeInfo.riderInfoGet;
+    let newRiderInfo = TypeInfo.inputFormsInfoRiderInfo(        
+                        ~startDateChanged=riderInfo->TypeInfo.startDateChanged,
+                        ~pickUpAddress=riderInfo->TypeInfo.pickUpAddress,
+                        ~dateInfo=riderInfo->TypeInfo.dateInfo,
+                        ~collectionAddress=riderInfo->TypeInfo.collectionAddress,
+                        ~collectionZip=riderInfo->TypeInfo.collectionZip,
+                        ~destinationAddress=riderInfo->TypeInfo.destinationAddress,
+                        ~destinationZip=riderInfo->TypeInfo.destinationZip,
+                        ~seatCount=riderInfo->TypeInfo.seatCount,
+                        ~powerChairUser=riderInfo->TypeInfo.powerChairUser,
+                        ~twoWayTripNeeded=riderInfo->TypeInfo.twoWayTripNeeded,
+                        ~otherRequirements=riderInfo->TypeInfo.otherRequirements,
+                        ~firstName=riderInfo->TypeInfo.firstName,
+                        ~lastName=riderInfo->TypeInfo.lastName,
+                        ~email=riderInfo->TypeInfo.email,
+                        ~phone=riderInfo->TypeInfo.phone,
+                        ~cellPhone=riderInfo->TypeInfo.cellPhone,
+                        ~emailPreferred=riderInfo->TypeInfo.emailPreferred,
+                        ~phonePreferred=riderInfo->TypeInfo.phonePreferred,
+                        ~smsPreferred=riderInfo->TypeInfo.smsPreferred,
+                        ~agreeTandC=riderInfo->TypeInfo.agreeTandC,
+                        ~contactOk=riderInfo->TypeInfo.contactOk,
+                        ~orgName=riderInfo->TypeInfo.orgName,
+                        );
+    /* Js.log(newRiderInfo) */
+
+    /* let n = {...riderInfo, TypeInfo.startDateChanged:false} */
+
+      /* let target = [%obj { a = 1; b = 1; }]; */
+      /* let target = [%obj {  }]; */
+  /* let source = [%obj {  }]; */
+
+  /* let obj = Js.Obj.assign target source */
+  /* let obj = Js.Obj.assign target riderInfo */
+
+  /* let obj = [%obj { a = 1 }] */
+
+/* let copy = Js.Obj.assign (Js.Obj.empty ()) riderInfo */
+/* let em =  Js.Obj.empty ();
+
+Js.log("em");
+Js.log(em);
+Js.log(Js.Obj.assign);
+let xx = Js.Obj.assign(em, em); */
+/* let xxa = Js.Obj.assign(em, newRiderInfo); */
+/* let copy = Js.Obj.assign () */
+/* Js.Obj.empty ()) */
+/* Js.log(xx); */
+    
+    (changeText, newRiderInfo);
+  }
+
   
   /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
   let srfi: ((TypeInfo.inputFormsInfoRiderInfo) => unit, TypeInfo.inputFormsInfoRiderInfo) => unit = [%raw (fx, formInfo) => "{ fx(formInfo); return 0; }"];
@@ -205,13 +261,45 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     Js.log(evt);
 
     let address = ReactEvent.Form.target(evt)##value;
-    /* Js.log(rawTime); */
 
     let riderInfo = inputFormsInfo->TypeInfo.riderInfoGet;
     let newRiderInfo = riderInfo;
     
     newRiderInfo->TypeInfo.collectionAddressSet(address);
 
+    srfi(setRiderFormInfo, newRiderInfo);
+
+    ();
+  }
+
+  let riderCollectionZipChangeHandler = evt => {
+    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
+    newRiderInfo->TypeInfo.collectionZipSet(address);
+    srfi(setRiderFormInfo, newRiderInfo);
+
+    ();
+  }
+
+  let riderDestinationAddressChangeHandler = evt => {
+    Js.log(evt);
+
+    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);
+    
+    newRiderInfo->TypeInfo.destinationAddressSet(address);
+
+    Js.log("rider info")
+    Js.log(inputFormsInfo->TypeInfo.riderInfoGet)
+    Js.log("new rider info")
+    Js.log(newRiderInfo);
+
+    srfi(setRiderFormInfo, newRiderInfo);
+
+    ();
+  }
+
+  let riderDestinationZipChangeHandler = evt => {
+    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
+    newRiderInfo->TypeInfo.destinationZipSet(address);
     srfi(setRiderFormInfo, newRiderInfo);
 
     ();
@@ -380,7 +468,7 @@ let make = (~loginInfo:TypeInfo.loginInfo,
                             </div>
                             <div className="form-group">
                                 <label htmlFor="riderDestinationAddress">{ReasonReact.string("Destination address")}</label>
-                                <input type_="text" className="form-input" id="riderDestinationAddress" placeholder="Your destination address" name="RiderDestinationAddress" required=true />
+                                <input type_="text" className="form-input" id="riderDestinationAddress" placeholder="Your destination address" name="RiderDestinationAddress" required=true onChange=riderDestinationAddressChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.destinationAddressGet />
                                 <div className="help-block with-errors"></div>
                             </div>
                             <div className="form-group">
