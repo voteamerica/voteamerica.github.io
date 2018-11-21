@@ -128,6 +128,10 @@ const setDateInfoType = type => type + '_SET_DATE_INFO';
 const driverSetDateInfoType = setDateInfoType(driverType);
 const riderSetDateInfoType = setDateInfoType(riderType);
 
+const setFormInfoType = type => type + '_SET_FORM_INFO';
+const driverSetFormInfoType = setFormInfoType(driverType);
+const riderSetFormInfoType = setFormInfoType(riderType);
+
 // these may be too detailed
 // const setDateType = type => type + '_SET_DATE';
 // const driverSetDateType = setDateType(driverType);
@@ -187,7 +191,9 @@ export {
   driverSetDateInfoType,
   riderSetDateInfoType,
   driverSetDateType,
+  driverSetFormInfoType,
   driverSetTimeTypes,
   riderSetDateType,
+  riderSetFormInfoType,
   riderSetTimeTypes
 };

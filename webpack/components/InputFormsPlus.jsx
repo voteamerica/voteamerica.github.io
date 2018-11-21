@@ -2,8 +2,25 @@ import { connect } from 'react-redux';
 
 import InputFormsBase from './InputForms.bs.js';
 
-const mapStateToProps = state => ({});
-const mapDispatchToProps = {};
+import {
+  setDriverDateInfo,
+  setDriverFormInfo,
+  setRiderDateInfo,
+  setRiderFormInfo
+} from '../actions/index.js';
+
+const mapStateToProps = state => {
+  const { apiInfo, loginInfo, inputFormsInfo } = state;
+
+  return { apiInfo, loginInfo, inputFormsInfo };
+};
+
+const mapDispatchToProps = {
+  setDriverDateInfo,
+  setDriverFormInfo,
+  setRiderDateInfo,
+  setRiderFormInfo
+};
 
 const InputFormsPlus = connect(
   mapStateToProps,

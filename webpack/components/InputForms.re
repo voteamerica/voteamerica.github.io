@@ -1,5 +1,29 @@
 let component = ReasonReact.statelessComponent("InputForms");
-let make = _children => {
+
+[@bs.deriving abstract]
+type jsProps = {
+  loginInfo: TypeInfo.loginInfo,
+  apiInfo: TypeInfo.apiInfo,
+  inputFormsInfo: TypeInfo.inputFormsInfo,
+  setDriverDateInfo: (int, TypeInfo.inputFormsDateInfo) => unit, 
+  setDriverFormInfo: TypeInfo.inputFormsInfoDriverInfo => unit,
+  setRiderDateInfo: (int, TypeInfo.inputFormsDateInfo) => unit,
+  setRiderFormInfo: TypeInfo.inputFormsInfoRiderInfo => unit
+};
+
+  /* [@bs.deriving abstract]
+  type xinputFormsDateInfo = {
+    xdate: string,
+  }; */
+
+let make = (~loginInfo:TypeInfo.loginInfo, 
+    ~apiInfo:TypeInfo.apiInfo, 
+    ~inputFormsInfo: TypeInfo.inputFormsInfo, 
+    ~setDriverDateInfo,
+    ~setDriverFormInfo,
+    ~setRiderDateInfo,
+    ~setRiderFormInfo,
+    _children) => {
   let typeName = "Rider";
   let rowId = string_of_int(0);
       
@@ -70,9 +94,10 @@ let make = _children => {
         <div className="help-block with-errors"></div>
       </div>; */
 
-    let riderDateChangeHandler = evt => {
-    /* TypeInfo.unitArgAction(hideExpiredRidersList); */
+  /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+  let srdi: ((int, TypeInfo.inputFormsDateInfo) => unit, int, TypeInfo.inputFormsDateInfo) => unit = [%raw (fx, index, dateInfo) => "{ fx(index, dateInfo); return 0; }"];
 
+  let riderDateChangeHandler = evt => {
     Js.log(evt);
 
     let rawDate = ReactEvent.Form.target(evt)##value;
@@ -81,10 +106,45 @@ let make = _children => {
 
     Js.log(parts);
 
+    let riderInfo:TypeInfo.inputFormsInfoRiderInfo = inputFormsInfo->TypeInfo.riderInfoGet;
+
+    Js.log(riderInfo);
+
+    let dateInfo:TypeInfo.inputFormsDateInfo = riderInfo->TypeInfo.dateInfoGet;
+    
+    /* let newDateInfo = TypeInfo.inputFormsDateInfo(~date=rawDate,
+     ~timeStart=dateInfo->TypeInfo.timeStartGet, 
+     ~timeEnd=dateInfo->TypeInfo.timeEndGet); */
+
+    let newDateInfo = dateInfo;
+
+    newDateInfo->TypeInfo.dateSet(rawDate);
+
+  /* let x = {
+    xdate: "X"
+  }; */
+
+  /* let target = [%obj { a = 1; b = 1; }];
+  let source = [%obj { b = 2; }];
+
+  let obj = Js.Obj.assign target source */
+
+  /* let x = xinputFormsDateInfo(~xdate="x"); */
+
+  /* let obj = Js.Obj.assign x {xdate:1}  */
+
+     /* let ndi:xinputFormsDateInfo = {...x, xdate: "xx"}; */
+
+    Js.log(riderInfo);
+
+    let index = 0;
+
+    srdi(setRiderDateInfo, index, newDateInfo);
+
     ();
   }
 
-    let riderStartTimeChangeHandler = evt => {
+  let riderStartTimeChangeHandler = evt => {
     /* TypeInfo.unitArgAction(hideExpiredRidersList); */
 
     Js.log(evt);
@@ -92,34 +152,82 @@ let make = _children => {
     let rawTime = ReactEvent.Form.target(evt)##value;
 
     /* let parts = Js.String.split("-", rawDate); */
-
     /* Js.log(parts); */
     Js.log(rawTime);
+
+    let riderInfo = inputFormsInfo->TypeInfo.riderInfoGet;
+    let dateInfo = inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet;
+
+    /* let newDateInfo = TypeInfo.inputFormsDateInfo(~date=dateInfo->TypeInfo.dateGet,
+     ~timeStart=rawTime, 
+     ~timeEnd=dateInfo->TypeInfo.timeEndGet) */
+
+    let newDateInfo = dateInfo;
+    newDateInfo->TypeInfo.timeStartSet(rawTime);
+
+    Js.log(riderInfo);
+
+    let index = 0;
+
+    srdi(setRiderDateInfo, index, newDateInfo);
 
     ();
   }
 
-    let riderEndTimeChangeHandler = evt => {
+  let riderEndTimeChangeHandler = evt => {
     /* TypeInfo.unitArgAction(hideExpiredRidersList); */
 
     Js.log(evt);
 
     let rawTime = ReactEvent.Form.target(evt)##value;
-
-    /* let parts = Js.String.split("-", rawDate); */
-
-    /* Js.log(parts); */
     Js.log(rawTime);
+
+    let dateInfo = inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet;
+
+    /* let newDateInfo = TypeInfo.inputFormsDateInfo(~date=dateInfo->TypeInfo.dateGet,
+     ~timeStart=dateInfo->TypeInfo.timeStartGet, 
+     ~timeEnd=rawTime) */
+     let newDateInfo = dateInfo;
+     newDateInfo->TypeInfo.timeEndSet(rawTime);
+
+    let index = 0;
+
+    srdi(setRiderDateInfo, index, newDateInfo);
 
     ();
   }
 
-  let inputTimeStart = (typeName, rowId) => {  
+  
+  /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
+  let srfi: ((TypeInfo.inputFormsInfoRiderInfo) => unit, TypeInfo.inputFormsInfoRiderInfo) => unit = [%raw (fx, formInfo) => "{ fx(formInfo); return 0; }"];
+
+  let riderCollectionAddressChangeHandler = evt => {
+    Js.log(evt);
+
+    let address = ReactEvent.Form.target(evt)##value;
+    /* Js.log(rawTime); */
+
+    let riderInfo = inputFormsInfo->TypeInfo.riderInfoGet;
+    let newRiderInfo = riderInfo;
+    
+    newRiderInfo->TypeInfo.collectionAddressSet(address);
+
+    srfi(setRiderFormInfo, newRiderInfo);
+
+    ();
+  }
+
+  let inputTimeStart = (typeName, rowId, startTime) => {  
     let xName = typeName ++ "TimeStart";
     let xId = inputId(typeName, rowId, "TimeStart");
     let xEnd = "#" ++ inputId(typeName, rowId, "TimeEnd");
 
-    let f = <input className="form-input input--time-start" type_="time" name=xName id=xId min=6 max="22:00" value="06:00" required=true onChange={riderStartTimeChangeHandler} />;
+    let time = switch (String.length (startTime) > 0) {
+      | true => startTime
+      | false => "06:00"
+    };
+
+    let f = <input className="form-input input--time-start" type_="time" name=xName id=xId min=6 max="22:00" value=time required=true onChange={riderStartTimeChangeHandler} />;
 
     let data = [("data-start", xEnd)];
 
@@ -128,12 +236,17 @@ let make = _children => {
     x;
   };
 
-  let inputTimeEnd = (typeName, rowId) => {  
+  let inputTimeEnd = (typeName, rowId, endTime) => {  
     let xName = typeName ++ "TimeEnd";
     let xId = inputId(typeName, rowId, "TimeEnd");
     let xEnd = "#" ++ inputId(typeName, rowId, "TimeStart");
 
-    let f = <input className="form-input input--time-end" type_="time" name=xName id=xId min=6 max="22:00" value="22:00" required=true onChange={riderEndTimeChangeHandler} />;
+    let time = switch (String.length (endTime) > 0) {
+      | true => endTime
+      | false => "22:00"
+    };
+
+    let f = <input className="form-input input--time-end" type_="time" name=xName id=xId min=6 max="22:00" value=time required=true onChange={riderEndTimeChangeHandler} />;
 
     let data = [("data-end", xEnd)];
 
@@ -142,28 +255,36 @@ let make = _children => {
     x;
   };
 
-  let datePickerRow = (typeName, rowId) => {
+  let datePickerRow = (typeName, rowId, dateInfo) => {
 
     let inputDateId =  {typeName ++ "Date" ++ rowId};
+
+    let dateValue = dateInfo->TypeInfo.dateGet;
+
+    let showCloseButton = false;
 
     let row = <div id="available-time-row">
         <li className="available-times__row">
             <div className="form-group calendar-date-block">
                 <label htmlFor=inputDateId>{ReasonReact.string("Date")}</label>
-              <input className="form-input input--date" type_="date" name={typeName ++ "Date"} id=inputDateId onChange={riderDateChangeHandler} required=true />
+              <input className="form-input input--date" type_="date" name={typeName ++ "Date"} id=inputDateId onChange={riderDateChangeHandler} value=dateValue required=true />
                 <div className="help-block with-errors"></div>
             </div>
             <div className="form-group">
                 <label htmlFor={typeName ++ "TimeStart" ++ rowId}>{ReasonReact.string("Start time")}</label>
-                {inputTimeStart(typeName, rowId)}
+                {inputTimeStart(typeName, rowId, dateInfo->TypeInfo.timeStart)}
                 <div className="help-block with-errors"></div>
             </div>
             <div className="form-group">
                 <label htmlFor={typeName ++ "TimeEnd" ++ rowId}>{ReasonReact.string("End time")}</label>
-                {inputTimeEnd(typeName, rowId)}
+                {inputTimeEnd(typeName, rowId, dateInfo->TypeInfo.timeEnd)}
                 <div className="help-block with-errors"></div>
             </div>
-            <button className="remove-time button--cancel" ariaLabel="Delete time">{hmtlTimesEntity}</button>
+            {switch (showCloseButton == true) {
+            | true => (<button className="remove-time button--cancel" ariaLabel="Delete time">{hmtlTimesEntity}</button>)
+            | false => ReasonReact.null
+            }}
+
         </li>
     </div>
 
@@ -173,8 +294,10 @@ let make = _children => {
   {
   ...component,
   render: _self => {
- 
-    let ulRiderTimes = <ul id="RiderAvailableTimes" className="available-times">{datePickerRow(typeName, rowId)}</ul>
+
+    let riderDateInfo = inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet;
+    
+    let ulRiderTimes = <ul id="RiderAvailableTimes" className="available-times">{datePickerRow(typeName, rowId, riderDateInfo)}</ul>
 
     let ulRiderAvailableTimes = withDataAttributes([("data-type", "Rider")], ulRiderTimes);
 
@@ -247,7 +370,7 @@ let make = _children => {
                         <div className="form-column">
                             <div className="form-group">
                                 <label htmlFor="riderCollectionAddress">{ReasonReact.string("Pick up address")}</label>
-                                <input type_="text" className="form-input" id="riderCollectionAddress" placeholder="Your pick up address" name="RiderCollectionAddress" required=true />
+                                <input type_="text" className="form-input" id="riderCollectionAddress" placeholder="Your pick up address" name="RiderCollectionAddress" required=true onChange=riderCollectionAddressChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.collectionAddressGet />
                                 <div className="help-block with-errors"></div>
                             </div>
                             <div className="form-group">
@@ -526,4 +649,11 @@ let make = _children => {
   </div>},
 }};
 
-let default = ReasonReact.wrapReasonForJs(~component, _jsProps => make([||]));
+let default = ReasonReact.wrapReasonForJs(~component, 
+jsProps => make(~loginInfo=jsProps->loginInfoGet, ~apiInfo=jsProps->apiInfoGet, 
+~inputFormsInfo=jsProps->inputFormsInfoGet,
+~setDriverDateInfo=jsProps->setDriverDateInfoGet,
+~setDriverFormInfo=jsProps->setDriverFormInfoGet,
+~setRiderDateInfo=jsProps->setRiderDateInfoGet,
+~setRiderFormInfo=jsProps->setRiderFormInfoGet,
+[||]));

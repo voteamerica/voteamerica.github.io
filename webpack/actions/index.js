@@ -34,7 +34,9 @@ import {
   showMatchForCurrentDriverType,
   showMatchForCurrentRiderType,
   driverSetDateInfoType,
+  driverSetFormInfoType,
   riderSetDateInfoType,
+  riderSetFormInfoType,
   driverSetDateType,
   driverSetTimeTypes,
   riderSetDateType,
@@ -225,14 +227,24 @@ const postUploadFile = (remoteUrlBase, token, fileDetails) => ({
   payload: { remoteUrlBase, token, fileDetails, successProperty: 'data' }
 });
 
-const setDriverDateInfo = dateInfo => ({
+const setDriverDateInfo = (index, dateInfo) => ({
   type: driverSetDateInfoType,
-  payload: dateInfo
+  payload: { index, dateInfo }
 });
 
-const setRiderDateInfo = dateInfo => ({
+const setRiderDateInfo = (index, dateInfo) => ({
   type: riderSetDateInfoType,
-  payload: dateInfo
+  payload: { index, dateInfo }
+});
+
+const setDriverFormInfo = formInfo => ({
+  type: driverSetFormInfoType,
+  payload: { formInfo }
+});
+
+const setRiderFormInfo = formInfo => ({
+  type: riderSetFormInfoType,
+  payload: { formInfo }
 });
 
 export {
@@ -282,5 +294,7 @@ export {
   uploadFileChosen,
   postUploadFile,
   setDriverDateInfo,
-  setRiderDateInfo
+  setDriverFormInfo,
+  setRiderDateInfo,
+  setRiderFormInfo
 };
