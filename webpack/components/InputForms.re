@@ -203,7 +203,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     let riderInfo = inputFormsInfo->TypeInfo.riderInfoGet;
     let newRiderInfo = TypeInfo.inputFormsInfoRiderInfo(        
                         ~startDateChanged=riderInfo->TypeInfo.startDateChanged,
-                        ~pickUpAddress=riderInfo->TypeInfo.pickUpAddress,
                         ~dateInfo=riderInfo->TypeInfo.dateInfo,
                         ~collectionAddress=riderInfo->TypeInfo.collectionAddress,
                         ~collectionZip=riderInfo->TypeInfo.collectionZip,

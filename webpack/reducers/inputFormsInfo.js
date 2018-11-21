@@ -14,15 +14,34 @@ const inputFormsInfo = (
       emailRequired: false,
       jsonTimesUpdated: false,
       availableDates: [],
-      dateInfo: { date: '', timeStart: '', timeEnd: '' }
+      dateInfo: { date: '', timeStart: '06:00', timeEnd: '22:00' }
     },
     riderInfo: {
       startDateChanged: false,
       endDateChanged: false,
       emailRequired: false,
       jsonTimesUpdated: false,
+      collectionAddress: '',
+      collectionZip: '',
+      destinationAddress: '',
+      destinationZip: '',
+      seatCount: 0,
+      powerChairUser: false,
+      twoWayTripNeeded: false,
+      otherRequirements: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      cellPhone: false,
+      emailPreferred: false,
+      phonePreferred: false,
+      smsPreferred: false,
+      agreeTandC: false,
+      contactOk: false,
+      orgName: 'None',
       availableDates: [],
-      dateInfo: { date: '', timeStart: '', timeEnd: '' }
+      dateInfo: { date: '', timeStart: '06:00', timeEnd: '22:00' }
     }
   },
   action

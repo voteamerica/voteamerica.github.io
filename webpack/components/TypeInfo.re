@@ -70,7 +70,6 @@ type inputFormsInfoRiderInfo = {
      refactor this away.
       */
   mutable startDateChanged: bool,
-  mutable pickUpAddress: string,
   dateInfo: inputFormsDateInfo,
   mutable collectionAddress: string,
   mutable collectionZip: string,
