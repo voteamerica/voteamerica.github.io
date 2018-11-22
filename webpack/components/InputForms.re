@@ -544,7 +544,9 @@ let xx = Js.Obj.assign(em, em); */
 
     let ulDriverAvailableTimes = withDataAttributes([("data-type", "Driver")], <ul id="DriverAvailableTimes" className="available-times" />);
 
-    let inputRiderPreferredEmailContact = withDataAttributes([("data-emailID", "#riderEmail")], <input className="toggleRequiredEmail" type_="checkbox" name="RiderPreferredContact" value="Email" checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.emailPreferredGet onChange=riderEmailPreferredChangeHandler />);
+    let emailPreferredContact =inputFormsInfo->TypeInfo.riderInfo->TypeInfo.emailPreferredGet;
+
+    let inputRiderPreferredEmailContact = withDataAttributes([("data-emailID", "#riderEmail")], <input className="toggleRequiredEmail" type_="checkbox" name="RiderPreferredContact" value="Email" checked=emailPreferredContact onChange=riderEmailPreferredChangeHandler />);
 
     /*
         <div id="forms" className="forms wrapper offset-top">
@@ -583,28 +585,10 @@ let xx = Js.Obj.assign(em, em); */
     riderDateInfo->TypeInfo.timeStartGet, 
     riderDateInfo->TypeInfo.timeEndGet);
 
-    Js.log(isoTime);
-
-    /* var datetimeClasses = [
-      '.input--date',
-      '.input--time-start',
-      '.input--time-end'
-  ];
-
-  return $availableTimes.find('.available-times__row')
-      .get()
-      .map(function(row) {
-          var $row = $(row);
-
-          var inputValues = datetimeClasses.map(function(c) {
-              return $row.find(c).val();
-          });
-
-          return formatAvailabilityPeriod.apply(this, inputValues);
-      }).join('|'); */
+    /* Js.log(isoTime); */
 
     let showCloseFormButton = false;
-
+    let showPollingPlaces = false;
 
     let inputFormsJSX = 
     <div> {ReasonReact.string("Input Forms")}
@@ -698,15 +682,21 @@ let xx = Js.Obj.assign(em, em); */
                             </div>
                         </div>
 
-                        <div className="form-column">
-                            <div className="form-group polling-place">
-                                <label>{ReasonReact.string("Find your polling place")}</label>
-                                <div className="help-block">{ReasonReact.string("(Link will open your state’s polling place checker in a new tab.)")}</div>
-                                <ul id="location-details" className="state-dropdown state-dropdown--large">
-                                    <li>{ReasonReact.string("Loading&hellip;")}</li>
-                                </ul>
-                            </div>
-                        </div>
+                        {
+                          switch showPollingPlaces {
+                          | true =>                         
+                              <div className="form-column">
+                                <div className="form-group polling-place">
+                                    <label>{ReasonReact.string("Find your polling place")}</label>
+                                    <div className="help-block">{ReasonReact.string("(Link will open your state’s polling place checker in a new tab.)")}</div>
+                                    <ul id="location-details" className="state-dropdown state-dropdown--large">
+                                        <li>{ReasonReact.string("Loading&hellip;")}</li>
+                                    </ul>
+                                </div>
+                              </div>
+                          | false => ReasonReact.null
+                          }; 
+                        }
                     </fieldset>
 
                     <fieldset>
@@ -758,10 +748,18 @@ let xx = Js.Obj.assign(em, em); */
                             <label htmlFor="riderLastName">{ReasonReact.string("Last name")}</label>
                             <input type_="text" className="form-input" id="riderLastName" placeholder="Your last name" name="RiderLastName" required=true onChange=riderLastNameChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.lastNameGet />
                             <div className="help-block with-errors"></div>
-                        </div>
+                        </div> 
                         <div className="form-group">
-                            <label htmlFor="riderEmail">{ReasonReact.string("Email address")} <i className="optional">{ReasonReact.string("Optional")}</i></label>
-                            <input type_="email" className="form-input" id="riderEmail" placeholder="Email" name="RiderEmail" onChange=riderEmailChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.emailGet />
+                            <label htmlFor="riderEmail">{ReasonReact.string("Email address")} 
+                            {
+                              switch emailPreferredContact {
+                              | true => ReasonReact.null
+                              | false => <i className="optional"
+                              >{ReasonReact.string("Optional")}</i>
+                              }
+                            }
+                            </label>
+                            <input type_="email" className="form-input" id="riderEmail" placeholder="Email" name="RiderEmail" onChange=riderEmailChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.emailGet required=emailPreferredContact />
                             <div className="help-block with-errors"></div>
                         </div>
                         <div className="form-group">
