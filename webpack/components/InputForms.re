@@ -544,7 +544,7 @@ let xx = Js.Obj.assign(em, em); */
 
     let ulDriverAvailableTimes = withDataAttributes([("data-type", "Driver")], <ul id="DriverAvailableTimes" className="available-times" />);
 
-    let inputRiderPreferredEmailContact = withDataAttributes([("data-emailID", "#riderEmail")], <input className="toggleRequiredEmail" type_="checkbox" name="RiderPreferredContact" checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.emailPreferredGet onChange=riderEmailPreferredChangeHandler />);
+    let inputRiderPreferredEmailContact = withDataAttributes([("data-emailID", "#riderEmail")], <input className="toggleRequiredEmail" type_="checkbox" name="RiderPreferredContact" value="Email" checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.emailPreferredGet onChange=riderEmailPreferredChangeHandler />);
 
     /*
         <div id="forms" className="forms wrapper offset-top">
@@ -786,10 +786,10 @@ let xx = Js.Obj.assign(em, em); */
                                 {inputRiderPreferredEmailContact} {ReasonReact.string("Email")}
                             </label>
                             <label>
-                                <input type_="checkbox" name="RiderPreferredContact" checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.phonePreferredGet  onChange=riderPhonePreferredChangeHandler /> {ReasonReact.string("Phone")}
+                                <input type_="checkbox" name="RiderPreferredContact" value="Phone" checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.phonePreferredGet  onChange=riderPhonePreferredChangeHandler /> {ReasonReact.string("Phone")}
                             </label>
                             <label>
-                                <input type_="checkbox" name="RiderPreferredContact" checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.smsPreferredGet onChange=ridersmsPreferredChangeHandler /> {ReasonReact.string("SMS")}
+                                <input type_="checkbox" name="RiderPreferredContact" value="SMS" checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.smsPreferredGet onChange=ridersmsPreferredChangeHandler /> {ReasonReact.string("SMS")}
                             </label>
                         </div>
                     </fieldset>
