@@ -4,6 +4,9 @@ let component = ReasonReact.statelessComponent("InputForms");
 [@bs.val] external spreadRiderString : (TypeInfo.inputFormsInfoRiderInfo, string, string) => TypeInfo.inputFormsInfoRiderInfo = "spreadObject";
 [@bs.val] external spreadRiderBool : (TypeInfo.inputFormsInfoRiderInfo, string, bool) => TypeInfo.inputFormsInfoRiderInfo = "spreadObject";
 
+[@bs.val] external formatAvailabilityPeriod : (string, string, string,) => string = "formatAvailabilityPeriod";
+
+
 [@bs.deriving abstract]
 type jsProps = {
   loginInfo: TypeInfo.loginInfo,
@@ -30,6 +33,12 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     _children) => {
   let typeName = "Rider";
   let rowId = string_of_int(0);
+
+  let url = apiInfo->TypeInfo.apiUrlGet;
+  let siteUrl = apiInfo->TypeInfo.siteUrl;
+
+  Js.log(url);
+  Js.log(siteUrl);
       
   /* https://stackoverflow.com/questions/49039433/how-to-add-a-copyright-symbol-in-reason-react-component */
   let hmtlPlusEntity = <span dangerouslySetInnerHTML={{ "__html": "&plus;" }}></span>;
@@ -493,25 +502,23 @@ let xx = Js.Obj.assign(em, em); */
 
     let inputDateId =  {typeName ++ "Date" ++ rowId};
 
-    let dateValue = dateInfo->TypeInfo.dateGet;
-
     let showCloseButton = false;
 
     let row = <div id="available-time-row">
         <li className="available-times__row">
             <div className="form-group calendar-date-block">
                 <label htmlFor=inputDateId>{ReasonReact.string("Date")}</label>
-              <input className="form-input input--date" type_="date" name={typeName ++ "Date"} id=inputDateId onChange={riderDateChangeHandler} value=dateValue required=true />
+              <input className="form-input input--date" type_="date" name={typeName ++ "Date"} id=inputDateId onChange={riderDateChangeHandler} value=dateInfo->TypeInfo.dateGet required=true />
                 <div className="help-block with-errors"></div>
             </div>
             <div className="form-group">
                 <label htmlFor={typeName ++ "TimeStart" ++ rowId}>{ReasonReact.string("Start time")}</label>
-                {inputTimeStart(typeName, rowId, dateInfo->TypeInfo.timeStart)}
+                {inputTimeStart(typeName, rowId, dateInfo->TypeInfo.timeStartGet)}
                 <div className="help-block with-errors"></div>
             </div>
             <div className="form-group">
                 <label htmlFor={typeName ++ "TimeEnd" ++ rowId}>{ReasonReact.string("End time")}</label>
-                {inputTimeEnd(typeName, rowId, dateInfo->TypeInfo.timeEnd)}
+                {inputTimeEnd(typeName, rowId, dateInfo->TypeInfo.timeEndGet)}
                 <div className="help-block with-errors"></div>
             </div>
             {switch (showCloseButton == true) {
@@ -548,16 +555,72 @@ let xx = Js.Obj.assign(em, em); */
 
     let showAddDateButton = false;
 
+    let riderDateInfo = inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet;
+
+    let riderDateDetails = [
+      riderDateInfo->TypeInfo.dateGet, 
+      riderDateInfo->TypeInfo.timeStartGet, 
+      riderDateInfo->TypeInfo.timeEndGet];
+ 
+    /* let formatAvailabilityPeriod = (date, startTime, endTime) => {
+        /* return [startTime, endTime].map(time => {
+            return toISO8601((date || ''), time);
+        }).join('/'); */
+
+        let lla: array(string) = [|startTime, endTime|];
+
+        let times = Array.map(time => {
+          (time);
+        }, lla);
+
+        let xx = Js.Array.joinWith("/", times)
+        /* let xx = Js.List..joinWith("/", times) */
+
+        xx;
+    }
+     */
+    let isoTime = formatAvailabilityPeriod(riderDateInfo->TypeInfo.dateGet, 
+    riderDateInfo->TypeInfo.timeStartGet, 
+    riderDateInfo->TypeInfo.timeEndGet);
+
+    Js.log(isoTime);
+
+    /* var datetimeClasses = [
+      '.input--date',
+      '.input--time-start',
+      '.input--time-end'
+  ];
+
+  return $availableTimes.find('.available-times__row')
+      .get()
+      .map(function(row) {
+          var $row = $(row);
+
+          var inputValues = datetimeClasses.map(function(c) {
+              return $row.find(c).val();
+          });
+
+          return formatAvailabilityPeriod.apply(this, inputValues);
+      }).join('|'); */
+
+    let showCloseFormButton = false;
+
+
     let inputFormsJSX = 
     <div> {ReasonReact.string("Input Forms")}
     <div style={mainDivStyle}>
         <div id="formsX" className="forms wrapper offset-top">
-        <form id="need-ride" name="needRide" action="{{ api }}/rider" method="post" className="ride-form-op" ariaHidden=false>
-            <input type_="hidden" name="_redirect" className="redirect" value="{{ cp_site }}/thanks-rider/?type_=rider" />
+        <form id="need-ride" name="needRide" action={url ++ "/rider"} method="post" className="ride-form-op" ariaHidden=false>
+            <input type_="hidden" name="_redirect" className="redirect" value={siteUrl ++ "/thanks-rider/?type_=rider"} />
             <div className="bannerbox">
                 <h2 className="bannerbox__title">{ReasonReact.string("I need a ride")}</h2>
                 <div className="bannerbox__content">
-                    <a className="close-form button--cancel" href="#intro" ariaLabel="Close form" role="button" ariaControls="need-ride">hmtlTimesEntity</a>
+                    {
+                      switch showCloseFormButton {
+                        | true =>                     <a className="close-form button--cancel" href="#intro" ariaLabel="Close form" role="button" ariaControls="need-ride">hmtlTimesEntity</a>
+                        | false => ReasonReact.null
+                      }
+                    }
 
                     <p>{ReasonReact.string("Please enter your details in the form below, and our automatic matching algorithm will use this information to try to find you a driver.")}</p>
 
@@ -600,7 +663,7 @@ let xx = Js.Obj.assign(em, em); */
                             | false => ReasonReact.null
                           }
                         }
-                        <input type_="hidden" className="hiddenJSONTimes" name="AvailableRideTimesJSON" />
+                        <input type_="hidden" className="hiddenJSONTimes" name="AvailableRideTimesJSON" value=isoTime />
                     </fieldset>
 
                     <fieldset>
@@ -732,8 +795,8 @@ let xx = Js.Obj.assign(em, em); */
                     </fieldset>
 
                     <div className="form-group checkbox">
-                        <label htmlFor="RiderAgreeTnC">
-                            <input type_="checkbox" id="RiderAgreeTnC" name="RiderAgreeTnC" required=true onChange=riderAgreeTandCChangeHandler checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.agreeTandCGet /> {ReasonReact.string("I agree to the")} <a href="terms-conditions/" target="_blank" >{ReasonReact.string("Terms ")}hmtlAmpEntity{ReasonReact.string(" Conditions.")}</a>
+                        <label htmlFor="RiderLegalConsent">
+                            <input type_="checkbox" id="RiderLegalConsent" name="RiderLegalConsent" required=true onChange=riderAgreeTandCChangeHandler checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.agreeTandCGet /> {ReasonReact.string("I agree to the")} <a href="terms-conditions/" target="_blank" >{ReasonReact.string("Terms ")}hmtlAmpEntity{ReasonReact.string(" Conditions.")}</a>
                         </label>
                         <small>{ReasonReact.string("I understand that Carpool Vote LLC will share my contact details with the driver if there's a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day if you've asked us not to stay in touch.)")}</small>
                         <small>{ReasonReact.string("I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.")}</small>
@@ -748,7 +811,12 @@ let xx = Js.Obj.assign(em, em); */
                     </div>
                     <div className="form-group">
                         <button type_="submit" className="button button--large" id="needRideSubmit">{ReasonReact.string("Sign up")}</button>
-                        <a className="align-right close-form" href="#intro">{ReasonReact.string("Back")}</a>
+                        {
+                          switch showCloseFormButton {
+                            | true => <a className="align-right close-form" href="#intro">{ReasonReact.string("Back")}</a>
+                            | false => ReasonReact.null
+                          }
+                        }
                     </div>
                     <p className="panel-footer"><b>{ReasonReact.string("What happens next?")}</b> {ReasonReact.string("Our system will use these details to automatically try to find you a driver. If there is a match, the driver will get in touch to arrange the ride.")}</p>
                 </div>

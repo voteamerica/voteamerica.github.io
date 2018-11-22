@@ -37,11 +37,14 @@ type loginInfo = {
 };
 
 [@bs.deriving abstract]
-type apiInfo = {apiUrl: string};
+type apiInfo = {
+  apiUrl: string,
+  siteUrl: string,
+};
 
 [@bs.deriving abstract]
 type inputFormsDateInfo = {
-  /* Very reluctantly using mutable here - it is
+  /* Very reluctantly using here - it is
      ONLY to mimic spread operator behaviour,
      which doesn't seem available for [@bs.deriving abstract] types. Will review how to efficiently
      refactor this away.
@@ -64,32 +67,27 @@ type inputFormsInfoDriverInfo = {
 
 [@bs.deriving abstract]
 type inputFormsInfoRiderInfo = {
-  /* Very reluctantly using mutable here - it is
-     ONLY to mimic spread operator behaviour,
-     which doesn't seem available for [@bs.deriving abstract] types. Will review how to efficiently
-     refactor this away.
-      */
-  mutable startDateChanged: bool,
+  startDateChanged: bool,
   dateInfo: inputFormsDateInfo,
-  mutable collectionAddress: string,
-  mutable collectionZip: string,
-  mutable destinationAddress: string,
-  mutable destinationZip: string,
-  mutable seatCount: string,
-  mutable powerChairUser: bool,
-  mutable twoWayTripNeeded: bool,
-  mutable otherRequirements: string,
-  mutable firstName: string,
-  mutable lastName: string,
-  mutable email: string,
-  mutable phone: string,
-  mutable cellPhone: bool,
-  mutable emailPreferred: bool,
-  mutable phonePreferred: bool,
-  mutable smsPreferred: bool,
-  mutable agreeTandC: bool,
-  mutable contactOk: bool,
-  mutable orgName: string,
+  collectionAddress: string,
+  collectionZip: string,
+  destinationAddress: string,
+  destinationZip: string,
+  seatCount: string,
+  powerChairUser: bool,
+  twoWayTripNeeded: bool,
+  otherRequirements: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  phone: string,
+  cellPhone: bool,
+  emailPreferred: bool,
+  phonePreferred: bool,
+  smsPreferred: bool,
+  agreeTandC: bool,
+  contactOk: bool,
+  orgName: string,
 };
 
 [@bs.deriving abstract]
@@ -129,18 +127,18 @@ type driverTableJsProps = {
 } /* type xyz = X | Y | Z;
 
 type xyzz = [`X | `Y | `Z]; */ /* [@bs.deriving abstract]
+type tableBaseJsProps = {
+  className: string, */ /* `type` is reserved in Reason. use `type_` and make it still compile to the
+    JS key `type` */ /*  [@bs.as "type"] type_: string,
+  columns: array(theader),
+  defaultPageSize: int,
+}; */ /* this compiles, but couldn't use it for table props */ /* type tbItem ('a) = TI ('a);
+
+type riderTableItem = TI rider;
+type driverTableItem = TI driver; */ /* seems a reasonable compromise, but do need both constructor and type */ /* type tableItem = | R(rider) | D(driver); */ /* this works, but prefer extra info for type being already defined */ /* type tisTest =
+  | RT( string, string  )
+  | DT(driver); */ /* [@bs.deriving abstract]
 type xriderTableJsProps = {
   base: tableBaseJsProps,
   data: array(rider)
-}; */ /* type tisTest =
-  | RT( string, string  )
-  | DT(driver); */ /* this works, but prefer extra info for type being already defined */ /* type tableItem = | R(rider) | D(driver); */ /* seems a reasonable compromise, but do need both constructor and type */ /* type tbItem ('a) = TI ('a);
-
-type riderTableItem = TI rider;
-type driverTableItem = TI driver; */ /* this compiles, but couldn't use it for table props */ /*  [@bs.as "type"] type_: string,
-  columns: array(theader),
-  defaultPageSize: int,
-}; */ /* `type` is reserved in Reason. use `type_` and make it still compile to the
-    JS key `type` */ /* [@bs.deriving abstract]
-type tableBaseJsProps = {
-  className: string, */;
+}; */;
