@@ -1,5 +1,9 @@
 let component = ReasonReact.statelessComponent("InputForms");
 
+/* [@bs.val] external sprdString : (TypeInfo.inputFormsInfoRiderInfo, string, string) => Js.t({..}) = "sprdString"; */
+[@bs.val] external spreadRiderString : (TypeInfo.inputFormsInfoRiderInfo, string, string) => TypeInfo.inputFormsInfoRiderInfo = "spreadObject";
+[@bs.val] external spreadRiderBool : (TypeInfo.inputFormsInfoRiderInfo, string, bool) => TypeInfo.inputFormsInfoRiderInfo = "spreadObject";
+
 [@bs.deriving abstract]
 type jsProps = {
   loginInfo: TypeInfo.loginInfo,
@@ -174,6 +178,11 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     ();
   }
 
+  /* : (TypeInfo.inputFormsInfoRiderInfo, string, string) => TypeInfo.inputFormsInfoRiderInfo */
+  /* const newObj = {...source, phone: 'test'}; */
+  /* let sprdString = [%raw (source, key, value) => "{ return 'test'; }"]; */
+  /* let sprdString = [%raw (source, key, value) => "{ const x = {...source, [key]: value}; console.log(x); return 'test'; }"]; */
+
   let riderEndTimeChangeHandler = evt => {
     /* TypeInfo.unitArgAction(hideExpiredRidersList); */
 
@@ -197,8 +206,28 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     ();
   }
 
+  /* Use of "type_" doesn't seem to compile to "type" */
+  let evtTargetType: Js.t({..}) => string = [%raw target => "{ return target.type; }"];
+
   let riderFormInfoChangeSupport = (evt) => {
-    let changeText = ReactEvent.Form.target(evt)##value;
+
+    let zd = spreadRiderString(inputFormsInfo->TypeInfo.riderInfoGet, "phone", "no");
+
+    Js.log(zd);
+
+    Js.log(evt);
+
+    /* let tt = ReactEvent.Form.target(evt)##typeGet; */
+    /* let tta = ReactEvent.Form.target(evt)##type; */
+
+    /* Js.log(tt) */
+
+    let ttt = evtTargetType(ReactEvent.Form.target(evt));
+
+    let changeText = switch (ttt == "checkbox") {
+    | true => ReactEvent.Form.target(evt)##checked
+    | false => ReactEvent.Form.target(evt)##value
+    };
 
     let riderInfo = inputFormsInfo->TypeInfo.riderInfoGet;
     let newRiderInfo = TypeInfo.inputFormsInfoRiderInfo(        
@@ -252,174 +281,172 @@ let xx = Js.Obj.assign(em, em); */
     (changeText, newRiderInfo);
   }
 
-  
   /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
   let srfi: ((TypeInfo.inputFormsInfoRiderInfo) => unit, TypeInfo.inputFormsInfoRiderInfo) => unit = [%raw (fx, formInfo) => "{ fx(formInfo); return 0; }"];
 
-  let riderCollectionAddressChangeHandler = evt => {
-    Js.log(evt);
-
-    let address = ReactEvent.Form.target(evt)##value;
-
-    let riderInfo = inputFormsInfo->TypeInfo.riderInfoGet;
-    let newRiderInfo = riderInfo;
-    
-    newRiderInfo->TypeInfo.collectionAddressSet(address);
+  let srfiString = (key, change) => {
+    let newRiderInfo = spreadRiderString(inputFormsInfo->TypeInfo.riderInfoGet, key, change);
 
     srfi(setRiderFormInfo, newRiderInfo);
+
+    ();
+}
+
+  let srfiNumber = (key, change) => {
+    let newRiderInfo = spreadRiderBool(inputFormsInfo->TypeInfo.riderInfoGet, key, change);
+
+    srfi(setRiderFormInfo, newRiderInfo);
+
+    ();
+  }
+
+  let srfiBool = (key, change) => {
+    let newRiderInfo = spreadRiderBool(inputFormsInfo->TypeInfo.riderInfoGet, key, change);
+
+    srfi(setRiderFormInfo, newRiderInfo);
+
+    ();
+  }
+
+  let riderFormInfoChangeSupportNewRider = (evt, key) => {
+    let targetType = evtTargetType(ReactEvent.Form.target(evt));
+
+    switch (targetType) {
+    | "checkbox" => {
+        let change = ReactEvent.Form.target(evt)##checked;
+        srfiBool(key, change);
+        }
+    | "radio" => {
+        let change = ReactEvent.Form.target(evt)##value == "Yes";
+        srfiBool(key, change);
+        }
+    | "number" => {
+        let change = ReactEvent.Form.target(evt)##value;
+        srfiNumber(key, change);
+        }
+    | _ =>  {
+        let change = ReactEvent.Form.target(evt)##value;
+        srfiString(key, change);
+        }
+    };
+
+    /* let newRiderInfo = spreadRider(inputFormsInfo->TypeInfo.riderInfoGet, key, changeText); */
+
+    /* srfi(setRiderFormInfo, newRiderInfo); */
+
+    ();
+  }
+  
+  let riderCollectionAddressChangeHandler = evt => {
+    riderFormInfoChangeSupportNewRider(evt, "collectionAddress");   
 
     ();
   }
 
   let riderCollectionZipChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.collectionZipSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "collectionZip");   
 
     ();
   }
 
   let riderDestinationAddressChangeHandler = evt => {
-    Js.log(evt);
-
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);
-    
-    newRiderInfo->TypeInfo.destinationAddressSet(address);
-
-    Js.log("rider info")
-    Js.log(inputFormsInfo->TypeInfo.riderInfoGet)
-    Js.log("new rider info")
-    Js.log(newRiderInfo);
-
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "destinationAddress");   
 
     ();
   }
 
   let riderDestinationZipChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.destinationZipSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "destinationZip");   
 
     ();
   }
 
   let riderSeatCountChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.seatCountSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "seatCount");   
 
     ();
   }
 
   let riderPowerChairUserChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.powerChairUserSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "powerChairUser");   
 
     ();
   }
 
   let riderTwoWayTripNeededChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.twoWayTripNeededSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "twoWayTripNeeded");   
 
     ();
   }
 
   let riderOtherRequirementsChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.otherRequirementsSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "otherRequirements");   
 
     ();
   }
 
   let riderFirstNameChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.firstNameSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "firstName");   
 
     ();
   }
 
   let riderLastNameChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.lastNameSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "lastName");   
 
     ();
   }
 
   let riderEmailChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.emailSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "email");   
 
     ();
   }
 
   let riderPhoneChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.phoneSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "phone");   
 
     ();
   }
 
   let riderCellPhoneChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.cellPhoneSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "cellPhone");   
 
     ();
   }
 
   let riderEmailPreferredChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.emailPreferredSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "emailPreferred");   
 
     ();
   }
 
   let riderPhonePreferredChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.phonePreferredSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "phonePreferred");   
 
     ();
   }
 
   let ridersmsPreferredChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.smsPreferredSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "smsPreferred");   
 
     ();
   }
 
   let riderAgreeTandCChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.agreeTandCSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "agreeTandC");   
 
     ();
   }
 
   let riderContactOkChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.contactOkSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "contactOk");   
 
     ();
   }
 
   let riderOrgNameChangeHandler = evt => {
-    let (address, newRiderInfo) = riderFormInfoChangeSupport(evt);   
-    newRiderInfo->TypeInfo.orgNameSet(address);
-    srfi(setRiderFormInfo, newRiderInfo);
+    riderFormInfoChangeSupportNewRider(evt, "orgName");   
 
     ();
   }
@@ -510,7 +537,7 @@ let xx = Js.Obj.assign(em, em); */
 
     let ulDriverAvailableTimes = withDataAttributes([("data-type", "Driver")], <ul id="DriverAvailableTimes" className="available-times" />);
 
-    let inputRiderPreferredEmailContact = withDataAttributes([("data-emailID", "#riderEmail")], <input className="toggleRequiredEmail" type_="checkbox" name="RiderPreferredContact" value="Email" onChange=riderEmailPreferredChangeHandler />);
+    let inputRiderPreferredEmailContact = withDataAttributes([("data-emailID", "#riderEmail")], <input className="toggleRequiredEmail" type_="checkbox" name="RiderPreferredContact" checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.emailPreferredGet onChange=riderEmailPreferredChangeHandler />);
 
     /*
         <div id="forms" className="forms wrapper offset-top">
@@ -519,6 +546,9 @@ let xx = Js.Obj.assign(em, em); */
 
     let mainDivStyle = ReactDOMRe.Style.make(~marginTop ="150px", ());
 
+    let showAddDateButton = false;
+
+    let inputFormsJSX = 
     <div> {ReasonReact.string("Input Forms")}
     <div style={mainDivStyle}>
         <div id="formsX" className="forms wrapper offset-top">
@@ -540,7 +570,7 @@ let xx = Js.Obj.assign(em, em); */
                             <div className="form-group">
                                 <input id="RidingOnBehalfOfOrganization" name="RidingOnBehalfOfOrganization" type_="hidden" value="true" />
                                 <label htmlFor="RidingOBOOrganizationName">{ReasonReact.string("Organization name")}</label>
-                                <select id="RidingOBOOrganizationName" name="RidingOBOOrganizationName" required=true onChange=riderOrgNameChangeHandler >
+                                <select id="RidingOBOOrganizationName" name="RidingOBOOrganizationName" required=true onChange=riderOrgNameChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.orgNameGet >
                                     <option value="None">{ReasonReact.string("None")}</option>
                                     <option value="NAACP">{ReasonReact.string("NAACP")}</option>
                                     <option value="AAPD">{ReasonReact.string("AAPD")}</option>
@@ -559,9 +589,17 @@ let xx = Js.Obj.assign(em, em); */
                         <legend>{ReasonReact.string("Dates and Times Available")}</legend>
 
                         <p>{ReasonReact.string("On what dates and times would you be available for the ride? Please pick all the time slots that could work for you: This will make it easier for us to match you with a driver. You can pick multiple time slots, on different dates or on the same date.")}</p>
-                        ulRiderAvailableTimes
-                        <button className="add-time-btn button" ariaControls="RiderAvailableTimes">hmtlPlusEntity{ReasonReact.string(" Add another date / time")}</button>
-                        <small>{ReasonReact.string("(Add as many dates and time ranges as you like)")}</small>
+                        {ulRiderAvailableTimes}
+                        {
+                          switch showAddDateButton {
+                            | true => 
+                              <div>
+                                <button className="add-time-btn button" ariaControls="RiderAvailableTimes">hmtlPlusEntity{ReasonReact.string(" Add another date / time")}</button>
+                                <small>{ReasonReact.string("(Add as many dates and time ranges as you like)")}</small>
+                              </div>
+                            | false => ReasonReact.null
+                          }
+                        }
                         <input type_="hidden" className="hiddenJSONTimes" name="AvailableRideTimesJSON" />
                     </fieldset>
 
@@ -582,7 +620,7 @@ let xx = Js.Obj.assign(em, em); */
                             </div>
                             <div className="form-group">
                                 <label htmlFor="rideArea">{ReasonReact.string("Pick up ZIP code")}</label>
-                                <input type_="text" className="form-input form-input--medium" pattern=regexPattern id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required=true onChange=riderCollectionZipChangeHandler />
+                                <input type_="text" className="form-input form-input--medium" pattern=regexPattern id="rideArea" placeholder="Where you can meet the driver" name="RiderCollectionZIP" required=true onChange=riderCollectionZipChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.collectionZipGet />
                                 <div className="help-block with-errors"></div>
                             </div>
                             <div className="form-group">
@@ -592,7 +630,7 @@ let xx = Js.Obj.assign(em, em); */
                             </div>
                             <div className="form-group">
                                 <label htmlFor="rideDestinationZIP">{ReasonReact.string("Destination ZIP code")}</label>
-                                <input type_="text" className="form-input form-input--medium" pattern=regexPattern id="rideDestinationZIP" name="RiderDropOffZIP" placeholder="To where do you need a ride?" required=true onChange=riderDestinationZipChangeHandler />
+                                <input type_="text" className="form-input form-input--medium" pattern=regexPattern id="rideDestinationZIP" name="RiderDropOffZIP" placeholder="To where do you need a ride?" required=true onChange=riderDestinationZipChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.destinationZipGet />
                                 <div className="help-block with-errors"></div>
                             </div>
                         </div>
@@ -612,25 +650,25 @@ let xx = Js.Obj.assign(em, em); */
                         <legend>{ReasonReact.string("Vehicle requirements")}</legend>
                         <div className="form-group">
                             <label htmlFor="rideSeats">{ReasonReact.string("Number of seats required")}</label>
-                            <input type_="number" className="form-input form-input--small" id="rideSeats" name="TotalPartySize" min=1 required=true onChange=riderSeatCountChangeHandler />
+                            <input type_="number" className="form-input form-input--small" id="rideSeats" name="TotalPartySize" min=1 required=true onChange=riderSeatCountChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.seatCountGet />
                             <div className="help-block with-errors"></div>
                             <small>{ReasonReact.string("Please let us know how many people will need to travel together in the same car. You may take somebody with you as a safety measure.")}</small>
                             <small>{ReasonReact.string("To make it easier for us to match people, we ask that you travel with as few people as possible.")}</small>
                         </div>
                         <div className="form-group checkbox">
                             <label htmlFor="riderIsPowerChairUser">
-                                <input type_="checkbox" name="NeedWheelchair" id="riderIsPowerChairUser" onChange=riderPowerChairUserChangeHandler />{ReasonReact.string("I am a powerchair user who needs an adapted van with a lift.")}
+                                <input type_="checkbox" name="NeedWheelchair" id="riderIsPowerChairUser" onChange=riderPowerChairUserChangeHandler checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.powerChairUserGet />{ReasonReact.string("I am a powerchair user who needs an adapted van with a lift.")}
                             </label>
                         </div>
                         <div className="form-group checkbox">
                             <label htmlFor="rideReturn">
-                                <input type_="checkbox" name="TwoWayTripNeeded" id="rideReturn" onChange=riderTwoWayTripNeededChangeHandler /> {ReasonReact.string("I need a two-way trip.")}
+                                <input type_="checkbox" name="TwoWayTripNeeded" id="rideReturn" onChange=riderTwoWayTripNeededChangeHandler checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.twoWayTripNeededGet /> {ReasonReact.string("I need a two-way trip.")}
                             </label>
                         </div>
                         <div className="form-group form-inline form-inline-other-requirements">
                             <label htmlFor="RiderAccommodationNotes">{ReasonReact.string("Other Requirements")} <i className="optional">{ReasonReact.string("Optional")}</i></label>
                             <textarea className="form-input" id="RiderAccommodationNotes"
-                                  placeholder="Please let us know any other requirements you have for your ride..." name="RiderAccommodationNotes" cols=60 rows=6 onChange=riderOtherRequirementsChangeHandler ></textarea>
+                                  placeholder="Please let us know any other requirements you have for your ride..." name="RiderAccommodationNotes" cols=60 rows=6 onChange=riderOtherRequirementsChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.otherRequirementsGet ></textarea>
                         </div>
                         <div className="form-inline">
                             <small>{ReasonReact.string("Please let us know of any other accommodation requirements.")}</small>
@@ -650,31 +688,33 @@ let xx = Js.Obj.assign(em, em); */
 
                         <div className="form-group">
                             <label htmlFor="riderFirstName">{ReasonReact.string("First name")}</label>
-                            <input type_="text" className="form-input" id="riderFirstName" placeholder="Your first name" name="RiderFirstName" required=true onChange=riderFirstNameChangeHandler />
+                            <input type_="text" className="form-input" id="riderFirstName" placeholder="Your first name" name="RiderFirstName" required=true onChange=riderFirstNameChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.firstNameGet />
                             <div className="help-block with-errors"></div>
                         </div>
                         <div className="form-group">
                             <label htmlFor="riderLastName">{ReasonReact.string("Last name")}</label>
-                            <input type_="text" className="form-input" id="riderLastName" placeholder="Your last name" name="RiderLastName" required=true onChange=riderLastNameChangeHandler />
+                            <input type_="text" className="form-input" id="riderLastName" placeholder="Your last name" name="RiderLastName" required=true onChange=riderLastNameChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.lastNameGet />
                             <div className="help-block with-errors"></div>
                         </div>
                         <div className="form-group">
                             <label htmlFor="riderEmail">{ReasonReact.string("Email address")} <i className="optional">{ReasonReact.string("Optional")}</i></label>
-                            <input type_="email" className="form-input" id="riderEmail" placeholder="Email" name="RiderEmail" onChange=riderEmailChangeHandler />
+                            <input type_="email" className="form-input" id="riderEmail" placeholder="Email" name="RiderEmail" onChange=riderEmailChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.emailGet />
                             <div className="help-block with-errors"></div>
                         </div>
                         <div className="form-group">
                             <label htmlFor="riderPhone">{ReasonReact.string("Phone number (cell preferred)")}</label>
-                            <input type_="tel" className="form-input" id="riderPhone" placeholder="Phone" name="RiderPhone" required=true onChange=riderPhoneChangeHandler />
+                            <input type_="tel" className="form-input" id="riderPhone" placeholder="Phone" name="RiderPhone" required=true onChange=riderPhoneChangeHandler value=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.phoneGet />
                             <div className="help-block with-errors"></div>
                         </div>
                         <div className="form-group radio">
                             <p>{ReasonReact.string("Is this a cell phone?")}</p>
                             <label>
-                                <input type_="radio" name="riderCell" value="Yes" onChange=riderCellPhoneChangeHandler />{ReasonReact.string("Yes")}
+                                <input type_="radio" name="riderCell" value="Yes"
+                                onChange=riderCellPhoneChangeHandler  checked={inputFormsInfo->TypeInfo.riderInfo->TypeInfo.cellPhoneGet==true} 
+                                 />{ReasonReact.string("Yes")}
                             </label>
                             <label>
-                                <input type_="radio" name="riderCell" value="No" onChange=riderCellPhoneChangeHandler />{ReasonReact.string("No")}
+                                <input type_="radio" name="riderCell" value="No" onChange=riderCellPhoneChangeHandler checked={inputFormsInfo->TypeInfo.riderInfo->TypeInfo.cellPhoneGet==false} />{ReasonReact.string("No")}
                             </label>
                         </div>
                         <div className="form-group checkbox checkbox--multi">
@@ -683,17 +723,17 @@ let xx = Js.Obj.assign(em, em); */
                                 {inputRiderPreferredEmailContact} {ReasonReact.string("Email")}
                             </label>
                             <label>
-                                <input type_="checkbox" name="RiderPreferredContact" value="Phone" onChange=riderPhonePreferredChangeHandler /> {ReasonReact.string("Phone")}
+                                <input type_="checkbox" name="RiderPreferredContact" checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.phonePreferredGet  onChange=riderPhonePreferredChangeHandler /> {ReasonReact.string("Phone")}
                             </label>
                             <label>
-                                <input type_="checkbox" name="RiderPreferredContact" value="SMS" onChange=ridersmsPreferredChangeHandler /> {ReasonReact.string("SMS")}
+                                <input type_="checkbox" name="RiderPreferredContact" checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.smsPreferredGet onChange=ridersmsPreferredChangeHandler /> {ReasonReact.string("SMS")}
                             </label>
                         </div>
                     </fieldset>
 
                     <div className="form-group checkbox">
                         <label htmlFor="RiderAgreeTnC">
-                            <input type_="checkbox" id="RiderAgreeTnC" name="RiderAgreeTnC" required=true onChange=riderAgreeTandCChangeHandler /> {ReasonReact.string("I agree to the")} <a href="terms-conditions/" target="_blank" >{ReasonReact.string("Terms ")}hmtlAmpEntity{ReasonReact.string(" Conditions.")}</a>
+                            <input type_="checkbox" id="RiderAgreeTnC" name="RiderAgreeTnC" required=true onChange=riderAgreeTandCChangeHandler checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.agreeTandCGet /> {ReasonReact.string("I agree to the")} <a href="terms-conditions/" target="_blank" >{ReasonReact.string("Terms ")}hmtlAmpEntity{ReasonReact.string(" Conditions.")}</a>
                         </label>
                         <small>{ReasonReact.string("I understand that Carpool Vote LLC will share my contact details with the driver if there's a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day if you've asked us not to stay in touch.)")}</small>
                         <small>{ReasonReact.string("I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong.")}</small>
@@ -703,7 +743,7 @@ let xx = Js.Obj.assign(em, em); */
 
                     <div className="form-group checkbox">
                         <label htmlFor="inTouchRider">
-                            <input type_="checkbox" id="inTouchRider" name="PleaseStayInTouch" checked=true onChange=riderContactOkChangeHandler /> {ReasonReact.string("We'd like to keep you updated from time to time about how the project is progressing. Please untick this box if you'd prefer us not to do this.")}
+                            <input type_="checkbox" id="inTouchRider" name="PleaseStayInTouch" onChange=riderContactOkChangeHandler checked=inputFormsInfo->TypeInfo.riderInfo->TypeInfo.contactOkGet /> {ReasonReact.string("We'd like to keep you updated from time to time about how the project is progressing. Please untick this box if you'd prefer us not to do this.")}
                         </label>
                     </div>
                     <div className="form-group">
@@ -751,9 +791,17 @@ let xx = Js.Obj.assign(em, em); */
 
                         <h3>{ReasonReact.string("Dates and times available")}</h3>
                         <p>{ReasonReact.string("On what dates and times would you be a available to give rides? Please pick all the time slots that could work for you: This will make it easier for us to match you with someone who needs a ride. You can pick multiple time slots, on different dates or on the same date.")}</p>
-                        ulDriverAvailableTimes                        
-                        <button className="add-time-btn button" ariaControls="DriverAvailableTimes">hmtlPlusEntity{ReasonReact.string(" Add another date / time")}</button>
-                        <small>{ReasonReact.string("(Add as many dates and time ranges as you like)")}</small>
+                        ulDriverAvailableTimes    
+                        {
+                          switch showAddDateButton {
+                            | true => 
+                                <div> 
+                                  <button className="add-time-btn button" ariaControls="DriverAvailableTimes">hmtlPlusEntity{ReasonReact.string(" Add another date / time")}</button>
+                                  <small>{ReasonReact.string("(Add as many dates and time ranges as you like)")}</small>
+                                </div>
+                            | false => ReasonReact.null
+                          }
+                        }
                         <input type_="hidden" className="hiddenJSONTimes" name="AvailableDriveTimesJSON" />
                     </fieldset>
 
@@ -853,7 +901,15 @@ let xx = Js.Obj.assign(em, em); */
         </form>
     </div>
     </div>
-  </div>},
+  </div>;
+
+  let display = switch (loginInfo->TypeInfo.loggedInGet) {
+  | true => inputFormsJSX
+  | false => ReasonReact.null
+  };
+
+  display;
+  },
 }};
 
 let default = ReasonReact.wrapReasonForJs(~component, 

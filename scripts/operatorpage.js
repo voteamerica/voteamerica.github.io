@@ -2,6 +2,12 @@ if (!remoteUrl) {
   var remoteUrl = 'https://api.carpoolvote.com/live';
 }
 
+const spreadObject = (source, key, value) => {
+  const newObject = { ...source, [key]: value };
+  // console.log(newObject);
+  return newObject;
+};
+
 let token = '';
 
 const $login = document.getElementById('loginSubmit');
