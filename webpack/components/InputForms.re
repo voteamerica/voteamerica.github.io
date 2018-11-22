@@ -1,6 +1,5 @@
 let component = ReasonReact.statelessComponent("InputForms");
 
-/* [@bs.val] external sprdString : (TypeInfo.inputFormsInfoRiderInfo, string, string) => Js.t({..}) = "sprdString"; */
 [@bs.val] external spreadRiderString : (TypeInfo.inputFormsInfoRiderInfo, string, string) => TypeInfo.inputFormsInfoRiderInfo = "spreadObject";
 [@bs.val] external spreadRiderBool : (TypeInfo.inputFormsInfoRiderInfo, string, bool) => TypeInfo.inputFormsInfoRiderInfo = "spreadObject";
 
@@ -18,11 +17,6 @@ type jsProps = {
   setRiderFormInfo: TypeInfo.inputFormsInfoRiderInfo => unit
 };
 
-  /* [@bs.deriving abstract]
-  type xinputFormsDateInfo = {
-    xdate: string,
-  }; */
-
 let make = (~loginInfo:TypeInfo.loginInfo, 
     ~apiInfo:TypeInfo.apiInfo, 
     ~inputFormsInfo: TypeInfo.inputFormsInfo, 
@@ -31,8 +25,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     ~setRiderDateInfo,
     ~setRiderFormInfo,
     _children) => {
-  let typeName = "Rider";
-  let rowId = string_of_int(0);
 
   let url = apiInfo->TypeInfo.apiUrlGet;
   let siteUrl = apiInfo->TypeInfo.siteUrl;
@@ -53,60 +45,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
 
   let inputId = (typeName, rowId, sectionName) => typeName ++ sectionName ++ rowId;
 
-  /* let inputMonth = (typeName, rowId) => {  
-    let xId = inputId(typeName, rowId, "Month");
-    
-    let f = <input className="form-input form-input--tiny input--month" type_="number" id=xId placeholder="MM" min=1 max="12" required=true />;
-
-    let data = [("data-field", "month")];
-
-    let x = inputDateSection(f, data);
-
-    x;
-  };
-
-  let inputDay = (typeName, rowId) =>{  
-    let xId = inputId(typeName, rowId, "Day");
-
-    let f = <input className="form-input form-input--tiny input--day" type_="number" id=xId placeholder="DD" min=1 max="31" required=true />;
-
-    let data = [("data-field", "day")];
-
-    let x = inputDateSection(f, data);
-
-    x;
-  }; */
-
-  /* let inputYear = (typeName, rowId) => {  
-    let xId = inputId(typeName, rowId, "Year");
-
-    let f = <input className="form-input form-input--tiny input--year" type_="number" id=xId placeholder="YYYY" min=2017 required=true />;
-
-    let data = [("data-field", "year")];
-
-    let x = inputDateSection(f, data);
-
-    x;
-  }; */
-
-  /* let inputDate = (typeName, rowId) => {  
-    let xId = inputId(typeName, rowId, "Date");
-    let xName = typeName ++ "Date"
-
-    let f = <input type_="hidden" id=xId className="input--date" name=xName />
-;
-    f;
-  }; */
-
-    /* let dateFieldFallback = <div className="form-group text-date-block">
-        <label htmlFor=inputDateId>{ReasonReact.string("Date")}</label>
-        {inputMonth(typeName, rowId)}
-        {inputDay(typeName, rowId)}
-        {inputYear(typeName, rowId)}
-        {inputDate(typeName, rowId)}
-        <div className="help-block with-errors"></div>
-      </div>; */
-
   /* NOTE: without this step, dispatch prop does not work correctly - best to use typed version of bs raw section, in part because dispatch prop is optimised out of the function if not referenced in some way */
   let srdi: ((int, TypeInfo.inputFormsDateInfo) => unit, int, TypeInfo.inputFormsDateInfo) => unit = [%raw (fx, index, dateInfo) => "{ fx(index, dateInfo); return 0; }"];
 
@@ -125,28 +63,9 @@ let make = (~loginInfo:TypeInfo.loginInfo,
 
     let dateInfo:TypeInfo.inputFormsDateInfo = riderInfo->TypeInfo.dateInfoGet;
     
-    /* let newDateInfo = TypeInfo.inputFormsDateInfo(~date=rawDate,
-     ~timeStart=dateInfo->TypeInfo.timeStartGet, 
-     ~timeEnd=dateInfo->TypeInfo.timeEndGet); */
-
     let newDateInfo = dateInfo;
 
     newDateInfo->TypeInfo.dateSet(rawDate);
-
-  /* let x = {
-    xdate: "X"
-  }; */
-
-  /* let target = [%obj { a = 1; b = 1; }];
-  let source = [%obj { b = 2; }];
-
-  let obj = Js.Obj.assign target source */
-
-  /* let x = xinputFormsDateInfo(~xdate="x"); */
-
-  /* let obj = Js.Obj.assign x {xdate:1}  */
-
-     /* let ndi:xinputFormsDateInfo = {...x, xdate: "xx"}; */
 
     Js.log(riderInfo);
 
@@ -158,22 +77,12 @@ let make = (~loginInfo:TypeInfo.loginInfo,
   }
 
   let riderStartTimeChangeHandler = evt => {
-    /* TypeInfo.unitArgAction(hideExpiredRidersList); */
-
-    Js.log(evt);
-
     let rawTime = ReactEvent.Form.target(evt)##value;
 
-    /* let parts = Js.String.split("-", rawDate); */
-    /* Js.log(parts); */
     Js.log(rawTime);
 
     let riderInfo = inputFormsInfo->TypeInfo.riderInfoGet;
     let dateInfo = inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet;
-
-    /* let newDateInfo = TypeInfo.inputFormsDateInfo(~date=dateInfo->TypeInfo.dateGet,
-     ~timeStart=rawTime, 
-     ~timeEnd=dateInfo->TypeInfo.timeEndGet) */
 
     let newDateInfo = dateInfo;
     newDateInfo->TypeInfo.timeStartSet(rawTime);
@@ -187,14 +96,7 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     ();
   }
 
-  /* : (TypeInfo.inputFormsInfoRiderInfo, string, string) => TypeInfo.inputFormsInfoRiderInfo */
-  /* const newObj = {...source, phone: 'test'}; */
-  /* let sprdString = [%raw (source, key, value) => "{ return 'test'; }"]; */
-  /* let sprdString = [%raw (source, key, value) => "{ const x = {...source, [key]: value}; console.log(x); return 'test'; }"]; */
-
   let riderEndTimeChangeHandler = evt => {
-    /* TypeInfo.unitArgAction(hideExpiredRidersList); */
-
     Js.log(evt);
 
     let rawTime = ReactEvent.Form.target(evt)##value;
@@ -202,9 +104,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
 
     let dateInfo = inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet;
 
-    /* let newDateInfo = TypeInfo.inputFormsDateInfo(~date=dateInfo->TypeInfo.dateGet,
-     ~timeStart=dateInfo->TypeInfo.timeStartGet, 
-     ~timeEnd=rawTime) */
      let newDateInfo = dateInfo;
      newDateInfo->TypeInfo.timeEndSet(rawTime);
 
@@ -225,11 +124,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     Js.log(zd);
 
     Js.log(evt);
-
-    /* let tt = ReactEvent.Form.target(evt)##typeGet; */
-    /* let tta = ReactEvent.Form.target(evt)##type; */
-
-    /* Js.log(tt) */
 
     let ttt = evtTargetType(ReactEvent.Form.target(evt));
 
@@ -262,31 +156,7 @@ let make = (~loginInfo:TypeInfo.loginInfo,
                         ~contactOk=riderInfo->TypeInfo.contactOk,
                         ~orgName=riderInfo->TypeInfo.orgName,
                         );
-    /* Js.log(newRiderInfo) */
 
-    /* let n = {...riderInfo, TypeInfo.startDateChanged:false} */
-
-      /* let target = [%obj { a = 1; b = 1; }]; */
-      /* let target = [%obj {  }]; */
-  /* let source = [%obj {  }]; */
-
-  /* let obj = Js.Obj.assign target source */
-  /* let obj = Js.Obj.assign target riderInfo */
-
-  /* let obj = [%obj { a = 1 }] */
-
-/* let copy = Js.Obj.assign (Js.Obj.empty ()) riderInfo */
-/* let em =  Js.Obj.empty ();
-
-Js.log("em");
-Js.log(em);
-Js.log(Js.Obj.assign);
-let xx = Js.Obj.assign(em, em); */
-/* let xxa = Js.Obj.assign(em, newRiderInfo); */
-/* let copy = Js.Obj.assign () */
-/* Js.Obj.empty ()) */
-/* Js.log(xx); */
-    
     (changeText, newRiderInfo);
   }
 
@@ -339,16 +209,11 @@ let xx = Js.Obj.assign(em, em); */
         }
     };
 
-    /* let newRiderInfo = spreadRider(inputFormsInfo->TypeInfo.riderInfoGet, key, changeText); */
-
-    /* srfi(setRiderFormInfo, newRiderInfo); */
-
     ();
   }
   
   let riderCollectionAddressChangeHandler = evt => {
     riderFormInfoChangeSupportNewRider(evt, "collectionAddress");   
-
     ();
   }
 
@@ -360,7 +225,6 @@ let xx = Js.Obj.assign(em, em); */
 
   let riderDestinationAddressChangeHandler = evt => {
     riderFormInfoChangeSupportNewRider(evt, "destinationAddress");   
-
     ();
   }
 
@@ -390,7 +254,6 @@ let xx = Js.Obj.assign(em, em); */
 
   let riderOtherRequirementsChangeHandler = evt => {
     riderFormInfoChangeSupportNewRider(evt, "otherRequirements");   
-
     ();
   }
 
@@ -535,10 +398,12 @@ let xx = Js.Obj.assign(em, em); */
   {
   ...component,
   render: _self => {
-
+    let riderTypeName = "Rider";
+    let rowId = string_of_int(0);
+  
     let riderDateInfo = inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet;
     
-    let ulRiderTimes = <ul id="RiderAvailableTimes" className="available-times">{datePickerRow(typeName, rowId, riderDateInfo)}</ul>
+    let ulRiderTimes = <ul id="RiderAvailableTimes" className="available-times">{datePickerRow(riderTypeName, rowId, riderDateInfo)}</ul>
 
     let ulRiderAvailableTimes = withDataAttributes([("data-type", "Rider")], ulRiderTimes);
 
@@ -554,6 +419,7 @@ let xx = Js.Obj.assign(em, em); */
     */
 
     let mainDivStyle = ReactDOMRe.Style.make(~marginTop ="150px", ());
+    let h2Style = ReactDOMRe.Style.make(~marginTop ="40px", ());
 
     let showAddDateButton = false;
 
@@ -564,34 +430,17 @@ let xx = Js.Obj.assign(em, em); */
       riderDateInfo->TypeInfo.timeStartGet, 
       riderDateInfo->TypeInfo.timeEndGet];
  
-    /* let formatAvailabilityPeriod = (date, startTime, endTime) => {
-        /* return [startTime, endTime].map(time => {
-            return toISO8601((date || ''), time);
-        }).join('/'); */
-
-        let lla: array(string) = [|startTime, endTime|];
-
-        let times = Array.map(time => {
-          (time);
-        }, lla);
-
-        let xx = Js.Array.joinWith("/", times)
-        /* let xx = Js.List..joinWith("/", times) */
-
-        xx;
-    }
-     */
     let isoTime = formatAvailabilityPeriod(riderDateInfo->TypeInfo.dateGet, 
     riderDateInfo->TypeInfo.timeStartGet, 
     riderDateInfo->TypeInfo.timeEndGet);
-
-    /* Js.log(isoTime); */
 
     let showCloseFormButton = false;
     let showPollingPlaces = false;
 
     let inputFormsJSX = 
-    <div> {ReasonReact.string("Input Forms")}
+    <div>
+      <h2 style={h2Style}>{ReasonReact.string("Input Forms")}
+      </h2>
     <div style={mainDivStyle}>
         <div id="formsX" className="forms wrapper offset-top">
         <form id="need-ride" name="needRide" action={url ++ "/rider"} method="post" className="ride-form-op" ariaHidden=false>
