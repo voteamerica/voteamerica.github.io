@@ -77,7 +77,7 @@ type inputFormsInfoDriverInfo = {
   dsmsPreferred: bool,
   dagreeTandC: bool,
   dcontactOk: bool,
-  orgName: string,
+  dorgName: string,
 };
 
 [@bs.deriving abstract]

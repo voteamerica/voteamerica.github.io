@@ -537,7 +537,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
                         | false => ReasonReact.null
                       }
                     }
-
                     <p>{ReasonReact.string("Please enter your details in the form below, and our automatic matching algorithm will use this information to try to find you a driver.")}</p>
 
                     <fieldset className="rider-select-org">
@@ -758,34 +757,43 @@ let make = (~loginInfo:TypeInfo.loginInfo,
             <div className="bannerbox">
                 <h2 className="bannerbox__title">{ReasonReact.string("I can offer a ride")}</h2>
                 <div className="bannerbox__content">
-                    <a className="close-form button--cancel" href="#intro" ariaLabel="Close form" role="button" ariaControls="offer-ride">hmtlTimesEntity</a>
+                {
+                  switch showCloseFormButton {
+                    | true =>
+                        <a className="close-form button--cancel" href="#intro" ariaLabel="Close form" role="button" ariaControls="offer-ride">hmtlTimesEntity</a>
 
-                    <fieldset className="driver-select-org">
-                        <legend>{ReasonReact.string("Choose your organization")}</legend>
+                    | false => ReasonReact.null
+                  }
+                }
+                <fieldset className="driver-select-org">
+                    <legend>{ReasonReact.string("Choose your organization")}</legend>
 
-                        <p>{ReasonReact.string("Please choose this carefully as otherwise you may be asked to re-enter your details. Check with your organization if you are not sure.")}</p>
+                    <p>{ReasonReact.string("Please choose this carefully as otherwise you may be asked to re-enter your details. Check with your organization if you are not sure.")}</p>
 
-                        /*      value=inputFormsInfo->TypeInfo.driverInfoGet->TypeInfo.orgNameGet   */
+                    /*         */
 
-                        <div className="form-column">
-                            <div className="form-group">
-                                <input id="DrivingOnBehalfOfOrganization" name="DrivingOnBehalfOfOrganization" type_="hidden" value="true" 
-                                onChange=driverOrgNameChangeHandler />
-                                <label htmlFor="DrivingOBOOrganizationName">{ReasonReact.string("Organization name")}</label>
-                                <select id="DrivingOBOOrganizationName" name="DrivingOBOOrganizationName" required=true>
-                                    <option value="None">{ReasonReact.string("None")}</option>
-                                    <option value="NAACP">{ReasonReact.string("NAACP")}</option>
-                                    <option value="AAPD">{ReasonReact.string("AAPD")}</option>
-                                    <option value="PPC">{ReasonReact.string("PPC")}</option>
-                                    <option value="MDCC">{ReasonReact.string("MDCC")}</option>
-                                    <option value="MarchOn">{ReasonReact.string("MarchOn")}</option>
-                                    <option value="CenterCG">{ReasonReact.string("CenterCG")}</option>
-                                    <option value="PDAction">{ReasonReact.string("PDAction")}</option>
-                                    <option value="DailyKos">{ReasonReact.string("DailyKos")}</option>
-                                </select>  
-                            </div>
-                        </div>
-                    </fieldset>
+                    <div className="form-column">
+                      <div className="form-group">
+                        <input id="DrivingOnBehalfOfOrganization" name="DrivingOnBehalfOfOrganization" type_="hidden" value="true" 
+                        onChange=driverOrgNameChangeHandler />
+                        <label htmlFor="DrivingOBOOrganizationName">{ReasonReact.string("Organization name")}</label>
+                        <select id="DrivingOBOOrganizationName" name="DrivingOBOOrganizationName" required=true
+                        onChange=driverOrgNameChangeHandler
+                        value=inputFormsInfo->TypeInfo.driverInfoGet->TypeInfo.dorgNameGet
+                        >
+                            <option value="None">{ReasonReact.string("None")}</option>
+                            <option value="NAACP">{ReasonReact.string("NAACP")}</option>
+                            <option value="AAPD">{ReasonReact.string("AAPD")}</option>
+                            <option value="PPC">{ReasonReact.string("PPC")}</option>
+                            <option value="MDCC">{ReasonReact.string("MDCC")}</option>
+                            <option value="MarchOn">{ReasonReact.string("MarchOn")}</option>
+                            <option value="CenterCG">{ReasonReact.string("CenterCG")}</option>
+                            <option value="PDAction">{ReasonReact.string("PDAction")}</option>
+                            <option value="DailyKos">{ReasonReact.string("DailyKos")}</option>
+                        </select>  
+                    </div>
+                  </div>
+                </fieldset>
                         
                     <fieldset className="date-time-pickers">
                         <legend>{ReasonReact.string("What can you offer?")}</legend>
@@ -898,10 +906,16 @@ let make = (~loginInfo:TypeInfo.loginInfo,
                     </div>
                     <div className="form-group">
                         <button type_="submit" className="button button--large" id="offerRideSubmit">{ReasonReact.string("Sign up")}</button>
-                        <a className="align-right close-form" href="#intro">{ReasonReact.string("Back")}</a>
+                        {
+                          switch showCloseFormButton {
+                            | true =>
+                                <a className="align-right close-form" href="#intro">{ReasonReact.string("Back")}</a>
+                            | false => ReasonReact.null
+                          }
+                        }
                     </div>
                     <p className="panel-footer"><b>{ReasonReact.string("What happens next?")}</b> {ReasonReact.string("Our system will use these details to try to find riders. If there is a potential match, we'll send you a notification. If you accept the match, we'll let the rider know that you'll be in touch to arrange the ride.")}</p>
-                </div>
+              </div>
             </div>
         </form>
     </div>
