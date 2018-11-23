@@ -63,6 +63,21 @@ type inputFormsInfoDriverInfo = {
       */
   mutable startDateChanged: bool,
   driverDateInfo: inputFormsDateInfo,
+  driverZip: string,
+  driverRadius: string,
+  seatsAvailable: string,
+  powerChairSupport: bool,
+  hasInsurance: bool,
+  licenceNumber: string,
+  dfirstName: string,
+  dlastName: string,
+  demail: string,
+  dphone: string,
+  demailPreferred: bool,
+  dsmsPreferred: bool,
+  dagreeTandC: bool,
+  dcontactOk: bool,
+  orgName: string,
 };
 
 [@bs.deriving abstract]

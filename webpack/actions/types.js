@@ -132,20 +132,6 @@ const setFormInfoType = type => type + '_SET_FORM_INFO';
 const driverSetFormInfoType = setFormInfoType(driverType);
 const riderSetFormInfoType = setFormInfoType(riderType);
 
-// these may be too detailed
-// const setDateType = type => type + '_SET_DATE';
-// const driverSetDateType = setDateType(driverType);
-// const riderSetDateType = setDateType(riderType);
-
-// these may be too detailed
-// const setTimeTypes = type => ({
-//   start: type + '_SET_TIME_START',
-//   end: type + '_SET_TIME_END'
-// });
-
-// const driverSetTimeTypes = setTimeTypes(driverType);
-// const riderSetTimeTypes = setTimeTypes(riderType);
-
 export {
   NO_OP,
   LOGIN_DETAILS,

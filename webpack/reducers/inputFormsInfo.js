@@ -13,6 +13,21 @@ const inputFormsInfo = (
       endDateChanged: false,
       emailRequired: false,
       jsonTimesUpdated: false,
+      driverZip: '',
+      driverRadius: '',
+      seatsAvailable: 0,
+      powerChairSupport: false,
+      hasInsurance: false,
+      licenceNumber: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      emailPreferred: false,
+      smsPreferred: false,
+      agreeTandC: false,
+      contactOk: false,
+      orgName: 'None',
       availableDates: [],
       driverDateInfo: { date: '', timeStart: '06:00', timeEnd: '22:00' }
     },
@@ -46,40 +61,35 @@ const inputFormsInfo = (
   },
   action
 ) => {
+  let dateInfoUpdate = (key, dateFieldName, driverOrRiderInfo) => {
+    const { dateInfo } = action.payload;
+    const newInfo = { ...driverOrRiderInfo, [dateFieldName]: dateInfo };
+
+    const newState = { ...state, [key]: newInfo };
+
+    return newState;
+  };
+
+  let driverOrRiderInfoUpdate = key => {
+    const { formInfo: newDriverOrRiderInfo } = action.payload;
+
+    const newState = { ...state, [key]: newDriverOrRiderInfo };
+
+    return newState;
+  };
+
   switch (action.type) {
-    case driverSetDateInfoType: {
-      const { dateInfo } = action.payload;
-      const newDriverInfo = { ...state.driverInfo, dateInfo };
+    case driverSetDateInfoType:
+      return dateInfoUpdate('driverInfo', 'driverDateInfo', state.driverInfo);
 
-      const newState = { ...state, driverInfo: newDriverInfo };
+    case riderSetDateInfoType:
+      return dateInfoUpdate('riderInfo', 'dateInfo', state.riderInfo);
 
-      return newState;
-    }
+    case driverSetFormInfoType:
+      return driverOrRiderInfoUpdate('driverInfo');
 
-    case riderSetDateInfoType: {
-      const { dateInfo } = action.payload;
-      const newRiderInfo = { ...state.riderInfo, dateInfo };
-
-      const newState = { ...state, riderInfo: newRiderInfo };
-
-      return newState;
-    }
-
-    case driverSetFormInfoType: {
-      const { formInfo: newDriverInfo } = action.payload;
-
-      const newState = { ...state, driverInfo: newDriverInfo };
-
-      return newState;
-    }
-
-    case riderSetFormInfoType: {
-      const { formInfo: newRiderInfo } = action.payload;
-
-      const newState = { ...state, riderInfo: newRiderInfo };
-
-      return newState;
-    }
+    case riderSetFormInfoType:
+      return driverOrRiderInfoUpdate('riderInfo');
 
     default:
       return state;
