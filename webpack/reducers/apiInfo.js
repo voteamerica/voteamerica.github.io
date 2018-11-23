@@ -1,12 +1,12 @@
 const apiInfo = (state = {}) => {
+  if (!state.apiUrl) {
+    const apiUrl = remoteUrl || '';
+    const siteUrl = cpSiteUrl || '';
 
-    if (!state.apiUrl) {
-        const apiUrl = remoteUrl || '';
+    return { ...state, apiUrl, siteUrl };
+  }
 
-        return { ...state, apiUrl };
-    }
-
-    return state;
-}
+  return state;
+};
 
 export default apiInfo;

@@ -124,6 +124,14 @@ const getMatchOtherDriverListTypes = getAsyncTypes(
 
 const postUploadAsyncTypes = getAsyncTypes(POST_UPLOAD);
 
+const setDateInfoType = type => type + '_SET_DATE_INFO';
+const driverSetDateInfoType = setDateInfoType(driverType);
+const riderSetDateInfoType = setDateInfoType(riderType);
+
+const setFormInfoType = type => type + '_SET_FORM_INFO';
+const driverSetFormInfoType = setFormInfoType(driverType);
+const riderSetFormInfoType = setFormInfoType(riderType);
+
 export {
   NO_OP,
   LOGIN_DETAILS,
@@ -165,5 +173,13 @@ export {
   showMatchForCurrentRiderType,
   UPLOAD_FILE_CHOSEN,
   POST_UPLOAD,
-  postUploadAsyncTypes
+  postUploadAsyncTypes,
+  driverSetDateInfoType,
+  riderSetDateInfoType,
+  driverSetDateType,
+  driverSetFormInfoType,
+  driverSetTimeTypes,
+  riderSetDateType,
+  riderSetFormInfoType,
+  riderSetTimeTypes
 };

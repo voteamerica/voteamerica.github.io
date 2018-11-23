@@ -437,6 +437,14 @@ li {
     display: none;
 }
 
+.ride-form-op {
+    display: block;
+}
+
+.driver-form-op {
+    display: block;
+}
+
 .forms .bannerbox__content {
     padding-top: 5px;
     position: relative;
