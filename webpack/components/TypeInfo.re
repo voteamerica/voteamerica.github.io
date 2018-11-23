@@ -62,7 +62,7 @@ type inputFormsInfoDriverInfo = {
      refactor this away.
       */
   mutable startDateChanged: bool,
-  dateInfo: inputFormsDateInfo,
+  driverDateInfo: inputFormsDateInfo,
 };
 
 [@bs.deriving abstract]

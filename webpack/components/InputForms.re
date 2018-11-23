@@ -398,16 +398,21 @@ let make = (~loginInfo:TypeInfo.loginInfo,
   {
   ...component,
   render: _self => {
-    let riderTypeName = "Rider";
+    let riderTypeName = "Rider";  
+    let driverTypeName = "Driver";  
     let rowId = string_of_int(0);
   
     let riderDateInfo = inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet;
+
+    let driverDateInfo = inputFormsInfo->TypeInfo.driverInfoGet->TypeInfo.driverDateInfoGet;
     
     let ulRiderTimes = <ul id="RiderAvailableTimes" className="available-times">{datePickerRow(riderTypeName, rowId, riderDateInfo)}</ul>
 
+    let ulDriverTimes = <ul id="DriverAvailableTimes" className="available-times">{datePickerRow(driverTypeName, rowId, driverDateInfo)}</ul>
+
     let ulRiderAvailableTimes = withDataAttributes([("data-type", "Rider")], ulRiderTimes);
 
-    let ulDriverAvailableTimes = withDataAttributes([("data-type", "Driver")], <ul id="DriverAvailableTimes" className="available-times" />);
+    let ulDriverAvailableTimes = withDataAttributes([("data-type", "Driver")], ulDriverTimes);
 
     let emailPreferredContact =inputFormsInfo->TypeInfo.riderInfo->TypeInfo.emailPreferredGet;
 
@@ -422,8 +427,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     let h2Style = ReactDOMRe.Style.make(~marginTop ="40px", ());
 
     let showAddDateButton = false;
-
-    let riderDateInfo = inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet;
 
     let riderDateDetails = [
       riderDateInfo->TypeInfo.dateGet, 
@@ -669,9 +672,9 @@ let make = (~loginInfo:TypeInfo.loginInfo,
                 </div>
             </div>
         </form>
-
-        <form id="offer-ride" name="offerRide" action="{{ api }}/driver" method="post" className="ride-form-op" ariaHidden=true>
-            <input type_="hidden" name="_redirect" className="redirect" value="{{ cp_site }}/thanks-driver/?type_=driver" />
+        
+        <form id="offer-ride" name="offerRide" action={url ++ "/driver"} method="post" className="driver-form-op" ariaHidden=false>
+            <input type_="hidden" name="_redirect" className="redirect" value={siteUrl ++ "/thanks-driver/?type_=driver"} />
             <div className="bannerbox">
                 <h2 className="bannerbox__title">{ReasonReact.string("I can offer a ride")}</h2>
                 <div className="bannerbox__content">

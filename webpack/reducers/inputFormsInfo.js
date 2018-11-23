@@ -14,7 +14,7 @@ const inputFormsInfo = (
       emailRequired: false,
       jsonTimesUpdated: false,
       availableDates: [],
-      dateInfo: { date: '', timeStart: '06:00', timeEnd: '22:00' }
+      driverDateInfo: { date: '', timeStart: '06:00', timeEnd: '22:00' }
     },
     riderInfo: {
       startDateChanged: false,
