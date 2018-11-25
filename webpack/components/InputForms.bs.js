@@ -40,6 +40,21 @@ function make(loginInfo, apiInfo, inputFormsInfo, setDriverDateInfo, setDriverFo
     srdi(action, index, newDateInfo);
     return /* () */0;
   };
+  var testDateChangeSupport = function (action, dateInfo, dateTimeFieldName, index) {
+    var newDateInfo = spreadObject(dateInfo, dateTimeFieldName, "2019-10-30");
+    srdi(action, index, newDateInfo);
+    return /* () */0;
+  };
+  var testRiderDateChangeHandler = function (evt) {
+    evt.preventDefault();
+    testDateChangeSupport(setRiderDateInfo, inputFormsInfo.riderInfo.dateInfo, "date", 0);
+    return /* () */0;
+  };
+  var testDriverDateChangeHandler = function (evt) {
+    evt.preventDefault();
+    testDateChangeSupport(setDriverDateInfo, inputFormsInfo.driverInfo.driverDateInfo, "date", 0);
+    return /* () */0;
+  };
   var riderDateChangeHandler = function (evt) {
     dateChangeSupport(setRiderDateInfo, evt, inputFormsInfo.riderInfo.dateInfo, "date", 0);
     return /* () */0;
@@ -425,6 +440,9 @@ function make(loginInfo, apiInfo, inputFormsInfo, setDriverDateInfo, setDriverFo
               var h2Style = {
                 marginTop: "40px"
               };
+              var testButtonStyle = {
+                display: "none"
+              };
               var inputFormsJSX = React.createElement("div", undefined, React.createElement("h2", {
                         style: h2Style
                       }, "Input Forms"), React.createElement("div", {
@@ -456,7 +474,17 @@ function make(loginInfo, apiInfo, inputFormsInfo, setDriverDateInfo, setDriverFo
                                                 className: "form-column"
                                               }, React.createElement("div", {
                                                     className: "form-group"
-                                                  }, React.createElement("input", {
+                                                  }, React.createElement("button", {
+                                                        className: "add-time-btn button",
+                                                        id: "riderSetTestDateButton",
+                                                        style: testButtonStyle,
+                                                        onClick: testRiderDateChangeHandler
+                                                      }, "Set Rider Test Date"), React.createElement("button", {
+                                                        className: "add-time-btn button",
+                                                        id: "driverSetTestDateButton",
+                                                        style: testButtonStyle,
+                                                        onClick: testDriverDateChangeHandler
+                                                      }, "Set Driver Test Date"), React.createElement("input", {
                                                         id: "RidingOnBehalfOfOrganization",
                                                         name: "RidingOnBehalfOfOrganization",
                                                         type: "hidden",

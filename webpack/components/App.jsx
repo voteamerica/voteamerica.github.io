@@ -17,7 +17,6 @@ class AppBase extends Component {
   render() {
     return (
       <div>
-        xxx
         <LoginArea />
         <Driver />
         <Riders />
