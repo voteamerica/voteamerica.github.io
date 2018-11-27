@@ -13,17 +13,6 @@ let component = ReasonReact.statelessComponent("InputForms");
 
 
 [@bs.deriving abstract]
-type dateExtraJsProps = {
-  id: string,
-  className: string,
-  [@bs.as "type"] type_: string,
-  name: string,
-  value: string,
-  required: bool,
-  onChange: ReactEvent.Form.t => unit,
-};
-
-[@bs.deriving abstract]
 type jsProps = {
   loginInfo: TypeInfo.loginInfo,
   apiInfo: TypeInfo.apiInfo,
@@ -78,33 +67,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
 
     ();
   }
-
-  /* TEST support start */
-  let testDateChangeSupport = (action, dateInfo, dateTimeFieldName, index) => {
-    let dateOrTime = "2019-10-30";
-    let newDateInfo = spreadDateString(dateInfo, dateTimeFieldName, dateOrTime);
-
-    srdi(action, index, newDateInfo);
-
-    ();
-  }
-
-  let testRiderDateChangeHandler = (evt) => {    
-    ReactEvent.Mouse.preventDefault(evt);
-
-    testDateChangeSupport(setRiderDateInfo, inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet, "date", rowId);
-
-    ();
-  }
-
-  let testDriverDateChangeHandler = (evt) => {    
-    ReactEvent.Mouse.preventDefault(evt);
-
-    testDateChangeSupport(setDriverDateInfo, inputFormsInfo->TypeInfo.driverInfoGet->TypeInfo.driverDateInfoGet, "date", rowId);
-
-    ();
-  }
-  /* TEST support end */
 
   let riderDateChangeHandler = evt => {
     dateChangeSupport(setRiderDateInfo, evt, inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.dateInfoGet, "date", rowId);
@@ -496,18 +458,10 @@ let make = (~loginInfo:TypeInfo.loginInfo,
 
     let showCloseButton = false;
 
-    /* 
-            <div className="form-group calendar-date-block">
-                <label htmlFor={inputDateId++"x"}>{ReasonReact.string("Datex")}</label>
-                <DateExtra props={dateExtraJsProps} id={inputDateId++"x"} className="form-input input--date" type_="date" name={typeName ++ "Datex"} value=dateInfo->TypeInfo.dateGet required=true onChange={dateChangeHandler} />
-                <div className="help-block with-errors"></div>
-            </div>    
-    */
-
     let row = <div id="available-time-row">
         <li className="available-times__row">
             <div className="form-group calendar-date-block">
-              <label htmlFor=inputDateId>{ReasonReact.string("Date")}</label>
+                <label htmlFor=inputDateId>{ReasonReact.string("Date")}</label>
               <input className="form-input input--date" type_="date" name={typeName ++ "Date"} id=inputDateId onChange={dateChangeHandler} value=dateInfo->TypeInfo.dateGet required=true />
                 <div className="help-block with-errors"></div>
             </div>
@@ -562,9 +516,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
     let mainDivStyle = ReactDOMRe.Style.make(~marginTop ="150px", ());
     let h2Style = ReactDOMRe.Style.make(~marginTop ="40px", ());
 
-    let testButtonStyle = ReactDOMRe.Style.make(~display ="none", ());
-    /* style={testButtonStyle}  */
-
     let showAddDateButton = false;
     let showCloseFormButton = false;
     let showPollingPlaces = false;
@@ -586,7 +537,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
                         | false => ReasonReact.null
                       }
                     }
-                    
                     <p>{ReasonReact.string("Please enter your details in the form below, and our automatic matching algorithm will use this information to try to find you a driver.")}</p>
 
                     <fieldset className="rider-select-org">
@@ -596,8 +546,6 @@ let make = (~loginInfo:TypeInfo.loginInfo,
 
                         <div className="form-column">
                             <div className="form-group">
-                                <button id="riderSetTestDateButton" style={testButtonStyle} className="add-time-btn button" onClick={testRiderDateChangeHandler}>{ReasonReact.string("Set Rider Test Date")}</button>                                
-                                <button id="driverSetTestDateButton" style={testButtonStyle} className="add-time-btn button" onClick={testDriverDateChangeHandler}>{ReasonReact.string("Set Driver Test Date")}</button>                                
                                 <input id="RidingOnBehalfOfOrganization" name="RidingOnBehalfOfOrganization" type_="hidden" value="true" />
                                 <label htmlFor="RidingOBOOrganizationName">{ReasonReact.string("Organization name")}</label>
                                 <select id="RidingOBOOrganizationName" name="RidingOBOOrganizationName" required=true onChange=riderOrgNameChangeHandler value=inputFormsInfo->TypeInfo.riderInfoGet->TypeInfo.orgNameGet >
