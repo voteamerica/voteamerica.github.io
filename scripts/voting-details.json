@@ -199,8 +199,8 @@
   },
   {
     "State": "NorthCarolina",
-    "RegCheck": "https://vt.ncsbe.gov/voter_search_public/",
-    "LocationFinder": "https://enr.ncsbe.gov/pollingplace_search/",
+    "RegCheck": "https://vt.ncsbe.gov/RegLkup/",
+    "LocationFinder": "https://vt.ncsbe.gov/PPLkup/",
     "Twitter": "https://twitter.com/ncsbe"
   },
   {
