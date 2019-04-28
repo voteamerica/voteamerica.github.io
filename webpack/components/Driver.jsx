@@ -205,6 +205,7 @@ class DriverBase extends Component {
       { Header: 'Collection ZIP', accessor: 'DriverCollectionZIP' },
       { Header: 'City', accessor: 'city' },
       { Header: 'State', accessor: 'full_state' },
+      { Header: 'StateShort', accessor: 'state' },
       { Header: 'Radius', accessor: 'DriverCollectionRadius' },
       {
         Header: 'Drive Times',
@@ -503,6 +504,7 @@ class DriverBase extends Component {
                         <ReactTable
                           defaultPageSize={DEFAULT_LIST_PAGE_SIZE}
                           pageSize={driversInfo.listPageSize}
+                          filterable={true}
                           data={tableDrivers}
                           columns={driverColumns}
                           onPageChange={this.driversTableOnPageChangeHandler(

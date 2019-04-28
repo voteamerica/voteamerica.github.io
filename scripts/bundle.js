@@ -46085,6 +46085,9 @@ function (_Component) {
         Header: 'State',
         accessor: 'full_state'
       }, {
+        Header: 'StateShort',
+        accessor: 'state'
+      }, {
         Header: 'Radius',
         accessor: 'DriverCollectionRadius'
       }, {
@@ -46329,6 +46332,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_table__WEBPACK_IMPORTED_MODULE_7__["default"], {
         defaultPageSize: _actions_types_js__WEBPACK_IMPORTED_MODULE_10__["DEFAULT_LIST_PAGE_SIZE"],
         pageSize: driversInfo.listPageSize,
+        filterable: true,
         data: tableDrivers,
         columns: driverColumns,
         onPageChange: this.driversTableOnPageChangeHandler(this),
@@ -46602,7 +46606,7 @@ var component = ReasonReact.statelessComponent("Matches");
 var tableType = "matches";
 var matchTableColumns =
 /* array */
-[Utils$VoteUSReason.thcCreator("Driver", "uuid_driver", 100), Utils$VoteUSReason.thcCreator("Rider", "uuid_rider", 100), Utils$VoteUSReason.thcCreator("City", "city", 100), Utils$VoteUSReason.thcCreator("State", "full_state", 100), Utils$VoteUSReason.thcCreator("Status", "status", 100), Utils$VoteUSReason.thcCreator("Created", "created_ts", 160), Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 160), Utils$VoteUSReason.thcCreator("DriverCollectionZIP", "DriverCollectionZIP", 100), Utils$VoteUSReason.thcCreator("Drive Times - Local", "AvailableDriveTimesLocal", 160), Utils$VoteUSReason.thcCreator("Seat Count", "SeatCount", 100), Utils$VoteUSReason.thcCreator("License Number", "DriverLicenseNumber", 100), Utils$VoteUSReason.thcCreator("Driving for Organization", "DrivingOBOOrganizationName", 100), Utils$VoteUSReason.thcCreator("Driver First Name", "DriverFirstName", 100), Utils$VoteUSReason.thcCreator("Driver Last Name", "DriverLastName", 100), Utils$VoteUSReason.thcCreator("Rider First Name", "RiderFirstName", 100), Utils$VoteUSReason.thcCreator("Rider Last Name", "RiderLastName", 100), Utils$VoteUSReason.thcCreator("Rider Email", "RiderEmail", 100), Utils$VoteUSReason.thcCreator("Rider Phone", "RiderPhone", 100), Utils$VoteUSReason.thcCreator("Rider Collection ZIP", "RiderCollectionZIP", 100), Utils$VoteUSReason.thcCreator("Rider Dropoff ZIP", "RiderDropOffZIP", 100), Utils$VoteUSReason.thcCreator("Rider Collection Street Number", "RiderCollectionStreetNumber", 100), Utils$VoteUSReason.thcCreator("Rider Collection Address", "RiderCollectionAddress", 100), Utils$VoteUSReason.thcCreator("Rider Destination Address", "RiderDestinationAddress", 100), Utils$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal", 160), Utils$VoteUSReason.thcCreator("Driver Notes", "driver_notes", 100), Utils$VoteUSReason.thcCreator("Rider Notes", "rider_notes", 100), Utils$VoteUSReason.thcCreator("Score", "score", 100)];
+[Utils$VoteUSReason.thcCreator("Driver", "uuid_driver", 100), Utils$VoteUSReason.thcCreator("Rider", "uuid_rider", 100), Utils$VoteUSReason.thcCreator("City", "city", 100), Utils$VoteUSReason.thcCreator("State", "full_state", 100), Utils$VoteUSReason.thcCreator("StateShort", "state", 100), Utils$VoteUSReason.thcCreator("Status", "status", 100), Utils$VoteUSReason.thcCreator("Created", "created_ts", 160), Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 160), Utils$VoteUSReason.thcCreator("DriverCollectionZIP", "DriverCollectionZIP", 100), Utils$VoteUSReason.thcCreator("Drive Times - Local", "AvailableDriveTimesLocal", 160), Utils$VoteUSReason.thcCreator("Seat Count", "SeatCount", 100), Utils$VoteUSReason.thcCreator("License Number", "DriverLicenseNumber", 100), Utils$VoteUSReason.thcCreator("Driving for Organization", "DrivingOBOOrganizationName", 100), Utils$VoteUSReason.thcCreator("Driver First Name", "DriverFirstName", 100), Utils$VoteUSReason.thcCreator("Driver Last Name", "DriverLastName", 100), Utils$VoteUSReason.thcCreator("Rider First Name", "RiderFirstName", 100), Utils$VoteUSReason.thcCreator("Rider Last Name", "RiderLastName", 100), Utils$VoteUSReason.thcCreator("Rider Email", "RiderEmail", 100), Utils$VoteUSReason.thcCreator("Rider Phone", "RiderPhone", 100), Utils$VoteUSReason.thcCreator("Rider Collection ZIP", "RiderCollectionZIP", 100), Utils$VoteUSReason.thcCreator("Rider Dropoff ZIP", "RiderDropOffZIP", 100), Utils$VoteUSReason.thcCreator("Rider Collection Street Number", "RiderCollectionStreetNumber", 100), Utils$VoteUSReason.thcCreator("Rider Collection Address", "RiderCollectionAddress", 100), Utils$VoteUSReason.thcCreator("Rider Destination Address", "RiderDestinationAddress", 100), Utils$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal", 160), Utils$VoteUSReason.thcCreator("Driver Notes", "driver_notes", 100), Utils$VoteUSReason.thcCreator("Rider Notes", "rider_notes", 100), Utils$VoteUSReason.thcCreator("Score", "score", 100)];
 
 function tableMatch(itemDetails) {
   return {
@@ -46611,6 +46615,7 @@ function tableMatch(itemDetails) {
     uuid_rider: itemDetails.uuid_rider,
     city: itemDetails.city,
     full_state: itemDetails.full_state,
+    state: itemDetails.state,
     DriverCollectionZIP: itemDetails.DriverCollectionZIP,
     AvailableDriveTimesLocal: itemDetails.AvailableDriveTimesLocal,
     SeatCount: itemDetails.SeatCount,
@@ -47070,19 +47075,20 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
           onChange: matchesTableShowMatchForCurrentRiderHandler
         })))), React.createElement("div", {
           style: tableDivStyle
-        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
+        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
           return {
             className: prim,
             type: prim$1,
             columns: prim$2,
             defaultPageSize: prim$3,
             pageSize: prim$4,
-            data: prim$5,
-            onPageChange: prim$6,
-            onPageSizeChange: prim$7,
-            getTdProps: prim$8
+            filterable: prim$5,
+            data: prim$6,
+            onPageChange: prim$7,
+            onPageSizeChange: prim$8,
+            getTdProps: prim$9
           };
-        }, "basicMatchTable", tableType, 5, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler,
+        }, "basicMatchTable", tableType, 5, matchesInfo.listPageSize, true, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler,
         /* array */
         []))), match$1 ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
       } else {
@@ -47257,7 +47263,7 @@ var component = ReasonReact.statelessComponent("Riders");
 var tableType = "riders";
 var riderTableColumns =
 /* array */
-[Utils$VoteUSReason.thcCreator("uuid", "UUID", 100), Utils$VoteUSReason.thcCreator("First Name", "RiderFirstName", 100), Utils$VoteUSReason.thcCreator("Last Name", "RiderLastName", 100), Utils$VoteUSReason.thcCreator("Email", "RiderEmail", 100), Utils$VoteUSReason.thcCreator("Phone", "RiderPhone", 100), Utils$VoteUSReason.thcCreator("Collection ZIP", "RiderCollectionZIP", 100), Utils$VoteUSReason.thcCreator("City", "city", 100), Utils$VoteUSReason.thcCreator("State", "full_state", 100), Utils$VoteUSReason.thcCreator("Dropoff ZIP", "RiderDropOffZIP", 100), Utils$VoteUSReason.thcCreator("Created", "created_ts", 160), Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 160), Utils$VoteUSReason.thcCreator("Status", "status", 100), Utils$VoteUSReason.thcCreator("Status Info", "status_info", 100), Utils$VoteUSReason.thcCreator("Org ID", "uuid_organization", 100), Utils$VoteUSReason.thcCreator("Org Name", "OrganizationName", 100), Utils$VoteUSReason.thcCreator("Collection Street Number", "RiderCollectionStreetNumber", 100), Utils$VoteUSReason.thcCreator("Collection Address", "RiderCollectionAddress", 100), Utils$VoteUSReason.thcCreator("Destination Address", "RiderDestinationAddress", 100), Utils$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal", 160), Utils$VoteUSReason.thcCreator("Party Size", "TotalPartySize", 100), Utils$VoteUSReason.thcCreatorBool("Two Way Trip", "TwoWayTripNeeded", 100), Utils$VoteUSReason.thcCreatorBool("Is Vulnerable", "RiderIsVulnerable", 100), Utils$VoteUSReason.thcCreatorBool("No Politics Talk", "RiderWillNotTalkPolitics", 100), Utils$VoteUSReason.thcCreatorBool("Stay In Touch", "PleaseStayInTouch", 100), Utils$VoteUSReason.thcCreatorBool("Need Wheelchair", "NeedWheelchair", 100), Utils$VoteUSReason.thcCreator("Contact Method", "RiderPreferredContact", 135), Utils$VoteUSReason.thcCreator("Rider Notes", "RiderAccommodationNotes", 100), Utils$VoteUSReason.thcCreatorBool("Legal Consent", "RiderLegalConsent", 100), Utils$VoteUSReason.thcCreatorBool("Ready To Match", "ReadyToMatch", 100), Utils$VoteUSReason.thcCreatorBool("Will Be Safe", "RiderWillBeSafe", 100), Utils$VoteUSReason.thcCreator("Time zone", "timezone", 100)];
+[Utils$VoteUSReason.thcCreator("uuid", "UUID", 100), Utils$VoteUSReason.thcCreator("First Name", "RiderFirstName", 100), Utils$VoteUSReason.thcCreator("Last Name", "RiderLastName", 100), Utils$VoteUSReason.thcCreator("Email", "RiderEmail", 100), Utils$VoteUSReason.thcCreator("Phone", "RiderPhone", 100), Utils$VoteUSReason.thcCreator("Collection ZIP", "RiderCollectionZIP", 100), Utils$VoteUSReason.thcCreator("City", "city", 100), Utils$VoteUSReason.thcCreator("State", "full_state", 100), Utils$VoteUSReason.thcCreator("StateShort", "state", 100), Utils$VoteUSReason.thcCreator("Dropoff ZIP", "RiderDropOffZIP", 100), Utils$VoteUSReason.thcCreator("Created", "created_ts", 160), Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 160), Utils$VoteUSReason.thcCreator("Status", "status", 100), Utils$VoteUSReason.thcCreator("Status Info", "status_info", 100), Utils$VoteUSReason.thcCreator("Org ID", "uuid_organization", 100), Utils$VoteUSReason.thcCreator("Org Name", "OrganizationName", 100), Utils$VoteUSReason.thcCreator("Collection Street Number", "RiderCollectionStreetNumber", 100), Utils$VoteUSReason.thcCreator("Collection Address", "RiderCollectionAddress", 100), Utils$VoteUSReason.thcCreator("Destination Address", "RiderDestinationAddress", 100), Utils$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal", 160), Utils$VoteUSReason.thcCreator("Party Size", "TotalPartySize", 100), Utils$VoteUSReason.thcCreatorBool("Two Way Trip", "TwoWayTripNeeded", 100), Utils$VoteUSReason.thcCreatorBool("Is Vulnerable", "RiderIsVulnerable", 100), Utils$VoteUSReason.thcCreatorBool("No Politics Talk", "RiderWillNotTalkPolitics", 100), Utils$VoteUSReason.thcCreatorBool("Stay In Touch", "PleaseStayInTouch", 100), Utils$VoteUSReason.thcCreatorBool("Need Wheelchair", "NeedWheelchair", 100), Utils$VoteUSReason.thcCreator("Contact Method", "RiderPreferredContact", 135), Utils$VoteUSReason.thcCreator("Rider Notes", "RiderAccommodationNotes", 100), Utils$VoteUSReason.thcCreatorBool("Legal Consent", "RiderLegalConsent", 100), Utils$VoteUSReason.thcCreatorBool("Ready To Match", "ReadyToMatch", 100), Utils$VoteUSReason.thcCreatorBool("Will Be Safe", "RiderWillBeSafe", 100), Utils$VoteUSReason.thcCreator("Time zone", "timezone", 100)];
 
 function tableRider(itemDetails) {
   return {
@@ -47269,6 +47275,7 @@ function tableRider(itemDetails) {
     RiderCollectionZIP: itemDetails.RiderCollectionZIP,
     city: itemDetails.city,
     full_state: itemDetails.full_state,
+    state: itemDetails.state,
     RiderDropOffZIP: itemDetails.RiderDropOffZIP,
     AvailableRideTimesLocal: itemDetails.AvailableRideTimesLocal,
     TotalPartySize: itemDetails.TotalPartySize,
@@ -47665,19 +47672,20 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
           onChange: ridersTableShowCurrentMatchRiderOnlyHandler
         }))), React.createElement("div", {
           style: tableDivStyle
-        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
+        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
           return {
             className: prim,
             type: prim$1,
             columns: prim$2,
             defaultPageSize: prim$3,
             pageSize: prim$4,
-            data: prim$5,
-            onPageChange: prim$6,
-            onPageSizeChange: prim$7,
-            getTdProps: prim$8
+            filterable: prim$5,
+            data: prim$6,
+            onPageChange: prim$7,
+            onPageSizeChange: prim$8,
+            getTdProps: prim$9
           };
-        }, "basicRiderTable", tableType, 5, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler,
+        }, "basicRiderTable", tableType, 5, ridersInfo.listPageSize, true, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler,
         /* array */
         []))), match$1 ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
       } else {
@@ -47793,8 +47801,8 @@ var ReasonReact = __webpack_require__(/*! reason-react/src/ReasonReact.js */ "./
 
 var ReactTable = __webpack_require__(/*! react-table */ "./node_modules/react-table/es/index.js");
 
-function make(props, className, type_, defaultPageSize, pageSize, columns, data, onPageChange, onPageSizeChange, getTdProps, children) {
-  return ReasonReact.wrapJsForReason(ReactTable.default, Curry.app(props, [className, type_, columns, defaultPageSize, pageSize, data, onPageChange, onPageSizeChange, getTdProps]), children);
+function make(props, className, type_, defaultPageSize, pageSize, filterable, columns, data, onPageChange, onPageSizeChange, getTdProps, children) {
+  return ReasonReact.wrapJsForReason(ReactTable.default, Curry.app(props, [className, type_, columns, defaultPageSize, pageSize, filterable, data, onPageChange, onPageSizeChange, getTdProps]), children);
 }
 
 exports.make = make;

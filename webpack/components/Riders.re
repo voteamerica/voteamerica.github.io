@@ -10,6 +10,7 @@ type rider = {
    [@bs.as "RiderCollectionZIP"] collectionZip: string,
    city: string,
    full_state: string,
+   state: string,
    [@bs.as "RiderDropOffZIP"] dropOffZIP: string,
    [@bs.as "AvailableRideTimesLocal"] rideTimesLocal: string,
    [@bs.as "TotalPartySize"] partySize: int,
@@ -65,6 +66,7 @@ type riderTableJsProps = {
   defaultPageSize: int,
   /* page: int, */
   pageSize: int,
+  filterable: bool,
   data: array(rider),
   onPageChange: TypeInfo.tableOnPageChangeHandler,
   onPageSizeChange: TypeInfo.tableOnPageChangeSizeHandler,
@@ -83,6 +85,7 @@ let riderTableColumns =
     Utils.thcCreator(~header="Collection ZIP", ~accessor="RiderCollectionZIP", ~width=100),
     Utils.thcCreator(~header="City", ~accessor="city", ~width=100),
     Utils.thcCreator(~header="State", ~accessor="full_state", ~width=100),
+    Utils.thcCreator(~header="StateShort", ~accessor="state", ~width=100),
     Utils.thcCreator(~header="Dropoff ZIP", ~accessor="RiderDropOffZIP", ~width=100),
     Utils.thcCreator(~header="Created", ~accessor="created_ts", ~width=160),
     Utils.thcCreator(~header="Updated", ~accessor="last_updated_ts", ~width=160),
@@ -118,6 +121,7 @@ let tableRider = itemDetails:rider =>
         ~collectionZip=itemDetails->collectionZipGet,
         ~city=itemDetails->cityGet,
         ~full_state=itemDetails->full_stateGet,
+        ~state=itemDetails->stateGet,
         ~dropOffZIP=itemDetails->dropOffZIPGet,
         ~uuid_organization=itemDetails->uuid_organizationGet,
         ~status=itemDetails->statusGet,
@@ -468,6 +472,7 @@ _children) => {
             <Table props={riderTableJsProps}  className="basicRiderTable" type_={tableType} columns={riderTableColumns}
             defaultPageSize={5} /* get this from types default */
             pageSize={ridersInfo->listPageSizeGet}
+            filterable={true}
             data=tableRiders
             onPageChange={ridersTableOnPageChangeHandler}
             onPageSizeChange={ridersTableOnPageChangeSizeHandler}
