@@ -1,7 +1,0 @@
-{% comment %}
-	Change the API url to the test value on the test repo
-{% endcomment %}
-{% assign api = site.api %}
-{% if site.github.owner_name == 'richardwestenra' %}
-	{% assign api = 'https://api.carpoolvote.com/test' %}
-{% endif %}
