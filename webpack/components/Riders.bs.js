@@ -24,6 +24,7 @@ var riderTableColumns = /* array */[
   Utils$VoteUSReason.thcCreator("Collection ZIP", "RiderCollectionZIP", 100),
   Utils$VoteUSReason.thcCreator("City", "city", 100),
   Utils$VoteUSReason.thcCreator("State", "full_state", 100),
+  Utils$VoteUSReason.thcCreator("StateShort", "state", 100),
   Utils$VoteUSReason.thcCreator("Dropoff ZIP", "RiderDropOffZIP", 100),
   Utils$VoteUSReason.thcCreator("Created", "created_ts", 160),
   Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 160),
@@ -59,6 +60,7 @@ function tableRider(itemDetails) {
           RiderCollectionZIP: itemDetails.RiderCollectionZIP,
           city: itemDetails.city,
           full_state: itemDetails.full_state,
+          state: itemDetails.state,
           RiderDropOffZIP: itemDetails.RiderDropOffZIP,
           AvailableRideTimesLocal: itemDetails.AvailableRideTimesLocal,
           TotalPartySize: itemDetails.TotalPartySize,
@@ -346,19 +348,20 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
                                   onChange: ridersTableShowCurrentMatchRiderOnlyHandler
                                 }))), React.createElement("div", {
                           style: tableDivStyle
-                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
+                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
                                     return {
                                             className: prim,
                                             type: prim$1,
                                             columns: prim$2,
                                             defaultPageSize: prim$3,
                                             pageSize: prim$4,
-                                            data: prim$5,
-                                            onPageChange: prim$6,
-                                            onPageSizeChange: prim$7,
-                                            getTdProps: prim$8
+                                            filterable: prim$5,
+                                            data: prim$6,
+                                            onPageChange: prim$7,
+                                            onPageSizeChange: prim$8,
+                                            getTdProps: prim$9
                                           };
-                                  }), "basicRiderTable", tableType, 5, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler, /* array */[]))), match$1 ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
+                                  }), "basicRiderTable", tableType, 5, ridersInfo.listPageSize, true, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler, /* array */[]))), match$1 ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
               } else {
                 tableRidersJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",

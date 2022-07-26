@@ -6471,6 +6471,96 @@ exports.__8 = __8;
 
 /***/ }),
 
+/***/ "./node_modules/bs-platform/lib/js/js_dict.js":
+/*!****************************************************!*\
+  !*** ./node_modules/bs-platform/lib/js/js_dict.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+var unsafeDeleteKey = (
+  function(dict,key){
+     delete dict[key];
+     return 0
+   }
+);
+
+function entries(dict) {
+  var keys = Object.keys(dict);
+  var l = keys.length;
+  var values = new Array(l);
+  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+    var key = keys[i];
+    values[i] = /* tuple */[
+      key,
+      dict[key]
+    ];
+  }
+  return values;
+}
+
+function values(dict) {
+  var keys = Object.keys(dict);
+  var l = keys.length;
+  var values$1 = new Array(l);
+  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+    values$1[i] = dict[keys[i]];
+  }
+  return values$1;
+}
+
+function fromList(entries) {
+  var dict = { };
+  var _param = entries;
+  while(true) {
+    var param = _param;
+    if (param) {
+      var match = param[0];
+      dict[match[0]] = match[1];
+      _param = param[1];
+      continue ;
+    } else {
+      return dict;
+    }
+  };
+}
+
+function fromArray(entries) {
+  var dict = { };
+  var l = entries.length;
+  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+    var match = entries[i];
+    dict[match[0]] = match[1];
+  }
+  return dict;
+}
+
+function map(f, source) {
+  var target = { };
+  var keys = Object.keys(source);
+  var l = keys.length;
+  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+    var key = keys[i];
+    target[key] = f(source[key]);
+  }
+  return target;
+}
+
+exports.unsafeDeleteKey = unsafeDeleteKey;
+exports.entries = entries;
+exports.values = values;
+exports.fromList = fromList;
+exports.fromArray = fromArray;
+exports.map = map;
+/* unsafeDeleteKey Not a pure module */
+
+
+/***/ }),
+
 /***/ "./node_modules/bs-platform/lib/js/js_exn.js":
 /*!***************************************************!*\
   !*** ./node_modules/bs-platform/lib/js/js_exn.js ***!
@@ -44576,7 +44666,7 @@ module.exports = function(originalModule) {
 /*!**********************************!*\
   !*** ./webpack/actions/index.js ***!
   \**********************************/
-/*! exports provided: noOp, loginDetails, login, loginSuccess, logout, getDriversList, hideDriversList, showDriversListDownloadLink, hideDriversListDownloadLink, setInfoDriversList, hideExpiredDriversList, hideConfirmedDriversList, showCurrentMatchOnlyDriversList, showCurrentDriver, hideCurrentDriver, getRidersList, hideRidersList, showRidersListDownloadLink, hideRidersListDownloadLink, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, getMatchesOtherDriverList, hideMatchesOtherDriverList, showMatchesOtherDriverListDownloadLink, hideMatchesOtherDriverListDownloadLink, setInfoMatchesOtherDriverList, hideExpiredMatchesOtherDriverList, hideConfirmedMatchesOtherDriverList, showMatchForCurrentDriver, showMatchForCurrentRider, uploadFileChosen, postUploadFile */
+/*! exports provided: noOp, loginDetails, login, loginSuccess, logout, getDriversList, hideDriversList, showDriversListDownloadLink, hideDriversListDownloadLink, setInfoDriversList, hideExpiredDriversList, hideConfirmedDriversList, showCurrentMatchOnlyDriversList, showCurrentDriver, hideCurrentDriver, getRidersList, hideRidersList, showRidersListDownloadLink, hideRidersListDownloadLink, setInfoRidersList, hideExpiredRidersList, hideConfirmedRidersList, showCurrentMatchOnlyRidersList, showCurrentRider, hideCurrentRider, getMatchesList, hideMatchesList, showMatchesListDownloadLink, hideMatchesListDownloadLink, setInfoMatchesList, hideExpiredMatchesList, hideConfirmedMatchesList, showCurrentMatch, hideCurrentMatch, getMatchesOtherDriverList, hideMatchesOtherDriverList, showMatchesOtherDriverListDownloadLink, hideMatchesOtherDriverListDownloadLink, setInfoMatchesOtherDriverList, hideExpiredMatchesOtherDriverList, hideConfirmedMatchesOtherDriverList, showMatchForCurrentDriver, showMatchForCurrentRider, uploadFileChosen, postUploadFile, setDriverDateInfo, setDriverFormInfo, setRiderDateInfo, setRiderFormInfo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44626,6 +44716,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showMatchForCurrentRider", function() { return showMatchForCurrentRider; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadFileChosen", function() { return uploadFileChosen; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postUploadFile", function() { return postUploadFile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDriverDateInfo", function() { return setDriverDateInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDriverFormInfo", function() { return setDriverFormInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRiderDateInfo", function() { return setRiderDateInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRiderFormInfo", function() { return setRiderFormInfo; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./webpack/actions/types.js");
 
 
@@ -44848,6 +44942,44 @@ var postUploadFile = function postUploadFile(remoteUrlBase, token, fileDetails) 
       token: token,
       fileDetails: fileDetails,
       successProperty: 'data'
+    }
+  };
+};
+
+var setDriverDateInfo = function setDriverDateInfo(index, dateInfo) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["driverSetDateInfoType"],
+    payload: {
+      index: index,
+      dateInfo: dateInfo
+    }
+  };
+};
+
+var setRiderDateInfo = function setRiderDateInfo(index, dateInfo) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["riderSetDateInfoType"],
+    payload: {
+      index: index,
+      dateInfo: dateInfo
+    }
+  };
+};
+
+var setDriverFormInfo = function setDriverFormInfo(formInfo) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["driverSetFormInfoType"],
+    payload: {
+      formInfo: formInfo
+    }
+  };
+};
+
+var setRiderFormInfo = function setRiderFormInfo(formInfo) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["riderSetFormInfoType"],
+    payload: {
+      formInfo: formInfo
     }
   };
 };
@@ -45532,7 +45664,7 @@ function loginSaga() {
 /*!**********************************!*\
   !*** ./webpack/actions/types.js ***!
   \**********************************/
-/*! exports provided: NO_OP, LOGIN_DETAILS, LOGIN_REQUEST, loginRequestTypes, LOGOUT, DEFAULT_LIST_PAGE_INDEX, DEFAULT_LIST_PAGE_SIZE, driversGetHideListTypes, driversListShowCurrentMatchOnlyType, driversListSetInfoType, getDriverListTypes, driversListHideExpiredType, driversListHideConfirmedType, currentDriverShowHideTypes, driversListDownloadLinkShowHideTypes, ridersGetHideListTypes, ridersListDownloadLinkShowHideTypes, ridersListSetInfoType, getRiderListTypes, ridersListHideExpiredType, ridersListHideConfirmedType, ridersListShowCurrentMatchOnlyType, currentRiderShowHideTypes, matchesGetHideListTypes, matchesListDownloadLinkShowHideTypes, matchesListSetInfoType, matchesListHideExpiredType, matchesListHideConfirmedType, getMatchListTypes, currentMatchShowHideTypes, matchesOtherDriverGetHideListTypes, matchesOtherDriverListDownloadLinkShowHideTypes, matchesOtherDriverListSetInfoType, matchesOtherDriverListHideExpiredType, matchesOtherDriverListHideConfirmedType, getMatchOtherDriverListTypes, showMatchForCurrentDriverType, showMatchForCurrentRiderType, UPLOAD_FILE_CHOSEN, POST_UPLOAD, postUploadAsyncTypes */
+/*! exports provided: NO_OP, LOGIN_DETAILS, LOGIN_REQUEST, loginRequestTypes, LOGOUT, DEFAULT_LIST_PAGE_INDEX, DEFAULT_LIST_PAGE_SIZE, driversGetHideListTypes, driversListShowCurrentMatchOnlyType, driversListSetInfoType, getDriverListTypes, driversListHideExpiredType, driversListHideConfirmedType, currentDriverShowHideTypes, driversListDownloadLinkShowHideTypes, ridersGetHideListTypes, ridersListDownloadLinkShowHideTypes, ridersListSetInfoType, getRiderListTypes, ridersListHideExpiredType, ridersListHideConfirmedType, ridersListShowCurrentMatchOnlyType, currentRiderShowHideTypes, matchesGetHideListTypes, matchesListDownloadLinkShowHideTypes, matchesListSetInfoType, matchesListHideExpiredType, matchesListHideConfirmedType, getMatchListTypes, currentMatchShowHideTypes, matchesOtherDriverGetHideListTypes, matchesOtherDriverListDownloadLinkShowHideTypes, matchesOtherDriverListSetInfoType, matchesOtherDriverListHideExpiredType, matchesOtherDriverListHideConfirmedType, getMatchOtherDriverListTypes, showMatchForCurrentDriverType, showMatchForCurrentRiderType, UPLOAD_FILE_CHOSEN, POST_UPLOAD, postUploadAsyncTypes, driverSetDateInfoType, riderSetDateInfoType, driverSetDateType, driverSetFormInfoType, driverSetTimeTypes, riderSetDateType, riderSetFormInfoType, riderSetTimeTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45578,6 +45710,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPLOAD_FILE_CHOSEN", function() { return UPLOAD_FILE_CHOSEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_UPLOAD", function() { return POST_UPLOAD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postUploadAsyncTypes", function() { return postUploadAsyncTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driverSetDateInfoType", function() { return driverSetDateInfoType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "riderSetDateInfoType", function() { return riderSetDateInfoType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driverSetDateType", function() { return driverSetDateType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driverSetFormInfoType", function() { return driverSetFormInfoType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "driverSetTimeTypes", function() { return driverSetTimeTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "riderSetDateType", function() { return riderSetDateType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "riderSetFormInfoType", function() { return riderSetFormInfoType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "riderSetTimeTypes", function() { return riderSetTimeTypes; });
 var NO_OP = 'NO_OP';
 var LOGIN_DETAILS = 'LOGIN_DETAILS';
 var LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -45687,6 +45827,20 @@ var getMatchListTypes = getAsyncTypes(matchesGetHideListTypes.get);
 var getMatchOtherDriverListTypes = getAsyncTypes(matchesOtherDriverGetHideListTypes.get);
 var postUploadAsyncTypes = getAsyncTypes(POST_UPLOAD);
 
+var setDateInfoType = function setDateInfoType(type) {
+  return type + '_SET_DATE_INFO';
+};
+
+var driverSetDateInfoType = setDateInfoType(driverType);
+var riderSetDateInfoType = setDateInfoType(riderType);
+
+var setFormInfoType = function setFormInfoType(type) {
+  return type + '_SET_FORM_INFO';
+};
+
+var driverSetFormInfoType = setFormInfoType(driverType);
+var riderSetFormInfoType = setFormInfoType(riderType);
+
 
 /***/ }),
 
@@ -45718,6 +45872,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MatchesPlus_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./MatchesPlus.jsx */ "./webpack/components/MatchesPlus.jsx");
 /* harmony import */ var _MatchesOtherDriverPlus_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./MatchesOtherDriverPlus.jsx */ "./webpack/components/MatchesOtherDriverPlus.jsx");
 /* harmony import */ var _UploadArea_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./UploadArea.jsx */ "./webpack/components/UploadArea.jsx");
+/* harmony import */ var _InputFormsPlus_jsx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./InputFormsPlus.jsx */ "./webpack/components/InputFormsPlus.jsx");
+
 
 
 
@@ -45752,13 +45908,13 @@ function (_Component) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(AppBase, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_LoginArea_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_Driver_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], null), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_RidersPlus_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_MatchesPlus_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, "xxx", react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_LoginArea_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_Driver_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], null), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_RidersPlus_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_MatchesPlus_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
         sectionHeading: "Matches Info",
         others: false
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_MatchesOtherDriverPlus_jsx__WEBPACK_IMPORTED_MODULE_11__["default"], {
         sectionHeading: "Matches Other Driver Info",
         others: true
-      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_UploadArea_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], null));
+      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_UploadArea_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], null), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_InputFormsPlus_jsx__WEBPACK_IMPORTED_MODULE_13__["default"], null));
     }
   }]);
 
@@ -46085,6 +46241,9 @@ function (_Component) {
         Header: 'State',
         accessor: 'full_state'
       }, {
+        Header: 'StateShort',
+        accessor: 'state'
+      }, {
         Header: 'Radius',
         accessor: 'DriverCollectionRadius'
       }, {
@@ -46329,6 +46488,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_table__WEBPACK_IMPORTED_MODULE_7__["default"], {
         defaultPageSize: _actions_types_js__WEBPACK_IMPORTED_MODULE_10__["DEFAULT_LIST_PAGE_SIZE"],
         pageSize: driversInfo.listPageSize,
+        filterable: true,
         data: tableDrivers,
         columns: driverColumns,
         onPageChange: this.driversTableOnPageChangeHandler(this),
@@ -46344,6 +46504,1349 @@ function (_Component) {
 
 var Driver = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, mapDispatchToProps)(DriverBase);
 /* harmony default export */ __webpack_exports__["default"] = (Driver);
+
+/***/ }),
+
+/***/ "./webpack/components/InputForms.bs.js":
+/*!*********************************************!*\
+  !*** ./webpack/components/InputForms.bs.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Generated by BUCKLESCRIPT VERSION 4.0.7, PLEASE EDIT WITH CARE
+
+
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var Js_dict = __webpack_require__(/*! bs-platform/lib/js/js_dict.js */ "./node_modules/bs-platform/lib/js/js_dict.js");
+
+var ReasonReact = __webpack_require__(/*! reason-react/src/ReasonReact.js */ "./node_modules/reason-react/src/ReasonReact.js");
+
+var component = ReasonReact.statelessComponent("InputForms");
+
+function make(loginInfo, apiInfo, inputFormsInfo, setDriverDateInfo, setDriverFormInfo, setRiderDateInfo, setRiderFormInfo, _children) {
+  var url = apiInfo.apiUrl;
+  var siteUrl = apiInfo.siteUrl;
+  var rowIdAsText = String(0);
+  React.createElement("span", {
+    dangerouslySetInnerHTML: {
+      __html: "&plus;"
+    }
+  });
+  var hmtlTimesEntity = React.createElement("span", {
+    dangerouslySetInnerHTML: {
+      __html: "&times;"
+    }
+  });
+  var hmtlAmpEntity = React.createElement("span", {
+    dangerouslySetInnerHTML: {
+      __html: "&amp;"
+    }
+  });
+  var regexPattern = "(^\\d{5}$)|(^\\d{5}-\\d{4}$)";
+
+  var withDataAttributes = function withDataAttributes(data, element) {
+    return React.cloneElement(element, Js_dict.fromList(data));
+  };
+
+  var inputId = function inputId(typeName, rowIdAsText, sectionName) {
+    return typeName + (sectionName + rowIdAsText);
+  };
+
+  var srdi = function srdi(fx, index, dateInfo) {
+    {
+      fx(index, dateInfo);
+      return 0;
+    }
+  };
+
+  var dateChangeSupport = function dateChangeSupport(action, evt, dateInfo, dateTimeFieldName, index) {
+    var dateOrTime = evt.target.value;
+    var newDateInfo = spreadObject(dateInfo, dateTimeFieldName, dateOrTime);
+    srdi(action, index, newDateInfo);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderDateChangeHandler = function riderDateChangeHandler(evt) {
+    dateChangeSupport(setRiderDateInfo, evt, inputFormsInfo.riderInfo.dateInfo, "date", 0);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderStartTimeChangeHandler = function riderStartTimeChangeHandler(evt) {
+    dateChangeSupport(setRiderDateInfo, evt, inputFormsInfo.riderInfo.dateInfo, "timeStart", 0);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderEndTimeChangeHandler = function riderEndTimeChangeHandler(evt) {
+    dateChangeSupport(setRiderDateInfo, evt, inputFormsInfo.riderInfo.dateInfo, "timeEnd", 0);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverDateChangeHandler = function driverDateChangeHandler(evt) {
+    dateChangeSupport(setDriverDateInfo, evt, inputFormsInfo.driverInfo.driverDateInfo, "date", 0);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverStartTimeChangeHandler = function driverStartTimeChangeHandler(evt) {
+    dateChangeSupport(setDriverDateInfo, evt, inputFormsInfo.driverInfo.driverDateInfo, "timeStart", 0);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverEndTimeChangeHandler = function driverEndTimeChangeHandler(evt) {
+    dateChangeSupport(setDriverDateInfo, evt, inputFormsInfo.driverInfo.driverDateInfo, "timeEnd", 0);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var eventTargetType = function eventTargetType(target) {
+    {
+      return target.type;
+    }
+  };
+
+  var srfi = function srfi(fx, formInfo) {
+    {
+      fx(formInfo);
+      return 0;
+    }
+  };
+
+  var srfiString = function srfiString(key, change) {
+    var newRiderInfo = spreadObject(inputFormsInfo.riderInfo, key, change);
+    srfi(setRiderFormInfo, newRiderInfo);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var srfiNumber = function srfiNumber(key, change) {
+    var newRiderInfo = spreadObject(inputFormsInfo.riderInfo, key, change);
+    srfi(setRiderFormInfo, newRiderInfo);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var srfiBool = function srfiBool(key, change) {
+    var newRiderInfo = spreadObject(inputFormsInfo.riderInfo, key, change);
+    srfi(setRiderFormInfo, newRiderInfo);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderFormInfoChangeSupportNewRider = function riderFormInfoChangeSupportNewRider(evt, key) {
+    var targetType = eventTargetType(evt.target);
+
+    switch (targetType) {
+      case "checkbox":
+        var change = evt.target.checked;
+        srfiBool(key, change);
+        break;
+
+      case "number":
+        var change$1 = evt.target.value;
+        srfiNumber(key, change$1);
+        break;
+
+      case "radio":
+        var change$2 = evt.target.value === "Yes";
+        srfiBool(key, change$2);
+        break;
+
+      default:
+        var change$3 = evt.target.value;
+        srfiString(key, change$3);
+    }
+
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var sdfi = function sdfi(fx, formInfo) {
+    {
+      fx(formInfo);
+      return 0;
+    }
+  };
+
+  var sdfiString = function sdfiString(key, change) {
+    var newDriverInfo = spreadObject(inputFormsInfo.driverInfo, key, change);
+    sdfi(setDriverFormInfo, newDriverInfo);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var sdfiNumber = function sdfiNumber(key, change) {
+    var newDriverInfo = spreadObject(inputFormsInfo.driverInfo, key, change);
+    sdfi(setDriverFormInfo, newDriverInfo);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var sdfiBool = function sdfiBool(key, change) {
+    var newDriverInfo = spreadObject(inputFormsInfo.driverInfo, key, change);
+    sdfi(setDriverFormInfo, newDriverInfo);
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverFormInfoChangeSupportNewDriver = function driverFormInfoChangeSupportNewDriver(evt, key) {
+    var targetType = eventTargetType(evt.target);
+
+    switch (targetType) {
+      case "checkbox":
+        var change = evt.target.checked;
+        sdfiBool(key, change);
+        break;
+
+      case "number":
+        var change$1 = evt.target.value;
+        sdfiNumber(key, change$1);
+        break;
+
+      case "radio":
+        var change$2 = evt.target.value === "Yes";
+        sdfiBool(key, change$2);
+        break;
+
+      default:
+        var change$3 = evt.target.value;
+        sdfiString(key, change$3);
+    }
+
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderCollectionAddressChangeHandler = function riderCollectionAddressChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "collectionAddress");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderCollectionZipChangeHandler = function riderCollectionZipChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "collectionZip");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderDestinationAddressChangeHandler = function riderDestinationAddressChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "destinationAddress");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderDestinationZipChangeHandler = function riderDestinationZipChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "destinationZip");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderSeatCountChangeHandler = function riderSeatCountChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "seatCount");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderPowerChairUserChangeHandler = function riderPowerChairUserChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "powerChairUser");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderTwoWayTripNeededChangeHandler = function riderTwoWayTripNeededChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "twoWayTripNeeded");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderOtherRequirementsChangeHandler = function riderOtherRequirementsChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "otherRequirements");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderFirstNameChangeHandler = function riderFirstNameChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "firstName");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderLastNameChangeHandler = function riderLastNameChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "lastName");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderEmailChangeHandler = function riderEmailChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "email");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderPhoneChangeHandler = function riderPhoneChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "phone");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderCellPhoneChangeHandler = function riderCellPhoneChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "cellPhone");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderEmailPreferredChangeHandler = function riderEmailPreferredChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "emailPreferred");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderPhonePreferredChangeHandler = function riderPhonePreferredChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "phonePreferred");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var ridersmsPreferredChangeHandler = function ridersmsPreferredChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "smsPreferred");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderAgreeTandCChangeHandler = function riderAgreeTandCChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "agreeTandC");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderContactOkChangeHandler = function riderContactOkChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "contactOk");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var riderOrgNameChangeHandler = function riderOrgNameChangeHandler(evt) {
+    riderFormInfoChangeSupportNewRider(evt, "orgName");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverZipChangeHandler = function driverZipChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "driverZip");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverRadiusChangeHandler = function driverRadiusChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "driverRadius");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverSeatsAvailableChangeHandler = function driverSeatsAvailableChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "seatsAvailable");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverPowerchairSupportChangeHandler = function driverPowerchairSupportChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "powerChairSupport");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverHasInsuranceChangeHandler = function driverHasInsuranceChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "hasInsurance");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverLicenceNumberChangeHandler = function driverLicenceNumberChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "licenceNumber");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverFirstNameChangeHandler = function driverFirstNameChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "firstName");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverLastNameChangeHandler = function driverLastNameChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "lastName");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverEmailChangeHandler = function driverEmailChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "email");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverPhoneChangeHandler = function driverPhoneChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "phone");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverEmailPreferredChangeHandler = function driverEmailPreferredChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "emailPreferred");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driversmsPreferredChangeHandler = function driversmsPreferredChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "smsPreferred");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverAgreeTandCChangeHandler = function driverAgreeTandCChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "agreeTandC");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverContactOkChangeHandler = function driverContactOkChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "contactOk");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var driverOrgNameChangeHandler = function driverOrgNameChangeHandler(evt) {
+    driverFormInfoChangeSupportNewDriver(evt, "orgName");
+    return (
+      /* () */
+      0
+    );
+  };
+
+  var inputTimeStart = function inputTimeStart(typeName, rowId, startTime, startTimeChangeHandler) {
+    var xName = typeName + "TimeStart";
+    var xId = inputId(typeName, rowId, "TimeStart");
+    var xEnd = "#" + inputId(typeName, rowId, "TimeEnd");
+    var match = startTime.length !== 0;
+    var time = match ? startTime : "06:00";
+    var f = React.createElement("input", {
+      className: "form-input input--time-start",
+      id: xId,
+      max: "22:00",
+      min: 6,
+      name: xName,
+      required: true,
+      type: "time",
+      value: time,
+      onChange: startTimeChangeHandler
+    });
+    var data_000 =
+    /* tuple */
+    ["data-start", xEnd];
+    var data =
+    /* :: */
+    [data_000,
+    /* [] */
+    0];
+    return withDataAttributes(data, f);
+  };
+
+  var inputTimeEnd = function inputTimeEnd(typeName, rowId, endTime, endTimeChangeHandler) {
+    var xName = typeName + "TimeEnd";
+    var xId = inputId(typeName, rowId, "TimeEnd");
+    var xEnd = "#" + inputId(typeName, rowId, "TimeStart");
+    var match = endTime.length !== 0;
+    var time = match ? endTime : "22:00";
+    var f = React.createElement("input", {
+      className: "form-input input--time-end",
+      id: xId,
+      max: "22:00",
+      min: 6,
+      name: xName,
+      required: true,
+      type: "time",
+      value: time,
+      onChange: endTimeChangeHandler
+    });
+    var data_000 =
+    /* tuple */
+    ["data-end", xEnd];
+    var data =
+    /* :: */
+    [data_000,
+    /* [] */
+    0];
+    return withDataAttributes(data, f);
+  };
+
+  var datePickerRow = function datePickerRow(typeName, rowId, dateInfo, dateChangeHandler, startTimeChangeHandler, endTimeChangeHandler) {
+    var inputDateId = typeName + ("Date" + rowId);
+    var match = false;
+    return React.createElement("div", {
+      id: "available-time-row"
+    }, React.createElement("li", {
+      className: "available-times__row"
+    }, React.createElement("div", {
+      className: "form-group calendar-date-block"
+    }, React.createElement("label", {
+      htmlFor: inputDateId
+    }, "Date"), React.createElement("input", {
+      className: "form-input input--date",
+      id: inputDateId,
+      name: typeName + "Date",
+      required: true,
+      type: "date",
+      value: dateInfo.date,
+      onChange: dateChangeHandler
+    }), React.createElement("div", {
+      className: "help-block with-errors"
+    })), React.createElement("div", {
+      className: "form-group"
+    }, React.createElement("label", {
+      htmlFor: typeName + ("TimeStart" + rowId)
+    }, "Start time"), inputTimeStart(typeName, rowId, dateInfo.timeStart, startTimeChangeHandler), React.createElement("div", {
+      className: "help-block with-errors"
+    })), React.createElement("div", {
+      className: "form-group"
+    }, React.createElement("label", {
+      htmlFor: typeName + ("TimeEnd" + rowId)
+    }, "End time"), inputTimeEnd(typeName, rowId, dateInfo.timeEnd, endTimeChangeHandler), React.createElement("div", {
+      className: "help-block with-errors"
+    })), match ? React.createElement("button", {
+      "aria-label": "Delete time",
+      className: "remove-time button--cancel"
+    }, hmtlTimesEntity) : null));
+  };
+
+  return (
+    /* record */
+    [
+    /* debugName */
+    component[
+    /* debugName */
+    0],
+    /* reactClassInternal */
+    component[
+    /* reactClassInternal */
+    1],
+    /* handedOffState */
+    component[
+    /* handedOffState */
+    2],
+    /* willReceiveProps */
+    component[
+    /* willReceiveProps */
+    3],
+    /* didMount */
+    component[
+    /* didMount */
+    4],
+    /* didUpdate */
+    component[
+    /* didUpdate */
+    5],
+    /* willUnmount */
+    component[
+    /* willUnmount */
+    6],
+    /* willUpdate */
+    component[
+    /* willUpdate */
+    7],
+    /* shouldUpdate */
+    component[
+    /* shouldUpdate */
+    8],
+    /* render */
+    function (_self) {
+      var riderDateInfo = inputFormsInfo.riderInfo.dateInfo;
+      var driverDateInfo = inputFormsInfo.driverInfo.driverDateInfo;
+      var riderIsoTime = formatAvailabilityPeriod(riderDateInfo.date, riderDateInfo.timeStart, riderDateInfo.timeEnd);
+      var driverIsoTime = formatAvailabilityPeriod(driverDateInfo.date, driverDateInfo.timeStart, driverDateInfo.timeEnd);
+      var ulRiderTimes = React.createElement("ul", {
+        className: "available-times",
+        id: "RiderAvailableTimes"
+      }, datePickerRow("Rider", rowIdAsText, riderDateInfo, riderDateChangeHandler, riderStartTimeChangeHandler, riderEndTimeChangeHandler));
+      var ulDriverTimes = React.createElement("ul", {
+        className: "available-times",
+        id: "DriverAvailableTimes"
+      }, datePickerRow("Driver", rowIdAsText, driverDateInfo, driverDateChangeHandler, driverStartTimeChangeHandler, driverEndTimeChangeHandler));
+      var ulRiderAvailableTimes = withDataAttributes(
+      /* :: */
+      [
+      /* tuple */
+      ["data-type", "Rider"],
+      /* [] */
+      0], ulRiderTimes);
+      var ulDriverAvailableTimes = withDataAttributes(
+      /* :: */
+      [
+      /* tuple */
+      ["data-type", "Driver"],
+      /* [] */
+      0], ulDriverTimes);
+      var riderEmailPreferredContact = inputFormsInfo.riderInfo.emailPreferred;
+      var inputRiderPreferredEmailContact = withDataAttributes(
+      /* :: */
+      [
+      /* tuple */
+      ["data-emailid", "#riderEmail"],
+      /* [] */
+      0], React.createElement("input", {
+        className: "toggleRequiredEmail",
+        checked: riderEmailPreferredContact,
+        name: "RiderPreferredContact",
+        type: "checkbox",
+        value: "Email",
+        onChange: riderEmailPreferredChangeHandler
+      }));
+      var mainDivStyle = {
+        marginTop: "150px"
+      };
+      var h2Style = {
+        marginTop: "40px"
+      };
+      var inputFormsJSX = React.createElement("div", undefined, React.createElement("h2", {
+        style: h2Style
+      }, "Input Forms"), React.createElement("div", {
+        style: mainDivStyle
+      }, React.createElement("div", {
+        className: "forms wrapper offset-top",
+        id: "formsX"
+      }, React.createElement("form", {
+        "aria-hidden": false,
+        className: "ride-form-op",
+        id: "need-ride",
+        action: url + "/rider",
+        method: "post",
+        name: "needRide"
+      }, React.createElement("input", {
+        className: "redirect",
+        name: "_redirect",
+        type: "hidden",
+        value: siteUrl + "/thanks-rider/?type_=rider"
+      }), React.createElement("div", {
+        className: "bannerbox"
+      }, React.createElement("h2", {
+        className: "bannerbox__title"
+      }, "I need a ride"), React.createElement("div", {
+        className: "bannerbox__content"
+      }, null, React.createElement("p", undefined, "Please enter your details in the form below, and our automatic matching algorithm will use this information to try to find you a driver."), React.createElement("fieldset", {
+        className: "rider-select-org"
+      }, React.createElement("legend", undefined, "Choose your organization"), React.createElement("p", undefined, "Please choose this carefully as otherwise you may be asked to re-enter your details. Check with your organization if you are not sure."), React.createElement("div", {
+        className: "form-column"
+      }, React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("input", {
+        id: "RidingOnBehalfOfOrganization",
+        name: "RidingOnBehalfOfOrganization",
+        type: "hidden",
+        value: "true"
+      }), React.createElement("label", {
+        htmlFor: "RidingOBOOrganizationName"
+      }, "Organization name"), React.createElement("select", {
+        id: "RidingOBOOrganizationName",
+        name: "RidingOBOOrganizationName",
+        required: true,
+        value: inputFormsInfo.riderInfo.orgName,
+        onChange: riderOrgNameChangeHandler
+      }, React.createElement("option", {
+        value: "None"
+      }, "None"), React.createElement("option", {
+        value: "NAACP"
+      }, "NAACP"), React.createElement("option", {
+        value: "AAPD"
+      }, "AAPD"), React.createElement("option", {
+        value: "PPC"
+      }, "PPC"), React.createElement("option", {
+        value: "MDCC"
+      }, "MDCC"), React.createElement("option", {
+        value: "MarchOn"
+      }, "MarchOn"), React.createElement("option", {
+        value: "CenterCG"
+      }, "CenterCG"), React.createElement("option", {
+        value: "PDAction"
+      }, "PDAction"), React.createElement("option", {
+        value: "DailyKos"
+      }, "DailyKos"))))), React.createElement("fieldset", {
+        className: "date-time-pickers"
+      }, React.createElement("legend", undefined, "Dates and Times Available"), React.createElement("p", undefined, "On what dates and times would you be available for the ride? Please pick all the time slots that could work for you: This will make it easier for us to match you with a driver. You can pick multiple time slots, on different dates or on the same date."), ulRiderAvailableTimes, null, React.createElement("input", {
+        className: "hiddenJSONTimes",
+        name: "AvailableRideTimesJSON",
+        type: "hidden",
+        value: riderIsoTime
+      })), React.createElement("fieldset", undefined, React.createElement("legend", undefined, "Your location details"), React.createElement("div", {
+        className: "form-column"
+      }, React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "riderCollectionAddress"
+      }, "Pick up address"), React.createElement("input", {
+        className: "form-input",
+        id: "riderCollectionAddress",
+        name: "RiderCollectionAddress",
+        placeholder: "Your pick up address",
+        required: true,
+        type: "text",
+        value: inputFormsInfo.riderInfo.collectionAddress,
+        onChange: riderCollectionAddressChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "rideArea"
+      }, "Pick up ZIP code"), React.createElement("input", {
+        className: "form-input form-input--medium",
+        id: "rideArea",
+        name: "RiderCollectionZIP",
+        pattern: regexPattern,
+        placeholder: "Where you can meet the driver",
+        required: true,
+        type: "text",
+        value: inputFormsInfo.riderInfo.collectionZip,
+        onChange: riderCollectionZipChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "riderDestinationAddress"
+      }, "Destination address"), React.createElement("input", {
+        className: "form-input",
+        id: "riderDestinationAddress",
+        name: "RiderDestinationAddress",
+        placeholder: "Your destination address",
+        required: true,
+        type: "text",
+        value: inputFormsInfo.riderInfo.destinationAddress,
+        onChange: riderDestinationAddressChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "rideDestinationZIP"
+      }, "Destination ZIP code"), React.createElement("input", {
+        className: "form-input form-input--medium",
+        id: "rideDestinationZIP",
+        name: "RiderDropOffZIP",
+        pattern: regexPattern,
+        placeholder: "To where do you need a ride?",
+        required: true,
+        type: "text",
+        value: inputFormsInfo.riderInfo.destinationZip,
+        onChange: riderDestinationZipChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      }))), null), React.createElement("fieldset", undefined, React.createElement("legend", undefined, "Vehicle requirements"), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "rideSeats"
+      }, "Number of seats required"), React.createElement("input", {
+        className: "form-input form-input--small",
+        id: "rideSeats",
+        min: 1,
+        name: "TotalPartySize",
+        required: true,
+        type: "number",
+        value: inputFormsInfo.riderInfo.seatCount,
+        onChange: riderSeatCountChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      }), React.createElement("small", undefined, "Please let us know how many people will need to travel together in the same car. You may take somebody with you as a safety measure."), React.createElement("small", undefined, "To make it easier for us to match people, we ask that you travel with as few people as possible.")), React.createElement("div", {
+        className: "form-group checkbox"
+      }, React.createElement("label", {
+        htmlFor: "riderIsPowerChairUser"
+      }, React.createElement("input", {
+        id: "riderIsPowerChairUser",
+        checked: inputFormsInfo.riderInfo.powerChairUser,
+        name: "NeedWheelchair",
+        type: "checkbox",
+        onChange: riderPowerChairUserChangeHandler
+      }), "I am a powerchair user who needs an adapted van with a lift.")), React.createElement("div", {
+        className: "form-group checkbox"
+      }, React.createElement("label", {
+        htmlFor: "rideReturn"
+      }, React.createElement("input", {
+        id: "rideReturn",
+        checked: inputFormsInfo.riderInfo.twoWayTripNeeded,
+        name: "TwoWayTripNeeded",
+        type: "checkbox",
+        onChange: riderTwoWayTripNeededChangeHandler
+      }), "I need a two-way trip.")), React.createElement("div", {
+        className: "form-group form-inline form-inline-other-requirements"
+      }, React.createElement("label", {
+        htmlFor: "RiderAccommodationNotes"
+      }, "Other Requirements", React.createElement("i", {
+        className: "optional"
+      }, "Optional")), React.createElement("textarea", {
+        className: "form-input",
+        id: "RiderAccommodationNotes",
+        cols: 60,
+        name: "RiderAccommodationNotes",
+        placeholder: "Please let us know any other requirements you have for your ride...",
+        rows: 6,
+        value: inputFormsInfo.riderInfo.otherRequirements,
+        onChange: riderOtherRequirementsChangeHandler
+      })), React.createElement("div", {
+        className: "form-inline"
+      }, React.createElement("small", undefined, "Please let us know of any other accommodation requirements."), React.createElement("ul", undefined, React.createElement("li", undefined, React.createElement("small", undefined, "Service animal")), React.createElement("li", undefined, React.createElement("small", undefined, "Assistance folding equipment")), React.createElement("li", undefined, React.createElement("small", undefined, "Assistance entering/ exiting the Vehicle")), React.createElement("li", undefined, React.createElement("small", undefined, "Child car seat or booster (please include age)")), React.createElement("li", undefined, React.createElement("small", undefined, "Do not speak English (please include languages)")), React.createElement("li", undefined, React.createElement("small", undefined, "Other"))))), React.createElement("fieldset", undefined, React.createElement("legend", undefined, "Your details"), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "riderFirstName"
+      }, "First name"), React.createElement("input", {
+        className: "form-input",
+        id: "riderFirstName",
+        name: "RiderFirstName",
+        placeholder: "Your first name",
+        required: true,
+        type: "text",
+        value: inputFormsInfo.riderInfo.firstName,
+        onChange: riderFirstNameChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "riderLastName"
+      }, "Last name"), React.createElement("input", {
+        className: "form-input",
+        id: "riderLastName",
+        name: "RiderLastName",
+        placeholder: "Your last name",
+        required: true,
+        type: "text",
+        value: inputFormsInfo.riderInfo.lastName,
+        onChange: riderLastNameChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "riderEmail"
+      }, "Email address", riderEmailPreferredContact ? null : React.createElement("i", {
+        className: "optional"
+      }, "Optional")), React.createElement("input", {
+        className: "form-input",
+        id: "riderEmail",
+        name: "RiderEmail",
+        placeholder: "Email",
+        required: riderEmailPreferredContact,
+        type: "email",
+        value: inputFormsInfo.riderInfo.email,
+        onChange: riderEmailChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "riderPhone"
+      }, "Phone number (cell preferred)"), React.createElement("input", {
+        className: "form-input",
+        id: "riderPhone",
+        name: "RiderPhone",
+        placeholder: "Phone",
+        required: true,
+        type: "tel",
+        value: inputFormsInfo.riderInfo.phone,
+        onChange: riderPhoneChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group radio"
+      }, React.createElement("p", undefined, "Is this a cell phone?"), React.createElement("label", undefined, React.createElement("input", {
+        checked: inputFormsInfo.riderInfo.cellPhone === true,
+        name: "riderCell",
+        type: "radio",
+        value: "Yes",
+        onChange: riderCellPhoneChangeHandler
+      }), "Yes"), React.createElement("label", undefined, React.createElement("input", {
+        checked: inputFormsInfo.riderInfo.cellPhone === false,
+        name: "riderCell",
+        type: "radio",
+        value: "No",
+        onChange: riderCellPhoneChangeHandler
+      }), "No")), React.createElement("div", {
+        className: "form-group checkbox checkbox--multi"
+      }, React.createElement("p", undefined, "How would you prefer the driver contacts you?"), React.createElement("label", undefined, inputRiderPreferredEmailContact, "Email"), React.createElement("label", undefined, React.createElement("input", {
+        checked: inputFormsInfo.riderInfo.phonePreferred,
+        name: "RiderPreferredContact",
+        type: "checkbox",
+        value: "Phone",
+        onChange: riderPhonePreferredChangeHandler
+      }), "Phone"), React.createElement("label", undefined, React.createElement("input", {
+        checked: inputFormsInfo.riderInfo.smsPreferred,
+        name: "RiderPreferredContact",
+        type: "checkbox",
+        value: "SMS",
+        onChange: ridersmsPreferredChangeHandler
+      }), "SMS"))), React.createElement("div", {
+        className: "form-group checkbox"
+      }, React.createElement("label", {
+        htmlFor: "RiderLegalConsent"
+      }, React.createElement("input", {
+        id: "RiderLegalConsent",
+        checked: inputFormsInfo.riderInfo.agreeTandC,
+        name: "RiderLegalConsent",
+        required: true,
+        type: "checkbox",
+        onChange: riderAgreeTandCChangeHandler
+      }), "I agree to the", React.createElement("a", {
+        href: "terms-conditions/",
+        target: "_blank"
+      }, "Terms ", hmtlAmpEntity, " Conditions.")), React.createElement("small", undefined, "I understand that Carpool Vote LLC will share my contact details with the driver if there's a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day if you've asked us not to stay in touch.)"), React.createElement("small", undefined, "I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote cannot be responsible if anything goes wrong."), React.createElement("small", undefined, "I understand that Carpool Vote cannot guarantee that I will find a ride by using the platform, or that a driver will complete the ride as agreed. In that case, I will keep looking for a ride until I have reached my destination."), React.createElement("small", undefined, "I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.")), React.createElement("div", {
+        className: "form-group checkbox"
+      }, React.createElement("label", {
+        htmlFor: "inTouchRider"
+      }, React.createElement("input", {
+        id: "inTouchRider",
+        checked: inputFormsInfo.riderInfo.contactOk,
+        name: "PleaseStayInTouch",
+        type: "checkbox",
+        onChange: riderContactOkChangeHandler
+      }), "We'd like to keep you updated from time to time about how the project is progressing. Please untick this box if you'd prefer us not to do this.")), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("button", {
+        className: "button button--large",
+        id: "needRideSubmit",
+        type: "submit"
+      }, "Sign up"), null), React.createElement("p", {
+        className: "panel-footer"
+      }, React.createElement("b", undefined, "What happens next?"), "Our system will use these details to automatically try to find you a driver. If there is a match, the driver will get in touch to arrange the ride.")))), React.createElement("form", {
+        "aria-hidden": false,
+        className: "driver-form-op",
+        id: "offer-ride",
+        action: url + "/driver",
+        method: "post",
+        name: "offerRide"
+      }, React.createElement("input", {
+        className: "redirect",
+        name: "_redirect",
+        type: "hidden",
+        value: siteUrl + "/thanks-driver/?type_=driver"
+      }), React.createElement("div", {
+        className: "bannerbox"
+      }, React.createElement("h2", {
+        className: "bannerbox__title"
+      }, "I can offer a ride"), React.createElement("div", {
+        className: "bannerbox__content"
+      }, null, React.createElement("fieldset", {
+        className: "driver-select-org"
+      }, React.createElement("legend", undefined, "Choose your organization"), React.createElement("p", undefined, "Please choose this carefully as otherwise you may be asked to re-enter your details. Check with your organization if you are not sure."), React.createElement("div", {
+        className: "form-column"
+      }, React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("input", {
+        id: "DrivingOnBehalfOfOrganization",
+        name: "DrivingOnBehalfOfOrganization",
+        type: "hidden",
+        value: "true",
+        onChange: driverOrgNameChangeHandler
+      }), React.createElement("label", {
+        htmlFor: "DrivingOBOOrganizationName"
+      }, "Organization name"), React.createElement("select", {
+        id: "DrivingOBOOrganizationName",
+        name: "DrivingOBOOrganizationName",
+        required: true,
+        value: inputFormsInfo.driverInfo.dorgName,
+        onChange: driverOrgNameChangeHandler
+      }, React.createElement("option", {
+        value: "None"
+      }, "None"), React.createElement("option", {
+        value: "NAACP"
+      }, "NAACP"), React.createElement("option", {
+        value: "AAPD"
+      }, "AAPD"), React.createElement("option", {
+        value: "PPC"
+      }, "PPC"), React.createElement("option", {
+        value: "MDCC"
+      }, "MDCC"), React.createElement("option", {
+        value: "MarchOn"
+      }, "MarchOn"), React.createElement("option", {
+        value: "CenterCG"
+      }, "CenterCG"), React.createElement("option", {
+        value: "PDAction"
+      }, "PDAction"), React.createElement("option", {
+        value: "DailyKos"
+      }, "DailyKos"))))), React.createElement("fieldset", {
+        className: "date-time-pickers"
+      }, React.createElement("legend", undefined, "What can you offer?"), React.createElement("h3", undefined, "Dates and times available"), React.createElement("p", undefined, "On what dates and times would you be a available to give rides? Please pick all the time slots that could work for you: This will make it easier for us to match you with someone who needs a ride. You can pick multiple time slots, on different dates or on the same date."), ulDriverAvailableTimes, null, React.createElement("input", {
+        className: "hiddenJSONTimes",
+        name: "AvailableDriveTimesJSON",
+        type: "hidden",
+        value: driverIsoTime
+      })), React.createElement("fieldset", undefined, React.createElement("legend", undefined, "Location and vehicle"), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "rideArea"
+      }, "Driving ZIP code"), React.createElement("input", {
+        className: "form-input form-input--medium",
+        id: "offerArea",
+        name: "DriverCollectionZIP",
+        pattern: regexPattern,
+        placeholder: "Where can you pick up the rider?",
+        required: true,
+        type: "text",
+        value: inputFormsInfo.driverInfo.driverZip,
+        onChange: driverZipChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("p", undefined, "I am willing to collect within a", React.createElement("input", {
+        className: "form-input form-input--inline",
+        id: "offerMiles",
+        min: 0,
+        name: "DriverCollectionRadius",
+        placeholder: "e.g. 10",
+        required: true,
+        step: 1.0,
+        type: "number",
+        value: inputFormsInfo.driverInfo.driverRadius,
+        onChange: driverRadiusChangeHandler
+      }), "mile radius of this zip code."), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "driverSeats"
+      }, "Passenger seats available in vehicle"), React.createElement("input", {
+        className: "form-input form-input--small",
+        id: "driverSeats",
+        min: 0,
+        name: "SeatCount",
+        placeholder: "e.g. 2",
+        required: true,
+        type: "number",
+        value: inputFormsInfo.driverInfo.seatsAvailable,
+        onChange: driverSeatsAvailableChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group checkbox"
+      }, React.createElement("label", {
+        htmlFor: "driverWheelchair"
+      }, React.createElement("input", {
+        id: "driverWheelchair",
+        checked: inputFormsInfo.driverInfo.powerChairSupport,
+        name: "DriverCanLoadRiderWithWheelchair",
+        type: "checkbox",
+        onChange: driverPowerchairSupportChangeHandler
+      }), "I have an adapted van with space for a powerchair")), React.createElement("div", {
+        className: "form-group checkbox"
+      }, React.createElement("label", {
+        htmlFor: "offerInsurance"
+      }, React.createElement("input", {
+        id: "offerInsurance",
+        checked: inputFormsInfo.driverInfo.hasInsurance,
+        name: "DriverHasInsurance",
+        required: true,
+        type: "checkbox",
+        onChange: driverHasInsuranceChangeHandler
+      }), "I confirm the driver has insurance"), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "driverLicence"
+      }, "Vehicle licence plate number"), React.createElement("input", {
+        className: "form-input form-input--medium",
+        id: "driverLicence",
+        name: "DriverLicenceNumber",
+        required: true,
+        type: "text",
+        value: inputFormsInfo.driverInfo.licenceNumber,
+        onChange: driverLicenceNumberChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      }))), React.createElement("fieldset", undefined, React.createElement("legend", undefined, "Your details"), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "driverFirstName"
+      }, "First name"), React.createElement("input", {
+        className: "form-input",
+        id: "driverFirstName",
+        name: "DriverFirstName",
+        placeholder: "Your first name",
+        required: true,
+        type: "text",
+        value: inputFormsInfo.driverInfo.dfirstName,
+        onChange: driverFirstNameChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "driverLastName"
+      }, "Last name"), React.createElement("input", {
+        className: "form-input",
+        id: "driverLastName",
+        name: "DriverLastName",
+        placeholder: "Your last name",
+        required: true,
+        type: "text",
+        value: inputFormsInfo.driverInfo.dlastName,
+        onChange: driverLastNameChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "driverEmail"
+      }, "Email address"), React.createElement("input", {
+        className: "form-input",
+        id: "driverEmail",
+        name: "DriverEmail",
+        placeholder: "Email address",
+        required: true,
+        type: "email",
+        value: inputFormsInfo.driverInfo.demail,
+        onChange: driverEmailChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("label", {
+        htmlFor: "driverPhone"
+      }, "Cell phone number"), React.createElement("input", {
+        className: "form-input",
+        id: "driverPhone",
+        name: "DriverPhone",
+        placeholder: "Phone",
+        required: true,
+        type: "tel",
+        value: inputFormsInfo.driverInfo.dphone,
+        onChange: driverPhoneChangeHandler
+      }), React.createElement("div", {
+        className: "help-block with-errors"
+      })), React.createElement("div", {
+        className: "form-group checkbox checkbox--multi"
+      }, React.createElement("p", undefined, "Preferred notification method (choose as many as you like)"), React.createElement("label", undefined, React.createElement("input", {
+        checked: inputFormsInfo.driverInfo.demailPreferred,
+        name: "DriverPreferredContact",
+        type: "checkbox",
+        value: "Email",
+        onChange: driverEmailPreferredChangeHandler
+      }), "Email"), React.createElement("label", undefined, React.createElement("input", {
+        checked: inputFormsInfo.driverInfo.dsmsPreferred,
+        name: "DriverPreferredContact",
+        type: "checkbox",
+        value: "SMS",
+        onChange: driversmsPreferredChangeHandler
+      }), "SMS"))), React.createElement("div", {
+        className: "form-group checkbox"
+      }, React.createElement("label", {
+        htmlFor: "DriverAgreeTnC"
+      }, React.createElement("input", {
+        id: "DriverAgreeTnC",
+        checked: inputFormsInfo.driverInfo.dagreeTandC,
+        name: "DriverAgreeTnC",
+        required: true,
+        type: "checkbox",
+        onChange: driverAgreeTandCChangeHandler
+      }), "I agree to the", React.createElement("a", {
+        href: "terms-conditions/",
+        target: "_blank"
+      }, "Terms ", hmtlAmpEntity, " Conditions.")), React.createElement("small", undefined, "I understand that Carpool Vote LLC will share my contact details with the driver if there's a match. (Carpool Vote will not share personal details with anybody else, unless required by law, and will destroy them within three months of election day if you've asked us not to stay in touch.)"), React.createElement("small", undefined, "I understand that Carpool Vote provides introductions between riders and volunteer drivers who have signed up on the platform. I understand that anybody can sign up to drive and Carpool Vote is unable to perform any background checks on people who use the platform. As with any other environment where I meet new people, I will take steps to keep myself and my possessions safe and accept that Carpool Vote LLC cannot be responsible if anything goes wrong."), React.createElement("small", undefined, "I understand that Carpool Vote cannot guarantee that I will find appropriate matches through the platform, or that any agreed ride will occur. I take full responsibility for any cost related to using the platform."), React.createElement("small", undefined, "I understand that this service is open to any driver or rider - no matter what their personal background or beliefs. To help make sure that both the driver and I feel comfortable and safe, I promise that I will not discuss politics during the journey.")), React.createElement("div", {
+        className: "form-group checkbox"
+      }, React.createElement("label", {
+        htmlFor: "inTouchDriver"
+      }, React.createElement("input", {
+        id: "inTouchDriver",
+        checked: inputFormsInfo.driverInfo.dcontactOk,
+        name: "PleaseStayInTouch",
+        type: "checkbox",
+        onChange: driverContactOkChangeHandler
+      }), "We'd like to keep you updated from time to time about how the project is progressing. Please untick this box if you'd prefer us not to do this.")), React.createElement("div", {
+        className: "form-group"
+      }, React.createElement("button", {
+        className: "button button--large",
+        id: "offerRideSubmit",
+        type: "submit"
+      }, "Sign up"), null), React.createElement("p", {
+        className: "panel-footer"
+      }, React.createElement("b", undefined, "What happens next?"), "Our system will use these details to try to find riders. If there is a potential match, we'll send you a notification. If you accept the match, we'll let the rider know that you'll be in touch to arrange the ride.")))))));
+      var match = loginInfo.loggedIn;
+
+      if (match) {
+        return inputFormsJSX;
+      } else {
+        return null;
+      }
+    },
+    /* initialState */
+    component[
+    /* initialState */
+    10],
+    /* retainedProps */
+    component[
+    /* retainedProps */
+    11],
+    /* reducer */
+    component[
+    /* reducer */
+    12],
+    /* jsElementWrapped */
+    component[
+    /* jsElementWrapped */
+    13]]
+  );
+}
+
+var $$default = ReasonReact.wrapReasonForJs(component, function (jsProps) {
+  return make(jsProps.loginInfo, jsProps.apiInfo, jsProps.inputFormsInfo, jsProps.setDriverDateInfo, jsProps.setDriverFormInfo, jsProps.setRiderDateInfo, jsProps.setRiderFormInfo,
+  /* array */
+  []);
+});
+exports.component = component;
+exports.make = make;
+exports.$$default = $$default;
+exports.default = $$default;
+exports.__esModule = true;
+/* component Not a pure module */
+
+/***/ }),
+
+/***/ "./webpack/components/InputFormsPlus.jsx":
+/*!***********************************************!*\
+  !*** ./webpack/components/InputFormsPlus.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _InputForms_bs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputForms.bs.js */ "./webpack/components/InputForms.bs.js");
+/* harmony import */ var _InputForms_bs_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_InputForms_bs_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/index.js */ "./webpack/actions/index.js");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  var apiInfo = state.apiInfo,
+      loginInfo = state.loginInfo,
+      inputFormsInfo = state.inputFormsInfo;
+  return {
+    apiInfo: apiInfo,
+    loginInfo: loginInfo,
+    inputFormsInfo: inputFormsInfo
+  };
+};
+
+var mapDispatchToProps = {
+  setDriverDateInfo: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["setDriverDateInfo"],
+  setDriverFormInfo: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["setDriverFormInfo"],
+  setRiderDateInfo: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["setRiderDateInfo"],
+  setRiderFormInfo: _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["setRiderFormInfo"]
+};
+var InputFormsPlus = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_InputForms_bs_js__WEBPACK_IMPORTED_MODULE_1___default.a);
+/* harmony default export */ __webpack_exports__["default"] = (InputFormsPlus);
 
 /***/ }),
 
@@ -46602,7 +48105,7 @@ var component = ReasonReact.statelessComponent("Matches");
 var tableType = "matches";
 var matchTableColumns =
 /* array */
-[Utils$VoteUSReason.thcCreator("Driver", "uuid_driver", 100), Utils$VoteUSReason.thcCreator("Rider", "uuid_rider", 100), Utils$VoteUSReason.thcCreator("City", "city", 100), Utils$VoteUSReason.thcCreator("State", "full_state", 100), Utils$VoteUSReason.thcCreator("Status", "status", 100), Utils$VoteUSReason.thcCreator("Created", "created_ts", 160), Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 160), Utils$VoteUSReason.thcCreator("DriverCollectionZIP", "DriverCollectionZIP", 100), Utils$VoteUSReason.thcCreator("Drive Times - Local", "AvailableDriveTimesLocal", 160), Utils$VoteUSReason.thcCreator("Seat Count", "SeatCount", 100), Utils$VoteUSReason.thcCreator("License Number", "DriverLicenseNumber", 100), Utils$VoteUSReason.thcCreator("Driving for Organization", "DrivingOBOOrganizationName", 100), Utils$VoteUSReason.thcCreator("Driver First Name", "DriverFirstName", 100), Utils$VoteUSReason.thcCreator("Driver Last Name", "DriverLastName", 100), Utils$VoteUSReason.thcCreator("Rider First Name", "RiderFirstName", 100), Utils$VoteUSReason.thcCreator("Rider Last Name", "RiderLastName", 100), Utils$VoteUSReason.thcCreator("Rider Email", "RiderEmail", 100), Utils$VoteUSReason.thcCreator("Rider Phone", "RiderPhone", 100), Utils$VoteUSReason.thcCreator("Rider Collection ZIP", "RiderCollectionZIP", 100), Utils$VoteUSReason.thcCreator("Rider Dropoff ZIP", "RiderDropOffZIP", 100), Utils$VoteUSReason.thcCreator("Rider Collection Street Number", "RiderCollectionStreetNumber", 100), Utils$VoteUSReason.thcCreator("Rider Collection Address", "RiderCollectionAddress", 100), Utils$VoteUSReason.thcCreator("Rider Destination Address", "RiderDestinationAddress", 100), Utils$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal", 160), Utils$VoteUSReason.thcCreator("Driver Notes", "driver_notes", 100), Utils$VoteUSReason.thcCreator("Rider Notes", "rider_notes", 100), Utils$VoteUSReason.thcCreator("Score", "score", 100)];
+[Utils$VoteUSReason.thcCreator("Driver", "uuid_driver", 100), Utils$VoteUSReason.thcCreator("Rider", "uuid_rider", 100), Utils$VoteUSReason.thcCreator("City", "city", 100), Utils$VoteUSReason.thcCreator("State", "full_state", 100), Utils$VoteUSReason.thcCreator("StateShort", "state", 100), Utils$VoteUSReason.thcCreator("Status", "status", 100), Utils$VoteUSReason.thcCreator("Created", "created_ts", 160), Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 160), Utils$VoteUSReason.thcCreator("DriverCollectionZIP", "DriverCollectionZIP", 100), Utils$VoteUSReason.thcCreator("Drive Times - Local", "AvailableDriveTimesLocal", 160), Utils$VoteUSReason.thcCreator("Seat Count", "SeatCount", 100), Utils$VoteUSReason.thcCreator("License Number", "DriverLicenseNumber", 100), Utils$VoteUSReason.thcCreator("Driving for Organization", "DrivingOBOOrganizationName", 100), Utils$VoteUSReason.thcCreator("Driver First Name", "DriverFirstName", 100), Utils$VoteUSReason.thcCreator("Driver Last Name", "DriverLastName", 100), Utils$VoteUSReason.thcCreator("Rider First Name", "RiderFirstName", 100), Utils$VoteUSReason.thcCreator("Rider Last Name", "RiderLastName", 100), Utils$VoteUSReason.thcCreator("Rider Email", "RiderEmail", 100), Utils$VoteUSReason.thcCreator("Rider Phone", "RiderPhone", 100), Utils$VoteUSReason.thcCreator("Rider Collection ZIP", "RiderCollectionZIP", 100), Utils$VoteUSReason.thcCreator("Rider Dropoff ZIP", "RiderDropOffZIP", 100), Utils$VoteUSReason.thcCreator("Rider Collection Street Number", "RiderCollectionStreetNumber", 100), Utils$VoteUSReason.thcCreator("Rider Collection Address", "RiderCollectionAddress", 100), Utils$VoteUSReason.thcCreator("Rider Destination Address", "RiderDestinationAddress", 100), Utils$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal", 160), Utils$VoteUSReason.thcCreator("Driver Notes", "driver_notes", 100), Utils$VoteUSReason.thcCreator("Rider Notes", "rider_notes", 100), Utils$VoteUSReason.thcCreator("Score", "score", 100)];
 
 function tableMatch(itemDetails) {
   return {
@@ -46611,6 +48114,7 @@ function tableMatch(itemDetails) {
     uuid_rider: itemDetails.uuid_rider,
     city: itemDetails.city,
     full_state: itemDetails.full_state,
+    state: itemDetails.state,
     DriverCollectionZIP: itemDetails.DriverCollectionZIP,
     AvailableDriveTimesLocal: itemDetails.AvailableDriveTimesLocal,
     SeatCount: itemDetails.SeatCount,
@@ -47070,19 +48574,20 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
           onChange: matchesTableShowMatchForCurrentRiderHandler
         })))), React.createElement("div", {
           style: tableDivStyle
-        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
+        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
           return {
             className: prim,
             type: prim$1,
             columns: prim$2,
             defaultPageSize: prim$3,
             pageSize: prim$4,
-            data: prim$5,
-            onPageChange: prim$6,
-            onPageSizeChange: prim$7,
-            getTdProps: prim$8
+            filterable: prim$5,
+            data: prim$6,
+            onPageChange: prim$7,
+            onPageSizeChange: prim$8,
+            getTdProps: prim$9
           };
-        }, "basicMatchTable", tableType, 5, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler,
+        }, "basicMatchTable", tableType, 5, matchesInfo.listPageSize, true, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler,
         /* array */
         []))), match$1 ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
       } else {
@@ -47257,7 +48762,7 @@ var component = ReasonReact.statelessComponent("Riders");
 var tableType = "riders";
 var riderTableColumns =
 /* array */
-[Utils$VoteUSReason.thcCreator("uuid", "UUID", 100), Utils$VoteUSReason.thcCreator("First Name", "RiderFirstName", 100), Utils$VoteUSReason.thcCreator("Last Name", "RiderLastName", 100), Utils$VoteUSReason.thcCreator("Email", "RiderEmail", 100), Utils$VoteUSReason.thcCreator("Phone", "RiderPhone", 100), Utils$VoteUSReason.thcCreator("Collection ZIP", "RiderCollectionZIP", 100), Utils$VoteUSReason.thcCreator("City", "city", 100), Utils$VoteUSReason.thcCreator("State", "full_state", 100), Utils$VoteUSReason.thcCreator("Dropoff ZIP", "RiderDropOffZIP", 100), Utils$VoteUSReason.thcCreator("Created", "created_ts", 160), Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 160), Utils$VoteUSReason.thcCreator("Status", "status", 100), Utils$VoteUSReason.thcCreator("Status Info", "status_info", 100), Utils$VoteUSReason.thcCreator("Org ID", "uuid_organization", 100), Utils$VoteUSReason.thcCreator("Org Name", "OrganizationName", 100), Utils$VoteUSReason.thcCreator("Collection Street Number", "RiderCollectionStreetNumber", 100), Utils$VoteUSReason.thcCreator("Collection Address", "RiderCollectionAddress", 100), Utils$VoteUSReason.thcCreator("Destination Address", "RiderDestinationAddress", 100), Utils$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal", 160), Utils$VoteUSReason.thcCreator("Party Size", "TotalPartySize", 100), Utils$VoteUSReason.thcCreatorBool("Two Way Trip", "TwoWayTripNeeded", 100), Utils$VoteUSReason.thcCreatorBool("Is Vulnerable", "RiderIsVulnerable", 100), Utils$VoteUSReason.thcCreatorBool("No Politics Talk", "RiderWillNotTalkPolitics", 100), Utils$VoteUSReason.thcCreatorBool("Stay In Touch", "PleaseStayInTouch", 100), Utils$VoteUSReason.thcCreatorBool("Need Wheelchair", "NeedWheelchair", 100), Utils$VoteUSReason.thcCreator("Contact Method", "RiderPreferredContact", 135), Utils$VoteUSReason.thcCreator("Rider Notes", "RiderAccommodationNotes", 100), Utils$VoteUSReason.thcCreatorBool("Legal Consent", "RiderLegalConsent", 100), Utils$VoteUSReason.thcCreatorBool("Ready To Match", "ReadyToMatch", 100), Utils$VoteUSReason.thcCreatorBool("Will Be Safe", "RiderWillBeSafe", 100), Utils$VoteUSReason.thcCreator("Time zone", "timezone", 100)];
+[Utils$VoteUSReason.thcCreator("uuid", "UUID", 100), Utils$VoteUSReason.thcCreator("First Name", "RiderFirstName", 100), Utils$VoteUSReason.thcCreator("Last Name", "RiderLastName", 100), Utils$VoteUSReason.thcCreator("Email", "RiderEmail", 100), Utils$VoteUSReason.thcCreator("Phone", "RiderPhone", 100), Utils$VoteUSReason.thcCreator("Collection ZIP", "RiderCollectionZIP", 100), Utils$VoteUSReason.thcCreator("City", "city", 100), Utils$VoteUSReason.thcCreator("State", "full_state", 100), Utils$VoteUSReason.thcCreator("StateShort", "state", 100), Utils$VoteUSReason.thcCreator("Dropoff ZIP", "RiderDropOffZIP", 100), Utils$VoteUSReason.thcCreator("Created", "created_ts", 160), Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 160), Utils$VoteUSReason.thcCreator("Status", "status", 100), Utils$VoteUSReason.thcCreator("Status Info", "status_info", 100), Utils$VoteUSReason.thcCreator("Org ID", "uuid_organization", 100), Utils$VoteUSReason.thcCreator("Org Name", "OrganizationName", 100), Utils$VoteUSReason.thcCreator("Collection Street Number", "RiderCollectionStreetNumber", 100), Utils$VoteUSReason.thcCreator("Collection Address", "RiderCollectionAddress", 100), Utils$VoteUSReason.thcCreator("Destination Address", "RiderDestinationAddress", 100), Utils$VoteUSReason.thcCreator("Ride Times Local", "AvailableRideTimesLocal", 160), Utils$VoteUSReason.thcCreator("Party Size", "TotalPartySize", 100), Utils$VoteUSReason.thcCreatorBool("Two Way Trip", "TwoWayTripNeeded", 100), Utils$VoteUSReason.thcCreatorBool("Is Vulnerable", "RiderIsVulnerable", 100), Utils$VoteUSReason.thcCreatorBool("No Politics Talk", "RiderWillNotTalkPolitics", 100), Utils$VoteUSReason.thcCreatorBool("Stay In Touch", "PleaseStayInTouch", 100), Utils$VoteUSReason.thcCreatorBool("Need Wheelchair", "NeedWheelchair", 100), Utils$VoteUSReason.thcCreator("Contact Method", "RiderPreferredContact", 135), Utils$VoteUSReason.thcCreator("Rider Notes", "RiderAccommodationNotes", 100), Utils$VoteUSReason.thcCreatorBool("Legal Consent", "RiderLegalConsent", 100), Utils$VoteUSReason.thcCreatorBool("Ready To Match", "ReadyToMatch", 100), Utils$VoteUSReason.thcCreatorBool("Will Be Safe", "RiderWillBeSafe", 100), Utils$VoteUSReason.thcCreator("Time zone", "timezone", 100)];
 
 function tableRider(itemDetails) {
   return {
@@ -47269,6 +48774,7 @@ function tableRider(itemDetails) {
     RiderCollectionZIP: itemDetails.RiderCollectionZIP,
     city: itemDetails.city,
     full_state: itemDetails.full_state,
+    state: itemDetails.state,
     RiderDropOffZIP: itemDetails.RiderDropOffZIP,
     AvailableRideTimesLocal: itemDetails.AvailableRideTimesLocal,
     TotalPartySize: itemDetails.TotalPartySize,
@@ -47665,19 +49171,20 @@ function make(loginInfo, apiInfo, ridersInfo, matchesInfo, getRidersList, hideRi
           onChange: ridersTableShowCurrentMatchRiderOnlyHandler
         }))), React.createElement("div", {
           style: tableDivStyle
-        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
+        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make(function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
           return {
             className: prim,
             type: prim$1,
             columns: prim$2,
             defaultPageSize: prim$3,
             pageSize: prim$4,
-            data: prim$5,
-            onPageChange: prim$6,
-            onPageSizeChange: prim$7,
-            getTdProps: prim$8
+            filterable: prim$5,
+            data: prim$6,
+            onPageChange: prim$7,
+            onPageSizeChange: prim$8,
+            getTdProps: prim$9
           };
-        }, "basicRiderTable", tableType, 5, ridersInfo.listPageSize, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler,
+        }, "basicRiderTable", tableType, 5, ridersInfo.listPageSize, true, riderTableColumns, tableRiders, ridersTableOnPageChangeHandler, ridersTableOnPageChangeSizeHandler, ridersTdPropsHandler,
         /* array */
         []))), match$1 ? currentRiderInfo(ridersInfo.currentRider) : React.createElement("div", undefined, "No rider selected"));
       } else {
@@ -47793,8 +49300,8 @@ var ReasonReact = __webpack_require__(/*! reason-react/src/ReasonReact.js */ "./
 
 var ReactTable = __webpack_require__(/*! react-table */ "./node_modules/react-table/es/index.js");
 
-function make(props, className, type_, defaultPageSize, pageSize, columns, data, onPageChange, onPageSizeChange, getTdProps, children) {
-  return ReasonReact.wrapJsForReason(ReactTable.default, Curry.app(props, [className, type_, columns, defaultPageSize, pageSize, data, onPageChange, onPageSizeChange, getTdProps]), children);
+function make(props, className, type_, defaultPageSize, pageSize, filterable, columns, data, onPageChange, onPageSizeChange, getTdProps, children) {
+  return ReasonReact.wrapJsForReason(ReactTable.default, Curry.app(props, [className, type_, columns, defaultPageSize, pageSize, filterable, data, onPageChange, onPageSizeChange, getTdProps]), children);
 }
 
 exports.make = make;
@@ -48215,8 +49722,10 @@ var apiInfo = function apiInfo() {
 
   if (!state.apiUrl) {
     var apiUrl = remoteUrl || '';
+    var siteUrl = cpSiteUrl || '';
     return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
-      apiUrl: apiUrl
+      apiUrl: apiUrl,
+      siteUrl: siteUrl
     });
   }
 
@@ -48358,6 +49867,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _matchesInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./matchesInfo */ "./webpack/reducers/matchesInfo.js");
 /* harmony import */ var _matchesOtherDriverInfo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./matchesOtherDriverInfo */ "./webpack/reducers/matchesOtherDriverInfo.js");
 /* harmony import */ var _uploadInfo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./uploadInfo */ "./webpack/reducers/uploadInfo.js");
+/* harmony import */ var _inputFormsInfo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./inputFormsInfo */ "./webpack/reducers/inputFormsInfo.js");
+
 
 
 
@@ -48373,8 +49884,131 @@ __webpack_require__.r(__webpack_exports__);
   ridersInfo: _ridersInfo__WEBPACK_IMPORTED_MODULE_4__["default"],
   matchesInfo: _matchesInfo__WEBPACK_IMPORTED_MODULE_5__["default"],
   matchesOtherDriverInfo: _matchesOtherDriverInfo__WEBPACK_IMPORTED_MODULE_6__["default"],
-  uploadInfo: _uploadInfo__WEBPACK_IMPORTED_MODULE_7__["default"]
+  uploadInfo: _uploadInfo__WEBPACK_IMPORTED_MODULE_7__["default"],
+  inputFormsInfo: _inputFormsInfo__WEBPACK_IMPORTED_MODULE_8__["default"]
 }));
+
+/***/ }),
+
+/***/ "./webpack/reducers/inputFormsInfo.js":
+/*!********************************************!*\
+  !*** ./webpack/reducers/inputFormsInfo.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/types */ "./webpack/actions/types.js");
+
+
+
+
+var inputFormsInfo = function inputFormsInfo() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    // validator: {}   function initFormValidator() {
+    driverInfo: {
+      startDateChanged: false,
+      endDateChanged: false,
+      emailRequired: false,
+      jsonTimesUpdated: false,
+      driverZip: '',
+      driverRadius: '',
+      seatsAvailable: 0,
+      powerChairSupport: false,
+      hasInsurance: false,
+      licenceNumber: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      emailPreferred: false,
+      smsPreferred: false,
+      agreeTandC: false,
+      contactOk: false,
+      orgName: 'None',
+      availableDates: [],
+      driverDateInfo: {
+        date: '',
+        timeStart: '06:00',
+        timeEnd: '22:00'
+      }
+    },
+    riderInfo: {
+      startDateChanged: false,
+      endDateChanged: false,
+      emailRequired: false,
+      jsonTimesUpdated: false,
+      collectionAddress: '',
+      collectionZip: '',
+      destinationAddress: '',
+      destinationZip: '',
+      seatCount: 0,
+      powerChairUser: false,
+      twoWayTripNeeded: false,
+      otherRequirements: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      cellPhone: false,
+      emailPreferred: false,
+      phonePreferred: false,
+      smsPreferred: false,
+      agreeTandC: false,
+      contactOk: false,
+      orgName: 'None',
+      availableDates: [],
+      dateInfo: {
+        date: '',
+        timeStart: '06:00',
+        timeEnd: '22:00'
+      }
+    }
+  };
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  var dateInfoUpdate = function dateInfoUpdate(key, dateFieldName, driverOrRiderInfo) {
+    var dateInfo = action.payload.dateInfo;
+
+    var newInfo = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, driverOrRiderInfo, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, dateFieldName, dateInfo));
+
+    var newState = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, state, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, key, newInfo));
+
+    return newState;
+  };
+
+  var driverOrRiderInfoUpdate = function driverOrRiderInfoUpdate(key) {
+    var newDriverOrRiderInfo = action.payload.formInfo;
+
+    var newState = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, state, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, key, newDriverOrRiderInfo));
+
+    return newState;
+  };
+
+  switch (action.type) {
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["driverSetDateInfoType"]:
+      return dateInfoUpdate('driverInfo', 'driverDateInfo', state.driverInfo);
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["riderSetDateInfoType"]:
+      return dateInfoUpdate('riderInfo', 'dateInfo', state.riderInfo);
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["driverSetFormInfoType"]:
+      return driverOrRiderInfoUpdate('driverInfo');
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["riderSetFormInfoType"]:
+      return driverOrRiderInfoUpdate('riderInfo');
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (inputFormsInfo);
 
 /***/ }),
 

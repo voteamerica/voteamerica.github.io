@@ -12,6 +12,7 @@ type systemMatch = {
   uuid_rider: string,     
   city: string,
   full_state: string,
+  state: string,
   [@bs.as "DriverCollectionZIP"] driverCollectionZIP: string,
   [@bs.as "AvailableDriveTimesLocal"] availableDriveTimesLocal: string,
   [@bs.as "SeatCount"] seatCount: string,
@@ -69,6 +70,7 @@ type matchTableJsProps = {
   defaultPageSize: int,
   /* page: int, */
   pageSize: int,
+  filterable: bool,
   data: array(systemMatch),
   onPageChange: TypeInfo.tableOnPageChangeHandler,
   onPageSizeChange: TypeInfo.tableOnPageChangeSizeHandler,
@@ -83,6 +85,7 @@ let matchTableColumns =
   Utils.thcCreator(~header="Rider", ~accessor="uuid_rider", ~width=100), 
   Utils.thcCreator(~header="City", ~accessor="city", ~width=100),
   Utils.thcCreator(~header="State", ~accessor="full_state", ~width=100),
+  Utils.thcCreator(~header="StateShort", ~accessor="state", ~width=100),
   Utils.thcCreator(~header="Status", ~accessor="status", ~width=100),
   Utils.thcCreator(~header="Created", ~accessor="created_ts", ~width=160),
   Utils.thcCreator(~header="Updated", ~accessor="last_updated_ts", ~width=160),
@@ -115,6 +118,7 @@ let matchTableColumns =
   ~rider_notes=itemDetails->rider_notesGet,
   ~city=itemDetails->cityGet,
   ~full_state=itemDetails->full_stateGet,
+  ~state=itemDetails->stateGet,
   ~status=itemDetails->statusGet,
   ~driverCollectionZIP=itemDetails->driverCollectionZIPGet,~availableDriveTimesLocal=itemDetails->availableDriveTimesLocalGet,~seatCount=itemDetails->seatCountGet,~driverLicenseNumber=itemDetails->driverLicenseNumberGet,
   ~drivingOBOOrganizationName=itemDetails->drivingOBOOrganizationNameGet,~driverFirstName=itemDetails->driverFirstNameGet,~driverLastName=itemDetails->driverLastNameGet,
@@ -512,6 +516,7 @@ _children) => {
             data=tableMatches
             defaultPageSize={5} /* get this from types default */
             pageSize={matchesInfo->listPageSizeGet}
+            filterable={true}
             onPageChange={matchesTableOnPageChangeHandler}
             onPageSizeChange={matchesTableOnPageChangeSizeHandler}
             getTdProps={matchesTdPropsHandler}

@@ -20,6 +20,7 @@ var matchTableColumns = /* array */[
   Utils$VoteUSReason.thcCreator("Rider", "uuid_rider", 100),
   Utils$VoteUSReason.thcCreator("City", "city", 100),
   Utils$VoteUSReason.thcCreator("State", "full_state", 100),
+  Utils$VoteUSReason.thcCreator("StateShort", "state", 100),
   Utils$VoteUSReason.thcCreator("Status", "status", 100),
   Utils$VoteUSReason.thcCreator("Created", "created_ts", 160),
   Utils$VoteUSReason.thcCreator("Updated", "last_updated_ts", 160),
@@ -52,6 +53,7 @@ function tableMatch(itemDetails) {
           uuid_rider: itemDetails.uuid_rider,
           city: itemDetails.city,
           full_state: itemDetails.full_state,
+          state: itemDetails.state,
           DriverCollectionZIP: itemDetails.DriverCollectionZIP,
           AvailableDriveTimesLocal: itemDetails.AvailableDriveTimesLocal,
           SeatCount: itemDetails.SeatCount,
@@ -392,19 +394,20 @@ function make(others, sectionHeading, loginInfo, apiInfo, matchesInfo, getMatche
                                       onChange: matchesTableShowMatchForCurrentRiderHandler
                                     })))), React.createElement("div", {
                           style: tableDivStyle
-                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8) {
+                        }, ReasonReact.element(undefined, undefined, Table$VoteUSReason.make((function (prim, prim$1, prim$2, prim$3, prim$4, prim$5, prim$6, prim$7, prim$8, prim$9) {
                                     return {
                                             className: prim,
                                             type: prim$1,
                                             columns: prim$2,
                                             defaultPageSize: prim$3,
                                             pageSize: prim$4,
-                                            data: prim$5,
-                                            onPageChange: prim$6,
-                                            onPageSizeChange: prim$7,
-                                            getTdProps: prim$8
+                                            filterable: prim$5,
+                                            data: prim$6,
+                                            onPageChange: prim$7,
+                                            onPageSizeChange: prim$8,
+                                            getTdProps: prim$9
                                           };
-                                  }), "basicMatchTable", tableType, 5, matchesInfo.listPageSize, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler, /* array */[]))), match$1 ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
+                                  }), "basicMatchTable", tableType, 5, matchesInfo.listPageSize, true, matchTableColumns, tableMatches, matchesTableOnPageChangeHandler, matchesTableOnPageChangeSizeHandler, matchesTdPropsHandler, /* array */[]))), match$1 ? currentMatchInfo(matchesInfo.currentMatch) : React.createElement("div", undefined, "No match selected"));
               } else {
                 tableMatchesJSX = React.createElement("div", undefined, React.createElement("button", {
                           className: "button button--large",
