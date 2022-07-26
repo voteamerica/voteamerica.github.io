@@ -8,7 +8,7 @@ We successfully deployed the site for the US 2016 election and now we are workin
 
 ## Slack
 
-We have a [Slack team](https://carpool-vote.slack.com/)! Please [email us](mailto:slack@carpoolvote.com) if you would like to join.
+We have a [Slack team](progcode.slack.com/)! Please [email us](mailto:admin@progcode.org) if you would like to join.
 
 ## Technical
 
